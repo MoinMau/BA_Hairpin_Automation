@@ -1,0 +1,27 @@
+name: Sync GitHub Issues to Notion
+
+on:
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Sync issue to Notion
+        env:
+          NOTION_TOKEN: $ secrets.NOTION_TOKEN 
+          NOTION_DATABASE_ID: $ secrets.NOTION_DATABASE_ID 
+          GH_REPO: $ secrets.GH_REPO 
+        run: python scripts/sync_github_issue_to_notion.py
