@@ -23,11 +23,33 @@ void stepPulse(uint16_t steps, uint16_t stepDelayUs) {
   }
 }
 
-void loop() {
-  stepPulse(400, 600); // move one direction
-  delay(500);
+void playTone(uint16_t freqHz, uint16_t durationMs) {
+  if (freqHz == 0) {
+    delay(durationMs);
+    return;
+  }
 
-  digitalWrite(DIR_PIN, !digitalRead(DIR_PIN)); // reverse
-  stepPulse(400, 600);
-  delay(500);
+  const uint32_t halfPeriodUs = 1000000UL / (freqHz * 2UL);
+  const uint32_t totalCycles = (uint32_t)freqHz * durationMs / 1000UL;
+
+  for (uint32_t i = 0; i < totalCycles; i++) {
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(halfPeriodUs);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(halfPeriodUs);
+  }
+}
+
+void loop() {
+  // Simple melody on X axis
+  const uint16_t notes[] = {523, 659, 784, 659, 523, 0, 523, 784, 988};
+  const uint16_t lengths[] = {200, 200, 250, 200, 300, 120, 200, 250, 350};
+  const size_t count = sizeof(notes) / sizeof(notes[0]);
+
+  for (size_t i = 0; i < count; i++) {
+    playTone(notes[i], lengths[i]);
+    delay(40);
+  }
+
+  delay(1000);
 }
