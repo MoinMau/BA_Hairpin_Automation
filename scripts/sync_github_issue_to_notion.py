@@ -5,7 +5,7 @@ import json
 
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 NOTION_DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
-NOTION_VERSION = "2022-06-28"
+NOTION_VERSION = "2024-04"
 
 def notion_headers():
     return {
