@@ -1,55 +1,116 @@
 #include <Arduino.h>
+#include <Wire.h>
 
-// CNC Shield V3 defaults (X axis)
-const uint8_t STEP_PIN = 2; // X.STEP
-const uint8_t DIR_PIN = 5;  // X.DIR
-const uint8_t EN_PIN = 8;   // Enable (active LOW)
+// CNC Shield V3 axis pin mapping
+const uint8_t STEP_PINS[] = {2, 3, 4};
+const uint8_t DIR_PINS[] = {5, 6, 7};
+const uint8_t EN_PIN = 8;
+const uint8_t AXIS_COUNT = 3;
+const uint8_t I2C_ADDRESS = 0x08;
 
-void setup() {
-  pinMode(STEP_PIN, OUTPUT);
-  pinMode(DIR_PIN, OUTPUT);
-  pinMode(EN_PIN, OUTPUT);
+enum CommandId : uint8_t {
+  CMD_MOVE = 0x01,
+  CMD_ENABLE = 0x02,
+  CMD_DISABLE = 0x03,
+};
 
-  digitalWrite(EN_PIN, LOW); // enable drivers
-  digitalWrite(DIR_PIN, LOW);
-}
+struct I2CCommand {
+  uint8_t cmd;
+  uint8_t axis;
+  uint8_t dir;
+  uint16_t steps;
+  uint16_t delayUs;
+};
 
-void stepPulse(uint16_t steps, uint16_t stepDelayUs) {
-  for (uint16_t i = 0; i < steps; i++) {
-    digitalWrite(STEP_PIN, HIGH);
-    delayMicroseconds(stepDelayUs);
-    digitalWrite(STEP_PIN, LOW);
-    delayMicroseconds(stepDelayUs);
-  }
-}
+volatile bool commandReady = false;
+I2CCommand currentCommand = {0, 0, 0, 0, 0};
 
-void playTone(uint16_t freqHz, uint16_t durationMs) {
-  if (freqHz == 0) {
-    delay(durationMs);
+void stepAxis(uint8_t axis, uint16_t steps, uint8_t dir, uint16_t delayUs) {
+  if (axis >= AXIS_COUNT || steps == 0) {
     return;
   }
 
-  const uint32_t halfPeriodUs = 1000000UL / (freqHz * 2UL);
-  const uint32_t totalCycles = (uint32_t)freqHz * durationMs / 1000UL;
+  digitalWrite(DIR_PINS[axis], dir ? HIGH : LOW);
 
-  for (uint32_t i = 0; i < totalCycles; i++) {
-    digitalWrite(STEP_PIN, HIGH);
-    delayMicroseconds(halfPeriodUs);
-    digitalWrite(STEP_PIN, LOW);
-    delayMicroseconds(halfPeriodUs);
+  for (uint16_t i = 0; i < steps; i++) {
+    digitalWrite(STEP_PINS[axis], HIGH);
+    delayMicroseconds(delayUs);
+    digitalWrite(STEP_PINS[axis], LOW);
+    delayMicroseconds(delayUs);
   }
 }
 
-void loop() {
-  // Simple melody on X axis
-  const uint16_t notes[] = {523, 659, 784, 659, 523, 0, 523, 784, 988};
-  const uint16_t lengths[] = {200, 200, 250, 200, 300, 120, 200, 250, 350};
-  const size_t count = sizeof(notes) / sizeof(notes[0]);
-
-  for (size_t i = 0; i < count; i++) {
-    playTone(notes[i], lengths[i]);
-    delay(40);
+void receiveI2C(int count) {
+  if (count < 1) {
+    return;
   }
 
-  delay(1000);
+  I2CCommand cmd = {0, 0, 0, 0, 0};
+  cmd.cmd = Wire.read();
+
+  if (cmd.cmd == CMD_MOVE && count >= 7) {
+    cmd.axis = Wire.read();
+    cmd.dir = Wire.read();
+    uint8_t lowSteps = Wire.read();
+    uint8_t highSteps = Wire.read();
+    cmd.steps = (uint16_t)lowSteps | ((uint16_t)highSteps << 8);
+    uint8_t lowDelay = Wire.read();
+    uint8_t highDelay = Wire.read();
+    cmd.delayUs = (uint16_t)lowDelay | ((uint16_t)highDelay << 8);
+  } else if ((cmd.cmd == CMD_ENABLE || cmd.cmd == CMD_DISABLE) && count >= 2) {
+    cmd.axis = Wire.read();
+  }
+
+  currentCommand = cmd;
+  commandReady = true;
+}
+
+void requestI2C() {
+  Wire.write((uint8_t)(commandReady ? 1 : 0));
+}
+
+void executeCommand() {
+  noInterrupts();
+  I2CCommand cmd = currentCommand;
+  commandReady = false;
+  interrupts();
+
+  if (cmd.cmd == CMD_MOVE) {
+    if (cmd.axis < AXIS_COUNT) {
+      digitalWrite(EN_PIN, LOW);
+      stepAxis(cmd.axis, cmd.steps, cmd.dir, cmd.delayUs);
+    }
+  } else if (cmd.cmd == CMD_ENABLE) {
+    digitalWrite(EN_PIN, LOW);
+  } else if (cmd.cmd == CMD_DISABLE) {
+    digitalWrite(EN_PIN, HIGH);
+  }
+}
+
+void setup() {
+  pinMode(EN_PIN, OUTPUT);
+  digitalWrite(EN_PIN, LOW);
+
+  for (uint8_t i = 0; i < AXIS_COUNT; i++) {
+    pinMode(STEP_PINS[i], OUTPUT);
+    pinMode(DIR_PINS[i], OUTPUT);
+    digitalWrite(STEP_PINS[i], LOW);
+    digitalWrite(DIR_PINS[i], LOW);
+  }
+
+  Wire.begin(I2C_ADDRESS);
+  Wire.onReceive(receiveI2C);
+  Wire.onRequest(requestI2C);
+
+  Serial.begin(115200);
+  while (!Serial) {
+    ;
+  }
+  Serial.println("UNO I2C-Slave bereit, Adresse 0x08");
+}
+
+void loop() {
+  if (commandReady) {
+    executeCommand();
+  }
 }
