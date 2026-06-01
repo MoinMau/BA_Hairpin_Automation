@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"name": "ELEGOO_R3",
+			"path": "../../ELEGOO_R3"
+		},
+		{
+			"name": "ESP32",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
