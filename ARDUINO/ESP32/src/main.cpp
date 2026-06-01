@@ -1,41 +1,132 @@
 #include <Arduino.h>
+#include <Wire.h>
 
-const uint8_t kLedPin = 2;
-const uint8_t kServoPin = 33;
-const uint8_t kServoChannel = 0;
-const uint32_t kServoFreqHz = 50;
-const uint8_t kServoResolutionBits = 16;
-const uint16_t kServoMinUs = 500;
-const uint16_t kServoMaxUs = 2500;
+static const int kI2cSdaPin = 21;
+static const int kI2cSclPin = 22;
+static const int kLedPin = 2;
+static const uint8_t kSlaveAddress = 0x08;
+
+enum CommandId : uint8_t {
+  CMD_MOVE = 0x01,
+  CMD_ENABLE = 0x02,
+  CMD_DISABLE = 0x03,
+};
+
+static void blinkLed() {
+  digitalWrite(kLedPin, HIGH);
+  delay(80);
+  digitalWrite(kLedPin, LOW);
+}
+
+void sendMoveCommand(uint8_t axis, uint8_t dir, uint16_t steps, uint16_t delayUs) {
+  Wire.beginTransmission(kSlaveAddress);
+  Wire.write(CMD_MOVE);
+  Wire.write(axis);
+  Wire.write(dir);
+  Wire.write(static_cast<uint8_t>(steps & 0xFF));
+  Wire.write(static_cast<uint8_t>((steps >> 8) & 0xFF));
+  Wire.write(static_cast<uint8_t>(delayUs & 0xFF));
+  Wire.write(static_cast<uint8_t>((delayUs >> 8) & 0xFF));
+  Wire.endTransmission();
+  blinkLed();
+}
+
+void sendEnableCommand(uint8_t axis) {
+  Wire.beginTransmission(kSlaveAddress);
+  Wire.write(CMD_ENABLE);
+  Wire.write(axis);
+  Wire.endTransmission();
+  blinkLed();
+}
+
+void sendDisableCommand(uint8_t axis) {
+  Wire.beginTransmission(kSlaveAddress);
+  Wire.write(CMD_DISABLE);
+  Wire.write(axis);
+  Wire.endTransmission();
+  blinkLed();
+}
+
+bool requestSlaveStatus() {
+  Wire.requestFrom(kSlaveAddress, static_cast<uint8_t>(1));
+  if (Wire.available()) {
+    blinkLed();
+    return Wire.read() != 0;
+  }
+  return false;
+}
+
+void printUsage() {
+  Serial.println("ESP32 I2C Master Interface");
+  Serial.println("Commands:");
+  Serial.println("  m <axis> <dir> <steps> <delay>  - MOVE");
+  Serial.println("  e <axis>                       - ENABLE");
+  Serial.println("  d <axis>                       - DISABLE");
+  Serial.println("  s                              - STATUS");
+  Serial.println("Example: m 0 1 200 500");
+}
 
 void setup() {
+  Serial.begin(115200);
+  while (!Serial) {
+    delay(10);
+  }
+
   pinMode(kLedPin, OUTPUT);
-  ledcSetup(kServoChannel, kServoFreqHz, kServoResolutionBits);
-  ledcAttachPin(kServoPin, kServoChannel);
-}
+  digitalWrite(kLedPin, LOW);
 
-static uint32_t pulseUsToDuty(uint32_t pulse_us) {
-  const uint32_t max_duty = (1u << kServoResolutionBits) - 1u;
-  const uint32_t period_us = 1000000u / kServoFreqHz;
-  return (pulse_us * max_duty) / period_us;
-}
-
-static void writeServoAngle(uint8_t angle_deg) {
-  const uint32_t pulse_us = kServoMinUs +
-      (static_cast<uint32_t>(angle_deg) * (kServoMaxUs - kServoMinUs)) / 180u;
-  ledcWrite(kServoChannel, pulseUsToDuty(pulse_us));
+  Wire.begin(kI2cSdaPin, kI2cSclPin);
+  Serial.println("I2C master initialized.");
+  printUsage();
 }
 
 void loop() {
-  digitalWrite(kLedPin, HIGH);
-  for (uint8_t angle = 0; angle <= 180; angle += 10) {
-    writeServoAngle(angle);
-    delay(300);
+  if (!Serial.available()) {
+    return;
   }
 
-  digitalWrite(kLedPin, LOW);
-  for (int angle = 180; angle >= 0; angle -= 10) {
-    writeServoAngle(static_cast<uint8_t>(angle));
-    delay(300);
+  String line = Serial.readStringUntil('\n');
+  line.trim();
+  if (line.length() == 0) {
+    return;
+  }
+
+  char type = line.charAt(0);
+  if (type == 'm' || type == 'M') {
+    uint8_t axis = 0;
+    uint8_t dir = 0;
+    uint16_t steps = 0;
+    uint16_t delayUs = 0;
+    int parsed = sscanf(line.c_str(), "%*c %hhu %hhu %hu %hu", &axis, &dir, &steps, &delayUs);
+    if (parsed == 4) {
+      sendMoveCommand(axis, dir, steps, delayUs);
+      Serial.println("MOVE command sent.");
+    } else {
+      Serial.println("Invalid MOVE command format.");
+    }
+  } else if (type == 'e' || type == 'E') {
+    uint8_t axis = 0;
+    int parsed = sscanf(line.c_str(), "%*c %hhu", &axis);
+    if (parsed == 1) {
+      sendEnableCommand(axis);
+      Serial.println("ENABLE command sent.");
+    } else {
+      Serial.println("Invalid ENABLE command format.");
+    }
+  } else if (type == 'd' || type == 'D') {
+    uint8_t axis = 0;
+    int parsed = sscanf(line.c_str(), "%*c %hhu", &axis);
+    if (parsed == 1) {
+      sendDisableCommand(axis);
+      Serial.println("DISABLE command sent.");
+    } else {
+      Serial.println("Invalid DISABLE command format.");
+    }
+  } else if (type == 's' || type == 'S') {
+    bool ready = requestSlaveStatus();
+    Serial.printf("Slave command ready: %s\n", ready ? "YES" : "NO");
+  } else {
+    Serial.println("Unknown command.");
+    printUsage();
   }
 }
