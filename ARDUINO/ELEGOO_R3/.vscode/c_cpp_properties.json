@@ -10,13 +10,13 @@
             "includePath": [
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ELEGOO_R3/include",
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ELEGOO_R3/src",
+                "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/variants/standard",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -24,13 +24,13 @@
                 "path": [
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ELEGOO_R3/include",
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ELEGOO_R3/src",
+                    "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/variants/standard",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                     "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                    "/Users/moinmau/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     ""
                 ]
             },

@@ -5,6 +5,7 @@
 const uint8_t STEP_PINS[] = {2, 3, 4};
 const uint8_t DIR_PINS[] = {5, 6, 7};
 const uint8_t EN_PIN = 8;
+const uint8_t STATUS_LED_PIN = 13;
 const uint8_t AXIS_COUNT = 3;
 const uint8_t I2C_ADDRESS = 0x08;
 
@@ -63,6 +64,7 @@ void receiveI2C(int count) {
 
   currentCommand = cmd;
   commandReady = true;
+  digitalWrite(STATUS_LED_PIN, HIGH);
 }
 
 void requestI2C() {
@@ -74,6 +76,9 @@ void executeCommand() {
   I2CCommand cmd = currentCommand;
   commandReady = false;
   interrupts();
+  digitalWrite(STATUS_LED_PIN, HIGH);
+  delay(100);
+  digitalWrite(STATUS_LED_PIN, LOW);
 
   if (cmd.cmd == CMD_MOVE) {
     if (cmd.axis < AXIS_COUNT) {
@@ -97,6 +102,9 @@ void setup() {
     digitalWrite(STEP_PINS[i], LOW);
     digitalWrite(DIR_PINS[i], LOW);
   }
+
+  pinMode(STATUS_LED_PIN, OUTPUT);
+  digitalWrite(STATUS_LED_PIN, LOW);
 
   Wire.begin(I2C_ADDRESS);
   Wire.onReceive(receiveI2C);

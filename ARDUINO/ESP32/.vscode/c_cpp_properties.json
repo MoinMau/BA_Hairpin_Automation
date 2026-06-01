@@ -10,6 +10,7 @@
             "includePath": [
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ESP32/include",
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ESP32/src",
+                "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -238,7 +239,6 @@
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -246,6 +246,7 @@
                 "path": [
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ESP32/include",
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/ESP32/src",
+                    "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -474,7 +475,6 @@
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                    "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     ""
                 ]
             },

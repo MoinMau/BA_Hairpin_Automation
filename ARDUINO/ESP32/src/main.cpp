@@ -56,6 +56,27 @@ bool requestSlaveStatus() {
   return false;
 }
 
+void scanI2CBus() {
+  Serial.println("I2C-Scan startet...");
+  bool foundAny = false;
+
+  for (uint8_t address = 1; address < 127; ++address) {
+    Wire.beginTransmission(address);
+    uint8_t error = Wire.endTransmission();
+    if (error == 0) {
+      Serial.printf("I2C-Gerät gefunden: 0x%02X\n", address);
+      foundAny = true;
+    } else if (error == 4) {
+      Serial.printf("I2C-Fehler bei Adresse: 0x%02X\n", address);
+    }
+  }
+
+  if (!foundAny) {
+    Serial.println("Keine I2C-Geräte gefunden.");
+  }
+  Serial.println("I2C-Scan fertig.");
+}
+
 void printUsage() {
   Serial.println("ESP32 I2C Master Interface");
   Serial.println("Commands:");
@@ -63,6 +84,7 @@ void printUsage() {
   Serial.println("  e <axis>                       - ENABLE");
   Serial.println("  d <axis>                       - DISABLE");
   Serial.println("  s                              - STATUS");
+  Serial.println("  x                              - I2C scan");
   Serial.println("Example: m 0 1 200 500");
 }
 
@@ -77,6 +99,7 @@ void setup() {
 
   Wire.begin(kI2cSdaPin, kI2cSclPin);
   Serial.println("I2C master initialized.");
+  scanI2CBus();
   printUsage();
 }
 
@@ -125,6 +148,8 @@ void loop() {
   } else if (type == 's' || type == 'S') {
     bool ready = requestSlaveStatus();
     Serial.printf("Slave command ready: %s\n", ready ? "YES" : "NO");
+  } else if (type == 'x' || type == 'X') {
+    scanI2CBus();
   } else {
     Serial.println("Unknown command.");
     printUsage();
