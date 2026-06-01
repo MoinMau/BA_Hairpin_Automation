@@ -14,6 +14,7 @@ enum CommandId : uint8_t {
   CMD_MOVE = 0x01,
   CMD_ENABLE = 0x02,
   CMD_DISABLE = 0x03,
+  CMD_VIBRATE = 0x04,
 };
 
 struct I2CCommand {
@@ -22,10 +23,13 @@ struct I2CCommand {
   uint8_t dir;
   uint16_t steps;
   uint16_t delayUs;
+  uint16_t frequency;
+  uint8_t amplitude;
+  uint16_t durationMs;
 };
 
 volatile bool commandReady = false;
-I2CCommand currentCommand = {0, 0, 0, 0, 0};
+I2CCommand currentCommand = {0, AXIS_ALL, 0, 0, 0, 0, 255, 0};
 
 void stepAxis(uint8_t axis, uint16_t steps, uint8_t dir, uint16_t delayUs) {
   if (axis >= AXIS_COUNT || steps == 0) {
@@ -47,7 +51,7 @@ void receiveI2C(int count) {
     return;
   }
 
-  I2CCommand cmd = {0, AXIS_ALL, 0, 0, 0};
+  I2CCommand cmd = {0, AXIS_ALL, 0, 0, 0, 0, 255, 0};
   cmd.cmd = Wire.read();
   bool validCommand = false;
 
@@ -60,6 +64,16 @@ void receiveI2C(int count) {
     uint8_t lowDelay = Wire.read();
     uint8_t highDelay = Wire.read();
     cmd.delayUs = (uint16_t)lowDelay | ((uint16_t)highDelay << 8);
+    validCommand = true;
+  } else if (cmd.cmd == CMD_VIBRATE && count >= 7) {
+    cmd.axis = Wire.read();
+    cmd.amplitude = Wire.read();
+    uint8_t lowFreq = Wire.read();
+    uint8_t highFreq = Wire.read();
+    cmd.frequency = (uint16_t)lowFreq | ((uint16_t)highFreq << 8);
+    uint8_t lowDuration = Wire.read();
+    uint8_t highDuration = Wire.read();
+    cmd.durationMs = (uint16_t)lowDuration | ((uint16_t)highDuration << 8);
     validCommand = true;
   } else if (cmd.cmd == CMD_ENABLE || cmd.cmd == CMD_DISABLE) {
     if (count >= 2) {
@@ -83,6 +97,40 @@ void requestI2C() {
   Wire.write((uint8_t)(commandReady ? 1 : 0));
 }
 
+void stepPulse(uint8_t axis, uint32_t delayUs) {
+  digitalWrite(STEP_PINS[axis], HIGH);
+  delayMicroseconds(delayUs);
+  digitalWrite(STEP_PINS[axis], LOW);
+  delayMicroseconds(delayUs);
+}
+
+void vibrateAxis(uint8_t axis, uint16_t frequency, uint8_t amplitude, uint16_t durationMs) {
+  if (axis >= AXIS_COUNT || frequency == 0 || durationMs == 0 || amplitude == 0) {
+    return;
+  }
+
+  digitalWrite(EN_PIN, LOW);
+  uint8_t pulseCount = 1 + ((uint16_t)(amplitude - 1) * 9) / 254;
+  uint32_t cycleUs = 1000000UL / frequency;
+  uint32_t halfStepDelayUs = cycleUs / (4UL * pulseCount);
+  if (halfStepDelayUs < 30) {
+    halfStepDelayUs = 30;
+  }
+
+  uint32_t endTime = millis() + durationMs;
+  digitalWrite(DIR_PINS[axis], HIGH);
+  while (millis() < endTime) {
+    for (uint8_t i = 0; i < pulseCount; ++i) {
+      stepPulse(axis, halfStepDelayUs);
+    }
+    digitalWrite(DIR_PINS[axis], LOW);
+    for (uint8_t i = 0; i < pulseCount; ++i) {
+      stepPulse(axis, halfStepDelayUs);
+    }
+    digitalWrite(DIR_PINS[axis], HIGH);
+  }
+}
+
 void executeCommand() {
   noInterrupts();
   I2CCommand cmd = currentCommand;
@@ -101,6 +149,8 @@ void executeCommand() {
     digitalWrite(EN_PIN, LOW);
   } else if (cmd.cmd == CMD_DISABLE) {
     digitalWrite(EN_PIN, HIGH);
+  } else if (cmd.cmd == CMD_VIBRATE) {
+    vibrateAxis(cmd.axis, cmd.frequency, cmd.amplitude, cmd.durationMs);
   }
 }
 

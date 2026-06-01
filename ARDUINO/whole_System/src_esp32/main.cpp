@@ -12,6 +12,7 @@ enum CommandId : uint8_t {
   CMD_MOVE = 0x01,
   CMD_ENABLE = 0x02,
   CMD_DISABLE = 0x03,
+  CMD_VIBRATE = 0x04,
 };
 
 static void blinkLed() {
@@ -83,6 +84,19 @@ void sendDisableCommand(uint8_t axis) {
   blinkLed();
 }
 
+void sendVibrateCommand(uint8_t axis, uint16_t frequency, uint8_t amplitude, uint16_t durationMs) {
+  Wire.beginTransmission(kSlaveAddress);
+  Wire.write(CMD_VIBRATE);
+  Wire.write(axis);
+  Wire.write(amplitude);
+  Wire.write(static_cast<uint8_t>(frequency & 0xFF));
+  Wire.write(static_cast<uint8_t>((frequency >> 8) & 0xFF));
+  Wire.write(static_cast<uint8_t>(durationMs & 0xFF));
+  Wire.write(static_cast<uint8_t>((durationMs >> 8) & 0xFF));
+  Wire.endTransmission();
+  blinkLed();
+}
+
 bool requestSlaveStatus() {
   Wire.requestFrom(kSlaveAddress, static_cast<uint8_t>(1));
   if (Wire.available()) {
@@ -120,6 +134,7 @@ void printUsage() {
   Serial.println("  step <axis> <dir> <steps> <delay>     - MOVE with explicit steps and step delay [us]");
   Serial.println("  enable <axis>                         - ENABLE axis");
   Serial.println("  disable <axis>                        - DISABLE axis");
+  Serial.println("  vibrate <axis> <frequency> <duration> [amp] - VIBRATE stepper axis with frequency [Hz], duration [ms], amplitude [0-255]");
   Serial.println("  status                                - STATUS request");
   Serial.println("  scan                                  - I2C scan");
   Serial.println("Axis: x, y, z or 0,1,2");
@@ -227,6 +242,21 @@ void loop() {
     Serial.printf("Slave command ready: %s\n", ready ? "YES" : "NO");
   } else if (cmd == "scan") {
     scanI2CBus();
+  } else if (cmd == "vibrate" && (argCount == 4 || argCount == 5)) {
+    uint8_t axis = axisFromToken(args[1]);
+    uint16_t frequency = static_cast<uint16_t>(args[2].toInt());
+    uint16_t durationMs = static_cast<uint16_t>(args[3].toInt());
+    uint8_t amplitude = 255;
+    if (argCount == 5) {
+      amplitude = static_cast<uint8_t>(args[4].toInt());
+    }
+    if (axis == 255 || frequency == 0 || durationMs == 0 || amplitude == 0) {
+      Serial.println("Invalid VIBRATE command format.");
+      printUsage();
+      return;
+    }
+    sendVibrateCommand(axis, frequency, amplitude, durationMs);
+    Serial.printf("VIBRATE axis %c %u Hz for %ums at amplitude %u\n", kAxisNames[axis], frequency, durationMs, amplitude);
   } else {
     Serial.println("Unknown command.");
     printUsage();
