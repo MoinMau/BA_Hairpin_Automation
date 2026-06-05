@@ -110,24 +110,21 @@ void vibrateAxis(uint8_t axis, uint16_t frequency, uint8_t amplitude, uint16_t d
   }
 
   digitalWrite(EN_PIN, LOW);
-  uint8_t pulseCount = 1 + ((uint16_t)(amplitude - 1) * 9) / 254;
-  uint32_t cycleUs = 1000000UL / frequency;
-  uint32_t halfStepDelayUs = cycleUs / (4UL * pulseCount);
-  if (halfStepDelayUs < 30) {
-    halfStepDelayUs = 30;
+  uint8_t amplitudeSteps = 1 + ((uint16_t)(amplitude - 1) * 39) / 254;
+  uint32_t halfCycleUs = 500000UL / frequency;
+  uint32_t stepDelayUs = halfCycleUs / (2UL * amplitudeSteps);
+  if (stepDelayUs < 200) {
+    stepDelayUs = 200;
   }
 
   uint32_t endTime = millis() + durationMs;
-  digitalWrite(DIR_PINS[axis], HIGH);
+  bool direction = true;
   while (millis() < endTime) {
-    for (uint8_t i = 0; i < pulseCount; ++i) {
-      stepPulse(axis, halfStepDelayUs);
+    digitalWrite(DIR_PINS[axis], direction ? HIGH : LOW);
+    for (uint8_t i = 0; i < amplitudeSteps; ++i) {
+      stepPulse(axis, stepDelayUs);
     }
-    digitalWrite(DIR_PINS[axis], LOW);
-    for (uint8_t i = 0; i < pulseCount; ++i) {
-      stepPulse(axis, halfStepDelayUs);
-    }
-    digitalWrite(DIR_PINS[axis], HIGH);
+    direction = !direction;
   }
 }
 
