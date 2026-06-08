@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/whole_System/include",
-                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/whole_System",
+                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
+                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
@@ -244,8 +244,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/whole_System/include",
-                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/ARDUINO/whole_System",
+                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
+                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
