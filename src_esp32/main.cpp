@@ -1,264 +1,142 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include "i2c_protocol.h"
 
-static const int kI2cSdaPin = 21;
-static const int kI2cSclPin = 22;
-static const int kLedPin = 2;
-static const uint8_t kSlaveAddress = 0x08;
-static const uint8_t kAxisCount = 3;
-static const char kAxisNames[kAxisCount] = {'x', 'y', 'z'};
+// I2C Pins für ESP32
+#define I2C_SDA 21
+#define I2C_SCL 22
+#define BAUD_RATE 115200
 
-enum CommandId : uint8_t {
-  CMD_MOVE = 0x01,
-  CMD_ENABLE = 0x02,
-  CMD_DISABLE = 0x03,
-  CMD_VIBRATE = 0x04,
-};
+// Eingabepuffer
+String inputBuffer = "";
 
-static void blinkLed() {
-  digitalWrite(kLedPin, HIGH);
-  delay(80);
-  digitalWrite(kLedPin, LOW);
-}
-
-uint8_t axisFromToken(const String& token) {
-  if (token.length() == 0) {
-    return 255;
-  }
-  char c = tolower(token.charAt(0));
-  for (uint8_t i = 0; i < kAxisCount; ++i) {
-    if (c == kAxisNames[i]) {
-      return i;
-    }
-  }
-  char* endPtr = nullptr;
-  long value = strtol(token.c_str(), &endPtr, 10);
-  if (*endPtr == '\0' && value >= 0 && value < kAxisCount) {
-    return static_cast<uint8_t>(value);
-  }
-  return 255;
-}
-
-bool parseDirection(const String& token, uint8_t& dir) {
-  if (token.length() == 0) {
-    return false;
-  }
-  char c = tolower(token.charAt(0));
-  if (c == '+' || c == 'f' || c == '1') {
-    dir = 1;
-    return true;
-  }
-  if (c == '-' || c == 'b' || c == '0') {
-    dir = 0;
-    return true;
-  }
-  return false;
-}
-
-void sendMoveCommand(uint8_t axis, uint8_t dir, uint16_t steps, uint16_t delayUs) {
-  Wire.beginTransmission(kSlaveAddress);
-  Wire.write(CMD_MOVE);
-  Wire.write(axis);
-  Wire.write(dir);
-  Wire.write(static_cast<uint8_t>(steps & 0xFF));
-  Wire.write(static_cast<uint8_t>((steps >> 8) & 0xFF));
-  Wire.write(static_cast<uint8_t>(delayUs & 0xFF));
-  Wire.write(static_cast<uint8_t>((delayUs >> 8) & 0xFF));
-  Wire.endTransmission();
-  blinkLed();
-}
-
-void sendEnableCommand(uint8_t axis) {
-  Wire.beginTransmission(kSlaveAddress);
-  Wire.write(CMD_ENABLE);
-  Wire.write(axis);
-  Wire.endTransmission();
-  blinkLed();
-}
-
-void sendDisableCommand(uint8_t axis) {
-  Wire.beginTransmission(kSlaveAddress);
-  Wire.write(CMD_DISABLE);
-  Wire.write(axis);
-  Wire.endTransmission();
-  blinkLed();
-}
-
-void sendVibrateCommand(uint8_t axis, uint16_t frequency, uint8_t amplitude, uint16_t durationMs) {
-  Wire.beginTransmission(kSlaveAddress);
-  Wire.write(CMD_VIBRATE);
-  Wire.write(axis);
-  Wire.write(amplitude);
-  Wire.write(static_cast<uint8_t>(frequency & 0xFF));
-  Wire.write(static_cast<uint8_t>((frequency >> 8) & 0xFF));
-  Wire.write(static_cast<uint8_t>(durationMs & 0xFF));
-  Wire.write(static_cast<uint8_t>((durationMs >> 8) & 0xFF));
-  Wire.endTransmission();
-  blinkLed();
-}
-
-bool requestSlaveStatus() {
-  Wire.requestFrom(kSlaveAddress, static_cast<uint8_t>(1));
-  if (Wire.available()) {
-    blinkLed();
-    return Wire.read() != 0;
-  }
-  return false;
-}
-
-void scanI2CBus() {
-  Serial.println("I2C-Scan startet...");
-  bool foundAny = false;
-
-  for (uint8_t address = 1; address < 127; ++address) {
-    Wire.beginTransmission(address);
-    uint8_t error = Wire.endTransmission();
-    if (error == 0) {
-      Serial.printf("I2C-Gerät gefunden: 0x%02X\n", address);
-      foundAny = true;
-    } else if (error == 4) {
-      Serial.printf("I2C-Fehler bei Adresse: 0x%02X\n", address);
-    }
-  }
-
-  if (!foundAny) {
-    Serial.println("Keine I2C-Geräte gefunden.");
-  }
-  Serial.println("I2C-Scan fertig.");
-}
-
-void printUsage() {
-  Serial.println("ESP32 I2C Master Interface");
-  Serial.println("Commands:");
-  Serial.println("  move <axis> <dir> <speed> <duration>  - MOVE with speed [steps/s] and duration [ms]");
-  Serial.println("  step <axis> <dir> <steps> <delay>     - MOVE with explicit steps and step delay [us]");
-  Serial.println("  enable <axis>                         - ENABLE axis");
-  Serial.println("  disable <axis>                        - DISABLE axis");
-  Serial.println("  vibrate <axis> <frequency> <duration> [amp] - VIBRATE stepper axis with frequency [Hz], duration [ms], amplitude [0-255]");
-  Serial.println("  status                                - STATUS request");
-  Serial.println("  scan                                  - I2C scan");
-  Serial.println("Axis: x, y, z or 0,1,2");
-  Serial.println("Dir: +, -, f, b, 1, 0");
-  Serial.println("Example: move x + 200 1500");
-  Serial.println("         step 1 0 400 800");
-}
+// Funktionsdeklarationen
+void processCommand(String cmd);
+void printHelp();
+void moveStepperViaI2C(int steps);
+void moveServoViaI2C(int servo_id, int angle);
 
 void setup() {
-  Serial.begin(115200);
-  while (!Serial) {
-    delay(10);
-  }
-
-  pinMode(kLedPin, OUTPUT);
-  digitalWrite(kLedPin, LOW);
-
-  Wire.begin(kI2cSdaPin, kI2cSclPin);
-  Serial.println("I2C master initialized.");
-  scanI2CBus();
-  printUsage();
+  // Serial Initialisierung für Debug-Ausgabe
+  Serial.begin(BAUD_RATE);
+  delay(1000);
+  
+  // I2C Master Initialisierung
+  Wire.begin(I2C_SDA, I2C_SCL);
+  
+  Serial.println("=== ESP32 Test Setup ===");
+  Serial.println("Befehle:");
+  Serial.println("  s<steps> - Stepper rotieren (z.B. s100 oder s-50)");
+  Serial.println("  v<id><angle> - Servo setzen (z.B. v0090 für Servo 0, 90°)");
+  Serial.println("  ? - Hilfe anzeigen");
 }
 
 void loop() {
-  if (!Serial.available()) {
+  // Seriellen Input verarbeiten
+  if (Serial.available()) {
+    char c = Serial.read();
+    
+    if (c == '\n' || c == '\r') {
+      if (inputBuffer.length() > 0) {
+        processCommand(inputBuffer);
+        inputBuffer = "";
+      }
+    } else {
+      inputBuffer += c;
+    }
+  }
+}
+
+// Befehl von Serial Monitor verarbeiten
+void processCommand(String cmd) {
+  Serial.print("> ");
+  Serial.println(cmd);
+  
+  if (cmd == "?") {
+    printHelp();
     return;
   }
-
-  String line = Serial.readStringUntil('\n');
-  line.trim();
-  if (line.length() == 0) {
-    return;
-  }
-
-  int argCount = 0;
-  String args[6];
-  int pos = 0;
-  while (pos < line.length() && argCount < 6) {
-    int start = pos;
-    while (pos < line.length() && !isSpace(line.charAt(pos))) {
-      pos++;
-    }
-    args[argCount++] = line.substring(start, pos);
-    while (pos < line.length() && isSpace(line.charAt(pos))) {
-      pos++;
+  
+  if (cmd.startsWith("s")) {
+    // Stepper Befehl: s<steps>
+    int steps = cmd.substring(1).toInt();
+    moveStepperViaI2C(steps);
+  } 
+  else if (cmd.startsWith("v")) {
+    // Servo Befehl: v<id><angle> (z.B. v0090)
+    if (cmd.length() >= 5) {
+      int servo_id = cmd.substring(1, 2).toInt();
+      int angle = cmd.substring(2, 5).toInt();
+      moveServoViaI2C(servo_id, angle);
+    } else {
+      Serial.println("  Fehler: Format v<id><angle> (z.B. v0090)");
     }
   }
+  else {
+    Serial.println("  Unbekannter Befehl. ? für Hilfe.");
+  }
+}
 
-  String cmd = args[0];
-  cmd.toLowerCase();
-
-  if (cmd == "move" && argCount == 5) {
-    uint8_t axis = axisFromToken(args[1]);
-    uint8_t dir = 0;
-    uint16_t speed = static_cast<uint16_t>(args[3].toInt());
-    uint16_t durationMs = static_cast<uint16_t>(args[4].toInt());
-    if (axis == 255 || !parseDirection(args[2], dir) || speed == 0 || durationMs == 0) {
-      Serial.println("Invalid MOVE command format.");
-      printUsage();
-      return;
-    }
-    uint32_t steps = (static_cast<uint32_t>(speed) * durationMs + 999) / 1000;
-    if (steps > 65535) {
-      Serial.println("Steps value too large for this command.");
-      return;
-    }
-    uint32_t delayUs = 500000UL / speed;
-    if (delayUs < 10) {
-      delayUs = 10;
-    }
-    sendMoveCommand(axis, dir, static_cast<uint16_t>(steps), static_cast<uint16_t>(delayUs));
-    Serial.printf("MOVE %c dir=%u speed=%u duration=%ums -> steps=%u delay=%u\n", kAxisNames[axis], dir, speed, durationMs, steps, delayUs);
-  } else if (cmd == "step" && argCount == 5) {
-    uint8_t axis = axisFromToken(args[1]);
-    uint8_t dir = 0;
-    uint32_t steps = static_cast<uint32_t>(args[3].toInt());
-    uint32_t delayUs = static_cast<uint32_t>(args[4].toInt());
-    if (axis == 255 || !parseDirection(args[2], dir) || steps == 0 || delayUs == 0 || steps > 65535 || delayUs > 65535) {
-      Serial.println("Invalid STEP command format.");
-      printUsage();
-      return;
-    }
-    sendMoveCommand(axis, dir, static_cast<uint16_t>(steps), static_cast<uint16_t>(delayUs));
-    Serial.printf("STEP %c dir=%u steps=%u delay=%u\n", kAxisNames[axis], dir, steps, delayUs);
-  } else if (cmd == "enable" && argCount == 2) {
-    uint8_t axis = axisFromToken(args[1]);
-    if (axis == 255) {
-      Serial.println("Invalid ENABLE command format.");
-      printUsage();
-      return;
-    }
-    sendEnableCommand(axis);
-    Serial.printf("ENABLE %c\n", kAxisNames[axis]);
-  } else if (cmd == "disable" && argCount == 2) {
-    uint8_t axis = axisFromToken(args[1]);
-    if (axis == 255) {
-      Serial.println("Invalid DISABLE command format.");
-      printUsage();
-      return;
-    }
-    sendDisableCommand(axis);
-    Serial.printf("DISABLE %c\n", kAxisNames[axis]);
-  } else if (cmd == "status") {
-    bool ready = requestSlaveStatus();
-    Serial.printf("Slave command ready: %s\n", ready ? "YES" : "NO");
-  } else if (cmd == "scan") {
-    scanI2CBus();
-  } else if (cmd == "vibrate" && (argCount == 4 || argCount == 5)) {
-    uint8_t axis = axisFromToken(args[1]);
-    uint16_t frequency = static_cast<uint16_t>(args[2].toInt());
-    uint16_t durationMs = static_cast<uint16_t>(args[3].toInt());
-    uint8_t amplitude = 255;
-    if (argCount == 5) {
-      amplitude = static_cast<uint8_t>(args[4].toInt());
-    }
-    if (axis == 255 || frequency == 0 || durationMs == 0 || amplitude == 0) {
-      Serial.println("Invalid VIBRATE command format.");
-      printUsage();
-      return;
-    }
-    sendVibrateCommand(axis, frequency, amplitude, durationMs);
-    Serial.printf("VIBRATE axis %c %u Hz for %ums at amplitude %u\n", kAxisNames[axis], frequency, durationMs, amplitude);
+// Stepper via I2C steuern (an Uno 0x33)
+void moveStepperViaI2C(int steps) {
+  StepperCommand cmd;
+  cmd.cmd = CMD_STEPPER_ROTATE;
+  cmd.steps = steps;
+  cmd.speed = 100; // Standard-Geschwindigkeit
+  
+  Wire.beginTransmission(I2C_ADDR_UNO);
+  Wire.write((uint8_t*)&cmd, sizeof(cmd));
+  int result = Wire.endTransmission();
+  
+  if (result == 0) {
+    Serial.print("  ✓ Stepper: ");
+    Serial.print(steps);
+    Serial.println(" Schritte");
   } else {
-    Serial.println("Unknown command.");
-    printUsage();
+    Serial.println("  ✗ Fehler: Uno nicht erreichbar");
   }
+}
+
+// Servo via I2C steuern (an Nano 0x32)
+void moveServoViaI2C(int servo_id, int angle) {
+  // Bounds Check
+  if (servo_id < 0 || servo_id > 5) {
+    Serial.println("  Fehler: Servo-ID muss 0-5 sein");
+    return;
+  }
+  if (angle < 0 || angle > 180) {
+    Serial.println("  Fehler: Winkel muss 0-180 sein");
+    return;
+  }
+  
+  ServoCommand cmd;
+  cmd.cmd = CMD_SERVO_SET_ANGLE;
+  cmd.servo_id = servo_id;
+  cmd.angle = angle;
+  
+  Wire.beginTransmission(I2C_ADDR_NANO);
+  Wire.write((uint8_t*)&cmd, sizeof(cmd));
+  int result = Wire.endTransmission();
+  
+  if (result == 0) {
+    Serial.print("  ✓ Servo ");
+    Serial.print(servo_id);
+    Serial.print(": ");
+    Serial.print(angle);
+    Serial.println("°");
+  } else {
+    Serial.println("  ✗ Fehler: Nano nicht erreichbar");
+  }
+}
+
+void printHelp() {
+  Serial.println("\n=== Hilfe ===");
+  Serial.println("Stepper rotieren:");
+  Serial.println("  s100    - 100 Schritte im Uhrzeigersinn");
+  Serial.println("  s-50    - 50 Schritte gegen Uhrzeigersinn");
+  Serial.println("\nServo bewegen:");
+  Serial.println("  v0090   - Servo 0 auf 90°");
+  Serial.println("  v1000   - Servo 1 auf 0°");
+  Serial.println("  v2180   - Servo 2 auf 180°");
+  Serial.println();
 }

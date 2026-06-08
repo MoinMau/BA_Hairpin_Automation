@@ -8,10 +8,10 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
-                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/src",
+                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/Servo/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
+                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -245,10 +245,10 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
-                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/src",
+                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/Servo/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
+                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",

@@ -1,183 +1,109 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include "i2c_protocol.h"
 
-// CNC Shield V3 axis pin mapping
-const uint8_t STEP_PINS[] = {2, 3, 4};
-const uint8_t DIR_PINS[] = {5, 6, 7};
-const uint8_t EN_PIN = 8;
-const uint8_t STATUS_LED_PIN = 13;
-const uint8_t AXIS_COUNT = 3;
-const uint8_t AXIS_ALL = 255;
-const uint8_t I2C_ADDRESS = 0x08;
+// CNC-Shield Pin-Belegung für Stepper
+#define STEPPER_STEP 2   // X.STP
+#define STEPPER_DIR 5    // X.DIR
+#define STEPPER_EN 8     // X.EN (Enable - LOW = Motor aktiv)
 
-enum CommandId : uint8_t {
-  CMD_MOVE = 0x01,
-  CMD_ENABLE = 0x02,
-  CMD_DISABLE = 0x03,
-  CMD_VIBRATE = 0x04,
+// I2C
+#define I2C_ADDR 0x33
+#define I2C_SDA A4
+#define I2C_SCL A5
+
+// Funktionsdeklaration
+void onI2CReceive(int numBytes);
+
+// Stepper-Zustand
+struct StepperState {
+  int steps_remaining;
+  uint8_t speed;
+  unsigned long last_step_time;
+  int current_direction; // 1 oder -1
 };
 
-struct I2CCommand {
-  uint8_t cmd;
-  uint8_t axis;
-  uint8_t dir;
-  uint16_t steps;
-  uint16_t delayUs;
-  uint16_t frequency;
-  uint8_t amplitude;
-  uint16_t durationMs;
-};
-
-volatile bool commandReady = false;
-I2CCommand currentCommand = {0, AXIS_ALL, 0, 0, 0, 0, 255, 0};
-
-void stepAxis(uint8_t axis, uint16_t steps, uint8_t dir, uint16_t delayUs) {
-  if (axis >= AXIS_COUNT || steps == 0) {
-    return;
-  }
-
-  digitalWrite(DIR_PINS[axis], dir ? HIGH : LOW);
-
-  for (uint16_t i = 0; i < steps; i++) {
-    digitalWrite(STEP_PINS[axis], HIGH);
-    delayMicroseconds(delayUs);
-    digitalWrite(STEP_PINS[axis], LOW);
-    delayMicroseconds(delayUs);
-  }
-}
-
-void receiveI2C(int count) {
-  if (count < 1) {
-    return;
-  }
-
-  I2CCommand cmd = {0, AXIS_ALL, 0, 0, 0, 0, 255, 0};
-  cmd.cmd = Wire.read();
-  bool validCommand = false;
-
-  if (cmd.cmd == CMD_MOVE && count >= 7) {
-    cmd.axis = Wire.read();
-    cmd.dir = Wire.read();
-    uint8_t lowSteps = Wire.read();
-    uint8_t highSteps = Wire.read();
-    cmd.steps = (uint16_t)lowSteps | ((uint16_t)highSteps << 8);
-    uint8_t lowDelay = Wire.read();
-    uint8_t highDelay = Wire.read();
-    cmd.delayUs = (uint16_t)lowDelay | ((uint16_t)highDelay << 8);
-    validCommand = true;
-  } else if (cmd.cmd == CMD_VIBRATE && count >= 7) {
-    cmd.axis = Wire.read();
-    cmd.amplitude = Wire.read();
-    uint8_t lowFreq = Wire.read();
-    uint8_t highFreq = Wire.read();
-    cmd.frequency = (uint16_t)lowFreq | ((uint16_t)highFreq << 8);
-    uint8_t lowDuration = Wire.read();
-    uint8_t highDuration = Wire.read();
-    cmd.durationMs = (uint16_t)lowDuration | ((uint16_t)highDuration << 8);
-    validCommand = true;
-  } else if (cmd.cmd == CMD_ENABLE || cmd.cmd == CMD_DISABLE) {
-    if (count >= 2) {
-      cmd.axis = Wire.read();
-    } else {
-      cmd.axis = AXIS_ALL;
-    }
-    validCommand = true;
-  }
-
-  if (!validCommand) {
-    return;
-  }
-
-  currentCommand = cmd;
-  commandReady = true;
-  digitalWrite(STATUS_LED_PIN, HIGH);
-}
-
-void requestI2C() {
-  Wire.write((uint8_t)(commandReady ? 1 : 0));
-}
-
-void stepPulse(uint8_t axis, uint32_t delayUs) {
-  digitalWrite(STEP_PINS[axis], HIGH);
-  delayMicroseconds(delayUs);
-  digitalWrite(STEP_PINS[axis], LOW);
-  delayMicroseconds(delayUs);
-}
-
-void vibrateAxis(uint8_t axis, uint16_t frequency, uint8_t amplitude, uint16_t durationMs) {
-  if (axis >= AXIS_COUNT || frequency == 0 || durationMs == 0 || amplitude == 0) {
-    return;
-  }
-
-  digitalWrite(EN_PIN, LOW);
-  uint8_t amplitudeSteps = 1 + ((uint16_t)(amplitude - 1) * 39) / 254;
-  uint32_t halfCycleUs = 500000UL / frequency;
-  uint32_t stepDelayUs = halfCycleUs / (2UL * amplitudeSteps);
-  if (stepDelayUs < 200) {
-    stepDelayUs = 200;
-  }
-
-  uint32_t endTime = millis() + durationMs;
-  bool direction = true;
-  while (millis() < endTime) {
-    digitalWrite(DIR_PINS[axis], direction ? HIGH : LOW);
-    for (uint8_t i = 0; i < amplitudeSteps; ++i) {
-      stepPulse(axis, stepDelayUs);
-    }
-    direction = !direction;
-  }
-}
-
-void executeCommand() {
-  noInterrupts();
-  I2CCommand cmd = currentCommand;
-  commandReady = false;
-  interrupts();
-  digitalWrite(STATUS_LED_PIN, HIGH);
-  delay(100);
-  digitalWrite(STATUS_LED_PIN, LOW);
-
-  if (cmd.cmd == CMD_MOVE) {
-    if (cmd.axis < AXIS_COUNT) {
-      digitalWrite(EN_PIN, LOW);
-      stepAxis(cmd.axis, cmd.steps, cmd.dir, cmd.delayUs);
-    }
-  } else if (cmd.cmd == CMD_ENABLE) {
-    digitalWrite(EN_PIN, LOW);
-  } else if (cmd.cmd == CMD_DISABLE) {
-    digitalWrite(EN_PIN, HIGH);
-  } else if (cmd.cmd == CMD_VIBRATE) {
-    vibrateAxis(cmd.axis, cmd.frequency, cmd.amplitude, cmd.durationMs);
-  }
-}
+StepperState stepper = {0, 100, 0, 1};
 
 void setup() {
-  pinMode(EN_PIN, OUTPUT);
-  digitalWrite(EN_PIN, LOW);
-
-  for (uint8_t i = 0; i < AXIS_COUNT; i++) {
-    pinMode(STEP_PINS[i], OUTPUT);
-    pinMode(DIR_PINS[i], OUTPUT);
-    digitalWrite(STEP_PINS[i], LOW);
-    digitalWrite(DIR_PINS[i], LOW);
-  }
-
-  pinMode(STATUS_LED_PIN, OUTPUT);
-  digitalWrite(STATUS_LED_PIN, LOW);
-
-  Wire.begin(I2C_ADDRESS);
-  Wire.onReceive(receiveI2C);
-  Wire.onRequest(requestI2C);
-
-  Serial.begin(115200);
-  while (!Serial) {
-    ;
-  }
-  Serial.println("UNO I2C-Slave bereit, Adresse 0x08");
+  // Pins initialisieren
+  pinMode(STEPPER_STEP, OUTPUT);
+  pinMode(STEPPER_DIR, OUTPUT);
+  pinMode(STEPPER_EN, OUTPUT);
+  digitalWrite(STEPPER_STEP, LOW);
+  digitalWrite(STEPPER_DIR, LOW);
+  digitalWrite(STEPPER_EN, LOW);  // Motor aktivieren
+  
+  // I2C Slave Initialisierung
+  Wire.begin(I2C_ADDR);
+  Wire.onReceive(onI2CReceive);
+  
+  Serial.begin(9600);
+  Serial.println("=== Arduino Uno: Stepper Control ===");
+  Serial.print("I2C Adresse: 0x");
+  Serial.println(I2C_ADDR, HEX);
+  Serial.println("Stepper Enable: ON (Pin 8 = LOW)");
 }
 
 void loop() {
-  if (commandReady) {
-    executeCommand();
+  // Nicht-blockierendes Stepper-Stepping mit millis()
+  if (stepper.steps_remaining > 0) {
+    // Berechne Verzögerung basierend auf Speed (0-255)
+    // Speed 100 = ~1000us zwischen Schritten
+    unsigned long delay_us = map(stepper.speed, 0, 255, 5000, 500);
+    
+    if (millis() * 1000 - stepper.last_step_time >= delay_us) {
+      // Schritt ausführen
+      digitalWrite(STEPPER_STEP, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(STEPPER_STEP, LOW);
+      delayMicroseconds(10);
+      
+      stepper.steps_remaining--;
+      stepper.last_step_time = millis() * 1000;
+      
+      if (stepper.steps_remaining == 0) {
+        Serial.println("✓ Stepper: Bewegung beendet");
+      }
+    }
+  }
+}
+
+// I2C Interrupt Handler
+void onI2CReceive(int numBytes) {
+  if (numBytes >= (int)sizeof(StepperCommand)) {
+    byte buffer[sizeof(StepperCommand)];
+    
+    for (int i = 0; i < (int)sizeof(StepperCommand); i++) {
+      buffer[i] = Wire.read();
+    }
+    
+    StepperCommand* cmd = (StepperCommand*)buffer;
+    
+    if (cmd->cmd == CMD_STEPPER_ROTATE) {
+      // Richtung setzen
+      if (cmd->steps > 0) {
+        digitalWrite(STEPPER_DIR, HIGH); // Uhrzeigersinn
+        stepper.current_direction = 1;
+      } else {
+        digitalWrite(STEPPER_DIR, LOW);  // Gegen Uhrzeigersinn
+        stepper.current_direction = -1;
+      }
+      
+      // Bewegung starten
+      stepper.steps_remaining = abs(cmd->steps);
+      stepper.speed = cmd->speed;
+      stepper.last_step_time = millis() * 1000;
+      
+      Serial.print("Befehl erhalten: ");
+      Serial.print(cmd->steps);
+      Serial.print(" Schritte, Speed: ");
+      Serial.println(cmd->speed);
+    }
+  }
+  
+  // Restliche Bytes auslesen
+  while (Wire.available()) {
+    Wire.read();
   }
 }
