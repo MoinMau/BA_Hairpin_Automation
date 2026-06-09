@@ -7,12 +7,15 @@
 const uint8_t SERVO_PINS[6] = {7, 8, 9, 10, 11, 12};
 Servo servos[6];
 
+uint16_t tracked_pwm[6] = {1500, 1500, 1500, 1500, 1500, 1500};
+
 // Globale Variablen für I2C und Debugging
 bool debug_enabled = false;
 volatile bool new_servo_command = false;
 volatile ServoCommand active_servo_cmd;
 
 void onI2CReceive(int numBytes);
+void onI2CRequest();
 void handleSerialCommands();
 void executeServoCommand(ServoCommand cmd);
 void printNanoHelp();
@@ -27,6 +30,7 @@ void setup() {
   // I2C Bus als Slave initialisieren
   Wire.begin(I2C_ADDR_NANO);
   Wire.onReceive(onI2CReceive);
+  Wire.onRequest(onI2CRequest);
 
   Serial.begin(9600);
   Serial.println(F("=== Arduino Nano: Servo & Sensor Slave ==="));
@@ -71,6 +75,7 @@ void executeServoCommand(ServoCommand cmd) {
 
   // Servo-Pulsweite aktualisieren
   servos[cmd.servo_num].writeMicroseconds(cmd.pwm_value);
+  tracked_pwm[cmd.servo_num] = cmd.pwm_value;
 }
 
 void handleSerialCommands() {
@@ -123,4 +128,12 @@ void onI2CReceive(int numBytes) {
     new_servo_command = true;
   }
   while (Wire.available()) { Wire.read(); }
+}
+
+void onI2CRequest() {
+  ServoStatus status;
+  for(int i = 0; i < 6; i++) {
+    status.current_pwm[i] = tracked_pwm[i];
+  }
+  Wire.write((uint8_t*)&status, sizeof(ServoStatus));
 }

@@ -43,6 +43,7 @@ enum HomingState { HOMING_IDLE, HOMING_SEARCHING, HOMING_REBOUND };
 HomingState axis_homing_state[3] = {HOMING_IDLE, HOMING_IDLE, HOMING_IDLE};
 
 void onI2CReceive(int numBytes);
+void onI2CRequest();
 void handleSerialCommands();
 void executeStepperCommand(StepperCommand cmd);
 void triggerHoming(uint8_t axis);
@@ -62,6 +63,7 @@ void setup() {
   
   Wire.begin(I2C_ADDR_UNO);
   Wire.onReceive(onI2CReceive);
+  Wire.onRequest(onI2CRequest);
   
   Serial.begin(9600);
   Serial.println(F("=== Arduino Uno: Stepper Slave Controller ==="));
@@ -226,6 +228,21 @@ void executeStepperCommand(StepperCommand cmd) {
       triggerHoming(cmd.axis);
       break;
   }
+}
+
+void onI2CRequest() {
+  StepperStatus status;
+  status.current_pos_x = stepper_x.currentPosition();
+  status.current_pos_y = stepper_y.currentPosition();
+  status.current_pos_z = stepper_z.currentPosition();
+  
+  // Flag setzen, ob irgendeine Achse im Homing ist
+  status.homing_active = (axis_homing_state[0] != HOMING_IDLE || 
+                          axis_homing_state[1] != HOMING_IDLE || 
+                          axis_homing_state[2] != HOMING_IDLE) ? 1 : 0;
+
+  // Struktur direkt als Byte-Array an den Master schicken
+  Wire.write((uint8_t*)&status, sizeof(StepperStatus));
 }
 
 void handleSerialCommands() {
