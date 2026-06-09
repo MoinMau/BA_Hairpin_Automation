@@ -16,10 +16,12 @@
 #define MOVE_TYPE_RELATIVE   1  // Direkt Schritte (steps, speed) -> Richtung über Vorzeichen von steps
 #define MOVE_TYPE_ABSOLUTE   2  // Move to Position (target_position, speed)
 #define MOVE_TYPE_TIMED      3  // Move mit Speed für X Millisekunden (speed, duration_ms) -> Richtung über Vorzeichen von speed
+#define MOVE_TYPE_VIBRATE    4  // NEU: Vibrationsmodus (Param1 = Amplitude in Steps, Param2 = Frequenz in Hz)
+#define MOVE_TYPE_FREEZE     5  // NEU: Stoppt jede Bewegung sofort und friert die Position ein
 
 #define CMD_STEPPER_ROTATE   0x10  
 #define CMD_STEPPER_HOMING   0x12  // NEU: Kalibrierungsfahrt starten
-
+ 
 // Datenstruktur für I2C
 struct StepperCommand {
   uint8_t axis;          // AXIS_X, AXIS_Y, AXIS_Z
