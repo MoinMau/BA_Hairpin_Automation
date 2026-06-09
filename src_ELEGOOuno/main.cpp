@@ -9,7 +9,9 @@
 #define STEPPER_Y_DIR 6   
 #define STEPPER_Z_STP 4   
 #define STEPPER_Z_DIR 7   
-#define STEPPER_EN 8      
+#define STEPPER_EN 8  
+
+#define LED_PIN 13
 
 #define ENDSTOP_X 9       
 #define MAX_STEPS_X 8000  
@@ -48,7 +50,9 @@ void printHelp();
 void startHomingX();
 
 void setup() {
+  pinMode(LED_PIN, OUTPUT);
   pinMode(STEPPER_EN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
   digitalWrite(STEPPER_EN, LOW); 
   pinMode(ENDSTOP_X, INPUT_PULLUP);
   
@@ -143,14 +147,22 @@ void loop() {
   
   if (new_command_received) {
     new_command_received = false;
-    if (!test_mode_active) {
-      StepperCommand cmd_copy;
-      cmd_copy.axis = active_cmd.axis;
-      cmd_copy.move_type = active_cmd.move_type;
-      cmd_copy.parameter1 = active_cmd.parameter1;
-      cmd_copy.parameter2 = active_cmd.parameter2;
-      executeStepperCommand(cmd_copy);
-    }
+    
+    Serial.println(F("\n[Uno Loop] Verarbeite neuen I2C-Befehl..."));
+    Serial.print(F("  -> Empfangene Achse (Raw): ")); Serial.println(active_cmd.axis);
+    Serial.print(F("  -> Bewegungstyp (Raw): ")); Serial.println(active_cmd.move_type);
+    Serial.print(F("  -> Parameter 1: ")); Serial.println(active_cmd.parameter1);
+    Serial.print(F("  -> Parameter 2: ")); Serial.println(active_cmd.parameter2);
+
+    // Wir kopieren und fuehren den Befehl JETZT aus, 
+    // um zu sehen, ob executeStepperCommand() ihn ablehnt!
+    StepperCommand cmd_copy;
+    cmd_copy.axis = active_cmd.axis;
+    cmd_copy.move_type = active_cmd.move_type;
+    cmd_copy.parameter1 = active_cmd.parameter1;
+    cmd_copy.parameter2 = active_cmd.parameter2;
+    
+    executeStepperCommand(cmd_copy);
   }
   
   // Live-Positionsanzeige
@@ -178,20 +190,31 @@ void startHomingX() {
 }
 
 void executeStepperCommand(StepperCommand cmd) {
+  Serial.println(F("[Uno Execute] Pruefe Grenzwerte..."));
+  
   if (cmd.axis == AXIS_X && x_homing_state == HOMING_IDLE && cmd.move_type != MOVE_TYPE_VIBRATE) {
-    if (cmd.move_type == MOVE_TYPE_ABSOLUTE && (cmd.parameter1 < 0 || cmd.parameter1 > MAX_STEPS_X)) return;
+    if (cmd.move_type == MOVE_TYPE_ABSOLUTE && (cmd.parameter1 < 0 || cmd.parameter1 > MAX_STEPS_X)) {
+      Serial.println(F("  -> ABGELEHNT: ABS-Ziel ausserhalb Software-Limit X (0-8000)!"));
+      return;
+    }
     if (cmd.move_type == MOVE_TYPE_RELATIVE) {
       long preview = stepper_x.currentPosition() + cmd.parameter1;
-      if (preview < 0 || preview > MAX_STEPS_X) return;
+      if (preview < 0 || preview > MAX_STEPS_X) {
+        Serial.println(F("  -> ABGELEHNT: REL-Fahrt verletzt Software-Limit X!"));
+        return;
+      }
     }
   }
 
   AccelStepper* target = nullptr;
-  if (cmd.axis == AXIS_X) target = &stepper_x;
-  else if (cmd.axis == AXIS_Y) target = &stepper_y;
-  else if (cmd.axis == AXIS_Z) target = &stepper_z;
+  if (cmd.axis == AXIS_X) { target = &stepper_x; Serial.println(F("  -> Achse X gewaehlt")); }
+  else if (cmd.axis == AXIS_Y) { target = &stepper_y; Serial.println(F("  -> Achse Y gewaehlt")); }
+  else if (cmd.axis == AXIS_Z) { target = &stepper_z; Serial.println(F("  -> Achse Z gewaehlt")); }
   
-  if (target == nullptr) return;
+  if (target == nullptr) {
+    Serial.println(F("  -> ABGELEHNT: target ist NULL (Achsen-ID ungueltig)!"));
+    return;
+  }
   
   // Alle anderen Bewegungsmodi für diese Achse zurücksetzen
   timed_move_active[cmd.axis] = false;
@@ -231,18 +254,19 @@ void executeStepperCommand(StepperCommand cmd) {
         target->move(vibrate_amplitude[cmd.axis]);
       }
       break;
-      case MOVE_TYPE_FREEZE: // --- NEU: Achse sofort einfrieren ---
-      target->stop(); // Sagt AccelStepper, er soll eine Bremsrampe einleiten bzw. stoppen
-      target->setCurrentPosition(target->currentPosition()); // Setzt das Ziel hart auf den Ist-Wert
-      
-      // Verhindert, dass asynchrone Zeit- oder Vibrationsschleifen weiterfeuern
+      case MOVE_TYPE_FREEZE: 
+      target->stop(); 
+      target->setCurrentPosition(target->currentPosition()); 
       timed_move_active[cmd.axis] = false;
       vibrate_active[cmd.axis] = false;
       
-      if (test_mode_active) {
-        Serial.print(F("ACHSE INITIERT EINGEFROREN -> ")); 
-        Serial.print(cmd.axis == AXIS_X ? F("X") : (cmd.axis == AXIS_Y ? F("Y") : F("Z")));
-        Serial.print(F(" auf Position: ")); Serial.println(target->currentPosition());
+      // --- NEU: Abfangen der globalen Treiber-Zustaende via I2C ---
+      if (cmd.parameter1 == 99) {
+        digitalWrite(STEPPER_EN, HIGH); // disAll: Treiber AUS
+        if (test_mode_active) Serial.println(F("I2C-Systemmeldung: Motoren STROMLOS (disAll)"));
+      } else {
+        digitalWrite(STEPPER_EN, LOW);  // enAll / Normaler Freeze: Treiber AN
+        if (test_mode_active) Serial.println(F("I2C-Systemmeldung: Motoren SCHARF (enAll)"));
       }
       break;
   }
@@ -326,17 +350,23 @@ void printHelp() {
 }
 
 void onI2CReceive(int numBytes) {
-  if (numBytes > 0 && numBytes >= (int)sizeof(StepperCommand)) {
-    byte buffer[sizeof(StepperCommand)];
-    for (int i = 0; i < (int)sizeof(StepperCommand); i++) {
-      buffer[i] = Wire.read();
+  // Sobald überhaupt Bytes reinkommen, lassen wir die LED umschalten!
+  if (numBytes > 0) {
+    digitalWrite(LED_PIN, !digitalRead(LED_PIN)); 
+    
+    // Ab hier folgt dein normaler, bestehender Code:
+    if (numBytes >= (int)sizeof(StepperCommand)) {
+      byte buffer[sizeof(StepperCommand)];
+      for (int i = 0; i < (int)sizeof(StepperCommand); i++) {
+        buffer[i] = Wire.read();
+      }
+      StepperCommand* cmd_ptr = (StepperCommand*)buffer;
+      active_cmd.axis = cmd_ptr->axis;
+      active_cmd.move_type = cmd_ptr->move_type;
+      active_cmd.parameter1 = cmd_ptr->parameter1;
+      active_cmd.parameter2 = cmd_ptr->parameter2;
+      new_command_received = true; 
     }
-    StepperCommand* cmd_ptr = (StepperCommand*)buffer;
-    active_cmd.axis = cmd_ptr->axis;
-    active_cmd.move_type = cmd_ptr->move_type;
-    active_cmd.parameter1 = cmd_ptr->parameter1;
-    active_cmd.parameter2 = cmd_ptr->parameter2;
-    new_command_received = true; 
   }
   while (Wire.available()) { Wire.read(); }
 }
