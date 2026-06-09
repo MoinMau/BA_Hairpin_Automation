@@ -3,17 +3,16 @@
 #include <AccelStepper.h>
 #include "i2c_protocol.h"
 
+// --- Hardware Pin Belegungen ---
 #define STEPPER_X_STP 2   
 #define STEPPER_X_DIR 5   
 #define STEPPER_Y_STP 3   
 #define STEPPER_Y_DIR 6   
 #define STEPPER_Z_STP 4   
 #define STEPPER_Z_DIR 7   
-#define STEPPER_EN 8  
+#define STEPPER_EN 8      
 
-#define LED_PIN 13
-
-#define ENDSTOP_X 9       
+const uint8_t ENDSTOP_PINS[3] = {9, 10, 11}; // X=Pin 9, Y=Pin 10, Z=Pin 11
 #define MAX_STEPS_X 8000  
 
 AccelStepper stepper_x(1, STEPPER_X_STP, STEPPER_X_DIR);
@@ -23,38 +22,39 @@ AccelStepper stepper_z(1, STEPPER_Z_STP, STEPPER_Z_DIR);
 #define DEFAULT_MAX_SPEED 1000.0      
 #define DEFAULT_ACCEL 500.0    
 
+bool debug_enabled = false;          
 volatile bool new_command_received = false;
 volatile StepperCommand active_cmd;
 
-// Zeitsteuerung für TIMED
+// --- Zeitsteuerung (TIMED) ---
 unsigned long timed_move_start[3] = {0, 0, 0};
 unsigned long timed_move_duration[3] = {0, 0, 0};
 bool timed_move_active[3] = {false, false, false};
 
-// --- NEU: Variablen für den Vibrationsmodus ---
+// --- Vibrationsmodus ---
 bool vibrate_active[3] = {false, false, false};
-int32_t vibrate_amplitude[3] = {0, 0, 0};     // Ausschlag in Schritten
-unsigned long vibrate_half_period[3] = {0, 0, 0}; // Zeit für eine Richtung in ms
-unsigned long vibrate_last_toggle[3] = {0, 0, 0}; // Letzter Richtungswechsel
-bool vibrate_direction[3] = {false, false, false}; // true = vor, false = zurück
+int32_t vibrate_amplitude[3] = {0, 0, 0};     
+unsigned long vibrate_half_period[3] = {0, 0, 0}; 
+unsigned long vibrate_last_toggle[3] = {0, 0, 0}; 
+bool vibrate_direction[3] = {false, false, false}; 
 
-bool test_mode_active = false; 
-
+// --- 3-Achsen Homing (Zustandsmaschine) ---
 enum HomingState { HOMING_IDLE, HOMING_SEARCHING, HOMING_REBOUND };
-HomingState x_homing_state = HOMING_IDLE;
+HomingState axis_homing_state[3] = {HOMING_IDLE, HOMING_IDLE, HOMING_IDLE};
 
 void onI2CReceive(int numBytes);
-void handleSerialDebug();
+void handleSerialCommands();
 void executeStepperCommand(StepperCommand cmd);
-void printHelp();
-void startHomingX();
+void triggerHoming(uint8_t axis);
+void printUnoHelp();
 
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
   pinMode(STEPPER_EN, OUTPUT);
-  digitalWrite(LED_PIN, LOW);
   digitalWrite(STEPPER_EN, LOW); 
-  pinMode(ENDSTOP_X, INPUT_PULLUP);
+  
+  for (int i = 0; i < 3; i++) {
+    pinMode(ENDSTOP_PINS[i], INPUT_PULLUP);
+  }
   
   stepper_x.setMaxSpeed(DEFAULT_MAX_SPEED); stepper_x.setAcceleration(DEFAULT_ACCEL);
   stepper_y.setMaxSpeed(DEFAULT_MAX_SPEED); stepper_y.setAcceleration(DEFAULT_ACCEL);
@@ -64,159 +64,119 @@ void setup() {
   Wire.onReceive(onI2CReceive);
   
   Serial.begin(9600);
-  Serial.println(F("=== Arduino Uno: Stepper Control & Vibration ==="));
-  Serial.println(F("Sende 't' fuer den TESTMODUS."));
+  Serial.println(F("=== Arduino Uno: Stepper Slave Controller ==="));
+  Serial.println(F("Tippe 'h' fuer die vollstaendige Befehlsuebersicht."));
 }
 
 void loop() {
-  // 1. Endschalter-Notstopp
-  if (digitalRead(ENDSTOP_X) == LOW && x_homing_state == HOMING_IDLE) {
-    if (stepper_x.speed() < 0 || stepper_x.distanceToGo() < 0) {
-      stepper_x.stop();
-      vibrate_active[AXIS_X] = false; // Vibration stoppen bei Kollision
-      stepper_x.setCurrentPosition(0); 
-      if (test_mode_active) Serial.println(F("NOTSTOPP: Endstopp X ausgeloest!"));
-    }
-  }
+  AccelStepper* steppers[3] = {&stepper_x, &stepper_y, &stepper_z};
 
-  // 2. TIMED Modus Überwachung
   for (int i = 0; i < 3; i++) {
+    // 1. Endschalter-Notstopp im Normalbetrieb
+    if (digitalRead(ENDSTOP_PINS[i]) == LOW && axis_homing_state[i] == HOMING_IDLE) {
+      if (steppers[i]->speed() < 0 || steppers[i]->distanceToGo() < 0) {
+        steppers[i]->stop();
+        vibrate_active[i] = false;
+        steppers[i]->setCurrentPosition(0); 
+        if (debug_enabled) { Serial.print(F("[NOTSTOPP] Achse ")); Serial.print(i); Serial.println(F(" ausgeloest!")); }
+      }
+    }
+
+    // 2. TIMED Modus Überwachung
     if (timed_move_active[i]) {
       if (millis() - timed_move_start[i] >= timed_move_duration[i]) {
         timed_move_active[i] = false;
-        if (i == 0) stepper_x.stop();
-        if (i == 1) stepper_y.stop();
-        if (i == 2) stepper_z.stop();
+        steppers[i]->stop();
       }
+    }
+
+    // 3. Homing Ablaufsteuerung pro Achse
+    if (axis_homing_state[i] == HOMING_SEARCHING) {
+      if (digitalRead(ENDSTOP_PINS[i]) == LOW) { 
+        steppers[i]->stop();
+        steppers[i]->setMaxSpeed(200); 
+        steppers[i]->move(200); // Freifahren vom Schalter (Rebound)
+        axis_homing_state[i] = HOMING_REBOUND;
+      } else {
+        steppers[i]->runSpeed(); 
+      }
+    } 
+    else if (axis_homing_state[i] == HOMING_REBOUND) {
+      steppers[i]->run();
+      if (steppers[i]->distanceToGo() == 0) {
+        steppers[i]->setCurrentPosition(0);
+        steppers[i]->setMaxSpeed(DEFAULT_MAX_SPEED);
+        axis_homing_state[i] = HOMING_IDLE;
+        if (debug_enabled) { Serial.print(F("[Homing] Achse ")); Serial.print(i); Serial.println(F(" erfolgreich kalibriert.")); }
+      }
+    } 
+    else {
+      // Normaler Fahrbetrieb
+      if (timed_move_active[i]) steppers[i]->runSpeed(); else steppers[i]->run();
     }
   }
 
-  // 3. Vibrationsmodus Ablaufsteuerung (Jetzt hochpraezise in Mikrosekunden!)
+  // 4. Vibrationsmodus Ablaufsteuerung (µs-genau & Symmetrie-geschützt)
   for (int i = 0; i < 3; i++) {
     if (vibrate_active[i]) {
       if (micros() - vibrate_last_toggle[i] >= vibrate_half_period[i]) {
         vibrate_last_toggle[i] = micros();
-        vibrate_direction[i] = !vibrate_direction[i]; // Richtung umkehren
-        
+        vibrate_direction[i] = !vibrate_direction[i]; 
         long steps = vibrate_direction[i] ? vibrate_amplitude[i] : -vibrate_amplitude[i];
-        
-        if (i == 0) {
-          stepper_x.setMaxSpeed(4000); // Erhöhter Max-Speed für Mikrosekunden-Takt
-          stepper_x.move(steps);
-        } else if (i == 1) {
-          stepper_y.setMaxSpeed(4000);
-          stepper_y.move(steps);
-        } else if (i == 2) {
-          stepper_z.setMaxSpeed(4000);
-          stepper_z.move(steps);
-        }
+        steppers[i]->setCurrentPosition(steppers[i]->currentPosition());
+        steppers[i]->setMaxSpeed(4000); 
+        steppers[i]->move(steps);
       }
     }
   }
 
-  // 4. Homing Ablaufsteuerung
-  if (x_homing_state == HOMING_SEARCHING) {
-    if (digitalRead(ENDSTOP_X) == LOW) { 
-      stepper_x.stop();
-      stepper_x.setMaxSpeed(200); 
-      stepper_x.move(200); 
-      x_homing_state = HOMING_REBOUND;
-    } else {
-      stepper_x.runSpeed(); 
-    }
-  } 
-  else if (x_homing_state == HOMING_REBOUND) {
-    stepper_x.run();
-    if (stepper_x.distanceToGo() == 0) {
-      stepper_x.setCurrentPosition(0);
-      stepper_x.setMaxSpeed(DEFAULT_MAX_SPEED);
-      x_homing_state = HOMING_IDLE;
-      if (test_mode_active) Serial.println(F("X-Kalibrierung ERFOLGREICH!"));
-    }
-  } 
-  else {
-    // Normaler Lauf / Vibrations-Lauf für X
-    if (timed_move_active[AXIS_X]) stepper_x.runSpeed(); else stepper_x.run();
-  }
-
-  // Normaler Lauf / Vibrations-Lauf für Y und Z
-  if (timed_move_active[AXIS_Y]) stepper_y.runSpeed(); else stepper_y.run();
-  if (timed_move_active[AXIS_Z]) stepper_z.runSpeed(); else stepper_z.run();
-  
-  handleSerialDebug();
+  handleSerialCommands();
   
   if (new_command_received) {
     new_command_received = false;
-    
-    Serial.println(F("\n[Uno Loop] Verarbeite neuen I2C-Befehl..."));
-    Serial.print(F("  -> Empfangene Achse (Raw): ")); Serial.println(active_cmd.axis);
-    Serial.print(F("  -> Bewegungstyp (Raw): ")); Serial.println(active_cmd.move_type);
-    Serial.print(F("  -> Parameter 1: ")); Serial.println(active_cmd.parameter1);
-    Serial.print(F("  -> Parameter 2: ")); Serial.println(active_cmd.parameter2);
-
-    // Wir kopieren und fuehren den Befehl JETZT aus, 
-    // um zu sehen, ob executeStepperCommand() ihn ablehnt!
     StepperCommand cmd_copy;
     cmd_copy.axis = active_cmd.axis;
     cmd_copy.move_type = active_cmd.move_type;
     cmd_copy.parameter1 = active_cmd.parameter1;
     cmd_copy.parameter2 = active_cmd.parameter2;
-    
     executeStepperCommand(cmd_copy);
-  }
-  
-  // Live-Positionsanzeige
-  static unsigned long last_status = 0;
-  if (test_mode_active && (millis() - last_status >= 200)) {
-    bool is_moving = (stepper_x.distanceToGo() != 0 || stepper_y.distanceToGo() != 0 || stepper_z.distanceToGo() != 0 || 
-                      timed_move_active[0] || timed_move_active[1] || timed_move_active[2] || 
-                      vibrate_active[0] || vibrate_active[1] || vibrate_active[2] || x_homing_state != HOMING_IDLE);
-                      
-    if (is_moving) {
-      Serial.print(F("LIVE-POS -> X:")); Serial.print(stepper_x.currentPosition());
-      Serial.print(F(" | Y:")); Serial.print(stepper_y.currentPosition());
-      Serial.print(F(" | Z:")); Serial.println(stepper_z.currentPosition());
-    }
-    last_status = millis();
   }
 }
 
-void startHomingX() {
-  if (test_mode_active) Serial.println(F("Suche Endstopp..."));
-  x_homing_state = HOMING_SEARCHING;
-  timed_move_active[AXIS_X] = false;
-  vibrate_active[AXIS_X] = false;
-  stepper_x.setSpeed(-400); 
+void triggerHoming(uint8_t axis) {
+  if (axis > 2) return;
+  AccelStepper* steppers[3] = {&stepper_x, &stepper_y, &stepper_z};
+  
+  if (debug_enabled) { Serial.print(F("[Homing] Starte Suche auf Achse ")); Serial.println(axis); }
+  axis_homing_state[axis] = HOMING_SEARCHING;
+  timed_move_active[axis] = false;
+  vibrate_active[axis] = false;
+  steppers[axis]->setSpeed(-400); // Fahre rückwärts Richtung Endstopp
 }
 
 void executeStepperCommand(StepperCommand cmd) {
-  Serial.println(F("[Uno Execute] Pruefe Grenzwerte..."));
-  
-  if (cmd.axis == AXIS_X && x_homing_state == HOMING_IDLE && cmd.move_type != MOVE_TYPE_VIBRATE) {
-    if (cmd.move_type == MOVE_TYPE_ABSOLUTE && (cmd.parameter1 < 0 || cmd.parameter1 > MAX_STEPS_X)) {
-      Serial.println(F("  -> ABGELEHNT: ABS-Ziel ausserhalb Software-Limit X (0-8000)!"));
-      return;
-    }
+  if (debug_enabled) {
+    Serial.print(F("[Execute] Achse: ")); Serial.print(cmd.axis);
+    Serial.print(F(" | Typ: ")); Serial.print(cmd.move_type);
+    Serial.print(F(" | P1: ")); Serial.print(cmd.parameter1);
+    Serial.print(F(" | P2: ")); Serial.println(cmd.parameter2);
+  }
+
+  if (cmd.axis == AXIS_X && axis_homing_state[AXIS_X] == HOMING_IDLE && cmd.move_type != MOVE_TYPE_VIBRATE && cmd.move_type != MOVE_TYPE_STOP && cmd.move_type != MOVE_TYPE_HOMING) {
+    if (cmd.move_type == MOVE_TYPE_ABSOLUTE && (cmd.parameter1 < 0 || cmd.parameter1 > MAX_STEPS_X)) return;
     if (cmd.move_type == MOVE_TYPE_RELATIVE) {
       long preview = stepper_x.currentPosition() + cmd.parameter1;
-      if (preview < 0 || preview > MAX_STEPS_X) {
-        Serial.println(F("  -> ABGELEHNT: REL-Fahrt verletzt Software-Limit X!"));
-        return;
-      }
+      if (preview < 0 || preview > MAX_STEPS_X) return;
     }
   }
 
   AccelStepper* target = nullptr;
-  if (cmd.axis == AXIS_X) { target = &stepper_x; Serial.println(F("  -> Achse X gewaehlt")); }
-  else if (cmd.axis == AXIS_Y) { target = &stepper_y; Serial.println(F("  -> Achse Y gewaehlt")); }
-  else if (cmd.axis == AXIS_Z) { target = &stepper_z; Serial.println(F("  -> Achse Z gewaehlt")); }
+  if (cmd.axis == AXIS_X) target = &stepper_x;
+  else if (cmd.axis == AXIS_Y) target = &stepper_y;
+  else if (cmd.axis == AXIS_Z) target = &stepper_z;
   
-  if (target == nullptr) {
-    Serial.println(F("  -> ABGELEHNT: target ist NULL (Achsen-ID ungueltig)!"));
-    return;
-  }
+  if (target == nullptr) return;
   
-  // Alle anderen Bewegungsmodi für diese Achse zurücksetzen
   timed_move_active[cmd.axis] = false;
   vibrate_active[cmd.axis] = false;
 
@@ -225,78 +185,70 @@ void executeStepperCommand(StepperCommand cmd) {
       target->setMaxSpeed(cmd.parameter2);
       target->move(cmd.parameter1);
       break;
+      
     case MOVE_TYPE_ABSOLUTE: 
       target->setMaxSpeed(cmd.parameter2);
       target->moveTo(cmd.parameter1);
       break;
+      
     case MOVE_TYPE_TIMED:    
       target->setSpeed(cmd.parameter2); 
       timed_move_duration[cmd.axis] = cmd.parameter1; 
       timed_move_start[cmd.axis] = millis();
       timed_move_active[cmd.axis] = true;
       break;
-    case MOVE_TYPE_VIBRATE: // --- NEU: Vibrations-Setup ---
+      
+    case MOVE_TYPE_VIBRATE: 
       if (cmd.parameter2 <= 0 || cmd.parameter1 <= 0) {
-        target->stop(); // Frequenz oder Amplitude 0 -> Stoppen
-        if (test_mode_active) Serial.println(F("Vibration gestoppt."));
+        target->stop();
       } else {
         vibrate_amplitude[cmd.axis] = cmd.parameter1;
-        // Halbe Periodendauer in ms berechnen: (1000 ms / Frequenz) / 2
-        vibrate_half_period[cmd.axis] = (1000 / cmd.parameter2) / 2;
-        if (vibrate_half_period[cmd.axis] < 1) vibrate_half_period[cmd.axis] = 1; // Schutz vor Division durch 0
-        
-        vibrate_last_toggle[cmd.axis] = millis();
+        vibrate_half_period[cmd.axis] = (1000000UL / cmd.parameter2) / 2;
+        vibrate_last_toggle[cmd.axis] = micros();
         vibrate_direction[cmd.axis] = true;
         vibrate_active[cmd.axis] = true;
-        
-        // Ersten Impuls direkt abfeuern
-        target->setMaxSpeed(2000);
+        target->setMaxSpeed(4000);
         target->move(vibrate_amplitude[cmd.axis]);
       }
       break;
-      case MOVE_TYPE_FREEZE: 
+      
+    case MOVE_TYPE_STOP: // Aus FREEZE wurde STOP
       target->stop(); 
       target->setCurrentPosition(target->currentPosition()); 
-      timed_move_active[cmd.axis] = false;
-      vibrate_active[cmd.axis] = false;
-      
-      // --- NEU: Abfangen der globalen Treiber-Zustaende via I2C ---
       if (cmd.parameter1 == 99) {
-        digitalWrite(STEPPER_EN, HIGH); // disAll: Treiber AUS
-        if (test_mode_active) Serial.println(F("I2C-Systemmeldung: Motoren STROMLOS (disAll)"));
+        digitalWrite(STEPPER_EN, HIGH); 
       } else {
-        digitalWrite(STEPPER_EN, LOW);  // enAll / Normaler Freeze: Treiber AN
-        if (test_mode_active) Serial.println(F("I2C-Systemmeldung: Motoren SCHARF (enAll)"));
+        digitalWrite(STEPPER_EN, LOW);  
       }
+      break;
+
+    case MOVE_TYPE_HOMING: // NEU: Homing-Zweig
+      triggerHoming(cmd.axis);
       break;
   }
 }
 
-void handleSerialDebug() {
+void handleSerialCommands() {
   if (Serial.available() > 0) {
-    char ch = Serial.peek();
-    if (ch == 't' || ch == 'T') {
-      Serial.read(); 
-      test_mode_active = !test_mode_active;
-      Serial.println(F("\n-------------------------------------------"));
-      Serial.print(F("TESTMODUS: ")); Serial.println(test_mode_active ? F("AKTIVIERT") : F("DEAKTIVIERT"));
-      Serial.println(F("-------------------------------------------"));
-      if (test_mode_active) printHelp();
-      return;
-    }
-    
-    if (!test_mode_active) {
-      while(Serial.available()) Serial.read();
-      return;
-    }
-    
     String input = Serial.readStringUntil('\n');
     input.trim();
     if (input.length() == 0) return;
-    if (input.equalsIgnoreCase("h")) { printHelp(); return; }
-    if (input.equalsIgnoreCase("enAll")) { digitalWrite(STEPPER_EN, LOW); Serial.println(F("Treiber AN")); return; }
-    if (input.equalsIgnoreCase("disAll")) { digitalWrite(STEPPER_EN, HIGH); Serial.println(F("Treiber AUS")); return; }
-    if (input.equalsIgnoreCase("homeX")) { startHomingX(); return; }
+    
+    if (input.equalsIgnoreCase("h")) { printUnoHelp(); return; }
+    if (input.equalsIgnoreCase("debug")) {
+      debug_enabled = !debug_enabled;
+      Serial.print(F("-> UNO DEBUG: ")); Serial.println(debug_enabled ? F("AN") : F("AUS"));
+      return;
+    }
+    
+    if (input.equalsIgnoreCase("enAll")) {
+      StepperCommand cmd = {0, MOVE_TYPE_STOP, 0, 0}; executeStepperCommand(cmd);
+      return;
+    }
+    if (input.equalsIgnoreCase("disAll")) {
+      StepperCommand cmd = {0, MOVE_TYPE_STOP, 99, 0}; executeStepperCommand(cmd);
+      return;
+    }
 
     int firstComma = input.indexOf(',');
     int secondComma = input.indexOf(',', firstComma + 1);
@@ -311,62 +263,56 @@ void handleSerialDebug() {
       axisStr.toUpperCase(); axisStr.trim();
       typeStr.toUpperCase(); typeStr.trim();
 
-      StepperCommand cmd;
-      if (axisStr == "STP_X") cmd.axis = AXIS_X;
-      else if (axisStr == "STP_Y") cmd.axis = AXIS_Y;
-      else if (axisStr == "STP_Z") cmd.axis = AXIS_Z;
-      else { return; }
+      StepperCommand local_cmd;
 
-      if (typeStr == "REL") cmd.move_type = MOVE_TYPE_RELATIVE;
-      else if (typeStr == "ABS") cmd.move_type = MOVE_TYPE_ABSOLUTE;
-      else if (typeStr == "TIMED") cmd.move_type = MOVE_TYPE_TIMED;
-      else if (typeStr == "VIB") cmd.move_type = MOVE_TYPE_VIBRATE;
-      else if (typeStr == "FREEZE") cmd.move_type = MOVE_TYPE_FREEZE; // NEU: FREEZE über Seriell
-      else { return; }
+      if (axisStr == "STP_X") local_cmd.axis = AXIS_X;
+      else if (axisStr == "STP_Y") local_cmd.axis = AXIS_Y;
+      else if (axisStr == "STP_Z") local_cmd.axis = AXIS_Z;
+      else return;
 
-      cmd.parameter1 = p1;
-      cmd.parameter2 = p2;
+      if (typeStr == "REL") local_cmd.move_type = MOVE_TYPE_RELATIVE;
+      else if (typeStr == "ABS") local_cmd.move_type = MOVE_TYPE_ABSOLUTE;
+      else if (typeStr == "TIMED") local_cmd.move_type = MOVE_TYPE_TIMED;
+      else if (typeStr == "VIB") local_cmd.move_type = MOVE_TYPE_VIBRATE;
+      else if (typeStr == "STOP") local_cmd.move_type = MOVE_TYPE_STOP;
+      else if (typeStr == "HOMING") local_cmd.move_type = MOVE_TYPE_HOMING;
+      else return;
 
-      Serial.print(F("Fuehre aus -> ")); Serial.print(axisStr);
-      Serial.print(F(" | Typ: ")); Serial.print(typeStr);
-      Serial.print(F(" | Amplitude: ")); Serial.print(p1);
-      Serial.print(F(" | Frequenz: ")); Serial.print(p2); Serial.println(F(" Hz"));
+      local_cmd.parameter1 = p1;
+      local_cmd.parameter2 = p2;
 
-      executeStepperCommand(cmd);
+      executeStepperCommand(local_cmd);
     }
   }
 }
 
-void printHelp() {
-  Serial.println(F("Format: [STP_Achse],[Typ],[Param1],[Param2]"));
-  Serial.println(F("  STP_X,REL,1000,600      -> Relative Schritte"));
-  Serial.println(F("  STP_Y,ABS,2000,500      -> Absolute Position"));
-  Serial.println(F("  STP_Z,TIMED,3000,-400   -> Fahrt auf Zeit"));
-  Serial.println(F("  STP_X,VIB,5,60          -> Vibration (5 Steps Amplitude, 60 Hz)"));
-  Serial.println(F("  STP_X,FREEZE,0,0        -> Stoppt Achse X SOFORT und loggt Position"));
-  Serial.println(F("Spezialbefehle:"));
-  Serial.println(F("  homeX  -> Startet X-Kalibrierung am Endstopp"));
-  Serial.println(F("  enAll  -> Treiber AN | disAll -> Treiber AUS | t -> Beenden"));
+void printUnoHelp() {
+  Serial.println(F("\n=================== UNO BEFEHLE ==================="));
+  Serial.println(F("Format: [Achse],[Typ],[Param1],[Param2]"));
+  Serial.println(F("  STP_X,REL,1000,600    -> Relative Fahrt (Schritte, Speed)"));
+  Serial.println(F("  STP_Y,ABS,2000,500    -> Absolute Fahrt (Zielposition, Speed)"));
+  Serial.println(F("  STP_Z,TIMED,3000,400  -> Zeitfahrt (Dauer in ms, Speed)"));
+  Serial.println(F("  STP_X,VIB,5,50        -> Vibration (Amplitude, Frequenz in Hz)"));
+  Serial.println(F("  STP_X,STOP,0,0        -> Stoppt Achse X & friert Position ein"));
+  Serial.println(F("  STP_Y,HOMING,0,0      -> Startet Homing-Fahrt fuer Achse Y"));
+  Serial.println(F("Systembefehle:"));
+  Serial.println(F("  debug  -> Schaltet Konsolenmeldungen AN/AUS"));
+  Serial.println(F("  enAll  -> Treiber AN  |  disAll -> Treiber AUS"));
+  Serial.println(F("==================================================="));
 }
 
 void onI2CReceive(int numBytes) {
-  // Sobald überhaupt Bytes reinkommen, lassen wir die LED umschalten!
-  if (numBytes > 0) {
-    digitalWrite(LED_PIN, !digitalRead(LED_PIN)); 
-    
-    // Ab hier folgt dein normaler, bestehender Code:
-    if (numBytes >= (int)sizeof(StepperCommand)) {
-      byte buffer[sizeof(StepperCommand)];
-      for (int i = 0; i < (int)sizeof(StepperCommand); i++) {
-        buffer[i] = Wire.read();
-      }
-      StepperCommand* cmd_ptr = (StepperCommand*)buffer;
-      active_cmd.axis = cmd_ptr->axis;
-      active_cmd.move_type = cmd_ptr->move_type;
-      active_cmd.parameter1 = cmd_ptr->parameter1;
-      active_cmd.parameter2 = cmd_ptr->parameter2;
-      new_command_received = true; 
+  if (numBytes >= (int)sizeof(StepperCommand)) {
+    byte buffer[sizeof(StepperCommand)];
+    for (int i = 0; i < (int)sizeof(StepperCommand); i++) {
+      buffer[i] = Wire.read();
     }
+    StepperCommand* cmd_ptr = (StepperCommand*)buffer;
+    active_cmd.axis = cmd_ptr->axis;
+    active_cmd.move_type = cmd_ptr->move_type;
+    active_cmd.parameter1 = cmd_ptr->parameter1;
+    active_cmd.parameter2 = cmd_ptr->parameter2;
+    new_command_received = true; 
   }
   while (Wire.available()) { Wire.read(); }
 }

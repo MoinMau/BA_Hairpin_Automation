@@ -3,126 +3,124 @@
 #include <Servo.h>
 #include "i2c_protocol.h"
 
-// Servo Pins: D7-D12 (D7=D7, D8=D8, D9=D9, D10=D10, D11=D11, D12=D12)
-#define SERVO_PIN_0 7
-#define SERVO_PIN_1 8
-#define SERVO_PIN_2 9
-#define SERVO_PIN_3 10
-#define SERVO_PIN_4 11
-#define SERVO_PIN_5 12
-
-// I2C
-#define I2C_ADDR 0x32
-#define I2C_SDA A4
-#define I2C_SCL A5
-
-// Funktionsdeklaration
-void onI2CReceive(int numBytes);
-
-// Servo-Array
+// Pin-Belegung laut Richtlinie (D7 bis D12)
+const uint8_t SERVO_PINS[6] = {7, 8, 9, 10, 11, 12};
 Servo servos[6];
-int servo_pins[6] = {SERVO_PIN_0, SERVO_PIN_1, SERVO_PIN_2, SERVO_PIN_3, SERVO_PIN_4, SERVO_PIN_5};
-int current_angles[6] = {90, 90, 90, 90, 90, 90}; // Start bei 90°
 
-// Servo-Bewegungs-State
-struct ServoState {
-  int target_angle;
-  int current_angle;
-  unsigned long last_update;
-  uint8_t servo_id;
-  bool moving;
-};
+// Globale Variablen für I2C und Debugging
+bool debug_enabled = false;
+volatile bool new_servo_command = false;
+volatile ServoCommand active_servo_cmd;
 
-ServoState servo_states[6] = {
-  {90, 90, 0, 0, false},
-  {90, 90, 0, 1, false},
-  {90, 90, 0, 2, false},
-  {90, 90, 0, 3, false},
-  {90, 90, 0, 4, false},
-  {90, 90, 0, 5, false}
-};
+void onI2CReceive(int numBytes);
+void handleSerialCommands();
+void executeServoCommand(ServoCommand cmd);
+void printNanoHelp();
 
 void setup() {
-  // Servos initialisieren
+  // Initialisiere die 6 Servos
   for (int i = 0; i < 6; i++) {
-    servos[i].attach(servo_pins[i]);
-    servos[i].write(90); // Neutral Position
+    servos[i].attach(SERVO_PINS[i]);
+    servos[i].writeMicroseconds(1500); // Standardmäßig in die Mitte (90 Grad) fahren
   }
-  
-  // I2C Slave Initialisierung
-  Wire.begin(I2C_ADDR);
+
+  // I2C Bus als Slave initialisieren
+  Wire.begin(I2C_ADDR_NANO);
   Wire.onReceive(onI2CReceive);
-  
+
   Serial.begin(9600);
-  Serial.println("=== Arduino Nano: Servo Control ===");
-  Serial.print("I2C Adresse: 0x");
-  Serial.println(I2C_ADDR, HEX);
-  Serial.println("6 Servos auf Pins D7-D12");
+  Serial.println(F("=== Arduino Nano: Servo & Sensor Slave ==="));
+  Serial.println(F("Tippe 'h' fuer die lokale Servo-Befehlsuebersicht."));
+  Serial.println(F("Tippe 'debug' ein, um Meldungen AN/AUS zu schalten."));
 }
 
 void loop() {
-  // Nicht-blockierende Servo-Bewegung mit millis()
-  for (int i = 0; i < 6; i++) {
-    if (servo_states[i].moving) {
-      // Servo sanft zum Zielwinkel bewegen (ca. 5ms zwischen 1° Schritten)
-      if (millis() - servo_states[i].last_update >= 20) {
-        if (servo_states[i].current_angle < servo_states[i].target_angle) {
-          servo_states[i].current_angle++;
-        } else if (servo_states[i].current_angle > servo_states[i].target_angle) {
-          servo_states[i].current_angle--;
-        }
-        
-        servos[i].write(servo_states[i].current_angle);
-        servo_states[i].last_update = millis();
-        
-        // Zielwinkel erreicht
-        if (servo_states[i].current_angle == servo_states[i].target_angle) {
-          servo_states[i].moving = false;
-          Serial.print("✓ Servo ");
-          Serial.print(i);
-          Serial.print(" erreicht ");
-          Serial.print(servo_states[i].target_angle);
-          Serial.println("°");
-        }
-      }
+  // Lokale serielle Befehle verarbeiten
+  handleSerialCommands();
+
+  // Wenn ein I2C-Befehl vom Master kam
+  if (new_servo_command) {
+    new_servo_command = false;
+
+    // Lokale Kopie der volatile Struktur ziehen
+    ServoCommand cmd_copy;
+    cmd_copy.servo_num = active_servo_cmd.servo_num;
+    cmd_copy.pwm_value = active_servo_cmd.pwm_value;
+
+    executeServoCommand(cmd_copy);
+  }
+}
+
+void executeServoCommand(ServoCommand cmd) {
+  if (debug_enabled) {
+    Serial.print(F("[Execute Nano] Servo: ")); Serial.print(cmd.servo_num);
+    Serial.print(F(" | PWM-Wert: ")); Serial.println(cmd.pwm_value);
+  }
+
+  // Sicherheitsprüfung für den Servo-Index
+  if (cmd.servo_num >= 6) {
+    if (debug_enabled) Serial.println(F("  -> ABGELEHNT: Servo-Nummer existiert nicht (0-5)!"));
+    return;
+  }
+
+  // Sicherheitsprüfung für den PWM-Bereich (typisch 500 bis 2500 µs)
+  if (cmd.pwm_value < 500 || cmd.pwm_value > 2500) {
+    if (debug_enabled) Serial.println(F("  -> ABGELEHNT: PWM-Wert ausserhalb des sicheren Bereichs (500-2500)!"));
+    return;
+  }
+
+  // Servo-Pulsweite aktualisieren
+  servos[cmd.servo_num].writeMicroseconds(cmd.pwm_value);
+}
+
+void handleSerialCommands() {
+  if (Serial.available() > 0) {
+    String input = Serial.readStringUntil('\n');
+    input.trim();
+    if (input.length() == 0) return;
+
+    if (input.equalsIgnoreCase("h")) { printNanoHelp(); return; }
+    if (input.equalsIgnoreCase("debug")) {
+      debug_enabled = !debug_enabled;
+      Serial.print(F("-> NANO DEBUG: ")); Serial.println(debug_enabled ? F("AN") : F("AUS"));
+      return;
+    }
+
+    // Lokaler Parser Format: [ServoNum],[PWM] -> z.B. 0,1800
+    int commaIdx = input.indexOf(',');
+    if (commaIdx != -1) {
+      uint8_t s_num = input.substring(0, commaIdx).toInt();
+      uint16_t pwm = input.substring(commaIdx + 1).toInt();
+
+      ServoCommand local_cmd = {s_num, pwm};
+      executeServoCommand(local_cmd);
     }
   }
 }
 
-// I2C Interrupt Handler
+void printNanoHelp() {
+  Serial.println(F("\n=================== NANO BEFEHLE ==================="));
+  Serial.println(F("Format: [ServoNummer],[PWM-Wert]"));
+  Serial.println(F("  0,1500    -> Setzt Servo 0 (Pin D7) auf die Mittelstellung"));
+  Serial.println(F("  5,2000    -> Setzt Servo 5 (Pin D12) weit nach rechts"));
+  Serial.println(F("Grenzwerte:"));
+  Serial.println(F("  Servos:   0 bis 5"));
+  Serial.println(F("  PWM:      500 bis 2500 Mikrosekunden"));
+  Serial.println(F("Systembefehle:"));
+  Serial.println(F("  debug     -> Schaltet Live-Meldungen AN/AUS"));
+  Serial.println(F("==================================================="));
+}
+
 void onI2CReceive(int numBytes) {
   if (numBytes >= (int)sizeof(ServoCommand)) {
     byte buffer[sizeof(ServoCommand)];
-    
     for (int i = 0; i < (int)sizeof(ServoCommand); i++) {
       buffer[i] = Wire.read();
     }
-    
-    ServoCommand* cmd = (ServoCommand*)buffer;
-    
-    if (cmd->cmd == CMD_SERVO_SET_ANGLE) {
-      if (cmd->servo_id >= 0 && cmd->servo_id < 6) {
-        if (cmd->angle >= 0 && cmd->angle <= 180) {
-          servo_states[cmd->servo_id].target_angle = cmd->angle;
-          servo_states[cmd->servo_id].moving = true;
-          servo_states[cmd->servo_id].last_update = millis();
-          
-          Serial.print("Befehl erhalten: Servo ");
-          Serial.print(cmd->servo_id);
-          Serial.print(" -> ");
-          Serial.print(cmd->angle);
-          Serial.println("°");
-        } else {
-          Serial.println("Fehler: Winkel außerhalb 0-180");
-        }
-      } else {
-        Serial.println("Fehler: Servo-ID außerhalb 0-5");
-      }
-    }
+    ServoCommand* cmd_ptr = (ServoCommand*)buffer;
+    active_servo_cmd.servo_num = cmd_ptr->servo_num;
+    active_servo_cmd.pwm_value = cmd_ptr->pwm_value;
+    new_servo_command = true;
   }
-  
-  // Restliche Bytes auslesen
-  while (Wire.available()) {
-    Wire.read();
-  }
+  while (Wire.available()) { Wire.read(); }
 }

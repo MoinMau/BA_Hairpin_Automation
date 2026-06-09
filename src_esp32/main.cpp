@@ -10,7 +10,6 @@ bool test_mode_active = false;
 
 void handleSerialMaster();
 void sendI2CCommand(StepperCommand cmd);
-void sendHomingXSignal();
 void scanI2CBus();
 void printMasterHelp();
 
@@ -18,10 +17,8 @@ void setup() {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT); 
   digitalWrite(LED_PIN, LOW);
-  
   Wire.begin(I2C_SDA, I2C_SCL, 100000); 
   
-  // Begrüßung beim Start
   Serial.println(F("\n=================================================="));
   Serial.println(F("       ESP32: ADVANCED I2C MASTER CENTER          "));
   Serial.println(F("=================================================="));
@@ -42,22 +39,9 @@ void sendI2CCommand(StepperCommand cmd) {
   digitalWrite(LED_PIN, LOW);
   
   if (error != 0) {
-    Serial.print(F("[I2C FEHLER] Befehl blockiert. Code: ")); Serial.println(error);
+    Serial.print(F("[I2C FEHLER] Code: ")); Serial.println(error);
   } else {
-    Serial.println(F("[I2C SUCCESS] Daten erfolgreich an Uno uebertragen."));
-  }
-}
-
-void sendHomingXSignal() {
-  digitalWrite(LED_PIN, HIGH);
-  Serial.println(F("[Master] Sende Homing-Signal (CMD_STEPPER_HOMING) an Uno..."));
-  Wire.beginTransmission(I2C_ADDR_UNO);
-  Wire.write(CMD_STEPPER_HOMING);
-  uint8_t error = Wire.endTransmission();
-  digitalWrite(LED_PIN, LOW);
-  
-  if (error != 0) {
-    Serial.print(F("[I2C FEHLER] Homing-Signal fehlgeschlagen. Code: ")); Serial.println(error);
+    Serial.println(F("[I2C SUCCESS] Befehl an Uno übertragen."));
   }
 }
 
@@ -65,11 +49,9 @@ void scanI2CBus() {
   Serial.println(F("\n--- Starte I2C-Bus-Scan... ---"));
   byte error, address;
   int nDevices = 0;
-
   for (address = 1; address < 127; address++) {
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
-
     if (error == 0) {
       Serial.print(F("Gerat gefunden auf Adresse 0x"));
       if (address < 16) Serial.print("0");
@@ -80,7 +62,6 @@ void scanI2CBus() {
     }
   }
   if (nDevices == 0) Serial.println(F("WARNUNG: Keine I2C-Geraete gefunden!\n"));
-  else Serial.println(F("Scan beendet.\n"));
 }
 
 void handleSerialMaster() {
@@ -91,7 +72,7 @@ void handleSerialMaster() {
       Serial.read(); 
       test_mode_active = !test_mode_active;
       Serial.println(F("\n=================================================="));
-      Serial.print(F(" MASTER-KONTROLLE: ")); Serial.println(test_mode_active ? F("ONLINE (Bereit)") : F("STANDBY (Gesperrt)"));
+      Serial.print(F(" MASTER-KONTROLLE: ")); Serial.println(test_mode_active ? F("ONLINE") : F("STANDBY"));
       Serial.println(F("=================================================="));
       if (test_mode_active) printMasterHelp();
       return;
@@ -111,76 +92,114 @@ void handleSerialMaster() {
     
     if (input.equalsIgnoreCase("h")) { printMasterHelp(); return; }
     if (input.equalsIgnoreCase("scan")) { scanI2CBus(); return; } 
-    if (input.equalsIgnoreCase("homeX")) { sendHomingXSignal(); return; }
 
-    // --- NEU: Globale Treiber-Zustände abfangen ---
     if (input.equalsIgnoreCase("enAll")) {
-      Serial.println(F("[Master] Befehl: Aktiviere alle Motortreiber (enAll)"));
-      StepperCommand cmd = {0, MOVE_TYPE_FREEZE, 0, 0}; // Ein Freeze-Befehl reaktiviert Treiber im Normalbetrieb
-      sendI2CCommand(cmd);
+      StepperCommand cmd = {0, MOVE_TYPE_STOP, 0, 0};
+      digitalWrite(LED_PIN, HIGH);
+      Wire.beginTransmission(I2C_ADDR_UNO);
+      Wire.write((uint8_t*)&cmd, sizeof(StepperCommand));
+      Wire.endTransmission();
+      digitalWrite(LED_PIN, LOW);
       return;
     }
     if (input.equalsIgnoreCase("disAll")) {
-      Serial.println(F("[Master] Befehl: DEAKTIVIERE alle Motortreiber (disAll) -> Motoren stromlos!"));
-      // Um disAll sauber zu tunneln, senden wir einen FREEZE-Befehl mit einem speziellen Flag (z.B. Parameter1 = 99)
-      StepperCommand cmd = {0, MOVE_TYPE_FREEZE, 99, 0}; 
-      sendI2CCommand(cmd);
+      StepperCommand cmd = {0, MOVE_TYPE_STOP, 99, 0};
+      digitalWrite(LED_PIN, HIGH);
+      Wire.beginTransmission(I2C_ADDR_UNO);
+      Wire.write((uint8_t*)&cmd, sizeof(StepperCommand));
+      Wire.endTransmission();
+      digitalWrite(LED_PIN, LOW);
       return;
     }
-    
-    int firstComma = input.indexOf(',');
-    int secondComma = input.indexOf(',', firstComma + 1);
-    int thirdComma = input.indexOf(',', secondComma + 1);
 
-    if (firstComma != -1 && secondComma != -1 && thirdComma != -1) {
-      String axisStr = input.substring(0, firstComma);
-      String typeStr = input.substring(firstComma + 1, secondComma);
-      int32_t p1 = input.substring(secondComma + 1, thirdComma).toInt();
-      int16_t p2 = input.substring(thirdComma + 1).toInt();
+    // --- NEU: Verzweigung zwischen Schrittmotor (Uno) und Servo (Nano) ---
+    if (input.startsWith("STP_") || input.startsWith("stp_")) {
+      int firstComma = input.indexOf(',');
+      int secondComma = input.indexOf(',', firstComma + 1);
+      int thirdComma = input.indexOf(',', secondComma + 1);
 
-      axisStr.toUpperCase(); axisStr.trim();
-      typeStr.toUpperCase(); typeStr.trim();
+      if (firstComma != -1 && secondComma != -1 && thirdComma != -1) {
+        String axisStr = input.substring(0, firstComma);
+        String typeStr = input.substring(firstComma + 1, secondComma);
+        int32_t p1 = input.substring(secondComma + 1, thirdComma).toInt();
+        int16_t p2 = input.substring(thirdComma + 1).toInt();
 
-      StepperCommand cmd;
-      
-      if (axisStr == "STP_X") cmd.axis = AXIS_X;
-      else if (axisStr == "STP_Y") cmd.axis = AXIS_Y;
-      else if (axisStr == "STP_Z") cmd.axis = AXIS_Z;
-      else { Serial.println(F("!! Fehler: Achse unbekannt (STP_X, STP_Y, STP_Z) !!")); return; }
+        axisStr.toUpperCase(); axisStr.trim();
+        typeStr.toUpperCase(); typeStr.trim();
 
-      if (typeStr == "REL") cmd.move_type = MOVE_TYPE_RELATIVE;
-      else if (typeStr == "ABS") cmd.move_type = MOVE_TYPE_ABSOLUTE;
-      else if (typeStr == "TIMED") cmd.move_type = MOVE_TYPE_TIMED;
-      else if (typeStr == "VIB") cmd.move_type = MOVE_TYPE_VIBRATE;
-      else if (typeStr == "FREEZE") cmd.move_type = MOVE_TYPE_FREEZE;
-      else { Serial.println(F("!! Fehler: Unbekannter Bewegungstyp !!")); return; }
+        StepperCommand cmd;
+        if (axisStr == "STP_X") cmd.axis = AXIS_X;
+        else if (axisStr == "STP_Y") cmd.axis = AXIS_Y;
+        else if (axisStr == "STP_Z") cmd.axis = AXIS_Z;
+        else { Serial.println(F("!! Fehler: Achse unbekannt !!")); return; }
 
-      cmd.parameter1 = p1;
-      cmd.parameter2 = p2;
+        if (typeStr == "REL") cmd.move_type = MOVE_TYPE_RELATIVE;
+        else if (typeStr == "ABS") cmd.move_type = MOVE_TYPE_ABSOLUTE;
+        else if (typeStr == "TIMED") cmd.move_type = MOVE_TYPE_TIMED;
+        else if (typeStr == "VIB") cmd.move_type = MOVE_TYPE_VIBRATE;
+        else if (typeStr == "STOP") cmd.move_type = MOVE_TYPE_STOP;
+        else if (typeStr == "HOMING") cmd.move_type = MOVE_TYPE_HOMING;
+        else { Serial.println(F("!! Fehler: Unbekannter Typ !!")); return; }
 
-      sendI2CCommand(cmd);
+        cmd.parameter1 = p1; cmd.parameter2 = p2;
+
+        digitalWrite(LED_PIN, HIGH);
+        Wire.beginTransmission(I2C_ADDR_UNO); // An Uno senden!
+        Wire.write((uint8_t*)&cmd, sizeof(StepperCommand));
+        uint8_t err = Wire.endTransmission();
+        digitalWrite(LED_PIN, LOW);
+        if (err == 0) Serial.println(F("[I2C Master] Stepper-Befehl an Uno übermittelt."));
+      } else {
+        Serial.println(F("Syntax-Fehler Stepper! Format: STP_X,REL,1000,500"));
+      }
+    }
+    else if (input.startsWith("SRV_") || input.startsWith("srv_")) {
+      // Format für Servos: SRV_[ServoNum],[PWM] -> z.B. SRV_0,1500
+      int firstComma = input.indexOf(',');
+      if (firstComma != -1) {
+        uint8_t s_num = input.substring(4, firstComma).toInt(); // Extrahiert die Nummer hinter "SRV_"
+        uint16_t pwm = input.substring(firstComma + 1).toInt();
+
+        ServoCommand cmd = {s_num, pwm};
+
+        digitalWrite(LED_PIN, HIGH);
+        Wire.beginTransmission(I2C_ADDR_NANO); // An Nano senden!
+        Wire.write((uint8_t*)&cmd, sizeof(ServoCommand));
+        uint8_t err = Wire.endTransmission();
+        digitalWrite(LED_PIN, LOW);
+        if (err == 0) Serial.println(F("[I2C Master] Servo-Befehl an Nano übermittelt."));
+      } else {
+        Serial.println(F("Syntax-Fehler Servo! Format: SRV_0,1500"));
+      }
     } else {
-      Serial.println(F("Syntax-Fehler! Nutze das Format: STP_X,REL,1000,500"));
+      Serial.println(F("Unbekannter Befehl! Nutze das Präfix STP_ oder SRV_"));
     }
   }
 }
 
+// Ersetze das Hilfemenü im ESP32-Code für die vollständige Übersicht:
 void printMasterHelp() {
-  Serial.println(F(" OOOOO  BEFEHLS-SYNTAX: [Achse],[Modus],[Param1],[Param2]"));
+  Serial.println(F("\n=================== ESP32 MULTI-SLAVE MATRIX ==================="));
+  Serial.println(F(" [SLAVE 1: ARDUINO UNO (0x33)] - SCHRITTMOTOREN"));
+  Serial.println(F("  Format: STP_[Achse],[Modus],[Param1],[Param2]"));
+  Serial.println(F("  STP_X,REL,2000,800     -> Relative Fahrt (2000 Steps, 800 Steps/s)"));
+  Serial.println(F("  STP_Y,ABS,4000,600     -> Absolute Koordinate (Ziel 4000, 600 Steps/s)"));
+  Serial.println(F("  STP_Z,TIMED,5000,-300  -> Zeitfahrt (5000 ms, -300 Steps/s)"));
+  Serial.println(F("  STP_X,VIB,6,45         -> Vibration (6 Steps Amplitude, 45 Hz)"));
+  Serial.println(F("  STP_X,STOP,0,0         -> Stoppt Achse & haelt Position"));
+  Serial.println(F("  STP_X,HOMING,0,0       -> Startet Endschalter-Kalibrierung Achse X"));
   Serial.println(F(" -----------------------------------------------------------------"));
-  Serial.println(F("  STP_X,REL,2000,800     -> Relative Fahrt (2000 Schritte, 800 Steps/s)"));
-  Serial.println(F("  STP_Y,ABS,4000,600     -> Absolute Koordinate (Zielschritt 4000, 600 Steps/s)"));
-  Serial.println(F("  STP_Z,TIMED,5000,-300  -> Zeitfahrt (5000 ms lang, mit -300 Steps/s rückwärts)"));
-  Serial.println(F("  STP_X,VIB,6,45         -> Vibration (6 Steps Amplitude, 45 Hz Ruttelfrequenz)"));
-  Serial.println(F("  STP_X,FREEZE,0,0       -> Notstopp Achse X: Friert aktuelle Position ein"));
+  Serial.println(F(" [SLAVE 2: ARDUINO NANO (0x32)] - SERVO-ANSTEUERUNG"));
+  Serial.println(F("  Format: SRV_[ServoNummer],[PWM-Wert]"));
+  Serial.println(F("  SRV_0,1500             -> Setzt Servo 0 (Pin D7) in Mittelstellung"));
+  Serial.println(F("  SRV_5,2200             -> Setzt Servo 5 (Pin D12) auf Pulsweite 2200us"));
+  Serial.println(F("  (Servos: 0-5  |  PWM-Sicherheitsbereich: 500 bis 2500)"));
   Serial.println(F(" -----------------------------------------------------------------"));
-  Serial.println(F(" OOOOO  SYSTEM-SPEZIALBEFEHLE (Direkte Eingabe ohne Komma):"));
-  Serial.println(F(" -----------------------------------------------------------------"));
-  Serial.println(F("  homeX   -> Startet automatische X-Kalibrierung am Endstopp"));
-  Serial.println(F("  enAll   -> Schaltet alle Motortreiber EIN (Motoren unter Haltestrom)"));
-  Serial.println(F("  disAll  -> Schaltet alle Motortreiber AUS (Motoren komplett stromlos/frei)"));
-  Serial.println(F("  scan    -> Scannt den I2C-Bus nach dem Arduino Uno ab"));
-  Serial.println(F("  h       -> Zeigt diese Befehlsübersicht erneut an"));
-  Serial.println(F("  t       -> Beendet den Master-Testmodus (Standby)"));
-  Serial.println(F("=================================================="));
+  Serial.println(F(" Globale Direktbefehle:"));
+  Serial.println(F("  enAll   -> Alle Motortreiber EIN"));
+  Serial.println(F("  disAll  -> Alle Motortreiber AUS (Motoren stromlos)"));
+  Serial.println(F("  scan    -> Scannt den I2C-Bus nach beiden Slaves ab"));
+  Serial.println(F("  h       -> Zeigt diese Befehlsmatrix an"));
+  Serial.println(F("  t       -> Beendet den Master-Testmodus"));
+  Serial.println(F("==================================================================\n"));
 }
