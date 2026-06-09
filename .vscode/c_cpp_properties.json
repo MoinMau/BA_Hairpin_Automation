@@ -9,6 +9,7 @@
             "name": "PlatformIO",
             "includePath": [
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
+                "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/AccelStepper/src",
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/Servo/src",
                 "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
@@ -246,6 +247,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation",
+                    "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/AccelStepper/src",
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/.pio/libdeps/esp32/Servo/src",
                     "/Users/moinmau/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/include",
