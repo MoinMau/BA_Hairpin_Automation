@@ -17,6 +17,9 @@
 #define MOVE_TYPE_ABSOLUTE   2  // Move to Position (target_position, speed)
 #define MOVE_TYPE_TIMED      3  // Move mit Speed für X Millisekunden (speed, duration_ms) -> Richtung über Vorzeichen von speed
 
+#define CMD_STEPPER_ROTATE   0x10  
+#define CMD_STEPPER_HOMING   0x12  // NEU: Kalibrierungsfahrt starten
+
 // Datenstruktur für I2C
 struct StepperCommand {
   uint8_t axis;          // AXIS_X, AXIS_Y, AXIS_Z
