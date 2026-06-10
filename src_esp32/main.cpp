@@ -8,10 +8,19 @@
 
 bool test_mode_active = false;
 
+// --- Ablaufsteuerung (Sequence) ---
+enum SequenceState { SEQ_IDLE, SEQ_VIB_START, SEQ_SERVO0_1, SEQ_SERVO1_1, SEQ_SERVO1_2, SEQ_SERVO0_2, SEQ_VIB_STOP };
+SequenceState currentSeqState = SEQ_IDLE;
+unsigned long seqStepStartTime = 0;
+const unsigned long SERVO_WAIT_TIME = 2000; // 1 Sekunde warten, bis Servos ihre Position erreicht haben
+
 void handleSerialMaster();
-void sendI2CCommand(StepperCommand cmd);
+void sendStepperCommand(StepperCommand cmd);
+void sendServoCommand(uint8_t num, uint16_t val);
 void scanI2CBus();
 void printMasterHelp();
+void updateSequence();
+void startHairpinSequence();
 
 void setup() {
   Serial.begin(115200);
@@ -29,9 +38,10 @@ void setup() {
 
 void loop() {
   handleSerialMaster();
+  updateSequence();
 }
 
-void sendI2CCommand(StepperCommand cmd) {
+void sendStepperCommand(StepperCommand cmd) {
   digitalWrite(LED_PIN, HIGH);
   Wire.beginTransmission(I2C_ADDR_UNO);
   Wire.write((uint8_t*)&cmd, sizeof(StepperCommand));
@@ -42,6 +52,19 @@ void sendI2CCommand(StepperCommand cmd) {
     Serial.print(F("[I2C FEHLER] Code: ")); Serial.println(error);
   } else {
     Serial.println(F("[I2C SUCCESS] Befehl an Uno übertragen."));
+  }
+}
+
+void sendServoCommand(uint8_t num, uint16_t val) {
+  digitalWrite(LED_PIN, HIGH);
+  ServoCommand cmd = {num, val};
+  Wire.beginTransmission(I2C_ADDR_NANO);
+  Wire.write((uint8_t*)&cmd, sizeof(ServoCommand));
+  uint8_t error = Wire.endTransmission();
+  digitalWrite(LED_PIN, LOW);
+  
+  if (error != 0 && test_mode_active) {
+    Serial.print(F("[I2C SERVO FEHLER] Code: ")); Serial.println(error);
   }
 }
 
@@ -67,37 +90,63 @@ void scanI2CBus() {
 void requestAndPrintStatus() {
   Serial.println(F("\n================= SYSTEM STATUS REPORT ================="));
   
-  // 1. Uno abfragen (Stepper)
-  Wire.requestFrom(I2C_ADDR_UNO, sizeof(StepperStatus));
-  if (Wire.available() >= (int)sizeof(StepperStatus)) {
+  // 1. Uno abfragen (Schrittmotoren)
+  uint8_t bytesReceived = Wire.requestFrom((uint8_t)I2C_ADDR_UNO, (uint8_t)sizeof(StepperStatus));
+  if (bytesReceived >= sizeof(StepperStatus)) {
     StepperStatus uStatus;
     Wire.readBytes((uint8_t*)&uStatus, sizeof(StepperStatus));
-    
-    Serial.println(F("[SLAVE 1: ARDUINO UNO (0x33) - SCHRITTMOTOREN]"));
-    Serial.print(F("  -> Position Achse X : ")); Serial.print(uStatus.current_pos_x); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Position Achse Y : ")); Serial.print(uStatus.current_pos_y); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Position Achse Z : ")); Serial.print(uStatus.current_pos_z); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Homing-Zustand   : ")); Serial.println(uStatus.homing_active ? F("KALIBRIERUNG LÄUFT") : F("BEREIT / IDLE"));
-  } else {
-    Serial.println(F("[ERR] Keine Antwort von Uno (0x33) erhalten!"));
+    Serial.println(F("[SLAVE 1: ARDUINO UNO (0x33)]"));
+    Serial.print(F("  -> Position X : ")); Serial.print(uStatus.current_pos_x); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Position Y : ")); Serial.print(uStatus.current_pos_y); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Position Z : ")); Serial.print(uStatus.current_pos_z); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Homing     : ")); Serial.println(uStatus.homing_active ? F("LAEUFT") : F("IDLE"));
   }
   
   Serial.println(F("-------------------------------------------------------"));
 
-  // 2. Nano abfragen (Servos)
-  Wire.requestFrom(I2C_ADDR_NANO, sizeof(ServoStatus));
+  // 2. Nano ABFRAGE TYP 1: Servo-Stellungen (0-1000)
+  Wire.beginTransmission(I2C_ADDR_NANO); //
+  Wire.write(REQ_NANO_SERVOS);           // Dem Nano sagen: "Ich will Servo-Werte!"
+  Wire.endTransmission();
+  
+  Wire.requestFrom(I2C_ADDR_NANO, sizeof(ServoStatus)); //
   if (Wire.available() >= (int)sizeof(ServoStatus)) {
     ServoStatus nStatus;
     Wire.readBytes((uint8_t*)&nStatus, sizeof(ServoStatus));
-    
-    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SERVOANSTEUERUNG]"));
+    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SERVOS]"));
+    Serial.print(F("  -> Stellwerte (0-1000): "));
     for(int i = 0; i < 6; i++) {
-      Serial.print(F("  -> Servo ")); Serial.print(i); 
-      Serial.print(F(" (Pin D")); Serial.print(7 + i); Serial.print(F(") : ")); // Laut Richtlinie D7 bis D12
-      Serial.print(nStatus.current_pwm[i]); Serial.println(F(" µs"));
+      Serial.print(F("S")); Serial.print(i); Serial.print(F(":")); 
+      Serial.print(nStatus.current_val[i]); Serial.print(F("  "));
     }
-  } else {
-    Serial.println(F("[ERR] Keine Antwort von Nano (0x32) erhalten!"));
+    Serial.println();
+  }
+
+  Serial.println(F("-------------------------------------------------------"));
+
+  // 3. Nano ABFRAGE TYP 2: Sensor-Telemetrie & Spannungen
+  Wire.beginTransmission(I2C_ADDR_NANO); //
+  Wire.write(REQ_NANO_SENSORS);          // Dem Nano sagen: "Ich will jetzt Sensor-Daten!"
+  Wire.endTransmission();
+  
+  Wire.requestFrom(I2C_ADDR_NANO, sizeof(SensorStatus)); //
+  if (Wire.available() >= (int)sizeof(SensorStatus)) {
+    SensorStatus snStatus;
+    Wire.readBytes((uint8_t*)&snStatus, sizeof(SensorStatus));
+    
+    // Umrechnung Raw-ADC (0-1023) in Volt für die analogen Pins (5V Referenz beim Nano)
+    float volt_a1 = (snStatus.analog_a1 * 5.0) / 1023.0;
+    float volt_a2 = (snStatus.analog_a2 * 5.0) / 1023.0;
+    float volt_a3 = (snStatus.analog_a3 * 5.0) / 1023.0;
+    float volt_mh = (snStatus.mh_a7_raw * 5.0) / 1023.0;
+
+    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SENSOREN & SPANNUNGEN]"));
+    Serial.print(F("  -> Shunt Strommessung (A0 Raw) : ")); Serial.println(snStatus.shunt_raw); //
+    Serial.print(F("  -> MH-Sensor Digital (D2)      : ")); Serial.println(snStatus.mh_d2_state == HIGH ? F("HIGH") : F("LOW")); //
+    Serial.print(F("  -> MH-Sensor Analog (A7)       : ")); Serial.print(volt_mh); Serial.println(F(" V")); //
+    Serial.print(F("  -> Spannung Pin A1             : ")); Serial.print(volt_a1); Serial.println(F(" V"));
+    Serial.print(F("  -> Spannung Pin A2             : ")); Serial.print(volt_a2); Serial.println(F(" V"));
+    Serial.print(F("  -> Spannung Pin A3             : ")); Serial.print(volt_a3); Serial.println(F(" V"));
   }
   Serial.println(F("========================================================\n"));
 }
@@ -131,6 +180,18 @@ void handleSerialMaster() {
     if (input.equalsIgnoreCase("h")) { printMasterHelp(); return; }
     if (input.equalsIgnoreCase("scan")) { scanI2CBus(); return; } 
     if (input.equalsIgnoreCase("status")) { requestAndPrintStatus(); return; } // NEUER BEFEHL
+    if (input.equalsIgnoreCase("run")) { 
+      Serial.println(F("\n[MASTER] Starte Hairpin-Zuführung-Sequenz..."));
+      startHairpinSequence(); 
+      return; 
+    }
+    
+    if (input.equalsIgnoreCase("stop")) { 
+      Serial.println(F("\n[MASTER] ABBRUCH: Sequenz gestoppt!"));
+      currentSeqState = SEQ_IDLE;
+      sendStepperCommand({AXIS_X, MOVE_TYPE_STOP, 0, 0}); // Sofort-Stopp der Vibration
+      return; 
+    }
 
     if (input.equalsIgnoreCase("enAll") || input.equalsIgnoreCase("disAll")) {
       bool isDisable = input.equalsIgnoreCase("disAll");
@@ -249,3 +310,100 @@ void printMasterHelp() {
   Serial.println(F("  t       -> Beendet den Master-Testmodus"));
   Serial.println(F("==================================================================\n"));
 }
+
+void startHairpinSequence() {
+  if (currentSeqState == SEQ_IDLE) {
+    currentSeqState = SEQ_VIB_START;
+  } else {
+    Serial.println(F("[WARNUNG] Sequenz laeuft bereits!"));
+  }
+}
+
+void updateSequence() {
+  if (currentSeqState == SEQ_IDLE) return;
+
+  unsigned long now = millis();
+
+  switch (currentSeqState) {
+    case SEQ_VIB_START:
+      Serial.println(F("  -> Schritt 1: Vibration starten"));
+      sendStepperCommand({AXIS_Z, MOVE_TYPE_VIBRATE, 1, 40}); 
+      currentSeqState = SEQ_SERVO0_1;
+      seqStepStartTime = now;
+      break;
+
+    case SEQ_SERVO0_1:
+      if (now - seqStepStartTime >= 1000) { // Kurze Verzögerung, damit Vibration wirkt
+        Serial.println(F("  -> Schritt 2: Servo 0 auf MAX"));
+        sendServoCommand(0, 490); // 490 ist das Max-Limit laut Nano Config
+        currentSeqState = SEQ_SERVO1_1;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case SEQ_SERVO1_1:
+      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
+        Serial.println(F("  -> Schritt 3: Servo 1 auf MIN"));
+        sendServoCommand(1, 150);
+        currentSeqState = SEQ_SERVO1_2;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case SEQ_SERVO1_2:
+      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
+        Serial.println(F("  -> Schritt 4: Servo 1 auf MAX"));
+        sendServoCommand(1, 490);
+        currentSeqState = SEQ_SERVO0_2;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case SEQ_SERVO0_2:
+      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
+        Serial.println(F("  -> Schritt 4: Servo 0 auf MIN"));
+        sendServoCommand(0, 150);
+        currentSeqState = SEQ_VIB_STOP;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case SEQ_VIB_STOP:
+      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
+        Serial.println(F("  -> Schritt 4: Vibration stoppen"));
+        sendStepperCommand({AXIS_Z, MOVE_TYPE_STOP, 0, 0});
+        Serial.println(F("[SEQUENZ BEENDET]"));
+        currentSeqState = SEQ_IDLE;
+      }
+      break;
+  }
+}
+
+/*
+=== BENUTZERHANDBUCH FÜR DIE SERIELLE KONSOLE ===
+
+1. System Start/Stop:
+   - 't'      : Schaltet den Testmodus (Master-Kontrolle) AN oder AUS.
+
+2. Automatischer Ablauf:
+   - 'run'    : Startet die vordefinierte Sequenz (Vibration -> S0 -> S1 -> Stop).
+   - 'stop'   : Bricht die laufende Sequenz sofort ab und stoppt die Vibration.
+
+3. Status & Diagnose:
+   - 'status' : Fragt Positionen vom Uno und Sensorwerte vom Nano ab.
+   - 'scan'   : Scannt den I2C-Bus nach Slaves (Uno: 0x33, Nano: 0x32).
+
+4. Treiber-Kontrolle:
+   - 'enAll'  : Aktiviert alle Motortreiber (Motoren unter Haltestrom).
+   - 'disAll' : Deaktiviert alle Treiber (Motoren stromlos / frei beweglich).
+
+5. Manuelle Stepper-Befehle (STP_[Achse],[Typ],[P1],[P2]):
+   - STP_X,REL,1000,500 : Bewege X relativ 1000 Steps mit Speed 500.
+   - STP_Y,ABS,0,800    : Fahre Y auf Nullposition mit Speed 800.
+   - STP_Z,HOMING,0,0   : Startet Homing-Fahrt der Z-Achse.
+   - STP_X,VIB,5,50     : Vibriere X mit Amplitude 5 und 50Hz.
+
+6. Manuelle Servo-Befehle (SRV_[Nummer],[WERT]):
+   - SRV_0,500 : Setzt Servo 0 auf den Wert 500 (Bereich 0-1000).
+   - SRV_1,900 : Setzt Servo 1 auf den Wert 900 (Max-Limit).
+*/

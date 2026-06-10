@@ -7,6 +7,10 @@
 #define I2C_ADDR_NANO        0x32  
 #define I2C_ADDR_UNO         0x33  
 
+// --- NEU: Anforderungs-IDs für gezielte Nano-Abfragen ---
+#define REQ_NANO_SERVOS      0x01  // Fragt nur die Servo-Werte (0-1000) ab
+#define REQ_NANO_SENSORS     0x02  // Fragt Shunt, MH-Sensoren und Analog-Pins ab
+
 // --- Schrittmotor-Definitionen (Uno) ---
 #define AXIS_X               0
 #define AXIS_Y               1
@@ -26,24 +30,33 @@ struct StepperCommand {
   int16_t parameter2;   
 } __attribute__((packed));
 
-// NEU: Status-Struktur vom Uno (Exakt 13 Bytes)
 struct StepperStatus {
-  int32_t current_pos_x; // Aktuelle Position in Schritten
+  int32_t current_pos_x; 
   int32_t current_pos_y;
   int32_t current_pos_z;
-  uint8_t homing_active; // Bitmaske oder Flag (0 = Idle, >0 = Kalibrierung läuft)
+  uint8_t homing_active; 
 } __attribute__((packed));
 
 
-// --- Servo-Definitionen (Nano) ---
+// --- Servo- & Sensor-Definitionen (Nano) ---
 struct ServoCommand {
   uint8_t servo_num;    
-  uint16_t pwm_value;   
+  uint16_t pwm_value;   // Wird nun als Wert von 0 bis 1000 interpretiert!
 } __attribute__((packed));
 
-// NEU: Status-Struktur vom Nano (Exakt 12 Bytes)
+// Status-Struktur für Servos (Werte von 0 bis 1000)
 struct ServoStatus {
-  uint16_t current_pwm[6]; // Aktuelle PWM-Werte der 6 Servos (6 * 2 Bytes)
+  uint16_t current_val[6]; 
+} __attribute__((packed));
+
+// NEU: Status-Struktur für Sensoren (Exakt 12 Bytes)
+struct SensorStatus {
+  uint16_t shunt_raw;       // Shunt-Widerstand (A0)
+  uint16_t mh_d2_state;     // Digitaler Zustand MH-Sensor (D2)
+  uint16_t mh_a7_raw;       // Analoger Zustand MH-Sensor (A7)
+  uint16_t analog_a1;       // Freie Analog-Pins für Spannungen
+  uint16_t analog_a2;
+  uint16_t analog_a3;
 } __attribute__((packed));
 
 #endif // I2C_PROTOCOL_H

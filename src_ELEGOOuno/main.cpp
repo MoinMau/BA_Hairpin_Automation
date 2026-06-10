@@ -2,25 +2,15 @@
 #include <Wire.h>
 #include <AccelStepper.h>
 #include "i2c_protocol.h"
-
-// --- Hardware Pin Belegungen ---
-#define STEPPER_X_STP 2   
-#define STEPPER_X_DIR 5   
-#define STEPPER_Y_STP 3   
-#define STEPPER_Y_DIR 6   
-#define STEPPER_Z_STP 4   
-#define STEPPER_Z_DIR 7   
-#define STEPPER_EN 8      
-
-const uint8_t ENDSTOP_PINS[3] = {9, 10, 11}; // X=Pin 9, Y=Pin 10, Z=Pin 11
-#define MAX_STEPS_X 8000  
+#include "config_uno.h"
 
 AccelStepper stepper_x(1, STEPPER_X_STP, STEPPER_X_DIR);
 AccelStepper stepper_y(1, STEPPER_Y_STP, STEPPER_Y_DIR);
 AccelStepper stepper_z(1, STEPPER_Z_STP, STEPPER_Z_DIR);
 
-#define DEFAULT_MAX_SPEED 1000.0      
-#define DEFAULT_ACCEL 500.0    
+// Pin-Arrays für einfachen indexbasierten Zugriff (0=X, 1=Y, 2=Z)
+const uint8_t step_pins[3] = {STEPPER_X_STP, STEPPER_Y_STP, STEPPER_Z_STP};
+const uint8_t dir_pins[3] = {STEPPER_X_DIR, STEPPER_Y_DIR, STEPPER_Z_DIR};
 
 bool debug_enabled = false;          
 volatile bool new_command_received = false;
@@ -36,7 +26,8 @@ bool vibrate_active[3] = {false, false, false};
 int32_t vibrate_amplitude[3] = {0, 0, 0};     
 unsigned long vibrate_half_period[3] = {0, 0, 0}; 
 unsigned long vibrate_last_toggle[3] = {0, 0, 0}; 
-bool vibrate_direction[3] = {false, false, false}; 
+int32_t vibrate_step_count[3] = {0, 0, 0};
+bool vibrate_dir_state[3] = {false, false, false};
 
 // --- 3-Achsen Homing (Zustandsmaschine) ---
 enum HomingState { HOMING_IDLE, HOMING_SEARCHING, HOMING_REBOUND };
@@ -118,29 +109,45 @@ void loop() {
     }
   }
 
-  // 4. Vibrationsmodus Ablaufsteuerung (µs-genau & Symmetrie-geschützt)
+  // 4. Manueller Vibrationsmodus (Direktes Pin-Writing für maximale Performance)
   for (int i = 0; i < 3; i++) {
     if (vibrate_active[i]) {
       if (micros() - vibrate_last_toggle[i] >= vibrate_half_period[i]) {
         vibrate_last_toggle[i] = micros();
-        vibrate_direction[i] = !vibrate_direction[i]; 
-        long steps = vibrate_direction[i] ? vibrate_amplitude[i] : -vibrate_amplitude[i];
-        steppers[i]->setCurrentPosition(steppers[i]->currentPosition());
-        steppers[i]->setMaxSpeed(4000); 
-        steppers[i]->move(steps);
+        
+        // Ein Puls besteht aus HIGH und LOW
+        static bool pin_state[3] = {false, false, false};
+        pin_state[i] = !pin_state[i];
+        digitalWrite(step_pins[i], pin_state[i]);
+
+        // Wenn ein voller Puls (HIGH->LOW) fertig ist, zählen wir den Step
+        if (!pin_state[i]) {
+          vibrate_step_count[i]++;
+          
+          // Wenn die Amplitude in eine Richtung erreicht ist -> Richtung umkehren
+          if (vibrate_step_count[i] >= vibrate_amplitude[i]) {
+            vibrate_step_count[i] = 0;
+            vibrate_dir_state[i] = !vibrate_dir_state[i];
+            digitalWrite(dir_pins[i], vibrate_dir_state[i]);
+          }
+        }
       }
     }
   }
 
   handleSerialCommands();
-  
+
+  // Sicherer Kopiervorgang der I2C-Befehle (Atomarität)
   if (new_command_received) {
-    new_command_received = false;
+    noInterrupts();
     StepperCommand cmd_copy;
     cmd_copy.axis = active_cmd.axis;
     cmd_copy.move_type = active_cmd.move_type;
     cmd_copy.parameter1 = active_cmd.parameter1;
     cmd_copy.parameter2 = active_cmd.parameter2;
+    new_command_received = false;
+    interrupts();
+
     executeStepperCommand(cmd_copy);
   }
 }
@@ -164,11 +171,19 @@ void executeStepperCommand(StepperCommand cmd) {
     Serial.print(F(" | P2: ")); Serial.println(cmd.parameter2);
   }
 
-  if (cmd.axis == AXIS_X && axis_homing_state[AXIS_X] == HOMING_IDLE && cmd.move_type != MOVE_TYPE_VIBRATE && cmd.move_type != MOVE_TYPE_STOP && cmd.move_type != MOVE_TYPE_HOMING) {
-    if (cmd.move_type == MOVE_TYPE_ABSOLUTE && (cmd.parameter1 < 0 || cmd.parameter1 > MAX_STEPS_X)) return;
-    if (cmd.move_type == MOVE_TYPE_RELATIVE) {
-      long preview = stepper_x.currentPosition() + cmd.parameter1;
-      if (preview < 0 || preview > MAX_STEPS_X) return;
+  if (cmd.axis > 2) return;
+
+  // Allgemeine Soft-Limit Prüfung (außer bei Vibration/Stop/Homing)
+  if (axis_homing_state[cmd.axis] == HOMING_IDLE && 
+      (cmd.move_type == MOVE_TYPE_ABSOLUTE || cmd.move_type == MOVE_TYPE_RELATIVE)) {
+    
+    long targetPos = (cmd.move_type == MOVE_TYPE_ABSOLUTE) ? 
+                      cmd.parameter1 : 
+                      (cmd.axis == 0 ? stepper_x.currentPosition() : (cmd.axis == 1 ? stepper_y.currentPosition() : stepper_z.currentPosition())) + cmd.parameter1;
+
+    if (targetPos < MIN_POS[cmd.axis] || targetPos > MAX_POS[cmd.axis]) {
+      if (debug_enabled) Serial.println(F("[Sicherheit] Zielposition ausserhalb der Soft-Limits!"));
+      return;
     }
   }
 
@@ -184,33 +199,36 @@ void executeStepperCommand(StepperCommand cmd) {
 
   switch (cmd.move_type) {
     case MOVE_TYPE_RELATIVE: 
-      target->setMaxSpeed(cmd.parameter2);
+      target->setMaxSpeed(min((float)abs(cmd.parameter2), MAX_SPEED_LIMITS[cmd.axis]));
       target->move(cmd.parameter1);
       break;
       
     case MOVE_TYPE_ABSOLUTE: 
-      target->setMaxSpeed(cmd.parameter2);
+      target->setMaxSpeed(min((float)abs(cmd.parameter2), MAX_SPEED_LIMITS[cmd.axis]));
       target->moveTo(cmd.parameter1);
       break;
       
     case MOVE_TYPE_TIMED:    
-      target->setSpeed(cmd.parameter2); 
+      target->setSpeed(cmd.parameter2); // setSpeed erlaubt negative Werte für die Richtung!
       timed_move_duration[cmd.axis] = cmd.parameter1; 
       timed_move_start[cmd.axis] = millis();
       timed_move_active[cmd.axis] = true;
       break;
       
     case MOVE_TYPE_VIBRATE: 
-      if (cmd.parameter2 <= 0 || cmd.parameter1 <= 0) {
+      if (cmd.parameter2 == 0 || cmd.parameter1 == 0) {
         target->stop();
       } else {
-        vibrate_amplitude[cmd.axis] = cmd.parameter1;
-        vibrate_half_period[cmd.axis] = (1000000UL / cmd.parameter2) / 2;
+        vibrate_amplitude[cmd.axis] = abs(cmd.parameter1);
+        // Wir berechnen die Zeit pro HALB-Schritt (für HIGH/LOW Wechsel)
+        // Frequenz (Hz) -> Periodendauer (us) -> Geteilt durch 2 (HIGH/LOW)
+        vibrate_half_period[cmd.axis] = (1000000UL / (abs(cmd.parameter2) * 2));
         vibrate_last_toggle[cmd.axis] = micros();
-        vibrate_direction[cmd.axis] = true;
+        vibrate_step_count[cmd.axis] = 0;
+        vibrate_dir_state[cmd.axis] = true;
+        
+        digitalWrite(dir_pins[cmd.axis], vibrate_dir_state[cmd.axis]);
         vibrate_active[cmd.axis] = true;
-        target->setMaxSpeed(4000);
-        target->move(vibrate_amplitude[cmd.axis]);
       }
       break;
       
