@@ -23,8 +23,9 @@ enum SequenceState {
   P1_Y_FORWARD,      P1_Y_FORWARD_WAIT,
   P1_Y_BACK,         P1_Y_BACK_WAIT,
   P1_DONE,
-  // ── PROGRAMM 2 (gleicher Ablauf wie P1) ──
+  // ── PROGRAMM 2 (Template) ──
   P2_START,
+  P2_DONE,
 };
 SequenceState currentSeqState = SEQ_IDLE;
 unsigned long seqStepStartTime = 0;
@@ -663,30 +664,32 @@ void updateSequence() {
       seqRemainingRuns--;
       if (seqRemainingRuns > 0) {
         Serial.print(F("  -> Durchlauf fertig. Noch ")); Serial.print(seqRemainingRuns);
-        if (currentProgram == 1) {
-          Serial.println(F("x. Starte P1 neu."));
-          currentSeqState = P1_HOME_Z;
-        } else {
-          Serial.println(F("x. Starte P2 neu."));
-          currentSeqState = P2_START;
-        }
+        Serial.println(F("x. Starte P1 neu."));
+        currentSeqState = P1_HOME_Z;
       } else {
-        Serial.print(F("Programm ")); Serial.print(currentProgram);
-        Serial.println(F(" beendet."));
+        Serial.println(F("Programm 1 beendet."));
         currentSeqState = SEQ_IDLE;
       }
       break;
 
     // ============================================================
-    // PROGRAMM 2: Kopie von P1 (Parameter selber anpassen)
+    // PROGRAMM 2: Template (selbst befuellen)
     // ============================================================
 
     case P2_START:
-      Serial.println(F("P2 gestartet (gleicher Ablauf wie P1)."));
-      currentSeqState = P1_HOME_Z;  // Gleiche States wie P1
+      Serial.println(F("P2 gestartet (Template) - noch nichts definiert."));
+      currentSeqState = P2_DONE;
       break;
 
-    // P1_DONE wertet currentProgram aus und startet ggf. P2 neu
+    case P2_DONE:
+      seqRemainingRuns--;
+      if (seqRemainingRuns > 0) {
+        currentSeqState = P2_START;
+      } else {
+        Serial.println(F("Programm 2 beendet."));
+        currentSeqState = SEQ_IDLE;
+      }
+      break;
 
     default:
       currentSeqState = SEQ_IDLE;
