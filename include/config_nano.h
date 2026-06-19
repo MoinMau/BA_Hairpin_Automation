@@ -29,4 +29,24 @@ static const uint16_t SERVO_MAX_LIMITS[6] = {
   S0_MAX, S1_MAX, S2_MAX, S3_MAX, S4_MAX, S5_MAX
 };
 
+// ============================================================
+// SERVO-RICHTUNGSUMKER
+//   false (Standard): 0 = 500us (min/zurückgezogen),
+//                      1000 = 2500us (max/ausgefahren)
+//   true:             0 = 2500us (max/ausgefahren),
+//                      1000 = 500us (min/zurückgezogen)
+//   Nützlich, wenn die Mechanik umgekehrt arbeitet.
+// ============================================================
+
+const bool S0_INVERT = false;
+const bool S1_INVERT = false;
+const bool S2_INVERT = false;
+const bool S3_INVERT = false;
+const bool S4_INVERT = false;
+const bool S5_INVERT = false;
+
+static const bool SERVO_INVERT[6] = {
+  S0_INVERT, S1_INVERT, S2_INVERT, S3_INVERT, S4_INVERT, S5_INVERT
+};
+
 #endif

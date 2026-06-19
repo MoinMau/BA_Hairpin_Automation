@@ -34,8 +34,15 @@ struct StepperStatus {
   int32_t current_pos_x; 
   int32_t current_pos_y;
   int32_t current_pos_z;
-  uint8_t homing_active; 
+  uint8_t homing_active;
+  uint8_t axis_busy;   // Bit 0=X, Bit 1=Y, Bit 2=Z (1 = Achse fährt noch)
 } __attribute__((packed));
+
+// Hilfsmakros für axis_busy
+#define BUSY_X  0x01
+#define BUSY_Y  0x02
+#define BUSY_Z  0x04
+#define BUSY_ALL(v) ((v) & 0x07)
 
 
 // --- Servo- & Sensor-Definitionen (Nano) ---

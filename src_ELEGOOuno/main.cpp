@@ -48,6 +48,11 @@ void setup() {
     pinMode(ENDSTOP_PINS[i], INPUT_PULLUP);
   }
   
+  // Richtungsumkehr pro Achse anwenden (aus config_uno.h: INVERT_X/Y/Z_DIR)
+  stepper_x.setPinsInverted(INVERT_X_DIR, false, false);
+  stepper_y.setPinsInverted(INVERT_Y_DIR, false, false);
+  stepper_z.setPinsInverted(INVERT_Z_DIR, false, false);
+  
   stepper_x.setMaxSpeed(DEFAULT_MAX_SPEED); stepper_x.setAcceleration(DEFAULT_ACCEL);
   stepper_y.setMaxSpeed(DEFAULT_MAX_SPEED); stepper_y.setAcceleration(DEFAULT_ACCEL);
   stepper_z.setMaxSpeed(DEFAULT_MAX_SPEED); stepper_z.setAcceleration(DEFAULT_ACCEL);
@@ -85,13 +90,13 @@ void loop() {
 
     // 3. Homing Ablaufsteuerung pro Achse
     if (axis_homing_state[i] == HOMING_SEARCHING) {
-      if (digitalRead(ENDSTOP_PINS[i]) == LOW) { 
+      if (digitalRead(ENDSTOP_PINS[i]) == LOW) {
         steppers[i]->stop();
-        steppers[i]->setMaxSpeed(200); 
-        steppers[i]->move(200); // Freifahren vom Schalter (Rebound)
+        steppers[i]->setMaxSpeed(HOMING_REBOUND_SPEED);
+        steppers[i]->move(HOMING_REBOUND_STEPS); // Freifahren vom Schalter (Rebound)
         axis_homing_state[i] = HOMING_REBOUND;
       } else {
-        steppers[i]->runSpeed(); 
+        steppers[i]->runSpeed();
       }
     } 
     else if (axis_homing_state[i] == HOMING_REBOUND) {
@@ -160,7 +165,7 @@ void triggerHoming(uint8_t axis) {
   axis_homing_state[axis] = HOMING_SEARCHING;
   timed_move_active[axis] = false;
   vibrate_active[axis] = false;
-  steppers[axis]->setSpeed(-400); // Fahre rückwärts Richtung Endstopp
+  steppers[axis]->setSpeed(HOMING_SEARCH_SPEED); // Konfigurierbare Suchgeschwindigkeit
 }
 
 void executeStepperCommand(StepperCommand cmd) {
@@ -249,15 +254,35 @@ void executeStepperCommand(StepperCommand cmd) {
 }
 
 void onI2CRequest() {
+  AccelStepper* steppers[3] = {&stepper_x, &stepper_y, &stepper_z};
+  
   StepperStatus status;
   status.current_pos_x = stepper_x.currentPosition();
   status.current_pos_y = stepper_y.currentPosition();
   status.current_pos_z = stepper_z.currentPosition();
   
-  // Flag setzen, ob irgendeine Achse im Homing ist
-  status.homing_active = (axis_homing_state[0] != HOMING_IDLE || 
-                          axis_homing_state[1] != HOMING_IDLE || 
+  // Homing-Flag
+  status.homing_active = (axis_homing_state[0] != HOMING_IDLE ||
+                          axis_homing_state[1] != HOMING_IDLE ||
                           axis_homing_state[2] != HOMING_IDLE) ? 1 : 0;
+
+  // axis_busy: Bit 0=X, 1=Y, 2=Z
+  // Eine Achse gilt als busy, wenn sie keinen Stillstand erreicht hat
+  // (distanceToGo != 0 bei position-basierten Fahrten, timed_move oder vibration aktiv)
+  status.axis_busy = 0;
+  for (int i = 0; i < 3; i++) {
+    bool isBusy = false;
+    if (axis_homing_state[i] != HOMING_IDLE) {
+      isBusy = true;
+    } else if (timed_move_active[i]) {
+      isBusy = true;
+    } else if (vibrate_active[i]) {
+      isBusy = true;
+    } else if (steppers[i]->distanceToGo() != 0) {
+      isBusy = true;
+    }
+    if (isBusy) status.axis_busy |= (1 << i);
+  }
 
   // Struktur direkt als Byte-Array an den Master schicken
   Wire.write((uint8_t*)&status, sizeof(StepperStatus));

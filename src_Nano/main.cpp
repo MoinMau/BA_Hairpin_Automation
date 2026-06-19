@@ -62,9 +62,17 @@ void executeServoCommand(ServoCommand cmd) {
   // Wert im Array für die Telemetrie merken (0-1000)
   tracked_servo_values[cmd.servo_num] = cmd.pwm_value;
 
+  // Richtungsumkehr (SERVO_INVERT aus config_nano.h)
+  // false: 0 = 500us (min), 1000 = 2500us (max)
+  // true:  0 = 2500us (max), 1000 = 500us (min)
+  uint16_t mapped = cmd.pwm_value;
+  if (SERVO_INVERT[cmd.servo_num]) {
+    mapped = 1000 - mapped;
+  }
+
   // Umrechnung (Mapping): 0 -> 500µs, 1000 -> 2500µs
   // Formel: 500 + (wert * 2000 / 1000) -> 500 + wert * 2
-  uint16_t microseconds = 500 + (cmd.pwm_value * 2);
+  uint16_t microseconds = 500 + (mapped * 2);
 
   servos[cmd.servo_num].writeMicroseconds(microseconds);
 
@@ -72,6 +80,10 @@ void executeServoCommand(ServoCommand cmd) {
     Serial.print(F("[Servo] Nr: ")); Serial.print(cmd.servo_num);
     Serial.print(F(" | Wert: ")); Serial.print(cmd.pwm_value);
     Serial.print(F(" -> Gemappt auf: ")); Serial.print(microseconds); Serial.println(F(" us"));
+    if (SERVO_INVERT[cmd.servo_num]) {
+      Serial.print(F("  (Richtung invertiert - interner Wert: "));
+      Serial.print(mapped); Serial.println(F(")"));
+    }
   }
 }
 
