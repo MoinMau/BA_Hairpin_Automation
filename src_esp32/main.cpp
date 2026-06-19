@@ -94,10 +94,13 @@ static unsigned long program_wait_start = 0;
 static unsigned long program_poll_last = 0;
 static const unsigned long POLL_INTERVAL_MS = 50;
 
-// Forward-Deklarationen (von weiter unten)
+// Forward-Deklarationen (Definitionen weiter unten)
 void sendStepperCommand(StepperCommand cmd);
 void sendServoCommand(uint8_t num, uint16_t val);
 void print_status();
+void handleSerialMaster();
+void printMasterHelp();
+void scanI2CBus();
 
 // =============================================================================
 // PROGRAMM-STEUERUNG (öffentlich)
