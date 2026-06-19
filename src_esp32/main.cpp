@@ -18,7 +18,11 @@ enum SequenceState {
   SEQ_Z_MOVE,         // Z 200 Steps relativ
   SEQ_Z_MOVE_WAIT,    // Warten bis Z angekommen
   SEQ_RUN,            // Vibration/Lauf fuer 3s
-  SEQ_RUN_WAIT,       // 3s waehrend Lauf
+  SEQ_SERVO_FEED1,    // Servo 1 auf 440 (Vereinzelung Schritt 1)
+  SEQ_SERVO_FEED1_1,
+  SEQ_SERVO_FEED2,    // Servo 0 auf 100 (Vereinzelung Schritt 2)
+  SEQ_SERVO_FEED2_1,
+  SEQ_STOP_VIBRATION, // Vibration stoppen
   SEQ_SERVO_CHANGE,   // Servo 2=800, 3=0, 4=0
   SEQ_SERVO_CHANGE_WAIT,
   SEQ_Y_FORWARD,      // Y 2000 Steps vor
@@ -517,6 +521,8 @@ void updateSequence() {
     // ── Schritt 2: Servos 2,3,4 ──
     case SEQ_SERVO_INIT:
       Serial.println(F("[2/6] Servos: S2=0, S3=800, S4=500"));
+      servo_set(0, 1000);
+      servo_set(1, 100);
       servo_set(2, 0);
       servo_set(3, 800);
       servo_set(4, 500);
@@ -534,7 +540,7 @@ void updateSequence() {
     // ── Schritt 3: Z 200 Steps ──
     case SEQ_Z_MOVE:
       Serial.println(F("[3/6] Z +200 Steps"));
-      axis_rel(AXIS_Z, 200, 600);
+      axis_rel(AXIS_Z, 100, 100);
       currentSeqState = SEQ_Z_MOVE_WAIT;
       break;
 
@@ -548,15 +554,33 @@ void updateSequence() {
     // ── Schritt 4: 3s Vibration ──
     case SEQ_RUN:
       Serial.println(F("[4/6] Vibration 3s..."));
-      axis_vibrate(AXIS_Z, 1, 40);
-      currentSeqState = SEQ_RUN_WAIT;
+      axis_vibrate(AXIS_Z, 1, 50);
+      currentSeqState = SEQ_SERVO_FEED1;
       seqStepStartTime = now;
       break;
 
-    case SEQ_RUN_WAIT:
-      if (now - seqStepStartTime >= 3000) {
-        axis_stop(AXIS_Z);
-        Serial.println(F("  -> 3s vorbei."));
+    case SEQ_SERVO_FEED1:
+      servo_set(1, 1000);
+      Serial.println(F("Vereinzelung Schritt 1"));
+      currentSeqState = SEQ_SERVO_FEED1_1;
+      break;
+
+    case SEQ_SERVO_FEED1_1:
+      if (now - seqStepStartTime >= 1500) {
+        Serial.println(F("  -> Servos in Position."));
+        currentSeqState = SEQ_SERVO_FEED2;
+      }
+      break;
+    
+    case SEQ_SERVO_FEED2:
+      servo_set(0, 100);
+      Serial.println(F("Vereinzelung Schritt 2"));
+      currentSeqState = SEQ_SERVO_FEED2_1;
+      break;
+
+    case SEQ_SERVO_FEED2_1:
+      if (now - seqStepStartTime >= 18000) {
+        Serial.println(F("  -> Servos in Position."));
         currentSeqState = SEQ_SERVO_CHANGE;
       }
       break;
@@ -574,8 +598,14 @@ void updateSequence() {
     case SEQ_SERVO_CHANGE_WAIT:
       if (now - seqStepStartTime >= 1500) {
         Serial.println(F("  -> Servos umgeschaltet."));
-        currentSeqState = SEQ_Y_FORWARD;
+        currentSeqState = SEQ_STOP_VIBRATION;
       }
+      break;
+    
+    case SEQ_STOP_VIBRATION:
+      axis_stop(AXIS_Z);
+      Serial.println(F("  -> Vibration gestoppt."));
+      currentSeqState = SEQ_Y_FORWARD;
       break;
 
     // ── Schritt 6: Y 2000 vor/zurueck ──

@@ -74,13 +74,13 @@ static const float  MAX_SPEED_LIMITS[3] = {X_MAX_SPEED, Y_MAX_SPEED, Z_MAX_SPEED
 
 // Geschwindigkeit während der Endschalter-Suche (Steps/s)
 // NEGATIV = Rückwärts zum Endschalter fahren
-#define HOMING_SEARCH_SPEED  -400.0
+#define HOMING_SEARCH_SPEED  -100.0
 
 // Geschwindigkeit beim Zurückfahren vom Endschalter (Steps/s)
-#define HOMING_REBOUND_SPEED  200.0
+#define HOMING_REBOUND_SPEED  50.0
 
 // Strecke, die nach Endschalter-Kontakt zurückgefahren wird (Steps)
-#define HOMING_REBOUND_STEPS  200
+#define HOMING_REBOUND_STEPS  20
 
 // ============================================================
 // 6. DEFAULT-BESCHLEUNIGUNG
