@@ -11,29 +11,26 @@ bool test_mode_active = false;
 // --- Ablaufsteuerung (Sequence) ---
 enum SequenceState {
   SEQ_IDLE,
-  SEQ_HOME_Z,         // Z homing starten
-  SEQ_HOME_Z_WAIT,    // Warten bis Z gehomt
-  SEQ_SERVO_INIT,     // Servo 2=0, 3=800, 4=500
-  SEQ_SERVO_INIT_WAIT,// Warten bis Servos in Position
-  SEQ_Z_MOVE,         // Z 200 Steps relativ
-  SEQ_Z_MOVE_WAIT,    // Warten bis Z angekommen
-  SEQ_RUN,            // Vibration/Lauf fuer 3s
-  SEQ_SERVO_FEED1,    // Servo 1 auf 440 (Vereinzelung Schritt 1)
-  SEQ_SERVO_FEED1_1,
-  SEQ_SERVO_FEED2,    // Servo 0 auf 100 (Vereinzelung Schritt 2)
-  SEQ_SERVO_FEED2_1,
-  SEQ_STOP_VIBRATION, // Vibration stoppen
-  SEQ_SERVO_CHANGE,   // Servo 2=800, 3=0, 4=0
-  SEQ_SERVO_CHANGE_WAIT,
-  SEQ_Y_FORWARD,      // Y 2000 Steps vor
-  SEQ_Y_FORWARD_WAIT,
-  SEQ_Y_BACK,         // Y 2000 Steps zurueck
-  SEQ_Y_BACK_WAIT,
-  SEQ_DONE            // Fertig
+  // ── PROGRAMM 1 (Hairpin) ──
+  P1_HOME_Z,         P1_HOME_Z_WAIT,
+  P1_SERVO_INIT,     P1_SERVO_INIT_WAIT,
+  P1_Z_MOVE,         P1_Z_MOVE_WAIT,
+  P1_RUN,
+  P1_FEED1,          P1_FEED1_WAIT,
+  P1_FEED2,          P1_FEED2_WAIT,
+  P1_STOP_VIB,
+  P1_SERVO_CHANGE,   P1_SERVO_CHANGE_WAIT,
+  P1_Y_FORWARD,      P1_Y_FORWARD_WAIT,
+  P1_Y_BACK,         P1_Y_BACK_WAIT,
+  P1_DONE,
+  // ── PROGRAMM 2 (Template) ──
+  P2_START,
+  P2_DONE,
 };
 SequenceState currentSeqState = SEQ_IDLE;
 unsigned long seqStepStartTime = 0;
-int seqRemainingRuns = 0;       // 0 = kein, >0 = noch x Durchlaeufe
+int seqRemainingRuns = 0;
+int currentProgram = 1;  // welches Programm gerade laeuft
 
 // ============================================================================
 // HIGH-LEVEL API — Für deine Mini-Programme (siehe setup() Beispiele)
@@ -70,7 +67,8 @@ void handleSerialMaster();
 void scanI2CBus();
 void printMasterHelp();
 void updateSequence();
-void startHairpinSequence(int runs = 1);
+void startHairpinSequence(int program, int runs);
+void startDefaultSequence(int runs);  // Kurzform fuer Programm 1
 
 void setup() {
   Serial.begin(115200);
@@ -347,17 +345,32 @@ void handleSerialMaster() {
     if (input.equalsIgnoreCase("h")) { printMasterHelp(); return; }
     if (input.equalsIgnoreCase("scan")) { scanI2CBus(); return; } 
     if (input.equalsIgnoreCase("status")) { print_status(); return; }
+
+    // run[p<prog>][_<count>]  z.B. run, run5, runp2, runp2_5
     if (input.startsWith("run") || input.startsWith("RUN")) {
       if (currentSeqState != SEQ_IDLE) {
         Serial.println(F("Sequenz laeuft bereits!"));
       } else {
-        int n = 1;
-        String s = input.substring(3);  // alles nach "run"
-        s.trim();
-        if (s.length() > 0) n = s.toInt();
-        if (n < 1) n = 1;
-        if (n > 99) n = 99;
-        startHairpinSequence(n);
+        String arg = input.substring(3); arg.trim();
+        int prog = 1, n = 1;
+        int pIdx = arg.indexOf('p');
+        if (pIdx >= 0) {
+          // runp2 oder runp2_5
+          String rest = arg.substring(pIdx + 1);
+          int uIdx = rest.indexOf('_');
+          if (uIdx >= 0) {
+            prog = rest.substring(0, uIdx).toInt();
+            n = rest.substring(uIdx + 1).toInt();
+          } else {
+            prog = rest.toInt();
+          }
+        } else if (arg.length() > 0) {
+          // run5 = Programm 1, 5 Durchlaeufe
+          n = arg.toInt();
+        }
+        if (prog < 1) prog = 1; if (prog > 3) prog = 3;
+        if (n < 1) n = 1; if (n > 99) n = 99;
+        startHairpinSequence(prog, n);
       }
       return;
     }
@@ -500,10 +513,21 @@ void printMasterHelp() {
 //   is_axis_busy(a)  axis_enable()  axis_disable()
 // ============================================================================
 
-void startHairpinSequence(int runs) {
+void startHairpinSequence(int program, int runs) {
   seqRemainingRuns = runs;
-  currentSeqState = SEQ_HOME_Z;
-  Serial.print(F("Sequenz gestartet (")); Serial.print(runs); Serial.println(F(" Durchlauf(e))."));
+  currentProgram = program;
+  Serial.print(F("Programm ")); Serial.print(program);
+  Serial.print(F(" gestartet (")); Serial.print(runs); Serial.println(F(" Durchlauf(e))."));
+
+  switch (program) {
+    case 1: currentSeqState = P1_HOME_Z; break;
+    case 2: currentSeqState = P2_START; break;
+    default: currentSeqState = P1_HOME_Z; break;
+  }
+}
+
+void startDefaultSequence(int runs) {
+  startHairpinSequence(1, runs);
 }
 
 void updateSequence() {
@@ -512,136 +536,158 @@ void updateSequence() {
 
   switch (currentSeqState) {
 
-    // ── Schritt 1: Z homen ──
-    case SEQ_HOME_Z:
-      Serial.println(F("[1/6] Z homen..."));
+    // ============================================================
+    // PROGRAMM 1: Hairpin-Automation
+    //   Z homen → Servos → Z fahren → Vibration → Y hin/zurueck
+    // ============================================================
+
+    case P1_HOME_Z:
+      Serial.println(F("P1 [1/6] Z homen..."));
       axis_home(AXIS_Z);
-      currentSeqState = SEQ_HOME_Z_WAIT;
+      currentSeqState = P1_HOME_Z_WAIT;
       break;
 
-    case SEQ_HOME_Z_WAIT:
+    case P1_HOME_Z_WAIT:
       if (!is_axis_busy(AXIS_Z)) {
         Serial.println(F("  -> Z gehomt."));
-        currentSeqState = SEQ_SERVO_INIT;
+        currentSeqState = P1_SERVO_INIT;
       }
       break;
 
-    // ── Schritt 2: Servos 2,3,4 ──
-    case SEQ_SERVO_INIT:
-      Serial.println(F("[2/6] Servos: S2=0, S3=800, S4=500"));
+    case P1_SERVO_INIT:
+      Serial.println(F("P1 [2/6] Servos: S2=0, S3=800, S4=500"));
       servo_set(0, 1000);
       servo_set(1, 100);
       servo_set(2, 0);
       servo_set(3, 800);
       servo_set(4, 500);
-      currentSeqState = SEQ_SERVO_INIT_WAIT;
+      currentSeqState = P1_SERVO_INIT_WAIT;
       seqStepStartTime = now;
       break;
 
-    case SEQ_SERVO_INIT_WAIT:
+    case P1_SERVO_INIT_WAIT:
       if (now - seqStepStartTime >= 1500) {
         Serial.println(F("  -> Servos in Position."));
-        currentSeqState = SEQ_Z_MOVE;
+        currentSeqState = P1_Z_MOVE;
       }
       break;
 
-    // ── Schritt 3: Z 200 Steps ──
-    case SEQ_Z_MOVE:
-      Serial.println(F("[3/6] Z +200 Steps"));
+    case P1_Z_MOVE:
+      Serial.println(F("P1 [3/6] Z +100 Steps"));
       axis_rel(AXIS_Z, 100, 100);
-      currentSeqState = SEQ_Z_MOVE_WAIT;
+      currentSeqState = P1_Z_MOVE_WAIT;
       break;
 
-    case SEQ_Z_MOVE_WAIT:
+    case P1_Z_MOVE_WAIT:
       if (!is_axis_busy(AXIS_Z)) {
         Serial.println(F("  -> Z positioniert."));
-        currentSeqState = SEQ_RUN;
+        currentSeqState = P1_RUN;
       }
       break;
 
-    // ── Schritt 4: 3s Vibration ──
-    case SEQ_RUN:
-      Serial.println(F("[4/6] Vibration 3s..."));
+    case P1_RUN:
+      Serial.println(F("P1 [4/6] Vibration 3s..."));
       axis_vibrate(AXIS_Z, 1, 50);
-      currentSeqState = SEQ_SERVO_FEED1;
+      currentSeqState = P1_FEED1;
       seqStepStartTime = now;
       break;
 
-    case SEQ_SERVO_FEED1:
+    case P1_FEED1:
       servo_set(1, 1000);
-      Serial.println(F("Vereinzelung Schritt 1"));
-      currentSeqState = SEQ_SERVO_FEED1_1;
+      Serial.println(F("  -> Vereinzelung Schritt 1"));
+      currentSeqState = P1_FEED1_WAIT;
       break;
 
-    case SEQ_SERVO_FEED1_1:
+    case P1_FEED1_WAIT:
       if (now - seqStepStartTime >= 1500) {
-        Serial.println(F("  -> Servos in Position."));
-        currentSeqState = SEQ_SERVO_FEED2;
+        Serial.println(F("  -> Servo in Position."));
+        currentSeqState = P1_FEED2;
       }
       break;
-    
-    case SEQ_SERVO_FEED2:
+
+    case P1_FEED2:
       servo_set(0, 100);
-      Serial.println(F("Vereinzelung Schritt 2"));
-      currentSeqState = SEQ_SERVO_FEED2_1;
+      Serial.println(F("  -> Vereinzelung Schritt 2"));
+      currentSeqState = P1_FEED2_WAIT;
       break;
 
-    case SEQ_SERVO_FEED2_1:
+    case P1_FEED2_WAIT:
       if (now - seqStepStartTime >= 18000) {
-        Serial.println(F("  -> Servos in Position."));
-        currentSeqState = SEQ_SERVO_CHANGE;
+        Serial.println(F("  -> Vereinzelung fertig."));
+        currentSeqState = P1_STOP_VIB;
       }
       break;
 
-    // ── Schritt 5: Servos umschalten ──
-    case SEQ_SERVO_CHANGE:
-      Serial.println(F("[5/6] Servos: S2=800, S3=0, S4=0"));
+    case P1_STOP_VIB:
+      axis_stop(AXIS_Z);
+      Serial.println(F("  -> Vibration gestoppt."));
+      currentSeqState = P1_SERVO_CHANGE;
+      break;
+
+    case P1_SERVO_CHANGE:
+      Serial.println(F("P1 [5/6] Servos: S2=800, S3=0, S4=0"));
       servo_set(2, 800);
       servo_set(3, 0);
       servo_set(4, 0);
-      currentSeqState = SEQ_SERVO_CHANGE_WAIT;
+      currentSeqState = P1_SERVO_CHANGE_WAIT;
       seqStepStartTime = now;
       break;
 
-    case SEQ_SERVO_CHANGE_WAIT:
+    case P1_SERVO_CHANGE_WAIT:
       if (now - seqStepStartTime >= 1500) {
         Serial.println(F("  -> Servos umgeschaltet."));
-        currentSeqState = SEQ_STOP_VIBRATION;
+        currentSeqState = P1_Y_FORWARD;
       }
       break;
-    
-    case SEQ_STOP_VIBRATION:
-      axis_stop(AXIS_Z);
-      Serial.println(F("  -> Vibration gestoppt."));
-      currentSeqState = SEQ_Y_FORWARD;
-      break;
 
-    // ── Schritt 6: Y 2000 vor/zurueck ──
-    case SEQ_Y_FORWARD:
-      Serial.println(F("[6/6] Y +2000 Steps..."));
+    case P1_Y_FORWARD:
+      Serial.println(F("P1 [6/6] Y +2000 Steps..."));
       axis_rel(AXIS_Y, 2000, 800);
-      currentSeqState = SEQ_Y_FORWARD_WAIT;
+      currentSeqState = P1_Y_FORWARD_WAIT;
       break;
 
-    case SEQ_Y_FORWARD_WAIT:
+    case P1_Y_FORWARD_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
         Serial.println(F("  -> Y vor. Y -2000 zurueck..."));
         axis_rel(AXIS_Y, -2000, 800);
-        currentSeqState = SEQ_Y_BACK_WAIT;
+        currentSeqState = P1_Y_BACK_WAIT;
       }
       break;
 
-    case SEQ_Y_BACK_WAIT:
+    case P1_Y_BACK_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
-        seqRemainingRuns--;
-        if (seqRemainingRuns > 0) {
-          Serial.print(F("  -> Durchlauf fertig. Noch "));
-          Serial.print(seqRemainingRuns); Serial.println(F(" Durchlauf(e)."));
-          currentSeqState = SEQ_HOME_Z;
-        } else {
-          Serial.println(F("  -> Y zurueck. Sequenz beendet!"));
-          currentSeqState = SEQ_IDLE;
-        }
+        currentSeqState = P1_DONE;
+      }
+      break;
+
+    case P1_DONE:
+      seqRemainingRuns--;
+      if (seqRemainingRuns > 0) {
+        Serial.print(F("  -> Durchlauf fertig. Noch ")); Serial.print(seqRemainingRuns);
+        Serial.println(F("x. Starte P1 neu."));
+        currentSeqState = P1_HOME_Z;
+      } else {
+        Serial.println(F("Programm 1 beendet."));
+        currentSeqState = SEQ_IDLE;
+      }
+      break;
+
+    // ============================================================
+    // PROGRAMM 2: Template (selbst befuellen)
+    // ============================================================
+
+    case P2_START:
+      Serial.println(F("P2 gestartet (Template) - noch nichts definiert."));
+      currentSeqState = P2_DONE;
+      break;
+
+    case P2_DONE:
+      seqRemainingRuns--;
+      if (seqRemainingRuns > 0) {
+        currentSeqState = P2_START;
+      } else {
+        Serial.println(F("Programm 2 beendet."));
+        currentSeqState = SEQ_IDLE;
       }
       break;
 
