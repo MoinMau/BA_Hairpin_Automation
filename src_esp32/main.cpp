@@ -33,6 +33,7 @@ enum SequenceState {
 };
 SequenceState currentSeqState = SEQ_IDLE;
 unsigned long seqStepStartTime = 0;
+int seqRemainingRuns = 0;       // 0 = kein, >0 = noch x Durchlaeufe
 
 // ============================================================================
 // HIGH-LEVEL API — Für deine Mini-Programme (siehe setup() Beispiele)
@@ -69,7 +70,7 @@ void handleSerialMaster();
 void scanI2CBus();
 void printMasterHelp();
 void updateSequence();
-void startHairpinSequence();
+void startHairpinSequence(int runs = 1);
 
 void setup() {
   Serial.begin(115200);
@@ -346,21 +347,27 @@ void handleSerialMaster() {
     if (input.equalsIgnoreCase("h")) { printMasterHelp(); return; }
     if (input.equalsIgnoreCase("scan")) { scanI2CBus(); return; } 
     if (input.equalsIgnoreCase("status")) { print_status(); return; }
-    if (input.equalsIgnoreCase("run")) {
+    if (input.startsWith("run") || input.startsWith("RUN")) {
       if (currentSeqState != SEQ_IDLE) {
-        Serial.println(F("\n[MASTER] Sequenz laeuft bereits!"));
+        Serial.println(F("Sequenz laeuft bereits!"));
       } else {
-        Serial.println(F("\n[MASTER] Starte Sequenz..."));
-        startHairpinSequence();
+        int n = 1;
+        String s = input.substring(3);  // alles nach "run"
+        s.trim();
+        if (s.length() > 0) n = s.toInt();
+        if (n < 1) n = 1;
+        if (n > 99) n = 99;
+        startHairpinSequence(n);
       }
       return;
     }
     
-    if (input.equalsIgnoreCase("stop")) { 
-      Serial.println(F("\n[MASTER] ABBRUCH: Sequenz gestoppt!"));
+    if (input.equalsIgnoreCase("stop")) {
+      Serial.println(F("Sequenz abgebrochen!"));
       currentSeqState = SEQ_IDLE;
-      sendStepperCommand({AXIS_X, MOVE_TYPE_STOP, 0, 0});
-      return; 
+      seqRemainingRuns = 0;
+      axis_stop(AXIS_X); axis_stop(AXIS_Y); axis_stop(AXIS_Z);
+      return;
     }
 
     if (input.equalsIgnoreCase("enAll") || input.equalsIgnoreCase("disAll")) {
@@ -493,9 +500,10 @@ void printMasterHelp() {
 //   is_axis_busy(a)  axis_enable()  axis_disable()
 // ============================================================================
 
-void startHairpinSequence() {
+void startHairpinSequence(int runs) {
+  seqRemainingRuns = runs;
   currentSeqState = SEQ_HOME_Z;
-  Serial.println(F("Sequenz gestartet."));
+  Serial.print(F("Sequenz gestartet (")); Serial.print(runs); Serial.println(F(" Durchlauf(e))."));
 }
 
 void updateSequence() {
@@ -625,8 +633,15 @@ void updateSequence() {
 
     case SEQ_Y_BACK_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
-        Serial.println(F("  -> Y zurueck. Sequenz beendet!"));
-        currentSeqState = SEQ_IDLE;
+        seqRemainingRuns--;
+        if (seqRemainingRuns > 0) {
+          Serial.print(F("  -> Durchlauf fertig. Noch "));
+          Serial.print(seqRemainingRuns); Serial.println(F(" Durchlauf(e)."));
+          currentSeqState = SEQ_HOME_Z;
+        } else {
+          Serial.println(F("  -> Y zurueck. Sequenz beendet!"));
+          currentSeqState = SEQ_IDLE;
+        }
       }
       break;
 
