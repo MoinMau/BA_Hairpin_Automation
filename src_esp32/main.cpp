@@ -50,6 +50,7 @@ void scanI2CBus();
 void printMasterHelp();
 void updateSequence();
 void startHairpinSequence();
+void startMiniProgram();
 
 void setup() {
   Serial.begin(115200);
@@ -64,46 +65,6 @@ void setup() {
   Serial.println(F(" -> Tippe 'scan' ein, um die Hardware zu pruefen."));
   Serial.println(F("--------------------------------------------------"));
 
-  // ==================================================================
-  // 👇 HIER DEIN MINI-PROGRAMM EINSETZEN
-  //
-  // Beispiele:
-  //
-  //   // Beispiel 1: Einfache absolute Position anfahren
-  //   axis_abs(AXIS_X, 5000, 800);
-  //   wait_axis_busy(AXIS_X);
-  //
-  //   // Beispiel 2: Servo bewegen, dann vibrieren
-  //   servo_set(0, 490);
-  //   wait_ms(500);
-  //   axis_vibrate(AXIS_Z, 1, 40);
-  //   wait_ms(2000);
-  //   axis_stop(AXIS_Z);
-  //
-  //   // Beispiel 3: Komplette Hairpin-Sequenz (wie run-Befehl)
-  //   axis_vibrate(AXIS_Z, 1, 40);
-  //   wait_ms(1000);
-  //   servo_set(0, 490);
-  //   wait_ms(2000);
-  //   servo_set(1, 150);
-  //   wait_ms(2000);
-  //   servo_set(1, 490);
-  //   wait_ms(2000);
-  //   servo_set(0, 150);
-  //   wait_ms(2000);
-  //   axis_stop(AXIS_Z);
-  //
-  //   // Beispiel 4: Homing + Fahrt
-  //   axis_home(AXIS_X);
-  //   wait_axis_busy(AXIS_X);
-  //   axis_abs(AXIS_X, 3000, 600);
-  //   wait_axis_busy(AXIS_X);
-  //
-  // ==================================================================
-
-  // Dein Programm startet automatisch beim Boot.
-  // Entweder direkt hier oder per startMiniProgram()-Aufruf.
-  // startMiniProgram();
 }
 
 void loop() {
@@ -368,7 +329,7 @@ void handleSerialMaster() {
     if (input.equalsIgnoreCase("status")) { print_status(); return; }
     if (input.equalsIgnoreCase("run")) { 
       Serial.println(F("\n[MASTER] Starte Hairpin-Zuführung-Sequenz..."));
-      startHairpinSequence(); 
+      startMiniProgram(); 
       return; 
     }
     
@@ -635,18 +596,18 @@ Hier alle verfügbaren Befehle:
   print_status()
     Zeigt alle Positionen, Servo-Werte und Sensordaten an.
 
---- Beispiel: Komplette Sequenz ---
+--- Beispiel: Komplette Sequenz ---*/
 
   void startMiniProgram() {
     Serial.println("Starte meine Sequenz...");
 
     // Homing
-    axis_home(AXIS_X);
-    wait_axis_busy(AXIS_X);
+    axis_home(AXIS_Z);
+    wait_axis_busy(AXIS_Z);
 
     // Position anfahren
-    axis_abs(AXIS_X, 4000, 600);
-    wait_axis_busy(AXIS_X);
+    axis_abs(AXIS_Z, 100, 100);
+    wait_axis_busy(AXIS_Z);
 
     // Servo greifen lassen
     servo_set(0, 490);
@@ -658,12 +619,7 @@ Hier alle verfügbaren Befehle:
     wait_ms(3000);
     axis_stop(AXIS_Z);
 
-    // Zurück
-    axis_abs(AXIS_X, 0, 800);
-    wait_axis_busy(AXIS_X);
-
     Serial.println("Sequenz beendet!");
   }
 
-Aktivieren: Rufe startMiniProgram(); in setup() auf.
-*/
+
