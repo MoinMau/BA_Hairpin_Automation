@@ -39,8 +39,8 @@ static const bool INVERT_DIR[3] = {INVERT_X_DIR, INVERT_Y_DIR, INVERT_Z_DIR};
 // ============================================================
 
 #define X_DEFAULT_SPEED  1000.0
-#define Y_DEFAULT_SPEED  500.0
-#define Z_DEFAULT_SPEED  100.0
+#define Y_DEFAULT_SPEED  800.0
+#define Z_DEFAULT_SPEED  600.0
 
 // ============================================================
 // 4. SOFT-LIMITS (maximale Verfahrwege in Steps)
@@ -74,13 +74,13 @@ static const float  MAX_SPEED_LIMITS[3] = {X_MAX_SPEED, Y_MAX_SPEED, Z_MAX_SPEED
 
 // Geschwindigkeit während der Endschalter-Suche (Steps/s)
 // NEGATIV = Rückwärts zum Endschalter fahren
-#define HOMING_SEARCH_SPEED  -50.0
+#define HOMING_SEARCH_SPEED  -400.0
 
 // Geschwindigkeit beim Zurückfahren vom Endschalter (Steps/s)
-#define HOMING_REBOUND_SPEED  10.0
+#define HOMING_REBOUND_SPEED  200.0
 
 // Strecke, die nach Endschalter-Kontakt zurückgefahren wird (Steps)
-#define HOMING_REBOUND_STEPS  10
+#define HOMING_REBOUND_STEPS  200
 
 // ============================================================
 // 6. DEFAULT-BESCHLEUNIGUNG

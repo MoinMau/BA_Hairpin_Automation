@@ -8,239 +8,281 @@
 
 bool test_mode_active = false;
 
-// --- Ablaufsteuerung (Sequence) ---
-enum SequenceState { SEQ_IDLE, SEQ_VIB_START, SEQ_SERVO0_1, SEQ_SERVO1_1, SEQ_SERVO1_2, SEQ_SERVO0_2, SEQ_VIB_STOP };
-SequenceState currentSeqState = SEQ_IDLE;
-unsigned long seqStepStartTime = 0;
-const unsigned long SERVO_WAIT_TIME = 2000; // 1 Sekunde warten, bis Servos ihre Position erreicht haben
-
 // ============================================================================
-// HIGH-LEVEL API — Für deine Mini-Programme (siehe setup() Beispiele)
+// NON-BLOCKING PROGRAM ENGINE
 // ============================================================================
-
-// --- Stepper-Funktionen ---
-void axis_abs(uint8_t axis, int32_t position, int16_t speed);
-void axis_rel(uint8_t axis, int32_t steps, int16_t speed);
-void axis_timed(uint8_t axis, unsigned long duration_ms, int16_t speed);
-void axis_vibrate(uint8_t axis, int32_t amplitude, int16_t freq_hz);
-void axis_stop(uint8_t axis);
-void axis_home(uint8_t axis);
-void axis_enable();
-void axis_disable();
-
-// --- Servo-Funktionen ---
-void servo_set(uint8_t num, uint16_t value);  // value: 0-1000
-
-// --- Wait / Status ---
-void wait_ms(unsigned long ms);
-void wait_axis_busy(uint8_t axis, unsigned long timeout_ms = 30000);
-void wait_all_busy(unsigned long timeout_ms = 30000);
-bool is_axis_busy(uint8_t axis);          // Pollt UNO-Status
-StepperStatus get_stepper_status();        // Holt vollen UNO-Status
-void print_status();                       // Detailierter Report
-
-// --- Low-Level (für eigene Erweiterungen) ---
-void sendStepperCommand(StepperCommand cmd);
-void sendServoCommand(uint8_t num, uint16_t val);
-
+// Definiere deine Sequenz als Schritt-für-Schritt Programm in setup().
+// Das Programm läuft dann non-blocking in loop() — kein delay(), kein Hänger.
+// Der serielle Testmodus (`t` drücken) und `stop` funktionieren parallel.
+//
+// Benutzung:
+//   void setup() {
+//     ...
+//     prog_home(AXIS_X);
+//     prog_wait_axis(AXIS_X);
+//     prog_abs(AXIS_X, 5000, 800);
+//     prog_wait_axis(AXIS_X);
+//     prog_servo(0, 490);
+//     prog_wait_ms(2000);
+//     prog_vibrate(AXIS_Z, 1, 40);
+//     prog_wait_ms(1000);
+//     prog_stop(AXIS_Z);
+//     prog_end();
+//     prog_start();  // Start sofort bei Boot
+//   }
+//
+// Über Serial: `run` startet das Programm, `stop` bricht ab.
 // ============================================================================
 
-void handleSerialMaster();
-void scanI2CBus();
-void printMasterHelp();
-void updateSequence();
-void startHairpinSequence();
-void startMiniProgram();
+// --- Schritt-Typen für das Programm ---
+enum ProgramCmd : uint8_t {
+  CMD_ABS,          // Absolute Fahrt:   axis, position,    speed
+  CMD_REL,          // Relative Fahrt:   axis, steps,       speed
+  CMD_TIMED,        // Zeit-Fahrt:       axis, duration_ms, speed
+  CMD_VIB,          // Vibration:        axis, amplitude,   freq_hz
+  CMD_STOP,         // Achse stoppen:    axis, -,           -
+  CMD_HOME,         // Homing:           axis, -,           -
+  CMD_ENABLE,       // Treiber an
+  CMD_DISABLE,      // Treiber aus
+  CMD_SERVO,        // Servo setzen:     servo_num, value,  -
+  CMD_WAIT_MS,      // Warten (ms):      -, ms,             -
+  CMD_WAIT_AXIS,    // Warten auf Achse: axis, -,           -
+  CMD_WAIT_ALL,     // Warten auf alle Achsen
+  CMD_STATUS,       // Status ausgeben
+  CMD_END,          // Programm-Ende
+};
 
-void setup() {
-  Serial.begin(115200);
-  pinMode(LED_PIN, OUTPUT); 
-  digitalWrite(LED_PIN, LOW);
-  Wire.begin(I2C_SDA, I2C_SCL, 100000); 
-  
-  Serial.println(F("\n=================================================="));
-  Serial.println(F("       ESP32: ADVANCED I2C MASTER CENTER          "));
-  Serial.println(F("=================================================="));
-  Serial.println(F(" -> Druecke 't' + Enter, um das System zu starten."));
-  Serial.println(F(" -> Tippe 'scan' ein, um die Hardware zu pruefen."));
-  Serial.println(F("--------------------------------------------------"));
+struct ProgramStep {
+  ProgramCmd cmd;
+  uint8_t axis;
+  int32_t param1;
+  int16_t param2;
+};
 
+#define MAX_PROGRAM_STEPS 64
+static ProgramStep program_buffer[MAX_PROGRAM_STEPS];
+static int program_count = 0;
+static int program_index = -1;   // -1 = idle
+static unsigned long program_wait_start = 0;
+static unsigned long program_poll_last = 0;
+static const unsigned long POLL_INTERVAL_MS = 50;  // I2C-Polling im Wait-Zustand
+
+// --- Programm-Builder (rufst du in setup() auf) ---
+
+void prog_clear() { program_count = 0; }
+
+void prog_abs(uint8_t axis, int32_t position, int16_t speed) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_ABS, axis, position, speed};
 }
 
-void loop() {
-  handleSerialMaster();
-  updateSequence();
+void prog_rel(uint8_t axis, int32_t steps, int16_t speed) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_REL, axis, steps, speed};
 }
 
-// ============================================================================
-// IMPLEMENTIERUNG HIGH-LEVEL API
-// ============================================================================
-
-// --- Stepper ---
-
-void axis_abs(uint8_t axis, int32_t position, int16_t speed) {
-  StepperCommand cmd = {axis, MOVE_TYPE_ABSOLUTE, position, speed};
-  sendStepperCommand(cmd);
+void prog_timed(uint8_t axis, unsigned long duration_ms, int16_t speed) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_TIMED, axis, (int32_t)duration_ms, speed};
 }
 
-void axis_rel(uint8_t axis, int32_t steps, int16_t speed) {
-  StepperCommand cmd = {axis, MOVE_TYPE_RELATIVE, steps, speed};
-  sendStepperCommand(cmd);
+void prog_vibrate(uint8_t axis, int32_t amplitude, int16_t freq_hz) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_VIB, axis, amplitude, freq_hz};
 }
 
-void axis_timed(uint8_t axis, unsigned long duration_ms, int16_t speed) {
-  StepperCommand cmd = {axis, MOVE_TYPE_TIMED, (int32_t)duration_ms, speed};
-  sendStepperCommand(cmd);
+void prog_stop(uint8_t axis) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_STOP, axis, 0, 0};
 }
 
-void axis_vibrate(uint8_t axis, int32_t amplitude, int16_t freq_hz) {
-  StepperCommand cmd = {axis, MOVE_TYPE_VIBRATE, amplitude, freq_hz};
-  sendStepperCommand(cmd);
+void prog_home(uint8_t axis) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_HOME, axis, 0, 0};
 }
 
-void axis_stop(uint8_t axis) {
-  StepperCommand cmd = {axis, MOVE_TYPE_STOP, 0, 0};
-  sendStepperCommand(cmd);
+void prog_enable() {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_ENABLE, 0, 0, 0};
 }
 
-void axis_home(uint8_t axis) {
-  StepperCommand cmd = {axis, MOVE_TYPE_HOMING, 0, 0};
-  sendStepperCommand(cmd);
+void prog_disable() {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_DISABLE, 0, 0, 0};
 }
 
-void axis_enable() {
-  StepperCommand cmd = {0, MOVE_TYPE_STOP, 0, 0};
-  sendStepperCommand(cmd);
+void prog_servo(uint8_t num, uint16_t value) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_SERVO, num, value, 0};
 }
 
-void axis_disable() {
-  StepperCommand cmd = {0, MOVE_TYPE_STOP, 99, 0};
-  sendStepperCommand(cmd);
+void prog_wait_ms(unsigned long ms) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_WAIT_MS, 0, (int32_t)ms, 0};
 }
 
-// --- Servo ---
-
-void servo_set(uint8_t num, uint16_t value) {
-  sendServoCommand(num, value);
+void prog_wait_axis(uint8_t axis) {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_WAIT_AXIS, axis, 0, 0};
 }
 
-// --- Wait / Status ---
-
-void wait_ms(unsigned long ms) {
-  delay(ms);
+void prog_wait_all() {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_WAIT_ALL, 0, 0, 0};
 }
 
-void wait_axis_busy(uint8_t axis, unsigned long timeout_ms) {
-  unsigned long start = millis();
-  while (true) {
-    StepperStatus st = get_stepper_status();
-    bool busy = st.axis_busy & (1 << axis);
-    if (!busy) return;
-    if (timeout_ms > 0 && (millis() - start) >= timeout_ms) {
-      Serial.print(F("[TIMEOUT] Achse ")); Serial.print(axis);
-      Serial.println(F(" wurde nicht fertig."));
-      return;
-    }
-    delay(10); // Kurze Polling-Pause
+void prog_status() {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_STATUS, 0, 0, 0};
+}
+
+void prog_end() {
+  if (program_count >= MAX_PROGRAM_STEPS) return;
+  program_buffer[program_count++] = {CMD_END, 0, 0, 0};
+}
+
+// --- Programm-Steuerung ---
+
+void prog_start() {
+  if (program_count == 0) {
+    Serial.println(F("[PROG] Keine Schritte definiert!"));
+    return;
+  }
+  program_index = 0;
+  program_wait_start = millis();
+  Serial.println(F("[PROG] Programm gestartet."));
+}
+
+void prog_stop_exec() {
+  if (program_index >= 0) {
+    Serial.println(F("[PROG] Programm abgebrochen."));
+    program_index = -1;
+    // Alle Achsen stoppen als Sicherheit
+    sendStepperCommand({AXIS_X, MOVE_TYPE_STOP, 0, 0});
   }
 }
 
-void wait_all_busy(unsigned long timeout_ms) {
-  unsigned long start = millis();
-  while (true) {
-    StepperStatus st = get_stepper_status();
-    if (st.axis_busy == 0) return;
-    if (timeout_ms > 0 && (millis() - start) >= timeout_ms) {
-      Serial.println(F("[TIMEOUT] Nicht alle Achsen wurden fertig."));
-      return;
+bool prog_is_running() {
+  return program_index >= 0;
+}
+
+// --- Programmschritt ausführen (ein Schritt pro Aufruf) ---
+
+static void prog_execute_step(const ProgramStep& step) {
+  switch (step.cmd) {
+    case CMD_ABS: {
+      StepperCommand c = {step.axis, MOVE_TYPE_ABSOLUTE, step.param1, step.param2};
+      sendStepperCommand(c);
+      break;
     }
-    delay(10);
+    case CMD_REL: {
+      StepperCommand c = {step.axis, MOVE_TYPE_RELATIVE, step.param1, step.param2};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_TIMED: {
+      StepperCommand c = {step.axis, MOVE_TYPE_TIMED, step.param1, step.param2};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_VIB: {
+      StepperCommand c = {step.axis, MOVE_TYPE_VIBRATE, step.param1, step.param2};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_STOP: {
+      StepperCommand c = {step.axis, MOVE_TYPE_STOP, 0, 0};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_HOME: {
+      StepperCommand c = {step.axis, MOVE_TYPE_HOMING, 0, 0};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_ENABLE: {
+      StepperCommand c = {0, MOVE_TYPE_STOP, 0, 0};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_DISABLE: {
+      StepperCommand c = {0, MOVE_TYPE_STOP, 99, 0};
+      sendStepperCommand(c);
+      break;
+    }
+    case CMD_SERVO:
+      sendServoCommand(step.axis, (uint16_t)step.param1);
+      break;
+    case CMD_WAIT_MS:
+      program_wait_start = millis();
+      break;
+    case CMD_WAIT_AXIS:
+    case CMD_WAIT_ALL:
+      program_wait_start = millis();
+      break;
+    case CMD_STATUS:
+      print_status();
+      break;
+    case CMD_END:
+      program_index = -1;
+      Serial.println(F("[PROG] Programm beendet."));
+      return;  // kein ++ von index
+    default:
+      break;
   }
+  program_index++;
 }
 
-bool is_axis_busy(uint8_t axis) {
-  StepperStatus st = get_stepper_status();
-  return (st.axis_busy & (1 << axis)) != 0;
-}
+// --- Bereitschafts-Prüfung für Wait-Schritte ---
 
-StepperStatus get_stepper_status() {
-  StepperStatus status = {0, 0, 0, 0, 0};
+static bool prog_wait_done(const ProgramStep& step) {
+  // Polling-Limit: nicht bei jedem loop()-Durchlauf I2C abfragen
+  if (millis() - program_poll_last < POLL_INTERVAL_MS) {
+    return false;  // Noch nicht prüfen
+  }
+  program_poll_last = millis();
+
+  if (step.cmd == CMD_WAIT_MS) {
+    return (millis() - program_wait_start) >= (unsigned long)step.param1;
+  }
+
+  // Axis/All Busy abfragen
   uint8_t received = Wire.requestFrom((uint8_t)I2C_ADDR_UNO, (uint8_t)sizeof(StepperStatus));
-  if (received >= sizeof(StepperStatus)) {
-    Wire.readBytes((uint8_t*)&status, sizeof(StepperStatus));
+  if (received < sizeof(StepperStatus)) return false;
+
+  StepperStatus st;
+  Wire.readBytes((uint8_t*)&st, sizeof(StepperStatus));
+
+  if (step.cmd == CMD_WAIT_AXIS) {
+    return (st.axis_busy & (1 << step.axis)) == 0;
   }
-  return status;
+  if (step.cmd == CMD_WAIT_ALL) {
+    return st.axis_busy == 0;
+  }
+  return true;
 }
 
-void print_status() {
-  Serial.println(F("\n================= SYSTEM STATUS REPORT ================="));
-  
-  // 1. Uno abfragen (Schrittmotoren)
-  uint8_t bytesReceived = Wire.requestFrom((uint8_t)I2C_ADDR_UNO, (uint8_t)sizeof(StepperStatus));
-  if (bytesReceived >= sizeof(StepperStatus)) {
-    StepperStatus uStatus;
-    Wire.readBytes((uint8_t*)&uStatus, sizeof(StepperStatus));
-    Serial.println(F("[SLAVE 1: ARDUINO UNO (0x33)]"));
-    Serial.print(F("  -> Position X : ")); Serial.print(uStatus.current_pos_x); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Position Y : ")); Serial.print(uStatus.current_pos_y); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Position Z : ")); Serial.print(uStatus.current_pos_z); Serial.println(F(" Steps"));
-    Serial.print(F("  -> Homing     : ")); Serial.println(uStatus.homing_active ? F("LAEUFT") : F("IDLE"));
-    Serial.print(F("  -> Busy       : "));
-    Serial.print(uStatus.axis_busy & BUSY_X ? F("X") : F("."));
-    Serial.print(uStatus.axis_busy & BUSY_Y ? F("Y") : F("."));
-    Serial.println(uStatus.axis_busy & BUSY_Z ? F("Z") : F("."));
-  }
-  
-  Serial.println(F("-------------------------------------------------------"));
+// --- Programm-Runner (aus loop() aufrufen) ---
 
-  // 2. Nano ABFRAGE TYP 1: Servo-Stellungen (0-1000)
-  Wire.beginTransmission(I2C_ADDR_NANO);
-  Wire.write(REQ_NANO_SERVOS);
-  Wire.endTransmission();
-  
-  Wire.requestFrom(I2C_ADDR_NANO, sizeof(ServoStatus));
-  if (Wire.available() >= (int)sizeof(ServoStatus)) {
-    ServoStatus nStatus;
-    Wire.readBytes((uint8_t*)&nStatus, sizeof(ServoStatus));
-    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SERVOS]"));
-    Serial.print(F("  -> Stellwerte (0-1000): "));
-    for(int i = 0; i < 6; i++) {
-      Serial.print(F("S")); Serial.print(i); Serial.print(F(":")); 
-      Serial.print(nStatus.current_val[i]); Serial.print(F("  "));
+void prog_update() {
+  if (program_index < 0 || program_index >= program_count) return;
+
+  ProgramStep& current = program_buffer[program_index];
+
+  // Bei Wait-Schritten: prüfen, ob Bedingung erfüllt
+  if (current.cmd == CMD_WAIT_MS || current.cmd == CMD_WAIT_AXIS || current.cmd == CMD_WAIT_ALL) {
+    if (prog_wait_done(current)) {
+      program_index++;  // Bedingung erfüllt → weiter
     }
-    Serial.println();
+    return;  // Noch warten
   }
 
-  Serial.println(F("-------------------------------------------------------"));
-
-  // 3. Nano ABFRAGE TYP 2: Sensor-Telemetrie & Spannungen
-  Wire.beginTransmission(I2C_ADDR_NANO);
-  Wire.write(REQ_NANO_SENSORS);
-  Wire.endTransmission();
-  
-  Wire.requestFrom(I2C_ADDR_NANO, sizeof(SensorStatus));
-  if (Wire.available() >= (int)sizeof(SensorStatus)) {
-    SensorStatus snStatus;
-    Wire.readBytes((uint8_t*)&snStatus, sizeof(SensorStatus));
-    
-    float volt_a1 = (snStatus.analog_a1 * 5.0) / 1023.0;
-    float volt_a2 = (snStatus.analog_a2 * 5.0) / 1023.0;
-    float volt_a3 = (snStatus.analog_a3 * 5.0) / 1023.0;
-    float volt_mh = (snStatus.mh_a7_raw * 5.0) / 1023.0;
-
-    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SENSOREN & SPANNUNGEN]"));
-    Serial.print(F("  -> Shunt Strommessung (A0 Raw) : ")); Serial.println(snStatus.shunt_raw);
-    Serial.print(F("  -> MH-Sensor Digital (D2)      : ")); Serial.println(snStatus.mh_d2_state == HIGH ? F("HIGH") : F("LOW"));
-    Serial.print(F("  -> MH-Sensor Analog (A7)       : ")); Serial.print(volt_mh); Serial.println(F(" V"));
-    Serial.print(F("  -> Spannung Pin A1             : ")); Serial.print(volt_a1); Serial.println(F(" V"));
-    Serial.print(F("  -> Spannung Pin A2             : ")); Serial.print(volt_a2); Serial.println(F(" V"));
-    Serial.print(F("  -> Spannung Pin A3             : ")); Serial.print(volt_a3); Serial.println(F(" V"));
-  }
-  Serial.println(F("========================================================\n"));
+  // Normale Kommando-Schritte: sofort ausführen
+  prog_execute_step(current);
 }
 
 // ============================================================================
-// LOW-LEVEL I2C (für Basis-Funktionen)
+// DIREKTE I2C-KOMMANDOS (für Testmodus per Serial)
 // ============================================================================
 
 void sendStepperCommand(StepperCommand cmd) {
@@ -274,6 +316,19 @@ void sendServoCommand(uint8_t num, uint16_t val) {
 // HILFS-FUNKTIONEN
 // ============================================================================
 
+StepperStatus get_stepper_status() {
+  StepperStatus status = {0, 0, 0, 0, 0};
+  uint8_t received = Wire.requestFrom((uint8_t)I2C_ADDR_UNO, (uint8_t)sizeof(StepperStatus));
+  if (received >= sizeof(StepperStatus)) {
+    Wire.readBytes((uint8_t*)&status, sizeof(StepperStatus));
+  }
+  return status;
+}
+
+bool is_axis_busy(uint8_t axis) {
+  return (get_stepper_status().axis_busy & (1 << axis)) != 0;
+}
+
 void scanI2CBus() {
   Serial.println(F("\n--- Starte I2C-Bus-Scan... ---"));
   byte error, address;
@@ -294,8 +349,125 @@ void scanI2CBus() {
   if (nDevices == 0) Serial.println(F("WARNUNG: Keine I2C-Geraete gefunden!\n"));
 }
 
+void print_status() {
+  Serial.println(F("\n================= SYSTEM STATUS REPORT ================="));
+  
+  // 1. Uno abfragen (Schrittmotoren)
+  uint8_t bytesReceived = Wire.requestFrom((uint8_t)I2C_ADDR_UNO, (uint8_t)sizeof(StepperStatus));
+  if (bytesReceived >= sizeof(StepperStatus)) {
+    StepperStatus uStatus;
+    Wire.readBytes((uint8_t*)&uStatus, sizeof(StepperStatus));
+    Serial.println(F("[SLAVE 1: ARDUINO UNO (0x33)]"));
+    Serial.print(F("  -> Position X : ")); Serial.print(uStatus.current_pos_x); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Position Y : ")); Serial.print(uStatus.current_pos_y); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Position Z : ")); Serial.print(uStatus.current_pos_z); Serial.println(F(" Steps"));
+    Serial.print(F("  -> Homing     : ")); Serial.println(uStatus.homing_active ? F("LAEUFT") : F("IDLE"));
+    Serial.print(F("  -> Busy       : "));
+    Serial.print(uStatus.axis_busy & BUSY_X ? F("X") : F("."));
+    Serial.print(uStatus.axis_busy & BUSY_Y ? F("Y") : F("."));
+    Serial.println(uStatus.axis_busy & BUSY_Z ? F("Z") : F("."));
+  }
+  
+  Serial.println(F("-------------------------------------------------------"));
+
+  // 2. Nano ABFRAGE TYP 1: Servo-Stellungen (0-1000)
+  Wire.beginTransmission(I2C_ADDR_NANO);
+  Wire.write(REQ_NANO_SERVOS);
+  Wire.endTransmission();
+  Wire.requestFrom(I2C_ADDR_NANO, sizeof(ServoStatus));
+  if (Wire.available() >= (int)sizeof(ServoStatus)) {
+    ServoStatus nStatus;
+    Wire.readBytes((uint8_t*)&nStatus, sizeof(ServoStatus));
+    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SERVOS]"));
+    Serial.print(F("  -> Stellwerte (0-1000): "));
+    for(int i = 0; i < 6; i++) {
+      Serial.print(F("S")); Serial.print(i); Serial.print(F(":")); 
+      Serial.print(nStatus.current_val[i]); Serial.print(F("  "));
+    }
+    Serial.println();
+  }
+
+  Serial.println(F("-------------------------------------------------------"));
+
+  // 3. Nano ABFRAGE TYP 2: Sensor-Telemetrie & Spannungen
+  Wire.beginTransmission(I2C_ADDR_NANO);
+  Wire.write(REQ_NANO_SENSORS);
+  Wire.endTransmission();
+  Wire.requestFrom(I2C_ADDR_NANO, sizeof(SensorStatus));
+  if (Wire.available() >= (int)sizeof(SensorStatus)) {
+    SensorStatus snStatus;
+    Wire.readBytes((uint8_t*)&snStatus, sizeof(SensorStatus));
+    
+    float volt_a1 = (snStatus.analog_a1 * 5.0) / 1023.0;
+    float volt_a2 = (snStatus.analog_a2 * 5.0) / 1023.0;
+    float volt_a3 = (snStatus.analog_a3 * 5.0) / 1023.0;
+    float volt_mh = (snStatus.mh_a7_raw * 5.0) / 1023.0;
+
+    Serial.println(F("[SLAVE 2: ARDUINO NANO (0x32) - SENSOREN & SPANNUNGEN]"));
+    Serial.print(F("  -> Shunt Strommessung (A0 Raw) : ")); Serial.println(snStatus.shunt_raw);
+    Serial.print(F("  -> MH-Sensor Digital (D2)      : ")); Serial.println(snStatus.mh_d2_state == HIGH ? F("HIGH") : F("LOW"));
+    Serial.print(F("  -> MH-Sensor Analog (A7)       : ")); Serial.print(volt_mh); Serial.println(F(" V"));
+    Serial.print(F("  -> Spannung Pin A1             : ")); Serial.print(volt_a1); Serial.println(F(" V"));
+    Serial.print(F("  -> Spannung Pin A2             : ")); Serial.print(volt_a2); Serial.println(F(" V"));
+    Serial.print(F("  -> Spannung Pin A3             : ")); Serial.print(volt_a3); Serial.println(F(" V"));
+  }
+  Serial.println(F("========================================================\n"));
+}
+
 // ============================================================================
-// SERIELLE SCHNITTSTELLE (Testmodus)
+// SETUP
+// ============================================================================
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT); 
+  digitalWrite(LED_PIN, LOW);
+  Wire.begin(I2C_SDA, I2C_SCL, 100000); 
+  
+  Serial.println(F("\n=================================================="));
+  Serial.println(F("       ESP32: ADVANCED I2C MASTER CENTER          "));
+  Serial.println(F("=================================================="));
+  Serial.println(F(" -> Druecke 't' + Enter, um das System zu starten."));
+  Serial.println(F(" -> Tippe 'scan' ein, um die Hardware zu pruefen."));
+  Serial.println(F(" -> 'run' startet das Programm, 'stop' bricht ab."));
+  Serial.println(F("--------------------------------------------------"));
+
+  // ================================================================
+  // 👇 HIER DEIN MINI-PROGRAMM DEFINIEREN
+  //
+  // Beispiel 1: Homing → Position → Servo → Vibration
+  //   prog_home(AXIS_X);
+  //   prog_wait_axis(AXIS_X);
+  //   prog_abs(AXIS_X, 5000, 800);
+  //   prog_wait_axis(AXIS_X);
+  //   prog_servo(0, 490);
+  //   prog_wait_ms(2000);
+  //   prog_vibrate(AXIS_Z, 1, 40);
+  //   prog_wait_ms(1000);
+  //   prog_stop(AXIS_Z);
+  //   prog_end();
+  //   prog_start();  // ← Start bei Boot
+  //
+  // Beispiel 2: Nur per 'run' Befehl starten (kein prog_start()):
+  //   (Programm ist definiert, startet aber nicht automatisch)
+  // ================================================================
+
+  // prog_ ... hier einfügen
+  // prog_end();
+  // prog_start();  // Auskommentieren = nur per 'run' startbar
+}
+
+// ============================================================================
+// LOOP
+// ============================================================================
+
+void loop() {
+  handleSerialMaster();   // Serielle Befehle (auch während Programm)
+  prog_update();          // Non-blocking Programm-Abarbeitung
+}
+
+// ============================================================================
+// SERIELLE SCHNITTSTELLE (Testmodus + Programmsteuerung)
 // ============================================================================
 
 void handleSerialMaster() {
@@ -327,17 +499,20 @@ void handleSerialMaster() {
     if (input.equalsIgnoreCase("h")) { printMasterHelp(); return; }
     if (input.equalsIgnoreCase("scan")) { scanI2CBus(); return; } 
     if (input.equalsIgnoreCase("status")) { print_status(); return; }
-    if (input.equalsIgnoreCase("run")) { 
-      Serial.println(F("\n[MASTER] Starte Hairpin-Zuführung-Sequenz..."));
-      startMiniProgram(); 
-      return; 
+    if (input.equalsIgnoreCase("run")) {
+      if (prog_is_running()) {
+        Serial.println(F("[WARNUNG] Programm läuft bereits!"));
+      } else if (program_count == 0) {
+        Serial.println(F("[WARNUNG] Kein Programm definiert!"));
+      } else {
+        prog_start();
+      }
+      return;
     }
     
-    if (input.equalsIgnoreCase("stop")) { 
-      Serial.println(F("\n[MASTER] ABBRUCH: Sequenz gestoppt!"));
-      currentSeqState = SEQ_IDLE;
-      sendStepperCommand({AXIS_X, MOVE_TYPE_STOP, 0, 0});
-      return; 
+    if (input.equalsIgnoreCase("stop")) {
+      prog_stop_exec();
+      return;
     }
 
     if (input.equalsIgnoreCase("enAll") || input.equalsIgnoreCase("disAll")) {
@@ -448,6 +623,10 @@ void printMasterHelp() {
   Serial.println(F("  SRV_0,1500             -> Setzt Servo 0 (Pin D7) in Mittelstellung"));
   Serial.println(F("  SRV_5,2200             -> Setzt Servo 5 (Pin D12) auf Pulsweite 2200us"));
   Serial.println(F(" -----------------------------------------------------------------"));
+  Serial.println(F(" PROGRAMM-STEUERUNG:"));
+  Serial.println(F("  run     -> Startet das definierte Programm"));
+  Serial.println(F("  stop    -> Bricht das laufende Programm ab"));
+  Serial.println(F(" -----------------------------------------------------------------"));
   Serial.println(F(" Telemetrie- & Direktbefehle:"));
   Serial.println(F("  status  -> Fordert Live-Meldungen (Positionen/PWM) von beiden Slaves an"));
   Serial.println(F("  enAll   -> Alle Motortreiber EIN"));
@@ -458,168 +637,72 @@ void printMasterHelp() {
   Serial.println(F("==================================================================\n"));
 }
 
-// ============================================================================
-// ALTE HAIRPIN-SEQUENZ (via 'run' Befehl)
-// ============================================================================
-
-void startHairpinSequence() {
-  if (currentSeqState == SEQ_IDLE) {
-    currentSeqState = SEQ_VIB_START;
-  } else {
-    Serial.println(F("[WARNUNG] Sequenz laeuft bereits!"));
-  }
-}
-
-void updateSequence() {
-  if (currentSeqState == SEQ_IDLE) return;
-
-  unsigned long now = millis();
-
-  switch (currentSeqState) {
-    case SEQ_VIB_START:
-      Serial.println(F("  -> Schritt 1: Vibration starten"));
-      axis_vibrate(AXIS_Z, 1, 40);
-      currentSeqState = SEQ_SERVO0_1;
-      seqStepStartTime = now;
-      break;
-
-    case SEQ_SERVO0_1:
-      if (now - seqStepStartTime >= 1000) {
-        Serial.println(F("  -> Schritt 2: Servo 0 auf MAX"));
-        servo_set(0, 490);
-        currentSeqState = SEQ_SERVO1_1;
-        seqStepStartTime = now;
-      }
-      break;
-
-    case SEQ_SERVO1_1:
-      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
-        Serial.println(F("  -> Schritt 3: Servo 1 auf MIN"));
-        servo_set(1, 150);
-        currentSeqState = SEQ_SERVO1_2;
-        seqStepStartTime = now;
-      }
-      break;
-
-    case SEQ_SERVO1_2:
-      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
-        Serial.println(F("  -> Schritt 4: Servo 1 auf MAX"));
-        servo_set(1, 490);
-        currentSeqState = SEQ_SERVO0_2;
-        seqStepStartTime = now;
-      }
-      break;
-
-    case SEQ_SERVO0_2:
-      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
-        Serial.println(F("  -> Schritt 5: Servo 0 auf MIN"));
-        servo_set(0, 150);
-        currentSeqState = SEQ_VIB_STOP;
-        seqStepStartTime = now;
-      }
-      break;
-
-    case SEQ_VIB_STOP:
-      if (now - seqStepStartTime >= SERVO_WAIT_TIME) {
-        Serial.println(F("  -> Schritt 6: Vibration stoppen"));
-        axis_stop(AXIS_Z);
-        Serial.println(F("[SEQUENZ BEENDET]"));
-        currentSeqState = SEQ_IDLE;
-      }
-      break;
-  }
-}
-
 /*
-=== HIGH-LEVEL API REFERENZ ===
+=== PROGRAMM-ENGINE REFERENZ ===
 
-Du schreibst dein Mini-Programm in die setup()-Funktion.
-Hier alle verfügbaren Befehle:
+Du definierst dein Programm in setup() mit Builder-Funktionen.
+Das Programm läuft dann non-blocking in loop() — die serielle 
+Schnittstelle und stop bleiben jederzeit reaktionsfähig.
 
---- Stepper (Achsen: AXIS_X, AXIS_Y, AXIS_Z) ---
+--- Schritt-für-Schritt-Programm ---
 
-  axis_abs(axis, position, speed)
-    Fährt Achse auf absolute Position (Steps).
-    axis_abs(AXIS_X, 5000, 800);
+  prog_clear()                    // Zurücksetzen (optional)
+  prog_abs(axis, pos, speed)      // Absolute Position anfahren
+  prog_rel(axis, steps, speed)    // Relativ verfahren
+  prog_timed(axis, ms, speed)     // Zeitgesteuert fahren
+  prog_vibrate(axis, amp, hz)     // Vibrieren
+  prog_stop(axis)                 // Achse stoppen
+  prog_home(axis)                 // Homing
+  prog_enable()                   // Treiber an
+  prog_disable()                  // Treiber aus
+  prog_servo(num, value)          // Servo positionieren (0-1000)
+  prog_wait_ms(ms)                // Warten (non-blocking!)
+  prog_wait_axis(axis)            // Warten bis Achse fertig
+  prog_wait_all()                 // Warten bis alle fertig
+  prog_status()                   // Status-Report ausgeben
+  prog_end()                      // Programm-Ende (immer notwendig!)
 
-  axis_rel(axis, steps, speed)
-    Fährt Achse relativ vom aktuellen Punkt.
-    axis_rel(AXIS_X, -1000, 600);  // 1000 Steps zurück
+--- Steuerung ---
 
-  axis_timed(axis, duration_ms, speed)
-    Fährt für eine bestimmte Zeit (ms).
-    axis_timed(AXIS_X, 3000, -500);  // 3s rückwärts mit 500 Steps/s
+  prog_start()                    // Startet Ausführung ab Schritt 0
+  prog_stop_exec()                // Bricht laufendes Programm ab
+  prog_is_running()               // true wenn Programm läuft
 
-  axis_vibrate(axis, amplitude, freq_hz)
-    Vibriert mit Amplitude (Steps) und Frequenz (Hz).
-    axis_vibrate(AXIS_Z, 1, 40);
+--- Serial-Befehle ---
 
-  axis_stop(axis)
-    Stoppt eine Achse sofort.
-    axis_stop(AXIS_X);
+  run   →  prog_start()
+  stop  →  prog_stop_exec()
 
-  axis_home(axis)
-    Startet Homing-Fahrt (Endschalter-Suche).
-    axis_home(AXIS_X);
+--- Beispiel: Komplette Hairpin-Sequenz ---
 
-  axis_enable()
-    Motortreiber einschalten (Haltestrom).
-
-  axis_disable()
-    Motortreiber ausschalten (stromlos).
-
---- Servos (Nummern: 0-5) ---
-
-  servo_set(num, value)
-    Setzt Servo auf Wert 0-1000.
-    (0=min 500us, 1000=max 2500us — es sei denn, INVERT ist gesetzt)
-    servo_set(0, 490);
-
---- Warten & Status ---
-
-  wait_ms(ms)
-    Wartet für ms Millisekunden.
-    wait_ms(500);
-
-  wait_axis_busy(axis, timeout_ms = 30000)
-    Wartet, bis die Achse ihre Fahrt beendet hat.
-    wait_axis_busy(AXIS_X);        // unbegrenzt warten
-    wait_axis_busy(AXIS_X, 5000);  // max 5s warten
-
-  wait_all_busy(timeout_ms = 30000)
-    Wartet, bis ALLE Achsen fertig sind.
-    wait_all_busy();
-
-  is_axis_busy(axis)
-    Prüft, ob eine Achse noch fährt. true/false.
-
-  print_status()
-    Zeigt alle Positionen, Servo-Werte und Sensordaten an.
-
---- Beispiel: Komplette Sequenz ---*/
-
-  void startMiniProgram() {
-    Serial.println("Starte meine Sequenz...");
-
-    // Homing
-    axis_home(AXIS_Z);
-    wait_axis_busy(AXIS_Z);
-
-    // Position anfahren
-    axis_abs(AXIS_Z, 100, 100);
-    wait_axis_busy(AXIS_Z);
-
-    // Servo greifen lassen
-    servo_set(0, 490);
-    wait_ms(1000);
-
-    // Vibrieren + Servo-Arbeit
-    axis_vibrate(AXIS_Z, 2, 30);
-    servo_set(1, 200);
-    wait_ms(3000);
-    axis_stop(AXIS_Z);
-
-    Serial.println("Sequenz beendet!");
+  void setup() {
+    // ... I2C init ...
+    
+    prog_home(AXIS_X);
+    prog_wait_axis(AXIS_X);
+    
+    prog_abs(AXIS_X, 4000, 600);
+    prog_wait_axis(AXIS_X);
+    
+    prog_vibrate(AXIS_Z, 1, 40);
+    prog_servo(0, 490);
+    prog_wait_ms(2000);
+    
+    prog_servo(1, 150);
+    prog_wait_ms(1000);
+    prog_servo(1, 490);
+    prog_wait_ms(1000);
+    prog_servo(0, 150);
+    prog_wait_ms(500);
+    
+    prog_stop(AXIS_Z);
+    prog_abs(AXIS_X, 0, 800);
+    prog_wait_axis(AXIS_X);
+    
+    prog_end();
+    prog_start();   // ← Start bei Boot
   }
 
-
+Der `run`-Befehl startet das gleiche Programm jederzeit neu.
+Mit `stop` brichst du jederzeit ab — loop() bleibt live.
+*/
