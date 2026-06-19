@@ -315,18 +315,20 @@ void setup() {
   // ==================================================================
   // 👇 HIER DEIN PROGRAMM DEFINIEREN
   //
-  // PROGRAM(
-  //   HOME(AXIS_X),
-  //   WAIT_AXIS(AXIS_X),
-  //   ABS(AXIS_X, 5000, 800),
-  //   WAIT_AXIS(AXIS_X),
-  //   SERVO(0, 490),
-  //   WAIT_MS(2000),
-  //   VIBRATE(AXIS_Z, 1, 40),
-  //   WAIT_MS(1000),
-  //   STOP(AXIS_Z),
-  //   END
-  // );
+ PROGRAM(
+    HOME(AXIS_Z),
+    WAIT_AXIS(AXIS_Z),
+    SERVO(0, 500),
+    ABS(AXIS_Z, 200, 300),
+    WAIT_AXIS(AXIS_Z),
+    SERVO(1, 500),
+    WAIT_MS(1000),
+    VIBRATE(AXIS_Z, 1, 40),
+    SERVO(0, 0),
+    WAIT_MS(2000),
+    STOP(AXIS_Z),
+    END
+  );
   //
   // Start: `run` Befehl per Serial
   // Auto-Start: prog_start(); hinter PROGRAM(...)
