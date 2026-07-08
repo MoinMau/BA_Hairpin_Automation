@@ -25,6 +25,7 @@ enum SequenceState {
   P1_DONE,
   // ── PROGRAMM 2 (Kopie von P1, zur freien Bearbeitung) ──
   P2_HOME_Z,         P2_HOME_Z_WAIT,
+  P2_HOME_Y,         P2_HOME_Y_WAIT,
   P2_SERVO_INIT,     P2_SERVO_INIT_WAIT,
   P2_Z_MOVE,         P2_Z_MOVE_WAIT,
   P2_RUN,            P2_WAIT_SLIDE,
@@ -687,7 +688,7 @@ void updateSequence() {
     // ============================================================
 
     case P2_HOME_Z:
-      Serial.println(F("P2 [1/6] Z homen..."));
+      Serial.println(F("P2 [1a/7] Z homen..."));
       axis_home(AXIS_Z);
       currentSeqState = P2_HOME_Z_WAIT;
       break;
@@ -695,12 +696,25 @@ void updateSequence() {
     case P2_HOME_Z_WAIT:
       if (!is_axis_busy(AXIS_Z)) {
         Serial.println(F("  -> Z gehomt."));
+        currentSeqState = P2_HOME_Y;
+      }
+      break;
+
+    case P2_HOME_Y:
+      Serial.println(F("P2 [1b/7] Y homen..."));
+      axis_home(AXIS_Y);
+      currentSeqState = P2_HOME_Y_WAIT;
+      break;
+
+    case P2_HOME_Y_WAIT:
+      if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("  -> Y gehomt."));
         currentSeqState = P2_SERVO_INIT;
       }
       break;
 
     case P2_SERVO_INIT:
-      Serial.println(F("P2 [2/6] Servos initialisieren..."));
+      Serial.println(F("P2 [2/7] Servos initialisieren..."));
       servo_set(0, 1000);
       servo_set(1, 100);
       servo_set(2, 0);
@@ -718,7 +732,7 @@ void updateSequence() {
       break;
 
     case P2_Z_MOVE:
-      Serial.println(F("P2 [3/6] Z fahren..."));
+      Serial.println(F("P2 [3/7] Z fahren..."));
       axis_rel(AXIS_Z, 100, 100);
       currentSeqState = P2_Z_MOVE_WAIT;
       break;
@@ -731,7 +745,7 @@ void updateSequence() {
       break;
 
     case P2_RUN:
-      Serial.println(F("P2 [4/6] Vibration..."));
+      Serial.println(F("P2 [4/7] Vibration..."));
       axis_vibrate(AXIS_Z, 1, 50);
       currentSeqState = P2_WAIT_SLIDE;
       seqStepStartTime = now;
@@ -778,7 +792,7 @@ void updateSequence() {
       break;
 
     case P2_SERVO_CHANGE:
-      Serial.println(F("P2 [5/6] Servos umschalten..."));
+      Serial.println(F("P2 [5/7] Servos umschalten..."));
       servo_set(2, 300);
       servo_set(3, 500);
       servo_set(4, 0);
@@ -794,14 +808,14 @@ void updateSequence() {
       break;
 
     case P2_Y_FORWARD:
-      Serial.println(F("P2 [6/6] Y vor..."));
+      Serial.println(F("P2 [6/7] Y vor..."));
       axis_rel(AXIS_Y, 4000, 2000);
       currentSeqState = P2_Y_FORWARD_WAIT;
       break;
 
     case P2_Y_FORWARD_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
-        Serial.println(F("  -> Y vor. Y zurueck..."));
+        Serial.println(F("P2 [7/7] Y zurueck..."));
         axis_rel(AXIS_Y, -4000, 2000);
         currentSeqState = P2_Y_BACK_WAIT;
       }

@@ -72,15 +72,25 @@ static const float  MAX_SPEED_LIMITS[3] = {X_MAX_SPEED, Y_MAX_SPEED, Z_MAX_SPEED
 // 5. HOMING-KONFIGURATION (pro Achse einstellbar)
 // ============================================================
 
-// Geschwindigkeit während der Endschalter-Suche (Steps/s)
-// NEGATIV = Rückwärts zum Endschalter fahren
-#define HOMING_SEARCH_SPEED  -100.0
+// --- X-Achse ---
+#define HOMING_X_SEARCH_SPEED    -100.0   // NEGATIV = rückwärts zum Endschalter
+#define HOMING_X_REBOUND_SPEED    50.0    // Geschwindigkeit beim Freifahren (Steps/s)
+#define HOMING_X_REBOUND_STEPS    20      // Strecke vom Endschalter weg (Steps)
 
-// Geschwindigkeit beim Zurückfahren vom Endschalter (Steps/s)
-#define HOMING_REBOUND_SPEED  50.0
+// --- Y-Achse ---
+#define HOMING_Y_SEARCH_SPEED     100.0   // POSITIV = vorwärts zum Endschalter
+#define HOMING_Y_REBOUND_SPEED   -50.0
+#define HOMING_Y_REBOUND_STEPS    20
 
-// Strecke, die nach Endschalter-Kontakt zurückgefahren wird (Steps)
-#define HOMING_REBOUND_STEPS  20
+// --- Z-Achse ---
+#define HOMING_Z_SEARCH_SPEED    -100.0
+#define HOMING_Z_REBOUND_SPEED    50.0
+#define HOMING_Z_REBOUND_STEPS    20
+
+// Index-Arrays (0=X, 1=Y, 2=Z)
+static const float   HOMING_SEARCH_SPEED[3]  = {HOMING_X_SEARCH_SPEED,  HOMING_Y_SEARCH_SPEED,  HOMING_Z_SEARCH_SPEED};
+static const float   HOMING_REBOUND_SPEED[3] = {HOMING_X_REBOUND_SPEED, HOMING_Y_REBOUND_SPEED, HOMING_Z_REBOUND_SPEED};
+static const int32_t HOMING_REBOUND_STEPS[3] = {HOMING_X_REBOUND_STEPS, HOMING_Y_REBOUND_STEPS, HOMING_Z_REBOUND_STEPS};
 
 // ============================================================
 // 6. DEFAULT-BESCHLEUNIGUNG

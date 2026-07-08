@@ -92,8 +92,8 @@ void loop() {
     if (axis_homing_state[i] == HOMING_SEARCHING) {
       if (digitalRead(ENDSTOP_PINS[i]) == LOW) {
         steppers[i]->stop();
-        steppers[i]->setMaxSpeed(HOMING_REBOUND_SPEED);
-        steppers[i]->move(HOMING_REBOUND_STEPS); // Freifahren vom Schalter (Rebound)
+        steppers[i]->setMaxSpeed(abs(HOMING_REBOUND_SPEED[i]));
+        steppers[i]->move(HOMING_REBOUND_STEPS[i] * (HOMING_REBOUND_SPEED[i] > 0 ? 1 : -1));
         axis_homing_state[i] = HOMING_REBOUND;
       } else {
         steppers[i]->runSpeed();
@@ -165,7 +165,7 @@ void triggerHoming(uint8_t axis) {
   axis_homing_state[axis] = HOMING_SEARCHING;
   timed_move_active[axis] = false;
   vibrate_active[axis] = false;
-  steppers[axis]->setSpeed(HOMING_SEARCH_SPEED); // Konfigurierbare Suchgeschwindigkeit
+  steppers[axis]->setSpeed(HOMING_SEARCH_SPEED[axis]); // Konfigurierbare Suchgeschwindigkeit pro Achse
 }
 
 void executeStepperCommand(StepperCommand cmd) {
