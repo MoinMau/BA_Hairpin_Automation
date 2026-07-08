@@ -48,13 +48,13 @@ static const bool INVERT_DIR[3] = {INVERT_X_DIR, INVERT_Y_DIR, INVERT_Z_DIR};
 
 // --- Achse X ---
 const long  X_MIN_POS    = 0;
-const long  X_MAX_POS    = 8000;
+const long  X_MAX_POS    = 4000;
 const float X_MAX_SPEED  = 2000.0;
 
 // --- Achse Y ---
 const long  Y_MIN_POS    = 0;
-const long  Y_MAX_POS    = 5000;
-const float Y_MAX_SPEED  = 1500.0;
+const long  Y_MAX_POS    = 20000;
+const float Y_MAX_SPEED  = 2000.0;
 
 // --- Achse Z ---
 const long  Z_MIN_POS    = 0;

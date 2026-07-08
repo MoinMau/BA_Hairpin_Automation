@@ -27,7 +27,7 @@ enum SequenceState {
   P2_HOME_Z,         P2_HOME_Z_WAIT,
   P2_SERVO_INIT,     P2_SERVO_INIT_WAIT,
   P2_Z_MOVE,         P2_Z_MOVE_WAIT,
-  P2_RUN,
+  P2_RUN,            P2_WAIT_SLIDE,
   P2_FEED1,          P2_FEED1_WAIT,
   P2_FEED2,          P2_FEED2_WAIT,
   P2_STOP_VIB,
@@ -733,8 +733,16 @@ void updateSequence() {
     case P2_RUN:
       Serial.println(F("P2 [4/6] Vibration..."));
       axis_vibrate(AXIS_Z, 1, 50);
-      currentSeqState = P2_FEED1;
+      currentSeqState = P2_WAIT_SLIDE;
       seqStepStartTime = now;
+      break;
+
+    case P2_WAIT_SLIDE:
+      if (now - seqStepStartTime >= 5000) {
+        Serial.println(F("  -> Hairpin rutschen"));
+        currentSeqState = P2_FEED1;
+        seqStepStartTime = now;
+      }
       break;
 
     case P2_FEED1:
@@ -757,7 +765,7 @@ void updateSequence() {
       break;
 
     case P2_FEED2_WAIT:
-      if (now - seqStepStartTime >= 18000) {  // ⚠ Anpassen!
+      if (now - seqStepStartTime >= 15000) {
         Serial.println(F("  -> Vereinzelung fertig."));
         currentSeqState = P2_STOP_VIB;
       }
@@ -771,8 +779,8 @@ void updateSequence() {
 
     case P2_SERVO_CHANGE:
       Serial.println(F("P2 [5/6] Servos umschalten..."));
-      servo_set(2, 800);
-      servo_set(3, 0);
+      servo_set(2, 300);
+      servo_set(3, 500);
       servo_set(4, 0);
       currentSeqState = P2_SERVO_CHANGE_WAIT;
       seqStepStartTime = now;
@@ -787,14 +795,14 @@ void updateSequence() {
 
     case P2_Y_FORWARD:
       Serial.println(F("P2 [6/6] Y vor..."));
-      axis_rel(AXIS_Y, 2000, 800);
+      axis_rel(AXIS_Y, 4000, 2000);
       currentSeqState = P2_Y_FORWARD_WAIT;
       break;
 
     case P2_Y_FORWARD_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
         Serial.println(F("  -> Y vor. Y zurueck..."));
-        axis_rel(AXIS_Y, -2000, 800);
+        axis_rel(AXIS_Y, -4000, 2000);
         currentSeqState = P2_Y_BACK_WAIT;
       }
       break;

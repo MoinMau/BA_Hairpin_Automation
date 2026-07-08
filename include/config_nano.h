@@ -13,8 +13,8 @@ static const uint8_t SERVO_PINS[6] = {7, 8, 9, 10, 11, 12};
 #define DEFAULT_SERVO_VAL 150 
 
 // --- Individuelle Servo Limits (0 - 1000 Bereich) ---
-const uint16_t S0_MIN = 100; const uint16_t S0_MAX = 660;
-const uint16_t S1_MIN = 100; const uint16_t S1_MAX = 580;
+const uint16_t S0_MIN = 100; const uint16_t S0_MAX = 560;
+const uint16_t S1_MIN = 100; const uint16_t S1_MAX = 540;
 const uint16_t S2_MIN = 0; const uint16_t S2_MAX = 800;
 const uint16_t S3_MIN = 0; const uint16_t S3_MAX = 800;
 const uint16_t S4_MIN = 0; const uint16_t S4_MAX = 500;
