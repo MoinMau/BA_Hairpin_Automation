@@ -1,0 +1,194 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{Ajanovic.2020}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=23633ffbbdf745a9da43527256bf1238}{%
+           family={Ajanovic},
+           familyi={A\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d5d06cd7992404aa013cc06e32b98711}{%
+           family={Glatt},
+           familyi={G\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
+      \strng{fullhash}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{fullhashraw}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{bibnamehash}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{authorbibnamehash}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{authornamehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
+      \strng{authorfullhash}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{authorfullhashraw}{47d03803707fe1bd928b42162c03e5ae}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{e {\&} i Elektrotechnik und Informationstechnik}
+      \field{shorttitle}{Aspekte der Elektromobilität}
+      \field{title}{Wirtschaftliche und ökologische Aspekte der Elektromobilität: Economic and ecological aspects of electric vehicles}
+      \field{urlday}{5}
+      \field{urlmonth}{4}
+      \field{urlyear}{2021}
+      \field{volume}{137}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{136\bibrangedash 146}
+      \range{pages}{11}
+      \verb{file}
+      \verb 2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet:Attachments/2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
+      \endverb
+    \endentry
+    \entry{Shepherd.1965}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ff116ca4d290dfe9d5cc91eab078e376}{%
+           family={Shepherd},
+           familyi={S\bibinitperiod},
+           given={C.\bibnamedelimi M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{fullhash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{fullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{bibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{authorbibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{authornamehash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{authorfullhash}{ff116ca4d290dfe9d5cc91eab078e376}
+      \strng{authorfullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0013-4651}
+      \field{journaltitle}{Journal of The Electrochemical Society}
+      \field{number}{7}
+      \field{shorttitle}{Primary Secondary Cells}
+      \field{title}{Design of Primary and Secondary Cells}
+      \field{volume}{112}
+      \field{year}{1965}
+      \field{pages}{657}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1149/1.2423659
+      \endverb
+      \verb{file}
+      \verb Shepherd1965{\_}DesignofPrimaryandSecondaryCells:Attachments/Shepherd1965{\_}DesignofPrimaryandSecondaryCells.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{Singh.2015}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=c71a65cb8774a2b07d1c51e6821349dd}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Madhav},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8f2696894bee53098b0299abd1e77167}{%
+           family={Kaiser},
+           familyi={K\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=89e24cdcd9903037b122b51443c37f2a}{%
+           family={Hahn},
+           familyi={H\bibinitperiod},
+           given={Horst},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{541f1c6eff033f5dec75869629f80489}
+      \strng{fullhash}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \strng{fullhashraw}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \strng{bibnamehash}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \strng{authorbibnamehash}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \strng{authornamehash}{541f1c6eff033f5dec75869629f80489}
+      \strng{authorfullhash}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \strng{authorfullhashraw}{792a7b2d5cb35b5069afa6ac7ed219a5}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0013-4651}
+      \field{journaltitle}{Journal of The Electrochemical Society}
+      \field{number}{7}
+      \field{shorttitle}{Thick Electrodes}
+      \field{title}{Thick Electrodes for High Energy Lithium Ion Batteries}
+      \field{volume}{162}
+      \field{year}{2015}
+      \field{pages}{A1196\bibrangedash A1201}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1149/2.0401507jes
+      \endverb
+      \verb{file}
+      \verb Singh2015{\_}ThickElectrodesforHighEnergyLithiumIonBatteries:Attachments/Singh2015{\_}ThickElectrodesforHighEnergyLithiumIonBatteries.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{Sollmann.2018}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6fe96fad09cc645a32cc7b5b1c77f942}{%
+           family={Sollmann},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{fullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{fullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{bibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{authorbibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{authornamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{authorfullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \strng{authorfullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{shorttitle}{Nickel-Cadmium-Batterien}
+      \field{title}{Nickel-Cadmium-Batterien}
+      \field{urlday}{6}
+      \field{urlmonth}{5}
+      \field{urlyear}{2021}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
+      \endverb
+      \verb{url}
+      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

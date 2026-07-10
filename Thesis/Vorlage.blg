@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'Vorlage.blg'
+[60] biber-darwin:342> INFO - === Fri Jul 10, 2026, 15:15:02
+[73] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
+[137] Biber.pm:1002> INFO - Found 4 citekeys in bib section 0
+[149] Biber.pm:4487> INFO - Processing section 0
+[156] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
+[158] bibtex.pm:1713> INFO - LaTeX decoding ...
+[162] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
+[212] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[212] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[212] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
+[212] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
+[220] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
+[222] bbl.pm:779> INFO - Output to Vorlage.bbl

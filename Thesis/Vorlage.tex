@@ -1,0 +1,261 @@
+		%%%%%%%%%%%%%%ATTENTION%%%%%%%%%%%%%%%
+		%%%%%!!!Use Biber and pdflatex!!!%%%%%
+		%%%%%%%%%%%%%%ATTENTION%%%%%%%%%%%%%%%
+% This Template was designed using MikTeX and TeXstudio.
+
+		%%%%%%%%%%%%%%%ACHTUNG%%%%%%%%%%%%%%%%
+		%%!!!Biber und pdflatex verwenden!!!%%
+		%%%%%%%%%%%%%%%ACHTUNG%%%%%%%%%%%%%%%%
+% Diese Vorlage wurde mit MikTeX und TeXstudio erstellt.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Präambel %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The preamble is the part of your document where all required packages and macros can be defined. This needs to be done before the \begin{document} command.
+%MAKE YOURSELF FAMILIAR WITH THE PACKAGES WHICH ARE SUGGESTED HERE! They are just a hint to get startet. You may not need all of them. Some could be commented out, some can't and some could be usefull and should be commented in.
+
+% Documentclass:
+% Standard LaTeX classes are: article, book, report, slides, and letter. These cover the basis, but are not best. More advanced users might want to try out the KOMA classes or the memoir class. Optional arguments: 10pt. The font size of the main content is set to 10pt with the option between [].
+	
+\documentclass
+	[
+		 a4paper,
+		 11pt,
+		 headsepline, %Linie in Kopfzeile
+		 bibliography=numbered, %Literaturverzeichnis auch in Inhaltsverzeichnis
+		 toc=listofnumbered, %Literaturverzeichnis auch in Inhaltsverzeichnis
+%		 toc=sectionentrydotfill, %Punkte im Inhaltsverzeichnis auch für Sections. Geschmacksache.
+%		 captions=nooneline, %Nur verwenden, wenn man unbedingt die unzulänglichkeit von Word mit linksbündigen Captions nachbauen will.
+		 	]{scrartcl}
+
+	%Schriftart: Wenn unbdeingt gewünscht, kann hier eine wenig ästisische serifenlose Schrift gewählt werden. Dann sieht es wirklich aus wie Word...
+%	\usepackage{helvet}
+%	\renewcommand{\familydefault}{\sfdefault}
+	%Serifenlose Matheschrift
+%	\usepackage{sfmath}
+
+	%Zeilenabstand definiern
+%	\usepackage{setspace}
+
+
+	\usepackage{scrlayer-scrpage}
+		%Überschriften in Kopfzeile inkl. Seitenzahlen
+		\pagestyle{scrheadings} 
+		\clearpairofpagestyles
+		%\automark[section]{chapter}
+		\automark[subsection]{section}
+		\ohead{\pagemark}
+		\ihead{\headmark}
+		\renewcommand{\headfont}{\normalfont \sffamily}
+		\newcommand{\sectionnumbering}[1] {%
+			\setcounter{section}{0}%
+			\renewcommand{\thesection}{\csname #1\endcsname{section}}}
+			
+		\RedeclareSectionCommand[tocnumwidth=21pt]{section} % Da die Section-Überschriften der Verzeichnisse und des Anhangs in römischen Zahlen nummeriert werden sollen, muss die Einrückung für die Sections vergrößert werden.
+
+	%Inhaltsverzeichnis mit im Inhaltsverzeichnis
+%	\setuptoc{toc}{numbered}
+
+	%Paket für Unterstützung verschiedener Sprachen
+	\usepackage[ngerman]{babel}
+	
+	%Pakete für Untersützung verschiedener Encodings 
+	\usepackage[utf8]{inputenc}
+	\usepackage[T1]{fontenc}
+	
+	%Paket für verschiedene nützliche Schriftarten
+	\usepackage{lmodern}
+
+	% Textsatzpakete
+		%Paket für besseren Microtextsatz
+		\usepackage{microtype}
+		%Paket für Querformat-Seite
+%		\usepackage{pdflscape}
+		%Paket für Drehung von Wörtern
+%		\usepackage{rotating}
+		%Ausrichtung und Umbruch der Abbildungsuntertitel
+		\usepackage{ragged2e}
+		\setcaptionalignment[figure]{L}
+	
+	%longtable paket
+%	\usepackage{longtable} %Tabellen über mehrere Seiten
+
+	
+	% Geometry:
+	% The papersize of the document is defined with the geometry package. Here, the size is set to A4 with a4paper. Other possibilities are a5paper, b5paper, letterpaper, legalpaper and executivepaper.
+	\usepackage[margin=2.5cm]{geometry}
+%	\usepackage[hang]{footmisc} %Fußnoten nicht einrücken
+
+	
+	% AMS math packages:
+	% Required for proper math display.
+	\usepackage{amsmath,amsfonts,amsthm}
+	
+	
+	% Graphicx:
+	% If you want to include graphics in your document, the graphicx package is required.
+	\usepackage{graphicx}
+%	\usepackage[abs]{overpic}
+	
+	% Booktabs:
+	% The booktabs package is needed for better looking tables. 
+	\usepackage{booktabs}
+	
+	% Einheiten:
+	% The SIunitx package enables the \SI{}{} command. It provides an easy way of working with (SI) units.
+	%\usepackage[decimalsymbol=comma]{siunitx}
+	%Eine Einfachere Version ist das untits packet.
+	\usepackage{units}
+	
+	% URL:
+	% Clickable URL's can be made with this package: \url{}.
+	\usepackage{xurl}
+	
+	
+	%Float Package zur Positionierung von Abbildungen
+	\usepackage{float}
+	
+	%Subfigures
+%	\usepackage{subfig}
+	
+	%Referenzen Zählweise
+	\usepackage{chngcntr}
+	\counterwithin{figure}{section}
+	\counterwithin{table}{section}
+	%\counterwithin{equation}{section} Formel durchgehend nummeriert!
+
+
+	% Caption:
+	% For better looking captions. See caption documentation on how to change the format of the captions.	
+	%Bildbeschriftung in Fett --> Einkommentieren, wenn gewünscht
+%	\usepackage{caption}
+%	\captionsetup[figure]{labelfont={bf,small}, font={bf,small}}
+%	\captionsetup[table]{labelfont={bf,small}, font={bf,small}}
+	
+	%Array für Tabellen
+	\usepackage{array}
+	
+	%Transparent und Farben
+	\usepackage{transparent}	
+	\usepackage{xcolor}
+	
+	%TabularX
+	\usepackage{tabularx}
+	\usepackage{bigstrut}
+	
+	
+	%Trennung bestimmter Wörter
+	
+	% Hyperref:
+	% This package makes all references within your document clickable. By default, these references will become boxed and colored. This is turned back to normal with the \hypersetup command below.
+	%Dieses Paket sollte möglichst zuletzt geladen werden!
+	\usepackage{hyperref}
+%	\hypersetup{colorlinks=false,pdfborder=0 0 0} % Diese Zeile einkommentieren, um Link-Markierungen auszublenden.
+	
+	% Cleveref:
+	% This package automatically detects the type of reference (equation, table, etc.) when the \cref{} command is used. It then adds a word in front of the reference, i.e. Fig. in front of a reference to a figure. With the \crefname{}{}{} command, these words may be changed.
+	%Cleverref nach Hyperref Laden!
+	\usepackage{cleveref}
+	\crefname{equation}{Gleichung}{Gleichung}
+	\crefname{figure}{Abbildung}{Abbildungen}	
+	\crefname{table}{Tabelle}{Tabellen}
+	\crefname{section}{Kapitel}{Kapitel}
+	\newcommand{\crefrangeconjunction}{ bis }
+	\newcommand{\creflastconjunction}{ und }
+	\newcommand{\crefpairconjunction}{ und }
+
+	%%% Pakete und Befehle für Biblographie
+	\input{refs/_PEMcite.tex}
+	%% Rückdefinition der originalen Befehle, falls z.B. für die Fehlersuche PEMcite deaktiviert werden muss.
+	%\newcommand{\PEMcite}{\cite}
+	%\newcommand{\PEMfootcite}{\footcite}
+	
+	%Relativer Pfad der Bib.-Datei
+	\addbibresource{refs/references.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Dokument %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin des Dokuments
+\begin{document}
+	
+	
+\setcounter{page}{-1} %Wenn man unbedingt die Verzeichnisse römisch nummerieren möchte, und bei der Einleitung mit Seite 1 beginnt, sollte das Deckblatt und die leere Seite die Seitennummern -1 und 0 bekommen, um zu vermeiden, dass es zwei mal die Seite 1 und 2 gibt.
+
+\sffamily
+	\input{docs/Titelseite}
+\normalfont
+
+%Römische Numerrierung für das Inhaltsverzeichnis und folgende
+\renewcommand\thesection{\Roman{section}}
+
+%Inhaltsverzeichnis
+\pagenumbering{roman} %römische Seitenzahlen
+\tableofcontents
+
+\newpage
+
+%Formelzeichen und Abkürzungen wird über eine Tabelle realisiert
+\input{glos/Formelzeichen}
+\newpage
+
+%Abbildungsverzeichnis
+\listoffigures
+\newpage
+
+%Tabellenverzeichnis
+\listoftables
+\newpage
+
+%Arabische Numerrierung für die Kapitel
+\renewcommand{\theHsection}{arabicsection.\thesection}
+\renewcommand\thesection{\arabic{section}}
+\setcounter{section}{0}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{docs/Einleitung}
+ %arabische Seitenzahlen
+\newpage
+\input{docs/Grundlagen}
+\newpage
+\input{docs/Methodik}
+\newpage
+\input{docs/Auswertung}
+\newpage
+\input{docs/Zusammenfassung}
+\newpage
+
+%TODO: Bestimmte Editoren, wie TeXstudio highlighten TODO-Kommentare was während der Erstellung eines Dokuments sehr nützlich sein kann.
+
+
+\appendix
+%% Römische Numerierung
+% Mit diesem Befehlssatz kann die Nummerierung des Anhangs auf Röhmische Zahlen umgestellt werden. Empfohen wird dies nicht, weil z. B. "VIII" deutlich mehr platz einnimt, als "C" und damit die Einrückung im Inhaltsverzeichnis sehr groß werden muss.
+%Setz die Kapitelzahl auf 5 (Inhaltsverzeichnis ist I, Formelzeichen II usw.
+% Achtung: Der Zähler begind bei 0. D.h. Inhaltsverzeichnis = I entspricht Zähler = 0)
+%\renewcommand{\theHsection}{\thesection}
+%\sectionnumbering{Roman} 
+
+
+
+\begingroup
+\raggedright
+\sloppy
+\printbibliography
+\endgroup
+
+\newpage
+
+%Anhang
+\input{docs/Anhang}
+\newpage
+
+%Erklärung
+\sffamily
+	\input{docs/Erklaerung}
+\normalfont
+
+\end{document}
+

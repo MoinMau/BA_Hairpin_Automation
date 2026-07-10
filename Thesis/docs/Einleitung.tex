@@ -1,0 +1,66 @@
+\section{Einleitung}\label{sec:Einleitung}
+
+Wenn Einheiten korrekt im Textsatz korrekt abgebildet werden sollen, sollte ein entsprechender Befehl verwendet werden.
+Hier ist ein Beispiel mit einer Frucht: \unit[Banane]{Lecker}.
+Ein ernsthafteres Beispiel wäre \unit[10]{cm} lang.
+Bei diesen Beispielen ist der Abstand zwischen Zahl und Einheit korrekt. 
+
+\cref{fig:Blume} zeigt ein Beispiel für eine Abbildung.
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.25\linewidth]{figs/Blume.jpg}
+	\caption{Dies ist eine schöne Blume}
+	\label{fig:Blume} 
+\end{figure}
+Um zu zeigen wie eine mehrzeilige Bildunterschrift aussieht, verweisen wir erneut auf eine schöne Blume, die dieses mal allerdings sehr klein geraten und in \cref{fig:Blumeklein} zu sehen ist.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[height=1cm]{figs/Blume.jpg}
+	\caption[Kleine Blume. Damit der ganze Bums nicht im Abbildungsverzeichnis steht, kann sich hier einmal kurz halten.]
+			{Dies ist eine schöne Blume mit einer besonders langen Bildunterschrift. Der Zweck dieser Langen Bilderunterschrift ist zu zeigen, wie eine derart lange Bilderunterschrift aussieht. Meine Güte ist diese Bilderunterschrift lang.}
+	\label{fig:Blumeklein} 
+\end{figure}
+\noindent
+\cref{eq:Formel} zeigt ein Beispiel für eine Formel.
+\begin{align}\label{eq:Formel}
+	I = \int_{t_0}^{t_0+n \cdot h} f(t) \hspace{0.1cm} dt
+\end{align}
+\noindent
+\cref{tab:Tabelle} zeig ein Beispiel für eine Tabelle.
+\begin{table}[htbp]
+	\centering
+	\caption
+	[Tabelle. Wenn ein Zitat in der Caption angegeben wird, dann auch Kurztitel ohne Caption angeben, damit das Zitat nicht im Abbildungsverzeichnis auftaucht.]
+	{Tabelle. Zitate können auch direkt in der Caption angegeben werden.
+		{\footnotesize \PEMcite[Vgl.][S. 42]{Ajanovic.2020}}}
+	\label{tab:Tabelle} 
+	\vspace{0.2cm}
+	\begin{tabularx}{\textwidth}{p{1.5cm} >{\raggedright\arraybackslash}X >{\centering\arraybackslash}X >{\raggedleft\arraybackslash}X } %Bestimmte Spaltenbreite, Linksbündig, Zentriert, Linksbündig. Bitte in die TabularX Doku schauen, da steht sowas drin.
+		\toprule[1.5pt]
+		ABC: & 1 & 2 & 3 \\
+		\midrule[1.0pt]
+		DEF: & 4 & 5 & 6 \\
+		\bottomrule[1.5pt]	
+	\end{tabularx}
+\end{table}
+\noindent
+Zitiert wird mit "`PEMfootcite"'. Das sieht dann so~\PEMfootcite[Vgl.][S. 456]{Ajanovic.2020} oder so~\PEMfootcite[Vgl.][S. 123]{Shepherd.1965} aus.
+"`Direkte, also wortwörtliche, Zitate werden in Anführungszeichen gesetzt."'~\PEMfootcite[Aus][S. 42]{Shepherd.1965}
+%
+\subsection{Erstes Unterkapitel}\label{sec:Unterkapitel}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+%
+\subsection{Zweites Unterkapitel}\label{sec:AnderesUnterkapitel}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+%
+\subsubsection{Erstes Unterkapitel im zweiten Unterkapitel}\label{sec:AmBestenImmerAussagekräftigeLabelVerwenden}
+Kapitelception lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+%
+\paragraph{Ein Paragraph} bzw. eigentlich immer mindestens zwei Paragraphen können auch nützlich sein um Abschnitte zu strukturieren.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\paragraph{Daher kommt hier auch Paragraph zwei} um den ertsen nicht alleine zu lassen.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\subsubsection{Zweites Unterkapitel im zweiten Unterkapitel}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.

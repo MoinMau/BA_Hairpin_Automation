@@ -1,0 +1,21 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {I}Formelzeichen und Abkürzungen}{ii}{section.1}%
+\contentsline {section}{\numberline {II}Abbildungsverzeichnis}{iii}{section.2}%
+\contentsline {section}{\numberline {III}Tabellenverzeichnis}{iv}{section.3}%
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.arabicsection.1}%
+\contentsline {subsection}{\numberline {1.1}Erstes Unterkapitel}{2}{subsection.arabicsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Zweites Unterkapitel}{2}{subsection.arabicsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Erstes Unterkapitel im zweiten Unterkapitel}{2}{subsubsection.arabicsection.1.2.1}%
+\contentsline {paragraph}{\nonumberline Ein Paragraph}{2}{paragraph*.1}%
+\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{2}{paragraph*.2}%
+\contentsline {subsubsection}{\numberline {1.2.2}Zweites Unterkapitel im zweiten Unterkapitel}{2}{subsubsection.arabicsection.1.2.2}%
+\contentsline {section}{\numberline {2}Grundlagen}{4}{section.arabicsection.2}%
+\contentsline {section}{\numberline {3}Methodik}{5}{section.arabicsection.3}%
+\contentsline {section}{\numberline {4}Auswertung}{6}{section.arabicsection.4}%
+\contentsline {section}{\numberline {5}Zusammenfassung und Ausblick}{7}{section.arabicsection.5}%
+\contentsline {section}{\numberline {A}Literatur}{8}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{9}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Anhang Unterkapitel}{9}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Auch der Anhang kann mehere Unterkapitel haben \dots }{9}{subsection.B.2}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{10}{appendix.C}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

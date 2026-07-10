@@ -1,0 +1,186 @@
+%% Lokalsierungsdatei liegt hier: \miktex-portable\texmfs\install\tex\latex\biblatex\lbx\german.lbx und kann mit folgendem Befehl selektiv bearbeitet werden:
+%\DefineBibliographyStrings{ngerman}{%
+	%  byeditor         = {hrsg\adddotspace},
+	%}
+
+\usepackage{csquotes}
+
+% PEM Zitattionsstil
+% Neudefinition einiger Befehle in authortitle.cbx und authortitle.bbx um den PEM Zitirstil abzubilden. 
+% Ohne Installation
+% Variante als Input-File, die ohne installation funktioniert, aber auch die Autocomplete nicht unterstützt.
+\usepackage[
+backend=biber,
+style=authortitle-ibid,%authortitle   %aktuell keine wirkung bei PEMcite
+dashed=false,
+%	page tracker=page, %Einsatz von \superfootcite prüfen
+maxcitenames=1,
+%	minbibnames=3,
+%	maxbibnames=4,
+uniquelist=false,
+autocite=footnote,
+url=true,
+related=true,
+language=ngerman,
+%	doi=false,
+]{biblatex}
+
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1\isdot}
+
+%Neudefinition einiger Befehle in standard.bbx, authortitle.cbx und authortitle.bbx um den PEM Zitirstil abzubilden
+%Funktionsweise der Zitirstiele: Die Standardatei definiert die Grundlage. Die weiteren untergordneten Stile überschreiben einzelne Stellen des Standards. Daher können mit _PEMcite wiederum Stellen aus dem Standard und der gewählten Grundlage überschreiben.
+
+% Aus biblatex.def
+
+\DeclareDelimFormat{authortypedelim}{\addcomma\space}
+\DeclareDelimFormat{editortypedelim}{\addcomma\space}
+
+% Aus standard.bbx
+\DeclareBibliographyDriver{inbook}{%
+	\usebibmacro{bibindex}%
+	\usebibmacro{begentry}%
+	\usebibmacro{author/editor+others/translator+others}%
+	\setunit{\printdelim{nametitledelim}}\newblock
+	\usebibmacro{title}%
+	\newunit
+	\printlist{language}%
+	\newunit\newblock
+	\usebibmacro{byauthor}%
+	\newunit\newblock
+	\usebibmacro{in:}%
+	\usebibmacro{bybookauthor}%
+	\newunit\newblock
+	\usebibmacro{maintitle+booktitle}%
+	\newunit\newblock
+	\usebibmacro{byeditor+others}%
+	\newunit\newblock
+	\printfield{edition}%
+	\newunit
+	\iffieldundef{maintitle}
+	{\printfield{volume}%
+		\printfield{part}}
+	{}%
+	\newunit
+	\printfield{volumes}%
+	\newunit\newblock
+	\usebibmacro{series+number}%
+	\newunit\newblock
+	\printfield{note}%
+	\newunit\newblock
+	\usebibmacro{publisher+location+date}%
+	\newunit\newblock
+	\usebibmacro{chapter+pages}%
+	\newunit\newblock
+	\iftoggle{bbx:isbn}
+	{\printfield{isbn}}
+	{}%
+	\newunit\newblock
+	\usebibmacro{doi+eprint+url}%
+	\newunit\newblock
+	\usebibmacro{addendum+pubstate}%
+	\setunit{\bibpagerefpunct}\newblock
+	\usebibmacro{pageref}%
+	\newunit\newblock
+	\iftoggle{bbx:related}
+	{\usebibmacro{related:init}%
+		\usebibmacro{related}}
+	{}%
+	\usebibmacro{finentry}}
+
+
+% Aus authortitle.cbx
+\DeclareCiteCommand{\PEMcite}
+{\usebibmacro{prenote}}
+{%
+	\usebibmacro{citeindex}%
+	%	\iffieldundef{shorthand}
+	%	{
+		\printnames{labelname}%
+		\setunit{\space}% ersetzt \setunit*{\printdelim{nametitledelim}} um , nach . zu vermeiden.
+		\printfield[]{year}%
+		\setunit{\space}%
+		\printtext[bibhyperref]%
+		{%
+			\printfield[parens]{labeltitle}%
+		}%
+		%	}%
+	%	{\usebibmacro{cite:shorthand}}
+}%
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\PEMfootcite}[\mkbibfootnote]%
+{\usebibmacro{prenote}}%
+{%
+	\usebibmacro{citeindex}%
+	\printnames{labelname}%
+	\setunit{\space}%
+	\printfield[]{year}%
+	\setunit{\space}%
+	\printtext[bibhyperref]%
+	{%
+		\printfield[parens]{labeltitle}%
+	}%
+}%
+{\multicitedelim}%
+{\usebibmacro{postnote}}
+
+% Aus authortitle.bbx
+
+\providebibmacro*{date+extradate}{}
+\renewbibmacro*{author}{%
+	\mkbibbold{% Hier \mkbibbold für fettgedruckte Authoren
+		\ifboolexpr{
+			test \ifuseauthor
+			and
+			not test {\ifnameundef{author}}
+		}
+		{\usebibmacro{bbx:dashcheck}
+			{\bibnamedash}
+			{\usebibmacro{bbx:savehash}%
+				\printnames[][1-1]{author}%[1-1] um nur den ersten Autor aurzugeben.
+				\iffieldundef{authortype}
+				{\setunit{\printdelim{nameyeardelim}}}
+				{\setunit{\printdelim{authortypedelim}}}}%
+			\iffieldundef{authortype}
+			{}
+			{\usebibmacro{authorstrg}%
+				\setunit{\printdelim{nameyeardelim}}}%
+			\printfield{year} %
+			\mkbibbold{%
+				\printfield[parens]{labeltitle}% Kurztitel eingefügt
+				\printunit{\mkbibbold{\addcolon}\newline\bibsentence}}% Zeilenumbruch eingefügt
+		}%
+		{\global\undef\bbx@lasthash
+			\usebibmacro{labeltitle}%
+			\setunit*{\printdelim{nonameyeardelim}}}%
+	}
+}
+
+\renewbibmacro*{editor}{%
+	\usebibmacro{bbx:editor}{editorstrg}}
+\renewbibmacro*{editor+others}{%
+	\usebibmacro{bbx:editor}{editor+othersstrg}}
+\renewbibmacro*{bbx:editor}[1]{%
+	\mkbibbold{%  Hier \mkbibbold für fettgedruckte Authoren
+		\ifboolexpr{
+			test \ifuseeditor
+			and
+			not test {\ifnameundef{editor}}
+		}
+		{\usebibmacro{bbx:dashcheck}
+			{\bibnamedash}
+			{\printnames[][1-1]{editor}%
+				\setunit{\printdelim{editortypedelim}}%
+				\usebibmacro{bbx:savehash}}%
+			\usebibmacro{#1}%
+			\clearname{editor}%
+			\setunit{\printdelim{nameyeardelim}}
+			\printfield{year} %
+			\printfield[parens]{labeltitle}% Kurztitel eingefügt
+			\printunit{\mkbibbold{\addcolon}\newline\bibsentence}}% Zeilenumbruch eingefügt mit bold colon
+		{\global\undef\bbx@lasthash
+			\usebibmacro{labeltitle}%
+			\setunit*{\printdelim{nonameyeardelim}}}%
+	}
+}
