@@ -52,8 +52,8 @@ const long  X_MAX_POS    = 4000;
 const float X_MAX_SPEED  = 2000.0;
 
 // --- Achse Y ---
-const long  Y_MIN_POS    = 0;
-const long  Y_MAX_POS    = 20000;
+const long  Y_MIN_POS    = -7600;
+const long  Y_MAX_POS    = 0;
 const float Y_MAX_SPEED  = 2000.0;
 
 // --- Achse Z ---
@@ -78,9 +78,9 @@ static const float  MAX_SPEED_LIMITS[3] = {X_MAX_SPEED, Y_MAX_SPEED, Z_MAX_SPEED
 #define HOMING_X_REBOUND_STEPS    20      // Strecke vom Endschalter weg (Steps)
 
 // --- Y-Achse ---
-#define HOMING_Y_SEARCH_SPEED     100.0   // POSITIV = vorwärts zum Endschalter
+#define HOMING_Y_SEARCH_SPEED     1000.0   // POSITIV = vorwärts zum Endschalter
 #define HOMING_Y_REBOUND_SPEED   -50.0
-#define HOMING_Y_REBOUND_STEPS    20
+#define HOMING_Y_REBOUND_STEPS    60
 
 // --- Z-Achse ---
 #define HOMING_Z_SEARCH_SPEED    -100.0

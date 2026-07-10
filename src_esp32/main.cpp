@@ -26,6 +26,7 @@ enum SequenceState {
   // ── PROGRAMM 2 (Kopie von P1, zur freien Bearbeitung) ──
   P2_HOME_Z,         P2_HOME_Z_WAIT,
   P2_HOME_Y,         P2_HOME_Y_WAIT,
+  P2_POSITION_Y,     P2_POSITION_Y_WAIT,
   P2_SERVO_INIT,     P2_SERVO_INIT_WAIT,
   P2_Z_MOVE,         P2_Z_MOVE_WAIT,
   P2_RUN,            P2_WAIT_SLIDE,
@@ -34,6 +35,7 @@ enum SequenceState {
   P2_STOP_VIB,
   P2_SERVO_CHANGE,   P2_SERVO_CHANGE_WAIT,
   P2_Y_FORWARD,      P2_Y_FORWARD_WAIT,
+  P2_Y_ROBOT_WAIT,
   P2_Y_BACK,         P2_Y_BACK_WAIT,
   P2_DONE,
 };
@@ -709,9 +711,21 @@ void updateSequence() {
     case P2_HOME_Y_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
         Serial.println(F("  -> Y gehomt."));
-        currentSeqState = P2_SERVO_INIT;
+        currentSeqState = P2_POSITION_Y;
       }
       break;
+
+    case P2_POSITION_Y:
+      Serial.println(F("P2 [1c/7] Y auf Position..."));
+      axis_abs(AXIS_Y, -7500, 2000);
+      currentSeqState = P2_POSITION_Y_WAIT;
+      break;
+
+    case P2_POSITION_Y_WAIT:
+      if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("  -> Y positioniert."));
+        currentSeqState = P2_SERVO_INIT;
+      }
 
     case P2_SERVO_INIT:
       Serial.println(F("P2 [2/7] Servos initialisieren..."));
@@ -763,6 +777,7 @@ void updateSequence() {
       servo_set(1, 1000);
       Serial.println(F("  -> Vereinzelung 1"));
       currentSeqState = P2_FEED1_WAIT;
+      seqStepStartTime = now;
       break;
 
     case P2_FEED1_WAIT:
@@ -776,10 +791,11 @@ void updateSequence() {
       servo_set(0, 100);
       Serial.println(F("  -> Vereinzelung 2"));
       currentSeqState = P2_FEED2_WAIT;
+      seqStepStartTime = now;
       break;
 
     case P2_FEED2_WAIT:
-      if (now - seqStepStartTime >= 15000) {
+      if (now - seqStepStartTime >= 10000) {
         Serial.println(F("  -> Vereinzelung fertig."));
         currentSeqState = P2_STOP_VIB;
       }
@@ -809,14 +825,28 @@ void updateSequence() {
 
     case P2_Y_FORWARD:
       Serial.println(F("P2 [6/7] Y vor..."));
-      axis_rel(AXIS_Y, 4000, 2000);
+      axis_rel(AXIS_Y, 7000, 2000);
       currentSeqState = P2_Y_FORWARD_WAIT;
       break;
 
     case P2_Y_FORWARD_WAIT:
       if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("P2 Y zum Roboter..."));
+        currentSeqState = P2_Y_ROBOT_WAIT;
+        seqStepStartTime = now;
+      }
+
+    case P2_Y_ROBOT_WAIT:
+      if (now - seqStepStartTime >= 12000) {
+        Serial.println(F("  -> Warten auf Roboter."));
+        currentSeqState = P2_Y_BACK;
+      }
+      break;
+
+    case P2_Y_BACK:
+      if (!is_axis_busy(AXIS_Y)) {
         Serial.println(F("P2 [7/7] Y zurueck..."));
-        axis_rel(AXIS_Y, -4000, 2000);
+        axis_rel(AXIS_Y, -7000, 2000);
         currentSeqState = P2_Y_BACK_WAIT;
       }
       break;
