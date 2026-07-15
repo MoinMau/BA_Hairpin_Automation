@@ -12,42 +12,42 @@
 \contentsline {subsubsection}{\numberline {2.1.1}Entwicklung}{2}{subsubsection.arabicsection.2.1.1}%
 \contentsline {subsubsection}{\numberline {2.1.2}Aufbau von modernen Elektromotoren}{2}{subsubsection.arabicsection.2.1.2}%
 \contentsline {subsubsection}{\numberline {2.1.3}Produktionsablauf}{3}{subsubsection.arabicsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.2}Produktionsverfahren zum Abisolieren}{3}{subsection.arabicsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Fräsen Inline}{3}{subsubsection.arabicsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Laser Inline}{3}{subsubsection.arabicsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Laser als eigener Prozess}{3}{subsubsection.arabicsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.3}Normen und Vorgaben}{3}{subsection.arabicsection.2.3}%
-\contentsline {section}{\numberline {3}Stand der Technik}{4}{section.arabicsection.3}%
-\contentsline {subsubsection}{\numberline {3.0.1}Echte Produktionen}{4}{subsubsection.arabicsection.3.0.1}%
-\contentsline {section}{\numberline {4}Lösungsansatz}{5}{section.arabicsection.4}%
-\contentsline {subsection}{\numberline {4.1}Vereinzelung}{5}{subsection.arabicsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Auslieferung}{5}{subsection.arabicsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Material Auswahl}{5}{subsection.arabicsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Elektronische Komponenten}{5}{subsection.arabicsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}CodeStruktur}{5}{subsection.arabicsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Aktuelle Systeme aus der Produktion}{5}{subsubsection.arabicsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}Code Struktur der Anlage}{5}{subsubsection.arabicsection.4.5.2}%
-\contentsline {section}{\numberline {5}Konstruktion}{6}{section.arabicsection.5}%
-\contentsline {subsection}{\numberline {5.1}Verwendete Tools}{6}{subsection.arabicsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Probleme beim Aufbau}{6}{subsection.arabicsection.5.2}%
-\contentsline {section}{\numberline {6}Validierung \& Tests}{7}{section.arabicsection.6}%
-\contentsline {subsection}{\numberline {6.1}Fehlerbetrachtung}{7}{subsection.arabicsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Versuchplan}{7}{subsubsection.arabicsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.2}Versuchsdruchführung}{7}{subsection.arabicsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Versuchsaufbau}{7}{subsubsection.arabicsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Ergebnisse}{7}{subsubsection.arabicsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.3}Testbewertung}{7}{subsection.arabicsection.6.3}%
-\contentsline {section}{\numberline {7}Optimierungen \& Fazit}{8}{section.arabicsection.7}%
-\contentsline {subsubsection}{\numberline {7.0.1}Probleme}{8}{subsubsection.arabicsection.7.0.1}%
-\contentsline {subsubsection}{\numberline {7.0.2}Bewertung für den Alltagbetrieb}{8}{subsubsection.arabicsection.7.0.2}%
-\contentsline {subsubsection}{\numberline {7.0.3}Verbesserungs Vorschläge}{8}{subsubsection.arabicsection.7.0.3}%
-\contentsline {subsubsection}{\numberline {7.0.1}Erstes Unterkapitel im zweiten Unterkapitel}{9}{subsubsection.arabicsection.7.0.1}%
-\contentsline {paragraph}{\nonumberline Ein Paragraph}{9}{paragraph*.2}%
-\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{9}{paragraph*.3}%
-\contentsline {subsubsection}{\numberline {7.0.2}Zweites Unterkapitel im zweiten Unterkapitel}{10}{subsubsection.arabicsection.7.0.2}%
-\contentsline {section}{\numberline {A}Literatur}{11}{appendix.A}%
-\contentsline {section}{\numberline {B}Anhang}{12}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Anhang Unterkapitel}{12}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}Auch der Anhang kann mehere Unterkapitel haben \dots }{12}{subsection.B.2}%
-\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{13}{appendix.C}%
+\contentsline {subsection}{\numberline {2.2}Produktionsverfahren zum Abisolieren}{4}{subsection.arabicsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Fräsen Inline}{5}{subsubsection.arabicsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Laser Inline}{5}{subsubsection.arabicsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Laser als eigener Prozess}{5}{subsubsection.arabicsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Normen und Vorgaben}{5}{subsection.arabicsection.2.3}%
+\contentsline {section}{\numberline {3}Stand der Technik}{6}{section.arabicsection.3}%
+\contentsline {subsubsection}{\numberline {3.0.1}Echte Produktionen}{6}{subsubsection.arabicsection.3.0.1}%
+\contentsline {section}{\numberline {4}Lösungsansatz}{7}{section.arabicsection.4}%
+\contentsline {subsection}{\numberline {4.1}Vereinzelung}{7}{subsection.arabicsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Auslieferung}{7}{subsection.arabicsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Material Auswahl}{7}{subsection.arabicsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Elektronische Komponenten}{7}{subsection.arabicsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}CodeStruktur}{7}{subsection.arabicsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Aktuelle Systeme aus der Produktion}{7}{subsubsection.arabicsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Code Struktur der Anlage}{7}{subsubsection.arabicsection.4.5.2}%
+\contentsline {section}{\numberline {5}Konstruktion}{8}{section.arabicsection.5}%
+\contentsline {subsection}{\numberline {5.1}Verwendete Tools}{8}{subsection.arabicsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Probleme beim Aufbau}{8}{subsection.arabicsection.5.2}%
+\contentsline {section}{\numberline {6}Validierung \& Tests}{9}{section.arabicsection.6}%
+\contentsline {subsection}{\numberline {6.1}Fehlerbetrachtung}{9}{subsection.arabicsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Versuchplan}{9}{subsubsection.arabicsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.2}Versuchsdruchführung}{9}{subsection.arabicsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Versuchsaufbau}{9}{subsubsection.arabicsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Ergebnisse}{9}{subsubsection.arabicsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Testbewertung}{9}{subsection.arabicsection.6.3}%
+\contentsline {section}{\numberline {7}Optimierungen \& Fazit}{10}{section.arabicsection.7}%
+\contentsline {subsubsection}{\numberline {7.0.1}Probleme}{10}{subsubsection.arabicsection.7.0.1}%
+\contentsline {subsubsection}{\numberline {7.0.2}Bewertung für den Alltagbetrieb}{10}{subsubsection.arabicsection.7.0.2}%
+\contentsline {subsubsection}{\numberline {7.0.3}Verbesserungs Vorschläge}{10}{subsubsection.arabicsection.7.0.3}%
+\contentsline {subsubsection}{\numberline {7.0.1}Erstes Unterkapitel im zweiten Unterkapitel}{11}{subsubsection.arabicsection.7.0.1}%
+\contentsline {paragraph}{\nonumberline Ein Paragraph}{11}{paragraph*.3}%
+\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{11}{paragraph*.4}%
+\contentsline {subsubsection}{\numberline {7.0.2}Zweites Unterkapitel im zweiten Unterkapitel}{12}{subsubsection.arabicsection.7.0.2}%
+\contentsline {section}{\numberline {A}Literatur}{13}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{14}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Anhang Unterkapitel}{14}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Auch der Anhang kann mehere Unterkapitel haben \dots }{14}{subsection.B.2}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{15}{appendix.C}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,18 +1,19 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Vorlage.blg'
-[90] biber-darwin:342> INFO - === Tue Jul 14, 2026, 13:04:34
-[110] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
-[216] Biber.pm:1002> INFO - Found 6 citekeys in bib section 0
-[236] Biber.pm:4487> INFO - Processing section 0
-[249] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
-[251] bibtex.pm:1713> INFO - LaTeX decoding ...
-[259] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
-[335] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[335] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[335] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
-[335] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
-[349] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
-[352] bbl.pm:779> INFO - Output to Vorlage.bbl
-[352] Biber.pm:132> WARN - I didn't find a database entry for 'Ajanovic.2020' (section 0)
-[353] Biber.pm:132> WARN - I didn't find a database entry for 'Shepherd.1965' (section 0)
-[353] Biber.pm:134> INFO - WARNINGS: 2
+[33] biber-darwin:342> INFO - === Wed Jul 15, 2026, 09:51:58
+[42] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
+[81] Biber.pm:1002> INFO - Found 7 citekeys in bib section 0
+[88] Biber.pm:4487> INFO - Processing section 0
+[93] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
+[94] bibtex.pm:1713> INFO - LaTeX decoding ...
+[97] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
+[139] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[139] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[139] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
+[139] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
+[145] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
+[146] bbl.pm:779> INFO - Output to Vorlage.bbl
+[146] Biber.pm:132> WARN - I didn't find a database entry for 'Singh.2015' (section 0)
+[146] Biber.pm:132> WARN - I didn't find a database entry for 'Ajanovic.2020' (section 0)
+[146] Biber.pm:132> WARN - I didn't find a database entry for 'Shepherd.1965' (section 0)
+[146] Biber.pm:134> INFO - WARNINGS: 3
