@@ -19,6 +19,69 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{Glaessel2020Skinning}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
+           family={Glässel},
+           familyi={G\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=19d2ab2d61dc84c8a2d7bcb02b13112e}{%
+           family={Seefried},
+           familyi={S\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=81e3ef3925c76dcbd14fc60d481088f8}{%
+           family={Kühl},
+           familyi={K\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=861854a17a7d79ab04e94dc8829f0e71}{%
+           family={Franke},
+           familyi={F\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{fullhash}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{fullhashraw}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{bibnamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authorbibnamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authornamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authorfullhash}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{authorfullhashraw}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{2278-0149}
+      \field{journaltitle}{International Journal of Mechanical Engineering and Robotics Research}
+      \field{number}{2}
+      \field{shorttitle}{Skinning of Insulated Copper Wires}
+      \field{title}{Skinning of Insulated Copper Wires within the Production Chain of Hairpin Windings for Electric Traction Drives}
+      \field{urlday}{15}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{9}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.18178/ijmerr.9.2.163-169
+      \endverb
+      \verb{file}
+      \verb Glaessel2020_SkinningInsulatedCopperWires:Attachments/Glaessel2020_SkinningInsulatedCopperWires.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+    \endentry
     \entry{ProductionProcessHairpinStator.2024}{book}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=b98c4fb4e9926c48a0cfc35d0672d0b4}{%
@@ -166,41 +229,6 @@
       \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
     \endentry
-    \entry{Sollmann.2018}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=6fe96fad09cc645a32cc7b5b1c77f942}{%
-           family={Sollmann},
-           familyi={S\bibinitperiod},
-           given={D.},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{fullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{fullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{bibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorbibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authornamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorfullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorfullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{shorttitle}{Nickel-Cadmium-Batterien}
-      \field{title}{Nickel-Cadmium-Batterien}
-      \field{urlday}{6}
-      \field{urlmonth}{5}
-      \field{urlyear}{2021}
-      \field{year}{2018}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
-      \endverb
-      \verb{url}
-      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
-      \endverb
-    \endentry
     \entry{HairpinTechnologyReview.2025}{article}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2f07389b8530a6840972c8777d18f2c8}{%
@@ -244,6 +272,7 @@
   \missing{Ajanovic.2020}
   \missing{Shepherd.1965}
   \missing{Singh.2015}
+  \missing{Sollmann.2018}
 \endrefsection
 \endinput
 
