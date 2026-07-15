@@ -19,89 +19,77 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{Ajanovic.2020}{article}{}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=23633ffbbdf745a9da43527256bf1238}{%
-           family={Ajanovic},
-           familyi={A\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod},
+    \entry{ComparativeReviewMotor.2023}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=36f45e976fb52c17e2092c49be865878}{%
+           family={Rimpas},
+           familyi={R\bibinitperiod},
+           given={Dimitrios},
+           giveni={D\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=d5d06cd7992404aa013cc06e32b98711}{%
-           family={Glatt},
-           familyi={G\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod},
+        {{un=0,uniquepart=base,hash=73e8b4491aa813395e9064e197e366cc}{%
+           family={Kaminaris},
+           familyi={K\bibinitperiod},
+           given={Stavros\bibnamedelima D.},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fa29112889945b6f619ce28a69d37d24}{%
+           family={Piromalis},
+           familyi={P\bibinitperiod},
+           given={Dimitrios\bibnamedelima D.},
+           giveni={D\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2c8a1e8c7b4e60003d31d39504da4768}{%
+           family={Vokas},
+           familyi={V\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a5bffc0830087eb3c62f23f03d443b9f}{%
+           family={Arvanitis},
+           familyi={A\bibinitperiod},
+           given={Konstantinos\bibnamedelima G.},
+           giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cb37da944494c79e265e00753e351ccb}{%
+           family={Karavas},
+           familyi={K\bibinitperiod},
+           given={Christos-Spyridon},
+           giveni={C\bibinithyphendelim S\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
-      \strng{fullhash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{fullhashraw}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{bibnamehash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authorbibnamehash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authornamehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
-      \strng{authorfullhash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authorfullhashraw}{47d03803707fe1bd928b42162c03e5ae}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \strng{namehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{fullhash}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{fullhashraw}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{bibnamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authorbibnamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authornamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authorfullhash}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{authorfullhashraw}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{journaltitle}{e {\&} i Elektrotechnik und Informationstechnik}
-      \field{shorttitle}{Aspekte der Elektromobilität}
-      \field{title}{Wirtschaftliche und ökologische Aspekte der Elektromobilität: Economic and ecological aspects of electric vehicles}
-      \field{urlday}{5}
-      \field{urlmonth}{4}
-      \field{urlyear}{2021}
-      \field{volume}{137}
-      \field{year}{2020}
-      \field{urldateera}{ce}
-      \field{pages}{136\bibrangedash 146}
-      \range{pages}{11}
+      \field{issn}{1996-1073}
+      \field{journaltitle}{Energies}
+      \field{number}{6}
+      \field{shorttitle}{Motor Technologies for EVs}
+      \field{title}{Comparative Review of Motor Technologies for Electric Vehicles Powered by a Hybrid Energy Storage System Based on Multi-Criteria Analysis}
+      \field{volume}{16}
+      \field{year}{2023}
+      \field{pages}{5\bibrangedash 11}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.3390/en16062555
+      \endverb
       \verb{file}
-      \verb 2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet:Attachments/2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet.pdf:application/pdf
+      \verb Rimpas2023_ComparativeReviewMotorTechnologies:Attachments/Rimpas2023_ComparativeReviewMotorTechnologies.pdf:application/pdf
       \endverb
       \verb{urlraw}
-      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
+      \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
       \verb{url}
-      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
-      \endverb
-    \endentry
-    \entry{Shepherd.1965}{article}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=ff116ca4d290dfe9d5cc91eab078e376}{%
-           family={Shepherd},
-           familyi={S\bibinitperiod},
-           given={C.\bibnamedelimi M.},
-           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{fullhash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{fullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{bibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorbibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authornamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorfullhash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorfullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{issn}{0013-4651}
-      \field{journaltitle}{Journal of The Electrochemical Society}
-      \field{number}{7}
-      \field{shorttitle}{Primary Secondary Cells}
-      \field{title}{Design of Primary and Secondary Cells}
-      \field{volume}{112}
-      \field{year}{1965}
-      \field{pages}{657}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1149/1.2423659
-      \endverb
-      \verb{file}
-      \verb Shepherd1965{\_}DesignofPrimaryandSecondaryCells:Attachments/Shepherd1965{\_}DesignofPrimaryandSecondaryCells.pdf:application/pdf
+      \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
     \endentry
     \entry{Singh.2015}{article}{}{}
@@ -188,7 +176,48 @@
       \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
       \endverb
     \endentry
+    \entry{HairpinTechnologyReview.2025}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=2f07389b8530a6840972c8777d18f2c8}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Tianjie},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{fullhash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{fullhashraw}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{bibnamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorbibnamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authornamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorfullhash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorfullhashraw}{2f07389b8530a6840972c8777d18f2c8}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{IEEE Open Journal of the Vehicular Technology}
+      \field{shorttitle}{Hairpin Winding Technology: Review}
+      \field{title}{Continuous Hairpin Winding Technology for Electric Machines Enabling Net Zero Transportation: A Comprehensive Review}
+      \field{urlday}{14}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{1481\bibrangedash 1483}
+      \range{pages}{3}
+      \verb{urlraw}
+      \verb https://nottingham-repository.worktribe.com/file/49829353/1/Continuous_Hairpin_Winding_Technology_for_Electric_Machines_Enabling_Net_Zero_Transportation_A_Comprehensive_Review
+      \endverb
+      \verb{url}
+      \verb https://nottingham-repository.worktribe.com/file/49829353/1/Continuous_Hairpin_Winding_Technology_for_Electric_Machines_Enabling_Net_Zero_Transportation_A_Comprehensive_Review
+      \endverb
+    \endentry
   \enddatalist
+  \missing{Ajanovic.2020}
+  \missing{Shepherd.1965}
 \endrefsection
 \endinput
 
