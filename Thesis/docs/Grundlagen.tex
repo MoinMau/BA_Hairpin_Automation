@@ -31,15 +31,16 @@ die Wicklungen verbaut werden. Der Rotor wiederum ist das rotierende Element des
 mit dem die Welle und damit dei Kraft des Motors übertragen wird.  \todo{Mag das nicht}Es gibt auch Motor konfigurationen, bei denen der Stator innen
 sitzt und der Rotor außen Rotiert, diese sind in elektroantrieben für die E Mobilität aber nciht im Einsatz.
 Für den Betrieb braucht es aber noch weitere Bauteile: Die elektrische Energie muss bereitgestellt werden, der Strom
-muss passend Trasnformiert werden und die Rotation muss mittels einem Getriebe passend übersetzt werden.
-In der E-Mobiltät stammt die Energie meistens aus hochmoderen Batterie-Pack, die ein annährenden Gleichstrom
-ausgeben. Diese DC Spannung muss dann für die Wikliungen in drei versetzten Phasen umgewandelt werden. Dabei werden hochlesitungs Mosfets
+muss passend Transformiert werden und die Rotation muss mittels einem Getriebe passend übersetzt werden.
+In Bezug auf die E-Mobiltät stammt die Energie meistens aus hochmoderen Batterie-Packs, die ein annährenden Gleichstrom
+ausgeben. Diese DC Spannung muss dann jenach Bauart des Motors passend weitergegeben werden. Bei den weitverrbeiteten PMSM Motoren
+wird diese DC Spannnug für die Wiklungen in drei versetzten Phasen umgewandelt. Dabei werden hochlesitungs Mosfets
 im Wechselrichter verwedet, um die Energie passend zur Drehzahl und geforderten Leistung in die 120° verschobenen Phasen zu leiten.
 Im Motor entsteht dann ein sich radial bewegendes Magnetfeld, welches den Rotor zur Rotation zwingt.
 Diese Drehbewegung wird dann in ein Getriebe geführt. Dieses ist entsprechend der Verwendung des Motors so angespasst,
 dass z.B. eine geringere Drehzahl für die Reifen eines Autos entsteht.\\
 
-Dieser Wertschöpfungsablauf ist grundsätzlich bei jedem Elektromotor gleich. Anders ist es bei dem eigentlichen
+Dieser Ablauf aus Energie Bereitstellung, Einspeisung, Umwandlung und Drehzalanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist es bei dem eigentlichen
 Aufbau des Motors: i. DC brushed motor;
 ii. DC brushless motor (BLDC);
 iii. Induction motor (IM);
@@ -53,6 +54,26 @@ vii. Flux reversal motors
 
 \subsubsection{Produktionsablauf}\label{sec:ProduktionsablaufHairPin}
 Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Stator Art Varieren.
+Grundsätzlich ist der Ablauf aber immer ähnlich:
+1. Kupferdraht richten
+2. Kupferdraht abisolieren
+3. Kupferdraht ablängen
+4. Kupferdraht biegen
+5. Statornuten isolieren
+6. Hairpins vormontieren
+7. Hairpins fügen
+8. Kupferenden freistellen
+9. Kupferenden schränken
+10. Kupferenden kontaktieren
+11. Verschalt-Elemente kontaktieren
+12. Kupferenden isolieren
+13. Stator imprägnieren
+14. Stator testen
+
+Bei dieser Aufzähung wird die Produktion des Stator Blechpaketes, welches aus auf einander gestapelten isolierten Belchen
+besteht, nciht betrachtet. Außerdem wird der Kupferdraht fertiges auf Rollen gewickeltes Produkt angesehen. Die oben beschreibene 
+Prozesskette entspricht einer Serienproduktion, bei der das Abisolieren vor dem Biegen des Kupferdrahtes Positioniert ist. In 
+der Prototypen Produktion ist dies nicht der Fall, da hier der unterpunkt 2. hinter 4. kommt.
 Wie sieht der Produktionsablauf aus? Welche unterschiede gibt es zu Prototypen Fertigung und Serienfertigung? Welcher Abschnitt wird in dieser Arbeit betrachtet?
 
 
