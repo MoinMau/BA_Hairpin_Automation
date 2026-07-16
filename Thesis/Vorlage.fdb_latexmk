@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber Vorlage"] 1784114202.50563 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1784129491.6178 0
-  "Vorlage.bcf" 1784129491.36919 109285 fb4e7ffd0853efc048c032ff63116dab "pdflatex"
+["biber Vorlage"] 1784114202.50563 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1784196465.76046 0
+  "Vorlage.bcf" 1784196465.52023 109285 fb4e7ffd0853efc048c032ff63116dab "pdflatex"
   "refs/references.bib" 1784114202.25625 3052 3baa87945cb658944f958c25a385a35a ""
   (generated)
   "Vorlage.bbl"
   "Vorlage.blg"
   (rewritten before read)
-["pdflatex"] 1784129487.77933 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1784129491.61826 0
+["pdflatex"] 1784196461.59414 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1784196465.76094 0
   "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" 1784022728.16211 8763 51325b94efcbb01c0cc26d59341d2592 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -269,21 +269,21 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1783688908 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1783688750 3636771 a7bb531bdb879a453dd41ae83a4e6dd5 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "Vorlage.aux" 1784129491.35054 34771 193d4bf074c48a25406e31ec6cdcc3e3 "pdflatex"
+  "Vorlage.aux" 1784196465.50159 41495 f56f2201cbdafe5849fd24b2e6aaa04e "pdflatex"
   "Vorlage.bbl" 1784114205.66159 11381 02fe74200ec1d2610ad4a6cdc2c90402 "biber Vorlage"
-  "Vorlage.lof" 1784129491.37115 407 a2914c067ad4fff54e3a3f4ba0e0c10f "pdflatex"
-  "Vorlage.lot" 1784129491.37119 336 50610cb33f7fba1eb89e978f1bd82472 "pdflatex"
-  "Vorlage.run.xml" 1784129491.37093 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
+  "Vorlage.lof" 1784196465.52159 407 69879cf8659f2d1afc3c784379525156 "pdflatex"
+  "Vorlage.lot" 1784196465.52163 336 ffa74bab1f1c9df126da7e4ce6a3a9b9 "pdflatex"
+  "Vorlage.run.xml" 1784196465.52141 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
   "Vorlage.tex" 1784022728.16211 8763 51325b94efcbb01c0cc26d59341d2592 ""
-  "Vorlage.toc" 1784129491.37108 5189 e6125100a5663a203e63842499f6b0b4 "pdflatex"
+  "Vorlage.toc" 1784196465.52152 6158 6d44f510e451d1bb8485b17250c3253b "pdflatex"
   "docs/Anhang.tex" 1783689261.15727 3126 33115ed5eba558e515dee7e8922970f6 ""
-  "docs/Einleitung.tex" 1784129479.23541 4401 325fd41b89a183dd0f4b93c437f24212 ""
+  "docs/Einleitung.tex" 1784196450.03811 7747 e8ab0d88c3e3cd342e0e93d967742f3f ""
   "docs/Erklaerung.tex" 1783689261.16052 2344 219ce918f4663fac7f09586f24cc0e31 ""
-  "docs/Grundlagen.tex" 1784119945.66939 14171 574067f6976b07fad94a88af2fd4053b ""
+  "docs/Grundlagen.tex" 1784196450.03809 14356 e5f86277da297700fc89501557c3fec9 ""
   "docs/Konstruktion.tex" 1783941896.99111 293 01666fae9cd9e53c0d7239c02df260ba ""
-  "docs/Lösungsansatz.tex" 1783941897.00432 1321 5ced918021650201c85bca9d41a5fe55 ""
+  "docs/Lösungsansatz.tex" 1784196450.02583 1367 c8264aeded550195b2014a4a2503eb4b ""
   "docs/Optimierung_Fazit.tex" 1783941896.99105 6733 d99171d4332dea9edf1aea5e3ec6f86e ""
-  "docs/StandDerTechnik.tex" 1783936434.01268 363 200fb17a074145e91f9d2853cfe12833 ""
+  "docs/StandDerTechnik.tex" 1784196450.0257 1067 5daa55ac583da139233d16eccd278e1c ""
   "docs/Titelseite.tex" 1783929776.92212 2244 f71d7f6c57c6596a3c94020882cef48a ""
   "docs/Validierung_Tests.tex" 1783941896.99108 691 5682f4b397efce7ff3528b89a768bc69 ""
   "figs/Blume.jpg" 1783689261.19212 68697 ca17a509011ad251ab87b590f5fa6324 ""
