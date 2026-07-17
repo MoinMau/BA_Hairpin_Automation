@@ -2376,13 +2376,14 @@
     <bcf:citekey order="2" intorder="1">ComparativeReviewMotor.2023</bcf:citekey>
     <bcf:citekey order="3" intorder="1">ProductionProcessHairpinStator.2024</bcf:citekey>
     <bcf:citekey order="4" intorder="1">Glaessel2020Skinning</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">Singh.2015</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">Sollmann.2018</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">Ajanovic.2020</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">ur5e_handbuch_2025</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">Singh.2015</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">Sollmann.2018</bcf:citekey>
     <bcf:citekey order="8" intorder="1">Ajanovic.2020</bcf:citekey>
     <bcf:citekey order="9" intorder="1">Ajanovic.2020</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">Shepherd.1965</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Ajanovic.2020</bcf:citekey>
     <bcf:citekey order="11" intorder="1">Shepherd.1965</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Shepherd.1965</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

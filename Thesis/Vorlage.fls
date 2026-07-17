@@ -509,6 +509,11 @@ INPUT ./docs/StandDerTechnik.tex
 INPUT ./docs/StandDerTechnik.tex
 INPUT ./docs/StandDerTechnik.tex
 INPUT docs/StandDerTechnik.tex
+INPUT ./figs/AufbauAbisolierZelle.png
+INPUT ./figs/AufbauAbisolierZelle.png
+INPUT ./figs/AufbauAbisolierZelle.png
+INPUT ./figs/AufbauAbisolierZelle.png
+INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./docs/Lösungsansatz.tex
 INPUT ./docs/Lösungsansatz.tex
 INPUT ./docs/Lösungsansatz.tex

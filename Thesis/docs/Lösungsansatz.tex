@@ -1,19 +1,59 @@
 \section{Lösungsansatz}\label{sec:loesungsansatz}
+Dieser Abschnitt beschreibt einen der größeren Teile der Arbeit. Hier soll detailiert gezeigt werden wie das System 
+zur automatischen Abisolierung in der Prototypenproduktion aussehen soll und wie welche Entscheidung auf diesem Weg 
+getroffen wurden.\\
+Dafür sollten nochmal grob die Anforderungen und Bedingungen aufgelegt werden:\\
+Das System, das einwickelt werden soll, muss in der Lage sein aus einer hängenden Reihe von Hairpins einzelne dieser
+an den Roboter zu übergeben. Dabei dürfen die Hairpins nicht beschädigt werden und die Übergabe an den Roboterarm
+muss einer festen Taktzeit und einer hohen Wiederholgenauigkeit Geschehen.\\
+Zunächst musste sich ein grober Aufbau einer solchen Anlage angeguckt werden. Dafür wurden zwei primäre zu erledignede
+Arbeitsschritte festgelegt:\\
+1. Die Vereinzelung der Hairpins,\\
+2. Die Auslieferung und Übergabe eines einzelnen Hairpins an den Roboterarm.\\
+Der genaue Aufbau dieser Subsysteme werden im späteren Teil dieses Abschnittes weiter erläutert, nun muss sich erstmal
+ein Überblick/Übersicht über die technischen Möglichkeiten verschafft werden. Es wird in drei grobe Kategorien unterteilt:\\
+- die mechanischen Bauteile \\
+- die elektronischen Komponenten \\
+- die programmier/Code \\
+
+
 Gibt drei Themen Bereiche der Anlage: 
 1. Die Vereinzelung der Hairpins,
 2. Die Auslieferung des Hairpins zum Roboter,
-3. Das Greifen und Abisolieren des Hairpins mittels Roboter arm, wobie diese Aufgbae nicht teil dieser Arbeit ist.
+3. Das Greifen und Abisolieren des Hairpins mittels Roboter arm, wobei diese Aufgabe nicht teil dieser Arbeit ist.
 
-\subsection{Pneumatik}
+\subsection{Mechanische Bauteile}\label{sec:Mechanik}
+In diesem Teil werden mechanische Bauteile, die für ein solches System benötigt werden untersucht. Relevant
+sind dabei besonders die Punkte wie Einsetzbarkeit, Langlebigkeit und Praktikabilität.
+%
+\subsubsection{Aktuatorik}\label{Aktuatorik}
 
-\subsection{Elektronische Aktuatorik}
-
-
-\subsection{Material Auswahl}\label{sec:MaterialAuswahl}
-
-
-\subsection{Elektronische Komponenten}\label{sec:ElektronischeKomponenten}
-Als Protoytepen Porduktion
+%
+\subparagraph{Pneumatik}
+%
+\subparagraph{Elektronische Aktuatorik}
+-Servo Motor
+-Spindel
+-Beld driven
+-Roboterarm?
+%
+%
+\subsubsection{Material}\label{sec:MaterialAuswahl}
+PLA
+%
+\subsubsection{Aluminiumprofile}\label{sec:AluProfil}
+%
+%
+\subsection{elektronische Komponenten}\label{sec:ElektronischeKomponenten}
+%
+\subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
+%
+\subsubsection{Microcontroller}\label{sec:Microcontroller}
+%
+\subsubsection{Sensorik}\label{sec:Sensorik}
+%
+\subsubsection{Motoren}\label{sec:Motoren}
+%
 
 
 \subsection{CodeStruktur}\label{sec:CodeStruktur}

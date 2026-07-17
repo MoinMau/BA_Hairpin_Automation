@@ -229,6 +229,40 @@
       \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
     \endentry
+    \entry{ur5e_handbuch_2025}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=cebc23c04027201c8b35f8fdada0e866}{%
+           family={{Universal Robots A/S}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Energivej 51, DK-5260 Odense, Dänemark}%
+      }
+      \list{organization}{1}{%
+        {Universal Robots A/S}%
+      }
+      \strng{namehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{fullhash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{fullhashraw}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{bibnamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorbibnamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authornamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorfullhash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorfullhashraw}{cebc23c04027201c8b35f8fdada0e866}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Copyright © 2009-2025}
+      \field{title}{Benutzerhandbuch UR5e: Übersetzung der Originalanleitung (de), PolyScope 5}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+    \endentry
     \entry{HairpinTechnologyReview.2025}{article}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=2f07389b8530a6840972c8777d18f2c8}{%
