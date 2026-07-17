@@ -19,6 +19,96 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{ali_pneumatic_2009}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=48e109716e95ee886119aeff298bc7fd}{%
+           family={Ali},
+           familyi={A\bibinitperiod},
+           given={Hazem\bibnamedelima I.},
+           giveni={H\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=69e44853c2350b02c35eb73c17f4d22c}{%
+           family={Mohd\bibnamedelima Noor},
+           familyi={M\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Samsul\bibnamedelimb Bahari\bibnamedelima B.},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d2fc9f994591f2c6bffe79858f951be1}{%
+           family={Bashi},
+           familyi={B\bibinitperiod},
+           given={S.\bibnamedelimi M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20728830660f711c0bf815de375b1f18}{%
+           family={Marhaban},
+           familyi={M\bibinitperiod},
+           given={M.\bibnamedelimi H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{fullhash}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{fullhashraw}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{bibnamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authorbibnamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authornamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authorfullhash}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{authorfullhashraw}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1991-8178}
+      \field{journaltitle}{Australian Journal of Basic and Applied Sciences}
+      \field{number}{2}
+      \field{title}{A Review of Pneumatic Actuators (Modeling and Control)}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{3}
+      \field{year}{2009}
+      \field{urldateera}{ce}
+      \field{pages}{440\bibrangedash 454}
+      \range{pages}{15}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/223260423_A_Review_of_Pneumatic_Actuators_Modeling_and_Control
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/223260423_A_Review_of_Pneumatic_Actuators_Modeling_and_Control
+      \endverb
+    \endentry
+    \entry{Beater.2007}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=3e8cbab5dd9fd73f1613fce094534fd9}{%
+           family={Beater},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{fullhash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{fullhashraw}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{bibnamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorbibnamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authornamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorfullhash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorfullhashraw}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{978-3-540-69470-0}
+      \field{shorttitle}{Pneumatic Drives}
+      \field{title}{Pneumatic Drives: System Design, Modelling and Control}
+      \field{year}{2007}
+    \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
@@ -80,6 +170,73 @@
       \endverb
       \verb{url}
       \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+    \endentry
+    \entry{Jamian.2020}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=dd51885c0413980ab1bf009f058e2853}{%
+           family={Jamian},
+           familyi={J\bibinitperiod},
+           given={Syamiza},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bddd64019251945c8a88095ec4ca77c3}{%
+           family={Salim},
+           familyi={S\bibinitperiod},
+           given={S.\bibnamedelimi N.\bibnamedelimi S.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=375f5d151d45ea698b104860df52c56f}{%
+           family={Blar},
+           familyi={B\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=79702b26b68665ceabe46b6e6ead7d01}{%
+           family={Hanafiah},
+           familyi={H\bibinitperiod},
+           given={M.\bibnamedelimi A.\bibnamedelimi M.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=44b6f2eecadc2ecb09b6d2aff6ac392f}{%
+           family={Abdullah},
+           familyi={A\bibinitperiod},
+           given={Lokman},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{fullhash}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{fullhashraw}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{bibnamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authorbibnamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authornamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authorfullhash}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{authorfullhashraw}{3c237e512a871174ab1f35cbe6fb65ef}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{TELKOMNIKA Telecommunication, Computing, Electronics and Control}
+      \field{number}{1}
+      \field{shorttitle}{Review on Controller Design in Pneumatic Actuator Drive System}
+      \field{title}{Review on controller design in pneumatic actuator drive system}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{18}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{332\bibrangedash 342}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.12928/telkomnika.v18i1.12626
+      \endverb
+      \verb{urlraw}
+      \verb https://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/12626
+      \endverb
+      \verb{url}
+      \verb https://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/12626
       \endverb
     \endentry
     \entry{ProductionProcessHairpinStator.2024}{book}{}{}
@@ -228,6 +385,51 @@
       \verb{url}
       \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
+    \endentry
+    \entry{Stoelting.2011}{book}{}{}
+      \name{editor}{3}{}{%
+        {{un=0,uniquepart=base,hash=e52af6fdd2d0194d6bec31c24caef2bd}{%
+           family={Stölting},
+           familyi={S\bibinitperiod},
+           given={Hans-Dieter},
+           giveni={H\bibinithyphendelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d2b9307e1ca96a85a7b06907b6523b52}{%
+           family={Kallenbach},
+           familyi={K\bibinitperiod},
+           given={Eberhard},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ca9bf9b740333c1b330a03994ea224b8}{%
+           family={Amrhein},
+           familyi={A\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag}%
+      }
+      \strng{namehash}{f51d0433e5377fc4fac0643519716281}
+      \strng{fullhash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{fullhashraw}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{bibnamehash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editorbibnamehash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editornamehash}{f51d0433e5377fc4fac0643519716281}
+      \strng{editorfullhash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editorfullhashraw}{eb3e704f761ebb974d6e3df73b898f58}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{4., neu bearbeitete Auflage}
+      \field{isbn}{978-3-446-42392-3}
+      \field{shorttitle}{Handbuch Elektrische Kleinantriebe}
+      \field{title}{Handbuch Elektrische Kleinantriebe}
+      \field{year}{2011}
     \endentry
     \entry{ur5e_handbuch_2025}{manual}{}{}
       \name{author}{1}{}{%
