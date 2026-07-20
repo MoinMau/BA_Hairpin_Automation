@@ -1,7 +1,7 @@
 \section{Grundlagen}\label{sec:Grundlagen}
 Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Automatisierung der entsprechenden Produktionsprozesse beschrieben.
-Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die akutuelle Relevanz und das Potenzial 
-dieser Technologie\todo{Wo? Einleitng!}. Interessant für diese Arbeit ist zudem der Produktionsablauf eines Elektromotors mittels Hairpin-Technologie.
+Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die aktuelle Relevanz und das Potenzial 
+dieser Technologie\todo{Wo? Einleitung!}. Interessant für diese Arbeit ist zudem der Produktionsablauf eines Elektromotors mittels Hairpin-Technologie.
 Dabei wird insbesondere auf die Produktionsschritte und Verfahren des Abisolierens eingegangen. Zuletzt werden dann noch relevante Normen 
 und Vorgaben aufgeführt.
 
@@ -12,34 +12,34 @@ zum direkten Einführen in den Stator verwendet. Durch die Entwicklung in der El
 und der Elektromotoren, hat die Hairpin-Technologie in den letzten Jahren weiter an Relevanz gewonnen.
 
 \subsubsection{Entwicklung}\label{sec:EntwicklungHairPin}
-Mit der Entdeckung der Elektromagentischen-Induktion durch Michael Faraday im Jahr 1831, begann die Entstehung von Elektromotoren.
-Die ersten elektrischen Maschinen wurden dabei aus gewickleten Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
-das Verfahren an sich wurde kaum überdacht,ledigdlich einfache Parametern wie den Kupferverlusten wurden optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen,
-kam um 1900 die ersten Ideen auf, die Wiklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen. Dies bot nicht nur 
-eine erhöhte Kupferdrahtdichte (FillFactor), sondern auch eine verbesserte Kühlfähigkeit, mechanische Stabilität und eine verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
-Dieses Konzept entwicklte sich über das 20. Jahrhundert weiter und wird mittlerweile in fast allen Hochleistungsantrieben eingesetzt. 
+Mit der Entdeckung der elektromagnetischen Induktion durch Michael Faraday im Jahr 1831 begann die Entstehung von Elektromotoren.
+Die ersten elektrischen Maschinen wurden dabei aus gewickeltem Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
+das Verfahren an sich wurde kaum überdacht, lediglich einfache Parameter wie die Kupferverluste wurden optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen
+kamen um 1900 die ersten Ideen auf, die Wicklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen. Dies bot nicht nur 
+eine erhöhte Kupferdrahtdichte (Füllfaktor), sondern auch eine verbesserte Kühlfähigkeit, mechanische Stabilität und eine verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
+Dieses Konzept entwickelte sich über das 20.\ Jahrhundert weiter und wird mittlerweile in fast allen Hochleistungsantrieben eingesetzt. 
 Dies zeigte sich besonders am klaren Trend der Elektromobilität und den angemeldeten Patenten in der Wissenschaft.\\
 
 
 \subsubsection{Aufbau von modernen Elektromotoren}\label{sec:AufbauElektromotoren}
-Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meisten mit der Hairpin-Technologie aufgebaut.
+Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meistens mit der Hairpin-Technologie aufgebaut.
 Es gibt jedoch auch hier verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\\
-Zunächst muss auf den allgemeinen Aufbau eines Elektromotors eingegenangen werden. Es gibt zwei Hauptkomponeneten:
-Den Stator und den Rotor. Dabei stellt der Stator zu meist den Feststehenden äußeren Teil des Motors da, in dem auch 
+Zunächst muss auf den allgemeinen Aufbau eines Elektromotors eingegangen werden. Es gibt zwei Hauptkomponenten:
+Den Stator und den Rotor. Dabei stellt der Stator zumeist den feststehenden äußeren Teil des Motors dar, in dem auch 
 die Wicklungen verbaut werden. Der Rotor wiederum ist das rotierende Element des Motors,
 mit dem die Welle und damit die Kraft des Motors übertragen wird. Es gibt auch Motorkonfigurationen, bei denen der Stator innen
-sitzt und der Rotor außen rotiert, diese sind in Elektroantrieben für die E Mobilität aber nicht im Einsatz.\todo{Sollte das nicht lieber raus?}
+sitzt und der Rotor außen rotiert, diese sind in Elektroantrieben für die E-Mobilität aber nicht im Einsatz.\todo{Sollte das nicht lieber raus?}
 Für den Betrieb braucht es aber noch weitere Bauteile: Die elektrische Energie muss bereitgestellt werden, der Strom
-muss passend Transformiert werden und die Rotation muss mittels einem Getriebe passend übersetzt werden.
-In Bezug auf die E-Mobiltät stammt die Energie meistens aus hochmodernen Batterie-Packs, die einen annährenden Gleichstrom
-ausgeben. Diese DC-Spannung muss dann jenach Bauart des Motors passend weitergegeben werden. Bei den weitverbreiteten PMSM Motoren
-wird diese DC-Spannnug für die Wicklungen in drei zueinander versetzten Phasen umgewandelt. Dabei werden hochleistungs FETs
-im Wechselrichter verwedet, um die Energie passend zur Drehzahl und geforderten Leistung in den 120° verschobenen Phasen zu leiten.
+muss passend transformiert werden und die Rotation muss mittels eines Getriebes passend übersetzt werden.
+In Bezug auf die E-Mobilität stammt die Energie meistens aus hochmodernen Batterie-Packs, die einen annähernden Gleichstrom
+ausgeben. Diese DC-Spannung muss dann je nach Bauart des Motors passend weitergegeben werden. Bei den weitverbreiteten PMSM-Motoren
+wird diese DC-Spannung für die Wicklungen in drei zueinander versetzten Phasen umgewandelt. Dabei werden Hochleistungs-FETs
+im Wechselrichter verwendet, um die Energie passend zur Drehzahl und geforderten Leistung in den 120° verschobenen Phasen zu leiten.
 Im Motor entsteht dann ein sich radial bewegendes Magnetfeld, welches den Rotor zur Rotation zwingt.
 Diese Drehbewegung wird dann in ein Getriebe geführt. Dieses ist entsprechend der Verwendung des Motors so angepasst,
-dass z.B. eine geringere Drehzahl für die Reifen eines Autos entsteht.\\
+dass z.\ B.\ eine geringere Drehzahl für die Reifen eines Autos entsteht.\\
 
-Dieser Ablauf aus Energie Bereitstellung, Einspeisung, Umwandlung und Drehzalanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist das bei dem 
+Dieser Ablauf aus Energiebereitstellung, Einspeisung, Umwandlung und Drehzahlanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist das bei dem 
 eigentlichen Aufbau des Motors:\\
 i. DC brushed motor;\\
 ii. DC brushless motor (BLDC);\\
@@ -49,12 +49,12 @@ v. Switched reluctance motor (SRM);\\
 vi. Permanent magnet motor (PMSM);\\
 vii. Flux reversal motors\\
 \PEMfootcite{ComparativeReviewMotor.2023}
-\todo{Hier muss tiefer ins Detail gegangen Werden, Abkürzungsverzeichnis!, Grapfik}
+\todo{Hier muss tiefer ins Detail gegangen werden, Abkürzungsverzeichnis!, Grafik}
 
 
 
 \subsubsection{Produktionsablauf}\label{sec:ProduktionsablaufHairPin}
-Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Statorart Varieren.
+Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Statorart variieren.
 Grundsätzlich ist der Ablauf der Produktion vom Kupferband zum bestückten Stator immer ähnlich:\\
 1. Kupferdraht richten\\
 2. Kupferdraht abisolieren\\
@@ -72,95 +72,91 @@ Grundsätzlich ist der Ablauf der Produktion vom Kupferband zum bestückten Stat
 14. Stator testen\\
 \todo{Grafik erstellen}
 
-Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus auf einander gestapelten isolierten und gestanzten Blechen
+Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus aufeinander gestapelten isolierten und gestanzten Blechen
 besteht, nicht betrachtet. Außerdem wird der Kupferdraht als fertiges, auf Rollen gewickeltes, Produkt angesehen. Die oben beschriebene 
 Prozesskette entspricht einer Serienproduktion, bei der das Abisolieren vor dem Biegen des Kupferdrahtes positioniert ist. In 
 der Prototypen-Produktion ist dies nicht der Fall, da hier der Unterpunkt 2. nach 4. kommt.\PEMfootcite{ProductionProcessHairpinStator.2024}\\
 
 Es beginnt mit einer Rolle an isoliertem rechteckigem Kupferdraht. Dieser muss aus seiner runden Form in eine exakt gerade 
-Ausrichtung gebracht werden. Dazu muss der Draht in den zwei aussrichtugen entgegen seiner natürlichen Biegung gerade gebogen weden. 
-Hier ist das Ziel die Restkrümmung auf ein Minimum zu bringen, wobei Einfluss faktoren, wie der Spulendurchmesser, Temoerarturänderugnen,
-Kaltverformungseffekte und Ungeneuagkeiten bei Isolierschicht und Kupferdahtdicke druch den Hersteller. Es gibt Möglchkeiten durch Messungen
-in der Prdouktion diese Abweichungen automatisiert entgegen zu wirken, jedoch muss meistens das Endprdoukt kontrolliert werden und eine manuelle 
+Ausrichtung gebracht werden. Dazu muss der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung gerade gebogen werden. 
+Hier ist das Ziel, die Restkrümmung auf ein Minimum zu bringen, wobei Einflussfaktoren wie der Spulendurchmesser, Temperaturänderungen,
+Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke durch den Hersteller zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
+in der Produktion diese Abweichungen automatisiert entgegenzuwirken, jedoch muss meistens das Endprodukt kontrolliert werden und eine manuelle 
 Adjustierung vorgenommen werden.\\\\
-Wie oben Bereits beschrieben würde nun das Abisolieren des Kupferdrahts in der Serienproduktion passieren. Da dies ein Wichtiger Bestandteil dieser
-Arbeit ist, wird dies unten nocheinmal genauer Betrachtet.\\\\
+Wie oben bereits beschrieben würde nun das Abisolieren des Kupferdrahts in der Serienproduktion passieren. Da dies ein wichtiger Bestandteil dieser
+Arbeit ist, wird dies unten noch einmal genauer betrachtet.\\\\
 Im nächsten Schritt wird der Kupferdraht je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass eine Deformation
-nicht entsteht. Außerdem entsteht mit dem Schneiden eine kleine Fase, die später beim Einstettzten der Hairpins in ins Belchpacket hilft.\\\\
-Einer der komplizierteren Schritte ist das Biegen. Hier gibt verschiedene Methoden: CNC Biegen, Schwenk Biegen, Gesenk Biegen und Freies Biegen. 
-Dabei wird in der Serienprduktion meist Gesenk Beigen verwendet, da zunöchst nur die 2D Dimensionale U From des Hairpins gebogen werden muss und danach
-erst das Pressen in eine Form die 3D Dimensionale Aufbau des fertigen Hairpins bringt. Dieser Prozess bietet neben einer Hohen Geschwindigkeit auch 
-eine hohe Prozess und Wiederholgenauigkeit mit sich. In der Prototypen Prduktion wiederum wird meist das CNC Biegen bevorzugt, da druch das erstellen 
-jeder einezlenen Biegung mittels Speziellen Werkzeugen, eine schnelle anpassung jegilciher parameter möglcih ist.\\\\
-Als Vorbreitung des Stators, gilt es die Nuten des Belchpackets für das einführen der hairpins zu isolieren. 
-Dazu wird vorgeformtes Isolierpapaier in die Nuten eingeschoben, um ein weitere Isolation zwischen Hairpins und geerdentem
+nicht entsteht. Außerdem entsteht mit dem Schneiden eine kleine Fase, die später beim Einsetzen der Hairpins in das Blechpacket hilft.\\\\
+Einer der komplizierteren Schritte ist das Biegen. Hier gibt es verschiedene Methoden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und Freies Biegen. 
+Dabei wird in der Serienproduktion meist Gesenkbiegen verwendet, da zunächst nur die 2D-dimensionale U-Form des Hairpins gebogen werden muss und danach
+erst das Pressen in eine Form den 3D-dimensionalen Aufbau des fertigen Hairpins bringt. Dieser Prozess bietet neben einer hohen Geschwindigkeit auch 
+eine hohe Prozess- und Wiederholgenauigkeit mit sich. In der Prototypenproduktion wiederum wird meist das CNC-Biegen bevorzugt, da durch das Erstellen 
+jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung jeglicher Parameter möglich ist.\\\\
+Als Vorbereitung des Stators gilt es, die Nuten des Blechpaketes für das Einführen der Hairpins zu isolieren. 
+Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen Hairpins und geerdetem
 Blechpacket zu schaffen.\\\\
-Für ein besseres Einsetzen der Hairpins in das Blechpacket, müssen diese Vorpositioniert werden. Je nach Stator typ muss hier 
-hier mehrere Reihen an unterschiedlichen Hairpin Größen vorbereitet werden.\\
+Für ein besseres Einsetzen der Hairpins in das Blechpacket müssen diese vorpositioniert werden. Je nach Statortyp müssen 
+mehrere Reihen an unterschiedlichen Hairpin-Größen vorbereitet werden.\\
 Beim Fügen werden die Hairpins samt der Halterung für die Vorpositionierung in das Blechpacket eingeführt. 
-Hier werden diese axial Ausgerichtet und Verpresst.\\\\
+Hier werden diese axial ausgerichtet und verpresst.\\\\
 Nun müssen die aus dem Blechpacket hervorstehenden Enden der Hairpins freigestellt werden. Dieser Vorgang ist wichtig,
-damit der näcshte Prozess ohne Probleme verläuft. Beim Separieren wird jeder Hairpin so gezogen, dass diese als einzelnes 
+damit der nächste Prozess ohne Probleme verläuft. Beim Separieren wird jeder Hairpin so gezogen, dass diese als einzelne 
 Beinchen hervorstehen.\\\\
-Beim Verschränken können nun die einzelnen Beinchen von einer Mehrgängigen Spindel so verformt werden, dass ein richitges
-Verschweißen möglich ist. Die hairpin Enden liegen nun im richitgen Abstand neben ihrem richtigen Partner.\\\\
-Das Laserschwißen dient der Kontaktierung von den Hairpin-Enden. Hier bei werden mittels einem Laserstrahl immer zwei Kupferenden 
-mit einander Verschweißt. Hierbei ist auf hohe genauigkeit zu setzten, da die Qualität der Schweißverbidnugen großen Einfluss auf 
-die Elektrische Beschaffenheit des Motors hat.\\\\
-Nachdem der Stator grundsätzlich zusammen gebaut wurde, müssen für den Einbau in einen Elektromotor, weitere Schritte beachtet werden.
-So muss die Hairpins mit dem Verbidnugselemt zum Wechselrichter verbudnen werden. Dazu wird in richtigen Schaltschema ein passender Kontaktring mit 
+Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel so verformt werden, dass ein richtiges
+Verschweißen möglich ist. Die Hairpin-Enden liegen nun im richtigen Abstand neben ihrem richtigen Partner.\\\\
+Das Laserschweißen dient der Kontaktierung der Hairpin-Enden. Hierbei werden mittels eines Laserstrahls immer zwei Kupferenden 
+miteinander verschweißt. Hierbei ist auf hohe Genauigkeit zu setzen, da die Qualität der Schweißverbindungen großen Einfluss auf 
+die elektrische Beschaffenheit des Motors hat.\\\\
+Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Elektromotor weitere Schritte beachtet werden.
+So müssen die Hairpins mit dem Verbindungselement zum Wechselrichter verbunden werden. Dazu wird im richtigen Schaltschema ein passender Kontaktring mit 
 Anschlüssen verbunden.\\\\
-Da nun auf der einen Seite des Stators die gesamten gerade beschriebenen Schweißnähte offen liegen, müssen diese selbstverständlcih 
-zu einander Isoliert werden. Um Kriechströme und Durchschläge zu vermeinden, wird eine Beschichtung aufgetragen.
-Dies kann durch Wirbelintensifverfahren, im Tauch- oder Traufelverfarhen passierne.\todo{Was das?} \\\\
-Der vorletzte Schritt dieser Prozesskette ist das Imprägnieren des Stators. Hierbei wird ein Harz in die Nuten des Belchpacketes gegeben,
-um die Hairpins zu Fixieren, eine bessere Wärmeleitung zu ermöglcihen und eine weitere elektrische Isolierschicht zu gewährleisten.\\\\
-Der letzte Schritt beschriebet die Funtkions und Qualitätsprüfung. Bei müssen die elektrischen Parametern den Anforderungen entsprechen. Dazu zählen 
-die Isolationsfestigkieit und elektrische Leitfähigkeit. Weitehin darf natürlcih auch keine mechanische Beschädigung vorhanden sein.\\
-
-Wie sieht der Produktionsablauf aus? Welche unterschiede gibt es zu Prototypen Fertigung und Serienfertigung? Welcher Abschnitt wird in dieser Arbeit betrachtet?
+Da nun auf der einen Seite des Stators die gesamten gerade beschriebenen Schweißnähte offen liegen, müssen diese selbstverständlich 
+zueinander isoliert werden. Um Kriechströme und Durchschläge zu vermeiden, wird eine Beschichtung aufgetragen.
+Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren.\todo{Was das?} \\\\
+Der vorletzte Schritt dieser Prozesskette ist das Imprägnieren des Stators. Hierbei wird ein Harz in die Nuten des Blechpaketes gegeben,
+um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.\\\\
+Der letzte Schritt beschreibt die Funktions- und Qualitätsprüfung. Dabei müssen die elektrischen Parameter den Anforderungen entsprechen. Dazu zählen 
+die Isolationsfestigkeit und elektrische Leitfähigkeit. Weiterhin darf natürlich auch keine mechanische Beschädigung vorhanden sein.\\
 
 
 \subsection{Produktionsverfahren zum Abisolieren}\label{sec:ProduktionsverfahrenAbisolieren}
-Das Abisolieren der Hairpins haben großen Einfluss auf die Quealität des fertigen Stators, da es bei Fehlern zur
-Minderung des maximalen Stromflusses und damit der Gesamtleistung kommt. Wegen dieser Relevanz, gibt es mehrere Methoden
-eine Abisolierung druchzuführen, die in diesem Abschnitt vorgestellt werden soll. Dazu wird auf das Abisolieren durch rotierende Bürsten,
-mit Schabwerkzeugen, induktives Erhitzen und dem Laser eingegenangen. \PEMfootcite{Glaessel2020Skinning}\\
-Außerdem kann die Position in der Prozesskette variert werden. So ist meist für die Serienproduktion das Absisolieren
-vor dem Ablängen. In der Prototypenproduktion ist dieser Schritt entkopplet von dem Drahtvorbereiten. Es wird hier erst
-nach dem Biegen eine Abisolierung in einer getrennten Station durchgeführt. 
+Das Abisolieren der Hairpins hat großen Einfluss auf die Qualität des fertigen Stators, da es bei Fehlern zur
+Minderung des maximalen Stromflusses und damit der Gesamtleistung kommt. Wegen dieser Relevanz gibt es mehrere Methoden,
+eine Abisolierung durchzuführen, die in diesem Abschnitt vorgestellt werden sollen. Dazu wird auf das Abisolieren durch rotierende Bürsten,
+mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen. \PEMfootcite{Glaessel2020Skinning}\\
+Außerdem kann die Position in der Prozesskette variiert werden. So ist meist für die Serienproduktion das Abisolieren
+vor dem Ablängen vorgesehen. In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung und wird erst
+nach dem Biegen in einer getrennten Station durchgeführt. 
 
-Welche Verfahren gitb es? Wo sind diese in der Produkitonskette angesiedelt?
 
 \subsubsection{Rotierende Bürsten}\label{sec:RotierendeBürsten}
-Bei dieser Abisolier Methode werden rotierende Bürsten verwendet, die die Isolierschicht mechanisch abtragen soll.
-Diese Bürsten sind meist als Stahldrähten gefertigt und die abgelöste Isolierung vom Kupferdraht wird abgesaugt. Dies
-bietet Vorteiel, wie einen einfachen Prozess aufwand und geringe Kosten. Dennoch gibt es große Prpbleme bei der Qualtiät
-dieser Methode durch abnutzten der Bürsten. Auch kann es auftreten, dass der Hairpin mechanischen Beschädigugne durch
-die rotirenden Bürsten annehemen.
-Serienproduktion, Vorteile, Nachteile, Kosten, Taktzeit, Qualität, Anlage im PEM?
+Bei dieser Abisolier-Methode werden rotierende Bürsten verwendet, die die Isolierschicht mechanisch abtragen soll.
+Diese Bürsten sind meist als Stahldrähte gefertigt und die abgelöste Isolierung vom Kupferdraht wird abgesaugt. Dies
+bietet Vorteile wie einen einfachen Prozessaufwand und geringe Kosten. Dennoch gibt es große Probleme bei der Qualität
+dieser Methode durch Abnutzen der Bürsten. Auch kann es auftreten, dass der Hairpin mechanische Beschädigungen durch
+die rotierenden Bürsten annimmt.
+
 
 \subsubsection{Fräsen}\label{sec:Fräsen}
-Eine weiter häufig verwendete Methode ist die Verwendung von Fräsern. Diese Schaben das Isoliermaterial 
-an der gewünschten Stelle ab. Dieser Prozess bedarf ein genaues einstellen der Fräsern, da auch Kupfermaterial abgetragen 
-werden kann. Dies ist besodners Problematisch wenn sich der Kupferdraht in seinen Dimensionen ändert oder sich die Fräser abnutzten.
-Auch hier ist ein großer Nachteil, die durch zu viel abgetragendes Material, verschelchteten Leitfähigkeit durch den verringerten 
-Kupferdurchschnitt. Auf der anderen Seite haben wir definierte Schnittkanten und einen sehr reine Oberfläche.
-Serienproduktion, Vorteile, Nachteile, Kosten, Taktzeit, Qualität, Anlage im PEM?
+Eine weitere häufig verwendete Methode ist die Verwendung von Fräsern. Diese schaben das Isoliermaterial 
+an der gewünschten Stelle ab. Dieser Prozess bedarf eines genauen Einstellens der Fräser, da auch Kupfermaterial abgetragen 
+werden kann. Dies ist besonders problematisch, wenn sich der Kupferdraht in seinen Dimensionen ändert oder sich die Fräser abnutzen.
+Auch ein großer Nachteil ist die durch zu viel abgetragenes Material verschlechterte Leitfähigkeit durch den verringerten 
+Kupferquerschnitt. Auf der anderen Seite ergeben sich definierte Schnittkanten und eine sehr reine Oberfläche.
+
 
 \subsubsection{Induktives Erhitzen}\label{sec:InduktivesErhitzten}
-Da die Isolierung des Kupferdrahtes bei zu hoher Hitze schmiltzt udn verbrennt, kann man zu Abisolieren auch die Methode des induktiven 
-Erhitzen verwenden. Dabei wird das abzuisolierendes Material in die Mitte einer induktiven SPule gegeben und eine Soannung mit hoher
-Frequenz auf die SPule gegeben. Das erzeugte schnell wechselnde Magnetfeld führt zu im Kupferdraht induzierten Eddy Strömen, die zu extrem
-hohen Temperaturen im Kupfer führen. Im Endeffekt führt Hitzte zur Verbrennung und damit zum Abtragen der Isolierung. Vorteile sind dabei, 
-die kueze Bearbeitungszeit und das kontaktlose Bearbeiten des Kupferdrahtes. Jedoch hat die große Hitze zur Folge, dass die blanke Oberfläche
-des Kupfers viel schneller Oxidiert, außerdem wird nicht nur der geplante Bereich abisoliert sondern es kann auch durch die starke Wäremleitung
+Da die Isolierung des Kupferdrahtes bei zu hoher Hitze schmilzt und verbrennt, kann man zum Abisolieren auch die Methode des induktiven 
+Erhitzens verwenden. Dabei wird das abzuisolierende Material in die Mitte einer induktiven Spule gegeben und eine Spannung mit hoher
+Frequenz auf die Spule gegeben. Das erzeugte schnell wechselnde Magnetfeld führt zu im Kupferdraht induzierten Wirbelströmen, die zu extrem
+hohen Temperaturen im Kupfer führen. Im Endeffekt führt Hitze zur Verbrennung und damit zum Abtragen der Isolierung. Vorteile sind dabei 
+die kurze Bearbeitungszeit und das kontaktlose Bearbeiten des Kupferdrahtes. Jedoch hat die große Hitze zur Folge, dass die blanke Oberfläche
+des Kupfers viel schneller oxidiert. Außerdem wird nicht nur der geplante Bereich abisoliert, sondern es kann auch durch die starke Wärmeleitung
 andere Teile der Isolierschicht beschädigt werden.
-Serienproduktion, Vorteile, Nachteile, Kosten, Taktzeit, Qualität, etc.
 
 \subsubsection{Laser}\label{sec:Laser}
-Als letztes wird weitverbreiteste Methode zum Abisolieren beschrieben: 
-\todo{sehr detailierte Betrachtung!!!}
+Als letztes wird die weitverbreitetste Methode zum Abisolieren beschrieben: 
+\todo{sehr detaillierte Betrachtung!!!}
 
 \subsection{Normen und Vorgaben}\label{sec:NormenVorgaben}
-Welche Normen muss ich beachten? Was gibts zu Sicherheit beim Anlagenbau?
+Welche Normen muss ich beachten? Was gibt es zur Sicherheit beim Anlagenbau?
