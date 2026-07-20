@@ -1,24 +1,62 @@
 \section{Validierung \& Tests}\label{sec:ValidierungTests}
-
-
-\subsection{Fehlerbetrachtung}\label{sec:Fehlerbetrachtung}
-Welche Fehler können auftreten?
-
-\subsubsection{Versuchsplan}\label{sec:Versuchsplan}
-
-\subsubsection{}
-
-
-\subsection{Versuchsdurchführung}\label{sec:Versuchsdurchführung}
-Ablauf der Tests
-
+%
+%
+\subsection{Verifikation \- Einzelkomponenten}\label{sec:Verifikation}
+%
+\subsubsection{I2C-Kommunikation}
+- Latenz, Fehlerrate
+%
+\subsubsection{Servomotoren}
+- Wiederholgenauigkeit\\
+- Kommunikationsporbleme (PWM, Stecker)
+%
+\subsubsection{Schrittmotoren}
+- Genauigkeiten\\
+- Belastungs/Betriebsgrenzen\\
+%
+%
+\subsection{Ausfall-Betrachtung}\label{sec:Ausfall}
+- Was passiert, wenn ein Subsystem, Spannungsversogung versagt?\\
+- FMAE betrachtung!\\
+- Sicherheitsregeln für Produktionsanalgen?\\
+%
+%
+\subsection{Systemtest \- Gesamtablauf}\label{sec:Systemtest}
+- Wie wird das System getestet?\\
+%
 \subsubsection{Versuchsaufbau}\label{sec:Versuchsaufbau}
-Wie laufen die Tests ab?
-
-\subsubsection{Ergebnisse}\label{sec:Ergebnisse}
-Was kam raus? Wie sehen die Testreihen aus? Welche Fehler?
-Müssen Tests wiederholt werden? Kleine Bewertung!
-
-
-\subsection{Testbewertung}\label{sec:Testbewertung}
-Was sagen die Ergebnisse jetzt? Gibt es Normen etc., gegen die man vergleichen kann?
+- Wie werden die Tests gemahct?\\
+- Worauf muss geachtet werden?\\
+- Welche Testreihen werden gemacht?\\
+%
+\paragraph{Versuchsdurchführung}
+- Nach welchen Standard wurde getestet: variable/feste Variablen?\\
+- Ablauf einer Testreihe\\
+%
+\subsubsection{Versuchsreihe\_Taktzeit}\label{sec:VR_Taktzeit}
+- Tabelle, etc. für Versuchsreihe nach Prüfung der Taktzeit\\
+%
+\subsubsection{Versuchsreihe\_Wiederholgenauigkeit}\label{sec:VR_Wiederholgenauigkeit}
+- Tabelle, etc. für Versuchsreihe nach Prüfung der Wiederholgenauigkeit\\
+%
+\subsubsection{Versuchsreihe\_Durchsatz}\label{sec:VR_Durchsatz}
+- Tabelle, etc. für Versuchsreihe nach Optimierung/Änderung des Durchsatzes von verarbeiteten Hairpins\\
+%
+\subsubsection{Versuchsreihe\_Beschädigung}\label{sec:VR_Beschädigung}
+- Tabelle, etc. für Versuchsreihe nach Prüfung der Bschädigung/Veränderung der Hairpins\\
+%
+%
+\subsection{Ergebnisse}\label{sec:Ergebnisse}
+- Was kam raus? Wie sehen die Testreihen aus? Welche Fehler?\\
+- Fehlerquoten!\\
+- müssen Tests wiederholt werden?
+- Einschätzung mittels "Testnormen"\\
+%
+%
+\subsection{Fehlerbetrachtung}\label{sec:Fehlerbetrachtung}
+- Einschätzung der eintretenden Fehler!\\
+%
+%
+\subsection{Bewertung gegen Anforderungsliste}\label{sec:Testbewertung}
+- Was sagen die Ergebnisse jetzt?\\
+- Vergleich gegen Anforderung\\

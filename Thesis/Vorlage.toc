@@ -15,56 +15,69 @@
 \contentsline {subsection}{\numberline {2.2}Produktionsverfahren zum Abisolieren}{7}{subsection.arabicsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Rotierende Bürsten}{7}{subsubsection.arabicsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2}Fräsen}{7}{subsubsection.arabicsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{8}{subsubsection.arabicsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{7}{subsubsection.arabicsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Laser}{8}{subsubsection.arabicsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.3}Normen und Vorgaben}{8}{subsection.arabicsection.2.3}%
+\contentsline {subsection}{\numberline {2.3}Normen}{8}{subsection.arabicsection.2.3}%
 \contentsline {section}{\numberline {3}Stand der Technik}{9}{section.arabicsection.3}%
-\contentsline {subsection}{\numberline {3.1}Echte Produktionen}{9}{subsection.arabicsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Subsystem Betrachtung}{9}{subsection.arabicsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Vereinzelungs System}{9}{subsubsection.arabicsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Auslieferungssystem(Deliverysystem)}{9}{subsubsection.arabicsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Aktuelles System}{9}{subsection.arabicsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Clean-Laser-Anlage}{10}{subsubsection.arabicsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Universal Robots Roboterarm}{10}{subsubsection.arabicsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Abisolierverfahren Aktuell}{10}{subsubsection.arabicsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.1}Aktuelles System}{9}{subsection.arabicsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Clean-Laser-Anlage}{9}{subsubsection.arabicsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Universal Robots Roboterarm}{9}{subsubsection.arabicsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Abisolierverfahren Aktuell}{10}{subsubsection.arabicsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Existierende System}{10}{subsection.arabicsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Subsystem-Betrachtung}{10}{subsection.arabicsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Vereinzelungssysteme}{10}{subsubsection.arabicsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Zuführsystem}{10}{subsubsection.arabicsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Forschungslücke}{10}{subsection.arabicsection.3.4}%
 \contentsline {section}{\numberline {4}Lösungsansatz}{11}{section.arabicsection.4}%
 \contentsline {subsection}{\numberline {4.1}Mechanische Bauteile}{11}{subsection.arabicsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Aktuatorik}{11}{subsubsection.arabicsection.4.1.1}%
-\contentsline {subparagraph}{\nonumberline Pneumatik}{11}{subparagraph*.11}%
-\contentsline {subparagraph}{\nonumberline Elektromechanische Aktuatorik}{12}{subparagraph*.12}%
+\contentsline {subparagraph}{\nonumberline Pneumatik}{11}{subparagraph*.12}%
+\contentsline {subparagraph}{\nonumberline Elektromechanische Aktuatorik}{12}{subparagraph*.13}%
 \contentsline {subsubsection}{\numberline {4.1.2}Material}{14}{subsubsection.arabicsection.4.1.2}%
 \contentsline {subsubsection}{\numberline {4.1.3}Aluminiumprofile}{14}{subsubsection.arabicsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.2}elektronische Komponenten}{14}{subsection.arabicsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Elektronische Komponenten}{14}{subsection.arabicsection.4.2}%
 \contentsline {subsubsection}{\numberline {4.2.1}Spannungsversorgung}{14}{subsubsection.arabicsection.4.2.1}%
 \contentsline {subsubsection}{\numberline {4.2.2}Microcontroller}{14}{subsubsection.arabicsection.4.2.2}%
 \contentsline {subsubsection}{\numberline {4.2.3}Sensorik}{14}{subsubsection.arabicsection.4.2.3}%
 \contentsline {subsubsection}{\numberline {4.2.4}Motoren}{14}{subsubsection.arabicsection.4.2.4}%
 \contentsline {subsection}{\numberline {4.3}CodeStruktur}{14}{subsection.arabicsection.4.3}%
 \contentsline {subsubsection}{\numberline {4.3.1}Aktuelle Systeme aus der Produktion}{14}{subsubsection.arabicsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Code Struktur der Anlage}{14}{subsubsection.arabicsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2}Code-Struktur der Anlage}{14}{subsubsection.arabicsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.4}Vereinzelung}{14}{subsection.arabicsection.4.4}%
 \contentsline {subsection}{\numberline {4.5}Auslieferung}{15}{subsection.arabicsection.4.5}%
-\contentsline {section}{\numberline {5}Konstruktion}{16}{section.arabicsection.5}%
-\contentsline {subsection}{\numberline {5.1}Verwendete Tools}{16}{subsection.arabicsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Probleme beim Aufbau}{16}{subsection.arabicsection.5.2}%
-\contentsline {section}{\numberline {6}Validierung \& Tests}{17}{section.arabicsection.6}%
-\contentsline {subsection}{\numberline {6.1}Fehlerbetrachtung}{17}{subsection.arabicsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Versuchplan}{17}{subsubsection.arabicsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.2}Versuchsdruchführung}{17}{subsection.arabicsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Versuchsaufbau}{17}{subsubsection.arabicsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Ergebnisse}{17}{subsubsection.arabicsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.3}Testbewertung}{17}{subsection.arabicsection.6.3}%
-\contentsline {section}{\numberline {7}Optimierungen \& Fazit}{18}{section.arabicsection.7}%
-\contentsline {subsubsection}{\numberline {7.0.1}Probleme}{18}{subsubsection.arabicsection.7.0.1}%
-\contentsline {subsubsection}{\numberline {7.0.2}Bewertung für den Alltagbetrieb}{18}{subsubsection.arabicsection.7.0.2}%
-\contentsline {subsubsection}{\numberline {7.0.3}Verbesserungs Vorschläge}{18}{subsubsection.arabicsection.7.0.3}%
-\contentsline {subsubsection}{\numberline {7.0.1}Erstes Unterkapitel im zweiten Unterkapitel}{19}{subsubsection.arabicsection.7.0.1}%
-\contentsline {paragraph}{\nonumberline Ein Paragraph}{19}{paragraph*.13}%
-\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{19}{paragraph*.14}%
-\contentsline {subsubsection}{\numberline {7.0.2}Zweites Unterkapitel im zweiten Unterkapitel}{20}{subsubsection.arabicsection.7.0.2}%
-\contentsline {section}{\numberline {A}Literatur}{21}{appendix.A}%
-\contentsline {section}{\numberline {B}Anhang}{22}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Anhang Unterkapitel}{22}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}Auch der Anhang kann mehere Unterkapitel haben \dots }{22}{subsection.B.2}%
-\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{23}{appendix.C}%
+\contentsline {section}{\numberline {5}Konzept \& Anforderungsanalyse}{16}{section.arabicsection.5}%
+\contentsline {subsection}{\numberline {5.1}Anforderungen}{16}{subsection.arabicsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Architektur}{16}{subsection.arabicsection.5.2}%
+\contentsline {section}{\numberline {6}Realisierung}{17}{section.arabicsection.6}%
+\contentsline {subsection}{\numberline {6.1}Verwendete Tools}{17}{subsection.arabicsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Hardware}{17}{subsection.arabicsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Software}{17}{subsection.arabicsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Herausforderungen \& Probleme}{17}{subsection.arabicsection.6.4}%
+\contentsline {section}{\numberline {7}Validierung \& Tests}{18}{section.arabicsection.7}%
+\contentsline {subsection}{\numberline {7.1}Verifikation \- Einzelkomponenten}{18}{subsection.arabicsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}I2C-Kommunikation}{18}{subsubsection.arabicsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Servomotoren}{18}{subsubsection.arabicsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Schrittmotoren}{18}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Ausfall-Betrachtung}{18}{subsection.arabicsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Systemtest \- Gesamtablauf}{18}{subsection.arabicsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Versuchsaufbau}{18}{subsubsection.arabicsection.7.3.1}%
+\contentsline {paragraph}{\nonumberline Versuchsdurchführung}{18}{paragraph*.14}%
+\contentsline {subsubsection}{\numberline {7.3.2}Versuchsreihe\_Taktzeit}{18}{subsubsection.arabicsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3}Versuchsreihe\_Wiederholgenauigkeit}{18}{subsubsection.arabicsection.7.3.3}%
+\contentsline {subsubsection}{\numberline {7.3.4}Versuchsreihe\_Durchsatz}{19}{subsubsection.arabicsection.7.3.4}%
+\contentsline {subsubsection}{\numberline {7.3.5}Versuchsreihe\_Beschädigung}{19}{subsubsection.arabicsection.7.3.5}%
+\contentsline {subsection}{\numberline {7.4}Ergebnisse}{19}{subsection.arabicsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Fehlerbetrachtung}{19}{subsection.arabicsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Bewertung gegen Anforderungsliste}{19}{subsection.arabicsection.7.6}%
+\contentsline {section}{\numberline {8}Diskussion}{20}{section.arabicsection.8}%
+\contentsline {subsection}{\numberline {8.1}Optimierungspotenzial}{20}{subsection.arabicsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Probleme}{20}{subsubsection.arabicsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Bewertung für den Alltagbetrieb}{20}{subsubsection.arabicsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}Verbesserungs Vorschläge}{20}{subsubsection.arabicsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.2}Erkenntnisse \& Limitationen}{20}{subsection.arabicsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Ausblick}{20}{subsection.arabicsection.8.3}%
+\contentsline {section}{\numberline {9}Zusammenfassung}{21}{section.arabicsection.9}%
+\contentsline {section}{\numberline {A}Literatur}{22}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{23}{appendix.B}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{24}{appendix.C}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

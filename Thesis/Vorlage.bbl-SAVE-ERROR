@@ -19,176 +19,496 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{Ajanovic.2020}{article}{}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=23633ffbbdf745a9da43527256bf1238}{%
-           family={Ajanovic},
+    \entry{ali_pneumatic_2009}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=48e109716e95ee886119aeff298bc7fd}{%
+           family={Ali},
            familyi={A\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod},
+           given={Hazem\bibnamedelima I.},
+           giveni={H\bibinitperiod\bibinitdelim I\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=d5d06cd7992404aa013cc06e32b98711}{%
-           family={Glatt},
-           familyi={G\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod},
+        {{un=0,uniquepart=base,hash=69e44853c2350b02c35eb73c17f4d22c}{%
+           family={Mohd\bibnamedelima Noor},
+           familyi={M\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Samsul\bibnamedelimb Bahari\bibnamedelima B.},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d2fc9f994591f2c6bffe79858f951be1}{%
+           family={Bashi},
+           familyi={B\bibinitperiod},
+           given={S.\bibnamedelimi M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20728830660f711c0bf815de375b1f18}{%
+           family={Marhaban},
+           familyi={M\bibinitperiod},
+           given={M.\bibnamedelimi H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
-      \strng{fullhash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{fullhashraw}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{bibnamehash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authorbibnamehash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authornamehash}{68dacf3d10ef5496a7f6a14d7eb1a319}
-      \strng{authorfullhash}{47d03803707fe1bd928b42162c03e5ae}
-      \strng{authorfullhashraw}{47d03803707fe1bd928b42162c03e5ae}
+      \strng{namehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{fullhash}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{fullhashraw}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{bibnamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authorbibnamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authornamehash}{b3519c6613fb470cb016be5921d78dff}
+      \strng{authorfullhash}{283af6a5ff12330fcd2f8c4f11857e8f}
+      \strng{authorfullhashraw}{283af6a5ff12330fcd2f8c4f11857e8f}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{journaltitle}{e {\&} i Elektrotechnik und Informationstechnik}
-      \field{shorttitle}{Aspekte der Elektromobilität}
-      \field{title}{Wirtschaftliche und ökologische Aspekte der Elektromobilität: Economic and ecological aspects of electric vehicles}
-      \field{urlday}{5}
-      \field{urlmonth}{4}
-      \field{urlyear}{2021}
-      \field{volume}{137}
-      \field{year}{2020}
+      \field{labeltitlesource}{title}
+      \field{issn}{1991-8178}
+      \field{journaltitle}{Australian Journal of Basic and Applied Sciences}
+      \field{number}{2}
+      \field{title}{A Review of Pneumatic Actuators (Modeling and Control)}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{3}
+      \field{year}{2009}
       \field{urldateera}{ce}
-      \field{pages}{136\bibrangedash 146}
-      \range{pages}{11}
-      \verb{file}
-      \verb 2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet:Attachments/2020{\_}WirtschaftlicheundoekologischeAspektederEletromobilitaet.pdf:application/pdf
-      \endverb
+      \field{pages}{440\bibrangedash 454}
+      \range{pages}{15}
       \verb{urlraw}
-      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
+      \verb https://www.researchgate.net/publication/223260423_A_Review_of_Pneumatic_Actuators_Modeling_and_Control
       \endverb
       \verb{url}
-      \verb https://link.springer.com/article/10.1007/s00502-020-00812-x
+      \verb https://www.researchgate.net/publication/223260423_A_Review_of_Pneumatic_Actuators_Modeling_and_Control
       \endverb
     \endentry
-    \entry{Shepherd.1965}{article}{}{}
+    \entry{Beater.2007}{book}{}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=ff116ca4d290dfe9d5cc91eab078e376}{%
-           family={Shepherd},
-           familyi={S\bibinitperiod},
-           given={C.\bibnamedelimi M.},
-           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+        {{un=0,uniquepart=base,hash=3e8cbab5dd9fd73f1613fce094534fd9}{%
+           family={Beater},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{fullhash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{fullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{bibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorbibnamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authornamehash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorfullhash}{ff116ca4d290dfe9d5cc91eab078e376}
-      \strng{authorfullhashraw}{ff116ca4d290dfe9d5cc91eab078e376}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{fullhash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{fullhashraw}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{bibnamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorbibnamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authornamehash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorfullhash}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \strng{authorfullhashraw}{3e8cbab5dd9fd73f1613fce094534fd9}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{issn}{0013-4651}
-      \field{journaltitle}{Journal of The Electrochemical Society}
-      \field{number}{7}
-      \field{shorttitle}{Primary Secondary Cells}
-      \field{title}{Design of Primary and Secondary Cells}
-      \field{volume}{112}
-      \field{year}{1965}
-      \field{pages}{657}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1149/1.2423659
-      \endverb
-      \verb{file}
-      \verb Shepherd1965{\_}DesignofPrimaryandSecondaryCells:Attachments/Shepherd1965{\_}DesignofPrimaryandSecondaryCells.pdf:application/pdf
-      \endverb
+      \field{isbn}{978-3-540-69470-0}
+      \field{shorttitle}{Pneumatic Drives}
+      \field{title}{Pneumatic Drives: System Design, Modelling and Control}
+      \field{year}{2007}
     \endentry
-    \entry{Singh.2015}{article}{}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=c71a65cb8774a2b07d1c51e6821349dd}{%
-           family={Singh},
-           familyi={S\bibinitperiod},
-           given={Madhav},
-           giveni={M\bibinitperiod},
+    \entry{Glaessel2020Skinning}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
+           family={Glässel},
+           familyi={G\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=8f2696894bee53098b0299abd1e77167}{%
-           family={Kaiser},
+        {{un=0,uniquepart=base,hash=19d2ab2d61dc84c8a2d7bcb02b13112e}{%
+           family={Seefried},
+           familyi={S\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=81e3ef3925c76dcbd14fc60d481088f8}{%
+           family={Kühl},
            familyi={K\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=861854a17a7d79ab04e94dc8829f0e71}{%
+           family={Franke},
+           familyi={F\bibinitperiod},
            given={Jörg},
            giveni={J\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=89e24cdcd9903037b122b51443c37f2a}{%
-           family={Hahn},
-           familyi={H\bibinitperiod},
-           given={Horst},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
       }
-      \strng{namehash}{541f1c6eff033f5dec75869629f80489}
-      \strng{fullhash}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \strng{fullhashraw}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \strng{bibnamehash}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \strng{authorbibnamehash}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \strng{authornamehash}{541f1c6eff033f5dec75869629f80489}
-      \strng{authorfullhash}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \strng{authorfullhashraw}{792a7b2d5cb35b5069afa6ac7ed219a5}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \strng{namehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{fullhash}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{fullhashraw}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{bibnamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authorbibnamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authornamehash}{4d05613425fac130764bde67b1dabe9d}
+      \strng{authorfullhash}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \strng{authorfullhashraw}{8d0c6e5c10f2641c029bccc9624e3e4e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{issn}{0013-4651}
-      \field{journaltitle}{Journal of The Electrochemical Society}
-      \field{number}{7}
-      \field{shorttitle}{Thick Electrodes}
-      \field{title}{Thick Electrodes for High Energy Lithium Ion Batteries}
-      \field{volume}{162}
-      \field{year}{2015}
-      \field{pages}{A1196\bibrangedash A1201}
-      \range{pages}{-1}
+      \field{issn}{2278-0149}
+      \field{journaltitle}{International Journal of Mechanical Engineering and Robotics Research}
+      \field{number}{2}
+      \field{shorttitle}{Skinning of Insulated Copper Wires}
+      \field{title}{Skinning of Insulated Copper Wires within the Production Chain of Hairpin Windings for Electric Traction Drives}
+      \field{urlday}{15}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{9}
+      \field{year}{2020}
+      \field{urldateera}{ce}
       \verb{doi}
-      \verb 10.1149/2.0401507jes
+      \verb 10.18178/ijmerr.9.2.163-169
       \endverb
       \verb{file}
-      \verb Singh2015{\_}ThickElectrodesforHighEnergyLithiumIonBatteries:Attachments/Singh2015{\_}ThickElectrodesforHighEnergyLithiumIonBatteries.pdf:application/pdf
+      \verb Glaessel2020_SkinningInsulatedCopperWires:Attachments/Glaessel2020_SkinningInsulatedCopperWires.pdf:application/pdf
       \endverb
-    \endentry
-    \entry{Sollmann.2018}{misc}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=6fe96fad09cc645a32cc7b5b1c77f942}{%
-           family={Sollmann},
-           familyi={S\bibinitperiod},
-           given={D.},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{fullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{fullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{bibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorbibnamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authornamehash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorfullhash}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \strng{authorfullhashraw}{6fe96fad09cc645a32cc7b5b1c77f942}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{shorttitle}{Nickel-Cadmium-Batterien}
-      \field{title}{Nickel-Cadmium-Batterien}
-      \field{urlday}{6}
-      \field{urlmonth}{5}
-      \field{urlyear}{2021}
-      \field{year}{2018}
-      \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
+      \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
       \endverb
       \verb{url}
-      \verb https://www.batterieforum-deutschland.de/infoportal/lexikon/nickel-cadmium-batterien/
+      \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+    \endentry
+    \entry{Jamian.2020}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=dd51885c0413980ab1bf009f058e2853}{%
+           family={Jamian},
+           familyi={J\bibinitperiod},
+           given={Syamiza},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bddd64019251945c8a88095ec4ca77c3}{%
+           family={Salim},
+           familyi={S\bibinitperiod},
+           given={S.\bibnamedelimi N.\bibnamedelimi S.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=375f5d151d45ea698b104860df52c56f}{%
+           family={Blar},
+           familyi={B\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=79702b26b68665ceabe46b6e6ead7d01}{%
+           family={Hanafiah},
+           familyi={H\bibinitperiod},
+           given={M.\bibnamedelimi A.\bibnamedelimi M.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=44b6f2eecadc2ecb09b6d2aff6ac392f}{%
+           family={Abdullah},
+           familyi={A\bibinitperiod},
+           given={Lokman},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{fullhash}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{fullhashraw}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{bibnamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authorbibnamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authornamehash}{7da0a7cfeae302f2579979f70dff7b61}
+      \strng{authorfullhash}{3c237e512a871174ab1f35cbe6fb65ef}
+      \strng{authorfullhashraw}{3c237e512a871174ab1f35cbe6fb65ef}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{TELKOMNIKA Telecommunication, Computing, Electronics and Control}
+      \field{number}{1}
+      \field{shorttitle}{Review on Controller Design in Pneumatic Actuator Drive System}
+      \field{title}{Review on controller design in pneumatic actuator drive system}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{18}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{332\bibrangedash 342}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.12928/telkomnika.v18i1.12626
+      \endverb
+      \verb{urlraw}
+      \verb https://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/12626
+      \endverb
+      \verb{url}
+      \verb https://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/12626
+      \endverb
+    \endentry
+    \entry{ProductionProcessHairpinStator.2024}{book}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=b98c4fb4e9926c48a0cfc35d0672d0b4}{%
+           family={Kampker},
+           familyi={K\bibinitperiod},
+           given={Achim},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ea1b7af4013a1cdd23ba0383d41366c7}{%
+           family={Heimes},
+           familyi={H\bibinitperiod},
+           given={Heiner\bibnamedelima Hans},
+           giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3e3221557379785083ea7ca80417806f}{%
+           family={Born},
+           familyi={B\bibinitperiod},
+           given={Henrik\bibnamedelima Christoph},
+           giveni={H\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=668db60d8e77bfe222f9c720b285a74d}{%
+           family={Nankemann},
+           familyi={N\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=081bdc0846e0803a992d82deca266cdc}{%
+           family={Backes},
+           familyi={B\bibinitperiod},
+           given={Till\bibnamedelima Augustin},
+           giveni={T\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Aachen}%
+      }
+      \list{publisher}{1}{%
+        {PEM of RWTH Aachen University, Chair of Production Engineering of E-Mobility Components}%
+      }
+      \strng{namehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{fullhash}{7f72b7136b69d08fedb88a4454773a1d}
+      \strng{fullhashraw}{7f72b7136b69d08fedb88a4454773a1d}
+      \strng{bibnamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authorbibnamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authornamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authorfullhash}{7f72b7136b69d08fedb88a4454773a1d}
+      \strng{authorfullhashraw}{7f72b7136b69d08fedb88a4454773a1d}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{3rd edition}
+      \field{isbn}{978-3-947920-61-7}
+      \field{shorttitle}{Production Process of a Hairpin Stator}
+      \field{title}{Production process of a hairpin stator}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Kampker2024_ProductionProcessHairpinStator:Attachments/Kampker2024_ProductionProcessHairpinStator.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://publications.rwth-aachen.de/record/1003088
+      \endverb
+      \verb{url}
+      \verb https://publications.rwth-aachen.de/record/1003088
+      \endverb
+    \endentry
+    \entry{ComparativeReviewMotor.2023}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=36f45e976fb52c17e2092c49be865878}{%
+           family={Rimpas},
+           familyi={R\bibinitperiod},
+           given={Dimitrios},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=73e8b4491aa813395e9064e197e366cc}{%
+           family={Kaminaris},
+           familyi={K\bibinitperiod},
+           given={Stavros\bibnamedelima D.},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fa29112889945b6f619ce28a69d37d24}{%
+           family={Piromalis},
+           familyi={P\bibinitperiod},
+           given={Dimitrios\bibnamedelima D.},
+           giveni={D\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2c8a1e8c7b4e60003d31d39504da4768}{%
+           family={Vokas},
+           familyi={V\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a5bffc0830087eb3c62f23f03d443b9f}{%
+           family={Arvanitis},
+           familyi={A\bibinitperiod},
+           given={Konstantinos\bibnamedelima G.},
+           giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cb37da944494c79e265e00753e351ccb}{%
+           family={Karavas},
+           familyi={K\bibinitperiod},
+           given={Christos-Spyridon},
+           giveni={C\bibinithyphendelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{fullhash}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{fullhashraw}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{bibnamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authorbibnamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authornamehash}{8c62e8e94e634fe72329c7e348084216}
+      \strng{authorfullhash}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \strng{authorfullhashraw}{391db69c6f3fffe0d9eda18bbf0b1008}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1996-1073}
+      \field{journaltitle}{Energies}
+      \field{number}{6}
+      \field{shorttitle}{Motor Technologies for EVs}
+      \field{title}{Comparative Review of Motor Technologies for Electric Vehicles Powered by a Hybrid Energy Storage System Based on Multi-Criteria Analysis}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{16}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{5\bibrangedash 11}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.3390/en16062555
+      \endverb
+      \verb{file}
+      \verb Rimpas2023_ComparativeReviewMotorTechnologies:Attachments/Rimpas2023_ComparativeReviewMotorTechnologies.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/1996-1073/16/6/2555
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/1996-1073/16/6/2555
+      \endverb
+    \endentry
+    \entry{Stoelting.2011}{book}{}{}
+      \name{editor}{3}{}{%
+        {{un=0,uniquepart=base,hash=e52af6fdd2d0194d6bec31c24caef2bd}{%
+           family={Stölting},
+           familyi={S\bibinitperiod},
+           given={Hans-Dieter},
+           giveni={H\bibinithyphendelim D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d2b9307e1ca96a85a7b06907b6523b52}{%
+           family={Kallenbach},
+           familyi={K\bibinitperiod},
+           given={Eberhard},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ca9bf9b740333c1b330a03994ea224b8}{%
+           family={Amrhein},
+           familyi={A\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag}%
+      }
+      \strng{namehash}{f51d0433e5377fc4fac0643519716281}
+      \strng{fullhash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{fullhashraw}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{bibnamehash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editorbibnamehash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editornamehash}{f51d0433e5377fc4fac0643519716281}
+      \strng{editorfullhash}{eb3e704f761ebb974d6e3df73b898f58}
+      \strng{editorfullhashraw}{eb3e704f761ebb974d6e3df73b898f58}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{4., neu bearbeitete Auflage}
+      \field{isbn}{978-3-446-42392-3}
+      \field{shorttitle}{Handbuch Elektrische Kleinantriebe}
+      \field{title}{Handbuch Elektrische Kleinantriebe}
+      \field{year}{2011}
+    \endentry
+    \entry{ur5e_handbuch_2025}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=cebc23c04027201c8b35f8fdada0e866}{%
+           family={{Universal Robots A/S}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Energivej 51, DK-5260 Odense, Dänemark}%
+      }
+      \list{organization}{1}{%
+        {Universal Robots A/S}%
+      }
+      \strng{namehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{fullhash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{fullhashraw}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{bibnamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorbibnamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authornamehash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorfullhash}{cebc23c04027201c8b35f8fdada0e866}
+      \strng{authorfullhashraw}{cebc23c04027201c8b35f8fdada0e866}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Copyright © 2009-2025}
+      \field{title}{Benutzerhandbuch UR5e: Übersetzung der Originalanleitung (de), PolyScope 5}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+    \endentry
+    \entry{HairpinTechnologyReview.2025}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=2f07389b8530a6840972c8777d18f2c8}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Tianjie},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{fullhash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{fullhashraw}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{bibnamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorbibnamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authornamehash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorfullhash}{2f07389b8530a6840972c8777d18f2c8}
+      \strng{authorfullhashraw}{2f07389b8530a6840972c8777d18f2c8}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{IEEE Open Journal of the Vehicular Technology}
+      \field{shorttitle}{Hairpin Winding Technology: Review}
+      \field{title}{Continuous Hairpin Winding Technology for Electric Machines Enabling Net Zero Transportation: A Comprehensive Review}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{1481\bibrangedash 1483}
+      \range{pages}{3}
+      \verb{urlraw}
+      \verb https://nottingham-repository.worktribe.com/file/49829353/1/Continuous_Hairpin_Winding_Technology_for_Electric_Machines_Enabling_Net_Zero_Transportation_A_Comprehensive_Review
+      \endverb
+      \verb{url}
+      \verb https://nottingham-repository.worktribe.com/file/49829353/1/Continuous_Hairpin_Winding_Technology_for_Electric_Machines_Enabling_Net_Zero_Transportation_A_Comprehensive_Review
       \endverb
     \endentry
   \enddatalist
+  \missing{Ajanovic.2020}
+  \missing{Shepherd.1965}
+  \missing{Singh.2015}
+  \missing{Sollmann.2018}
 \endrefsection
 \endinput
 
