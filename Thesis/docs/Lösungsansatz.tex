@@ -1,29 +1,29 @@
 \section{Lösungsansatz}\label{sec:loesungsansatz}
-Dieser Abschnitt beschreibt einen der größeren Teile der Arbeit. Hier soll detailiert gezeigt werden wie das System 
-zur automatischen Abisolierung in der Prototypenproduktion aussehen soll und wie welche Entscheidung auf diesem Weg 
+Dieser Abschnitt beschreibt einen der größeren Teile der Arbeit. Hier soll detailliert gezeigt werden, wie das System
+zur automatischen Abisolierung in der Prototypenproduktion aussehen soll und welche Entscheidungen auf diesem Weg
 getroffen wurden.\\
-Dafür sollten nochmal grob die Anforderungen und Bedingungen aufgelegt werden:\\
-Das System, das einwickelt werden soll, muss in der Lage sein aus einer hängenden Reihe von Hairpins einzelne dieser
+Dafür sollten noch einmal grob die Anforderungen und Bedingungen dargelegt werden:\\
+Das System, das entwickelt werden soll, muss in der Lage sein, aus einer hängenden Reihe von Hairpins einzelne dieser
 an den Roboter zu übergeben. Dabei dürfen die Hairpins nicht beschädigt werden und die Übergabe an den Roboterarm
-muss einer festen Taktzeit und einer hohen Wiederholgenauigkeit Geschehen.\\
-Zunächst musste sich ein grober Aufbau einer solchen Anlage angeguckt werden. Dafür wurden zwei primäre zu erledignede
+muss mit einer festen Taktzeit und einer hohen Wiederholgenauigkeit geschehen.\\
+Zunächst musste sich ein grober Aufbau einer solchen Anlage angesehen werden. Dafür wurden zwei primäre zu erledigende
 Arbeitsschritte festgelegt:\\
 1. Die Vereinzelung der Hairpins,\\
 2. Die Auslieferung und Übergabe eines einzelnen Hairpins an den Roboterarm.\\
-Der genaue Aufbau dieser Subsysteme werden im späteren Teil dieses Abschnittes weiter erläutert, nun muss sich erstmal
-ein Überblick/Übersicht über die technischen Möglichkeiten verschafft werden. Es wird in drei grobe Kategorien unterteilt:\\
+Der genaue Aufbau dieser Subsysteme wird im späteren Teil dieses Abschnittes weiter erläutert. Zunächst muss man sich
+einen Überblick über die technischen Möglichkeiten verschaffen. Es wird in drei grobe Kategorien unterteilt:\\
 - die mechanischen Bauteile \\
 - die elektronischen Komponenten \\
-- die programmier/Code \\
+- die Programmierung/der Code \\
 
 
-Gibt drei Themen Bereiche der Anlage: 
+Es gibt drei Themenbereiche der Anlage:
 1. Die Vereinzelung der Hairpins,
 2. Die Auslieferung des Hairpins zum Roboter,
-3. Das Greifen und Abisolieren des Hairpins mittels Roboter arm, wobei diese Aufgabe nicht teil dieser Arbeit ist.
+3. Das Greifen und Abisolieren des Hairpins mittels Roboterarm, wobei diese Aufgabe nicht Teil dieser Arbeit ist.
 
 \subsection{Mechanische Bauteile}\label{sec:Mechanik}
-In diesem Teil werden mechanische Bauteile, die für ein solches System benötigt werden untersucht. Relevant
+In diesem Teil werden mechanische Bauteile, die für ein solches System benötigt werden, untersucht. Relevant
 sind dabei besonders die Punkte wie Einsetzbarkeit, Langlebigkeit und Praktikabilität.
 %
 \subsubsection{Aktuatorik}\label{Aktuatorik}
@@ -32,9 +32,9 @@ sind dabei besonders die Punkte wie Einsetzbarkeit, Langlebigkeit und Praktikabi
 \subparagraph{Pneumatik}
 %
 \subparagraph{Elektronische Aktuatorik}
--Servo Motor
+-Servomotor
 -Spindel
--Beld driven
+-Belt driven
 -Roboterarm?
 %
 %
@@ -44,7 +44,7 @@ PLA
 \subsubsection{Aluminiumprofile}\label{sec:AluProfil}
 %
 %
-\subsection{elektronische Komponenten}\label{sec:ElektronischeKomponenten}
+\subsection{Elektronische Komponenten}\label{sec:ElektronischeKomponenten}
 %
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
 %
@@ -57,20 +57,20 @@ PLA
 
 
 \subsection{CodeStruktur}\label{sec:CodeStruktur}
-Welche Code Strukturen gibt es für Ausfall sicherheit etc. Welche Code Struktur wird verwendet? Welche Vorteile und Nachteile hat diese Code Struktur?
+Welche Code-Strukturen gibt es für Ausfallsicherheit etc.? Welche Code-Struktur wird verwendet? Welche Vorteile und Nachteile hat diese Code-Struktur?
 
 \subsubsection{Aktuelle Systeme aus der Produktion}\label{sec:Codesystems}
 Welche Normen und Arten für solche Systeme gibt es?
 
-\subsubsection{Code Struktur der Anlage}\label{sec:CodeStrukturAnlage}
-Diagramm für Signal Fluss, Fallbacks, Sicherheit
+\subsubsection{Code-Struktur der Anlage}\label{sec:CodeStrukturAnlage}
+Diagramm für Signalfluss, Fallbacks, Sicherheit
 
 
 \subsection{Vereinzelung}\label{sec:Vereinzelung}
-Das Subsystem der Vereinzelung muss die Hairpins mit einer hohen Taktzeit 
-und Zuverlässigkeit vereinzeln. Dbei muss eaus ein Bündel von Hiarpins ein 
-einzeler Hairpin ausgegeben werden.
+Das Subsystem der Vereinzelung muss die Hairpins mit einer hohen Taktzeit
+und Zuverlässigkeit vereinzeln. Dabei muss aus einem Bündel von Hairpins ein
+einzelner Hairpin ausgegeben werden.
 %
 \subsection{Auslieferung}\label{sec:Auslieferung}
-Das Subssystem der Auslieferung muss die Hairpins mit einer hohen Taktzeit 
+Das Subsystem der Auslieferung muss die Hairpins mit einer hohen Taktzeit
 und Zuverlässigkeit ausliefern.
