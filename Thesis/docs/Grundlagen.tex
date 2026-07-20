@@ -1,47 +1,46 @@
 \section{Grundlagen}\label{sec:Grundlagen}
-Im folgenden Kapitel werden Grundlagen zur Hairpin Technologie und Automatisierung der entsprechenden Produktionsprozessen beschrieben.
-Dazu wird zunächst auf die Entwicklung der Hairpin Technologie eingegangen, darauf folgend auf die akutuelle Relevanz und das Potentzial 
-dieser Technologie. Interessant für diese Arbeit ist zudem der Produktionsablauf eines Elektromotros mittels Hairpin Technologie.
+Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Automatisierung der entsprechenden Produktionsprozesse beschrieben.
+Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die akutuelle Relevanz und das Potenzial 
+dieser Technologie\todo{Wo? Einleitng!}. Interessant für diese Arbeit ist zudem der Produktionsablauf eines Elektromotors mittels Hairpin-Technologie.
 Dabei wird insbesondere auf die Produktionsschritte und Verfahren des Abisolierens eingegangen. Zuletzt werden dann noch relevante Normen 
 und Vorgaben aufgeführt.
 
 
 \subsection{Hairpin-Technologie}\label{sec:HairPinTechnologie}
-Die Hairpin-Technologie ist eine modered Wickeltechnologie von Statoren von Elektromotoren. Dabei werden vorgeformte Kupferleitungen
-zum einfach einstecken in den Stator verwendet. Durch die entwicklung in der Elektromobilität, in Bereichen der Batterietechnik, Leistungselektronik 
-und der Elektromotoren, hat die Hairpin-Technologie in den letzten Jahren an Relevanz gewonnen.
+Die Hairpin-Technologie ist eine moderne Wickeltechnologie der Statoren von Elektromotoren. Dabei werden vorgeformte Kupferleitungen
+zum direkten Einführen in den Stator verwendet. Durch die Entwicklung in der Elektromobilität, wie der Batterietechnik, Leistungselektronik 
+und der Elektromotoren, hat die Hairpin-Technologie in den letzten Jahren weiter an Relevanz gewonnen.
 
 \subsubsection{Entwicklung}\label{sec:EntwicklungHairPin}
-Mit der Entdeckung der Elektromagentischen Induktion durch Michael Faraday im Jahr 1831, begann die Entwicklung von Elektromotoren.
-Die ersten Elektrischenmaschinen wurden dabei aus gewickleten Kupferdraht hergestellt. Dies galt lange zeit als Stand der Technik und
-es wurde nur nach eifnachen Parametern wie den Kupferverlusten optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen,
-kam um 1900 die ersten Ideen auf, die Wiklungen nciht aus rundenm Draht sondern asu flachen Kupferband erzustellen. Dies Bot nciht nur 
-einen erhöhte Kupferdraht dichte (FillFactor), sondern auch eine verbesserte Kühlfhäigkeit, mechanische Stabilität und verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
-Dieses Konzept entwicklte sich über das 20. Jahrhundert weiter und wird mittlerweile in fast allen hochleistungs Antrieben eingesetzt. 
-Besonders die letzten Jahre zeigten den klaren Trend in der Elektromobilotät und den angemendelten Patenten.\\
+Mit der Entdeckung der Elektromagentischen-Induktion durch Michael Faraday im Jahr 1831, begann die Entstehung von Elektromotoren.
+Die ersten elektrischen Maschinen wurden dabei aus gewickleten Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
+das Verfahren an sich wurde kaum überdacht,ledigdlich einfache Parametern wie den Kupferverlusten wurden optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen,
+kam um 1900 die ersten Ideen auf, die Wiklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen. Dies bot nicht nur 
+eine erhöhte Kupferdrahtdichte (FillFactor), sondern auch eine verbesserte Kühlfähigkeit, mechanische Stabilität und eine verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
+Dieses Konzept entwicklte sich über das 20. Jahrhundert weiter und wird mittlerweile in fast allen Hochleistungsantrieben eingesetzt. 
+Dies zeigte sich besonders am klaren Trend der Elektromobilität und den angemeldeten Patenten in der Wissenschaft.\\
 
-Wie und waraus hat sich die Hairpin-Technologie entwickelt? Welche Vorteile bietet sie gegenüber anderen Technologien? Welche Nachteile gibt es?
 
 \subsubsection{Aufbau von modernen Elektromotoren}\label{sec:AufbauElektromotoren}
-Wie bereits beschrieben sind aktuelle hochleistungs Elektroantriebe meisten mit der Hairpin-Technologie aufgebaut.
-Es gibt dabei jedoch wieder verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\\
+Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meisten mit der Hairpin-Technologie aufgebaut.
+Es gibt jedoch auch hier verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\\
 Zunächst muss auf den allgemeinen Aufbau eines Elektromotors eingegenangen werden. Es gibt zwei Hauptkomponeneten:
 Den Stator und den Rotor. Dabei stellt der Stator zu meist den Feststehenden äußeren Teil des Motors da, in dem auch 
 die Wicklungen verbaut werden. Der Rotor wiederum ist das rotierende Element des Motors,
-mit dem die Welle und damit dei Kraft des Motors übertragen wird.  \todo{Mag das nicht}Es gibt auch Motor konfigurationen, bei denen der Stator innen
-sitzt und der Rotor außen Rotiert, diese sind in elektroantrieben für die E Mobilität aber nciht im Einsatz.
+mit dem die Welle und damit die Kraft des Motors übertragen wird. Es gibt auch Motorkonfigurationen, bei denen der Stator innen
+sitzt und der Rotor außen rotiert, diese sind in Elektroantrieben für die E Mobilität aber nicht im Einsatz.\todo{Sollte das nicht lieber raus?}
 Für den Betrieb braucht es aber noch weitere Bauteile: Die elektrische Energie muss bereitgestellt werden, der Strom
 muss passend Transformiert werden und die Rotation muss mittels einem Getriebe passend übersetzt werden.
-In Bezug auf die E-Mobiltät stammt die Energie meistens aus hochmoderen Batterie-Packs, die ein annährenden Gleichstrom
-ausgeben. Diese DC Spannung muss dann jenach Bauart des Motors passend weitergegeben werden. Bei den weitverrbeiteten PMSM Motoren
-wird diese DC Spannnug für die Wiklungen in drei versetzten Phasen umgewandelt. Dabei werden hochlesitungs Mosfets
-im Wechselrichter verwedet, um die Energie passend zur Drehzahl und geforderten Leistung in die 120° verschobenen Phasen zu leiten.
+In Bezug auf die E-Mobiltät stammt die Energie meistens aus hochmodernen Batterie-Packs, die einen annährenden Gleichstrom
+ausgeben. Diese DC-Spannung muss dann jenach Bauart des Motors passend weitergegeben werden. Bei den weitverbreiteten PMSM Motoren
+wird diese DC-Spannnug für die Wicklungen in drei zueinander versetzten Phasen umgewandelt. Dabei werden hochleistungs FETs
+im Wechselrichter verwedet, um die Energie passend zur Drehzahl und geforderten Leistung in den 120° verschobenen Phasen zu leiten.
 Im Motor entsteht dann ein sich radial bewegendes Magnetfeld, welches den Rotor zur Rotation zwingt.
-Diese Drehbewegung wird dann in ein Getriebe geführt. Dieses ist entsprechend der Verwendung des Motors so angespasst,
+Diese Drehbewegung wird dann in ein Getriebe geführt. Dieses ist entsprechend der Verwendung des Motors so angepasst,
 dass z.B. eine geringere Drehzahl für die Reifen eines Autos entsteht.\\
 
-Dieser Ablauf aus Energie Bereitstellung, Einspeisung, Umwandlung und Drehzalanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist es bei dem eigentlichen
-Aufbau des Motors:\\
+Dieser Ablauf aus Energie Bereitstellung, Einspeisung, Umwandlung und Drehzalanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist das bei dem 
+eigentlichen Aufbau des Motors:\\
 i. DC brushed motor;\\
 ii. DC brushless motor (BLDC);\\
 iii. Induction motor (IM);\\
@@ -50,13 +49,13 @@ v. Switched reluctance motor (SRM);\\
 vi. Permanent magnet motor (PMSM);\\
 vii. Flux reversal motors\\
 \PEMfootcite{ComparativeReviewMotor.2023}
-\todo{Hier muss tiefer ins Detail gegangen Werden, Abkürzungsverzeichnis!}
+\todo{Hier muss tiefer ins Detail gegangen Werden, Abkürzungsverzeichnis!, Grapfik}
 
 
 
 \subsubsection{Produktionsablauf}\label{sec:ProduktionsablaufHairPin}
-Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Stator Art Varieren.
-Grundsätzlich ist der Ablauf aber immer ähnlich:\\
+Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Statorart Varieren.
+Grundsätzlich ist der Ablauf der Produktion vom Kupferband zum bestückten Stator immer ähnlich:\\
 1. Kupferdraht richten\\
 2. Kupferdraht abisolieren\\
 3. Kupferdraht ablängen\\
@@ -73,13 +72,13 @@ Grundsätzlich ist der Ablauf aber immer ähnlich:\\
 14. Stator testen\\
 \todo{Grafik erstellen}
 
-Bei dieser Aufzähung wird die Produktion des Stator Blechpaketes, welches aus auf einander gestapelten isolierten Belchen
-besteht, nciht betrachtet. Außerdem wird der Kupferdraht fertiges auf Rollen gewickeltes Produkt angesehen. Die oben beschreibene 
-Prozesskette entspricht einer Serienproduktion, bei der das Abisolieren vor dem Biegen des Kupferdrahtes Positioniert ist. In 
-der Prototypen Produktion ist dies nicht der Fall, da hier der unterpunkt 2. hinter 4. kommt.
-\PEMfootcite{ProductionProcessHairpinStator.2024}
-Es beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner Runden Form in eine exakt gerade 
-Ausrichtugn gebracht werden. Dazu muss der Draht in den Zwei achsrichtugen entgegen seiner natürlcihen Biegung gerade gebogen weden. 
+Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus auf einander gestapelten isolierten und gestanzten Blechen
+besteht, nicht betrachtet. Außerdem wird der Kupferdraht als fertiges, auf Rollen gewickeltes, Produkt angesehen. Die oben beschriebene 
+Prozesskette entspricht einer Serienproduktion, bei der das Abisolieren vor dem Biegen des Kupferdrahtes positioniert ist. In 
+der Prototypen-Produktion ist dies nicht der Fall, da hier der Unterpunkt 2. nach 4. kommt.\PEMfootcite{ProductionProcessHairpinStator.2024}\\
+
+Es beginnt mit einer Rolle an isoliertem rechteckigem Kupferdraht. Dieser muss aus seiner runden Form in eine exakt gerade 
+Ausrichtung gebracht werden. Dazu muss der Draht in den zwei aussrichtugen entgegen seiner natürlichen Biegung gerade gebogen weden. 
 Hier ist das Ziel die Restkrümmung auf ein Minimum zu bringen, wobei Einfluss faktoren, wie der Spulendurchmesser, Temoerarturänderugnen,
 Kaltverformungseffekte und Ungeneuagkeiten bei Isolierschicht und Kupferdahtdicke druch den Hersteller. Es gibt Möglchkeiten durch Messungen
 in der Prdouktion diese Abweichungen automatisiert entgegen zu wirken, jedoch muss meistens das Endprdoukt kontrolliert werden und eine manuelle 

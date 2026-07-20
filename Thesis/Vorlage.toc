@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {2.2}Produktionsverfahren zum Abisolieren}{7}{subsection.arabicsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Rotierende Bürsten}{7}{subsubsection.arabicsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2}Fräsen}{7}{subsubsection.arabicsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{7}{subsubsection.arabicsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{8}{subsubsection.arabicsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Laser}{8}{subsubsection.arabicsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.3}Normen und Vorgaben}{8}{subsection.arabicsection.2.3}%
 \contentsline {section}{\numberline {3}Stand der Technik}{9}{section.arabicsection.3}%
@@ -30,8 +30,8 @@
 \contentsline {section}{\numberline {4}Lösungsansatz}{11}{section.arabicsection.4}%
 \contentsline {subsection}{\numberline {4.1}Mechanische Bauteile}{11}{subsection.arabicsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Aktuatorik}{11}{subsubsection.arabicsection.4.1.1}%
-\contentsline {subparagraph}{\nonumberline Pneumatik}{11}{subparagraph*.8}%
-\contentsline {subparagraph}{\nonumberline Elektromechanische Aktuatorik}{12}{subparagraph*.9}%
+\contentsline {subparagraph}{\nonumberline Pneumatik}{11}{subparagraph*.11}%
+\contentsline {subparagraph}{\nonumberline Elektromechanische Aktuatorik}{12}{subparagraph*.12}%
 \contentsline {subsubsection}{\numberline {4.1.2}Material}{14}{subsubsection.arabicsection.4.1.2}%
 \contentsline {subsubsection}{\numberline {4.1.3}Aluminiumprofile}{14}{subsubsection.arabicsection.4.1.3}%
 \contentsline {subsection}{\numberline {4.2}elektronische Komponenten}{14}{subsection.arabicsection.4.2}%
@@ -59,8 +59,8 @@
 \contentsline {subsubsection}{\numberline {7.0.2}Bewertung für den Alltagbetrieb}{18}{subsubsection.arabicsection.7.0.2}%
 \contentsline {subsubsection}{\numberline {7.0.3}Verbesserungs Vorschläge}{18}{subsubsection.arabicsection.7.0.3}%
 \contentsline {subsubsection}{\numberline {7.0.1}Erstes Unterkapitel im zweiten Unterkapitel}{19}{subsubsection.arabicsection.7.0.1}%
-\contentsline {paragraph}{\nonumberline Ein Paragraph}{19}{paragraph*.10}%
-\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{19}{paragraph*.11}%
+\contentsline {paragraph}{\nonumberline Ein Paragraph}{19}{paragraph*.13}%
+\contentsline {paragraph}{\nonumberline Daher kommt hier auch Paragraph zwei}{19}{paragraph*.14}%
 \contentsline {subsubsection}{\numberline {7.0.2}Zweites Unterkapitel im zweiten Unterkapitel}{20}{subsubsection.arabicsection.7.0.2}%
 \contentsline {section}{\numberline {A}Literatur}{21}{appendix.A}%
 \contentsline {section}{\numberline {B}Anhang}{22}{appendix.B}%

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber Vorlage"] 1784311987.10224 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1784316423.63025 0
-  "Vorlage.bcf" 1784316423.44722 109707 42547a86e18cc63d4492cec7d899673c "pdflatex"
+["biber Vorlage"] 1784311987.10224 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1784558065.67124 0
+  "Vorlage.bcf" 1784558065.49276 109707 42547a86e18cc63d4492cec7d899673c "pdflatex"
   "refs/references.bib" 1784311977.98524 5455 503af13bbabba2d871ac05b98a312c67 ""
   (generated)
   "Vorlage.bbl"
   "Vorlage.blg"
   (rewritten before read)
-["pdflatex"] 1784316419.97314 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1784316423.63065 0
+["pdflatex"] 1784558062.14898 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1784558065.6716 0
   "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" 1784312958.95812 8930 5941472564eeab93708eefee5f121318 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -280,17 +280,17 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1783688908 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1783688750 3636771 a7bb531bdb879a453dd41ae83a4e6dd5 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "Vorlage.aux" 1784316423.42888 47962 0e9961ef22be4d8f7a8192e19ce02d5d "pdflatex"
+  "Vorlage.aux" 1784558065.47941 48687 b1711c19cf9404ee28faf3391f109b0f "pdflatex"
   "Vorlage.bbl" 1784311989.9174 21551 36b17be6d0caca119676c570488a0e4a "biber Vorlage"
-  "Vorlage.lof" 1784316423.44873 1112 7945996f8338ece0669e96308181808c "pdflatex"
-  "Vorlage.lot" 1784316423.44878 336 3f9c3dbb103e3129061c9b2de2a57e30 "pdflatex"
-  "Vorlage.run.xml" 1784316423.44854 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
+  "Vorlage.lof" 1784558065.49386 1112 7945996f8338ece0669e96308181808c "pdflatex"
+  "Vorlage.lot" 1784558065.4939 336 3f9c3dbb103e3129061c9b2de2a57e30 "pdflatex"
+  "Vorlage.run.xml" 1784558065.4937 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
   "Vorlage.tex" 1784312958.95812 8930 5941472564eeab93708eefee5f121318 ""
-  "Vorlage.toc" 1784316423.44865 6864 2e1f286868227f02ded995a8706bed80 "pdflatex"
+  "Vorlage.toc" 1784558065.49378 6866 03d65fb8d5b27a268f09d71e385f1329 "pdflatex"
   "docs/Anhang.tex" 1783689261.15727 3126 33115ed5eba558e515dee7e8922970f6 ""
-  "docs/Einleitung.tex" 1784196450.03811 7747 e8ab0d88c3e3cd342e0e93d967742f3f ""
+  "docs/Einleitung.tex" 1784556381.95961 7926 70bcbf57ca68b18ca82f4b9b7b2e8f6f ""
   "docs/Erklaerung.tex" 1783689261.16052 2344 219ce918f4663fac7f09586f24cc0e31 ""
-  "docs/Grundlagen.tex" 1784196450.03809 14356 e5f86277da297700fc89501557c3fec9 ""
+  "docs/Grundlagen.tex" 1784558058.19798 14387 6824680271c16c87085e9258dd13fdf8 ""
   "docs/Konstruktion.tex" 1783941896.99111 293 01666fae9cd9e53c0d7239c02df260ba ""
   "docs/Lösungsansatz.tex" 1784316415.63001 17673 b6c259427ab5eff82eeb3be19c57922b ""
   "docs/Optimierung_Fazit.tex" 1783941896.99105 6733 d99171d4332dea9edf1aea5e3ec6f86e ""
@@ -301,7 +301,7 @@
   "figs/Blume.jpg" 1784279519.76097 68697 ca17a509011ad251ab87b590f5fa6324 ""
   "figs/pneumatikzylinder_schnitt.svg" 1784301798.47359 8604 788a681fa4f18e972b2b4ecf110a0872 ""
   "figs/rwth_pem_bild_rgb.pdf" 1783689261.19354 3253 bc1df308dda4bd08e4f0c64f5795f5a5 ""
-  "glos/Formelzeichen.tex" 1784026423.38966 863 fb60875c0ae753e6c650e15766bdaa3b ""
+  "glos/Formelzeichen.tex" 1784558058.19688 857 96f681b1aa97243e138185f4a8fcf9fc ""
   "refs/_PEMcite.tex" 1783689261.24885 5368 8c1972c80c475ab4d9584c87e71ea7b9 ""
   "svg-inkscape/pneumatikzylinder_schnitt_svg-tex.pdf" 1784302707.00558 3885 ce8ae05d4d44c97f1da5c5e604656c77 ""
   "svg-inkscape/pneumatikzylinder_schnitt_svg-tex.pdf_tex" 1784302707.00606 3530 4b56947ddbd5850543ffdb358809652a ""
