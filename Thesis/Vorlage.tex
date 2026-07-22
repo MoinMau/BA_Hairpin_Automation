@@ -125,7 +125,7 @@
 
 	%für Grafiken direkt in Latex:
 	\usepackage{tikz}
-   	\usetikzlibrary{positioning, arrows.meta}
+   	\usetikzlibrary{positioning, arrows.meta, fit}
 %
 	
 	%Subfigures
@@ -155,7 +155,12 @@
 	%TabularX
 	\usepackage{tabularx}
 	\usepackage{bigstrut}
-	
+
+	%Tabellen
+	\usepackage{booktabs}
+	\usepackage{longtable}
+	\usepackage{array}
+	\usepackage{colortbl} 
 	
 	%Trennung bestimmter Wörter
 	
@@ -231,8 +236,6 @@
 \input{docs/Grundlagen}
 \newpage
 \input{docs/StandDerTechnik}
-\newpage
-\input{docs/Lösungsansatz}
 \newpage
 \input{docs/Konzept}
 \newpage

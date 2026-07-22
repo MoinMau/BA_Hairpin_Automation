@@ -1,11 +1,251 @@
 \section{Konzept \& Anforderungsanalyse}\label{sec:Konzept}
-In diesem Kapitel soll betrachtet werden, was das System zur automatisierten Abisolierung erfüllen muss.
+Dieser Abschnitt beschreibt einen der größeren Teile dieser Arbeit. Hier soll detailliert gezeigt werden, wie das System
+zur automatischen Abisolierung in der Prototypenproduktion aussehen soll und welche Entscheidungen auf diesem Weg
+getroffen wurden.\\
+Dafür sollten noch einmal grob die Anforderungen und Bedingungen dargelegt werden:\\
+Das System, das entwickelt werden soll, muss in der Lage sein, aus einer hängenden Reihe von Hairpins einzelne dieser
+an den Roboter zu übergeben. Dabei dürfen die Hairpins nicht beschädigt werden und die Übergabe an den Roboterarm
+muss mit einer festen Taktzeit und einer hohen Wiederholgenauigkeit geschehen.\\
+Zunächst musste sich ein grober Aufbau einer solchen Anlage angesehen werden. Dafür wurden zwei primäre zu erledigende
+Arbeitsschritte festgelegt:\\
+1. Die Vereinzelung der Hairpins,\\
+2. Die Zuführung und Übergabe eines einzelnen Hairpins an den Roboterarm.\\
+Der genaue Aufbau dieser Subsysteme wird im späteren Teil dieses Abschnittes weiter erläutert. Zunächst muss man sich
+einen Überblick über die technischen Möglichkeiten verschaffen. 
 %
 %
 \subsection{Anforderungen}\label{sec:Anforderung}
-- Was MUSS erfüllt sein?\\
-- Was ist optional?\\
+Diese Bachelorarbeit orientiert sich für die Erarbeitung des automatisierten Abisoliersystems an der VDI 2221.
+In dieser ist beschrieben, wie ein systematischer und phasenweiser Entwicklungsprozess eines Produktes aussieht.
+Der Grundgedanke ist dabei, Anforderungen festzulegen, Funktionsstrukturen und Lösungskonzepte festzulegen und 
+zuletzt das Gesamtsystem zu gestalten.\\
+Wichtigster Teil der Anforderungsliste besteht dabei die Anforderungen nach Forderung (F) und Wunsch (W) zu klassifizieren.
+Es wird also unterschieden, ob eine Bestimmung für den Betrieb des Gesamtsystem relevant ist oder nur zur
+Verbesserung diese Führt.\\
+Die Festlegung der Anforderungen stammen aus der Forschungsfrage folgendem Bedingungen für das Gesamtsystem.
+Weiter ist natürlich relevant, wie das bestand System aussieht und wie hier das Zusammenspiel gestaltet wird.
+Bei manchen Parameter wurde wiederum Betriebsgrenzen festgelegt, die mit wie ein externer Kundenwunsch betrachtet
+werden kann\\
+
+\begin{longtable}{@{} p{0.9cm} c p{7.0cm} p{2.9cm} p{1.5cm} @{}}
+\caption{Anforderungsliste des Vereinzelungs- und Zuführsystems nach VDI~2221
+(F = Forderung, W = Wunsch).}
+\label{tab:anforderungen}\\
+\toprule
+\textbf{Nr.} & \textbf{Art} & \textbf{Anforderung} & \textbf{Wert / Größe} & \textbf{Quelle}\\
+\midrule
+\endfirsthead
+\multicolumn{5}{@{}l}{\footnotesize\tablename~\thetable\ -- Fortsetzung}\\
+\toprule
+\textbf{Nr.} & \textbf{Art} & \textbf{Anforderung} & \textbf{Wert / Größe} & \textbf{Quelle}\\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r@{}}{\footnotesize Fortsetzung nächste Seite}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{5}{@{}l}{\textbf{Leistungs- und Gütemerkmale}}\\
+\addlinespace[2pt]
+L1 & F & Bereitstellungszeit je Hairpin unterschreitet die Zykluszeit der Zelle; das System bildet zu keinem Zeitpunkt den Engpass & $\leq 30\,$s (Ziel: $\leq 25\,$s) & 3.1, 6.3.3\\
+L2 & F & Wiederholgenauigkeit der Übergabeposition & $\leq 0{,}5\,$mm & 6.3.4\\ % Zielwert bestätigen/anpassen
+L3 & F & Durchsatz ohne manuelles Nachladen & $\geq 50\,$Stk. & 6.3.5\\ % Zielwert bestätigen/anpassen
+L4 & F & Hairpins bleiben unbeschädigt (Isolierung/Geometrie); Ausschussrate & $\leq 1\,\%$ & 6.3.6\\ % Zielwert bestätigen/anpassen
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Geometrie}}\\
+\addlinespace[2pt]
+G1 & F & Unterbringung im vorhandenen Bauraum der Zelle & $\langle B\times T\times H\rangle$ & 3.1\\ % Maße eintragen
+G2 & F & Übergabeposition im Arbeitsraum des UR5e, kollisionsfrei erreichbar & -- & 3.1.2\\
+G3 & F & Zuführung der Hairpins in hängender Lage & -- & 1.2\\
+G4 & W & Manuelle Justage der Übergabeposition (Schienensystem) & -- & 5.2.1\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Kinematik}}\\
+\addlinespace[2pt]
+K1 & F & Vereinzelung genau eines Hairpins je Zyklus aus dem Bündel & 1\,Stk./Zyklus & 4.3.1\\
+K2 & F & Transport in eine definierte, reproduzierbare Endlage & -- & 4.3.2\\
+K3 & F & Erkennung der Endlage (Endstop) & -- & 5.3.2\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Kräfte}}\\
+\addlinespace[2pt]
+Kr1 & F & Keine plastische Verformung oder Beschädigung der Hairpins & -- & 6.3.6\\
+Kr2 & F & Ausreichende Führung/Halt gegen Verrutschen bei der Übergabe & -- & --\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Stoff / Material}}\\
+\addlinespace[2pt]
+St1 & F & Verarbeitung variierender Hairpin-Geometrien (Prototypenbetrieb) & Spektrum $\langle\ldots\rangle$ & 1.2\\ % Bereich definieren
+St2 & W & Verwendung kostengünstiger, prototypentauglicher Werkstoffe (PLA, Alu-Profil) & -- & 5.2.1\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Signal / Steuerung}}\\
+\addlinespace[2pt]
+Si1 & F & Definierte Signalschnittstelle zum Roboter (Bereit-/Übernahmesignal) & digital (I/O) & 5.3.2\\
+Si2 & F & Rückmeldung der Endlage über Sensorik & -- & 6.1\\
+Si3 & W & Robuste interne Kommunikation (I2C, Master--Slave) & Fehlerrate $\langle\ldots\rangle$ & 6.1.1\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Energie}}\\
+\addlinespace[2pt]
+En1 & F & Versorgung aus vorhandener Infrastruktur & 12\,V / 5\,V & 5.2.2\\
+En2 & F & Sichere Abschaltung im Not-Halt-Fall & -- & 6.2\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Sicherheit}}\\
+\addlinespace[2pt]
+Sa1 & F & Definierter sicherer Zustand über Not-Halt & -- & 2.4\\
+Sa2 & W & Fail-Safe-Verhalten bei Ausfall eines Subsystems & -- & 6.2\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Ergonomie / Bedienung}}\\
+\addlinespace[2pt]
+B1 & F & Einmaliges Beladen mit einer Vielzahl von Hairpins, danach autonomer Betrieb & -- & 1.2\\
+B2 & W & Bedienperson nur überwachend tätig & -- & 1.2\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Fertigung / Montage / Instandhaltung}}\\
+\addlinespace[2pt]
+Fm1 & W & Reproduzierbarkeit mit vorhandenen Mitteln (3D-Druck, Standardprofile) & -- & 5.1\\
+In1 & W & Verschleißteile zugänglich und einfach austauschbar & -- & 7.1.2\\
+\addlinespace
+
+\multicolumn{5}{@{}l}{\textbf{Kosten / Termin}}\\
+\addlinespace[2pt]
+Co1 & W & Einsatz kostengünstiger Standardkomponenten & Budget $\langle\ldots\rangle$ & --\\ % Budget eintragen
+Te1 & F & Fertigstellung der Testphase gemäß Projektzeitplan & $\langle$Datum$\rangle$ & Zeitplan\\ % Datum eintragen
+
+\end{longtable}
+%
+Diese Punkte wurden in sich priorisiert bearbeitet. So wurde innerhalb der Forderung zwischen geringfügige Anforderungen
+und welche die das Gesamtsystem maßgeblich beschreiben. Auch die Wunschanforderungen wurden nach Aufwand zu Nutzen
+abgewogen. Dieses Gesamtbild und Priorisierung wurde verwendet um in Arbeitspackete zu unterteilen. 
+
 - Nach welchen Kriterien wurde entschieden?\\
 %
-\subsection{Architektur}\label{sec:Architektur}
-- Wofür wurde sich entschieden?\\
+\subsection{Gesamtarchitektur}\label{sec:Architektur}
+In diesem Abschnitt soll betrachtet werden in welchen Subsystemen unterteilt wurde und wie sich hier entschieden wurde.
+Dafür müssen die Arbeitschritte in verbindung mit dem bestehende System aufgezeigt werden. Es ergbit Sinn dies
+einmal rückläufig zu Beschreiben: Der Roboterarm muss die Hairpins für die Abisolierung greifen können. Dafür 
+muss ein Hairpin so bereitgestellt werden, dass dieser an einer fixen Postion und an den angreif Punkten des Greifers
+des Roboterarmes übergeben wird. Es muss also ein vereinzelter Hairpin aus der restlichen Anlage herausfahren.
+Vorher musste also aus einer vielzahl von Hairpins einer isoliert übergeben werden. Nach Anforderungen muss 
+das System also einmal mit Hairpins beladen werden, sodass ein Vorrat an diesen vorhanden ist.\\
+
+Aus diesem System haben sich zwei wichitge Subsysteme gebildet: die Vereinzelung und die Zuführung.
+Diese besitzten Schnittstellen, die untereinadner verbunden werden, sodass das Gesamtsystem entsteht.
+Nach der VDI 2221 wird dieser Ablauf in der im nächsten Unterpunkt beleuchteten Funktionsstruktur aufgezeigt.
+Danach werden sich die einzelenen Schirtte mit unterschiedlichen Lösungsansätzten beleuchtet.
+Als letzter Schritt kommt dann die Entscheidung weleche Prinzipien oder Ansätzte für den jeweiligen Schritt
+verwendet wurde.
+%
+%
+\subsubsection{Funktionsstruktur}
+\todo{gerne hier noch ein Fließtext zu den Teilfunktionen}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  block/.style={draw, rounded corners, minimum width=3.4cm, minimum height=0.9cm,
+                align=center, fill=white},
+  io/.style={align=center, font=\footnotesize\itshape},
+  flow/.style={-{Stealth[length=2.4mm]}, thick},
+  node distance=5mm
+]
+\node[io] (in) {Hairpin-Vorrat};
+\node[block, below=of in]  (bev) {Hairpins bevorraten und nachführen};
+\node[block, below=of bev] (ver) {Vereinzeln};
+\node[block, below=of ver] (rut) {Überführen der Subsysteme};
+\node[block, below=of rut] (fix) {Übernehmen \& Fixieren};
+\node[block, below=of fix] (pos) {Positionieren / Transport};
+\node[block, below=of pos] (ueb) {Übergeben};
+\node[io, below=of ueb] (out) {Übergabe an Roboter};
+
+\draw[flow] (in)  -- (bev);
+\draw[flow] (bev) -- (ver);
+\draw[flow] (ver) -- (rut);
+\draw[flow] (rut) -- (fix);
+\draw[flow] (fix) -- (pos);
+\draw[flow] (pos) -- (ueb);
+\draw[flow] (ueb) -- (out);
+
+\node[draw, dashed, rounded corners, inner sep=6pt, fit=(bev)(ver)] (s1) {};
+\node[right=3mm of s1, align=left, font=\footnotesize\bfseries] {Vereinzelungs-\\system};
+
+\node[draw, dashed, rounded corners, inner sep=6pt, fit=(fix)(pos)(ueb)] (s2) {};
+\node[right=3mm of s2, align=left, font=\footnotesize\bfseries] {Zuführ-\\system};
+
+\node[left=3mm of rut, align=right, font=\footnotesize\itshape] {passive\\Schnittstelle};
+\end{tikzpicture}
+\caption{Funktionsstruktur des Gesamtsystems; der Stofffluss (Hairpin) verläuft von
+oben nach unten. Die Rutsche bildet die passive Schnittstelle zwischen den beiden
+aktiven Subsystemen.}
+\label{fig:funktionsstruktur}
+\end{figure}
+%
+%
+\subsubsection{Morphologischer Kasten}\label{sec:Morph}
+
+\definecolor{groupgray}{gray}{0.92}      
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\chosen}[1]{\cellcolor{groupgray}\textbf{#1}}  % markiert gewähltes Prinzip
+
+\begingroup
+\renewcommand{\arraystretch}{1.3}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+
+\begin{longtable}{@{} L{2.6cm} L{2.9cm} L{2.9cm} L{2.9cm} L{2.6cm} @{}}
+\caption{Morphologischer Kasten der Teilfunktionen; grau hinterlegt ist das
+gewählte Lösungsprinzip (Konzeptvariante).}
+\label{tab:morph}\\
+\toprule
+\textbf{Teilfunktion} & \textbf{Prinzip 1} & \textbf{Prinzip 2} & \textbf{Prinzip 3} & \textbf{Prinzip 4}\\
+\midrule
+\endfirsthead
+\multicolumn{5}{@{}l}{\footnotesize\itshape Tabelle \thetable{} -- Fortsetzung}\\
+\toprule
+\textbf{Teilfunktion} & \textbf{Prinzip 1} & \textbf{Prinzip 2} & \textbf{Prinzip 3} & \textbf{Prinzip 4}\\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r@{}}{\footnotesize\itshape Fortsetzung auf der nächsten Seite}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+Bevorraten            & \chosen{Trichter / Hopper}        & Schachtmagazin        & Vibrationstopf        & Reihenspeicher (hängend)\\
+Nachführen            & \chosen{Schwerkraft (Rutsche)}    & Vibration             & aktiver Schieber      & Förderband\\
+Vereinzeln            & \chosen{Trennschieber (Servo)}    & Sternrad / Zellenrad  & Sperrklinke + Schwerkraft & Greifer\\
+Übernehmen \& Fixieren & \chosen{Formschluss-Nest + Klemmung} & Pneumatikgreifer   & Servo-Klemme          & Vakuum\\
+Transport             & \chosen{Spindeltrieb + Schrittmotor} & Zahnriemen + Schrittmotor & Pneumatikzylinder & fertige Linearachse\\
+Positionieren         & \chosen{Endstop + Schrittzählung} & Servo-Lageregelung    & Festanschlag          & sensorgeführt\\
+Übergeben             & \chosen{aktives Freigeben (Klemme öffnet)} & Schwerkraft in Nest & Roboter greift selbst & --\\
+
+\end{longtable}
+\endgroup
+
+\subsubsection{Konzeptauswahl}\label{sec:Konzeptauswahl}
+% FLIESSTEXT (selbst ausformulieren): pro kritischer Teilfunktion begründen,
+%  warum das gewählte Prinzip gegen die Anforderungsliste (4.1) gewinnt.
+%  z.B. Transport: Spindel+Schrittmotor erfüllt L2 (Wiederholgenauigkeit) und
+%  En1 besser als Pneumatik (schlechte Regelbarkeit in Zwischenlagen, vgl. 2.3.1).
+%
+%
+\subsection{Subsysteme}\label{sec:Subsysteme}
+%
+\subsubsection{Vereinzelung}\label{sec:Vereinzelung}
+Das Subsystem der Vereinzelung muss die Hairpins mit einer hohen Taktzeit
+und Zuverlässigkeit vereinzeln. Dabei muss aus einem Bündel von Hairpins ein
+einzelner Hairpin ausgegeben werden.
+%
+\subsubsection{Zuführung}\label{sec:Zuführung}
+Das Subsystem der Auslieferung muss die Hairpins mit einer hohen Taktzeit
+und Zuverlässigkeit ausliefern.
+%
+%
+\subsection{Schnittstellen}\label{sec:Schnittstellen}
+- Was sind die Übergabe Punkte?\\
+- Warum kann man die einzelnen Subsysteme Betrachten?\\

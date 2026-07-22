@@ -264,6 +264,8 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/auxhook/auxhook.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
+INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/array.sty
@@ -272,6 +274,11 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/multirow/bigstrut.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/multirow/bigstrut.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
@@ -561,16 +568,13 @@ INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
-INPUT ./docs/Lösungsansatz.tex
-INPUT ./docs/Lösungsansatz.tex
-INPUT ./docs/Lösungsansatz.tex
-INPUT ./docs/Lösungsansatz.tex
-INPUT docs/Lösungsansatz.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT docs/Konzept.tex
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri9.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx9.tfm
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
@@ -612,6 +616,7 @@ INPUT Vorlage.aux
 INPUT Vorlage.run.xml
 OUTPUT Vorlage.run.xml
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr10.pfb
@@ -620,6 +625,7 @@ INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr6.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri10.pfb
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss12.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss8.pfb
