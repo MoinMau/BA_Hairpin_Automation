@@ -500,6 +500,7 @@ INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT ./Vorlage.lof
 INPUT ./Vorlage.lof
 INPUT Vorlage.lof
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 OUTPUT Vorlage.lof
 INPUT ./Vorlage.lot
 INPUT ./Vorlage.lot
@@ -563,11 +564,21 @@ INPUT ./docs/StandDerTechnik.tex
 INPUT ./docs/StandDerTechnik.tex
 INPUT ./docs/StandDerTechnik.tex
 INPUT docs/StandDerTechnik.tex
+INPUT ./figs/AbsiolierZelle.png
+INPUT ./figs/AbsiolierZelle.png
+INPUT ./figs/AbsiolierZelle.png
+INPUT ./figs/AbsiolierZelle.png
+INPUT ./figs/AbsiolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
 INPUT ./figs/AufbauAbisolierZelle.png
+INPUT ./figs/wireLine MIRROR.png
+INPUT ./figs/wireLine MIRROR.png
+INPUT ./figs/wireLine MIRROR.png
+INPUT ./figs/wireLine MIRROR.png
+INPUT ./figs/wireLine MIRROR.png
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
@@ -595,7 +606,6 @@ INPUT ./docs/Zusammenfassung.tex
 INPUT ./docs/Zusammenfassung.tex
 INPUT ./docs/Zusammenfassung.tex
 INPUT docs/Zusammenfassung.tex
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd

@@ -4,12 +4,33 @@ Danach folgt eine Betrachtung des Grundsystems, auf das diese Arbeit aufbauen so
 %
 %
 \subsection{Aktuelles System}\label{sec:AktuellesSystem}
-In diesem Abschnitt soll unser aktuelles System, auf das wir in dieser Arbeit aufbauen, beschrieben werden.
-Dazu steht eine Laseranlage von CleanLaser bereit, die den eigentlichen Schritt der Abisolierung übernimmt.
-Diese Anlage ist mit einem Roboterarm von Universal Robots gekoppelt. Der Arm steht neben dem Laser und kann den
-Abisolierprozess automatisch starten. Weiter soll beschrieben werden, wie das aktuell manuelle Abisolieren
-funktioniert. Die folgende Abbildung~\cref{fig:AufbauAbisolierZelle} zeigt für ein besseres Verständnis den geometrischen Aufbau der Zelle
-auf.\\
+In diesem Abschnitt soll das aktuelles System, auf das in dieser Arbeit aufgebaut wird, eingegangen werden.
+Das System aus einer Laseranlage von Clean-Laser, die den eigentlichen Schritt der Abisolierung der Hairpins übernimmt.
+Diese Anlage ist mit einem Roboterarm von Universal Robots gekoppelt. Der Arm steht neben dem Laser und übernimmt das 
+Einführen der Hairpins in die Laseranlage. Beide Systeme werden im folgenden detialierter beschrieben. Weiter soll zudem gezeigt werden,
+wie das aktuell manuelle Abisolieren abläuft. Die folgende ~\cref{fig:laser_system_aufbau} zeigt den geometrischen Aufbau der Zelle
+für ein besseres Verständnis auf.\\
+%
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figs/AbsiolierZelle.png}
+  \caption{Gesamtansicht des Laserbearbeitungssystems, \cite[Abb.~2.1, S.~19]{CleanLaser2022}}
+  \label{fig:laser_system_aufbau}
+\end{figure}
+%
+Der markierte Punkt 1 ist der Serverschrank, in dem viele Teile der Laseranlage verbaut sind. Die 2. 
+zeigt die Schutzeinhausung des Laser, die Nummer 5 sit die Optische 2d Laseroptik. All diese Subsystem 
+werden im folgenden genauer beschrieben. 
+Der Roboterarm (4) führt die Hairpins in der individuellen Schutzdeckel (3). Für einen sicheren Betrieb 
+ist zudem einen Absaugung (7) über Schläuche an die Schutzeinhausung angebracht (6). Diese sorgt für eine
+Absaugung der entstandenen Partikel beim Abisolieren.
+Weiter ist in der \cref{fig:laser_system_aufbau} der Arbeitsbereich des Robtorarmes durch einen Zaun begrenzt.
+Diese Zelle sorgt für eine sichere Benutzung der Anlage. Die Maße dieser Zelle sind mit \todo{MAße der Zelle!}
+fest vorgeben. In \cref{fig:AufbauAbisolierZelle} ist zu dem eine Aluminium Extrusions Struktur, bei der
+es möglich ist Subsysteme zu monieren, die für den Roboterarm zu erreichen sind. Der Aufbau befndet sich in der
+gegenüberliegenden Ecke zu Laser, also in der \cref{fig:laser_system_aufbau} unten rechts. Hier werden
+bereits die unten beschireben Trays, usw. montiert.
+
 \begin{figure}[htbp]
 	\centering
 	    \includegraphics[width=1\linewidth]{figs/AufbauAbisolierZelle.png}
@@ -17,11 +38,49 @@ auf.\\
 	\label{fig:AufbauAbisolierZelle} 
 \end{figure}
 %
+%
 \subsubsection{Clean-Laser-Anlage}\label{sec:CleanLaser}
-- Welche Eigenschaften hat die Laser Anlage\\
-- Wie funktioniert das Abisolieren, technisch? Wie werden alle vier Seiten bearbeitet?\\
-- Wie lange braucht ein Durchlauf?\\
-- Welche Sicherheits features gibt es?\\
+Die Clean-Laser-Analage ist für den eigentlichen Schritt der Abisolierung der Hairpins verantwortlich.
+Dafür wird ein Laserstrahl verwendet, der die Enden der Hairpins so bearbeitet, das die Abisolierung
+abgetragen wird.
+
+Das Laserbearbeitungssystem ist eine Sonderanfertigung des Hersteller, welches einen CL 300GR Laser
+mit Optik Stamp 14 und einem Prozessmodul. Dieses Gesamtsystem wird wireLine MIRROR static genannt,
+da der Laserstrahl so aufgeteilt werden muss, dass alle vierseiten des Hairpins bearbeitet werden können.\\
+
+Die Laseremitierung ist bei diesem System in einem externen gekühltem Serverschrank, in dem auch
+weitere Versorgungseinheiten, wie der Industrie PC zur Steuerung, eine Pneumatiche Regelungsanlage und 
+Siemens ET200SP Signalklemmen als Kommunikationsschnittstellen, verbaut sind. Der Laser ist 
+als diodengepumpter Festkörperlaser ausgelegt, der mit 300W besonders Beschädigungsarm metallische 
+Bauteile bearbeiten kann. Die optiische Strahlungsleistung ist so hoch, das die Isolierung wie PEEK, PI und PAI\todo{Abkürzungsverzeichnis}
+optimal entfernt werden können. Weiter ist zu beachten, dass dieses System der Laserklasse 4 angehört und
+mit dem 1064nm Infrarotlaserstrahl für Menschen unsichtbar ist. Dies birgt Sicherheitsrisiken, die aber durch
+passende Schutzeinrichtungen und einer dementsprechenden Steurung minimiert werden können.\\
+
+Nach dem Breitstellen des Laserstrahls, wird dieser durch einen optischen Leiter in Schutzeinhausung
+der eigentlichen Abisolier Einrichtung geführt. Hier wird der Laserstrahl durch Spiegel so abgelenkt, dass
+alle vier Kanten des zu bearbeitenden Hairpins erreicht werden können.
+Dazu gibt es zu den festverbauten Spiegeln in der Schutzeinhausung in der Laseroptik an sich (Stamp 14)
+die möglichekeit den Laserstrahl in 2D, also X- und Y-Richtung, zu bewegen. In \cref{fig:laser_MIRROR_system} sieht man,
+dass diese Strahlenablenkung genutzt wird, um mit einem einmalingen Ausrichten der Spiegel, jeden Punkt am Hairpin zu erreichen. 
+Der Voteil dabei ist, dass keine vier Laser für jede Kante benötigt werden.
+Außerdem wird mit dem benötigten Gehäuse dieses System nun als Produkt der Laserklasse 1 klassifiziert.
+
+Das Sicherheitssystem besteht aus vielen Sensoren, die den einen sicheren Betrieb gewähren. So gibt es
+Notschalter, einen Türsensor und Metalldetektoren, die den Verschluss aller Serviceklappen und Ausgänge bestätigen.
+Eine Vielzahl an weiteren Kontrollmechanismen geben dem Bedienelemtn und Schluss endlich der Steuereinheit
+Rückschluss auf den Status des Systems. Die Bedienung, erfolgt dabei durch die Erstellung eines eignen Programmes
+und der aktivierung deses durch ein Fußknopf. Weiter ist es möglich den Befehl des Abisolierens durch einen 
+externen Eingang, wie den Roboterarm, durchzuführen.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\textwidth]{figs/wireLine MIRROR.png}
+  \caption{wireLINE MIRROR System - Laserstrahlführung, \cite[Abb. Bearbeitungsoptik, S.~42]{CleanLaser2022}}
+  \label{fig:laser__MIRROR_system}
+\end{figure}
+
+\todo{- Wie lange braucht ein Durchlauf?}
+%
 %
 \subsubsection{Universal Robots Roboterarm}\label{sec:UniversalRobot}
 Der vorhandene Roboterarm ist ein 6-Drehgelenkarm von Universal Robots. Der UR5e hat eine maximale Nutzlast
@@ -32,10 +91,34 @@ Blöcke aufeinander geschoben werden oder einfach Einstellungen betätigt werden
 erfolgt durch die Verbindung einer Festo-Valve und den programmierbaren digitalen Ausgängen des Roboterarms.
 Die Wiederholgenauigkeit liegt bei ungefähr $\pm 0{,}03$\,mm und die Gelenke können sich maximal um 360° drehen.
 \PEMfootcite{ur5e_handbuch_2025}\\
+
 %
 \subsubsection{Gesamtverfahren}\label{sec:GesamtVerfahrenAktuell}
-- Was wird manuell gemacht?\\
-- Was stört?\\
+Der bisherige Arbeitsablauf bestand bei diesem System daraus, dass Hairpins vorbereitet wurden, diese dann in
+der Zelle platziert wurden, der Roboterarm kalibiriert und aktiviert wurde. Der letzte Schritt bestand dann
+nach dem Abisolieren im Laser die Hairpins in eine Ablage zugeben.
+
+Dieses System basiert auf manuellen Eingriffen in wichtigen Schritten des Prozessflusses. So müssen für
+jede Hairpin Art eigene Trays montiert werden, in denen die Hairpins gehalten werden können. Aktuell sind 
+diese einfache Aluminumextrusions mit montierten Füßen, die vorher im 3d-Drucker erstellt wurden. Der Bedienende
+muss nun nach einem Durchlauf von circa. 10 Hairpins den Roboterarm deaktivieren und in der Zelle neue Hairpins
+platzieren. Erst danach kann der Roboterarm wieder aktiviert werden und ein weiterer Durchlauf der Abisolierung
+starten. Dies bringt zwei große Probleme mit sich:\\
+1. kein kontinuierlicher Prozessfluss,\\
+2. Rekalibirerung der Postion der Hairpins,\\
+3. Anpassung der Trays an jede Hairpin Art.\\
+
+Der erste Punkt ist direkt ersichtlich und folgt durch die Pause, die Entsteht, wenn der Bedienende in Zelle
+betreten muss. Der zweite Punkt, muss nach jeder Inbetriebnahme geschehen, da sich die Trays verschieben können
+oder sich die Längen der Hairpins verändern. Außerdem müssen die Trays jedesmal für den Hairpin passend vorhanden
+sein. Ist dies nicht der Fall muss eine neue Version erstellt und gedruckt werden. Dies bedeutet einen 
+weiteren Schritt im Prozess, der für das Umbauen benötigt wird.
+
+Die weiteren Schritte, wie die Bewegungen des Roboterarmes und die Abisolierung, erfolgen voll automatisch
+durch ein vorher definiertes Programm. Dieses ist einfach anpassbar und arbeitet über feste Taktzeiten.
+Die Ablage der Hairpins erfolgt durch ein einfachs übergeben des Roboterarmes auf eine Führung für Hairpins.
+Besodnere Hairpin Arten, wie die I-Pins unterliegen ähnlichen Arbeitsschritten, wobei die Trays und die Ablage
+anders aufgebaut sind. 
 %
 %
 \subsection{Existierende Produktionen}\label{sec:RealeProduktionen}
@@ -45,13 +128,267 @@ Die Wiederholgenauigkeit liegt bei ungefähr $\pm 0{,}03$\,mm und die Gelenke k�
 %
 %
 \subsection{Subsystem-Betrachtung}\label{sec:SubSystem}
-Die oben beschriebenen Anlagen lassen sich jeweils in mehrere Subsysteme unterteilen.
+Die oben beschriebenen Anlagen lassen sich jeweils in mehrere Subsysteme unterteilen. Zur Analyse
+der verschiedenen Aulegungsmöglichekeiten wird die VDI 2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese 
+Richtline wurde 2018 wegen einer teilweisen veralteten Betrachtung zurückgezogen, ist aber für diesen 
+Abschnitt dennoch Relevant mit zu betrachten. 
+
+In der Handhabungstechnik wird nämlcih in die Teilfunktionen Speichern, Mengen verändern, Bewegen, Sichern
+und Konrollieren unterschieden. Genau diese Themen werden im folgenden detailiert betrachtet und analysiert.
 %
-\subsubsection{Vereinzelungssysteme}\label{sec:VereinzelungsSystem}
+\subsubsection{Lagerung}\label{sec:LagerungsSystem}
+Es gibt drei unterscheidliche Lagerarten:\PEMfootcite{MontageIndustriellenProduktion.2012}\\
+1. Ungeordnete Speicherung - Bunkern,\\
+2. Teilgeordente Speicherung,\\
+3. Geordnete Speicherung - Magazinieren.\\
+Das erste System wird in den meisten Fällen für Kleingut, welches schon in einem unsortierten Zustand 
+angeliefert wird, verwendet. Die Teile liegen also einfach als Schüttgut vor. Wichitg ist hier zu beachten,
+dass diese zwar ungeordnet sein dürfen aber nicht mit anderen Kleingut durchmischt werden. Vorteile eines
+solchen Systems ist die kostengünstige Befüllung sowie eine hohe Speicherdichte und damit großen Puffermenge 
+an Teilen. Auf der anderen Seite muss das Schüttgut meisttens für den weiteren Porduktionsprozess sauber 
+geordnet werden. Hier entstehen typische Problemne wie das Verhaken der Teile untereinander oder ein weitere
+Abrieb.
+
+Die Teilgeordnete Speicherung ist ein Kompromiss aus beiden Welten. Hier sind die Teile in einer Dimension
+angeordnet. Sie sind also z. B. liegend auf einer Ebene orierntiert und können so einfacher entnommen werden.
+Dies wird sehr häufig in Kombination mit der flexiblen Entnahme durch einen bildverarbetungsgestüzten Roboterarm 
+mit passendem Greifer genutzt. Vorteile sind dabei die Viefältigkeit der Teile, die mit dem passenden Greifer verwednet
+werden können. Als Nachteil ist hier wiederum, das ständige gezielte Nachfüllen von Teilen und einer im Vergleich zu 
+anderen System langsamen Taktzeit. Als größte Störgröße der letzten beiden Systemen jedoch ist die sogenannte Brückenbildung,
+die einen Behinderung für die weitere Produktion darstellt. Die \cref{fig:zufuehrprinzipien} zeigt den groben Aufbau der
+drei typischesten Ausführungen der beiden ersten Systeme auf. Für die Lagerung mittels Bunker, sind diese System meist 
+mit einer direkten Einheit zum Ordnen der Teile ausgeführt. Der Vibrationsförderer (a) benützt dabei Vibrationenen
+um das Kleingut auf einer kontrolierten Bahn zu bewegen, die wegen ihrer größe nur maximal ein Teil tragen kann.
+So werden die Teile als geordnete Reihe aus dem System gegeben. Ähnlich funktioniert der Stufenförderer (b), wo 
+die Teile einzelt Stück für Stück angehoben werden. Dabei haben die einzelenne Treppe die genaue Größe der Bauteile
+und auch hier werden die Teile geordnet ausgegebne. Es muss aber nochmal gesagt sein, das meistens ein weiters System
+benötigt wird, um eine richtige Orientierung der Bauteile zu gewährleisten. Als modernstes System ist sicherlich die
+Flexible Zuführung, die durch Kameraalgortihmen und einer präzisen Steuerung eines Greifers einzelne Teile entnehmen
+und passend platzieren kann. Häufig muss die Lagefläche mit einem Backlight und einer Vibrationsmöglichkeit asugelegt
+werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährleistet werden kann.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  part/.style={draw, fill=black!15, minimum width=2.6mm, minimum height=1.3mm,
+               inner sep=0pt, outer sep=0pt},
+  fl/.style={-{Stealth[length=1.8mm]}, thick},
+  thin fl/.style={-{Stealth[length=1.4mm]}},
+  lbl/.style={align=center, font=\scriptsize}
+]
+
+%% ---------------- (a) Vibrationswendelförderer ----------------
+\begin{scope}[shift={(0,0)}]
+  \draw[thick] (0.35,0) -- (0.05,2.0);
+  \draw[thick] (2.15,0) -- (2.45,2.0);
+  \draw[thick] (0.35,0) -- (2.15,0);
+  \draw[gray] (0.30,0.35) -- (2.20,0.55);
+  \draw[gray] (0.24,0.85) -- (2.26,1.05);
+  \draw[gray] (0.18,1.35) -- (2.32,1.55);
+  \node[part] at (0.75,0.44) {};  \node[part] at (1.55,0.52) {};
+  \node[part] at (0.95,0.96) {};  \node[part] at (1.80,1.06) {};
+  \node[part] at (1.30,1.48) {};
+  \node[part, rotate=25] at (0.85,0.14) {};
+  \node[part, rotate=-40] at (1.35,0.16) {};
+  \node[part, rotate=70] at (1.75,0.13) {};
+  \draw[fl] (1.15,1.72) -- (2.05,1.80);
+  \draw[thick] (2.45,1.90) -- (3.05,1.70);
+  \draw[thick] (2.38,1.62) -- (2.95,1.44);
+  \node[part] at (2.72,1.68) {};
+  \draw[thin fl] (3.05,1.60) -- (3.35,1.48);
+  \foreach \x in {0.55,1.25,1.95}{
+    \draw[gray] (\x,0) -- ++(0.18,-0.30) -- ++(-0.18,-0.20) -- ++(0.18,-0.25);
+  }
+  \draw[thick, fill=black!8] (0.30,-0.95) rectangle (2.20,-0.75);
+  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray]
+        (2.55,-0.55) arc (-20:20:1.1);
+  \node[gray, right=0.5mm] at (2.75,-0.20) {Schwingung};
+\end{scope}
+
+%% ---------------- (b) Stufenförderer ----------------
+\begin{scope}[shift={(5.15,0)}]
+  \draw[thick] (0.0,2.0) -- (0.45,0.15) -- (1.05,0.15);
+  \node[part, rotate=15] at (0.45,0.30) {};
+  \node[part, rotate=-35] at (0.72,0.32) {};
+  \node[part, rotate=55] at (0.58,0.55) {};
+  \node[part, rotate=-10] at (0.80,0.62) {};
+  \draw[thick] (1.05,0.15) -- (1.05,0.55) -- (1.50,0.55);
+  \draw[thick] (1.50,0.55) -- (1.50,0.95) -- (1.95,0.95);
+  \draw[thick] (1.95,0.95) -- (1.95,1.35) -- (2.40,1.35);
+  \draw[thick] (2.40,1.35) -- (2.40,1.75) -- (2.85,1.75);
+  \node[part] at (1.27,0.62) {};  \node[part] at (1.72,1.02) {};
+  \node[part] at (2.17,1.42) {};  \node[part] at (2.62,1.82) {};
+  \foreach \x in {1.30,1.75,2.20}{
+    \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray] (\x,0.20) -- (\x,0.42);
+  }
+  \node[gray, align=center] at (1.75,-0.02) {Hubbewegung};
+  \draw[thick] (2.85,1.75) -- (3.35,1.58);
+  \draw[thin fl] (3.20,1.48) -- (3.50,1.36);
+\end{scope}
+
+%% ---------------- (c) Flexible Zuführung ----------------
+\begin{scope}[shift={(10.30,0)}]
+  \draw[thick] (0.0,1.95) -- (0.30,1.30) -- (0.72,1.30);
+  \node[part, rotate=30] at (0.28,1.48) {};
+  \node[part, rotate=-20] at (0.48,1.44) {};
+  \draw[thin fl] (0.52,1.22) -- (0.62,0.85);
+  \draw[thick, fill=black!5] (0.15,0.45) rectangle (3.05,0.62);
+  \node[gray, below=0.5mm] at (1.60,0.45) {Backlight-Fläche};
+  \node[part, rotate=20] at (0.60,0.72) {};
+  \node[part, rotate=-55] at (1.05,0.70) {};
+  \node[part, rotate=80] at (1.45,0.73) {};
+  \node[part, rotate=-15] at (1.95,0.70) {};
+  \node[part, rotate=45] at (2.45,0.72) {};
+  \draw[thick, fill=black!10] (1.35,2.05) rectangle (1.95,2.35);
+  \draw[thick] (1.55,2.05) -- (1.55,1.92) -- (1.75,1.92) -- (1.75,2.05);
+  \node[above=0.3mm] at (1.65,2.35) {Kamera};
+  \draw[gray, dashed] (1.55,1.90) -- (0.70,0.78);
+  \draw[gray, dashed] (1.75,1.90) -- (2.55,0.78);
+  \draw[thick] (2.60,1.85) -- (2.60,1.45);
+  \draw[thick] (2.42,1.45) -- (2.78,1.45);
+  \draw[thick] (2.42,1.45) -- (2.42,1.15);
+  \draw[thick] (2.78,1.45) -- (2.78,1.15);
+  \draw[thin fl] (2.60,1.98) -- (2.60,2.30);
+  \node[above=0.3mm] at (2.60,2.30) {Roboter};
+  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray] (0.75,0.28) -- (1.35,0.28);
+\end{scope}
+
+\node[lbl] at (1.65,-1.55) {(a) Vibrationswendelförderer};
+\node[lbl] at (6.90,-1.55) {(b) Stufenförderer};
+\node[lbl] at (12.05,-1.55) {(c) Flexible Zuführung};
+
+\end{tikzpicture}
+\caption[Prinzipskizzen ausgewählter Zuführprinzipien]{Prinzipskizzen ausgewählter
+Zuführprinzipien: (a) ungeordnete Bevorratung mit mechanischer Ordnung durch
+Schikanen, (b) schonende, stufenweise Förderung aus dem Bunker, (c) teilgeordnete
+Bereitstellung mit kamerabasierter Lageerkennung und Direktgriff. Eigene
+Darstellung in Anlehnung an \cite{GrundlagenHandhabungstechnik.2020}.}
+\label{fig:zufuehrprinzipien}
+\end{figure}
+%
+Beim letzten System wird vorausgesetzt, dass die Teile in einem geordnetem und definierten Zustand angeliefert
+werden. Das Magazinieren bietet also die Möglichkeit den Schritt des Sortierens zu übersrpringen. 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  wp/.style={draw, fill=black!15, minimum width=3.2mm, minimum height=1.4mm,
+             inner sep=0pt, outer sep=0pt},
+  fl/.style={-{Stealth[length=1.7mm]}, thick},
+  tf/.style={-{Stealth[length=1.4mm]}, gray},
+  lbl/.style={align=center, font=\scriptsize}
+]
+
+%% ---- (a) Schachtmagazin ----
+\begin{scope}[shift={(0,0)}]
+  \draw[thick] (0.55,0.30) -- (0.55,2.60);
+  \draw[thick] (2.05,0.30) -- (2.05,2.60);
+  \foreach \y in {0.55,0.85,1.15,1.45,1.75,2.05,2.35}{
+    \draw[fill=black!15] (0.62,\y) rectangle (1.98,\y+0.17);
+  }
+  \draw[tf] (2.45,2.35) -- (2.45,1.05);
+  \node[gray, rotate=90, anchor=south] at (2.62,1.30) {Schwerkraft};
+  \draw[thick, fill=black!8] (0.30,0.05) rectangle (1.20,0.25);
+  \draw[fl] (1.30,0.15) -- (2.20,0.15);
+\end{scope}
+
+%% ---- (b) Reihen-/Hängemagazin ----
+\begin{scope}[shift={(5.20,0)}]
+  \draw[thick] (0.20,2.30) -- (3.05,2.30);
+  \foreach \x in {0.55,1.05,1.55,2.05,2.55}{
+    \draw[thick] (\x-0.14,2.28) -- (\x-0.14,1.72)
+      arc (180:360:0.14) -- (\x+0.14,2.28);
+  }
+  \draw[fl] (0.70,2.62) -- (2.40,2.62);
+  \node[gray] at (1.55,1.25) {geordnet, lagedefiniert};
+  \draw[tf] (2.70,2.05) -- (3.10,2.05);
+\end{scope}
+
+%% ---- (c) Trommelmagazin ----
+\begin{scope}[shift={(10.40,0)}]
+  \begin{scope}[shift={(1.55,1.55)}]
+    \draw[thick] (0,0) circle (0.92);
+    \draw[thick] (0,0) circle (0.30);
+    \foreach \a in {0,45,...,315}{ \draw[gray] (\a:0.30) -- (\a:0.92); }
+    \foreach \a in {22,67,112,157,202,247,292}{
+      \node[wp, rotate=\a] at (\a:0.62) {};
+    }
+    \draw[{Stealth[length=1.5mm]}-, thick] (1.10,0.35) arc (30:-30:1.25);
+  \end{scope}
+  \node[gray] at (2.95,0.95) {Takt};
+  \draw[tf] (1.55,0.50) -- (1.55,0.12);
+\end{scope}
+
+%% ---- (d) Kettenmagazin ----
+\begin{scope}[shift={(0,-3.75)}]
+  \draw[thick, rounded corners=0.55cm] (0.45,0.65) rectangle (2.75,2.35);
+  \foreach \x in {0.95,1.60,2.25}{
+    \node[wp] at (\x,2.35) {};
+    \node[wp] at (\x,0.65) {};
+  }
+  \node[wp, rotate=90] at (0.45,1.50) {};
+  \node[wp, rotate=90] at (2.75,1.50) {};
+  \draw[fl] (1.20,2.62) -- (2.05,2.62);
+  \draw[tf] (3.05,1.50) -- (3.45,1.50);
+\end{scope}
+
+%% ---- (e) Palettenmagazin / Tray ----
+\begin{scope}[shift={(5.20,-3.75)}]
+  \draw[thick] (0.30,0.65) rectangle (3.00,2.35);
+  \foreach \x in {0.975,1.65,2.325}{ \draw[gray] (\x,0.65) -- (\x,2.35); }
+  \foreach \y in {1.2166,1.7833}{ \draw[gray] (0.30,\y) -- (3.00,\y); }
+  \foreach \x in {0.6375,1.3125,1.9875,2.6625}{
+    \foreach \y in {0.94,1.50,2.07}{ \node[wp] at (\x,\y) {}; }
+  }
+  \node[gray] at (1.65,0.30) {ortsfeste Nester};
+\end{scope}
+
+%% ---- (f) Werkstückgurt ----
+\begin{scope}[shift={(10.40,-3.75)}]
+  \draw[thick] (0.85,1.50) circle (0.62);
+  \draw[thick] (0.85,1.50) circle (0.16);
+  \draw[thick] (0.85,2.12) -- (3.10,2.12);
+  \draw[thick] (0.85,1.82) -- (3.10,1.82);
+  \foreach \x in {1.35,1.85,2.35,2.85}{ \node[wp] at (\x,1.97) {}; }
+  \draw[fl] (1.60,2.45) -- (2.60,2.45);
+  \node[gray] at (1.85,1.20) {Rolle};
+  \draw[tf] (3.20,1.97) -- (3.55,1.97);
+\end{scope}
+
+\node[lbl] at (1.30,-0.55) {(a) Schachtmagazin};
+\node[lbl] at (6.75,-0.55) {(b) Reihen-/Hängemagazin};
+\node[lbl] at (11.95,-0.55) {(c) Trommelmagazin};
+\node[lbl] at (1.60,-4.30) {(d) Kettenmagazin};
+\node[lbl] at (6.85,-4.30) {(e) Palettenmagazin (Tray)};
+\node[lbl] at (12.00,-4.30) {(f) Werkstückgurt};
+
+\end{tikzpicture}
+\caption[Bauformen geordneter Magazine]{Bauformen geordneter Magazine zur
+lagedefinierten Bevorratung von Werkstücken. Eigene Darstellung in Anlehnung
+an \cite{GrundlagenHandhabungstechnik.2020}.}
+\label{fig:magazinbauformen}
+\end{figure}
+
+- Wie können die Hairpins "gespeichert" werden?\\
+- Wie wird dafür gesorgt, dass nichts verahckt?\\
+- Welche Postionen müssen die Hairpins haben?
+%
+\subsubsection{Vereinzelung}\label{sec:Vereinzelung}
+
 - Was für Systeme existieren zur Vereinzelung von Objekten? Vorstellung der Systeme\\
 - Was sind Vor- und Nachteile?\\
 %
-\subsubsection{Zuführsystem}\label{sec:DeliverySystem}
+\subsubsection{Transport}\label{sec:TransportSystem}
+Da es für unterschieldiche Teile Arten und Größen viele Transportsysteme gibt, wird sich in diesem
+Abschnitt nur auf vier verschiedene Methoden konzentriert Teile zu befördern. 
+- Wie können die Hairpins von einem Ort/System zum nächsten transprotiert werden?\\
+%
+\subsubsection{Fixierung}\label{sec:FixierungsSystem}
+Wie können die Hairpins so psotioniert werden, dass sie optimal übergeben werden können?\\
+%
+\subsubsection{Zuführung}\label{sec:DeliverySystem}
 - Welche Möglichkeiten gibt es für den Transport (Vibration, Linearmagazine, Belts, spindel)?\\
 - Was sind Vor- und Nachteile?\\
 %

@@ -109,6 +109,33 @@
       \field{title}{Pneumatic Drives: System Design, Modelling and Control}
       \field{year}{2007}
     \endentry
+    \entry{CleanLaser2022}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=feb7e5846831a503abc05a722a5518e3}{%
+           family={{Clean-Lasersysteme GmbH}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Clean-Lasersysteme GmbH}%
+      }
+      \strng{namehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{fullhash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{fullhashraw}{feb7e5846831a503abc05a722a5518e3}
+      \strng{bibnamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorbibnamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authornamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorfullhash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorfullhashraw}{feb7e5846831a503abc05a722a5518e3}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{note}{Revision 02-01 vom 22.02.2022}
+      \field{number}{Dok-ID: 1340066}
+      \field{title}{Betriebsanleitung: wireLINE MIRROR static (L21-1710)}
+      \field{year}{2022}
+    \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
@@ -170,6 +197,52 @@
       \endverb
       \verb{url}
       \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+    \endentry
+    \entry{GrundlagenHandhabungstechnik.2020}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=dd51491356eea0174873278d9ea5cab1}{%
+           family={Hesse},
+           familyi={H\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e8b8dbe782f90414c7d5c8cf39d8e7c}{%
+           family={Malisa},
+           familyi={M\bibinitperiod},
+           given={Viktorio},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag}%
+      }
+      \strng{namehash}{f1fedf6775f751c1fa58e442a74f08d6}
+      \strng{fullhash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{fullhashraw}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{bibnamehash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authorbibnamehash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authornamehash}{f1fedf6775f751c1fa58e442a74f08d6}
+      \strng{authorfullhash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authorfullhashraw}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{5., aktualisierte Auflage}
+      \field{isbn}{978-3-446-46335-6}
+      \field{pagetotal}{586}
+      \field{shorttitle}{Grundlagen der Handhabungstechnik}
+      \field{title}{Grundlagen der Handhabungstechnik}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.3139/9783446463592
+      \endverb
+      \verb{file}
+      \verb Hesse2020_GrundlagenHandhabungstechnik:Attachments/Hesse2020_GrundlagenHandhabungstechnik.pdf:application/pdf
       \endverb
     \endentry
     \entry{Jamian.2020}{article}{}{}
@@ -307,6 +380,63 @@
       \endverb
       \verb{url}
       \verb https://publications.rwth-aachen.de/record/1003088
+      \endverb
+    \endentry
+    \entry{MontageIndustriellenProduktion.2012}{book}{}{}
+      \name{editor}{2}{}{%
+        {{un=0,uniquepart=base,hash=009d9e2ef5ce994e4588489b597d1e84}{%
+           family={Lotter},
+           familyi={L\bibinitperiod},
+           given={Bruno},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=57aff481f65f5ed63af62ba7da99e782}{%
+           family={Wiendahl},
+           familyi={W\bibinitperiod},
+           given={Hans-Peter},
+           giveni={H\bibinithyphendelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{d761a15ea97c167f09657e8b4f3be2ce}
+      \strng{fullhash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{fullhashraw}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{bibnamehash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editorbibnamehash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editornamehash}{d761a15ea97c167f09657e8b4f3be2ce}
+      \strng{editorfullhash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editorfullhashraw}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{2. Auflage}
+      \field{isbn}{978-3-642-29060-2}
+      \field{pagetotal}{516}
+      \field{series}{VDI-Buch}
+      \field{shorttitle}{Montage in der industriellen Produktion}
+      \field{title}{Montage in der industriellen Produktion: Ein Handbuch für die Praxis}
+      \field{urlday}{23}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-642-29061-9
+      \endverb
+      \verb{file}
+      \verb Lotter2012_MontageIndustriellenProduktion:Attachments/Lotter2012_MontageIndustriellenProduktion.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
       \endverb
     \endentry
     \entry{ComparativeReviewMotor.2023}{article}{}{}
@@ -463,6 +593,48 @@
       \endverb
       \verb{url}
       \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+    \endentry
+    \entry{VDI2860.1990}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b72003ef20a8eeaaf8ea3204757fd44e}{%
+           family={{Verein Deutscher Ingenieure}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Düsseldorf}%
+      }
+      \list{publisher}{1}{%
+        {VDI-Verlag}%
+      }
+      \strng{namehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{bibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorbibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authornamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Ausgabe 1982-10, überprüft und bestätigt 1990-05; zurückgezogen 2018}
+      \field{shorttitle}{VDI 2860: Handhabungsfunktionen}
+      \field{title}{VDI 2860 Blatt 1: Montage- und Handhabungstechnik; Handhabungsfunktionen, Handhabungseinrichtungen; Begriffe, Definitionen, Symbole}
+      \field{urlday}{23}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{1990}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb VDI2860_Handhabungsfunktionen:Attachments/VDI2860_Handhabungsfunktionen.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
+      \endverb
+      \verb{url}
+      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
       \endverb
     \endentry
     \entry{HairpinTechnologyReview.2025}{article}{}{}
