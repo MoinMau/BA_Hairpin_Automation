@@ -421,9 +421,9 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
 In dieser Arbeit ist gegenüber dem Bewegen von Teilen auch die Überwachung dieser von großer Wichtigkeit.
 So muss kontrolliert werden, ob einzlene Hairpins an bestimmten Postion vorbeigekommen sind oder einfach nur 
 vorhanden sind. Dafür müssen unterschiedliche Sensoren untersucht werden, um eine optimale Wahl zwischen
-geringe Fehler in der Detektion, Robustheit und passenden Geometrie.
+geringe Fehler in der Detektion, Robustheit und passenden Geometrie zu treffen.
 Die betrachteten Sensoren Teilen sich maßgeblich in Optische Systeme, Feldeffekt Sensoren und mechanische 
-Taster.
+Taster auf.
 %
 %
 \subsubsection{Optische Sensoren}
@@ -475,20 +475,53 @@ birgt Probleme in der Kalibierung des Systems, damit zuverlässig ein aussagekr�
 
 Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschieden Oberflächen
 der zu regestrierenden Teile die Genauigkeit stark beeinflusst.
-Auf der anderen Seite stehen Vorteile, wie eine sehr schnelle Detektion und große Messbereiche.
+Auf der anderen Seite stehen Vorteile, wie eine sehr schnelle Detektion und ein großer Messbereich.
 %
 %
 \subsubsection{Feldeffekt Sensoren}
+%
+\paragraph{Induktive Sensoren} funkitonieren über ein hochfrequentes Magnetfeld. Dabei besteht der Sensorkopf
+aus einer Spule mit Oszillator. Nähert sich nun ein elektrisch leitfähiges Objekt werden in diesem Wirbelströme
+induziert, die dem Schwingkreis des Sensors Energie entziehen. Dies bewirkt eine Amplitudenabsenkung, welche als
+elektrische Spannung detektiert und als Signal ausgegeben werden kann. Da die Voraussetzungen für diesen Sensor
+die elektrische Leitfähigkeit ist, ist dieser Sensor robust gegen Staub, Feuchtigkeit, Schmutz und Licht. Außerdem
+führt die kontaktlose Messung  zu einem geringen Verschleiß und einer resultierenden Langlebigkeit. Für nicht
+eisenmetalle muss jedoch beachtet werden, dass die Detektion schwächer ist und ein geringer Abstand von Obejkt
+zu Sensorkopf vorrausgesetzt wird.
+%
+\paragraph{Kapazitive Sensoren} setzen nicht auf einen Schwingkreis sondern auf die Kapazitätsänderung einer 
+Eletrode. Dabei gibt es üblicherweise zwei Verfahren zur Ermittlung dieser Kapazitätsänderung, die durch fast 
+alle Materialien entsteht. Der Industrie Standard funktioniert dabei über das Oszilator-Prinzip. Die Sensorelektrode
+mit ihrer Elektrode ist Teil eines Schwingkreises. Ändert sich nun die Kapazität ändert sich die Resonanzfrequenz,
+wobei dann weider die verschobene Spannungsamplitude eingelesen werden kann. Ist ein gewisser Schwellwert erreicht, kann ein
+genaues binäeres Signal ausgegeben werden. Die andere Methode bedarf einem geringeren Hardware aufwand und wird
+meist in Microcontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer 
+festen Spannung auf geladen wird und dann die gespeicherte Ladung gezählt wird. 
+\begin{equation}
+	Q = C * U
+\end{equation}
+Dies geschieht in dem in jedem Zyklus ein großer Referenzkondesator je nach Ladung der Sensorelektrode aufgeladen wird. 
+Es wird dann detektiert nach dem wie vielten Zyklus ein Schwellenwert der Kondesatorspannung erreicht wurde.
+So lässt sich die größe der Kapazität der Sensorelektrode sehr genau und mit wenig Fehlereinflüsse ermitteln. 
+Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen ein gewisse Zeit für ein Ergebnis
+braucht.
+%
+\paragraph{Halleffekt Sensoren} ist ein weitere Sensortyp, welcher auf Magnetfelder regiert. Dieser Sensor
+funktionert so, dass in einem stromdurchflossenen Leiter die ELektronene durch ein Magnetfeld abgelenkt wird.
+Diese Ablenkung führt zu einer Überkonzentration und einem Defizit an Elektronen an den Ränderen. Dieser Untershcied
+lässt sich als Spannung einlesen und damit die gemessen Magnetfeldstärke ermitteln. Diese Prinzip setzt aber
+voraus, dass ein ferromagentisches oder magnetisches Objekt detektiert werden muss.
+%
+%
+\subsubsection{Mechanische Sensoren}
 
-\paragraph{Induktive Sensoren} funkitonieren über ein hochfrequnetes Magnetfeld. Dabei besteht der Sensorkopf
-aus einer Spule mit Oszillator. Nähert sich nun ein elektrisch leitfähiges Objekt werden Wirbelströme induziert,
-die dem Schwingkreis des Sensors Energie entziehen. Dies bewrikt eine Amplitudenabsenkung, welche durch
-den Sensor detektiert wird und als Signal ausgegeben wird.
-
-\paragraph{}
-- Was gibt es für Sensoren?\\
-- Wie funktionieren die?\\
-- Vor- und Nachteile!\\
+Die letzten Gruppe an Sensoren zum Detektieren von Objekten ist die wohl Trivialste Methode. Ein Taster, der
+bei mechanischem Druck aus löst und ein klares eletrisches Signal ausgibt. Weiter gibt noch die Möglichkeit
+kein seperates Bauteil zu verweden, sondern das Objekt selber als Leiter zu benutzen. Dabei könnte  
+das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann ausgewertet werden
+kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu regestrierende Objekt auf der genau 
+vordefinierten Postion landen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
+und Verschmutzung leicht zu Fehlern führen.
 %
 %
 \subsection{Normen}\label{sec:NormenVorgaben}
