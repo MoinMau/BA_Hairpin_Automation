@@ -544,6 +544,29 @@
       \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
       \endverb
     \endentry
+    \entry{Werkstueckmagazin.2008}{online}{}{}
+      \list{organization}{1}{%
+        {industrial-production.de}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{shorttitle}
+      \field{month}{11}
+      \field{note}{Veröffentlicht am 01.11.2008}
+      \field{shorttitle}{Werkstückmagazin}
+      \field{title}{Magazine / Werkstückmagazin}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
+      \endverb
+      \verb{url}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
+      \endverb
+    \endentry
     \entry{ComparativeReviewMotor.2023}{article}{}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=36f45e976fb52c17e2092c49be865878}{%

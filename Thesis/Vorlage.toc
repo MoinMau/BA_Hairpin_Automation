@@ -39,60 +39,60 @@
 \contentsline {subsection}{\numberline {3.2}Existierende Produktionen}{19}{subsection.arabicsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Subsystem-Betrachtung}{19}{subsection.arabicsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Lagerung}{19}{subsubsection.arabicsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Vereinzelung}{21}{subsubsection.arabicsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Transport}{21}{subsubsection.arabicsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Fixierung}{21}{subsubsection.arabicsection.3.3.4}%
-\contentsline {subsubsection}{\numberline {3.3.5}Zuführung}{21}{subsubsection.arabicsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.4}Forschungslücke}{21}{subsection.arabicsection.3.4}%
-\contentsline {section}{\numberline {4}Konzept \& Anforderungsanalyse}{22}{section.arabicsection.4}%
-\contentsline {subsection}{\numberline {4.1}Anforderungen}{22}{subsection.arabicsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Gesamtarchitektur}{22}{subsection.arabicsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Funktionsstruktur}{23}{subsubsection.arabicsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Morphologischer Kasten}{23}{subsubsection.arabicsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Konzeptauswahl}{24}{subsubsection.arabicsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.3}Subsysteme}{24}{subsection.arabicsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Vereinzelung}{24}{subsubsection.arabicsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Zuführung}{24}{subsubsection.arabicsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.4}Schnittstellen}{24}{subsection.arabicsection.4.4}%
-\contentsline {section}{\numberline {5}Realisierung}{25}{section.arabicsection.5}%
-\contentsline {subsection}{\numberline {5.1}Verwendete Tools}{25}{subsection.arabicsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Hardware}{25}{subsection.arabicsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Mechanische Bauteile}{25}{subsubsection.arabicsection.5.2.1}%
-\contentsline {paragraph}{\nonumberline Material}{25}{paragraph*.25}%
-\contentsline {paragraph}{\nonumberline Aluminiumprofile}{25}{paragraph*.26}%
-\contentsline {subsubsection}{\numberline {5.2.2}Elektronische Komponenten}{25}{subsubsection.arabicsection.5.2.2}%
-\contentsline {paragraph}{\nonumberline Spannungsversorgung}{25}{paragraph*.28}%
-\contentsline {paragraph}{\nonumberline Microcontroller}{25}{paragraph*.29}%
-\contentsline {paragraph}{\nonumberline Sensorik}{25}{paragraph*.30}%
-\contentsline {subsection}{\numberline {5.3}Software}{25}{subsection.arabicsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Code Struktur}{25}{subsubsection.arabicsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Signalfluss}{26}{subsubsection.arabicsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.4}Herausforderungen \& Probleme}{26}{subsection.arabicsection.5.4}%
-\contentsline {section}{\numberline {6}Validierung \& Tests}{27}{section.arabicsection.6}%
-\contentsline {subsection}{\numberline {6.1}Verifikation der Einzelkomponenten}{27}{subsection.arabicsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}I2C-Kommunikation}{27}{subsubsection.arabicsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}Servomotoren}{27}{subsubsection.arabicsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.3}Schrittmotoren}{27}{subsubsection.arabicsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.2}Ausfall-Betrachtung}{27}{subsection.arabicsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Systemtest-Gesamtablauf}{27}{subsection.arabicsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}Versuchsaufbau}{27}{subsubsection.arabicsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}Versuchsdurchführung}{27}{subsubsection.arabicsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}Versuchsreihe Taktzeit}{27}{subsubsection.arabicsection.6.3.3}%
-\contentsline {subsubsection}{\numberline {6.3.4}Versuchsreihe Wiederholgenauigkeit}{27}{subsubsection.arabicsection.6.3.4}%
-\contentsline {subsubsection}{\numberline {6.3.5}Versuchsreihe Durchsatz}{28}{subsubsection.arabicsection.6.3.5}%
-\contentsline {subsubsection}{\numberline {6.3.6}Versuchsreihe Beschädigung}{28}{subsubsection.arabicsection.6.3.6}%
-\contentsline {subsection}{\numberline {6.4}Ergebnisse}{28}{subsection.arabicsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Fehlerbetrachtung}{28}{subsection.arabicsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Bewertung gegen Anforderungsliste}{28}{subsection.arabicsection.6.6}%
-\contentsline {section}{\numberline {7}Diskussion}{29}{section.arabicsection.7}%
-\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{29}{subsection.arabicsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{29}{subsubsection.arabicsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagbetrieb}{29}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungs Vorschläge}{29}{subsubsection.arabicsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{29}{subsection.arabicsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Ausblick}{29}{subsection.arabicsection.7.3}%
-\contentsline {section}{\numberline {8}Zusammenfassung}{30}{section.arabicsection.8}%
-\contentsline {section}{\numberline {A}Literatur}{31}{appendix.A}%
-\contentsline {section}{\numberline {B}Anhang}{33}{appendix.B}%
-\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{34}{appendix.C}%
+\contentsline {subsubsection}{\numberline {3.3.2}Vereinzelung}{22}{subsubsection.arabicsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Transport}{22}{subsubsection.arabicsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Fixierung}{22}{subsubsection.arabicsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Zuführung}{22}{subsubsection.arabicsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.4}Forschungslücke}{22}{subsection.arabicsection.3.4}%
+\contentsline {section}{\numberline {4}Konzept \& Anforderungsanalyse}{23}{section.arabicsection.4}%
+\contentsline {subsection}{\numberline {4.1}Anforderungen}{23}{subsection.arabicsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Gesamtarchitektur}{23}{subsection.arabicsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Funktionsstruktur}{24}{subsubsection.arabicsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Morphologischer Kasten}{24}{subsubsection.arabicsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Konzeptauswahl}{25}{subsubsection.arabicsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Subsysteme}{25}{subsection.arabicsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Vereinzelung}{25}{subsubsection.arabicsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Zuführung}{25}{subsubsection.arabicsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Schnittstellen}{25}{subsection.arabicsection.4.4}%
+\contentsline {section}{\numberline {5}Realisierung}{26}{section.arabicsection.5}%
+\contentsline {subsection}{\numberline {5.1}Verwendete Tools}{26}{subsection.arabicsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Hardware}{26}{subsection.arabicsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Mechanische Bauteile}{26}{subsubsection.arabicsection.5.2.1}%
+\contentsline {paragraph}{\nonumberline Material}{26}{paragraph*.27}%
+\contentsline {paragraph}{\nonumberline Aluminiumprofile}{26}{paragraph*.28}%
+\contentsline {subsubsection}{\numberline {5.2.2}Elektronische Komponenten}{26}{subsubsection.arabicsection.5.2.2}%
+\contentsline {paragraph}{\nonumberline Spannungsversorgung}{26}{paragraph*.30}%
+\contentsline {paragraph}{\nonumberline Microcontroller}{26}{paragraph*.31}%
+\contentsline {paragraph}{\nonumberline Sensorik}{26}{paragraph*.32}%
+\contentsline {subsection}{\numberline {5.3}Software}{26}{subsection.arabicsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Code Struktur}{26}{subsubsection.arabicsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Signalfluss}{27}{subsubsection.arabicsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.4}Herausforderungen \& Probleme}{27}{subsection.arabicsection.5.4}%
+\contentsline {section}{\numberline {6}Validierung \& Tests}{28}{section.arabicsection.6}%
+\contentsline {subsection}{\numberline {6.1}Verifikation der Einzelkomponenten}{28}{subsection.arabicsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}I2C-Kommunikation}{28}{subsubsection.arabicsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Servomotoren}{28}{subsubsection.arabicsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Schrittmotoren}{28}{subsubsection.arabicsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}Ausfall-Betrachtung}{28}{subsection.arabicsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Systemtest-Gesamtablauf}{28}{subsection.arabicsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Versuchsaufbau}{28}{subsubsection.arabicsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Versuchsdurchführung}{28}{subsubsection.arabicsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Versuchsreihe Taktzeit}{28}{subsubsection.arabicsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}Versuchsreihe Wiederholgenauigkeit}{28}{subsubsection.arabicsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.5}Versuchsreihe Durchsatz}{29}{subsubsection.arabicsection.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.3.6}Versuchsreihe Beschädigung}{29}{subsubsection.arabicsection.6.3.6}%
+\contentsline {subsection}{\numberline {6.4}Ergebnisse}{29}{subsection.arabicsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Fehlerbetrachtung}{29}{subsection.arabicsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Bewertung gegen Anforderungsliste}{29}{subsection.arabicsection.6.6}%
+\contentsline {section}{\numberline {7}Diskussion}{30}{section.arabicsection.7}%
+\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{30}{subsection.arabicsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{30}{subsubsection.arabicsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagbetrieb}{30}{subsubsection.arabicsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungs Vorschläge}{30}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{30}{subsection.arabicsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Ausblick}{30}{subsection.arabicsection.7.3}%
+\contentsline {section}{\numberline {8}Zusammenfassung}{31}{section.arabicsection.8}%
+\contentsline {section}{\numberline {A}Literatur}{32}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{34}{appendix.B}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{35}{appendix.C}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
