@@ -189,6 +189,26 @@
       \verb https://doi.org/10.1007/978-3-642-41438-1
       \endverb
     \endentry
+    \entry{RNAAutomation.o.J.}{online}{}{}
+      \list{organization}{1}{%
+        {RNA Automation Ltd}%
+      }
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labeltitlesource}{title}
+      \field{note}{Ohne Datumsangabe}
+      \field{title}{Escapements and Nests}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
+      \verb{url}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
+    \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
