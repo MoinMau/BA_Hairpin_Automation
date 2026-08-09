@@ -149,11 +149,173 @@ des Kupfers viel schneller oxidiert. Außerdem wird nicht nur der geplante Berei
 andere Teile der Isolierschicht beschädigt werden.
 %
 \subsubsection{Laser}\label{sec:Laser}
-- Wie funktioniert die Abisolierung mittels Laser\\
-- Was sind Anforderungen an den Laser\\
-- Was gibt es für Probleme?\\
-Als letztes wird die weitverbreiteste Methode zum Abisolieren beschrieben:
-\todo{sehr detaillierte Betrachtung!!!}
+In diesem Kapitel soll in ein Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht und 2. wie dieses zum Abisolieren
+von Hairpins verwendet werden kann.\\
+Ein Laser basiert hauptsächlich auf die in \cref{fig:laser-prinzip} dargestellten drei pysikalischen Effekte zwischen Photonen und Atomen. Dazu zählt die Absorption, die spontane Emission und 
+die stimulierte Emission von Photonen\PEMfootcite[S. 27-31]{Eichler.2015}. Gelangt Licht durch eine Materialschicht, wird dieses zu einem
+gewissen Teil absorbiert. Je nach Materialbeschaffenheit und Wellenlänge hat das Licht nach dem Durchdringen dieser Schicht eine geringere 
+Intensität und damit eine geringere Energie. Diese Differenz wird zum einen Teil in Wärme umgewandelt zum anderen aber auch in angeregte Atome.
+Dies geschieht, wenn ein Photon auf ein Atom im Grundzustand trifft. Dabei wird die Energie des Photons bei der Absorption abgegeben und die 
+Elektronen des betroffene Atom auf ein erhöhtes Ennergieniveau gehoben. Durch das zweite Phänomen, die spontane Emission, springt das Elektron
+des angeregten Atoms nach einer gewissen Zeit wieder in den Grundzustand zurück. Bei diesem Rücksprung wird die zuvor aufgenommene Energie 
+wieder als Lichtqunat abgegeben. Hierbei ist wichitg zu erwähnen, dass die Richtung und Wellenlänge des emittierten Photons nicht mit dem 
+absorbierten Photon übereinstimmen muss. Dieser Effekt ist schon länger durch Naturphänomen wie Fluoreszenz bekannt, würde aber für die Funktion
+des Lasers nicht ausreichen. Die stimulierte Emission bewirkt nämlich, dass aus den vereinzelten Emissionen eine Kettenreaktion entsteht. Kommt
+es dazu, dass ein Photon auf ein angeregtes Atom tifft, wird ein Photon emittiert, dass die gleiche Wellenlänge und Phase wie das einfallende
+Photon hat. Für die große Intensität des Laserlichtes muss dieser Lawineneffekt weiter verstärkt werden. Dazu braucht es ein aktives Medium,
+welches die Atome zur Anregung und Emission bereitstellt und ein Resonator, der den Lawineneffekt weiter verstärkt. Das aktive Medium ist
+meist ein bestimmter Kristall oder ein Gas, bei dem die Energieniveaus der benötigten Wellenlänge entsprechen. An den Enden dieses Mediums
+sind wie in \cref{fig:laser-prinzip} (b) zu sehen, zwei Spiegel, die das Laserlicht mehrfach durch das Medium schicken. Dabei gibt es eine 
+Seite des Resonators, der das gesamte Licht reflektiert. Gegenüberliegend gibt es teildruchlässigen Spiegel, der dafür sorgt, dass ein Teil
+des Lichtes den Aufbau verlassen kann. Dieses austretende Licht kann nur über weitere Spiegel oder einer Glasfaser zum benötigten Ort geleitet
+werden. Damit dieses Prinzip überhaupt im Dauerbetrieb funktioniert, muss dem Gesamten System genau so viel Energie zugeführt werden, wie
+durch die Abstrahlung des Laserlichtes entzogen wird. Dies geschieht durch ein Pumpquelle, eine ausreichend hohe Besetzungsinversion bereitstellt.
+Dazu werden Dioden oder andere kleiner Laser verwendet um mehr Atome im angeregten Zustand zu halten, als im Grundzustand.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\linewidth}{!}{%
+  \begin{tikzpicture}[
+    font=\small,
+    lvl/.style     = {draw=gray!75, thin},
+    elec/.style    = {draw=gray!60, thin, fill=violet!55},
+    photon/.style  = {decorate, decoration={snake, amplitude=0.5mm,
+                      segment length=1.8mm, post length=1.6mm},
+                      draw=orange!85, line width=0.5pt,
+                      -{Latex[length=1.6mm,width=1.3mm]}},
+    trans/.style   = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85},
+    lbl/.style     = {font=\scriptsize, text=gray!85},
+    pan/.style     = {font=\scriptsize, text=gray!70},
+    mirror/.style  = {draw=gray!70, line width=1pt, fill=gray!25},
+    mirrorout/.style = {draw=gray!70, line width=1pt, fill=gray!8},
+    medium/.style  = {draw=teal!70, thin, fill=teal!12},
+    pump/.style    = {draw=violet!60, thin, fill=violet!10},
+    beam/.style    = {draw=orange!80, line width=0.6pt},
+    dim/.style     = {{Latex[length=1.4mm,width=1.1mm]}-{Latex[length=1.4mm,width=1.1mm]},
+                      thin, gray!70}
+  ]
+
+  %% ============================================================
+  %% (a) Wechselwirkung zwischen Photon und Atom
+  %% ============================================================
+  %% #1 = x-Versatz, #2 = Überschrift
+  \newcommand{\niveaus}[2]{%
+    \begin{scope}[shift={(#1,0)}]
+      \draw[lvl] (-1.0,0)   -- (1.0,0);
+      \draw[lvl] (-1.0,1.4) -- (1.0,1.4);
+      \node[lbl, left=1mm] at (-1.0,0)   {$E_1$};
+      \node[lbl, left=1mm] at (-1.0,1.4) {$E_2$};
+      \node[font=\small] at (0,2.3) {#2};
+    \end{scope}}
+
+  %% ---- Absorption ----
+  \niveaus{0}{Absorption}
+  \fill[elec] (0.55,0) circle (0.11);
+  \draw[trans] (0.55,0.12) -- (0.55,1.28);
+  \draw[photon] (-2.30,0.7) -- (-0.35,0.7);
+  \node[lbl, align=center] at (0,-0.8)
+       {Photon wird aufgenommen,\\[-2pt] Elektron steigt auf $E_2$};
+
+  %% ---- Spontane Emission ----
+  \niveaus{5.2}{Spontane Emission}
+  \fill[elec] (5.75,1.4) circle (0.11);
+  \draw[trans] (5.75,1.28) -- (5.75,0.12);
+  \draw[photon] (6.35,1.05) -- (7.60,1.65);
+  \node[lbl, align=center] at (5.2,-0.8)
+       {Photon mit zufälliger Richtung\\[-2pt] und Phase wird frei};
+
+  %% ---- Stimulierte Emission ----
+  \niveaus{10.4}{Stimulierte Emission}
+  \fill[elec] (10.95,1.4) circle (0.11);
+  \draw[trans] (10.95,1.28) -- (10.95,0.12);
+  \draw[photon] (8.35,0.7)   -- (10.10,0.7);
+  \draw[photon] (11.75,0.85) -- (13.40,0.85);
+  \draw[photon] (11.75,0.55) -- (13.40,0.55);
+  \node[lbl, align=center] at (10.4,-0.8)
+       {zwei Photonen gleicher Wellenlänge,\\[-2pt] Richtung und Phase};
+
+  \node[pan, anchor=west] at (-2.35,3.0)
+       {(a) Wechselwirkung zwischen Photon und Atom};
+
+  %% ============================================================
+  %% (b) Prinzipieller Aufbau
+  %% ============================================================
+  \begin{scope}[yshift=-55mm, xshift=-6mm]
+
+    %% aktives Medium
+    \draw[medium] (3.6,-0.7) rectangle (8.4,0.7);
+    \foreach \x in {4.0,4.6,...,8.2} {
+      \foreach \y in {-0.42,0,0.42} {
+        \fill[violet!45] (\x,\y) circle (0.055);}}
+
+    %% Spiegel
+    \draw[mirror]    (1.5,-1.15)   rectangle (1.85,1.15);
+    \draw[mirrorout] (10.15,-1.15) rectangle (10.5,1.15);
+    \foreach \y in {-1.0,-0.8,...,1.0} {
+      \draw[gray!60, line width=0.3pt] (1.5,\y) -- (1.85,\y+0.13);}
+
+    %% im Resonator umlaufender Strahl
+    \draw[beam, -{Latex[length=1.8mm,width=1.4mm]}] (1.9,0.28) -- (10.1,0.28);
+    \draw[beam, {Latex[length=1.8mm,width=1.4mm]}-] (1.9,-0.28) -- (10.1,-0.28);
+
+    %% ausgekoppelter Laserstrahl
+    \draw[beam, line width=1.6pt, -{Latex[length=2.6mm,width=2.2mm]}]
+         (10.55,0) -- (13.1,0);
+    \node[lbl, align=center, anchor=west] at (10.9,0.75)
+         {Laserstrahl\\[-2pt] $\lambda = \unit[1064]{nm}$};
+
+    %% Pumpquelle
+    \draw[pump] (3.6,-2.5) rectangle (8.4,-1.8);
+    \node[font=\scriptsize] at (6.0,-2.15) {Pumpquelle};
+    \foreach \x in {4.2,5.1,...,8.0} {
+      \draw[-{Latex[length=1.6mm,width=1.3mm]}, violet!65, thin]
+            (\x,-1.75) -- (\x,-0.78);}
+
+    %% Beschriftungen
+    \node[lbl, align=center] at (1.68,-1.6)  {Rückspiegel\\[-2pt] $R \approx \unit[100]{\%}$};
+    \node[lbl, align=center] at (10.3,-1.6)  {Auskoppel-\\[-2pt] spiegel\\[-2pt] $R < \unit[100]{\%}$};
+    \node[lbl, align=center] at (6.0,1.15)   {Aktives Medium};
+    \node[lbl, align=center, anchor=east] at (1.35,0.55)
+         {Verstärkung bei\\[-2pt] jedem Umlauf};
+
+    \node[pan, anchor=west] at (-1.75,2.1) {(b) Prinzipieller Aufbau};
+  \end{scope}
+
+  \end{tikzpicture}}
+  \caption[Physikalisches Funktionsprinzip des Lasers]%
+          {Physikalisches Funktionsprinzip des Lasers. (a) Die drei
+           Wechselwirkungen zwischen Photon und Atom. (b) Aufbau aus drei Komponenten: 
+           Pumpquelle, aktives Medium und Resonator.}
+  \label{fig:laser-prinzip}
+\end{figure}
+%
+
+Im zweiten Teil dieses Kaptiels betrachten wir den physikalischen Vorgang des Abisolierens mittels Laser. Grundsätzlich beruhen alle 
+Fertingungprozesse mittels Laser \enquote{auf der Umwandlung von auf das Werkstück treffender elektromagnetischer Energie in Wärme.}\PEMfootcite[S. 127]{Huegel.2022}
+Dabei gibt es drei Effekte, die beim Auftreffen des Laserlichtes auf die Werkstoffoberfläche auftreten können: Reflektion, Transmission
+und Absoroption. Die Leistung des Laserlichtes teilt sich also in genau diese drei Teile auf:
+\begin{equation}
+  P_{Laser} = P_{Reflektion} + P_{Transmission} + P_{Absorption}
+\end{equation}
+Die Reflektion besitz dabei für die Bearbeitung des Werkstückes keine Wirkung und wird somit als Verlsut betrachtet. Die Absorption ist
+widerum der relevanteste Effekt, da die absobierte Energie maßgeblich für den Temperaturanstieg verantwortlich ist. Für die Abisolierung
+der Hairpins ist zu dem Vorteilhaft, dass die Isolierung und der Leiter aus unterschiedlichen Materialien besteht. So ist die Eindringtiefe
+des Laserlichts bei Polymeren wesentlich höher als die bei Kupfer. Somit erwärmt sich die Isolierung viel stärker und erreicht somit schneller
+die Verdampfungstemperatur zum Abtragen. Dies wird in Kombination mit einem extrem kurz gepulsten Laserlicht genutzt, um geziehlt den
+Kupferdraht nicht zu beschädigen indem sich dieser zu stark erwärmt. Für das photochemische Abtragen von Material, wird so viel Energie
+in Form von Wärme zugeführt, dass die Moleküle von dem festen Zustand schmelzen und schluss endlich verdampfen. Auch ist es möglich
+Material photochemisch zu entfernen, indem die Bindungen der Moleküle durch die Energie des Laserlichtes aufgebrochen werden. Um dies für
+das in dieser Arbeit verwendete Setup zu untersuchen, lässt sich folgende Gleichung aufstellen:
+\begin{equation}
+  E_{Laser} = h * c / \lambda
+\end{equation}
+Bei einer Wellenlänge von 1064 nm, die der dem Laserlicht der Cleanlaser-Anlage entspricht, ergibt sich eine Energie von 1,1eV. Die Bindungsenergie von Polymeren liegt wiederum
+bei etwa 3-4eV. Somit ist die Energie des Laserlichtes nicht ausreichend, um die Bindungen der Moleküle auf zu brechen. Es muss sich dementspechend
+bei diesem Setup, um einen thermischen Prozess handeln. Außerdem ist ein physiklischer Schutz in deisen Prozess integriert. So wird der Laserstrahl
+nach dem Abtragen der Isolierung weitestgehend vom Kuperdraht reflektiert. Mit der der Kopplung des Laserlichtpunktes mit einer Vorschubeinheit,
+lassen sich so ganze Oberflächen kontinuierlich bearbeiten.
+\todo{Probleme dieses Prozesses?}
+\todo{Was sind mindest anforderungen?}
 %
 %
 \subsection{Aktuatorik}\label{Aktuatorik}

@@ -136,6 +136,59 @@
       \field{title}{Betriebsanleitung: wireLINE MIRROR static (L21-1710)}
       \field{year}{2022}
     \endentry
+    \entry{Eichler.2015}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=833ed924068efd1e9d7edada5284f993}{%
+           family={Eichler},
+           familyi={E\bibinitperiod},
+           given={Hans\bibnamedelima Joachim},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7a18e69fb744ad0b2bdbce75f97947e}{%
+           family={Eichler},
+           familyi={E\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg}%
+      }
+      \strng{namehash}{6f1f248aa0535c23c72a5b84192b1968}
+      \strng{fullhash}{da19692639892be9a3a0e508ced344c1}
+      \strng{fullhashraw}{da19692639892be9a3a0e508ced344c1}
+      \strng{bibnamehash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authorbibnamehash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authornamehash}{6f1f248aa0535c23c72a5b84192b1968}
+      \strng{authorfullhash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authorfullhashraw}{da19692639892be9a3a0e508ced344c1}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{8. Auflage}
+      \field{isbn}{978-3-642-41437-4}
+      \field{series}{Springer-Lehrbuch}
+      \field{shorttitle}{Laser: Bauformen, Strahlführung, Anwendungen}
+      \field{title}{Laser: Bauformen, Strahlführung, Anwendungen}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-642-41438-1
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-642-41438-1
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-642-41438-1
+      \endverb
+    \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
@@ -243,6 +296,58 @@
       \endverb
       \verb{file}
       \verb Hesse2020_GrundlagenHandhabungstechnik:Attachments/Hesse2020_GrundlagenHandhabungstechnik.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{Huegel.2022}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=da58c8ff998f3a43f0c6e44e30a48641}{%
+           family={Hügel},
+           familyi={H\bibinitperiod},
+           given={Helmut},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83b171dea9b4659ea8be921fb3b5bd96}{%
+           family={Graf},
+           familyi={G\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wiesbaden}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg}%
+      }
+      \strng{namehash}{6800c86f67dc515fbe3699dc00287727}
+      \strng{fullhash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{fullhashraw}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{bibnamehash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authorbibnamehash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authornamehash}{6800c86f67dc515fbe3699dc00287727}
+      \strng{authorfullhash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authorfullhashraw}{6c3eedf37a8331b053dafab63f703c53}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{4. Auflage}
+      \field{isbn}{978-3-658-37252-1}
+      \field{shorttitle}{Materialbearbeitung mit Laser}
+      \field{title}{Materialbearbeitung mit Laser: Grundlagen und Verfahren}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-658-37252-1
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-658-37252-1
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-658-37252-1
       \endverb
     \endentry
     \entry{Jamian.2020}{article}{}{}
