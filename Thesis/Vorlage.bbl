@@ -587,6 +587,45 @@
       \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
       \endverb
     \endentry
+    \entry{Reibung.2001}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=de5776ac5c32cd3a7a849f188d87b11b}{%
+           family={Mitdank},
+           familyi={M\bibinitperiod},
+           given={Rüdiger},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {Humboldt-Universität zu Berlin, Institut für Physik}%
+      }
+      \strng{namehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{fullhash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{fullhashraw}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{bibnamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorbibnamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authornamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorfullhash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorfullhashraw}{de5776ac5c32cd3a7a849f188d87b11b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Skript zur Vorlesung Experimentalphysik}
+      \field{shorttitle}{Reibung}
+      \field{title}{Reibung}
+      \field{urlday}{10}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+      \verb{url}
+      \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+    \endentry
     \entry{ComparativeReviewMotor.2023}{article}{}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=36f45e976fb52c17e2092c49be865878}{%

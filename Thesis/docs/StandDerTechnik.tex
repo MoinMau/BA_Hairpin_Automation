@@ -449,6 +449,45 @@ Bauteile durch den Abstand der beiden Arme einzustellen.
 \todo{Was sind Vor- und Nachteile?}
 %
 \subsubsection{Transport}\label{sec:TransportSystem}
+Damit Bauteile von einem Subsystem in ein Anderes gelangen, bedarf der Wahl eines passenden Transportsystem. Es muss auf
+Taktrate, Fehlerquote und Ausfallsicherheit geachtet werden. Für die Untersuchung der folgenden Ausführungen 
+wurde zwischen aktiven und passiven Transportsystem unterschieden. 
+
+Als Vorraussetung für ein passives Transportsystem gilt, dass dieses System ohen Zufuhr von exterener Steuerung und Energie
+funktioniert. Die Schwerkraft spielt in diesem Zusammenhang eine Wichtige Rolle, da diese durch eine vorleigende Höhendifferenz
+Bauteile bewegen kann. Die häufigsten Ausführung dieses Systems sind Rutschen oder Fallschächte, über die die Bauteile geführt
+über eine Ebene gleiten. Ein solcher Aufbau muss individuell an das Bauteil angepasst sein, wobei aber immer eine Höhendifferenz
+zwischen den Schnitt- und Übergabepunkten vorhanden sein muss. Äußerdem muss für eine Bewegung physikalisch der passende Grenzwinkel
+zum Überwinden der Haftreibung\PEMfootcite{Reibung.2001} eingestellt sein:
+\begin{equation}
+  \tan(\alpha) = my_(H)
+\end{equation}
+Da im Normalfall die Gleitreibung kleiner als die Haftreibung ist, wird mit dieser Formel also der Winkel zwischen dem vertikalen 
+Boden und der schiefen Ebene beschrieben. Die Konstante muss individuel zwsichen der Wekrstoffpaarung, also zwischen Außenschicht des 
+Bauteils und Beschaffenheit der schiefen Ebene. Der steielste Winkel beschreibt die Aufstelleung im Rechtenwinkel mit einem Winkel von 90°.
+Hierbei ist aber zu beachten, dass dieser theoretische Wert in der Praxis selten verwednet wird, weil besonders bei kleineren Bauteilen
+die Gefahr besteht, dass sich diese Überschlagen und in einer unerwünschten Lage ankommen. Weiter ist mit diesem System eine Geschwindikeits
+konrolle schwer möglich. Denn es muss verhindert werden, dass sich Bauteile verharken oder die Haftreibung nicht überwinden können. 
+Dafür Bedarf es eine gewisse Geschwindigkeit, die für die Minderung solcher Probleme tendenziell höher gewählt wird. Dies weiderum kann
+zu Beschädigungen, wie Verformungen oder Abrieb, führen. Auf der Anderen Seite ist ein solches System einfach im mechanischen Aufbau,
+kostgengünsitg und eine Wartungsarme Methode die Schnittstellen der einzelnen Subsystem zu verbinden.
+
+Die folgenden Transportssysteme setzten auf einen externen Anrtieb, zählen also zu den aktiven Systemen. Der Vibrationslinear-
+und Bandförderer kommen aber tortzdem ohne eine elektronische Regelung aus. Es kann ausschließlich zwischen den zwei Zuständen
+AN udn AUS entscheiden werden. Der Vibrationslinearförderer benutzt Virationen bei einer festen Frequenz, die die Bauteile in 
+Mikroschritten vorbewegt. Physikalisch werden die Teile bei jeder Amplitude eine minimale Strecke weiter geworfen. Passiert dies
+mit der zum Bauteil passenden Frequenz und Amplitude, stellt sich eine kontinuierliche gerade Bewegung ein. Dieses System ist sehr
+robust und in der Industrie vielvertreten, da die Bewegung in einer moderaten konstanten Geschwindigkeit passeirt. Auch lässt sich
+mit einer dedizierten Steuerung weitere Parameter in einem gewissen Rahmen anpassen. Neben der einfachen Funktionsweise stellt aber
+besonders die Lautstärke des Systems und ein recht komplexer Aufbau mit vielen Komponeten Probleme darf.
+Die wohl bekannteste und gängiste Art der Transportsysteme sind die Förderbänder. Diese gibt es in einer großen Varitation bezüglich
+Bauteile Art, Größe und Geschwindigkeit. Grundsätzlich werden die zu befördernenden Teile aber liegend auf einem Band abgelegt.
+Dabei gibt einen Punkt bei dem Teile dazu gegeben werden und einen Endpunkt an dem diese wieder abgegeben werden. Das Band besteht
+meistenst aus einem runden kontinuierlichen Kustoffband, welches über zwei Umlenkrollen rotiert. Die Oberseite wird so zu einer
+linearen bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung
+
+
+
 Da es für unterschieldiche Teile Arten und Größen viele Transportsysteme gibt, wird sich in diesem
 Abschnitt nur auf vier verschiedene Methoden konzentriert Teile zu befördern. 
 - Wie können die Hairpins von einem Ort/System zum nächsten transprotiert werden?\\
