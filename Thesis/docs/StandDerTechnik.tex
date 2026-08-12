@@ -76,7 +76,7 @@ externen Eingang, wie den Roboterarm, durchzuführen.
   \centering
   \includegraphics[width=0.4\textwidth]{figs/wireLine MIRROR.png}
   \caption{wireLINE MIRROR System - Laserstrahlführung, \cite[Abb. Bearbeitungsoptik, S.~42]{CleanLaser2022}}
-  \label{fig:laser__MIRROR_system}
+  \label{fig:laser_MIRROR_system}
 \end{figure}
 
 \todo{- Wie lange braucht ein Durchlauf?}
@@ -417,7 +417,7 @@ werden. Neben der manuellen Bestückung kann dies bespielweise durch erweiterte 
 beschierbenen passieren. Bei jedem dieser Systeme muss jedoch betrachtet, wie die Bauteile in eine weiteres Subsystem übergeben
 werden. Häufig muss das Bauteil als verinzeltes Stück übergeben werden, was bei den Magazinen außer dem Reihen- und Hängemagazin
 der Fall ist. Auch die Lagerungssystem müssen zur weiteren Verwendeung vereinzelt werden. Die Betrachtung solcher Systeme folgt
-in \cref{sec:Vereinzelung}.
+in \cref{sec:VereinzelungSystem}.
 %
 %
 \todo{Hairpin spezifischer???}
@@ -425,7 +425,7 @@ in \cref{sec:Vereinzelung}.
 - Wie können die Hairpins "gespeichert" werden?
 - Wie wird dafür gesorgt, dass nichts verhackt?}
 %
-\subsubsection{Vereinzelung}\label{sec:Vereinzelung}
+\subsubsection{Vereinzelung}\label{sec:VereinzelungSystem}
 Nach der VDI 2860 braucht es für viele Prozesse eine Abtrennung von Werkstücken aus einem geordenten Strom. Genau für diesen
 Zweck gibt unterschiedliche mechanische Ansätze\PEMfootcite{RNAAutomation.o.J.}. Ein häufig verwendeter Mechanismus ist dabei
 die Vereinzelung mittels Schieber. Ähnlich wie den in \cref{sec:LagerungsSystem} beschriebenen Schachtmagazin, wird das Bauteil
@@ -484,22 +484,60 @@ Die wohl bekannteste und gängiste Art der Transportsysteme sind die Förderbän
 Bauteile Art, Größe und Geschwindigkeit. Grundsätzlich werden die zu befördernenden Teile aber liegend auf einem Band abgelegt.
 Dabei gibt einen Punkt bei dem Teile dazu gegeben werden und einen Endpunkt an dem diese wieder abgegeben werden. Das Band besteht
 meistenst aus einem runden kontinuierlichen Kustoffband, welches über zwei Umlenkrollen rotiert. Die Oberseite wird so zu einer
-linearen bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung
+linearen bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung bietet
+neben ihrer Variantenvielfalt auch die Möglichkeit einer weiteren Regelung, um ebenfalls Paramerter wie Geschwingdigleit und Taktzeit
+dem benötigten Prozess anzupassen. Nachteil ist die Wartbarkeit, da in diesem System viele unterschiedliche bewegebare Komponenten
+verbaut werden.
 
+Die in \cref{fig:wirkkette-antrieb} darfgestellten Linearachsen sind eine weitere Möglichkeit Bauteile zu bewegen. Der Zahnriemen-Ansatz
+ist dabei verwandt zu den gerade beschreibenen Förderbänder. Der Spindel- und Zahnstangenansatz soll hierfür noch einmal genauer
+betrachtet werden, denn diese bieten den Vorteil extrem präzise Positionen anzufahren. Laut Altinas werden besonders die Kugelgewindegetriebe
+verwendet \PEMfootcite{Altintas.2011}. Diese ist eine kleine mechanische Änderung gegenüber der Spindel, bei der statt einer Mutter
+eine lange Reihe an Kugeln um das Gewinde der Welle geführt wird. So wird die Rotation der Spindel in eine abnutzungsarme und energieeffizienten
+Vor- und Rückbewegung des Läufers umgewandelt. Trotz der höheren Komplexität des mechanischen Aufbaus sind die Vorteile bei einer 
+dauerhaften Nutzung relevant. Außerdem nur für deise Antriebe nicht nur die externe Energiequelle in Form eines Motors zu berücksichtigen,
+sondern auch eine vorhandene aktive Regelung. Da diese Antriebe druch zwei Endpunkte begrenzt sind, muss die Regelung dafür sorgen,
+das der Schlitten innerhalb dieses Bereiches bleibt. Deises System kann weiter auch für eine genaue Postionitionierung genutzt werden,
+welches individuelle Anfahrten für den Schlitten ermöglicht.
 
-
-Da es für unterschieldiche Teile Arten und Größen viele Transportsysteme gibt, wird sich in diesem
-Abschnitt nur auf vier verschiedene Methoden konzentriert Teile zu befördern. 
-- Wie können die Hairpins von einem Ort/System zum nächsten transprotiert werden?\\
+Alle diese beschriebenen Systeme müssen für den jeweiligen Einsatz stark angepasst werden. Es gibt noch einige weitere Transprotsysteme,
+die auf anderne Antrieben, wie elektromagnetische Linearantriebe oder selbstfahrbare Wägen für Industrienhallen. Diese wurden aber 
+hier nicht weiter betrachtet, da diese nur unwahrscheilich für den Hairpintransport und diese Arbeit in betracht gezogen werden können.
+\todo{Definition Transprotsystem? Schnittstellenübergabe...}
 %
-\subsubsection{Fixierung}\label{sec:FixierungsSystem}
-Wie können die Hairpins so psotioniert werden, dass sie optimal übergeben werden können?\\
+\subsubsection{Fixierung}\label{sec:FixierungSystem}
+Für die Bearbeitung oder Übergabe an neuen Subsystemen, bedarf es einer passenden Fixierung von Bauteilen. Es lässt sich grob in Kraftschluss
+und Formschluss Fixierungssysteme unterscheiden. Für die sehr schonende Art der Formschluss fixierung kommen an das Bauteil angepasste
+Konturen und Halter zum Einsatz. Diese sind so konstruiert, dass die Bauteile ohne eine exteren Halterung in ihrer Postion bleiben. Da
+nur Auflagekräfte wirken, ist eine mechanische Beeinflusssung des Bauteils sehr unwahrscheinlich. Das Dimensiionieren und Designen
+eines solchen System bedarf jedoch einer instensiven Prüf- und Konsturktionphase. Es muss für jedes Bauteil eine teiletypgebundenne
+Version erstellt werden, welches eine Variation von Bauteilen entgegen spricht.
+
+Die andere Möglichkeit ist der Kraftschluss, bei dem ein externer Fixiermechanis muss zum Einsatz kommt. Das Bauteil wird so an definierten
+Stellen eingespannt und gehalten. Für den genauen Aufbau eines solchen Mechanismus gibt eine Vielzahl unterschiedlicher Anssätzen, \todo{Das als Quelle?: https://www.mechstream.com/clamping-mechanism-motion-animations/}
+wobei meistens Backen an das Bauteil unter Druck angesetzt werden. Da eine genaue Betrachtung der unterschiedlichen Aufbauten, den
+Rahmen spregen würde, wird später in der Realisierung die konkrete Umsetzung beschrieben. Problem dieses Systems ist aber, dass
+eine Krafteinwirkung auf das Bauteil zu Beschädigungen und Verformungen führen kann. Wird dies im Konstruktionsprozess nicht mit
+beachtet, sind die Vorteile wie die Möglichkeit verschiedene Bauteile aufzunehemen nicht mehr relevant.
+
+Eine geosnderte Art der Kraftschlussmechanismen sind Greifersysteme, die hier noch einmal gesodnert aufgeführt werden, da das bereits
+in \cref{sec:AktuellesSystem} dargestellt System ein solches beinhaltet. Auch hier gibt es eine große Variation von mechanischen Aufbauten,
+wobei hier meist linear bewegbare Backen verwendeten werden. Für die fixierung und Bewegung werden eletromechanische oder pneumatische
+Antriebe verwendet. Ein solches Gesamtsystem besteht dabei aber wieder aus mehreren Subsystemen\PEMfootcite[Abbildung 9]{Strasser.2011}. 
+Es wird unterscheiden in den Greifer, also dem Wirk-/Haltesystem ansich, dem Antriebsystem für die Bewegung der Fixierung, einem Tragsystem
+an dem die einzelnen Greifer montiert sind, ein Steurungssystem mit Sensorfeedback und ein Schutz- und Sicherheutssyste für die Anlage
+selber und das Bedienpersonal.
+
+Weiter gibt es noch Vakuumgreifer oder magnetische Halterungen, die aber wegen ihrer sehr individuellen Anwendung in dieser Arbeit
+nicht detialierter betrachtet werden müssen.
 %
 \subsubsection{Zuführung}\label{sec:DeliverySystem}
+\todo{Hier evtl. Schnitt/Übergabe Punkt betrachtung?}
 - Welche Möglichkeiten gibt es für den Transport (Vibration, Linearmagazine, Belts, spindel)?\\
 - Was sind Vor- und Nachteile?\\
 %
 %
+\subsubsection{Positionierung}\label{sec:PositionierungsSystem}
 \subsection{Forschungslücke}\label{ResearchGap}
 - Warum muss ich das überhaupt machen?\\
 - Welche Systeme bringe ich zusammen?\\

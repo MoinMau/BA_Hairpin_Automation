@@ -2397,6 +2397,8 @@
     <bcf:citekey order="25" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
     <bcf:citekey order="26" intorder="1">RNAAutomation.o.J.</bcf:citekey>
     <bcf:citekey order="27" intorder="1">Reibung.2001</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">Altintas.2011</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">Strasser.2011</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

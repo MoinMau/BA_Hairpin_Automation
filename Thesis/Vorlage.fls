@@ -398,6 +398,7 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.st
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT 'inkscape' -V 
 OUTPUT Vorlage.pdf
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/german.lbx
