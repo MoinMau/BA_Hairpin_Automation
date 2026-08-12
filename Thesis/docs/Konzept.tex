@@ -72,6 +72,7 @@ K2 & F & Transport in eine definierte, reproduzierbare Endlage & --\\
 \addlinespace[2pt]
 St1 & F & Verarbeitung variierender Hairpin-Geometrien & Spektrum $\langle\ldots\rangle$\\ % Bereich definieren
 St2 & W & Verwendung kostengünstiger, prototypentauglicher Werkstoffe für den Aufbau & --\\
+St3 & F & Hairpins müssen als hängende Reihe angnommen werden & --\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Signal / Steuerung}}\\
@@ -83,7 +84,8 @@ Si3 & F & Robuste interne Kommunikation & Fehlerrate $\langle\ldots\rangle$\\
 
 \multicolumn{4}{@{}l}{\textbf{Energie}}\\
 \addlinespace[2pt]
-En1 & F & Versorgung aus vorhandener Infrastruktur & AC 230\,V \\
+En1 & F & Elektrische Versorgung aus vorhandener Infrastruktur & AC 230\,V \\
+En2 & F & Versogung aus vorhandener Infrastruktur ohne Große Anpassung & Druckluft 5bar, kein Vakuum\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Sicherheit}}\\
@@ -101,6 +103,7 @@ B2 & W & Bedienperson nur überwachend tätig & --\\
 \addlinespace[2pt]
 Fm1 & W & Reproduzierbarkeit mit vorhandenen Mitteln & --\\
 In1 & W & Verschleißteile zugänglich und einfach austauschbar & --\\
+Mo1 & F & Einfachheit gegenüber Komplexität & --\\
 
 \end{longtable}
 
@@ -139,7 +142,7 @@ dazu, einen sicheren Transport aus der Anlage zu ermöglichen. Außerdem muss in
 eine spätere Übergabe an den Roboterarm ermöglicht. Weiter muss der transportierte Hairpin auf eine fest definierte Position fahren.
 Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm funktionieren.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}[
   font=\footnotesize,
@@ -186,6 +189,10 @@ aktiven Subsystemen.}
 %
 %
 \subsubsection{Morphologischer Kasten}\label{sec:Morph}
+Die aufgeführten Prinzpien wurden aus den \cref{sec:SubSystem} beschriebenen und erklärten Möglichkeiten abgeleitet. Der Morphologische
+Kasten soll den Entscheidungsprozess übersichtlich veranschaulichen. Wichtig sit zu benennen, dass ein mechanischer Aufbau 
+manchmal mehrere Funktionen auf einmal lösen kann. Aus diesem Grund kann es in \cref{tab:morph} überschneidungen oder Wiederholungen
+geben. Dies wird aber in den nachfolgenen Abschnitten detailierter und nachvollziehbarer beschrieben.
 
 \definecolor{groupgray}{gray}{0.90}
 \definecolor{kogray}{gray}{0.55}
@@ -221,25 +228,59 @@ K.-o.-Filter ausgeschieden.}
 \bottomrule
 \endlastfoot
 
-Bevorraten     & Trichter / Hopper & Schachtmagazin & \ko{Vibrationstopf} & Reihenspeicher (hängend)\\
-Nachführen     & Schwerkraft & \ko{Vibration} & aktiver Schieber & Förderband\\
-Vereinzeln     & Trennschieber & Zellenrad & Sperrklinken (sequenziell) & Greifer\\
-Überführen     & Rutsche (Schwerkraft) & Fallschacht & aktiver Transferschieber & Förderband\\
-Übernehmen \& Fixieren & Formschluss-Nest + Klemmung & \ko{Pneumatikgreifer} & Servo-Klemme & \ko{Vakuum}\\
+Bevorraten     & \ko{Kettenmagazin} & Schachtmagazin & \ko{ortsfeste Nester} & Reihenmagazin (hängend)\\
+Nachführen     & Schwerkraft & Vibration & \ko{Stufenförderer} & \ko{Förderband}\\
+Vereinzeln     & Trennschieber & \ko{Zellenrad} & Sperrklinken (sequenziell) & \ko{Greifer}\\
+Überführen     & Rutsche (Schwerkraft) & Fallschacht & \ko{aktiver Schieber} & Förderband\\
+Übernehmen \& Fixieren & Formschluss-Nest & \ko{Pneumatikgreifer} & Kraftschluss-Klemme & \ko{Vakuum}\\
 Transportieren & Spindelantrieb & Zahnriemen & \ko{Pneumatikzylinder} & \\
 Positionieren  & Endstop + Schrittzählung & Lageregelung & Festanschlag & \\
-Übergeben      & aktives Freigeben (Klemme öffnet) & Schwerkraft in Nest & Roboter greift selbst & --\\
+Übergeben      & aktives Freigeben & Schwerkraft in Nest & Roboterarm löst selbtständig & \\
 
 \end{longtable}
 \endgroup
 
-\subsubsection{Konzeptauswahl}\label{sec:Konzeptauswahl}
-% FLIESSTEXT (selbst ausformulieren): pro kritischer Teilfunktion begründen,
-%  warum das gewählte Prinzip gegen die Anforderungsliste (4.1) gewinnt.
-%  z.B. Transport: Spindel+Schrittmotor erfüllt L2 (Wiederholgenauigkeit) und
-%  En1 besser als Pneumatik (schlechte Regelbarkeit in Zwischenlagen, vgl. 2.3.1).
-%
-%
+\subsection{Konzeptauswahl}\label{sec:Konzeptauswahl}
+Die Auswahl der Konzepte verläuft in mehreren Schritten. Zunächst werden Prinzipien ausgenommen, die die Anforderungsliste nicht
+erfüllen können. Im nächsten Schritt werden mit den verbliebenen Prinzipen Konzeptvarianten erstellt und gegeneinander verglichen.
+Die beste Kombination wird weiter analysiert und wird dann in der Realsisierung konkret ausgearbeitet.
+
+\subsubsection{Prinzipanalyse gegenüber Anforderungen}\label{sec:Prinzipanalyse}
+Für die Analyse und dem Begründen des K.-o. Filters wird Schritt für Schritt durch die Zeilen gegenangen. Eine Prüfung gegen die 
+Anforderungen und weiterer techischer Anforderungen erfolgt im gleichen Zuge.
+
+\paragraph{Bevorraten}: Bei diesen Prinzipien schneiden das System der ortsfesten Nester und das Kettenmagazin aus, weil diese 
+nicht die Anforderung St3 erfüllen können. Für das potentzielle Nutzen dieser Prinzipien wäre ein weiteres System zur Beladung
+nötig. Dies bietet kein Vorteil in Hinblick auf Prozesssicherheit und Automation.
+
+\paragraph{Nachführen}: Hier Bedarf es einer Betrachtung des vorherigen Punktes. Denn auch hier können der Stufenförderer und das
+Förderband nicht genutz werden, da laut Anforderung St3 die Hairpins in einer für diese Systeme falschen Lage eingegeben werden.
+
+\paragraph{Vereinzeln}: Bei diesem Unterpunkt ist die Anforderung St1 ausschlag gebend für den Ausschluss des Zellenrad und Greifers.
+Durch die geforderte hohen Variantenvielfalt der Hairpins ist das Konstruieren eines Greifers nur schwer möglich. Dieser müsste 
+Austauschbar und Variabel montiert werden, was zudem auch der Wunschanforderung In1 widersprechen würde. Auch für das Zellenrad spricht
+die Wunschanforderung St2 diesem System entgegen, da für die Sperrigkeit der Hairpin ein großer und komplexer Aufbau nötig wäre.
+
+\paragraph{Überführen}: In diesem Fall ist die Betrachtung aller möglichen Prinzipien für diesen Bereich relevant, da grundsätzlich
+keine Anforderungen verletzt werden. Doch vergleicht man die Prinzipien gegeneinander, so lässt sich der aktive Schieber als schlechte
+Wahl deklarieren. In Anforderung Mo1 ist vorrausgesetzt, dass das Gesamtsystem eine einfach Montage ermöglichen und Komplexität 
+verringgern soll. Bei einem aktiven Schieber wären externe Antriebe, eine Regelung und weitere Bauteile nötig, die die Prozesssicherheit
+durch mehr Fehlerquellen minimieren.
+
+\paragraph{Übernehmen \& Fixieren}: Nach Anforderung En2 entfällt die Vakuum Fixierung direkt, da kein Vakuumdrucksystem vorhanden
+ist. Aber auch ein pneumatisches System fällt im ersen Stadium dieser Arbeit weg, weil eine Luftdruck Steurungseinheiten nicht
+vorhanden ist und eine Regleung dieser eine erhöhte Komplexität mit sich bringt.
+
+\paragraph{Transportieren}: Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
+
+\paragraph{Positionieren}:
+
+\paragraph{Übergeben}: Hier entfällt nach Anforderung L2 das Prinzip der Schwerkraft im Nest. In Kombination mit Anforderung St1,
+der variereinden Hairpin-Geometrie, ist das Loseführen der Hairpins für die geforderte Übergabe Tolleranz nicht möglich. Dabei muss
+gesagt sein, dass der Hairpin bei diesem Schritt nur an den beiden Beinen gehalten werden kann. Dies ist durch den Ansatz des Greifers
+des Roboterarmes, welcher nicht Teil dieser Arbeit ist, vorgegen.
+
+
 \subsection{Subsysteme}\label{sec:Subsysteme}
 %
 \subsubsection{Vereinzelung}\label{sec:Vereinzelung}
