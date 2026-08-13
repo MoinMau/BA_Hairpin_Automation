@@ -197,9 +197,9 @@ geben. Dies wird aber in den nachfolgenen Abschnitten detailierter und nachvollz
 \definecolor{groupgray}{gray}{0.90}
 \definecolor{kogray}{gray}{0.55}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcommand{\chosen}[1]{\cellcolor{groupgray}\textbf{#1}\,\textsuperscript{A}} % gewählt
+\newcommand{\altA}[1]{\cellcolor{groupgray}\textbf{#1}\,\textsuperscript{A}} % gewählt
 \newcommand{\altB}[1]{#1\,\textsuperscript{B}}                                 % Variante B
-\newcommand{\altC}[1]{#1\,\textsuperscript{C}}                                 % Variante C
+\newcommand{\altC}[1]{#1\,\textsuperscript{A\&B}}                                 % Variante C
 \newcommand{\ko}[1]{\textcolor{kogray}{#1}}                                    % ausgeschieden
 
 \begingroup
@@ -228,14 +228,14 @@ K.-o.-Filter ausgeschieden.}
 \bottomrule
 \endlastfoot
 
-Bevorraten     & \ko{Kettenmagazin} & Schachtmagazin & \ko{ortsfeste Nester} & Reihenmagazin (hängend)\\
-Nachführen     & Schwerkraft & Vibration & \ko{Stufenförderer} & \ko{Förderband}\\
-Vereinzeln     & Trennschieber & \ko{Zellenrad} & Sperrklinken (sequenziell) & \ko{Greifer}\\
-Überführen     & Rutsche (Schwerkraft) & Fallschacht & \ko{aktiver Schieber} & Förderband\\
+Bevorraten     & \ko{Kettenmagazin} & \altB{Schachtmagazin} & \ko{ortsfeste Nester} & \altA{Reihenmagazin} (hängend)\\
+Nachführen     & \altB{Schwerkraft} & \altA{Vibration} & \ko{Stufenförderer} & \ko{Förderband}\\
+Vereinzeln     & \altB{Trennschieber} & \ko{Zellenrad} & Sperrklinken (sequenziell) & \ko{Greifer}\\
+Überführen     & Rutsche (Schwerkraft) & Fallschacht & \ko{aktiver Schieber} & \altB{Förderband}\\
 Übernehmen \& Fixieren & Formschluss-Nest & \ko{Pneumatikgreifer} & Kraftschluss-Klemme & \ko{Vakuum}\\
 Transportieren & Spindelantrieb & Zahnriemen & \ko{Pneumatikzylinder} & \\
 Positionieren  & Endstop + Schrittzählung & Lageregelung & Festanschlag & \\
-Übergeben      & aktives Freigeben & Schwerkraft in Nest & Roboterarm löst selbtständig & \\
+Übergeben      & aktives Freigeben & \ko{Schwerkraft in Nest} & Roboterarm löst selbtständig & \\
 
 \end{longtable}
 \endgroup
@@ -249,36 +249,62 @@ Die beste Kombination wird weiter analysiert und wird dann in der Realsisierung 
 Für die Analyse und dem Begründen des K.-o. Filters wird Schritt für Schritt durch die Zeilen gegenangen. Eine Prüfung gegen die 
 Anforderungen und weiterer techischer Anforderungen erfolgt im gleichen Zuge.
 
-\paragraph{Bevorraten}: Bei diesen Prinzipien schneiden das System der ortsfesten Nester und das Kettenmagazin aus, weil diese 
+\paragraph{Bevorraten} Bei diesen Prinzipien schneiden das System der ortsfesten Nester und das Kettenmagazin aus, weil diese 
 nicht die Anforderung St3 erfüllen können. Für das potentzielle Nutzen dieser Prinzipien wäre ein weiteres System zur Beladung
 nötig. Dies bietet kein Vorteil in Hinblick auf Prozesssicherheit und Automation.
 
-\paragraph{Nachführen}: Hier Bedarf es einer Betrachtung des vorherigen Punktes. Denn auch hier können der Stufenförderer und das
+\paragraph{Nachführen} Hier Bedarf es einer Betrachtung des vorherigen Punktes. Denn auch hier können der Stufenförderer und das
 Förderband nicht genutz werden, da laut Anforderung St3 die Hairpins in einer für diese Systeme falschen Lage eingegeben werden.
 
-\paragraph{Vereinzeln}: Bei diesem Unterpunkt ist die Anforderung St1 ausschlag gebend für den Ausschluss des Zellenrad und Greifers.
+\paragraph{Vereinzeln} Bei diesem Unterpunkt ist die Anforderung St1 ausschlag gebend für den Ausschluss des Zellenrad und Greifers.
 Durch die geforderte hohen Variantenvielfalt der Hairpins ist das Konstruieren eines Greifers nur schwer möglich. Dieser müsste 
 Austauschbar und Variabel montiert werden, was zudem auch der Wunschanforderung In1 widersprechen würde. Auch für das Zellenrad spricht
 die Wunschanforderung St2 diesem System entgegen, da für die Sperrigkeit der Hairpin ein großer und komplexer Aufbau nötig wäre.
 
-\paragraph{Überführen}: In diesem Fall ist die Betrachtung aller möglichen Prinzipien für diesen Bereich relevant, da grundsätzlich
+\paragraph{Überführen} In diesem Fall ist die Betrachtung aller möglichen Prinzipien für diesen Bereich relevant, da grundsätzlich
 keine Anforderungen verletzt werden. Doch vergleicht man die Prinzipien gegeneinander, so lässt sich der aktive Schieber als schlechte
 Wahl deklarieren. In Anforderung Mo1 ist vorrausgesetzt, dass das Gesamtsystem eine einfach Montage ermöglichen und Komplexität 
 verringgern soll. Bei einem aktiven Schieber wären externe Antriebe, eine Regelung und weitere Bauteile nötig, die die Prozesssicherheit
 durch mehr Fehlerquellen minimieren.
 
-\paragraph{Übernehmen \& Fixieren}: Nach Anforderung En2 entfällt die Vakuum Fixierung direkt, da kein Vakuumdrucksystem vorhanden
+\paragraph{Übernehmen \& Fixieren} Nach Anforderung En2 entfällt die Vakuum Fixierung direkt, da kein Vakuumdrucksystem vorhanden
 ist. Aber auch ein pneumatisches System fällt im ersen Stadium dieser Arbeit weg, weil eine Luftdruck Steurungseinheiten nicht
 vorhanden ist und eine Regleung dieser eine erhöhte Komplexität mit sich bringt.
 
-\paragraph{Transportieren}: Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
+\paragraph{Transportieren} Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
 
-\paragraph{Positionieren}:
+\paragraph{Positionieren}
 
-\paragraph{Übergeben}: Hier entfällt nach Anforderung L2 das Prinzip der Schwerkraft im Nest. In Kombination mit Anforderung St1,
+\paragraph{Übergeben} Hier entfällt nach Anforderung L2 das Prinzip der Schwerkraft im Nest. In Kombination mit Anforderung St1,
 der variereinden Hairpin-Geometrie, ist das Loseführen der Hairpins für die geforderte Übergabe Tolleranz nicht möglich. Dabei muss
 gesagt sein, dass der Hairpin bei diesem Schritt nur an den beiden Beinen gehalten werden kann. Dies ist durch den Ansatz des Greifers
 des Roboterarmes, welcher nicht Teil dieser Arbeit ist, vorgegen.
+
+
+\subsubsection{Verträglichkeitsbetrachtung}\label{sec:Verträglichkeit}
+Im nächsten Schritt muss analysiert werden, welche Systeme überhaupt miteinander Kompatibel sind. Dafür werden die Prinzipien mit
+einander verglichen, die noch nicht durch die Prinzipienanalyse entfernt wurden. Die in \cref{tab:morph} grau geschriebenen Prinzipien
+werden für diese Arbeit nicht mehr als nutzbar oder relvant eingestuft.
+
+Für die folgende Verträglichkeitsbetrachtung bot es sich an jeweils zwei Varianten in den einzelnen Subsystemen zu betrachten.
+Aus diesem Grund wird als Startpunkt die Wahl eines der zwei Bevorratungssysteme getroffen und anhand dessen das resulierende 
+Teilsystem untersucht.
+
+\paragraph{Schachtmagazin} Wird für die erste Teilfunktion das Schachtmagazin gewählt, so folgt automatisch für das 
+Nachführen die Schwerkraft und für die Vereinzelung der Trennschieber. Dies folgt aus dem mechanischen Aufbau eines
+Schachtsystems, bei dem die Hairpins in einem Behältnis aufgestappelt liegen. Hierbei wird das Nachrutschen entweder
+durch eine Feder oder die Schwerkraft erzielt. Ein System mittels Vibration wäre physikalisch zwar auch realisierbar,
+wird aber selten verwendet und wird in dieser Kombination nicht weiter betrachtet. Die in dem Schachtmagazinen befindlichen
+Hairpins, können nun mittels eines passgenauen Trennschiebers einzelnt ausgeben werden. Ein Ansatz mit Sperrklinken ist
+diesem Fall nicht möglcih, da die Hairpins in dem Gehäuse liegen und extra Öffnungen mit Anbauteilen benötigt werden würde.
+Die Prinzipien zur Überführung zwischen den Subsystemen sind mechanisch alle Möglich und müssen im weiteren Verlauf gegeneinander
+abgewogen werden. Für diese Variante bietet sich aber dennoch das Förderband an, da die Hairpins in einer liegenden Postion
+aus der Vereinzelung kommen würden und passend auf das Förderband gegeben werden können.
+
+\paragraph{Reihenmagazin} Wird das Reihenmagazin als erste Teilfunktion gewählt sind für das Nachführen die Schwerkraft und
+die Vibration mögliche Systeme. Auch bei der Vereinzelung wäre der Trennschieber und die Sperrklinken umsetzbar. 
+
+
 
 
 \subsection{Subsysteme}\label{sec:Subsysteme}
