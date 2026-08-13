@@ -199,7 +199,7 @@ geben. Dies wird aber in den nachfolgenen Abschnitten detailierter und nachvollz
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcommand{\altA}[1]{\cellcolor{groupgray}\textbf{#1}\,\textsuperscript{A}} % gewählt
 \newcommand{\altB}[1]{#1\,\textsuperscript{B}}                                 % Variante B
-\newcommand{\altC}[1]{#1\,\textsuperscript{A\&B}}                                 % Variante C
+\newcommand{\altC}[1]{#1\,\textsuperscript{B\1}}                                 % Variante C
 \newcommand{\ko}[1]{\textcolor{kogray}{#1}}                                    % ausgeschieden
 
 \begingroup
@@ -231,11 +231,11 @@ K.-o.-Filter ausgeschieden.}
 Bevorraten     & \ko{Kettenmagazin} & \altB{Schachtmagazin} & \ko{ortsfeste Nester} & \altA{Reihenmagazin} (hängend)\\
 Nachführen     & \altB{Schwerkraft} & \altA{Vibration} & \ko{Stufenförderer} & \ko{Förderband}\\
 Vereinzeln     & \altB{Trennschieber} & \ko{Zellenrad} & Sperrklinken (sequenziell) & \ko{Greifer}\\
-Überführen     & Rutsche (Schwerkraft) & Fallschacht & \ko{aktiver Schieber} & \altB{Förderband}\\
-Übernehmen \& Fixieren & Formschluss-Nest & \ko{Pneumatikgreifer} & Kraftschluss-Klemme & \ko{Vakuum}\\
-Transportieren & Spindelantrieb & Zahnriemen & \ko{Pneumatikzylinder} & \\
-Positionieren  & Endstop + Schrittzählung & Lageregelung & Festanschlag & \\
-Übergeben      & aktives Freigeben & \ko{Schwerkraft in Nest} & Roboterarm löst selbtständig & \\
+Überführen     & \altA{Rutsche (Schwerkraft)} & Fallschacht & \ko{aktiver Schieber} & \altB{Förderband}\\
+Übernehmen \& Fixieren & Formschluss-Nest & \ko{Pneumatikgreifer} & \altA{Kraftschluss-Klemme} & \ko{Vakuum}\\
+Transportieren & \altA{Spindelantrieb} & \altB{Zahnriemen} & \ko{Pneumatikzylinder} & \\
+Positionieren  & \altA{Endstop (open-loop)} & \ko{Lageregelung (Potentiometer)} & \altB{Endstop (closed-loop)} & \\
+Übergeben      & aktives Freigeben & \ko{Schwerkraft in Nest} & \altA{Roboterarm löst selbtständig} & \\
 
 \end{longtable}
 \endgroup
@@ -273,7 +273,11 @@ vorhanden ist und eine Regleung dieser eine erhöhte Komplexität mit sich bring
 
 \paragraph{Transportieren} Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
 
-\paragraph{Positionieren}
+\paragraph{Positionieren} In dieser Teilfunktion ist die Lageregelung mittels eines Potentiometers wegen der Anforderung Si3 aus
+der Auswahl zu nehemen. Dies hat den Grund, dass als Hauptprolem dieses Sensorsystems der Abnehmer, der beim Dauereinsatz zu Kontaktabbrüchen 
+führen kann, eingestuft wurde. Laut Si3 wird aber eine robuste Kommunikation vorausgesetzt, welche eine stabile Signalübertragung 
+von allen angeschlossenen Sensoren mit sich trägt. Die anderen beiden Prinzipeien sind vom Grundaufbau sehr ähnlich und müssen
+deshalb im späteren Verlauf gegeneinander verglichen werden.
 
 \paragraph{Übergeben} Hier entfällt nach Anforderung L2 das Prinzip der Schwerkraft im Nest. In Kombination mit Anforderung St1,
 der variereinden Hairpin-Geometrie, ist das Loseführen der Hairpins für die geforderte Übergabe Tolleranz nicht möglich. Dabei muss
@@ -302,8 +306,21 @@ abgewogen werden. Für diese Variante bietet sich aber dennoch das Förderband a
 aus der Vereinzelung kommen würden und passend auf das Förderband gegeben werden können.
 
 \paragraph{Reihenmagazin} Wird das Reihenmagazin als erste Teilfunktion gewählt sind für das Nachführen die Schwerkraft und
-die Vibration mögliche Systeme. Auch bei der Vereinzelung wäre der Trennschieber und die Sperrklinken umsetzbar. 
+die Vibration mögliche Systeme. Auch bei der Vereinzelung wäre der Trennschieber und die Sperrklinken umsetzbar. Für die Positionierung
+ist zu beachten, dass bei der Wahl eines Trennschiebers das Förderband folgt. Das Förderband hat nämlich die Möglichkeit, den
+Hairpin aus dem Trennschieber zu lösen und es wird kein externes System zum Auslösen und Fallen lassen benötigt.
 
+\paragraph{Zuführsystem} In diesem Subsystem Bedingen sich nur die Art der Fixierung und Übergabe. Das Formschluss-Nest basiert
+auf einem rein mechanischen Aufbau. Eine aktives Freigeben bei der Übergabe des Hairpins zum Roboterarm ist also überhaupt nicht
+möglich. Der Roboterarm muss den Hairpin also selbständig lösen und aufnehmen. Für die anderen Teilfunktionen gilt eine direkte
+Kompatibilität. 
+%
+%
+\subsubsection{Variantenbetrachtung}
+Für eine weitere Reduktion der Prinzpien und die Wahl es Endkonzeptes werden im folgenden drei Varianten gegen einander verglichen.
+Dafür wird sich mit zu Hilfenahme der vorher beschriebenen Punkte die Varianten einfach festgelegt. Dies ist eine gängige Praxis
+für Ingenieure, da ab irgnedeinen Punkt nur noch abgeschötzt werden kann und eine Wahl einfach festgelegt werden muss. An diesem 
+wird dann die Theorie überprüft und in einem nachgekoppelten Optimierungsverlauf zu einem optimalen System geführt. 
 
 
 
