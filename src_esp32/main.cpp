@@ -38,6 +38,13 @@ enum SequenceState {
   P2_Y_ROBOT_WAIT,
   P2_Y_BACK,         P2_Y_BACK_WAIT,
   P2_DONE,
+  // ── PROGRAMM 3 (nur Servos, keine Achsen) ──
+  P3_SERVO_INIT,     P3_SERVO_INIT_WAIT,
+  P3_SERVO_FEED1,    P3_SERVO_FEED1_WAIT,
+  P3_SERVO_FEED2,    P3_SERVO_FEED2_WAIT,
+  P3_SERVO_CHANGE,   P3_SERVO_CHANGE_WAIT,
+  P3_SERVO_RESET,    P3_SERVO_RESET_WAIT,
+  P3_DONE,
 };
 SequenceState currentSeqState = SEQ_IDLE;
 unsigned long seqStepStartTime = 0;
@@ -510,6 +517,8 @@ void printMasterHelp() {
   Serial.println(F("  scan    -> Scannt den I2C-Bus nach beiden Slaves ab"));
   Serial.println(F("  h       -> Zeigt diese Befehlsmatrix an"));
   Serial.println(F("  t       -> Beendet den Master-Testmodus"));
+  Serial.println(F("runp2_... für Programm 2"));
+  Serial.println(F("runp3_... für Programm 3 (nur Servos)"));
   Serial.println(F("==================================================================\n"));
 }
 
@@ -534,6 +543,7 @@ void startHairpinSequence(int program, int runs) {
   switch (program) {
     case 1: currentSeqState = P1_HOME_Z; break;
     case 2: currentSeqState = P2_HOME_Z; break;
+    case 3: currentSeqState = P3_SERVO_INIT; break;
     default: currentSeqState = P1_HOME_Z; break;
   }
 }
@@ -811,7 +821,7 @@ void updateSequence() {
       Serial.println(F("P2 [5/7] Servos umschalten..."));
       servo_set(2, 300);
       servo_set(3, 500);
-      servo_set(4, 0);
+      servo_set(4, 60);
       currentSeqState = P2_SERVO_CHANGE_WAIT;
       seqStepStartTime = now;
       break;
@@ -865,6 +875,102 @@ void updateSequence() {
         currentSeqState = P2_HOME_Z;
       } else {
         Serial.println(F("Programm 2 beendet."));
+        currentSeqState = SEQ_IDLE;
+      }
+      break;
+
+    // ============================================================
+    // PROGRAMM 3: Nur Servos (keine Achsen-Bewegung)
+    // ============================================================
+
+    case P3_SERVO_INIT:
+      Serial.println(F("P3 [1/5] Servos Grundstellung..."));
+      servo_set(0, 0);
+      servo_set(1, 0);
+      servo_set(2, 0);
+      servo_set(3, 800);
+      servo_set(4, 500);
+      currentSeqState = P3_SERVO_INIT_WAIT;
+      seqStepStartTime = now;
+      break;
+
+    case P3_SERVO_INIT_WAIT:
+      if (now - seqStepStartTime >= 1500) {
+        Serial.println(F("  -> Servos in Grundstellung."));
+        currentSeqState = P3_SERVO_FEED1;
+      }
+      break;
+
+    case P3_SERVO_FEED1:
+      Serial.println(F("P3 Servo ausfahren"));
+      servo_set(0, 1000);
+      currentSeqState = P3_SERVO_FEED1_WAIT;
+      seqStepStartTime = now;
+      break;
+
+    case P3_SERVO_FEED1_WAIT:
+      if (now - seqStepStartTime >= 4000) {
+        Serial.println(F("  -> Servo in Position."));
+        currentSeqState = P3_DONE;
+      }
+      break;
+
+    case P3_SERVO_FEED2:
+      Serial.println(F("P3 [3/5] Vereinzelung 2"));
+      servo_set(0, 100);
+      currentSeqState = P3_SERVO_FEED2_WAIT;
+      seqStepStartTime = now;
+      break;
+
+    case P3_SERVO_FEED2_WAIT:
+      if (now - seqStepStartTime >= 1500) {
+        Serial.println(F("  -> Vereinzelung fertig."));
+        currentSeqState = P3_SERVO_CHANGE;
+      }
+      break;
+
+    case P3_SERVO_CHANGE:
+      Serial.println(F("P3 [4/5] Servos umschalten..."));
+      servo_set(2, 300);
+      servo_set(3, 500);
+      servo_set(4, 60);
+      currentSeqState = P3_SERVO_CHANGE_WAIT;
+      seqStepStartTime = now;
+      break;
+
+    case P3_SERVO_CHANGE_WAIT:
+      if (now - seqStepStartTime >= 1500) {
+        Serial.println(F("  -> Servos umgeschaltet."));
+        currentSeqState = P3_SERVO_RESET;
+      }
+      break;
+
+    case P3_SERVO_RESET:
+      Serial.println(F("P3 [5/5] Servos zurueck in Grundstellung..."));
+      servo_set(0, 1000);
+      servo_set(1, 100);
+      servo_set(2, 0);
+      servo_set(3, 800);
+      servo_set(4, 500);
+      currentSeqState = P3_SERVO_RESET_WAIT;
+      seqStepStartTime = now;
+      break;
+
+    case P3_SERVO_RESET_WAIT:
+      if (now - seqStepStartTime >= 1500) {
+        Serial.println(F("  -> Servos zurueckgesetzt."));
+        currentSeqState = P3_DONE;
+      }
+      break;
+
+    case P3_DONE:
+      seqRemainingRuns--;
+      if (seqRemainingRuns > 0) {
+        Serial.print(F("  -> Durchlauf fertig. Noch ")); Serial.print(seqRemainingRuns);
+        Serial.println(F("x. Starte P3 neu."));
+        currentSeqState = P3_SERVO_INIT;
+      } else {
+        Serial.println(F("Programm 3 beendet."));
         currentSeqState = SEQ_IDLE;
       }
       break;
