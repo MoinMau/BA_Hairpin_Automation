@@ -26,16 +26,16 @@
 \contentsline {subsection}{\numberline {2.5}Sensorik}{13}{subsection.arabicsection.2.5}%
 \contentsline {subsubsection}{\numberline {2.5.1}Optische Sensoren}{13}{subsubsection.arabicsection.2.5.1}%
 \contentsline {paragraph}{\nonumberline Einweglichtschranken}{14}{paragraph*.16}%
-\contentsline {paragraph}{\nonumberline Refelxionslichtschranken}{14}{paragraph*.17}%
-\contentsline {paragraph}{\nonumberline Refelxlichttaster}{14}{paragraph*.18}%
-\contentsline {subsubsection}{\numberline {2.5.2}Feldeffekt Sensoren}{14}{subsubsection.arabicsection.2.5.2}%
+\contentsline {paragraph}{\nonumberline Reflexionslichtschranken}{14}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Reflexlichttaster}{14}{paragraph*.18}%
+\contentsline {subsubsection}{\numberline {2.5.2}Feldeffekt-Sensoren}{14}{subsubsection.arabicsection.2.5.2}%
 \contentsline {paragraph}{\nonumberline Induktive Sensoren}{14}{paragraph*.19}%
 \contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{15}{paragraph*.20}%
-\contentsline {paragraph}{\nonumberline Halleffekt Sensoren}{15}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{15}{paragraph*.21}%
 \contentsline {subsubsection}{\numberline {2.5.3}Mechanische Sensoren}{15}{subsubsection.arabicsection.2.5.3}%
 \contentsline {subsection}{\numberline {2.6}Steuerungstechnik}{15}{subsection.arabicsection.2.6}%
 \contentsline {subsubsection}{\numberline {2.6.1}Systemaufbau (Master-Slave)}{15}{subsubsection.arabicsection.2.6.1}%
-\contentsline {subsubsection}{\numberline {2.6.2}Komunikation}{15}{subsubsection.arabicsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.2}Kommunikation}{15}{subsubsection.arabicsection.2.6.2}%
 \contentsline {paragraph}{\nonumberline Analoge Spannung als Signal}{15}{paragraph*.23}%
 \contentsline {paragraph}{\nonumberline UART}{15}{paragraph*.24}%
 \contentsline {paragraph}{\nonumberline I2C}{16}{paragraph*.25}%
@@ -86,7 +86,7 @@
 \contentsline {paragraph}{\nonumberline Aluminiumprofile}{35}{paragraph*.54}%
 \contentsline {paragraph}{\nonumberline Additive Fertigung}{35}{paragraph*.55}%
 \contentsline {paragraph}{\nonumberline Fertigungsgerechte Gestaltung von Gelenken}{36}{paragraph*.57}%
-\contentsline {subsection}{\numberline {5.3}Vereinzelungssystem}{36}{subsection.arabicsection.5.3}%
+\contentsline {subsection}{\numberline {5.3}Vereinzelungssystem}{37}{subsection.arabicsection.5.3}%
 \contentsline {subsubsection}{\numberline {5.3.1}Schnittstellen}{37}{subsubsection.arabicsection.5.3.1}%
 \contentsline {subsubsection}{\numberline {5.3.2}Bevorratung und Nachführung}{37}{subsubsection.arabicsection.5.3.2}%
 \contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{37}{paragraph*.58}%
@@ -139,8 +139,8 @@
 \contentsline {section}{\numberline {7}Diskussion}{44}{section.arabicsection.7}%
 \contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{44}{subsection.arabicsection.7.1}%
 \contentsline {subsubsection}{\numberline {7.1.1}Probleme}{44}{subsubsection.arabicsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagbetrieb}{44}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungs Vorschläge}{44}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagsbetrieb}{44}{subsubsection.arabicsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungsvorschläge}{44}{subsubsection.arabicsection.7.1.3}%
 \contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{44}{subsection.arabicsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Ausblick}{44}{subsection.arabicsection.7.3}%
 \contentsline {section}{\numberline {8}Zusammenfassung}{45}{section.arabicsection.8}%

@@ -4,10 +4,10 @@ Danach folgt eine Betrachtung des Grundsystems, auf das diese Arbeit aufbauen so
 %
 %
 \subsection{Aktuelles System}\label{sec:AktuellesSystem}
-In diesem Abschnitt soll das aktuelles System, auf das in dieser Arbeit aufgebaut wird, eingegangen werden.
+In diesem Abschnitt soll das aktuelle System, auf das in dieser Arbeit aufgebaut wird, eingegangen werden.
 Das System aus einer Laseranlage von Clean-Laser, die den eigentlichen Schritt der Abisolierung der Hairpins übernimmt.
 Diese Anlage ist mit einem Roboterarm von Universal Robots gekoppelt. Der Arm steht neben dem Laser und übernimmt das 
-Einführen der Hairpins in die Laseranlage. Beide Systeme werden im folgenden detialierter beschrieben. Weiter soll zudem gezeigt werden,
+Einführen der Hairpins in die Laseranlage. Beide Systeme werden im Folgenden detaillierter beschrieben. Weiter soll zudem gezeigt werden,
 wie das aktuell manuelle Abisolieren abläuft. Die folgende ~\cref{fig:laser_system_aufbau} zeigt den geometrischen Aufbau der Zelle
 für ein besseres Verständnis auf.\\
 %
@@ -18,59 +18,59 @@ für ein besseres Verständnis auf.\\
   \label{fig:laser_system_aufbau}
 \end{figure}
 %
-Der markierte Punkt 1 ist der Serverschrank, in dem viele Teile der Laseranlage verbaut sind. Die 2. 
-zeigt die Schutzeinhausung des Laser, die Nummer 5 sit die Optische 2d Laseroptik. All diese Subsystem 
-werden im folgenden genauer beschrieben. 
-Der Roboterarm (4) führt die Hairpins in der individuellen Schutzdeckel (3). Für einen sicheren Betrieb 
-ist zudem einen Absaugung (7) über Schläuche an die Schutzeinhausung angebracht (6). Diese sorgt für eine
+Der markierte Punkt 1 ist der Serverschrank, in dem viele Teile der Laseranlage verbaut sind. Die 2.
+zeigt die Schutzeinhausung des Lasers, die Nummer 5 ist die optische 2D-Laseroptik. All diese Subsysteme
+werden im Folgenden genauer beschrieben.
+Der Roboterarm (4) führt die Hairpins in den individuellen Schutzdeckel (3). Für einen sicheren Betrieb
+ist zudem eine Absaugung (7) über Schläuche an die Schutzeinhausung angebracht (6). Diese sorgt für eine
 Absaugung der entstandenen Partikel beim Abisolieren.
-Weiter ist in der \cref{fig:laser_system_aufbau} der Arbeitsbereich des Robtorarmes durch einen Zaun begrenzt.
-Diese Zelle sorgt für eine sichere Benutzung der Anlage. Die Maße dieser Zelle sind mit \todo{MAße der Zelle!}
-fest vorgeben. In \cref{fig:AufbauAbisolierZelle} ist zu dem eine Aluminium Extrusions Struktur, bei der
-es möglich ist Subsysteme zu monieren, die für den Roboterarm zu erreichen sind. Der Aufbau befndet sich in der
-gegenüberliegenden Ecke zu Laser, also in der \cref{fig:laser_system_aufbau} unten rechts. Hier werden
-bereits die unten beschireben Trays, usw. montiert.
+Weiter ist in der \cref{fig:laser_system_aufbau} der Arbeitsbereich des Roboterarmes durch einen Zaun begrenzt.
+Diese Zelle sorgt für eine sichere Benutzung der Anlage. Die Maße dieser Zelle sind mit \todo{Maße der Zelle!}
+fest vorgegeben. In \cref{fig:AufbauAbisolierZelle} ist zudem eine Aluminium-Extrusions-Struktur, bei der
+es möglich ist Subsysteme zu montieren, die für den Roboterarm zu erreichen sind. Der Aufbau befindet sich in der
+gegenüberliegenden Ecke zum Laser, also in der \cref{fig:laser_system_aufbau} unten rechts. Hier werden
+bereits die unten beschriebenen Trays, usw. montiert.
 
 \begin{figure}[htbp]
 	\centering
 	    \includegraphics[width=1\linewidth]{figs/AufbauAbisolierZelle.png}
-	\caption{Aufbau der Abisolier Zelle mit Roboterarm und Laser}
+	\caption{Aufbau der Abisolierzelle mit Roboterarm und Laser}
 	\label{fig:AufbauAbisolierZelle} 
 \end{figure}
 %
 %
 \subsubsection{Clean-Laser-Anlage}\label{sec:CleanLaser}
-Die Clean-Laser-Analage ist für den eigentlichen Schritt der Abisolierung der Hairpins verantwortlich.
-Dafür wird ein Laserstrahl verwendet, der die Enden der Hairpins so bearbeitet, das die Abisolierung
+Die Clean-Laser-Anlage ist für den eigentlichen Schritt der Abisolierung der Hairpins verantwortlich.
+Dafür wird ein Laserstrahl verwendet, der die Enden der Hairpins so bearbeitet, dass die Abisolierung
 abgetragen wird.
 
-Das Laserbearbeitungssystem ist eine Sonderanfertigung des Hersteller, welches einen CL 300GR Laser
+Das Laserbearbeitungssystem ist eine Sonderanfertigung des Herstellers, welches einen CL 300GR Laser
 mit Optik Stamp 14 und einem Prozessmodul. Dieses Gesamtsystem wird wireLine MIRROR static genannt,
-da der Laserstrahl so aufgeteilt werden muss, dass alle vierseiten des Hairpins bearbeitet werden können.\\
+da der Laserstrahl so aufgeteilt werden muss, dass alle vier Seiten des Hairpins bearbeitet werden können.\\
 
-Die Laseremitierung ist bei diesem System in einem externen gekühltem Serverschrank, in dem auch
-weitere Versorgungseinheiten, wie der Industrie PC zur Steuerung, eine Pneumatiche Regelungsanlage und 
-Siemens ET200SP Signalklemmen als Kommunikationsschnittstellen, verbaut sind. Der Laser ist 
-als diodengepumpter Festkörperlaser ausgelegt, der mit 300W besonders Beschädigungsarm metallische 
-Bauteile bearbeiten kann. Die optiische Strahlungsleistung ist so hoch, das die Isolierung wie PEEK, PI und PAI\todo{Abkürzungsverzeichnis}
+Die Laseremitierung ist bei diesem System in einem externen gekühlten Serverschrank, in dem auch
+weitere Versorgungseinheiten, wie der Industrie PC zur Steuerung, eine pneumatische Regelungsanlage und
+Siemens ET200SP Signalklemmen als Kommunikationsschnittstellen, verbaut sind. Der Laser ist
+als diodengepumpter Festkörperlaser ausgelegt, der mit 300W besonders beschädigungsarm metallische
+Bauteile bearbeiten kann. Die optische Strahlungsleistung ist so hoch, dass die Isolierung wie PEEK, PI und PAI\todo{Abkürzungsverzeichnis}
 optimal entfernt werden können. Weiter ist zu beachten, dass dieses System der Laserklasse 4 angehört und
 mit dem 1064nm Infrarotlaserstrahl für Menschen unsichtbar ist. Dies birgt Sicherheitsrisiken, die aber durch
-passende Schutzeinrichtungen und einer dementsprechenden Steurung minimiert werden können.\\
+passende Schutzeinrichtungen und einer dementsprechenden Steuerung minimiert werden können.\\
 
-Nach dem Breitstellen des Laserstrahls, wird dieser durch einen optischen Leiter in Schutzeinhausung
-der eigentlichen Abisolier Einrichtung geführt. Hier wird der Laserstrahl durch Spiegel so abgelenkt, dass
+Nach dem Bereitstellen des Laserstrahls, wird dieser durch einen optischen Leiter in die Schutzeinhausung
+der eigentlichen Abisoliereinrichtung geführt. Hier wird der Laserstrahl durch Spiegel so abgelenkt, dass
 alle vier Kanten des zu bearbeitenden Hairpins erreicht werden können.
 Dazu gibt es zu den festverbauten Spiegeln in der Schutzeinhausung in der Laseroptik an sich (Stamp 14)
-die möglichekeit den Laserstrahl in 2D, also X- und Y-Richtung, zu bewegen. In \cref{fig:laser_MIRROR_system} sieht man,
-dass diese Strahlenablenkung genutzt wird, um mit einem einmalingen Ausrichten der Spiegel, jeden Punkt am Hairpin zu erreichen. 
-Der Voteil dabei ist, dass keine vier Laser für jede Kante benötigt werden.
+die Möglichkeit den Laserstrahl in 2D, also X- und Y-Richtung, zu bewegen. In \cref{fig:laser_MIRROR_system} sieht man,
+dass diese Strahlenablenkung genutzt wird, um mit einem einmaligen Ausrichten der Spiegel, jeden Punkt am Hairpin zu erreichen.
+Der Vorteil dabei ist, dass keine vier Laser für jede Kante benötigt werden.
 Außerdem wird mit dem benötigten Gehäuse dieses System nun als Produkt der Laserklasse 1 klassifiziert.
 
-Das Sicherheitssystem besteht aus vielen Sensoren, die den einen sicheren Betrieb gewähren. So gibt es
+Das Sicherheitssystem besteht aus vielen Sensoren, die einen sicheren Betrieb gewähren. So gibt es
 Notschalter, einen Türsensor und Metalldetektoren, die den Verschluss aller Serviceklappen und Ausgänge bestätigen.
-Eine Vielzahl an weiteren Kontrollmechanismen geben dem Bedienelemtn und Schluss endlich der Steuereinheit
-Rückschluss auf den Status des Systems. Die Bedienung, erfolgt dabei durch die Erstellung eines eignen Programmes
-und der aktivierung deses durch ein Fußknopf. Weiter ist es möglich den Befehl des Abisolierens durch einen 
+Eine Vielzahl an weiteren Kontrollmechanismen geben dem Bedienelement und schlussendlich der Steuereinheit
+Rückschluss auf den Status des Systems. Die Bedienung, erfolgt dabei durch die Erstellung eines eigenen Programmes
+und der Aktivierung dessen durch einen Fußknopf. Weiter ist es möglich den Befehl des Abisolierens durch einen
 externen Eingang, wie den Roboterarm, durchzuführen.
 \begin{figure}[htbp]
   \centering
@@ -95,29 +95,29 @@ Die Wiederholgenauigkeit liegt bei ungefähr $\pm 0{,}03$\,mm und die Gelenke k�
 %
 \subsubsection{Gesamtverfahren}\label{sec:GesamtVerfahrenAktuell}
 Der bisherige Arbeitsablauf bestand bei diesem System daraus, dass Hairpins vorbereitet wurden, diese dann in
-der Zelle platziert wurden, der Roboterarm kalibiriert und aktiviert wurde. Der letzte Schritt bestand dann
-nach dem Abisolieren im Laser die Hairpins in eine Ablage zugeben.
+der Zelle platziert wurden, der Roboterarm kalibriert und aktiviert wurde. Der letzte Schritt bestand dann
+nach dem Abisolieren im Laser die Hairpins in eine Ablage zu geben.
 
 Dieses System basiert auf manuellen Eingriffen in wichtigen Schritten des Prozessflusses. So müssen für
-jede Hairpin Art eigene Trays montiert werden, in denen die Hairpins gehalten werden können. Aktuell sind 
-diese einfache Aluminumextrusions mit montierten Füßen, die vorher im 3d-Drucker erstellt wurden. Der Bedienende
-muss nun nach einem Durchlauf von circa. 10 Hairpins den Roboterarm deaktivieren und in der Zelle neue Hairpins
+jede Hairpin-Art eigene Trays montiert werden, in denen die Hairpins gehalten werden können. Aktuell sind
+diese einfache Aluminiumextrusionen mit montierten Füßen, die vorher im 3D-Drucker erstellt wurden. Der Bedienende
+muss nun nach einem Durchlauf von circa 10 Hairpins den Roboterarm deaktivieren und in der Zelle neue Hairpins
 platzieren. Erst danach kann der Roboterarm wieder aktiviert werden und ein weiterer Durchlauf der Abisolierung
 starten. Dies bringt zwei große Probleme mit sich:\\
 1. kein kontinuierlicher Prozessfluss,\\
-2. Rekalibirerung der Postion der Hairpins,\\
-3. Anpassung der Trays an jede Hairpin Art.\\
+2. Rekalibrierung der Position der Hairpins,\\
+3. Anpassung der Trays an jede Hairpin-Art.\\
 
-Der erste Punkt ist direkt ersichtlich und folgt durch die Pause, die Entsteht, wenn der Bedienende in Zelle
+Der erste Punkt ist direkt ersichtlich und folgt durch die Pause, die entsteht, wenn der Bedienende die Zelle
 betreten muss. Der zweite Punkt, muss nach jeder Inbetriebnahme geschehen, da sich die Trays verschieben können
-oder sich die Längen der Hairpins verändern. Außerdem müssen die Trays jedesmal für den Hairpin passend vorhanden
+oder sich die Längen der Hairpins verändern. Außerdem müssen die Trays jedes Mal für den Hairpin passend vorhanden
 sein. Ist dies nicht der Fall muss eine neue Version erstellt und gedruckt werden. Dies bedeutet einen 
 weiteren Schritt im Prozess, der für das Umbauen benötigt wird.
 
 Die weiteren Schritte, wie die Bewegungen des Roboterarmes und die Abisolierung, erfolgen voll automatisch
 durch ein vorher definiertes Programm. Dieses ist einfach anpassbar und arbeitet über feste Taktzeiten.
-Die Ablage der Hairpins erfolgt durch ein einfachs übergeben des Roboterarmes auf eine Führung für Hairpins.
-Besodnere Hairpin Arten, wie die I-Pins unterliegen ähnlichen Arbeitsschritten, wobei die Trays und die Ablage
+Die Ablage der Hairpins erfolgt durch ein einfaches Übergeben des Roboterarmes auf eine Führung für Hairpins.
+Besondere Hairpin-Arten, wie die I-Pins unterliegen ähnlichen Arbeitsschritten, wobei die Trays und die Ablage
 anders aufgebaut sind. 
 %
 %
@@ -129,43 +129,43 @@ anders aufgebaut sind.
 %
 \subsection{Subsystem-Betrachtung}\label{sec:SubSystem}
 Die oben beschriebenen Anlagen lassen sich jeweils in mehrere Subsysteme unterteilen. Zur Analyse
-der verschiedenen Aulegungsmöglichekeiten wird die VDI 2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese 
-Richtline wurde 2018 wegen einer teilweisen veralteten Betrachtung zurückgezogen, ist aber für diesen 
-Abschnitt dennoch Relevant mit zu betrachten. 
+der verschiedenen Auslegungsmöglichkeiten wird die VDI 2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese
+Richtlinie wurde 2018 wegen einer teilweise veralteten Betrachtung zurückgezogen, ist aber für diesen
+Abschnitt dennoch relevant mit zu betrachten.
 
-In der Handhabungstechnik wird nämlcih in die Teilfunktionen Speichern, Mengen verändern, Bewegen, Sichern
-und Konrollieren unterschieden. Genau diese Themen werden im folgenden detailiert betrachtet und analysiert.
+In der Handhabungstechnik wird nämlich in die Teilfunktionen Speichern, Mengen verändern, Bewegen, Sichern
+und Kontrollieren unterschieden. Genau diese Themen werden im Folgenden detailliert betrachtet und analysiert.
 %
 \subsubsection{Lagerung}\label{sec:LagerungsSystem}
-Es gibt drei unterscheidliche Lagerarten:\PEMfootcite{MontageIndustriellenProduktion.2012}\\
+Es gibt drei unterschiedliche Lagerarten:\PEMfootcite{MontageIndustriellenProduktion.2012}\\
 1. Ungeordnete Speicherung - Bunkern,\\
-2. Teilgeordente Speicherung,\\
+2. Teilgeordnete Speicherung,\\
 3. Geordnete Speicherung - Magazinieren.\\
 Das erste System wird in den meisten Fällen für Kleingut, welches schon in einem unsortierten Zustand 
-angeliefert wird, verwendet. Die Teile liegen also einfach als Schüttgut vor. Wichitg ist hier zu beachten,
-dass diese zwar ungeordnet sein dürfen aber nicht mit anderen Kleingut durchmischt werden. Vorteile eines
-solchen Systems ist die kostengünstige Befüllung sowie eine hohe Speicherdichte und damit die große Puffermenge 
-an Teilen. Auf der anderen Seite muss das Schüttgut meistenst für den weiteren Porduktionsprozess sauber 
-geordnet werden. Hier entstehen typische Problemne wie das Verhaken der Teile untereinander oder ein möglicher
+angeliefert wird, verwendet. Die Teile liegen also einfach als Schüttgut vor. Wichtig ist hier zu beachten,
+dass diese zwar ungeordnet sein dürfen aber nicht mit anderem Kleingut durchmischt werden. Vorteile eines
+solchen Systems sind die kostengünstige Befüllung sowie eine hohe Speicherdichte und damit die große Puffermenge
+an Teilen. Auf der anderen Seite muss das Schüttgut meistens für den weiteren Produktionsprozess sauber
+geordnet werden. Hier entstehen typische Probleme wie das Verhaken der Teile untereinander oder ein möglicher
 Abrieb.
 
-Die Teilgeordnete Speicherung ist ein Kompromiss aus beiden Welten. Hier sind die Teile in einer Dimension
-angeordnet. Sie sind also z. B. liegend auf einer Ebene orierntiert und können so einfacher entnommen werden.
-Dies wird sehr häufig in Kombination mit der flexiblen Entnahme durch einen bildverarbetungsgestüzten Roboterarm 
-mit passendem Greifer genutzt. Vorteile sind dabei die Viefältigkeit der Teile, die mit dem passenden Greifer verwednet
-werden können. Als Nachteil ist wiederum, das ständige gezielte Nachfüllen von Teilen und einer im Vergleich zu 
-anderen System langsamen Taktzeit. Die größte Störgröße der letzten beiden Systeme ist jedoch die sogenannte Brückenbildung,
+Die teilgeordnete Speicherung ist ein Kompromiss aus beiden Welten. Hier sind die Teile in einer Dimension
+angeordnet. Sie sind also z. B. liegend auf einer Ebene orientiert und können so einfacher entnommen werden.
+Dies wird sehr häufig in Kombination mit der flexiblen Entnahme durch einen bildverarbeitungsgestützten Roboterarm
+mit passendem Greifer genutzt. Vorteile sind dabei die Vielfältigkeit der Teile, die mit dem passenden Greifer verwendet
+werden können. Als Nachteil ist wiederum, das ständige gezielte Nachfüllen von Teilen und einer im Vergleich zu
+anderen Systemen langsamen Taktzeit. Die größte Störgröße der letzten beiden Systeme ist jedoch die sogenannte Brückenbildung,
 die eine Behinderung für die weitere Produktion darstellt. 
 
 Die \cref{fig:zufuehrprinzipien} zeigt den groben Aufbau der
-drei typischesten Ausführungen der beiden ersten Systeme auf. Für die Lagerung mittels Bunker, sind diese Systeme meist 
-mit einer direkten Einheit zum Ordnen der Teile ausgeführt. Der Vibrationsförderer (a) benutzt dabei Vibrationenen,
-um das Kleingut auf einer kontrolierten Bahn zu bewegen. Diese Bahn kann ausgründen ihrer Größe und Beschaffenheit nur maximal ein Teil tragen.
+drei typischsten Ausführungen der beiden ersten Systeme auf. Für die Lagerung mittels Bunker, sind diese Systeme meist 
+mit einer direkten Einheit zum Ordnen der Teile ausgeführt. Der Vibrationsförderer (a) benutzt dabei Vibrationen,
+um das Kleingut auf einer kontrollierten Bahn zu bewegen. Diese Bahn kann aufgrund ihrer Größe und Beschaffenheit nur maximal ein Teil tragen.
 So werden die Teile als geordnete Reihe aus dem System gegeben. Ähnlich funktioniert der Stufenförderer (b), wo 
-die Teile einzelnt Stück für Stück angehoben werden. Dabei haben die einzelennen Treppen ebenfalls die passende Größe,
-sodass auch hier die Teile geordnet ausgegeben werden. Es muss aber nochmal gesagt sein, dass zumeist ein weiters System
-zur richtigen Orientierung der Teilebenötigt wird. Das modernstes und technisch komplexeste System, ist die
-flexible Zuführung (c), die durch Kameraalgortihmen und einer präzisen Steuerung eines Greifers eine geordnete Entnahme ermöglicht. 
+die Teile einzeln Stück für Stück angehoben werden. Dabei haben die einzelnen Treppen ebenfalls die passende Größe,
+sodass auch hier die Teile geordnet ausgegeben werden. Es muss aber nochmal gesagt sein, dass zumeist ein weiteres System
+zur richtigen Orientierung der Teile benötigt wird. Das modernste und technisch komplexeste System, ist die
+flexible Zuführung (c), die durch Kameraalgorithmen und einer präzisen Steuerung eines Greifers eine geordnete Entnahme ermöglicht. 
 Häufig muss die Lagefläche mit einem Backlight und einer Vibrationsmöglichkeit ausgelegt
 werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährleistet werden kann.
 
@@ -269,44 +269,44 @@ Darstellung in Anlehnung an \cite{GrundlagenHandhabungstechnik.2020}.}
 \label{fig:zufuehrprinzipien}
 \end{figure}
 %
-Im Gegensatz zu den eben beschriebenen Systemen zur Lagerung von unsortiereten Teilen, geht es im Folgenden um die Lagerung und Bereitstellung
-von Teilen die in einem bereits geordeneten Zustand vorliegen. Die sognannten Magzinierung bedarf einer genauen Anpassung 
-an die jewiligen Teile\PEMfootcite{Werkstueckmagazin.2008}. In \cref{fig:magazinbauformen} sind sechs der gängisten 
+Im Gegensatz zu den eben beschriebenen Systemen zur Lagerung von unsortierten Teilen, geht es im Folgenden um die Lagerung und Bereitstellung
+von Teilen die in einem bereits geordneten Zustand vorliegen. Die sogenannte Magazinierung bedarf einer genauen Anpassung
+an die jeweiligen Teile\PEMfootcite{Werkstueckmagazin.2008}. In \cref{fig:magazinbauformen} sind sechs der gängigsten
 Magazinsysteme für sperrige Teile, wie Hairpins, dargestellt. In der ersten Skizze (a) ist ein Schachtmagazin dargestellt, 
 bei dem die Teile in einem senkrechten Schacht gelagert werden. Mit einem Schieber lässt sich definiert ein Teil entnehmen.
 Die Schwerkraft sorgt für ein Nachrücken der Teile. Als Vorteil hierbei ist die Möglichkeit der Speicherung
-einer großen Menge an Teilen und die einfache Entnahme zu nennen. Da Brückebildungen oder Verhaken der Teile ein häufiges
-Problem darstellt, ist meist ein externen Rüttelmechanismus oder Spannfeder notwendig.
+einer großen Menge an Teilen und die einfache Entnahme zu nennen. Da Brückenbildungen oder Verhaken der Teile ein häufiges
+Problem darstellt, ist meist ein externer Rüttelmechanismus oder Spannfeder notwendig.
 
-Das Reihen- oder Hängemagazin (b) profitiert bei passenden Teilen von einem sehr einfach Aufbau. Dabei stehen oder hängen
-die Teile in einer Schiene. Eine Nachführen erfolgt entweder durch das Anschrägen der Schiene und somit das Nutzen der Schwerkraft.
-Eine andere Möglichkeit wäre ebnefalls ein Vibrationsmechanismus, der die Teile in eine definierte Richtung bewegt. 
-Vorteil bei diesem System ist geringe Verhakungs und Beschädigungsgefahr. Im Gegensatz steht dazu die im Vergleich geringe 
-Speicherkapzität an Teilen, da die Länge des Magazins schnell ansteigt.
+Das Reihen- oder Hängemagazin (b) profitiert bei passenden Teilen von einem sehr einfachen Aufbau. Dabei stehen oder hängen
+die Teile in einer Schiene. Ein Nachführen erfolgt entweder durch das Anschrägen der Schiene und somit das Nutzen der Schwerkraft.
+Eine andere Möglichkeit wäre ebenfalls ein Vibrationsmechanismus, der die Teile in eine definierte Richtung bewegt.
+Vorteil bei diesem System ist geringe Verhakungs- und Beschädigungsgefahr. Im Gegensatz steht dazu die im Vergleich geringe
+Speicherkapazität an Teilen, da die Länge des Magazins schnell ansteigt.
 
 Das Trommelmagazin (c) wird meist als Schnittstelle zwischen zwei Subsystemen genutzt. Die Teile werden auf der einen Seite 
-auf die Fläche abgelegt und diese dann in jedem Taktschirtt in eine Richtung weiterbewegt. Dies funkitoniert in einer sehr
-kompakten und prozesssicheren Bauart. Es wird aber ein extrerner Antrieb vorausgesetzt und die Taktung muss mit den 
-anliegenden System übereinstimmen. Außerdem ist wegen der Kompakten bauform und dem Umfang der Trommen die Kapazität 
+auf die Fläche abgelegt und diese dann in jedem Taktschritt in eine Richtung weiterbewegt. Dies funktioniert in einer sehr
+kompakten und prozesssicheren Bauart. Es wird aber ein externer Antrieb vorausgesetzt und die Taktung muss mit den
+anliegenden Systemen übereinstimmen. Außerdem ist wegen der kompakten Bauform und dem Umfang der Trommel die Kapazität
 begrenzt.
 
 Das Kettenmagazin (d) basiert auf einem ähnlichen Prinzip zum Reihen- oder Hängemagazin, nur dass hier statt die Teile
-dicht an einander gereiht zu Speichern, jedes Teil eine eigenen Halterung bekommt. Diese Werkstückträger sind auf einer 
-Umlaufenden Kette montiert. Ähnlich wie beim Trommelmagazin bewegen sich die Träger je Taktschritt in eine definierte Richtung,
-mit dem Voteil die Abstände und Menge der Träger frei zu skallieren. Auch ist es bei einer entsprechenden Überwachung
+dicht aneinandergereiht zu speichern, jedes Teil eine eigene Halterung bekommt. Diese Werkstückträger sind auf einer
+umlaufenden Kette montiert. Ähnlich wie beim Trommelmagazin bewegen sich die Träger je Taktschritt in eine definierte Richtung,
+mit dem Vorteil die Abstände und Menge der Träger frei zu skalieren. Auch ist es bei einer entsprechenden Überwachung
 unterschiedliche Bauarten der Teile aufzunehmen. Die Herausforderungen sind dabei aber ein hoher mechanischer Aufwand und
-den dementspechenden erhöhten Verschleiß der einzelenen Komponenten.
+der dementsprechende erhöhte Verschleiß der einzelnen Komponenten.
 
 Das in (e) skizzierte Palettenmagazin oder auch Traysystem gibt es in sehr unterschiedlichen Ausführungen. So können
-die Teile liegend in einzelenen Netzern oder auch stehend in einer Reihe gespeichert werden. Dabei ist aber bei jeglicher
-Bauform wichtig, dass jedes Teil an einer bekannten Postion in einer vordefinierten Lage abgelegt wird. Hierbei sticht besonders
-die teilschonende und fest definierte Lagepostion heraus. Auf der anderen Seite müssen diese Trays vorbereitet und bestückt
+die Teile liegend in einzelnen Nestern oder auch stehend in einer Reihe gespeichert werden. Dabei ist aber bei jeglicher
+Bauform wichtig, dass jedes Teil an einer bekannten Position in einer vordefinierten Lage abgelegt wird. Hierbei sticht besonders
+die teilschonende und fest definierte Lageposition heraus. Auf der anderen Seite müssen diese Trays vorbereitet und bestückt
 werden.
 
 Das letzte System, der Werkstückgurt (f), wird häufig in der Magazinierung von elektrischen Komponenten verwendet. Dieser
-Ansatz wird zwar meistens für kleinere Bauteile verwendet, ist aber in einer modifizierten Aufbau, in dem nicht das gesamte
-Bauteil,sondern nur ein kleiner Teil, vom Gurt eingeschlossen wird auch in betracht zu ziehen. Nomalerweise sind die 
-Komponenten jeweils in einem verschlossenem Container verstaut, der für eine hohe Prozesssicherheit und Teilschonung sorgt.
+Ansatz wird zwar meistens für kleinere Bauteile verwendet, ist aber in einem modifizierten Aufbau, in dem nicht das gesamte
+Bauteil, sondern nur ein kleiner Teil, vom Gurt eingeschlossen wird auch in Betracht zu ziehen. Normalerweise sind die
+Komponenten jeweils in einem verschlossenen Container verstaut, der für eine hohe Prozesssicherheit und Teilschonung sorgt.
 Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Dies lohnt sich erst ab hohen Stückzahlen.
 
 \begin{figure}[htbp]
@@ -410,37 +410,37 @@ an \cite{GrundlagenHandhabungstechnik.2020}.}
 \label{fig:magazinbauformen}
 \end{figure}
 
-Diese Magazin System haben jeweils unterschiedliche Anforderungen an Vorbereitung und Nachbearbeitung. Ziel ist jedoch 
-jedesmal, dass die Bauteile in einer geordneten Lage zwishcen gepspeichert werden können. Je nach Anwendung und System
-kommen die Magazine entweder schon Vorbestückt durch den Produzenten oder müssen erst durch ein weiters System befüllt 
-werden. Neben der manuellen Bestückung kann dies bespielweise durch erweiterte System wie die in \cref{sec:LagerungsSystem} 
-beschierbenen passieren. Bei jedem dieser Systeme muss jedoch betrachtet, wie die Bauteile in eine weiteres Subsystem übergeben
-werden. Häufig muss das Bauteil als verinzeltes Stück übergeben werden, was bei den Magazinen außer dem Reihen- und Hängemagazin
-der Fall ist. Auch die Lagerungssystem müssen zur weiteren Verwendeung vereinzelt werden. Die Betrachtung solcher Systeme folgt
+Diese Magazinsysteme haben jeweils unterschiedliche Anforderungen an Vorbereitung und Nachbearbeitung. Ziel ist jedoch
+jedes Mal, dass die Bauteile in einer geordneten Lage zwischengespeichert werden können. Je nach Anwendung und System
+kommen die Magazine entweder schon vorbestückt durch den Produzenten oder müssen erst durch ein weiteres System befüllt
+werden. Neben der manuellen Bestückung kann dies beispielsweise durch erweiterte Systeme wie die in \cref{sec:LagerungsSystem}
+beschriebenen passieren. Bei jedem dieser Systeme muss jedoch betrachtet werden, wie die Bauteile in ein weiteres Subsystem übergeben
+werden. Häufig muss das Bauteil als vereinzeltes Stück übergeben werden, was bei den Magazinen außer dem Reihen- und Hängemagazin
+der Fall ist. Auch die Lagerungssysteme müssen zur weiteren Verwendung vereinzelt werden. Die Betrachtung solcher Systeme folgt
 in \cref{sec:VereinzelungSystem}.
 %
 %
 \todo{Hairpin spezifischer???}
-\todo{- Welche Postionen müssen die Hairpins haben?
+\todo{- Welche Positionen müssen die Hairpins haben?
 - Wie können die Hairpins "gespeichert" werden?
-- Wie wird dafür gesorgt, dass nichts verhackt?}
+- Wie wird dafür gesorgt, dass nichts verhakt?}
 %
 \subsubsection{Vereinzelung}\label{sec:VereinzelungSystem}
-Nach der VDI 2860 braucht es für viele Prozesse eine Abtrennung von Werkstücken aus einem geordenten Strom. Genau für diesen
-Zweck gibt unterschiedliche mechanische Ansätze\PEMfootcite{RNAAutomation.o.J.}. Ein häufig verwendeter Mechanismus ist dabei
-die Vereinzelung mittels Schieber. Ähnlich wie den in \cref{sec:LagerungsSystem} beschriebenen Schachtmagazin, wird das Bauteil
+Nach der VDI 2860 braucht es für viele Prozesse eine Abtrennung von Werkstücken aus einem geordneten Strom. Genau für diesen
+Zweck gibt es unterschiedliche mechanische Ansätze\PEMfootcite{RNAAutomation.o.J.}. Ein häufig verwendeter Mechanismus ist dabei
+die Vereinzelung mittels Schieber. Ähnlich wie bei dem in \cref{sec:LagerungsSystem} beschriebenen Schachtmagazin, wird das Bauteil
 so aus dem System geschoben, dass immer nur ein Bauteil zur Zeit dieses verlässt. 
 
-Eine andere Möglichkeit ist es das Bauteil in eine Vorrichtung zu befördern, in der nur exakt ein Bauteil rein passt. Diese 
-Vorrichtung mit einem Bauteil kann dann so verschoben werden, dass dieses nun vereinzelte Bauteil frei gegeben wird. Wird dieser
+Eine andere Möglichkeit ist es das Bauteil in eine Vorrichtung zu befördern, in der nur exakt ein Bauteil reinpasst. Diese
+Vorrichtung mit einem Bauteil kann dann so verschoben werden, dass dieses nun vereinzelte Bauteil freigegeben wird. Wird dieser
 Prozess in einer bestimmten Taktzeit wiederholt, lässt sich eine robuste und einfache Vereinzelung ermöglichen.
 
-An das eben beschrieben System orientiert sich auch das Zellenrad. Auch hier gibt es passende Auskerbunge, sodass nur ein einzelnes
-Bauteil platz findet. Der Vorteil hierbei, ist das es möglich ist auch aus einem unsortieren Lager Bateile zu nehmen. Da die Formen
-auf dem Rad jewelils nur ein Platz haben, lässt sich auch so eine Vereinzelung ermöglichen.
+An das eben beschriebene System orientiert sich auch das Zellenrad. Auch hier gibt es passende Auskerbungen, sodass nur ein einzelnes
+Bauteil Platz findet. Der Vorteil hierbei, ist dass es möglich ist auch aus einem unsortierten Lager Bauteile zu nehmen. Da die Formen
+auf dem Rad jeweils nur einen Platz haben, lässt sich auch so eine Vereinzelung ermöglichen.
 
-Die variableste Art der Vereinzelung beschriebt aber die Vereinzelung durch Sperrklinken. Bei dieser Methode wird auf zwei gegeneinander
-arbeitenden Sperrfingern gesetzt, die sequenziell versetzt arbeiten. Im ersten Moment wird Sperrt der vordere Arm und Bauteile
+Die variableste Art der Vereinzelung beschreibt aber die Vereinzelung durch Sperrklinken. Bei dieser Methode wird auf zwei gegeneinander
+arbeitende Sperrfinger gesetzt, die sequenziell versetzt arbeiten. Im ersten Moment sperrt der vordere Arm und Bauteile
 bewegen sich so weit vor, bis diese auf den versperrten Weg treffen. Nun kann je nach Anforderung der zweite Arm zwischen zwei
 Bauteile ausfahren und so eine vorher eingestellte Anzahl an Bauteilen isolieren. Fährt nun der vordere Arm ein, kann das isolierte
 Bauteil im nächsten System verwendet werden. Dieses Prinzip bietet die Möglichkeit flexibel die Anzahl der zu vereinzelnden
@@ -449,129 +449,129 @@ Bauteile durch den Abstand der beiden Arme einzustellen.
 \todo{Was sind Vor- und Nachteile?}
 %
 \subsubsection{Transport}\label{sec:TransportSystem}
-Damit Bauteile von einem Subsystem in ein Anderes gelangen, bedarf der Wahl eines passenden Transportsystem. Es muss auf
-Taktrate, Fehlerquote und Ausfallsicherheit geachtet werden. Für die Untersuchung der folgenden Ausführungen 
-wurde zwischen aktiven und passiven Transportsystem unterschieden. 
+Damit Bauteile von einem Subsystem in ein Anderes gelangen, bedarf es der Wahl eines passenden Transportsystems. Es muss auf
+Taktrate, Fehlerquote und Ausfallsicherheit geachtet werden. Für die Untersuchung der folgenden Ausführungen
+wurde zwischen aktiven und passiven Transportsystemen unterschieden.
 
-Als Vorraussetung für ein passives Transportsystem gilt, dass dieses System ohen Zufuhr von exterener Steuerung und Energie
-funktioniert. Die Schwerkraft spielt in diesem Zusammenhang eine Wichtige Rolle, da diese durch eine vorleigende Höhendifferenz
-Bauteile bewegen kann. Die häufigsten Ausführung dieses Systems sind Rutschen oder Fallschächte, über die die Bauteile geführt
+Als Voraussetzung für ein passives Transportsystem gilt, dass dieses System ohne Zufuhr von externer Steuerung und Energie
+funktioniert. Die Schwerkraft spielt in diesem Zusammenhang eine wichtige Rolle, da diese durch eine vorliegende Höhendifferenz
+Bauteile bewegen kann. Die häufigsten Ausführungen dieses Systems sind Rutschen oder Fallschächte, über die die Bauteile geführt
 über eine Ebene gleiten. Ein solcher Aufbau muss individuell an das Bauteil angepasst sein, wobei aber immer eine Höhendifferenz
-zwischen den Schnitt- und Übergabepunkten vorhanden sein muss. Äußerdem muss für eine Bewegung physikalisch der passende Grenzwinkel
+zwischen den Schnitt- und Übergabepunkten vorhanden sein muss. Außerdem muss für eine Bewegung physikalisch der passende Grenzwinkel
 zum Überwinden der Haftreibung\PEMfootcite{Reibung.2001} eingestellt sein:
 \begin{equation}
   \tan(\alpha) = my_(H)
 \end{equation}
 Da im Normalfall die Gleitreibung kleiner als die Haftreibung ist, wird mit dieser Formel also der Winkel zwischen dem vertikalen 
-Boden und der schiefen Ebene beschrieben. Die Konstante muss individuel zwsichen der Wekrstoffpaarung, also zwischen Außenschicht des 
-Bauteils und Beschaffenheit der schiefen Ebene. Der steielste Winkel beschreibt die Aufstelleung im Rechtenwinkel mit einem Winkel von 90°.
-Hierbei ist aber zu beachten, dass dieser theoretische Wert in der Praxis selten verwednet wird, weil besonders bei kleineren Bauteilen
-die Gefahr besteht, dass sich diese Überschlagen und in einer unerwünschten Lage ankommen. Weiter ist mit diesem System eine Geschwindikeits
-konrolle schwer möglich. Denn es muss verhindert werden, dass sich Bauteile verharken oder die Haftreibung nicht überwinden können. 
-Dafür Bedarf es eine gewisse Geschwindigkeit, die für die Minderung solcher Probleme tendenziell höher gewählt wird. Dies weiderum kann
-zu Beschädigungen, wie Verformungen oder Abrieb, führen. Auf der Anderen Seite ist ein solches System einfach im mechanischen Aufbau,
-kostgengünsitg und eine Wartungsarme Methode die Schnittstellen der einzelnen Subsystem zu verbinden.
+Boden und der schiefen Ebene beschrieben. Die Konstante muss individuell zwischen der Werkstoffpaarung, also zwischen Außenschicht des
+Bauteils und Beschaffenheit der schiefen Ebene. Der steilste Winkel beschreibt die Aufstellung im rechten Winkel mit einem Winkel von 90°.
+Hierbei ist aber zu beachten, dass dieser theoretische Wert in der Praxis selten verwendet wird, weil besonders bei kleineren Bauteilen
+die Gefahr besteht, dass sich diese überschlagen und in einer unerwünschten Lage ankommen. Weiter ist mit diesem System eine
+Geschwindigkeitskontrolle schwer möglich. Denn es muss verhindert werden, dass sich Bauteile verharken oder die Haftreibung nicht überwinden können.
+Dafür bedarf es einer gewissen Geschwindigkeit, die für die Minderung solcher Probleme tendenziell höher gewählt wird. Dies wiederum kann
+zu Beschädigungen, wie Verformungen oder Abrieb, führen. Auf der anderen Seite ist ein solches System einfach im mechanischen Aufbau,
+kostengünstig und eine wartungsarme Methode die Schnittstellen der einzelnen Subsysteme zu verbinden.
 
-Die folgenden Transportssysteme setzten auf einen externen Anrtieb, zählen also zu den aktiven Systemen. Der Vibrationslinear-
-und Bandförderer kommen aber tortzdem ohne eine elektronische Regelung aus. Es kann ausschließlich zwischen den zwei Zuständen
-AN udn AUS entscheiden werden. Der Vibrationslinearförderer benutzt Virationen bei einer festen Frequenz, die die Bauteile in 
-Mikroschritten vorbewegt. Physikalisch werden die Teile bei jeder Amplitude eine minimale Strecke weiter geworfen. Passiert dies
+Die folgenden Transportsysteme setzen auf einen externen Antrieb, zählen also zu den aktiven Systemen. Der Vibrationslinear-
+und Bandförderer kommen aber trotzdem ohne eine elektronische Regelung aus. Es kann ausschließlich zwischen den zwei Zuständen
+AN und AUS entschieden werden. Der Vibrationslinearförderer benutzt Vibrationen bei einer festen Frequenz, die die Bauteile in
+Mikroschritten vorbewegen. Physikalisch werden die Teile bei jeder Amplitude eine minimale Strecke weiter geworfen. Passiert dies
 mit der zum Bauteil passenden Frequenz und Amplitude, stellt sich eine kontinuierliche gerade Bewegung ein. Dieses System ist sehr
-robust und in der Industrie vielvertreten, da die Bewegung in einer moderaten konstanten Geschwindigkeit passeirt. Auch lässt sich
+robust und in der Industrie viel vertreten, da die Bewegung in einer moderaten konstanten Geschwindigkeit passiert. Auch lassen sich
 mit einer dedizierten Steuerung weitere Parameter in einem gewissen Rahmen anpassen. Neben der einfachen Funktionsweise stellt aber
-besonders die Lautstärke des Systems und ein recht komplexer Aufbau mit vielen Komponeten Probleme darf.
-Die wohl bekannteste und gängiste Art der Transportsysteme sind die Förderbänder. Diese gibt es in einer großen Varitation bezüglich
-Bauteile Art, Größe und Geschwindigkeit. Grundsätzlich werden die zu befördernenden Teile aber liegend auf einem Band abgelegt.
-Dabei gibt einen Punkt bei dem Teile dazu gegeben werden und einen Endpunkt an dem diese wieder abgegeben werden. Das Band besteht
-meistenst aus einem runden kontinuierlichen Kustoffband, welches über zwei Umlenkrollen rotiert. Die Oberseite wird so zu einer
-linearen bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung bietet
-neben ihrer Variantenvielfalt auch die Möglichkeit einer weiteren Regelung, um ebenfalls Paramerter wie Geschwingdigleit und Taktzeit
-dem benötigten Prozess anzupassen. Nachteil ist die Wartbarkeit, da in diesem System viele unterschiedliche bewegebare Komponenten
+besonders die Lautstärke des Systems und ein recht komplexer Aufbau mit vielen Komponenten Probleme dar.
+Die wohl bekannteste und gängigste Art der Transportsysteme sind die Förderbänder. Diese gibt es in einer großen Variation bezüglich
+Bauteilart, Größe und Geschwindigkeit. Grundsätzlich werden die zu befördernden Teile aber liegend auf einem Band abgelegt.
+Dabei gibt es einen Punkt bei dem Teile dazu gegeben werden und einen Endpunkt an dem diese wieder abgegeben werden. Das Band besteht
+meistens aus einem runden kontinuierlichen Kunststoffband, welches über zwei Umlenkrollen rotiert. Die Oberseite wird so zu einer
+linear bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung bietet
+neben ihrer Variantenvielfalt auch die Möglichkeit einer weiteren Regelung, um ebenfalls Parameter wie Geschwindigkeit und Taktzeit
+dem benötigten Prozess anzupassen. Nachteil ist die Wartbarkeit, da in diesem System viele unterschiedliche bewegbare Komponenten
 verbaut werden.
 
-Die in \cref{fig:wirkkette-antrieb} darfgestellten Linearachsen sind eine weitere Möglichkeit Bauteile zu bewegen. Der Zahnriemen-Ansatz
-ist dabei verwandt zu den gerade beschreibenen Förderbänder. Der Spindel- und Zahnstangenansatz soll hierfür noch einmal genauer
-betrachtet werden, denn diese bieten den Vorteil extrem präzise Positionen anzufahren. Laut Altinas werden besonders die Kugelgewindegetriebe
+Die in \cref{fig:wirkkette-antrieb} dargestellten Linearachsen sind eine weitere Möglichkeit Bauteile zu bewegen. Der Zahnriemen-Ansatz
+ist dabei verwandt zu den gerade beschriebenen Förderbändern. Der Spindel- und Zahnstangenansatz soll hierfür noch einmal genauer
+betrachtet werden, denn diese bieten den Vorteil extrem präzise Positionen anzufahren. Laut Altintas werden besonders die Kugelgewindegetriebe
 verwendet \PEMfootcite{Altintas.2011}. Diese ist eine kleine mechanische Änderung gegenüber der Spindel, bei der statt einer Mutter
-eine lange Reihe an Kugeln um das Gewinde der Welle geführt wird. So wird die Rotation der Spindel in eine abnutzungsarme und energieeffizienten
-Vor- und Rückbewegung des Läufers umgewandelt. Trotz der höheren Komplexität des mechanischen Aufbaus sind die Vorteile bei einer 
-dauerhaften Nutzung relevant. Außerdem nur für deise Antriebe nicht nur die externe Energiequelle in Form eines Motors zu berücksichtigen,
-sondern auch eine vorhandene aktive Regelung. Da diese Antriebe druch zwei Endpunkte begrenzt sind, muss die Regelung dafür sorgen,
-das der Schlitten innerhalb dieses Bereiches bleibt. Deises System kann weiter auch für eine genaue Postionitionierung genutzt werden,
+eine lange Reihe an Kugeln um das Gewinde der Welle geführt wird. So wird die Rotation der Spindel in eine abnutzungsarme und energieeffiziente
+Vor- und Rückbewegung des Läufers umgewandelt. Trotz der höheren Komplexität des mechanischen Aufbaus sind die Vorteile bei einer
+dauerhaften Nutzung relevant. Außerdem nur für diese Antriebe nicht nur die externe Energiequelle in Form eines Motors zu berücksichtigen,
+sondern auch eine vorhandene aktive Regelung. Da diese Antriebe durch zwei Endpunkte begrenzt sind, muss die Regelung dafür sorgen,
+dass der Schlitten innerhalb dieses Bereiches bleibt. Dieses System kann weiter auch für eine genaue Positionierung genutzt werden,
 welches individuelle Anfahrten für den Schlitten ermöglicht.
 
-Alle diese beschriebenen Systeme müssen für den jeweiligen Einsatz stark angepasst werden. Es gibt noch einige weitere Transprotsysteme,
-die auf anderne Antrieben, wie elektromagnetische Linearantriebe oder selbstfahrbare Wägen für Industrienhallen. Diese wurden aber 
-hier nicht weiter betrachtet, da diese nur unwahrscheilich für den Hairpintransport und diese Arbeit in betracht gezogen werden können.
-\todo{Definition Transprotsystem? Schnittstellenübergabe...}
+Alle diese beschriebenen Systeme müssen für den jeweiligen Einsatz stark angepasst werden. Es gibt noch einige weitere Transportsysteme,
+die auf anderen Antrieben, wie elektromagnetische Linearantriebe oder selbstfahrbare Wägen für Industriehallen. Diese wurden aber
+hier nicht weiter betrachtet, da diese nur unwahrscheinlich für den Hairpintransport und diese Arbeit in Betracht gezogen werden können.
+\todo{Definition Transportsystem? Schnittstellenübergabe...}
 %
 \subsubsection{Fixierung}\label{sec:FixierungSystem}
-Für die Bearbeitung oder Übergabe an neuen Subsystemen, bedarf es einer passenden Fixierung von Bauteilen. Es lässt sich grob in Kraftschluss
-und Formschluss Fixierungssysteme unterscheiden. Für die sehr schonende Art der Formschluss fixierung kommen an das Bauteil angepasste
-Konturen und Halter zum Einsatz. Diese sind so konstruiert, dass die Bauteile ohne eine exteren Halterung in ihrer Postion bleiben. Da
-nur Auflagekräfte wirken, ist eine mechanische Beeinflusssung des Bauteils sehr unwahrscheinlich. Das Dimensiionieren und Designen
-eines solchen System bedarf jedoch einer instensiven Prüf- und Konsturktionphase. Es muss für jedes Bauteil eine teiletypgebundenne
-Version erstellt werden, welches eine Variation von Bauteilen entgegen spricht.
+Für die Bearbeitung oder Übergabe an neuen Subsystemen, bedarf es einer passenden Fixierung von Bauteilen. Es lässt sich grob in Kraftschluss-
+und Formschluss-Fixierungssysteme unterscheiden. Für die sehr schonende Art der Formschlussfixierung kommen an das Bauteil angepasste
+Konturen und Halter zum Einsatz. Diese sind so konstruiert, dass die Bauteile ohne eine externe Halterung in ihrer Position bleiben. Da
+nur Auflagekräfte wirken, ist eine mechanische Beeinflussung des Bauteils sehr unwahrscheinlich. Das Dimensionieren und Designen
+eines solchen Systems bedarf jedoch einer intensiven Prüf- und Konstruktionsphase. Es muss für jedes Bauteil eine teiletypgebundene
+Version erstellt werden, welches eine Variation von Bauteilen entgegenspricht.
 
-Die andere Möglichkeit ist der Kraftschluss, bei dem ein externer Fixiermechanis muss zum Einsatz kommt. Das Bauteil wird so an definierten
-Stellen eingespannt und gehalten. Für den genauen Aufbau eines solchen Mechanismus gibt eine Vielzahl unterschiedlicher Anssätzen, \todo{Das als Quelle?: https://www.mechstream.com/clamping-mechanism-motion-animations/}
+Die andere Möglichkeit ist der Kraftschluss, bei dem ein externer Fixiermechanismus zum Einsatz kommt. Das Bauteil wird so an definierten
+Stellen eingespannt und gehalten. Für den genauen Aufbau eines solchen Mechanismus gibt es eine Vielzahl unterschiedlicher Ansätze, \todo{Das als Quelle?: https://www.mechstream.com/clamping-mechanism-motion-animations/}
 wobei meistens Backen an das Bauteil unter Druck angesetzt werden. Da eine genaue Betrachtung der unterschiedlichen Aufbauten, den
-Rahmen spregen würde, wird später in der Realisierung die konkrete Umsetzung beschrieben. Problem dieses Systems ist aber, dass
+Rahmen sprengen würde, wird später in der Realisierung die konkrete Umsetzung beschrieben. Problem dieses Systems ist aber, dass
 eine Krafteinwirkung auf das Bauteil zu Beschädigungen und Verformungen führen kann. Wird dies im Konstruktionsprozess nicht mit
-beachtet, sind die Vorteile wie die Möglichkeit verschiedene Bauteile aufzunehemen nicht mehr relevant.
+beachtet, sind die Vorteile wie die Möglichkeit verschiedene Bauteile aufzunehmen nicht mehr relevant.
 
-Eine geosnderte Art der Kraftschlussmechanismen sind Greifersysteme, die hier noch einmal gesodnert aufgeführt werden, da das bereits
-in \cref{sec:AktuellesSystem} dargestellt System ein solches beinhaltet. Auch hier gibt es eine große Variation von mechanischen Aufbauten,
-wobei hier meist linear bewegbare Backen verwendeten werden. Für die fixierung und Bewegung werden eletromechanische oder pneumatische
+Eine gesonderte Art der Kraftschlussmechanismen sind Greifersysteme, die hier noch einmal gesondert aufgeführt werden, da das bereits
+in \cref{sec:AktuellesSystem} dargestellte System ein solches beinhaltet. Auch hier gibt es eine große Variation von mechanischen Aufbauten,
+wobei hier meist linear bewegbare Backen verwendet werden. Für die Fixierung und Bewegung werden elektromechanische oder pneumatische
 Antriebe verwendet. Ein solches Gesamtsystem besteht dabei aber wieder aus mehreren Subsystemen\PEMfootcite[Abbildung 9]{Strasser.2011}. 
-Es wird unterscheiden in den Greifer, also dem Wirk-/Haltesystem ansich, dem Antriebsystem für die Bewegung der Fixierung, einem Tragsystem
-an dem die einzelnen Greifer montiert sind, ein Steurungssystem mit Sensorfeedback und ein Schutz- und Sicherheutssyste für die Anlage
+Es wird unterschieden in den Greifer, also dem Wirk-/Haltesystem ansich, dem Antriebssystem für die Bewegung der Fixierung, einem Tragsystem
+an dem die einzelnen Greifer montiert sind, ein Steuerungssystem mit Sensorfeedback und ein Schutz- und Sicherheitssystem für die Anlage
 selber und das Bedienpersonal.
 
 Weiter gibt es noch Vakuumgreifer oder magnetische Halterungen, die aber wegen ihrer sehr individuellen Anwendung in dieser Arbeit
-nicht detialierter betrachtet werden müssen.
+nicht detaillierter betrachtet werden müssen.
 %
 %
 \subsubsection{Positionierung}\label{sec:PositionierungsSystem}
-In diesem Abschitt soll Systeme analysiert werden, die die Positionierung von Hairpin und dessen Halterung kontrollieren. Dazu kann
+In diesem Abschnitt sollen Systeme analysiert werden, die die Positionierung von Hairpin und dessen Halterung kontrollieren. Dazu kann
 zwischen kontinuierlichen Wegsensoren und inkrementellen Sensoren mit Referenzpunkten unterschieden werden. Die in \cref{sec:Sensorik}
-beschrieben Sensoren dienen hauptsächlich zur Überprüfung, ob ein Hairpin an einer bestimmten Position vorbeigekommen ist. Diese Sensortypen
+beschriebenen Sensoren dienen hauptsächlich zur Überprüfung, ob ein Hairpin an einer bestimmten Position vorbeigekommen ist. Diese Sensortypen
 werden im späteren Verlauf dieser Arbeit eingesetzt und verglichen.
 
-Eine kontinierliche Sensoreinheit zeichnet sich dadurch aus, dass diese zu jeder Zeit einen absoluten Wert ausgeben, der die Position
-wiederspiegelt. Auch nach einem vorheringen Ausschalten ist dieses System in der Lage, die Postion direkt als kontinueirlichen Wert
-auszugeben. In der Industrie werden hierfür zumeist Potentiometer verwendet, die bei einem Verschieben eine veränderte kontinierliche 
-Spannung ausgibt. Dies folgt dem einfachen Spannungsteiler Prinzip: Über die gesamte Sensorlänge mit fest definiertem Widerstand wird eine 
-Versorgungsspannung angelegt. Auf diesem Bereich wird nun ein Abnehmer platziert, der mit dem zu bestimmenden Position des Schlittens
-verbunden ist. Ändert sich nun die Postion des Abnehmer, verändert sich auch das Widerstandsverhältnis und damit die Spannung am Abnehmer.
+Eine kontinuierliche Sensoreinheit zeichnet sich dadurch aus, dass diese zu jeder Zeit einen absoluten Wert ausgibt, der die Position
+widerspiegelt. Auch nach einem vorherigen Ausschalten ist dieses System in der Lage, die Position direkt als kontinuierlichen Wert
+auszugeben. In der Industrie werden hierfür zumeist Potentiometer verwendet, die bei einem Verschieben eine veränderte kontinuierliche
+Spannung ausgeben. Dies folgt dem einfachen Spannungsteiler-Prinzip: Über die gesamte Sensorlänge mit fest definiertem Widerstand wird eine
+Versorgungsspannung angelegt. Auf diesem Bereich wird nun ein Abnehmer platziert, der mit der zu bestimmenden Position des Schlittens
+verbunden ist. Ändert sich nun die Position des Abnehmers, verändert sich auch das Widerstandsverhältnis und damit die Spannung am Abnehmer.
 \begin{equation}
   U_(Abnehmer) = U_(Versorgung) * R_(GND/Abnehmer) / (R_Gesamt)
 \end{equation}
-Die Endpunkte bilden einmal die niedrigeste Spannung am Ground mit 0V und die höchste Spannung am Ende des Widerstandes mit der Verorugngsspannung.
-Für eine lineare Bewegung wird meist ein länglicher Widerstand verwendet. Es gibt aber auch Potentiometer in Runderausführung, die
-aber dem gleichen eletrischen Prinzip entsprechen. Der Vorteil dieses Prinzips, ist die einfach Kopplung eine elektrische Regelung,
-da wie bereits erwähnt nur eine einfach analoge Spannung mit Umrechnung als Postionssignal gilt. Dieses schnelle und direkte Signal
-ist mit dem einfach Aufbau kaum anders zu realsierien. Bei einem dauerhaften Betrieb stellen sich jedoch Probleme beim Verschleiß
-heraus, da der Abnehmer druch den ständigen mechanischen Druck und das Bewegen den Kontakt immer weiter abnutzt.
+Die Endpunkte bilden einmal die niedrigste Spannung am Ground mit 0V und die höchste Spannung am Ende des Widerstandes mit der Versorgungsspannung.
+Für eine lineare Bewegung wird meist ein länglicher Widerstand verwendet. Es gibt aber auch Potentiometer in Rundausführung, die
+aber dem gleichen elektrischen Prinzip entsprechen. Der Vorteil dieses Prinzips, ist die einfache Kopplung an eine elektrische Regelung,
+da wie bereits erwähnt nur eine einfache analoge Spannung mit Umrechnung als Positionssignal gilt. Dieses schnelle und direkte Signal
+ist mit dem einfachen Aufbau kaum anders zu realisieren. Bei einem dauerhaften Betrieb stellen sich jedoch Probleme beim Verschleiß
+heraus, da der Abnehmer durch den ständigen mechanischen Druck und das Bewegen den Kontakt immer weiter abnutzt.
 
-Bei den inkrementellen Sensoren unterschiedet man in open-loop und closed-loop. Diese Unterscheiden sich im Feedback an die Regelung.
-Grundsätzlich wird hierbei mit End- oder Refernezpunkten gearbeitet. Zur Initialiesierung des Systems müssen dafür bestimmt Sensoren,
-meist Endschalter, angefahren werden, damit einmalig eine feste Position vorgeben wird. Hier gibt es eine weitere Trennung für die 
-Steuerung an sich: Für open-loop System reicht die Anfangspositionen und die vorgegeben Bewegungen werden intern verrechnet. Bei einem
-einem Antrieb mit Schrittmotor z. B. werden nur die einzelnen Schritte vorgegeben. Das Gefahr hierbei ist, dass wegen Überlast einzlne
-Schritte ohne geregestriert zu werden übersprungen werden. Dies widerrum führt dazu, dass die Steuerung nach diesem Schritt eine 
-zur Realtiät abweichenden Postion annimmt. Wird dieses System jedoch in ihren Arbeitsbereiche betrieben, treten solche Ungenauikeiten
-selten auf und das System ist mechanisch und eltkrisch einfach aufzubauen.
-Dem Gegenüber steht das closed-loop system, bei dem die Steuerung auf einen weiteren Kontrollmechanismus zurückgreifen kann. Dieser
+Bei den inkrementellen Sensoren unterscheidet man in open-loop und closed-loop. Diese unterscheiden sich im Feedback an die Regelung.
+Grundsätzlich wird hierbei mit End- oder Referenzpunkten gearbeitet. Zur Initialisierung des Systems müssen dafür bestimmte Sensoren,
+meist Endschalter, angefahren werden, damit einmalig eine feste Position vorgegeben wird. Hier gibt es eine weitere Trennung für die
+Steuerung an sich: Für open-loop Systeme reicht die Anfangsposition und die vorgegebenen Bewegungen werden intern verrechnet. Bei
+einem Antrieb mit Schrittmotor z. B. werden nur die einzelnen Schritte vorgegeben. Die Gefahr hierbei ist, dass wegen Überlast einzelne
+Schritte ohne registriert zu werden übersprungen werden. Dies wiederum führt dazu, dass die Steuerung nach diesem Schritt eine
+zur Realität abweichenden Position annimmt. Wird dieses System jedoch in seinen Arbeitsbereichen betrieben, treten solche Ungenauigkeiten
+selten auf und das System ist mechanisch und elektrisch einfach aufzubauen.
+Dem Gegenüber steht das closed-loop System, bei dem die Steuerung auf einen weiteren Kontrollmechanismus zurückgreifen kann. Dieser
 gibt durch elektrische Zähler, meist in Form von Hall-Sonden, die die Magnetfeldänderung durch die Rotation in Motoren zählen können
-die genaue Schrittanzahl wieder. So können Fehler zurück gerechnet werden und die berechnete Postion der Steuerung stimmt immer mit 
-der realen Position überein. Als Nachteil ist hier klar der zusätzliche Aufwand doch weiter Komponenten und Schnittstellen zu nennen.
+die genaue Schrittanzahl wieder. So können Fehler zurückgerechnet werden und die berechnete Position der Steuerung stimmt immer mit
+der realen Position überein. Als Nachteil ist hier klar der zusätzliche Aufwand durch weitere Komponenten und Schnittstellen zu nennen.
 %
 %
 \subsection{Forschungslücke}\label{ResearchGap}
 Nach Vorstellung dieser ganzen Systeme, stellt sich heraus, dass es eine Vielzahl an Möglichkeiten gibt den mechanischen und elektrischen
-Audbau dieser Arbeit zu gestalten. In der Produktion ist eben dies die Herausforderung, eine passende Anlage für einen genauen Verwendungszweck
-zu entwickeln. Besonders die Protrotypen Produktion mit Anforderungen, wie das Verarbeiten verschiedener Hairpin Geometrien, stellen
-eine so hohe Individalsiieurng herraus, dass eine solche Anlage nicht frei auf dem Markt erhältlich ist. Eben aus diesem Grund muss
+Aufbau dieser Arbeit zu gestalten. In der Produktion ist eben dies die Herausforderung, eine passende Anlage für einen genauen Verwendungszweck
+zu entwickeln. Besonders die Prototypenproduktion mit Anforderungen, wie das Verarbeiten verschiedener Hairpin-Geometrien, stellt
+eine so hohe Individualisierung heraus, dass eine solche Anlage nicht frei auf dem Markt erhältlich ist. Eben aus diesem Grund muss
 geprüft werden, ob der Bau einer solchen Anlage überhaupt möglich ist und im Dauerbetrieb Vorteile mit sich bringt.
 \todo{Besseren Titel verwenden?}
