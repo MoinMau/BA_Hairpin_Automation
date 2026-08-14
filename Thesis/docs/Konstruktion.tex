@@ -1,79 +1,315 @@
 \section{Realisierung}\label{sec:Realisierung}
 Nach dem Abschluss des theoretischen Teils dieser Arbeit, steht die Konzeptvariante fest und die konkrete Umsetzung kann erfolgen.
-In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und dem Bau der Anlage dargestellt.
+In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und dem Bau der Anlage dargestellt werden.
 %
 %
-\subsection{Vorgehen und verwendete Werzeuge}\label{sec:VerwendeteTools}
-Wie schon in \cref{sec:Konzeptauswahl} angewendet, wird auch auch in der Realisierung in die verschiedene Subsysteme unterteilt.
-Dies ist hilfreich, da Schnittstellen definiert , Bauteile in Gruppen realisiert werden können und die Komplexität
+\subsection{Vorgehen und verwendete Werkzeuge}\label{sec:VerwendeteTools}
+%
+Wie schon in \cref{sec:Konzeptauswahl} angewendet, wird auch in der Realisierung in die verschiedenen Subsysteme unterteilt.
+Dies ist hilfreich, da Schnittstellen definiert, Bauteile in Gruppen realisiert werden können und die Komplexität
 je Subsystem minimiert wird.
 
-Für die Ausarbeitung werden aus den Teilfunktionen der gewählten Variante konkrete Skizzen erstellt. Diese sollen zunächst eine 
-grobe Beschreibung für das Realesystem darstellen. An diesem Punkt kann nochmal gegen Anforderungen und Realisierbarkeit geprüft
-werden. Nach diesem Schritt folgt das Erstellen des realen Objektes in einem CAD-Programm. In dieser Arbeit wurde die Studenten 
-Lizenz von Autodesk Fusion360 verwendet. Auch elektromechniasche Komponeten werden in diesem Prozess mit eingeplant. Nach der
-Erstellung aller Subsysteme am Computer, konnte die einzelnen Bauteile mittels 3d-Druck gefertigt und montiert werden. Für das 
-Elektirsche System wurde parallel externe Komponenten zur Steuerung festgelegt und ein Kabelplan erstellt werden. Zur Nachvollziehbarkeit
+Für die Ausarbeitung werden aus den Teilfunktionen der gewählten Variante konkrete Skizzen erstellt. Diese sollen zunächst eine
+grobe Beschreibung für das Realsystem darstellen. An diesem Punkt kann nochmal gegen Anforderungen und Realisierbarkeit geprüft
+werden. Nach diesem Schritt folgt das Erstellen des realen Objektes in einem CAD-Programm. In dieser Arbeit wurde die Studenten-Lizenz
+von Autodesk Fusion~360 verwendet. Auch elektromechanische Komponenten werden in diesem Prozess mit eingeplant. Nach der
+Erstellung aller Subsysteme am Computer, konnten die einzelnen Bauteile mittels 3D-Druck gefertigt und montiert werden. Für das
+elektrische System wurden parallel externe Komponenten zur Steuerung festgelegt und ein Kabelplan erstellt. Zur Nachvollziehbarkeit
 dieses Schaltplanes wurde eine Schematic in KiCad angefertigt. Nach dem festgelegten Schaltplan wurden dann die einzelnen Komponenten
-mit Kabeln und selbst gelegten Leitungen auf einer Lochrasterplatine verbunden. Zur schrittweisen Initialisierung der Anlage wurde 
-als Entwicklunghilf des Codes GitHub verwendet. Git ermöglicht es Code schrittweise aufzubauen und einfach zwischen Versionen
-zu wechseln. Dieser Prozess wurde weiter durch die Verwendung von DeepSeekV4 unterstützt, der als Co-Worker für das schreiben
-und fixen von Code diente.
+mit Kabeln und selbst gelegten Leitungen auf einer Lochrasterplatine verbunden. Zur schrittweisen Initialisierung der Anlage wurde
+als Entwicklungshilfe des Codes GitHub verwendet. Git ermöglicht es, Code schrittweise aufzubauen und einfach zwischen Versionen
+zu wechseln. Dieser Prozess wurde weiter durch die Verwendung von DeepSeek~V4 unterstützt, der als Co-Worker für das Schreiben
+und Fixen von Code diente.
 
-Diese Aufzählung beschreibt zwar alle verwendeten Werkzeuge, soll aber nicht als zeitliche Darstellung der Realisierung dienen. 
-In Realität wurde nach dem Aufbau des einzelnen Subsystems ein Initialisirungstest druchgeführt, der die Grundsätzliche Funktion
+Diese Aufzählung beschreibt zwar alle verwendeten Werkzeuge, soll aber nicht als zeitliche Darstellung der Realisierung dienen.
+In Realität wurde nach dem Aufbau eines einzelnen Subsystems ein Initialisierungstest durchgeführt, der die grundsätzliche Funktion
 überprüfen sollte.
-\todo{Einzelne Tools besser erklären?}
-\todo{Randbedingungen wie Alu extrutions, PLA erklären?}
+\todo{Wie darf KI-Einsatz?}
 %
 %
 
-\subsection{Hardware}\label{sec:Hardware}
-- Wie wurde das System physisch aufgebaut?\\
-Es wird in drei grobe Kategorien unterteilt:\\
-- die mechanischen Bauteile \\
-- die elektronische Komponenten \\
-- die Programmierung/der Code \\
+\subsection{Konstruktive Randbedingungen}\label{sec:Randbedingungen}
+
+Alle Subsysteme müssen gemeinsam in das in \cref{sec:AktuellesSystem} beschriebene Traggeruest montiert werden. Für die Verbindung
+und Fixierung stehen Aluminumextrutions mit Winkelbefestigungen zur Verfügung. Alle Bauteile müssen Prototypen gerecht sein, was 
+eine einfach Handhabung und Produktion voraussetzt. 
+
+\paragraph{Aluminiumprofile} werden als Hauptsächlcihe Tragkomponete verwednet. Durch Standartisierungen in Größe und Anbauteilen
+ist der Einsatz im Aufbau einer Prototypen Anlage gut geieignet. Die Profile können mittels einer Bandsäge einfach abgelängt werden,
+sie stehen als Werkmaterial in großer Anzahl zu Verfügung und können bei fehlerhaften Einbau an andere Stelle wiederverwendet werden.
+
+\paragraph{Additive Fertigung} bietet die Möglichkeit komplexe Formen auf günstigem und schnellen Wege herzustellen. Diese Fertigungs
+methode basiert auf dem Schichtweisen Auftrag von Material. Durch diesen Prozess können aus zwei Dimensionalen Layern verbundene
+drei Dimensionale Objekte entstehen. Als Material kann für diese Verfahren grundsätzlich Metall, Nylon und Polymere in Frage kommen.
+Für das Auftagen muss das Grundmaterial jedoch zum Schmelzen gebracht werden, damit es druch eine Nozzel mit definierte Höhe und Breite
+auf das Druckbett aufgetragen werden kann. Genau in diesem Punkt unterscheiden sich auch die Komplexität des 3d-Druckes für das eingesetzte
+Material. Ein Polymere kann mit viel weniger Aufwand erhitzt und bewegt werden. In den letzten Jahren gab es einen großen Entwicklungssprung
+für eben diese FDM (Fused Depostion Modeling) Drucker, die die Kosten und Geschwindigkeit für ein Druck mit bestimmten Materialien ermöglicht.
+Die am häufigsten zum Einsatz kommenden Materialen sind dabei ABS (Acrylnitril-Butadien-Styrol-Copolymer), PLA (Polylactide), PETG (Polyethylenterephthalatglycol),
+Nylon und TPU (Thermoplastisches Polyurethan) wobei es noch weitere sleten verwednete spezial Materialen gibt. Für diese Arbeit wurde
+PLA als Wahl für das Material von gedruckten Bauteilen getroffen. Besonders die einfache Handhabung, hohe Belastbarkeit und 
+Verfügbarkeit war der Grund dieser Wahl.
+\todo{Quellen für diese Wahl???}
+
+\paragraph{Fertigungsgerechte Gestaltung von Gelenken} wird in dieser Arbeit für den Einsatz von einfachen Gelenken verwendet.
+Ein Gelenk verbindet zwei Bauteile so miteinander, dass ihnen genau ein rotatorischer Freiheitsgrad verbleibt. Konstruktiv wird 
+dies üblicherweise über einen zylindrischen Zapfen gelöst, der in einer entsprechenden Bohrung des Gegenstücks geführt wird. In 
+der klassischen Umsetzung sind Zapfen und Lagerauge getrennte Bauteile, die über einen Stift oder eine Buchse gefügt werden.
+
+Da die Bauteile dieser Arbeit im 3d-Druck Verfahren gefertigt werden, wird stattdessen ein einteiliger Ansatz verwendet. Zapfen 
+und Lagerauge werden als ein einziges Bauteil modelliert und lediglich durch einen schmalen Spalt voneinander getrennt (\cref{fig:PrintInPlace}\,a). 
+Dieser Spalt liegt im Bereich weniger Zehntelmillimeter und damit unterhalb dessen, was das Druckverfahren sauber auflösen kann. 
+Beim Druck entstehen an diesen Stellen deshalb keine vollständig getrennten Flächen, sondern schmale Materialbrücken,
+die beide Elemente zunächst zusammenhalten (\cref{fig:PrintInPlace}\,b).
+
+Diese Materialbrücken wirken als bewusst eingeplante Sollbruchstelle. Wird das fertig gedruckte Bauteil einmalig mit einer 
+definierten Kraft belastet, lösen sich die Brücken und der Zapfen ist in der Bohrung frei beweglich (\cref{fig:PrintInPlace}\,c). 
+Das Gelenk entsteht damit unmittelbar aus dem Druckprozess, ohne Stifte, Buchsen oder ein zusätzliches Gehäuse.
+
+Der Vorteil dieses Vorgehens liegt im Wegfall von Zusatzteilen sowie in der kurzen Iterationszeit, da eine geänderte
+Gelenkgeometrie nach einem einzigen Druckvorgang zur Verfügung steht. Dem gegenüber stehen deutslich geringere
+übertragbare Kräfte als bei metallischen Gelenken. Für die hier auftretenden geringen Belastungen ist das Prinzip 
+dennoch eine geeignete und schnelle Lösung.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    aussen/.style  = {fill=gray!20, draw=black, line width=0.6pt},
+    bohrung/.style = {fill=white,   draw=black, line width=0.6pt},
+    innen/.style   = {fill=gray!55, draw=black, line width=0.6pt},
+    bez/.style     = {font=\footnotesize, align=center},
+    titel/.style   = {font=\footnotesize}
+  ]
+ 
+% ------------------------------------------------ (a) Konstruktion im CAD
+\begin{scope}
+  \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
+  \draw[bohrung] (0,0) circle (0.85);
+  \draw[innen]   (0,0) circle (0.60);
+  \node[font=\tiny] at (0,0) {Zapfen};
+  \node[font=\tiny] at (-0.95,-1.08) {Lagerauge};
+  \node[bez] (la) at (0,2.05) {geplanter Spalt};
+  \draw[thin] (la.south) -- (0.51,0.51);
+  \node[titel] at (0,-1.9) {(a) Konstruktion des Gelenks};
+\end{scope}
+ 
+% ------------------------------------------------ (b) nach dem Druck
+\begin{scope}[xshift=3.9cm]
+  \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
+  \draw[bohrung] (0,0) circle (0.85);
+  \draw[innen]   (0,0) circle (0.60);
+  \foreach \a in {30,120,210,300}{%
+    \draw[line width=2.2pt] (\a:0.57) -- (\a:0.88);}
+  \node[bez] (lb) at (0,2.05) {Materialbrücken als\\Sollbruchstelle};
+  \draw[thin] (lb.south) -- (30:0.72);
+  \node[titel] at (0,-1.9) {(b) nach dem 3D-Druck};
+\end{scope}
+% ------------------------------------------------ (c) nach dem Loesen
+\begin{scope}[xshift=7.8cm]
+  \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
+  \draw[bohrung] (0,0) circle (0.85);
+  \draw[innen]   (0,0) circle (0.60);
+  \draw[->, line width=0.9pt] (-50:0.42) arc (-50:190:0.42);
+  \node[bez] (lc) at (0,2.05) {ein rotatorischer\\Freiheitsgrad};
+  \draw[thin] (lc.south) -- (0.51,0.51);
+  \node[titel] at (0,-1.9) {(c) nach dem Lösen};
+\end{scope}
+ 
+\end{tikzpicture}
+\caption[Fertigungsgerechtes Gelenk im 3D-Druck]{Schematische
+Schnittdarstellung eines im Druckprozess erzeugten Gelenks: (a) Zapfen und
+Lagerauge werden mit einem geplanten Spalt als ein Bauteil modelliert,
+(b) beim Druck verbleiben Materialbrücken als Sollbruchstelle, (c) nach dem
+Lösen und Austragen der Matrialbrücken durch wiederholtes bewegen verbleibt ein rotatorischer Freiheitsgrad.}
+\label{fig:PrintInPlace}
+\end{figure}
 %
 %
-\subsubsection{Mechanische Bauteile}\label{sec:Mechanik}
-In diesem Teil werden mechanische Bauteile, die für ein solches System benötigt werden, untersucht. Relevant
-sind dabei besonders die Punkte wie Einsetzbarkeit, Langlebigkeit und Praktikabilität.
+\subsection{Vereinzelungssystem}\label{sec:Vereinzelungssystem}
+%
+Die Aufgabe dieses Systems ist die Aufnahme der Hairpins in einem hängenden Bündel und die Ausgabe eines vereinzelten Hairpins.
+Für die Konstruktion muss dabei besonders auf eine elektrische Steuerung und die Verwendung von verschiedenen Hairpin-Geometrien
+geachtet werden.
+%
+\subsubsection{Schnittstellen}
+%
+Die mechanischen Schnittstellen dieses Subsystems stellen die Ein- und Ausgabepunkte für die Hairpins
+dar. Die Anlieferung der Hairpins erfolgt auf einer Stange. Diese im Bündel und in hängender Lage befindlichen Hairpins müssen vom
+Bedienpersonal auf eine Vibrationsschiene überführt werden. Diese Schiene muss elektronisch regelbar sein, da Vibration und Höhe
+der Schiene eingestellt werden müssen. Auch muss die Vereinzelung elektronisch ansprechbar sein. So müssen die Sperrklinken getrennt
+voneinander steuerbar sein. Als letzter Schritt folgt die Übergabe eines einzelnen Hairpins an die Überführung.
+
+%
+\subsubsection{Bevorratung und Nachführung}\label{sec:Bevorratung}
+%
+Diese Prinzipien wurden in einem System vereint, in dem die Schiene zur Lagerung ebenfalls eine Möglichkeit zur Vibration bietet.
+
+\paragraph{Aufbau und Wirkprinzip}
+Wie in \cref{fig:Vibrationsschiene} zu sehen, wird die Schiene an zwei Enden gehalten, wobei Halterung~1 in vertikaler Richtung als starr
+und Halterung~2 als bewegbar anzunehmen ist. Die Halterungen werden auf den zwei Befestigungen montiert, die wiederum die Verbindung
+zu der in \cref{sec:AktuellesSystem} beschriebenen Struktur darstellen. Die Vibrationseinheit ist aus einem Schrittmotor mit Zahnrad und der
+gelagerten Halterung~2 mit Zahnstange aufgebaut. Die vertikale Lagerung der Halterung~2 erfolgt durch an der Vibrationseinheit 
+montierten Kugellager. Diese bieten die Möglichkeit, dass Halterung~2 mit einem geringen Widerstand und Toleranzen in die vertikale
+Richtung bewegt werden kann. 
+Für eine Vibration des Gesamtsystems wird also die rotatorische Bewegung des Motors über die Zahnrad und Zahnstangen Kombination 
+in eine lineare Bewegung übertragen. Wird dem Schrittmotor also der Befehl für eine Oszilation gegeben wird dies in eine vertikale
+Vibration übertragen, die in die Trageschiene übergeht.
+
+Die Entscheidung für die Wahl dieses Prinzips ist die hohe Variabilität durch
+die Einstellung der Neigung. Andere Systeme, wie ein freilaufender Motor mit Unwucht, der an einer durch eine Feder freischwingenden
+Befestigung montiert werden würde, haben keine Möglichkeit, sich für die folgende Vereinzelung anzupassen.\todo{Besser Formulieren!}
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=1\linewidth]{figs/Beschriftung_Vereinzelungssystem_Vibrationsschiene.png}
+	\caption{Aufbau der Vibrationsschiene}
+	\label{fig:Vibrationsschiene}
+\end{figure}
+
+\paragraph{Gelenke und Freiheitsgrade}
+Mechanisch ist für die Auf- und Abbewegung das Gelenk~1 an Halterung~1 wichtig. Dieses fixiert die Vibrationsschiene und ermöglicht
+ausschließlich die Rotation um eine Achse. 
+Auch auf der sich bewegenden Halterung~2 muss als Verbindungsstück ein Gelenk mit zusätzlicher linearer Verschiebung sitzen.
+Gelenk~1 und Gelenk~2 sind nach demselben in \cref{sec:Randbedingungen} beschrieben Herstellungsverfahren gefertigt worden. 
+Die Verbindung zwischen Vibrationsschiene und dem Gelenk~2 bedarf jedoch einer weiteren Anforderung. Da der vertikale Hub 
+den Angriffspunkt auf der Schiene verschiebt, muss diese Verbindung die Möglichkeit haben, linear auf der Schiene verschiebbar 
+zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde aus Gründen 
+der Komplexität gegen ein weiteres gelagertes lineares System entschieden.
+
+\paragraph{Antrieb und elektrisches System}
+Für das elektrische System wurde wie bereits erwähnt ein Schrittmotor verwendet. Im Vergleich zu anderen Motoren bietet ein
+Schrittmotor die passende Mischung aus Genauigkeit, Geschwindigkeit und Belastbarkeit (vgl. \cref{sec:Aktuatorik}).
+Ein Servomotor mit Getriebe ist wegen mangelnder Geschwindigkeit keine Option für ein Vibrationssystem.
+Diese Wahl bedarf jedoch eines weiteren Systems zur Positionserfassung.
+Aus diesem Grund wird für den eingefahrenen Zustand der Halterung~2 ein Endstop benötigt, der eben diesen Punkt als Signal an die
+Steuerung übergeben kann. Wird nun also das System initialisiert und bleibt in den zu testenden Betriebsgrenzen, kann die Steuerung
+durch das Verrechnen der Schritte eine Position genau bestimmen.
+%
+\subsubsection{Vereinzelung}\label{sec:Vereinzelung}
+Das in \cref{sec:Bevorratung} beschriebene System führt die im Bündel befindlichen Hairpins zu diesem System. In diesem Schritt sollen
+die Hairpins vereinzelt werden. Beide Systeme sind zueinander Entkoppelt aufgebaut und werden jeweils Seperat an dem Trägergerüst
+montiert. Die Vereinzelung ist dabei in hängernder Lage ausgeführt, damit eine frei Möglichkeit der Höheneinstellung besteht.
+%
+\paragraph{Aufbau und Wirkprinzip}
+Grundsätzlich besteht die Vereinzelung aus zwei linearen Bewegungseinheiten. Zum Erzeugen einer festen und definierten linearen
+Bewegung wurden ein Schlitten mit Servomotor und einer Zahnrad, Zahnstangen Kombination verwendet. Dieses Prinzip wurde wie in 
+\cref{fig:Vereinzelungseinheit} aufgezeigt doppelt ausgeführt. Die rotatorische Bewegung wird hier ebenfalls in eine vertikale 
+Auf und Ab Bewegung umgesetzt. Am Ende dieser Bewegungshalterung sitzen die Sperrklinken und Endeffektoren, die die eigentliche 
+Trennung der Hairpins durchführen. 
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=1\linewidth]{figs/Beschriftung_Vereinzelungseinheit.png}
+	\caption{Aufbau der Vereinzelungseinheit}
+	\label{fig:Vereinzelungseinheit}
+\end{figure}
+
+\paragraph{Konstruktive Auslegung}
+Die Befestigung der Schlitten erfolgt auf zwei Linearschienen, die wiederum an den Halterungen 3 und 4 fixiert sind. Diese System
+wird zudem auf beiden Seiten durch hängende Aluminiumextrusion gehalten. Der Einsatz der Linearschienen bietet die Möglichkeit
+den Abstand der Schlitten zu einenader anzupassen. Dafür ist wurde ein Schraube Muttersystem so integriert, dass durch Drehen einer
+Sechskant Schraube in den Halterungen3 und 4 die Schlitten sehr genau bewegt werden können. Zu dem wurden die vier Konktaktpunkte 
+eines Schlittens auf den beiden Linaerschiene so designt, dass bewusste Aussparungen und ein angepasster Durchmesser verwendet wurde,
+der einen optimalen Kompromiss zwischen Halt und Rutschen darstellt. Da durch den Anpressdruck der Hairpins die Lineare Bewegungseinheit
+hohe Kräfte bei minimalen Toleranzen erleben darf, wurden die Halterung der Verbidnugsstangen als metallische Linear Lager ausgeführt.
+Diese ermöglichen trotzt wirkender Kräfte eine leichte lineare Bewegung, welche den Servomotoren zu gute kommt.
+Die Endeffektoren müssen zudem so designt werden, dass ein Schnitt zwischen den Hairpins ohne Verharkung möglich ist. Dafür müssen
+diese an die Form und Biegung des oberen Teils angepasst werden. Ziel sollte aber sein, eine möglichst Varianten starkes Design für
+einen geringeren Wechsel der Endeffektoren zu finden.
+
+\paragraph{Antrieb und Sensorik}
+Für die Vereinzelung wurden zwei Servomoteren verwendet. Dies hat den Grund, dass in diesem System eine sehr präzise Position angefahren
+werden muss, weil die Hairpin meinst nur eine Höhe von 3-4mm aufweisen. Außerdem müssen keine hohe Geschwindigkeiten und lange Strecken
+umgesetzt werden. Die Wahl des Servomotors entspricht also genau diesen Anforerungen und ist in der passende kompakten Form Vorhanden.
+Durch die interen Lageregelung ist kein externer Sensor zur Bestimmung der Position notwendig. Zu Kontrolle der Vereinzelung wird
+in diesem System noch kein Sensor verwendet, da dies auch im späteren Schritt, der Überführung ausreichend ist.
+
+\subsubsection{Überführung}\label{sec:Ueberfuehrung}
+% ---------------------------------------------------------------------------
+% Rutsche als Schnittstelle zum Zufuehrsystem:
+% - Neigungswinkel / Grenzwinkel (Rueckverweis auf die Grundlagen zur Reibung)
+% - Warum Rutsche statt Fallschacht -- die Begruendung steht schon in
+%   \cref{sec:Konzeptvarianten}, hier nur die konstruktive Umsetzung
 %
 %
-\paragraph{Material}
-- Warum PLA? Vor- und Nachteile\\
-- Was gäbe es für Alternativen?\\
-%
-\paragraph{Aluminiumprofile}
-- Warum Aluminiumprofile für den Gesamtaufbau?\\
-%
-\todo{Was ist mit den Spindeln, und Servomotoren?}
-%
-\subsubsection{Elektronische Komponenten}\label{sec:ElektronischeKomponenten}
-%
-\paragraph{Spannungsversorgung}\label{sec:SpannungsVersorgung}
-%
-\paragraph{Microcontroller}\label{sec:Microcontroller}
-%
-\paragraph{Sensorik}\label{sec:Sensorik}
-%
-%
-\subsection{Software}\label{sec:Software}
-- Wie wurde das System vom Code her aufgebaut?\\
-%
-\subsubsection{Code Struktur}\label{sec:CodeStruktur}
-- Welche Code-Strukturen gibt es für Ausfallsicherheit etc.? Welche Code-Struktur wird verwendet? Welche Vorteile und Nachteile hat diese Code-Struktur?\\
-- Welche Normen und Arten für solche Systeme gibt es?\\
-%
-\subsubsection{Signalfluss}\label{sec:Signalfluss}
-- Wie werden die Signale verschickt, wohing gehen diese?\\
-- Functional Block Diagramm\\
-- Fallbacks für Sicherheit\\
-\todo{Mehr Details zum Code?}
+% ============================================================================
+\subsection{Zuführsystem}\label{sec:Zufuehrsystem}
+% ============================================================================
+% Einleitungsabsatz analog zum Vereinzelungssystem: Aufgabe in 2-3 Saetzen.
+
+\subsubsection{Schnittstellen}
+% Eingang: vereinzelter Hairpin aus der Ueberfuehrung
+% Ausgang: definierte Uebergabeposition fuer den UR5e  -> Anforderung G2
+% Signale: Handshake mit dem Roboterarm  -> Anforderung Si1
+
+\subsubsection{Übernahme und Fixierung}
+\paragraph{Aufbau und Wirkprinzip}
+\paragraph{Konstruktive Auslegung}
+\paragraph{Antrieb und Sensorik}
+
+\subsubsection{Transport und Positionierung}
+\paragraph{Aufbau und Wirkprinzip}
+% Spindelantrieb, Fuehrung, Verfahrweg
+\paragraph{Konstruktive Auslegung}
+\paragraph{Antrieb und Referenzierung}
+% Endstop, open-loop, Schrittzaehlung  -> Anforderungen L2, K2
+
+\subsubsection{Übergabe an den Roboterarm}
+% Aktives Freigeben, Zugaenglichkeit fuer den Greifer, kollisionsfreie Lage
 %
 %
-\subsection{Herausforderungen \& Probleme}\label{sec:ChallengesProbleme}
-- Was waren die größten Herausforderungen?\\
-- Welche Probleme gab es?\\
+% ============================================================================
+\subsection{Elektrische Integration}\label{sec:ElektrischeIntegration}
+% ============================================================================
+% Einleitung: Aufbau in Ebenen -- Versorgung, Steuerung, Peripherie.
+
+\subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
+% 12V/5V, Wandlung, Massekonzept, Absicherung  -> Anforderung En1
+
+\subsubsection{Steuerungstopologie}\label{sec:Microcontroller}
+% Master/Slave-Aufteilung, Pegelwandlung, Lochrasterplatinen
+% PFLICHT-ABBILDUNG: Blockschaltbild der Steuerungstopologie
+% \todo{Blockschaltbild erstellen}
+
+\subsubsection{Sensorik}\label{sec:Sensorik}
+% Welcher Sensortyp an welcher Stelle -- und WARUM dieser statt der
+% Alternativen aus \cref{sec:GrundlagenSensorik}. Kein Nacherzaehlen der
+% Funktionsprinzipien, die stehen schon in Kapitel 2.
 %
+%
+% ============================================================================
+\subsection{Steuerungssoftware}\label{sec:Software}
+% ============================================================================
+
+\subsubsection{Architektur}\label{sec:CodeStruktur}
+% - Zustandsautomat, nichtblockierende Ablaufsteuerung, Modulschnitt
+% - Aufteilung Master / Slaves
+% - Normative Anknuepfung gehoert in die Grundlagen, hier nur die Umsetzung
+
+\subsubsection{Signalfluss und Kommunikation}\label{sec:Signalfluss}
+% - Befehlssatz, Quittierung, Timeouts
+% - PFLICHT-ABBILDUNG: Functional Block Diagram
+% \todo{Signalflussdiagramm erstellen}
+
+\subsubsection{Fehlerbehandlung und sicherer Zustand}
+% - Verhalten bei Not-Halt  -> Anforderung Sa1
+% - Verhalten bei ausbleibender Rueckmeldung / Kommunikationsfehler -> Si3
+%
+%
+% ============================================================================
+\subsection{Schnittstellen im Betrieb}\label{sec:Betriebsschnittstellen}
+% ============================================================================
+
+\subsubsection{Bedienschnittstelle}
+% Display und Joystick, Betriebsarten (Einrichten / Automatik),
+% was der Bediener sieht und einstellen kann  -> Anforderungen B1, B2
+
+\subsubsection{Schnittstelle zum Roboterarm}
+% Digitale I/O, Handshake-Ablauf, wer wartet auf wen  -> Anforderung Si1
+%
+%
+% ============================================================================
+\subsection{Zusammenfassung des Realisierungsstands}\label{sec:Realisierungsstand}
+% ============================================================================
+% 2-3 Absaetze: Was ist fertig, was ist provisorisch, was wurde bewusst
+% zurueckgestellt. Bruecke zu Kapitel 6.
