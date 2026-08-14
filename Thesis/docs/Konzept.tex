@@ -52,13 +52,14 @@ L1 & F & Bereitstellungszeit je Hairpin unterschreitet die Zykluszeit der Zelle;
 L2 & F & Wiederholgenauigkeit der Übergabeposition & $\leq 0{,}5\,$mm\\
 L3 & F & Durchsatz ohne manuelles Nachladen & $\geq 25\,$Stk.\\
 L4 & F & Hairpins bleiben unbeschädigt (Isolierung/Geometrie) & $\leq 1\,\%$\\
+L5 & F & Anlage weißt hohe Prozessstabilität auf & --\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Geometrie}}\\
 \addlinespace[2pt]
 G1 & F & Unterbringung im vorhandenen Bauraum der Zelle (Aluminum Gestell) & $\langle B\times T\times H\rangle$\\ % Maße eintragen
 G2 & F & Übergabeposition im Arbeitsraum des Roboterarms UR5e, kollisionsfrei erreichbar & --\\
-G3 & F & Zuführung der Hairpins in stehender Lage & --\\
+G3 & F & Zuführung der Hairpins in hängender Lage & --\\
 G4 & W & Manuelle Justage der Übergabeposition (Schienensystem) & --\\
 \addlinespace
 
@@ -72,7 +73,6 @@ K2 & F & Transport in eine definierte, reproduzierbare Endlage & --\\
 \addlinespace[2pt]
 St1 & F & Verarbeitung variierender Hairpin-Geometrien & Spektrum $\langle\ldots\rangle$\\ % Bereich definieren
 St2 & W & Verwendung kostengünstiger, prototypentauglicher Werkstoffe für den Aufbau & --\\
-St3 & F & Hairpins müssen als hängende Reihe angnommen werden & --\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Signal / Steuerung}}\\
@@ -230,12 +230,12 @@ K.-o.-Filter ausgeschieden.}
 
 Bevorraten     & \ko{Kettenmagazin} & \altB{Schachtmagazin} & \ko{ortsfeste Nester} & \altA{Reihenmagazin} (hängend)\\
 Nachführen     & \altB{Schwerkraft} & \altA{Vibration} & \ko{Stufenförderer} & \ko{Förderband}\\
-Vereinzeln     & \altB{Trennschieber} & \ko{Zellenrad} & Sperrklinken (sequenziell) & \ko{Greifer}\\
+Vereinzeln     & \altB{Trennschieber} & \ko{Zellenrad} & \altA{Sperrklinken (sequenziell)} & \ko{Greifer}\\
 Überführen     & \altA{Rutsche (Schwerkraft)} & Fallschacht & \ko{aktiver Schieber} & \altB{Förderband}\\
-Übernehmen \& Fixieren & Formschluss-Nest & \ko{Pneumatikgreifer} & \altA{Kraftschluss-Klemme} & \ko{Vakuum}\\
+Übernehmen \& Fixieren & \altB{Formschluss-Nest} & \ko{Pneumatikgreifer} & \altA{Kraftschluss-Klemme} & \ko{Vakuum}\\
 Transportieren & \altA{Spindelantrieb} & \altB{Zahnriemen} & \ko{Pneumatikzylinder} & \\
 Positionieren  & \altA{Endstop (open-loop)} & \ko{Lageregelung (Potentiometer)} & \altB{Endstop (closed-loop)} & \\
-Übergeben      & aktives Freigeben & \ko{Schwerkraft in Nest} & \altA{Roboterarm löst selbtständig} & \\
+Übergeben      & \altA{aktives Freigeben} & \ko{Schwerkraft in Nest} & \altB{Roboterarm löst selbtständig} & \\
 
 \end{longtable}
 \endgroup
@@ -250,11 +250,11 @@ Für die Analyse und dem Begründen des K.-o. Filters wird Schritt für Schritt 
 Anforderungen und weiterer techischer Anforderungen erfolgt im gleichen Zuge.
 
 \paragraph{Bevorraten} Bei diesen Prinzipien schneiden das System der ortsfesten Nester und das Kettenmagazin aus, weil diese 
-nicht die Anforderung St3 erfüllen können. Für das potentzielle Nutzen dieser Prinzipien wäre ein weiteres System zur Beladung
+nicht die Anforderung G3 erfüllen können. Für das potentzielle Nutzen dieser Prinzipien wäre ein weiteres System zur Beladung
 nötig. Dies bietet kein Vorteil in Hinblick auf Prozesssicherheit und Automation.
 
 \paragraph{Nachführen} Hier Bedarf es einer Betrachtung des vorherigen Punktes. Denn auch hier können der Stufenförderer und das
-Förderband nicht genutz werden, da laut Anforderung St3 die Hairpins in einer für diese Systeme falschen Lage eingegeben werden.
+Förderband nicht genutz werden, da laut Anforderung G3 die Hairpins in einer für diese Systeme falschen Lage eingegeben werden.
 
 \paragraph{Vereinzeln} Bei diesem Unterpunkt ist die Anforderung St1 ausschlag gebend für den Ausschluss des Zellenrad und Greifers.
 Durch die geforderte hohen Variantenvielfalt der Hairpins ist das Konstruieren eines Greifers nur schwer möglich. Dieser müsste 
@@ -302,8 +302,7 @@ wird aber selten verwendet und wird in dieser Kombination nicht weiter betrachte
 Hairpins, können nun mittels eines passgenauen Trennschiebers einzelnt ausgeben werden. Ein Ansatz mit Sperrklinken ist
 diesem Fall nicht möglcih, da die Hairpins in dem Gehäuse liegen und extra Öffnungen mit Anbauteilen benötigt werden würde.
 Die Prinzipien zur Überführung zwischen den Subsystemen sind mechanisch alle Möglich und müssen im weiteren Verlauf gegeneinander
-abgewogen werden. Für diese Variante bietet sich aber dennoch das Förderband an, da die Hairpins in einer liegenden Postion
-aus der Vereinzelung kommen würden und passend auf das Förderband gegeben werden können.
+abgewogen werden.
 
 \paragraph{Reihenmagazin} Wird das Reihenmagazin als erste Teilfunktion gewählt sind für das Nachführen die Schwerkraft und
 die Vibration mögliche Systeme. Auch bei der Vereinzelung wäre der Trennschieber und die Sperrklinken umsetzbar. Für die Positionierung
@@ -316,26 +315,69 @@ möglich. Der Roboterarm muss den Hairpin also selbständig lösen und aufnehmen
 Kompatibilität. 
 %
 %
-\subsubsection{Variantenbetrachtung}
-Für eine weitere Reduktion der Prinzpien und die Wahl es Endkonzeptes werden im folgenden drei Varianten gegen einander verglichen.
-Dafür wird sich mit zu Hilfenahme der vorher beschriebenen Punkte die Varianten einfach festgelegt. Dies ist eine gängige Praxis
-für Ingenieure, da ab irgnedeinen Punkt nur noch abgeschötzt werden kann und eine Wahl einfach festgelegt werden muss. An diesem 
-wird dann die Theorie überprüft und in einem nachgekoppelten Optimierungsverlauf zu einem optimalen System geführt. 
+\subsubsection{Festlegung der Konzeptvarianten}
+Für eine weitere Reduktion der Prinzpien und die Wahl es Endkonzeptes werden im folgenden zwei Varianten gegen einander verglichen.
+Wie oben bereits beschrieben entfallen manche Prinzipien wegen der Anforderugnen an das System oder sind wegen dessen Eigenschaften
+mit anderen Prinzipien gekoppelt. Die beiden Varianten unterscheiden sich Grundsätzlich im Zuführsystem anhand der ersten beiden
+Prinzipien der Bevoratung mittels Schacht- und Reihenmagazin. Nach der Teilfunktion Überführen beginnt das Subssystem der Zuführung.
+Hier wäre es möglich, die Konzeptvarianten so zu gestallten, dass jedes Prinzip mit jeder vorherigen Variante kompatibel ist. 
+Innerhalb jedes Zweigs wird dasjenige Prinzip gewählt, das unter den dort herrschenden mechanischen Randbedingungen die Anforderungen
+am besten erfüllt. Verglichen werden anschließend die beiden so entstandenen Bestlösungen.
 
+\paragraph{Variante A} Aus dem Reihenmagazin folgt, dass die Hairpins in einer waagerechten hängenden Lage vorhanden sind. In der
+nächsten Teilfunktion folgt die Wahl des Nachführens der Hairpins zwischen der Schwerkraft oder Vibration. Laut Anforderung St1
+muss das System jedoch in der Lage sein, Variabel Haripin Geometrien mit verschiednen Größen,Gewichten und Beschaffenheiten auf
+zu nehmen. Dies wiederum hat zu folge, dass bei einem Nachführen mittels Schwerkraft unterschiedliche Einstelllwinkel zur Überwindung
+der Haftreibung eingestellt werden müssen. Ein System mit Virbration kann auf der anderen Seite sorgt für eine höhere Prozesssicherheit,
+da der einsetzbare Bereich der Hairpin-Geometrien ohne Anpassungen am Aufbau größer ist.
 
+Im nächsten Schritt, der Vereinzelung, werden die Sperrklinken gewählt. Dies folgt ebenfalls aus der Anforderung St1, wobei 
+ein Trennschieber aufwengig Anpassungen für verschiedene Hairpin Geometrien bäuchte. Dies widerspricht der Wunschanforderung B2,
+welche besagt, dass das Eingreifen des Bedienpersonals in die Anlage nicht nötig ist. Außerdem ist der Sperrklinken Ansatz
+mechanisch einfacher umzusetzten, da die Hairpins bereits in dieser Variante freiliegen. 
 
-\subsection{Subsysteme}\label{sec:Subsysteme}
-%
-\subsubsection{Vereinzelung}\label{sec:Vereinzelung}
-Das Subsystem der Vereinzelung muss die Hairpins mit einer hohen Taktzeit
-und Zuverlässigkeit vereinzeln. Dabei muss aus einem Bündel von Hairpins ein
-einzelner Hairpin ausgegeben werden.
-%
-\subsubsection{Zuführung}\label{sec:Zuführung}
-Das Subsystem der Auslieferung muss die Hairpins mit einer hohen Taktzeit
-und Zuverlässigkeit ausliefern.
-%
-%
-\subsection{Schnittstellen}\label{sec:Schnittstellen}
-- Was sind die Übergabe Punkte?\\
-- Warum kann man die einzelnen Subsysteme Betrachten?\\
+In der Überfühung zwischen Vereinzelung und Zuführung ist es möglich die Rutsche und den Fallschacht zu verwenden. Beide Prinzipien
+sind ähnlich aufgebaut, wobei der Fallschacht Hairpins in einem geschlossenem Behältnis führen. Ein dirketer Vergleich zeigt auf, 
+dass bei einem Fallschacht der Gefahr der Verharkung größer ist. Außerdem ist ein Beheben dieser Fehler schwerer möglich, da 
+der geschlossene Bereich das Erreichen der Problemstelle erschwert. 
+
+Wie in der Einführung bereits genannt, ist es für das Zuführsystem legitim beide Prinzipien des Übernehmens und Fixierens zu
+verwenden. Da die Wahl zwischen Formschluss-Nest und Kraftschluss-Klemme gleichwertig ist, wird jeweils ein Prinzip einer Variante
+zugeordnet. Für die weitere Betrachtung wird die Kraftschluss-Klemme der Variante A zugeordnet.
+
+Für das Tansportieren bietet der Spindelantrieb gegenüber einem Zahnantrieb eine höhere Genauigkeit. Diese wird besodners für
+die Anforderung L2 benötigt. In diesem Zuge kann ebenfalls die Positionierung mit Analysiert werden. Durch die Festlegung des
+Arbeitsbereiches druch die Hairpin Geometrien, sind die Betriebsbereiche für den Motor des Spindelantriebes festgelegt. Die 
+Wahl eines open-loop Sensorssystems ist passend und die Komplexität wird weiterreduziert.
+
+Für das Übergeben führt aus der Kraftschluss-Klemme automatisch das aktive Freigeben. 
+
+\paragraph{Variante B} Diese Konzeptvariante startet mit dem Bevoraten nach dem Schachtmagazin. Aus der Vertraglichkeitsbetrachtung
+folgt für das Nachführen das Prinzip der Schwerkraft und die Vereinzelung der Trennschieber. Für diese Variante bietet sich bei der
+Wahl der Überfühung das Förderband an, da die Hairpins in einer liegenden Postion aus der Vereinzelung kommen würden und passend 
+auf das Förderband gegeben werden könnten. Bei einer Wahl der Schwerkraft basierenden System müsste nämlich ein weitere Mechanismus
+vebaut werden, der die Hairpins im richtigen Moment aus dem Trennschieber ausgibt.
+
+Wie in Variante A bereits beschrieben, wird für die Zuführung der Varaiante B das Prinzip des Formschluss-Nest angenommen.
+
+Da für das Formschluss-Nest keine externen elketrische Anschlüsse benötigt werden, wird der Zahnriemen als Transportsystem genutzt.
+Dies hat den prkatischen Vorteil, dass sich ein solches System schneller Bewegen lässt als der Spindelantrieb. Damit ist das Risiko
+der Verletzung der Anforderung L1 geringer und andere Teilfunktionen haben die Möglichkeit längere Prinzipien einzusetzten.
+
+Diese schnelleren Bewegungen führen jedoch automatisch zu höheren Kräften. Es bietet sich also an für die Positionierung ein 
+closed-loop System zuverwenden, damit die Wiederholgenauigkeit nach Anforderung L2 weiter erreicht werden kann.
+
+Wegen dem rein mechansichen Aufbau des Formschluss-Nest muss der Roboterarm für die Übergabe den Hairpin slebstständig aus 
+dem Nest lösen. Ein aktives Freigeben ist ohne steerbare Bewegungseinhait nicht möglich.
+
+\subsubsection{Vergleich der Konzeptvarianten}
+Die im vorherigen Abschnitt festgelegten Konzpetvarianten müssen nun gegeneinander verglichen werden. Dazu bietet es sich 
+an zunächst die bedien Subsysteme getrennt zuvergleichen.
+
+\paragraph{Vereinzelung} Bei diesem System müssen die Varianten vom Ausgangspunkt verglichen werden. Dieser ist nach Anforderung
+G3 die Hairpins in einer hängenden Lage anzunehmen. Die Variante A nutzt das Reihenmagazin, das exakt der Anlieferung der Hairpins
+entspricht. Das Schachtmagazin der Variante B wiederum, bräuchte ein weiteren Arbeitschritt der die Befüllung und Lageänderung der
+Hairpins übernimmt. Dieser zusätzliche Schritt wirkt sich wieder auf die verringtere Prozessstabilität auf, die nach Anforderung 
+L5 möglichst hoch bleiben soll. 
+\todo{Hier muss weiter verglichen werden!!!}
+
