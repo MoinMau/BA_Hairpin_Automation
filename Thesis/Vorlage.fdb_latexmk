@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber Vorlage"] 1786740181.68615 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1786741402.52379 0
-  "Vorlage.bcf" 1786741402.34791 110517 eb5f331f2fdd62c8c30f9ecbf9fd6ecd "pdflatex"
+["biber Vorlage"] 1786740181.68615 "Vorlage.bcf" "Vorlage.bbl" "Vorlage" 1786822822.35703 0
+  "Vorlage.bcf" 1786822822.05806 110517 eb5f331f2fdd62c8c30f9ecbf9fd6ecd "pdflatex"
   "refs/references.bib" 1786691467.21435 11105 cd506acd8b498e5637ebde0a41c9d98d ""
   (generated)
   "Vorlage.bbl"
   "Vorlage.blg"
   (rewritten before read)
-["pdflatex"] 1786741397.41932 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1786741402.52414 0
+["pdflatex"] 1786822813.00687 "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" "Vorlage.pdf" "Vorlage" 1786822822.35758 0
   "/Users/moinmau/Documents/GitHub/BA_Hairpin_Automation/Thesis/Vorlage.tex" 1786691466.25851 9181 a39466013d4fb5126276cbd1fc529bb1 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -288,19 +288,19 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1783688908 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1783688750 3636771 a7bb531bdb879a453dd41ae83a4e6dd5 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "Vorlage.aux" 1786741402.32769 90521 bb5bfb8e230d8f9d358841222c5c4735 "pdflatex"
+  "Vorlage.aux" 1786822822.02212 92027 2907f458d0c6c0cd04397698b171e4d9 "pdflatex"
   "Vorlage.bbl" 1786740184.46966 40120 4b19f3c50a686f9bc87d011662a5c39f "biber Vorlage"
-  "Vorlage.lof" 1786741402.34882 2217 f03aef986b0d0f87d23d8d9a5c33f0c0 "pdflatex"
-  "Vorlage.lot" 1786741402.34887 586 c45646f7244998561c617b7f463cd446 "pdflatex"
-  "Vorlage.run.xml" 1786741402.34868 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
+  "Vorlage.lof" 1786822822.05954 2479 ac9bf8e717dfa5dbb8cd3b60b964f372 "pdflatex"
+  "Vorlage.lot" 1786822822.05959 586 c45646f7244998561c617b7f463cd446 "pdflatex"
+  "Vorlage.run.xml" 1786822822.05925 2414 9d5c970c18f12baf5366582b2cc2ab9e "pdflatex"
   "Vorlage.tex" 1786691466.25851 9181 a39466013d4fb5126276cbd1fc529bb1 ""
-  "Vorlage.toc" 1786741402.34874 14472 9dc13a42997dab39eb8c5e5f96881181 "pdflatex"
+  "Vorlage.toc" 1786822822.05939 14722 d37affb9f80b7062fad8e16943a55623 "pdflatex"
   "docs/Anhang.tex" 1786691466.26633 52 bf11b478878d90fbc032afeaf2977324 ""
   "docs/Diskussion.tex" 1786740003.84487 1072 b32facd95ee11ca5b3b202dd8334aa36 ""
   "docs/Einleitung.tex" 1786740032.93612 7976 908e1b9fced5afbd9dba765adfdb525f ""
   "docs/Erklaerung.tex" 1786740010.99943 2346 8007161a74b81a9bb0e4f7ad3bf57949 ""
-  "docs/Grundlagen.tex" 1786741197.37706 49043 4bb21335ea9aafc6c59072260244c42c ""
-  "docs/Konstruktion.tex" 1786740205.44601 20626 adb19bbeb86296dd436a7da2de34be1a ""
+  "docs/Grundlagen.tex" 1786822793.06886 50023 3dc2fcd462d0a056b51d23cac77add52 ""
+  "docs/Konstruktion.tex" 1786822793.18806 26575 49042442d8a735f22e777b918e4b2a59 ""
   "docs/Konzept.tex" 1786740437.77053 25764 3ec948377010104f61cfd79761789d70 ""
   "docs/StandDerTechnik.tex" 1786741338.92666 40996 02cf37aa04ead0abc852f13d125a38d5 ""
   "docs/Titelseite.tex" 1786741337.54053 2244 5b9c239a5c339c95bf87e39de6483d48 ""
@@ -308,6 +308,8 @@
   "docs/Zusammenfassung.tex" 1786691466.2745 120 062d6d25a8137c438c9644df3bafeb20 ""
   "figs/AbsiolierZelle.png" 1786691466.27823 253347 40bd7ed7fb04667860e72731962b9f05 ""
   "figs/AufbauAbisolierZelle.png" 1786691466.28152 219119 eb98035a7f9c2f9dab485e85c8fa3eba ""
+  "figs/Beschriftung_Klemmeinheit.png" 1786813465.31974 346560 82889f6fb976ef3ffeb9acb9c8a34ba1 ""
+  "figs/Beschriftung_Rutschensegment.png" 1786779568.79969 103118 197523773d7b35dad086433fee339751 ""
   "figs/Beschriftung_Vereinzelungseinheit.png" 1786728518.93268 370746 0fb6221a4e87b026c0812205d43c095d ""
   "figs/Beschriftung_Vereinzelungssystem_Vibrationsschiene.png" 1786717749.96544 352995 49804b88090a20d17c7ec377ca03519e ""
   "figs/pneumatikzylinder_schnitt.svg" 1786691466.28221 8604 788a681fa4f18e972b2b4ecf110a0872 ""

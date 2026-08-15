@@ -17,32 +17,33 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Fräsen}{7}{subsubsection.arabicsection.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{7}{subsubsection.arabicsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Laser}{8}{subsubsection.arabicsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.3}Normen}{10}{subsection.arabicsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Sicherheit}{10}{subsubsection.arabicsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Verfahren zur Bedienung}{10}{subsubsection.arabicsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.4}Aktuatorik}{10}{subsection.arabicsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Pneumatik}{10}{subsubsection.arabicsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktuatorik}{11}{subsubsection.arabicsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.5}Sensorik}{13}{subsection.arabicsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Optische Sensoren}{13}{subsubsection.arabicsection.2.5.1}%
-\contentsline {paragraph}{\nonumberline Einweglichtschranken}{14}{paragraph*.16}%
-\contentsline {paragraph}{\nonumberline Reflexionslichtschranken}{14}{paragraph*.17}%
-\contentsline {paragraph}{\nonumberline Reflexlichttaster}{14}{paragraph*.18}%
-\contentsline {subsubsection}{\numberline {2.5.2}Feldeffekt-Sensoren}{14}{subsubsection.arabicsection.2.5.2}%
-\contentsline {paragraph}{\nonumberline Induktive Sensoren}{14}{paragraph*.19}%
-\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{15}{paragraph*.20}%
-\contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{15}{paragraph*.21}%
-\contentsline {subsubsection}{\numberline {2.5.3}Mechanische Sensoren}{15}{subsubsection.arabicsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.6}Steuerungstechnik}{15}{subsection.arabicsection.2.6}%
-\contentsline {subsubsection}{\numberline {2.6.1}Systemaufbau (Master-Slave)}{15}{subsubsection.arabicsection.2.6.1}%
-\contentsline {subsubsection}{\numberline {2.6.2}Kommunikation}{15}{subsubsection.arabicsection.2.6.2}%
-\contentsline {paragraph}{\nonumberline Analoge Spannung als Signal}{15}{paragraph*.23}%
-\contentsline {paragraph}{\nonumberline UART}{15}{paragraph*.24}%
-\contentsline {paragraph}{\nonumberline I2C}{16}{paragraph*.25}%
-\contentsline {paragraph}{\nonumberline PWM}{16}{paragraph*.26}%
-\contentsline {subsubsection}{\numberline {2.6.3}Microcontroller}{16}{subsubsection.arabicsection.2.6.3}%
-\contentsline {subsubsection}{\numberline {2.6.4}Motordriver?}{16}{subsubsection.arabicsection.2.6.4}%
-\contentsline {subsection}{\numberline {2.7}Additive Fertigung}{16}{subsection.arabicsection.2.7}%
+\contentsline {subsection}{\numberline {2.3}Sensorik}{10}{subsection.arabicsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Optische Sensoren}{10}{subsubsection.arabicsection.2.3.1}%
+\contentsline {paragraph}{\nonumberline Einweglichtschranken}{11}{paragraph*.13}%
+\contentsline {paragraph}{\nonumberline Reflexionslichtschranken}{11}{paragraph*.14}%
+\contentsline {paragraph}{\nonumberline Reflexlichttaster}{11}{paragraph*.15}%
+\contentsline {subsubsection}{\numberline {2.3.2}Feldeffekt-Sensoren}{11}{subsubsection.arabicsection.2.3.2}%
+\contentsline {paragraph}{\nonumberline Induktive Sensoren}{11}{paragraph*.16}%
+\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{11}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{12}{paragraph*.18}%
+\contentsline {subsubsection}{\numberline {2.3.3}Mechanische Sensoren}{12}{subsubsection.arabicsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Aktuatorik}{12}{subsection.arabicsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Pneumatik}{12}{subsubsection.arabicsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktuatorik}{13}{subsubsection.arabicsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.5}Steuerungstechnik}{15}{subsection.arabicsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Mikrocontroller}{15}{subsubsection.arabicsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Steuerungsarchitektur}{15}{subsubsection.arabicsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Signalarten}{15}{subsubsection.arabicsection.2.5.3}%
+\contentsline {paragraph}{\nonumberline Digitale Schaltsignale}{15}{paragraph*.19}%
+\contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{15}{paragraph*.20}%
+\contentsline {paragraph}{\nonumberline Pulsweitenmodulation}{15}{paragraph*.21}%
+\contentsline {subsubsection}{\numberline {2.5.4}Bussysteme}{15}{subsubsection.arabicsection.2.5.4}%
+\contentsline {paragraph}{\nonumberline I2C}{15}{paragraph*.22}%
+\contentsline {subsubsection}{\numberline {2.5.5}Ablaufsteuerung und Fehlerverhalten}{15}{subsubsection.arabicsection.2.5.5}%
+\contentsline {subsubsection}{\numberline {2.5.6}Leistungselektronik und Motortreiber}{15}{subsubsection.arabicsection.2.5.6}%
+\contentsline {subsection}{\numberline {2.6}Normen}{15}{subsection.arabicsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Sicherheit}{16}{subsubsection.arabicsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Verfahren zur Bedienung}{16}{subsubsection.arabicsection.2.6.2}%
 \contentsline {section}{\numberline {3}Stand der Technik}{17}{section.arabicsection.3}%
 \contentsline {subsection}{\numberline {3.1}Aktuelles System}{17}{subsection.arabicsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Clean-Laser-Anlage}{18}{subsubsection.arabicsection.3.1.1}%
@@ -63,88 +64,89 @@
 \contentsline {subsubsection}{\numberline {4.2.2}Morphologischer Kasten}{30}{subsubsection.arabicsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.3}Konzeptauswahl}{31}{subsection.arabicsection.4.3}%
 \contentsline {subsubsection}{\numberline {4.3.1}Prinzipanalyse gegenüber Anforderungen}{31}{subsubsection.arabicsection.4.3.1}%
-\contentsline {paragraph}{\nonumberline Bevorraten}{31}{paragraph*.38}%
-\contentsline {paragraph}{\nonumberline Nachführen}{31}{paragraph*.39}%
-\contentsline {paragraph}{\nonumberline Vereinzeln}{31}{paragraph*.40}%
-\contentsline {paragraph}{\nonumberline Überführen}{31}{paragraph*.41}%
-\contentsline {paragraph}{\nonumberline Übernehmen \& Fixieren}{31}{paragraph*.42}%
-\contentsline {paragraph}{\nonumberline Transportieren}{31}{paragraph*.43}%
-\contentsline {paragraph}{\nonumberline Positionieren}{32}{paragraph*.44}%
-\contentsline {paragraph}{\nonumberline Übergeben}{32}{paragraph*.45}%
+\contentsline {paragraph}{\nonumberline Bevorraten}{31}{paragraph*.35}%
+\contentsline {paragraph}{\nonumberline Nachführen}{31}{paragraph*.36}%
+\contentsline {paragraph}{\nonumberline Vereinzeln}{31}{paragraph*.37}%
+\contentsline {paragraph}{\nonumberline Überführen}{31}{paragraph*.38}%
+\contentsline {paragraph}{\nonumberline Übernehmen \& Fixieren}{31}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline Transportieren}{31}{paragraph*.40}%
+\contentsline {paragraph}{\nonumberline Positionieren}{32}{paragraph*.41}%
+\contentsline {paragraph}{\nonumberline Übergeben}{32}{paragraph*.42}%
 \contentsline {subsubsection}{\numberline {4.3.2}Verträglichkeitsbetrachtung}{32}{subsubsection.arabicsection.4.3.2}%
-\contentsline {paragraph}{\nonumberline Schachtmagazin}{32}{paragraph*.46}%
-\contentsline {paragraph}{\nonumberline Reihenmagazin}{32}{paragraph*.47}%
-\contentsline {paragraph}{\nonumberline Zuführsystem}{32}{paragraph*.48}%
+\contentsline {paragraph}{\nonumberline Schachtmagazin}{32}{paragraph*.43}%
+\contentsline {paragraph}{\nonumberline Reihenmagazin}{32}{paragraph*.44}%
+\contentsline {paragraph}{\nonumberline Zuführsystem}{32}{paragraph*.45}%
 \contentsline {subsubsection}{\numberline {4.3.3}Festlegung der Konzeptvarianten}{33}{subsubsection.arabicsection.4.3.3}%
-\contentsline {paragraph}{\nonumberline Variante A}{33}{paragraph*.49}%
-\contentsline {paragraph}{\nonumberline Variante B}{33}{paragraph*.50}%
+\contentsline {paragraph}{\nonumberline Variante A}{33}{paragraph*.46}%
+\contentsline {paragraph}{\nonumberline Variante B}{33}{paragraph*.47}%
 \contentsline {subsubsection}{\numberline {4.3.4}Vergleich der Konzeptvarianten}{34}{subsubsection.arabicsection.4.3.4}%
-\contentsline {paragraph}{\nonumberline Vereinzelung}{34}{paragraph*.51}%
+\contentsline {paragraph}{\nonumberline Vereinzelung}{34}{paragraph*.48}%
 \contentsline {section}{\numberline {5}Realisierung}{35}{section.arabicsection.5}%
 \contentsline {subsection}{\numberline {5.1}Vorgehen und verwendete Werkzeuge}{35}{subsection.arabicsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Konstruktive Randbedingungen}{35}{subsection.arabicsection.5.2}%
-\contentsline {paragraph}{\nonumberline Aluminiumprofile}{35}{paragraph*.54}%
-\contentsline {paragraph}{\nonumberline Additive Fertigung}{35}{paragraph*.55}%
-\contentsline {paragraph}{\nonumberline Fertigungsgerechte Gestaltung von Gelenken}{36}{paragraph*.57}%
+\contentsline {paragraph}{\nonumberline Aluminiumprofile}{35}{paragraph*.51}%
+\contentsline {paragraph}{\nonumberline Additive Fertigung}{35}{paragraph*.52}%
+\contentsline {paragraph}{\nonumberline Fertigungsgerechte Gestaltung von Gelenken}{36}{paragraph*.54}%
 \contentsline {subsection}{\numberline {5.3}Vereinzelungssystem}{37}{subsection.arabicsection.5.3}%
 \contentsline {subsubsection}{\numberline {5.3.1}Schnittstellen}{37}{subsubsection.arabicsection.5.3.1}%
 \contentsline {subsubsection}{\numberline {5.3.2}Bevorratung und Nachführung}{37}{subsubsection.arabicsection.5.3.2}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{37}{paragraph*.58}%
-\contentsline {paragraph}{\nonumberline Gelenke und Freiheitsgrade}{37}{paragraph*.60}%
-\contentsline {paragraph}{\nonumberline Antrieb und elektrisches System}{37}{paragraph*.61}%
-\contentsline {subsubsection}{\numberline {5.3.3}Vereinzelung}{39}{subsubsection.arabicsection.5.3.3}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{39}{paragraph*.62}%
-\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{39}{paragraph*.63}%
-\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{40}{paragraph*.64}%
-\contentsline {subsubsection}{\numberline {5.3.4}Überführung}{40}{subsubsection.arabicsection.5.3.4}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{37}{paragraph*.55}%
+\contentsline {paragraph}{\nonumberline Gelenke und Freiheitsgrade}{37}{paragraph*.57}%
+\contentsline {paragraph}{\nonumberline Antrieb und elektrisches System}{37}{paragraph*.58}%
+\contentsline {subsubsection}{\numberline {5.3.3}Vereinzelung}{38}{subsubsection.arabicsection.5.3.3}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{38}{paragraph*.59}%
+\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{38}{paragraph*.60}%
+\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{39}{paragraph*.61}%
+\contentsline {subsubsection}{\numberline {5.3.4}Überführung}{39}{subsubsection.arabicsection.5.3.4}%
+\contentsline {paragraph}{\nonumberline Schnittstellen}{39}{paragraph*.62}%
+\contentsline {paragraph}{\nonumberline Aufbau und Auslegung}{40}{paragraph*.63}%
 \contentsline {subsection}{\numberline {5.4}Zuführsystem}{40}{subsection.arabicsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Schnittstellen}{40}{subsubsection.arabicsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Übernahme und Fixierung}{40}{subsubsection.arabicsection.5.4.2}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{40}{paragraph*.65}%
-\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{40}{paragraph*.66}%
-\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{40}{paragraph*.67}%
-\contentsline {subsubsection}{\numberline {5.4.3}Transport und Positionierung}{40}{subsubsection.arabicsection.5.4.3}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{40}{paragraph*.68}%
-\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{40}{paragraph*.69}%
-\contentsline {paragraph}{\nonumberline Antrieb und Referenzierung}{40}{paragraph*.70}%
-\contentsline {subsubsection}{\numberline {5.4.4}Übergabe an den Roboterarm}{41}{subsubsection.arabicsection.5.4.4}%
-\contentsline {subsection}{\numberline {5.5}Elektrische Integration}{41}{subsection.arabicsection.5.5}%
-\contentsline {subsubsection}{\numberline {5.5.1}Spannungsversorgung}{41}{subsubsection.arabicsection.5.5.1}%
-\contentsline {subsubsection}{\numberline {5.5.2}Steuerungstopologie}{41}{subsubsection.arabicsection.5.5.2}%
-\contentsline {subsubsection}{\numberline {5.5.3}Sensorik}{41}{subsubsection.arabicsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.6}Steuerungssoftware}{41}{subsection.arabicsection.5.6}%
-\contentsline {subsubsection}{\numberline {5.6.1}Architektur}{41}{subsubsection.arabicsection.5.6.1}%
-\contentsline {subsubsection}{\numberline {5.6.2}Signalfluss und Kommunikation}{41}{subsubsection.arabicsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.3}Fehlerbehandlung und sicherer Zustand}{41}{subsubsection.arabicsection.5.6.3}%
-\contentsline {subsection}{\numberline {5.7}Schnittstellen im Betrieb}{41}{subsection.arabicsection.5.7}%
-\contentsline {subsubsection}{\numberline {5.7.1}Bedienschnittstelle}{41}{subsubsection.arabicsection.5.7.1}%
-\contentsline {subsubsection}{\numberline {5.7.2}Schnittstelle zum Roboterarm}{41}{subsubsection.arabicsection.5.7.2}%
-\contentsline {subsection}{\numberline {5.8}Zusammenfassung des Realisierungsstands}{41}{subsection.arabicsection.5.8}%
-\contentsline {section}{\numberline {6}Validierung \& Tests}{42}{section.arabicsection.6}%
-\contentsline {subsection}{\numberline {6.1}Verifikation der Einzelkomponenten}{42}{subsection.arabicsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}I2C-Kommunikation}{42}{subsubsection.arabicsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}Servomotoren}{42}{subsubsection.arabicsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.3}Schrittmotoren}{42}{subsubsection.arabicsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.2}Ausfall-Betrachtung}{42}{subsection.arabicsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Systemtest-Gesamtablauf}{42}{subsection.arabicsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}Versuchsaufbau}{42}{subsubsection.arabicsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}Versuchsdurchführung}{42}{subsubsection.arabicsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}Versuchsreihe Taktzeit}{42}{subsubsection.arabicsection.6.3.3}%
-\contentsline {subsubsection}{\numberline {6.3.4}Versuchsreihe Wiederholgenauigkeit}{42}{subsubsection.arabicsection.6.3.4}%
-\contentsline {subsubsection}{\numberline {6.3.5}Versuchsreihe Durchsatz}{43}{subsubsection.arabicsection.6.3.5}%
-\contentsline {subsubsection}{\numberline {6.3.6}Versuchsreihe Beschädigung}{43}{subsubsection.arabicsection.6.3.6}%
-\contentsline {subsection}{\numberline {6.4}Ergebnisse}{43}{subsection.arabicsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Fehlerbetrachtung}{43}{subsection.arabicsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Bewertung gegen Anforderungsliste}{43}{subsection.arabicsection.6.6}%
-\contentsline {section}{\numberline {7}Diskussion}{44}{section.arabicsection.7}%
-\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{44}{subsection.arabicsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{44}{subsubsection.arabicsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagsbetrieb}{44}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungsvorschläge}{44}{subsubsection.arabicsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{44}{subsection.arabicsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Ausblick}{44}{subsection.arabicsection.7.3}%
-\contentsline {section}{\numberline {8}Zusammenfassung}{45}{section.arabicsection.8}%
-\contentsline {section}{\numberline {A}Literatur}{46}{appendix.A}%
-\contentsline {section}{\numberline {B}Anhang}{48}{appendix.B}%
-\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{49}{appendix.C}%
+\contentsline {subsubsection}{\numberline {5.4.1}Schnittstellen}{41}{subsubsection.arabicsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Übernahme und Fixierung}{41}{subsubsection.arabicsection.5.4.2}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{41}{paragraph*.65}%
+\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{42}{paragraph*.66}%
+\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{42}{paragraph*.68}%
+\contentsline {subsubsection}{\numberline {5.4.3}Transport und Positionierung}{42}{subsubsection.arabicsection.5.4.3}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{42}{paragraph*.69}%
+\contentsline {paragraph}{\nonumberline Antrieb und Referenzierung}{42}{paragraph*.70}%
+\contentsline {subsubsection}{\numberline {5.4.4}Übergabe an den Roboterarm}{42}{subsubsection.arabicsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.5}Elektrische Integration}{43}{subsection.arabicsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Spannungsversorgung}{43}{subsubsection.arabicsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Steuerungstopologie}{43}{subsubsection.arabicsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}Sensorik}{43}{subsubsection.arabicsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.6}Steuerungssoftware}{43}{subsection.arabicsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Architektur}{43}{subsubsection.arabicsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}Signalfluss und Kommunikation}{43}{subsubsection.arabicsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.3}Fehlerbehandlung und sicherer Zustand}{43}{subsubsection.arabicsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.7}Schnittstellen im Betrieb}{43}{subsection.arabicsection.5.7}%
+\contentsline {subsubsection}{\numberline {5.7.1}Bedienschnittstelle}{43}{subsubsection.arabicsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.2}Schnittstelle zum Roboterarm}{43}{subsubsection.arabicsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.8}Zusammenfassung des Realisierungsstands}{43}{subsection.arabicsection.5.8}%
+\contentsline {section}{\numberline {6}Validierung \& Tests}{44}{section.arabicsection.6}%
+\contentsline {subsection}{\numberline {6.1}Verifikation der Einzelkomponenten}{44}{subsection.arabicsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}I2C-Kommunikation}{44}{subsubsection.arabicsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Servomotoren}{44}{subsubsection.arabicsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Schrittmotoren}{44}{subsubsection.arabicsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}Ausfall-Betrachtung}{44}{subsection.arabicsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Systemtest-Gesamtablauf}{44}{subsection.arabicsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Versuchsaufbau}{44}{subsubsection.arabicsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Versuchsdurchführung}{44}{subsubsection.arabicsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Versuchsreihe Taktzeit}{44}{subsubsection.arabicsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}Versuchsreihe Wiederholgenauigkeit}{44}{subsubsection.arabicsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.5}Versuchsreihe Durchsatz}{45}{subsubsection.arabicsection.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.3.6}Versuchsreihe Beschädigung}{45}{subsubsection.arabicsection.6.3.6}%
+\contentsline {subsection}{\numberline {6.4}Ergebnisse}{45}{subsection.arabicsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Fehlerbetrachtung}{45}{subsection.arabicsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Bewertung gegen Anforderungsliste}{45}{subsection.arabicsection.6.6}%
+\contentsline {section}{\numberline {7}Diskussion}{46}{section.arabicsection.7}%
+\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{46}{subsection.arabicsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{46}{subsubsection.arabicsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagsbetrieb}{46}{subsubsection.arabicsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungsvorschläge}{46}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{46}{subsection.arabicsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Ausblick}{46}{subsection.arabicsection.7.3}%
+\contentsline {section}{\numberline {8}Zusammenfassung}{47}{section.arabicsection.8}%
+\contentsline {section}{\numberline {A}Literatur}{48}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{50}{appendix.B}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{51}{appendix.C}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

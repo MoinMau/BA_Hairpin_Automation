@@ -161,7 +161,7 @@ Befestigung montiert werden würde, haben keine Möglichkeit, sich für die folg
 
 \begin{figure}[htbp]
 	\centering
-	    \includegraphics[width=1\linewidth]{figs/Beschriftung_Vereinzelungssystem_Vibrationsschiene.png}
+	    \includegraphics[width=0.8\linewidth]{figs/Beschriftung_Vereinzelungssystem_Vibrationsschiene.png}
 	\caption{Aufbau der Vibrationsschiene}
 	\label{fig:Vibrationsschiene}
 \end{figure}
@@ -199,7 +199,7 @@ Trennung der Hairpins durchführen.
 
 \begin{figure}[htbp]
 	\centering
-	    \includegraphics[width=1\linewidth]{figs/Beschriftung_Vereinzelungseinheit.png}
+	    \includegraphics[width=0.8\linewidth]{figs/Beschriftung_Vereinzelungseinheit.png}
 	\caption{Aufbau der Vereinzelungseinheit}
 	\label{fig:Vereinzelungseinheit}
 \end{figure}
@@ -225,41 +225,106 @@ Durch die interne Lageregelung ist kein externer Sensor zur Bestimmung der Posit
 in diesem System noch kein Sensor verwendet, da dies auch im späteren Schritt, der Überführung ausreichend ist.
 
 \subsubsection{Überführung}\label{sec:Ueberfuehrung}
-% ---------------------------------------------------------------------------
-% Rutsche als Schnittstelle zum Zufuehrsystem:
-% - Neigungswinkel / Grenzwinkel (Rueckverweis auf die Grundlagen zur Reibung)
-% - Warum Rutsche statt Fallschacht -- die Begruendung steht schon in
-%   \cref{sec:Konzeptvarianten}, hier nur die konstruktive Umsetzung
-%
-%
-% ============================================================================
+Wegen eines begrenzten Platzangebotes in der Trägerstruktur sind die beiden Subsysteme physisch übereinander angeordnet (vgl \cref{Abbildung gesamt}).
+Das Ziel diese Systems ist die Überführung der Hairpins zwischen diesen Subsystemen. Dazu wurde wie in \cref{sec:Konzeptauswahl} entschieden
+eine rein passive Rutsche gewählt.
+
+\paragraph{Schnittstellen} 
+
+Da die Überführung als rein passives System funktioniert, gibt es keine elektrischen Schnittstellen. Die mechanischen Schnittstelle
+stellen dabei die Übernahme des vereinzelten Haripins aus der Vereinzelung und die Übergabe diese Hairpins in das folgende Zuführsystem 
+dar.
+
+\paragraph{Aufbau und Auslegung}
+
+Allgemein besteht die Rutsche aus drei Segmenten. Alle diese Segmente sind als Schale ausgeführt. Zwei Ränder an den Außenseiten
+verhindern ein seitliches Rausfallen der Hairpins. Zudem wurde in die Mitte einen an die Biegung der Oberseite der Hairpins
+angepasste Einkerbung mit eingebracht. Diese hilft mit einer leicht angeschrägten Unterseite den Hairpin stabil in der Mitte
+der Schale zu halten. Der obere Teil dieser Segmente ist eine sich konvex öffnenene Schale. Dies dient dem besseren Fangen für den 
+Übergang der Hairpin vom Vereinzelungs- in das Überführungssystem. Das mittlere Teil ist eines einfaches lineares Segment ohne Besodnerheiten.
+Der unterste Teil ist als Trichter kontruiert, der die Hairpins sicher in das Zuführsystem überführen soll. Die Wahl des Trichters
+ergab sich durch erste Tests, bei denen eine einfache Schale für fehlerhafte Lagen der Hairpins in der im folgenden Erklärten
+Fixiereinheit aufzeigten.
+Der Grenzwinkel dieses Systems setzt sich aus der Haftreibung zwischen dem Isoliermaterial des Hairpins, dem PLA der Rutsche und
+den Kontkatflächen zwischen beiden Materilien.\todo{Rechnung zum Grenzwinkel}
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=0.8\linewidth]{figs/Beschriftung_Rutschensegment.png}
+	\caption{Aufbau eines Segments der Überführungseinheit/Rutsche}
+	\label{fig:Überführungseinheit}
+\end{figure}
+
 \subsection{Zuführsystem}\label{sec:Zufuehrsystem}
-% ============================================================================
-% Einleitungsabsatz analog zum Vereinzelungssystem: Aufgabe in 2-3 Saetzen.
+Diese Subsystem hat dei Aufgabe alle restlichen Teilfunktionen zu lösen und einen Übergabe eines einzelenen Hairpins and den 
+Roboterarm zu ermöglichen. Dabei ist auf eine hohe Genauigkeit, die variablen Hairpin Geomeitrien und eine eine ekltrische
+Steuerung zu achten.
 
 \subsubsection{Schnittstellen}
-% Eingang: vereinzelter Hairpin aus der Ueberfuehrung
-% Ausgang: definierte Uebergabeposition fuer den UR5e  -> Anforderung G2
-% Signale: Handshake mit dem Roboterarm  -> Anforderung Si1
+Mechanisch Gesehen ist der Eingang dieses Subsystems der vereinzelte Hairpin aus der Überführung. Der Ausgang beschreibt widerum
+die definierte Übergabeposition an den Roboterarm. Als elektrisches Signal wird die Steurung eines Schrittmotors für das Transportieren
+benötigt. Auch die Fixiereinheit muss elektronisch eingestellt werden.
 
 \subsubsection{Übernahme und Fixierung}
-\paragraph{Aufbau und Wirkprinzip}
-\paragraph{Konstruktive Auslegung}
-\paragraph{Antrieb und Sensorik}
+Dieser Teil des Zuführsystems besteht aus einem Behälter und elektronisch angetriebenen Klemmen. Durch die Rutsche des Überführungssystems
+wird ein Hairpin in stehender Lage in diesen Behälter gegeben. Hier folgt das Schließen und Ausrichten des Hairpins durch die 
+Klemmen. Diese Einheit sitzt auf einem Transportsystem, welchse für den Wechsel der Postion verantwortlich ist.
 
-\subsubsection{Transport und Positionierung}
 \paragraph{Aufbau und Wirkprinzip}
-% Spindelantrieb, Fuehrung, Verfahrweg
+Der in \cref{fig:Kraftschlussklemme} augezeigte Behälter ist mit den gleichen Dimensionen wie die der Segmente der Rutsche konstruiert. Der Übergang
+zwischen beiden Systemen stellt somit eine geringere Verhakungsgefahr da. Landet nun also ein Hairpin in diesem Behälter, kommen die Klemmen zum
+Einsatz. Nach einer passenden Kalibrierung auf die Hairpingeometrie, können die Seitenklemmen auf die definierte Postion ausfahren.
+Dies ermöglicht das Ausrichten des Hairpins genau auf die Mitte und fixiert zudem das seitliches Verrutschen. Die Bewegung übernimmt
+dabei ein einfacher Servomotor, der mit einem Ausleger verbunden ist. Die Hauptkleme dient zum Aufrichten des Hairpins. Da die 
+Rutsche in einem Winkel montiert ist, werden die Hairpin ebenfalls in dieser schrägen Lage übernommen. Schließt die Hauptklemme
+nach der Ausrichtung der Seitenklemmen lässt sich als der Hairpin Punkt genau Positionieren. Als Referenzeben für die vertikale
+Richtung dient dabei die längere Außenwand des Behälters.
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=0.8\linewidth]{figs/Beschriftung_Klemmeinheit.png}
+	\caption{Aufbau der Kraftschlussklemme}
+	\label{fig:Kraftschlussklemme}
+\end{figure}
+
 \paragraph{Konstruktive Auslegung}
+Der Behälter wird mit vier Schrauben auf dem in \cref{sec:TransportSystem} aufgezeigten Transportsystem montiert. Für das Ein- und
+Ausfahren der Klemmen wird die rotatorische Bewegung der Servomotoren mittels eines Auslegers und einer Verbidungsstange auf die
+linear bewegten Klemmen übertragen. Dabei sind die Seitenklemmen so konstruiert, dass jeweils zwei einfach Führungsschienen die
+Bewegungsrichtung auf eine Richutng beschränken und das gesamte System stabilisieren. Dieses Verfahren wurde gewählt, da dieses 
+System einen geringen Montageaufwand benötigt und durch die nach außen zeigenden Schienen keine Einschränkungen für die Innenwände
+des Behäters. Die Hauptklemme wiederum wurde mit Einkerbungen gestalltet in den diese Verläuft. Auch hier ist ein einfacher 
+Aufbau möglich.\todo{bessere Begründungen}
+
+\paragraph{Antrieb und Sensorik}
+Wie bereits erwähnt, wird für die Aktuatorik der Klemmen kleine Servomotoren verwenden. Diese Wahl wurde aus Gründen des Platzmangels
+und der präzisen Ansteuerung getroffen. Zu dem sind durch die kurzen Bewegungsstrecken der Klemmen die beschränkte Rotation dieser
+Motoren kein Problem für dieses System. Für das detektieren des Hairpins in dem Behälter wurde ein kapazitiver Sensor geplant. 
+Da dieses System gegenüber anderen Sensoriken verlässlich jegliche Verädenrungen in der Umgebung des Sensors erkennen kann, bietet
+sich dies besonders bei Variablen Geomtrien und damit Postionen an. Dieses Konzept ist aber wegen erhöhter Komplexität im Bau nicht
+realisiert worden.
+
+\subsubsection{Transport und Positionierung}\label{sec:Transportsystem}
+Der Behälter mit dem fixierten Hairpin muss aus dem Überfühungssystem herausbewegt werden und zur Übergabe Postion des Roboterarmes
+gefahren werden.
+
+\paragraph{Aufbau und Wirkprinzip}
+Die Führung besteht aus dem Spindelantrieb mit Schirttmotor, zwei Führungsschienen und einen Schlitten, der alle drei Teile verbindet.
+Der Schlitten besitzt zwei lineare Lager, die auf den Führungschienen für eine reibungslose Befestigung sorgen und die Möglichkeit
+den Behälter der Fixiereinheit mit vier Schrauben zu montieren. Die Rotation der Spindel sorgt für die Bewegung aus der Tragstruktur
+raus. 
+
 \paragraph{Antrieb und Referenzierung}
-% Endstop, open-loop, Schrittzaehlung  -> Anforderungen L2, K2
+Für die Positionsermittlung wird das bekannte Verfahren mit Endstop und einer open-loop Steuerung eingesetzt.
 
 \subsubsection{Übergabe an den Roboterarm}
-% Aktives Freigeben, Zugaenglichkeit fuer den Greifer, kollisionsfreie Lage
-%
-%
-% ============================================================================
+Nachdem die Kraftschlussklemme durch den Spindelantrieb an eine definierte Postion gefahren wurde, greift der Roboterarm mit einem
+angepassten Greifer den oberen Teil des Hairpins. In einem festdefinierten Zeitfenster müssen nun die Beine des Hairpins aus den
+KLemmen gelöst werden. Dafür wird von der Steuerung der Befehl gegeben die Servomotoren zum Einziehen der Klemmen zu bewegen. Der
+Roboterarm kann so den Hairpin nach oben aus dem Behältnis heben und diesen nun in die Laseranlage geben.
+
 \subsection{Elektrische Integration}\label{sec:ElektrischeIntegration}
+
 % ============================================================================
 % Einleitung: Aufbau in Ebenen -- Versorgung, Steuerung, Peripherie.
 

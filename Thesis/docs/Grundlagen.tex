@@ -318,20 +318,112 @@ lassen sich so ganze Oberflächen kontinuierlich bearbeiten.
 \todo{Was sind Mindestanforderungen?}
 %
 %
-\subsection{Normen}\label{sec:NormenVorgaben}
-Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 und 2206 beschriebenen Methoden. Diese werden in \cref{sec:Anforderung} genauer
-beschrieben, wobei es aber hilft jetzt schonmal kurz darzustellen nach welchem Prinzip in dieser
-Arbeit verfahren wird. So wird das am Ende zu entwickelnde Gesamtsystem in mehrere Subsysteme unterteilt.
-Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkt und Anforderungen. Für eine Analyse und Betrachtung wird
-also je nach Tiefe nur der innere Aufbau, der die festgelegten Anforderungen erfüllen muss, betrachtet oder nur die Schnittstellen der einzelnen Subsysteme.
-In dieser Arbeit wird es also immer eine Abstufung zwischen detaillierter und grober Betrachtung geben, damit die Komplexität des Gesamtsystems
-in einzelne Abschnitte unterteilt werden kann. Im Folgenden sollen weitere Sicherheits- und andere Normen beschrieben werden.
-
-\subsubsection{Sicherheit}\label{sec:Sicherheit}
-\todo{DIN EN ISO 12100, DIN EN ISO 13849-1}
+\subsection{Sensorik}\label{sec:sensors}
 %
-\subsubsection{Verfahren zur Bedienung}
-\todo{Wie geht man mit dem Bediener um, gibt es da Verfahren und System?}
+In dieser Arbeit ist gegenüber dem Bewegen von Teilen auch die Überwachung dieser von großer Wichtigkeit.
+So muss kontrolliert werden, ob einzelne Hairpins an bestimmten Positionen vorbeigekommen sind oder einfach nur
+vorhanden sind. Dafür müssen unterschiedliche Sensoren untersucht werden, um eine optimale Wahl zwischen
+geringen Fehlern in der Detektion, Robustheit und passender Geometrie zu treffen.
+Die betrachteten Sensoren teilen sich maßgeblich in optische Systeme, Feldeffekt-Sensoren und mechanische
+Taster auf.
+%
+%
+\subsubsection{Optische Sensoren}
+Bei diesen Systemen gibt es immer zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
+abgibt, zum anderen ein Fototransistor, der einfallendes Licht detektiert und als elektrisches Signal ausgibt.
+Dieses Signal wird zumeist als direkte analoge Spannung ausgegeben oder in einer internen Auswerteschaltung
+ausgewertet.
+
+Die Sendediode wird meist als einfach für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
+Hierbei besteht diese aus einem n-dotierten Leitungsband mit einem Überschuss an Elektronen und einem p-dotierten
+Bereich, dem Valenzbereich. Wird nun eine Spannung in Durchlassrichtung angelegt, wird die Potenzialbarriere
+des pn-Übergangs verschoben. Dadurch rekombinieren Elektronen des n-dotierten Bereichs mit den Löchern
+des energetisch niedrigeren Valenzbandes. Durch diesen Sprung in ein niedrigeres Energieniveau, wird Energie
+emittiert die mitunter als infrarotes Licht abgestrahlt wird.
+Eine andere häufige Quelle ist ein monochromatischer Laser. Dabei besteht dieser aus drei Bauteilen: Der Pumpe zur
+Energiezufuhr, dem aktiven Lasermedium und dem optischen Resonator. Bei der Energiezufuhr werden hierbei Elektronen
+auf ein höheres Energieniveau gehoben. Sind mehr Teilchen in einem angeregten Zustand als im Grundzustand
+beginnt die Laserwirkung und es entstehen spontane Emissionen. Bei diesen werden Photonen ausgesendet, die
+dem Energiesprung entsprechen. Trifft ein solcher Zündfunke auf ein weiteres angeregtes Atom entsteht eine
+Kettenreaktion durch eine stimulierte Emission. Hier ist es nämlich so, dass das anfängliche Photon die Energie
+vorgibt und das ausgelöste Photon eine exakte Kopie ist. Bewegen sich diese Photonen nun durch das aktive Medium und
+treffen auf einen der Spiegel wird dieser Effekt weiter verstärkt. Durch einen teildurchlässigen Spiegel auf der
+gegenüberliegenden Seite, tritt eine kontrollierte Menge der Photonen aus dem Laser aus.
+Den optischen Sendemodulen gegenüber registriert der Fototransistor die erzeugten Lichtstrahlen. Dabei ist
+dieser eine Kombination aus einer Fotodiode und einem NPN-Transistor. Die Diode besteht dabei wieder aus
+einem pn-Übergang. Fällt energiereiches Licht auf diese Schicht werden die Photonen absorbiert und
+Elektronen aus dem Valenzband in das Leitungsband gehoben. Dadurch entsteht eine Ladungstrennung, die einen
+Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom der proportional zur Bestrahlungsstärke
+ist. Dieser Strom wird nun zur weiteren Verstärkung an einen Bipolartransistor geleitet, der den
+niedrigen Fotostrom verstärkt ausgeben kann.\todo{Zu viel Detail, zu wenig in die Tiefe?}
+
+\paragraph{Einweglichtschranken} sind eine physische Ausführung der oben beschriebenen Komponenten. Hierbei
+sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird so detektiert, dass der
+Lichtstrahl unterbrochen wird und dies als elektrisches Signal vom Fototransistor ausgegeben wird. Vorteil
+ist hierbei, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
+Geräte justiert und ausgerichtet werden.
+
+\paragraph{Reflexionslichtschranken} sind ähnlich zu Einweglichtschranken, wobei Sender und Empfänger hier
+in einem Gehäuse verbaut sind. Es wird ein Reflektor verwendet, um den austretenden Lichtstrahl zurück auf
+den Detektor zu werfen. Der Vorteil dabei ist, dass nicht zu beiden Seiten Kabel sondern nur zu einer Seite
+verlegt werden müssen. Bei dem Detektieren von metallischen Objekten kann es jedoch zu Problemen kommen, dass
+der Sensor dieses Teil nicht detektiert, da der Lichtstrahl nun nicht mehr durch den Reflektor, sondern durch
+das Metall zurückgeworfen wird.
+
+\paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Denn auch
+hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt auf einen reflektierten Lichtstrahl kontrolliert.
+Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke von Hell/Dunkel einzustellen. Dies
+birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird.
+
+Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschiedene Oberflächen
+der zu registrierenden Teile die Genauigkeit stark beeinflussen.
+Auf der anderen Seite stehen Vorteile, wie eine sehr schnelle Detektion und ein großer Messbereich.
+%
+%
+\subsubsection{Feldeffekt-Sensoren}
+%
+\paragraph{Induktive Sensoren} funktionieren über ein hochfrequentes Magnetfeld. Dabei besteht der Sensorkopf
+aus einer Spule mit Oszillator. Nähert sich nun ein elektrisch leitfähiges Objekt werden in diesem Wirbelströme
+induziert, die dem Schwingkreis des Sensors Energie entziehen. Dies bewirkt eine Amplitudenabsenkung, welche als
+elektrische Spannung detektiert und als Signal ausgegeben werden kann. Da die Voraussetzung für diesen Sensor
+die elektrische Leitfähigkeit ist, ist dieser Sensor robust gegen Staub, Feuchtigkeit, Schmutz und Licht. Außerdem
+führt die kontaktlose Messung  zu einem geringen Verschleiß und einer resultierenden Langlebigkeit. Für
+Nichteisenmetalle muss jedoch beachtet werden, dass die Detektion schwächer ist und ein geringer Abstand von Objekt
+zu Sensorkopf vorausgesetzt wird.
+%
+\paragraph{Kapazitive Sensoren} setzen nicht auf einen Schwingkreis sondern auf die Kapazitätsänderung einer
+Elektrode. Dabei gibt es üblicherweise zwei Verfahren zur Ermittlung dieser Kapazitätsänderung, die durch fast
+alle Materialien entsteht. Der Industriestandard funktioniert dabei über das Oszillator-Prinzip. Die Sensorelektrode
+mit ihrer Elektrode ist Teil eines Schwingkreises. Ändert sich nun die Kapazität ändert sich die Resonanzfrequenz,
+wobei dann wieder die verschobene Spannungsamplitude eingelesen werden kann. Ist ein gewisser Schwellwert erreicht, kann ein
+genaues binäres Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
+meist in Microcontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer 
+festen Spannung aufgeladen wird und dann die gespeicherte Ladung gezählt wird.
+\begin{equation}
+	Q = C * U
+\end{equation}
+Dies geschieht indem in jedem Zyklus ein großer Referenzkondensator je nach Ladung der Sensorelektrode aufgeladen wird.
+Es wird dann detektiert nach dem wievielten Zyklus ein Schwellenwert der Kondensatorspannung erreicht wurde.
+So lässt sich die Größe der Kapazität der Sensorelektrode sehr genau und mit wenigen Fehlereinflüssen ermitteln.
+Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen eine gewisse Zeit für ein Ergebnis
+braucht.
+%
+\paragraph{Halleffekt-Sensoren} sind ein weiterer Sensortyp, welcher auf Magnetfelder reagiert. Dieser Sensor
+funktioniert so, dass in einem stromdurchflossenen Leiter die Elektronen durch ein Magnetfeld abgelenkt werden.
+Diese Ablenkung führt zu einer Überkonzentration und einem Defizit an Elektronen an den Rändern. Dieser Unterschied
+lässt sich als Spannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt aber
+voraus, dass ein ferromagnetisches oder magnetisches Objekt detektiert werden muss.
+%
+%
+\subsubsection{Mechanische Sensoren}
+
+Die letzte Gruppe an Sensoren zum Detektieren von Objekten ist die wohl trivialste Methode. Ein Taster, der
+bei mechanischem Druck auslöst und ein klares elektrisches Signal ausgibt. Weiter gibt es noch die Möglichkeit
+kein separates Bauteil zu verwenden, sondern das Objekt selber als Leiter zu benutzen. Dabei könnte
+das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann ausgewertet werden
+kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf der genau
+vordefinierten Position landen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
+und Verschmutzung leicht zu Fehlern führen.
 %
 %
 \subsection{Aktuatorik}\label{sec:Aktuatorik}
@@ -591,135 +683,53 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
            eine translatorische Bewegung.}
   \label{fig:uebertragungselemente}
 \end{figure}
-\todo{Hier evtl. noch mehr Themen aus der Realisierung verwenden? (Microcontroller, Code Struktur,etc.)}
 %
 %
-\subsection{Sensorik}\label{sec:sensors}
+\subsection{Steuerungstechnik}\label{sec:Steuerungstechnik}
+Für eine Steuerung der mechatronischen Systeme bedarf es eletrischen Systems, welches Signale verarbeitet und schaltet. Der 
+Eingang stellt dabei das Feedback von Sensoren oder einer Bedieneinheit da. Als Ausgang werden alle Befehle gesehen, die Signale
+an Motoren oder andere Systeme schickt. Die Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung
+bestehen. Das Gesamtsystem muss von einem Punkt aus steuerbar sein.
+
+\subsubsection{Mikrocontroller}
+% Aufbau, GPIO, Timer, ADC, Interrupt vs. Polling
+% Betriebsspannung 3,3V / 5V und Pegelanpassung
+
+\subsubsection{Steuerungsarchitektur}
+% Zentrale vs. verteilte Steuerung
+% Master-Slave-Prinzip: Rollenverteilung, Vor- und Nachteile
+
+\subsubsection{Signalarten}
+\paragraph{Digitale Schaltsignale}     % Pull-up, Entprellung
+\paragraph{Analoge Spannungssignale}   % Spannungsteiler, ADC, Aufloesung
+\paragraph{Pulsweitenmodulation}       % Tastgrad, Servoansteuerung, Step/Dir
+
+\subsubsection{Bussysteme}
+% Kurzer Vergleich UART / I2C / SPI -- eine Tabelle reicht
+\paragraph{I2C}   % ausfuehrlich, weil im System eingesetzt
+
+\subsubsection{Ablaufsteuerung und Fehlerverhalten}
+% Endlicher Automat, zyklische Abarbeitung, nichtblockierender Code
+% Watchdog, sicherer Zustand (DIN EN ISO 13849-1)
+
+\subsubsection{Leistungselektronik und Motortreiber}
+% Treiberstufe, Stromregelung, Mikroschritt, Waermeabfuhr
+% -> Anknuepfung an \cref{sec:Aktuatorik}
+
+
+\subsection{Normen}\label{sec:NormenVorgaben}
+Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 und 2206 beschriebenen Methoden. Diese werden in \cref{sec:Anforderung} genauer
+beschrieben, wobei es aber hilft jetzt schonmal kurz darzustellen nach welchem Prinzip in dieser
+Arbeit verfahren wird. So wird das am Ende zu entwickelnde Gesamtsystem in mehrere Subsysteme unterteilt.
+Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkt und Anforderungen. Für eine Analyse und Betrachtung wird
+also je nach Tiefe nur der innere Aufbau, der die festgelegten Anforderungen erfüllen muss, betrachtet oder nur die Schnittstellen der einzelnen Subsysteme.
+In dieser Arbeit wird es also immer eine Abstufung zwischen detaillierter und grober Betrachtung geben, damit die Komplexität des Gesamtsystems
+in einzelne Abschnitte unterteilt werden kann. Im Folgenden sollen weitere Sicherheits- und andere Normen beschrieben werden.
+
+\subsubsection{Sicherheit}\label{sec:Sicherheit}
+\todo{DIN EN ISO 12100, DIN EN ISO 13849-1}
 %
-In dieser Arbeit ist gegenüber dem Bewegen von Teilen auch die Überwachung dieser von großer Wichtigkeit.
-So muss kontrolliert werden, ob einzelne Hairpins an bestimmten Positionen vorbeigekommen sind oder einfach nur
-vorhanden sind. Dafür müssen unterschiedliche Sensoren untersucht werden, um eine optimale Wahl zwischen
-geringen Fehlern in der Detektion, Robustheit und passender Geometrie zu treffen.
-Die betrachteten Sensoren teilen sich maßgeblich in optische Systeme, Feldeffekt-Sensoren und mechanische
-Taster auf.
-%
-%
-\subsubsection{Optische Sensoren}
-Bei diesen Systemen gibt es immer zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
-abgibt, zum anderen ein Fototransistor, der einfallendes Licht detektiert und als elektrisches Signal ausgibt.
-Dieses Signal wird zumeist als direkte analoge Spannung ausgegeben oder in einer internen Auswerteschaltung
-ausgewertet.
-
-Die Sendediode wird meist als einfach für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
-Hierbei besteht diese aus einem n-dotierten Leitungsband mit einem Überschuss an Elektronen und einem p-dotierten
-Bereich, dem Valenzbereich. Wird nun eine Spannung in Durchlassrichtung angelegt, wird die Potenzialbarriere
-des pn-Übergangs verschoben. Dadurch rekombinieren Elektronen des n-dotierten Bereichs mit den Löchern
-des energetisch niedrigeren Valenzbandes. Durch diesen Sprung in ein niedrigeres Energieniveau, wird Energie
-emittiert die mitunter als infrarotes Licht abgestrahlt wird.
-Eine andere häufige Quelle ist ein monochromatischer Laser. Dabei besteht dieser aus drei Bauteilen: Der Pumpe zur
-Energiezufuhr, dem aktiven Lasermedium und dem optischen Resonator. Bei der Energiezufuhr werden hierbei Elektronen
-auf ein höheres Energieniveau gehoben. Sind mehr Teilchen in einem angeregten Zustand als im Grundzustand
-beginnt die Laserwirkung und es entstehen spontane Emissionen. Bei diesen werden Photonen ausgesendet, die
-dem Energiesprung entsprechen. Trifft ein solcher Zündfunke auf ein weiteres angeregtes Atom entsteht eine
-Kettenreaktion durch eine stimulierte Emission. Hier ist es nämlich so, dass das anfängliche Photon die Energie
-vorgibt und das ausgelöste Photon eine exakte Kopie ist. Bewegen sich diese Photonen nun durch das aktive Medium und
-treffen auf einen der Spiegel wird dieser Effekt weiter verstärkt. Durch einen teildurchlässigen Spiegel auf der
-gegenüberliegenden Seite, tritt eine kontrollierte Menge der Photonen aus dem Laser aus.
-Den optischen Sendemodulen gegenüber registriert der Fototransistor die erzeugten Lichtstrahlen. Dabei ist
-dieser eine Kombination aus einer Fotodiode und einem NPN-Transistor. Die Diode besteht dabei wieder aus
-einem pn-Übergang. Fällt energiereiches Licht auf diese Schicht werden die Photonen absorbiert und
-Elektronen aus dem Valenzband in das Leitungsband gehoben. Dadurch entsteht eine Ladungstrennung, die einen
-Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom der proportional zur Bestrahlungsstärke
-ist. Dieser Strom wird nun zur weiteren Verstärkung an einen Bipolartransistor geleitet, der den
-niedrigen Fotostrom verstärkt ausgeben kann.\todo{Zu viel Detail, zu wenig in die Tiefe?}
-
-\paragraph{Einweglichtschranken} sind eine physische Ausführung der oben beschriebenen Komponenten. Hierbei
-sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird so detektiert, dass der
-Lichtstrahl unterbrochen wird und dies als elektrisches Signal vom Fototransistor ausgegeben wird. Vorteil
-ist hierbei, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
-Geräte justiert und ausgerichtet werden.
-
-\paragraph{Reflexionslichtschranken} sind ähnlich zu Einweglichtschranken, wobei Sender und Empfänger hier
-in einem Gehäuse verbaut sind. Es wird ein Reflektor verwendet, um den austretenden Lichtstrahl zurück auf
-den Detektor zu werfen. Der Vorteil dabei ist, dass nicht zu beiden Seiten Kabel sondern nur zu einer Seite
-verlegt werden müssen. Bei dem Detektieren von metallischen Objekten kann es jedoch zu Problemen kommen, dass
-der Sensor dieses Teil nicht detektiert, da der Lichtstrahl nun nicht mehr durch den Reflektor, sondern durch
-das Metall zurückgeworfen wird.
-
-\paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Denn auch
-hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt auf einen reflektierten Lichtstrahl kontrolliert.
-Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke von Hell/Dunkel einzustellen. Dies
-birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird.
-
-Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschiedene Oberflächen
-der zu registrierenden Teile die Genauigkeit stark beeinflussen.
-Auf der anderen Seite stehen Vorteile, wie eine sehr schnelle Detektion und ein großer Messbereich.
+\subsubsection{Verfahren zur Bedienung}
+\todo{Wie geht man mit dem Bediener um, gibt es da Verfahren und System?}
 %
 %
-\subsubsection{Feldeffekt-Sensoren}
-%
-\paragraph{Induktive Sensoren} funktionieren über ein hochfrequentes Magnetfeld. Dabei besteht der Sensorkopf
-aus einer Spule mit Oszillator. Nähert sich nun ein elektrisch leitfähiges Objekt werden in diesem Wirbelströme
-induziert, die dem Schwingkreis des Sensors Energie entziehen. Dies bewirkt eine Amplitudenabsenkung, welche als
-elektrische Spannung detektiert und als Signal ausgegeben werden kann. Da die Voraussetzung für diesen Sensor
-die elektrische Leitfähigkeit ist, ist dieser Sensor robust gegen Staub, Feuchtigkeit, Schmutz und Licht. Außerdem
-führt die kontaktlose Messung  zu einem geringen Verschleiß und einer resultierenden Langlebigkeit. Für
-Nichteisenmetalle muss jedoch beachtet werden, dass die Detektion schwächer ist und ein geringer Abstand von Objekt
-zu Sensorkopf vorausgesetzt wird.
-%
-\paragraph{Kapazitive Sensoren} setzen nicht auf einen Schwingkreis sondern auf die Kapazitätsänderung einer
-Elektrode. Dabei gibt es üblicherweise zwei Verfahren zur Ermittlung dieser Kapazitätsänderung, die durch fast
-alle Materialien entsteht. Der Industriestandard funktioniert dabei über das Oszillator-Prinzip. Die Sensorelektrode
-mit ihrer Elektrode ist Teil eines Schwingkreises. Ändert sich nun die Kapazität ändert sich die Resonanzfrequenz,
-wobei dann wieder die verschobene Spannungsamplitude eingelesen werden kann. Ist ein gewisser Schwellwert erreicht, kann ein
-genaues binäres Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
-meist in Microcontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer 
-festen Spannung aufgeladen wird und dann die gespeicherte Ladung gezählt wird.
-\begin{equation}
-	Q = C * U
-\end{equation}
-Dies geschieht indem in jedem Zyklus ein großer Referenzkondensator je nach Ladung der Sensorelektrode aufgeladen wird.
-Es wird dann detektiert nach dem wievielten Zyklus ein Schwellenwert der Kondensatorspannung erreicht wurde.
-So lässt sich die Größe der Kapazität der Sensorelektrode sehr genau und mit wenigen Fehlereinflüssen ermitteln.
-Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen eine gewisse Zeit für ein Ergebnis
-braucht.
-%
-\paragraph{Halleffekt-Sensoren} sind ein weiterer Sensortyp, welcher auf Magnetfelder reagiert. Dieser Sensor
-funktioniert so, dass in einem stromdurchflossenen Leiter die Elektronen durch ein Magnetfeld abgelenkt werden.
-Diese Ablenkung führt zu einer Überkonzentration und einem Defizit an Elektronen an den Rändern. Dieser Unterschied
-lässt sich als Spannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt aber
-voraus, dass ein ferromagnetisches oder magnetisches Objekt detektiert werden muss.
-%
-%
-\subsubsection{Mechanische Sensoren}
-
-Die letzte Gruppe an Sensoren zum Detektieren von Objekten ist die wohl trivialste Methode. Ein Taster, der
-bei mechanischem Druck auslöst und ein klares elektrisches Signal ausgibt. Weiter gibt es noch die Möglichkeit
-kein separates Bauteil zu verwenden, sondern das Objekt selber als Leiter zu benutzen. Dabei könnte
-das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann ausgewertet werden
-kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf der genau
-vordefinierten Position landen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
-und Verschmutzung leicht zu Fehlern führen.
-%
-%
-\subsection{Steuerungstechnik}\label{Steurungstechnik}
-\todo{Hier muss rein wie man solche Systeme steuern kann}
-
-\subsubsection{Systemaufbau (Master-Slave)}
-
-\subsubsection{Kommunikation}
-
-\paragraph{Analoge Spannung als Signal}
-
-\paragraph{UART}
-
-\paragraph{I2C}
-
-\paragraph{PWM}
-
-\subsubsection{Microcontroller}
-
-\subsubsection{Motordriver?}
-
-\subsection{Additive Fertigung}
-\todo{Soll das wirklich rein?}
