@@ -686,36 +686,264 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
 %
 %
 \subsection{Steuerungstechnik}\label{sec:Steuerungstechnik}
-Für eine Steuerung der mechatronischen Systeme bedarf es eletrischen Systems, welches Signale verarbeitet und schaltet. Der 
+Für eine Steuerung der mechatronischen Systeme bedarf es eines eletrischen Systems, welches Signale verarbeitet und schaltet. Der 
 Eingang stellt dabei das Feedback von Sensoren oder einer Bedieneinheit da. Als Ausgang werden alle Befehle gesehen, die Signale
-an Motoren oder andere Systeme schickt. Die Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung
-bestehen. Das Gesamtsystem muss von einem Punkt aus steuerbar sein.
-
-\subsubsection{Mikrocontroller}
-% Aufbau, GPIO, Timer, ADC, Interrupt vs. Polling
-% Betriebsspannung 3,3V / 5V und Pegelanpassung
+an Aktuatoren oder andere Systeme schickt.
 
 \subsubsection{Steuerungsarchitektur}
-% Zentrale vs. verteilte Steuerung
-% Master-Slave-Prinzip: Rollenverteilung, Vor- und Nachteile
+Die Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung bestehen. Dabei muss die zeitkritische
+Ansteuerung und die Koordination des Gesamtablaufs analysiert werden. Der Aufbau diese Systems wird dabei aus mehreren Ebenen bestehen,
+die die einzelnen Aufgaben untereinander verteilen. Das Hieraische Prinpzip ist dabei in die direkten Steuereinheiten der Aktuatoren
+und in die Koordinationseinheit unterteilt.
 
-\subsubsection{Signalarten}
-\paragraph{Digitale Schaltsignale}     % Pull-up, Entprellung
-\paragraph{Analoge Spannungssignale}   % Spannungsteiler, ADC, Aufloesung
-\paragraph{Pulsweitenmodulation}       % Tastgrad, Servoansteuerung, Step/Dir
+Für die Entwicklung eines solchen Systems lässt sich in einem zentralen, hiearischen und heterarchischen Aufbau unterteilen.
+Diese System müssen für die Wahl auf das Ausfallverhalten, der Reaktionszeit, die Erweiterbarkeit, den Integrationsaufwand und
+die Testbarkeit einzelner Subsysteme geprüft werden. 
+
+Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktoren) zur Steurerungseinheit.
+Diese verarbeitet die Daten direkt und schickt Befehle wiederzurück. Als Vorteile sind ein einfacher physischer und programiertechischer
+Aufbau, sowie eine einfache Datenkosistenz. Dem gegenüber stehen wegen dem Nutzen eines Hauptknoten die geringe Ausfallsicherheit. 
+Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtesystem in einem unsichern oder fehlerhaften Status. Außerdem
+lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im vorhinein festgelegt werden müssen.
+Auch das Prüfen einzelner Subsysteme ist nach der Montage aller Komponetten und Anbauteile möglich.
+Der nächste Schritt, die hierarchische Steuerungsarchitektur, aus einer Pyramide mit mehreren Steurungsebenen aufgebaut. Dabei
+deligiert jede Ebene Aufgaben an die darunterleigende Ebene, die diese selbstständig und mit lokalen Details löst. Die höchste 
+Ebene dient der Koordination und dem Behalten des globalen Überblicks. Dieses Prinzip ermöglicht eine enorme Skalierbarkeit,
+da Subsystem eigenständig arbeiten können und nur die Befehle eines Masters befolgen muss. Diese klaren und strukturierten 
+Zuständigkeiten führen zu einer Entlastung der Hauptebene und können Fehler begrenzen. Auch besteht die Möglichkeit weitere
+Subsysteme nachträglich einzugliedern. Als Nachteile gelten hier der starre und lange Informations- und Entscheidungsfluss 
+durch alle Ebenen, sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkablung der einzelen Ebenen.
+Das komplexeste und modernste System arbeite nach dem heterarischen Prinzip. Hier wird ebenfalls in mehrere Subsysteme aufgeteilt, 
+wobei aber die Kommunikation und Aufgabenverteilung über Prioritätssysteme untereinander verhandelt wird. Dies bietet eine
+extreme Felxibilität und eine hohe Ausfallsicherheit, da das System nicht statisch festgelegt ist. Es wird als optimierte 
+Methode zu einem statischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationszeiten minimiert werden und eine 
+Überprüfung einzelner Ebenen weiterhin erhalten bleibt. Die Herausforderung sind hierbei aber eine komplexe Programmierung 
+und ein schwer vorhersehbares Systemverhalten.
+
+Für ein konkreten Aufbau werden die einzelenn Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
+arbitet nach dem hieraischen Prinzip, bei dem der Master eine Abfrage oder Befehl initialisiert und ein Slave nur nach Erhalt
+dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selber welche Peripehriegeraäte
+angesprochen werden müssen. Aus dieser festen Zuteilung folgt ein zyklisches Abfragen und damit ein kollisionsfreier Buszuriff. 
+Ein Bus beschreibt dabei die Kommunikationsschnittstellen zwischen den einzelnen Komponenten, die aber durch festgelegte Bandbreiten
+beschränkt sind. Das beschriebene Beipiel entspricht einem einfachen Aufbau, wo bei komplexere Systeme mit weiteren gestaffelten Ebenen
+arbeitet.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    font=\small,
+    box/.style    = {draw, thin, rounded corners=2pt, align=center},
+    master/.style = {box, fill=violet!10, draw=violet!60,
+                     minimum width=32mm, minimum height=11mm},
+    slave/.style  = {box, fill=teal!12,   draw=teal!65,
+                     minimum width=24mm, minimum height=11mm},
+    peri/.style   = {box, fill=gray!8,    draw=gray!60,
+                     minimum width=24mm, minimum height=8mm,
+                     font=\scriptsize},
+    bus/.style    = {draw=gray!75, line width=1pt},
+    stub/.style   = {draw=gray!75, thin},
+    sig/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85},
+    dsig/.style   = {sig, dashed, dash pattern=on 1.2mm off 0.9mm},
+    lbl/.style    = {font=\scriptsize, text=gray!85}
+  ]
+ 
+  %% ---------------- Master ----------------
+  \node[master] (m) at (0,0) {Master\\[-3pt]{\scriptsize Koordination des Ablaufs}};
+ 
+  %% ---------------- Bus ----------------
+  \draw[bus] (-4.2,-1.9) -- (4.2,-1.9);
+  \node[lbl, anchor=west] at (4.35,-1.9) {Bus};
+ 
+  %% ---------------- Signalrichtungen ----------------
+  \draw[sig]  (-0.55,-0.62) -- (-0.55,-1.78) node[lbl, midway, left]  {Befehl};
+  \draw[dsig] ( 0.55,-1.78) -- ( 0.55,-0.62) node[lbl, midway, right] {Antwort};
+ 
+  %% ---------------- Slaves und Peripherie ----------------
+  \foreach \x/\n/\p in {-3/1/{Aktoren}, 0/2/{Sensoren}, 3/n/{Peripherie}} {
+    \node[slave] (s\n) at (\x,-3.2) {Slave~\n};
+    \node[peri]  (p\n) at (\x,-4.8) {\p};
+    \draw[stub] (\x,-1.9) -- (s\n.north);
+    \draw[sig]  (s\n.south) -- (p\n.north);
+  }
+  \node[lbl] at (1.5,-3.2) {$\cdots$};
+ 
+  \end{tikzpicture}
+  \caption[Aufbau in einer Master-Slave-Architektur]%
+          {Aufbau in einer Master-Slave-Architektur.}
+  \label{fig:master-slave}
+\end{figure}
+ 
+
+\subsubsection{Mikrocontroller}
+Der Mirkokontrroller bietet sich als Ein-Chip-System hevorragend als Steuerbaustein an. Ein solcher Controller kommt mit interner
+Recheneinheit, Speicher und einer integrierten Peripherie zur Steuerung der Aus- und Eingänge. Diese Peripherie stellt
+einen Hauptvorteil gegenüber eines handelsüblichen Computern, der über mehr Rechenleistung verfügt, dar.
+
+Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar. Der Timer wird zum 
+Erzeugen von Steuersignale oder interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogespannungen verwednet. Dieser
+wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzeten Auflösung ein. Ein 
+GPIO Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
+ein die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
+
+Als Logikpegel gibt zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des 
+Mikrocontrollers, die Höhe eines digitalen Signals und die maximale zulässige Spannung an den einzelen Aus- und Eingängen. In den
+Datenblättern der konkreten Komponete sind zulässige kurzzeitige Spitzenwerte, für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
+für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegt, gibt es nach geschaltete Treiberstufen.
+Für eine Kompatibilität zwischen zwei Spannungsebenen bedarf es eines Pegelwandelers, der die jeweilige Signalhöhe anpasst.
+
+In der Industrie werden vermehrt SPS-Systeme von Herstellern wie Beckhoff oder Festo verwendet. Diese sind auf Echtzeitanwendungen 
+und industielle Robustheit optimiert. Besonders die Beschaffungskosten und eine geringe Individualsierbarkeit stellt dieses System
+auf Prbleme bei dem Prototypenbau.\todo{Kann das nciht raus?}
+
+\subsubsection{Signalübertragung}
+Für das Übertragen von Signalen unterscheidet man in der Kodierungsart der Daten und den Teilnehmern einer Signalleitung. Ein Bussystem
+definiert sich durch mehrere an einer Leitung befindlichen Teilnehemern. Einfache Signale wiederum besitzen nur zwei Teilnemher und 
+der Imfomationsfluss ist fest vom Sender zum Empfänger definiert. Die Information kann in unterschiedlichen Eigenschaften einer
+elektrischen Spannung kodiert sein. So lassen sich Parameter wie Amplitude und Frequenz entsprechen Ausgeben und wieder Einlesen.
+
+\paragraph{Digitale Schaltsignale}     
+arbeiten mit zwei definierten Schaltpegeln, die meist der Versogungsspannung und Ground entsprechen. Für das Schalten eines LOW
+Ausgangs wird GND also die niedrigste Spannung auf die Leitung gegeben. Beim Schalten eines HIGH Ausgangs wird wiederum 
+weggeschaltet und der Ausgang schwebt auf einem undifinerten Wert. Hierfür muss ein externer oder ein intern verbauter Pull-up-Widerstand
+eingesetzt werden, um den Pegel aktiv mittels der Versorgungsspannung auf HIGH zu ziehen. Durch das Einlesen ebend dieser 
+HIGH und LOW Pegel, lassen sich einfache Schaltvorgänge durchführen.
+
+\paragraph{Analoge Spannungssignale}
+basieren auf dem kontinierlichen Wert deren Amplitude. Zum Beispiel wandlet ein Sensor die zu messende Größe in einen Spannungswert
+um. Dieser wandert dann druch die Leitung bis zu einem ADC, der dieses kontinuierliche Signale in einen diskreten Spannungswert umwandelt.
+Diese binäre Zahl kann dann vom Chip ausgewertet werden. Wichtig ist hierbei die Auflösung des ADC, die durch Quantisierungfehler
+und den Abtastschritten bedingt ist. Außerdem wird immer gegen einen Referenzwert verglichen, der nicht höher als die Versorgungsspannung
+ist. Aus diesem Grund müssen bei Signalen mit höhere Amplitude ein dedizierter Spannungsteiler für die Verringerung der Spannung
+am Eingang des ADC eingesetzt werden.
+
+\paragraph{Pulsweitenmodulation} 
+nutzt geschaltet digitale Pegel mit definirter Frequenz und Tastgrad. Innerhalb einer Periode wird also bis zum Wert des Tastgrades
+der Ausgang auf HIGH gestellt und die restiliche Zeit auf LOW. Eine Möglichkeit dieses Signal zu verwenden ist es den arithmetischen 
+Mittelwert der Perioden einzusetzten. So lassen sich durch elektrische Filter und Lasten ein gleiches Leistungsniveau einzustellen,
+wie mit einer variablen Spannungs- und Stromquellen. Die Frequnez ist bei diesem Prinzip frei wählbar.
+
+Eine andere Möglichkeit nutzt die absolute Impulsdauer zur Rekonstruktion des Tastgerades. Damit lässt sich verlässlich und ohne
+Störfaktoren ein Wert übermitteln. Für dieses Prinzip müssen Sender und Empfänger für die gleiche festgelgte Frequenz arbeiten.
 
 \subsubsection{Bussysteme}
-% Kurzer Vergleich UART / I2C / SPI -- eine Tabelle reicht
-\paragraph{I2C}   % ausfuehrlich, weil im System eingesetzt
+Ein Bussystem arbeitet nicht starr wie die voher beschireben einfach Signalübertragungen. Allgemein verwenden mehrere Teilnehmer 
+mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Der Vorteile dieser Systeme ist eine bidirektionaler 
+Informationsfluss und einen geringeren Leitungsaufwand gegenpber den einfachen direkt Verbindungen. Die konkreten Systeme
+lassen sich in syschrone mit einer dedizierten Taktleitung und asysnchrone Prinzipien mit festgelegter Baudrate unterscheiden.
+In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgezeigt und verglichen.
 
-\subsubsection{Ablaufsteuerung und Fehlerverhalten}
-% Endlicher Automat, zyklische Abarbeitung, nichtblockierender Code
-% Watchdog, sicherer Zustand (DIN EN ISO 13849-1)
+\begin{table}[htbp]
+  \centering
+  \caption[Vergleich serieller Kommunikationsschnittstellen]%
+          {Vergleich gebräuchlicher serieller Kommunikationsschnittstellen}
+  \label{tab:bussysteme}
+  \small
+  \begin{tabularx}{\textwidth}{@{}
+      l
+      >{\centering\arraybackslash}p{16mm}
+      >{\centering\arraybackslash}p{18mm}
+      >{\centering\arraybackslash}p{18mm}
+      >{\raggedright\arraybackslash}X @{}}
+    \toprule
+    \textbf{Schnittstelle} & \textbf{Signal\-leitungen} & \textbf{Takt} &
+    \textbf{Teil\-nehmer} & \textbf{Charakteristik} \\
+    \midrule
+    UART & 2 & asynchron & 2 &
+      Punkt-zu-Punkt ohne Adressierung; Baudrate muss beidseitig
+      übereinstimmen \\[3pt]
+ 
+    SPI & $3+n$ & synchron & $1+n$ &
+      Vollduplex und hohe Datenrate; je Teilnehmer eine zusätzliche
+      Auswahlleitung \\[3pt]
+ 
+    I\textsuperscript{2}C & 2 & synchron & mehrere &
+      Adressierung im Protokoll, Open-Drain; Leitungslänge durch
+      Buskapazitaet begrenzt \\[3pt]
+ 
+    CAN & 2 & asynchron & mehrere &
+      Differenzielle Übertragung mit Prioritätsvergabe und Prüfsumme;
+      hohe Störfestigkeit \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\paragraph{I\textsuperscript{2}C}
+funktioniert über zwei Leitungen mit Pull-up-Widerständen. Die beiden Leitungen sind jeweils für das Vorgeben einer Clock (SCL)
+für eine Sychronisation des gesamten Systems und dem Führen der eigentlichen Daten (SDA). Elektronsich kann dabei jeder Teilnehmer
+nur aktiv auf ein LOW Pegel schalten und das Treiben auf HIGH wird druch die Verbindung der Pull-up-Widerstände gegen die Versorgungsspannung
+erzielt. Die Clock gibt der Frequnez des gesamten Systm vor in dem je Periode zwischen HIGH und LOW gewechselt wird.
+Das Kommunizieren beginnt mit der Start-Bedingung durch den Master, die die SDA-Leitung, während SCL auf HIGH steht, aktiv auf LOW.
+Danach folgt im Takt der Glock das senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK) 
+in dem dieer die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentiche Datenübertragung, die Stückweise in
+8-Bit Paketen mit nachfolgender Bestätigung eines Paketes druch ein ACK erfolgt. Der Master beendet die Übertragung, indem er 
+die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen diese Prinzip sit druch eine
+maximale Teilnehmeranzahl und Leitungslänge beschränkt. 
 
 \subsubsection{Leistungselektronik und Motortreiber}
-% Treiberstufe, Stromregelung, Mikroschritt, Waermeabfuhr
-% -> Anknuepfung an \cref{sec:Aktuatorik}
+Da die Ausgänge der Mikrocontroller auf einen bestimmten maximalen Strom, der unter dem für den Betrieb von Motoren benötigt wird,ausgelegt 
+ist, bedarf es einer weiteren zwischen Einheit für die Steuerung. Außerdem entstehen unter hohen Leistungen Wärme und Induktionsspannungen,
+die einer weiteren Kontrolle unterliegen. Als Motortreiber für Schrittmotoren wird je Wicklung eine H-Brücke 
+mit vier hochleistungs Mosfets verwendet. Wie in \cref{fig:h-bruecke} aufgezeigt, lässt sich die Versogungsspannung des Motors Vm auf
+die Wicklung geben. Da der Stromansteig durch die Induktivität L der Wicklung begrenzt ist, kann die Leistung und damit das Drehmoment
+nicht mehr durch schnelleres Schalten erzeilt werden. Es ist zu beachten, dass die Mosfets eines Halbzweiges niemals gleichzeitig
+sodnern nur mit einem Verzögerungsglied geschaltet werden dürfen, da sonst hohe Kurzschlussströme entstehen können. Durch das Umschalten
+der Mosfetkombination, kann die Stromrichtung druch die Wicklung umgedreht werden. Dabei arbeiten T1, T4 und T3, T2 als Paar.
+Die Besonderheit bei Schrittmotoren ist der Einsatz von gegneineander verschibene Wirkungströme zum Erzeugen eiens Mikroschrittes.
+Druch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.\todo{Umschreiben!}
 
+\begin{figure}[htbp]
+  \centering
+  \begin{circuitikz}[
+      hl/.style={draw=orange!80!red, line width=2.4pt, opacity=.45},
+      ar/.style={-{Latex[length=3mm,width=2.6mm]}, draw=orange!80!red,
+                 line width=2.4pt, opacity=.75}
+    ]
+ 
+    %% ---- Strompfad, durchgehend hinterlegt ----
+    \draw[hl] (1.6,4.6) -- (1.6,1.35) -- (5.4,1.35) -- (5.4,-1.2) -- (1.6,-1.2);
+    \draw[ar] (1.6,4.0) -- (1.6,3.2);
+    \draw[ar] (2.6,1.35) -- (3.4,1.35);
+    \draw[ar] (5.4,0.4) -- (5.4,-0.4);
+ 
+    %% ---- Schienen ----
+    \draw (0,4.6) node[left]{$V_{\mathrm{M}}$} -- (7,4.6);
+    \draw (0,-1.2) -- (7,-1.2);
+    \node[right] at (7,-1.2) {GND};
+ 
+    %% ---- Linker Zweig ----
+    \draw (1.6,4.6) -- (1.6,3.55);
+    \node[nigfete, bodydiode, anchor=D] (T1) at (1.6,3.55) {};
+    \node[left=3mm] at (T1.gate) {$T_1$};
+    \draw (T1.S) -- (1.6,1.35) coordinate (A);
+    \node[nigfete, bodydiode, anchor=D] (T2) at (1.6,1.35) {};
+    \node[left=3mm] at (T2.gate) {$T_2$};
+    \draw (T2.S) -- (1.6,-1.2);
+ 
+    %% ---- Rechter Zweig ----
+    \draw (5.4,4.6) -- (5.4,3.55);
+    \node[nigfete, bodydiode, anchor=D] (T3) at (5.4,3.55) {};
+    \node[left=3mm] at (T3.gate) {$T_3$};
+    \draw (T3.S) -- (5.4,1.35) coordinate (B);
+    \node[nigfete, bodydiode, anchor=D] (T4) at (5.4,1.35) {};
+    \node[left=3mm] at (T4.gate) {$T_4$};
+    \draw (T4.S) -- (5.4,-1.2);
+ 
+    %% ---- Wicklung ----
+    \draw (A) -- (2.4,1.35) to[L, l=$L$] (3.6,1.35) -- (B);
+ 
+    \node[circle,fill,inner sep=1.1pt] at (A) {};
+    \node[circle,fill,inner sep=1.1pt] at (B) {};
+    \node[above left=-1pt and -2pt] at (A) {A};
+    \node[above right=-1pt and -2pt] at (B) {B};
+ 
+  \end{circuitikz}
+  \caption[Aufbau einer H-Bruecke]%
+          {Aufbau einer H-Bruecke aus zwei Halbbrueckenzweigen. Die Wicklung
+           liegt als Diagonale zwischen den Mittelpunkten A und B. Hervorgehoben
+           ist der Strompfad bei durchgeschaltetem $T_1$ und $T_4$; das
+           Durchschalten von $T_2$ und $T_3$ kehrt die Stromrichtung um.}
+  \label{fig:h-bruecke}
+\end{figure}
 
 \subsection{Normen}\label{sec:NormenVorgaben}
 Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 und 2206 beschriebenen Methoden. Diese werden in \cref{sec:Anforderung} genauer

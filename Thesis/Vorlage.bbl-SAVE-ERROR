@@ -77,6 +77,73 @@
       \verb https://www.researchgate.net/publication/223260423_A_Review_of_Pneumatic_Actuators_Modeling_and_Control
       \endverb
     \endentry
+    \entry{Altintas.2011}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=b331534b12425e13d037b62b8520e9e3}{%
+           family={Altintas},
+           familyi={A\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=26b67fe8f9384b702aa6732dedfcdf5a}{%
+           family={Verl},
+           familyi={V\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1c57b1be27e7fef226b617c19debab94}{%
+           family={Brecher},
+           familyi={B\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=04da3425f3532df7ac7b16643b25445c}{%
+           family={Uriarte},
+           familyi={U\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=74e58102b04378fda5f9783a8db9529c}{%
+           family={Pritschow},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{96ddc4fa3a480f0dc62fc29c448552a9}
+      \strng{fullhash}{3da40eb06bcf302b0761396820b9d57f}
+      \strng{fullhashraw}{3da40eb06bcf302b0761396820b9d57f}
+      \strng{bibnamehash}{96ddc4fa3a480f0dc62fc29c448552a9}
+      \strng{authorbibnamehash}{96ddc4fa3a480f0dc62fc29c448552a9}
+      \strng{authornamehash}{96ddc4fa3a480f0dc62fc29c448552a9}
+      \strng{authorfullhash}{3da40eb06bcf302b0761396820b9d57f}
+      \strng{authorfullhashraw}{3da40eb06bcf302b0761396820b9d57f}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0007-8506}
+      \field{journaltitle}{CIRP Annals}
+      \field{number}{2}
+      \field{title}{Machine tool feed drives}
+      \field{urlday}{11}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{volume}{60}
+      \field{year}{2011}
+      \field{urldateera}{ce}
+      \field{pages}{779\bibrangedash 796}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1016/j.cirp.2011.05.010
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0007850611002125
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0007850611002125
+      \endverb
+    \endentry
     \entry{Beater.2007}{book}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=3e8cbab5dd9fd73f1613fce094534fd9}{%
@@ -108,6 +175,106 @@
       \field{shorttitle}{Pneumatic Drives}
       \field{title}{Pneumatic Drives: System Design, Modelling and Control}
       \field{year}{2007}
+    \endentry
+    \entry{CleanLaser2022}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=feb7e5846831a503abc05a722a5518e3}{%
+           family={{Clean-Lasersysteme GmbH}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Clean-Lasersysteme GmbH}%
+      }
+      \strng{namehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{fullhash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{fullhashraw}{feb7e5846831a503abc05a722a5518e3}
+      \strng{bibnamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorbibnamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authornamehash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorfullhash}{feb7e5846831a503abc05a722a5518e3}
+      \strng{authorfullhashraw}{feb7e5846831a503abc05a722a5518e3}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{2}
+      \field{note}{Revision 02-01 vom 22.02.2022}
+      \field{number}{Dok-ID: 1340066}
+      \field{title}{Betriebsanleitung: wireLINE MIRROR static (L21-1710)}
+      \field{year}{2022}
+    \endentry
+    \entry{Eichler.2015}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=833ed924068efd1e9d7edada5284f993}{%
+           family={Eichler},
+           familyi={E\bibinitperiod},
+           given={Hans\bibnamedelima Joachim},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7a18e69fb744ad0b2bdbce75f97947e}{%
+           family={Eichler},
+           familyi={E\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg}%
+      }
+      \strng{namehash}{6f1f248aa0535c23c72a5b84192b1968}
+      \strng{fullhash}{da19692639892be9a3a0e508ced344c1}
+      \strng{fullhashraw}{da19692639892be9a3a0e508ced344c1}
+      \strng{bibnamehash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authorbibnamehash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authornamehash}{6f1f248aa0535c23c72a5b84192b1968}
+      \strng{authorfullhash}{da19692639892be9a3a0e508ced344c1}
+      \strng{authorfullhashraw}{da19692639892be9a3a0e508ced344c1}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{8. Auflage}
+      \field{isbn}{978-3-642-41437-4}
+      \field{series}{Springer-Lehrbuch}
+      \field{shorttitle}{Laser: Bauformen, Strahlführung, Anwendungen}
+      \field{title}{Laser: Bauformen, Strahlführung, Anwendungen}
+      \field{urlday}{8}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-642-41438-1
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-642-41438-1
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-642-41438-1
+      \endverb
+    \endentry
+    \entry{RNAAutomation.o.J.}{online}{}{}
+      \list{organization}{1}{%
+        {RNA Automation Ltd}%
+      }
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labeltitlesource}{title}
+      \field{note}{Ohne Datumsangabe}
+      \field{title}{Escapements and Nests}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
+      \verb{url}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
     \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
@@ -170,6 +337,104 @@
       \endverb
       \verb{url}
       \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
+      \endverb
+    \endentry
+    \entry{GrundlagenHandhabungstechnik.2020}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=dd51491356eea0174873278d9ea5cab1}{%
+           family={Hesse},
+           familyi={H\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e8b8dbe782f90414c7d5c8cf39d8e7c}{%
+           family={Malisa},
+           familyi={M\bibinitperiod},
+           given={Viktorio},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Carl Hanser Verlag}%
+      }
+      \strng{namehash}{f1fedf6775f751c1fa58e442a74f08d6}
+      \strng{fullhash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{fullhashraw}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{bibnamehash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authorbibnamehash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authornamehash}{f1fedf6775f751c1fa58e442a74f08d6}
+      \strng{authorfullhash}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \strng{authorfullhashraw}{b017b2d0e2ff980305a39bce5e6c6ff2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{5., aktualisierte Auflage}
+      \field{isbn}{978-3-446-46335-6}
+      \field{pagetotal}{586}
+      \field{shorttitle}{Grundlagen der Handhabungstechnik}
+      \field{title}{Grundlagen der Handhabungstechnik}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.3139/9783446463592
+      \endverb
+      \verb{file}
+      \verb Hesse2020_GrundlagenHandhabungstechnik:Attachments/Hesse2020_GrundlagenHandhabungstechnik.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{Huegel.2022}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=da58c8ff998f3a43f0c6e44e30a48641}{%
+           family={Hügel},
+           familyi={H\bibinitperiod},
+           given={Helmut},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83b171dea9b4659ea8be921fb3b5bd96}{%
+           family={Graf},
+           familyi={G\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wiesbaden}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg}%
+      }
+      \strng{namehash}{6800c86f67dc515fbe3699dc00287727}
+      \strng{fullhash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{fullhashraw}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{bibnamehash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authorbibnamehash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authornamehash}{6800c86f67dc515fbe3699dc00287727}
+      \strng{authorfullhash}{6c3eedf37a8331b053dafab63f703c53}
+      \strng{authorfullhashraw}{6c3eedf37a8331b053dafab63f703c53}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{4. Auflage}
+      \field{isbn}{978-3-658-37252-1}
+      \field{shorttitle}{Materialbearbeitung mit Laser}
+      \field{title}{Materialbearbeitung mit Laser: Grundlagen und Verfahren}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-658-37252-1
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-658-37252-1
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-658-37252-1
       \endverb
     \endentry
     \entry{Jamian.2020}{article}{}{}
@@ -309,6 +574,125 @@
       \verb https://publications.rwth-aachen.de/record/1003088
       \endverb
     \endentry
+    \entry{MontageIndustriellenProduktion.2012}{book}{}{}
+      \name{editor}{2}{}{%
+        {{un=0,uniquepart=base,hash=009d9e2ef5ce994e4588489b597d1e84}{%
+           family={Lotter},
+           familyi={L\bibinitperiod},
+           given={Bruno},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=57aff481f65f5ed63af62ba7da99e782}{%
+           family={Wiendahl},
+           familyi={W\bibinitperiod},
+           given={Hans-Peter},
+           giveni={H\bibinithyphendelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{d761a15ea97c167f09657e8b4f3be2ce}
+      \strng{fullhash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{fullhashraw}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{bibnamehash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editorbibnamehash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editornamehash}{d761a15ea97c167f09657e8b4f3be2ce}
+      \strng{editorfullhash}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \strng{editorfullhashraw}{58baf776dc3e6c735d3a9ea4a4a4646d}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{2. Auflage}
+      \field{isbn}{978-3-642-29060-2}
+      \field{pagetotal}{516}
+      \field{series}{VDI-Buch}
+      \field{shorttitle}{Montage in der industriellen Produktion}
+      \field{title}{Montage in der industriellen Produktion: Ein Handbuch für die Praxis}
+      \field{urlday}{23}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-642-29061-9
+      \endverb
+      \verb{file}
+      \verb Lotter2012_MontageIndustriellenProduktion:Attachments/Lotter2012_MontageIndustriellenProduktion.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
+      \endverb
+    \endentry
+    \entry{Werkstueckmagazin.2008}{online}{}{}
+      \list{organization}{1}{%
+        {industrial-production.de}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{shorttitle}
+      \field{month}{11}
+      \field{note}{Veröffentlicht am 01.11.2008}
+      \field{shorttitle}{Werkstückmagazin}
+      \field{title}{Magazine / Werkstückmagazin}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
+      \endverb
+      \verb{url}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
+      \endverb
+    \endentry
+    \entry{Reibung.2001}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=de5776ac5c32cd3a7a849f188d87b11b}{%
+           family={Mitdank},
+           familyi={M\bibinitperiod},
+           given={Rüdiger},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {Humboldt-Universität zu Berlin, Institut für Physik}%
+      }
+      \strng{namehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{fullhash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{fullhashraw}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{bibnamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorbibnamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authornamehash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorfullhash}{de5776ac5c32cd3a7a849f188d87b11b}
+      \strng{authorfullhashraw}{de5776ac5c32cd3a7a849f188d87b11b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Skript zur Vorlesung Experimentalphysik}
+      \field{shorttitle}{Reibung}
+      \field{title}{Reibung}
+      \field{urlday}{10}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+      \verb{url}
+      \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+    \endentry
     \entry{ComparativeReviewMotor.2023}{article}{}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=36f45e976fb52c17e2092c49be865878}{%
@@ -431,6 +815,54 @@
       \field{title}{Handbuch Elektrische Kleinantriebe}
       \field{year}{2011}
     \endentry
+    \entry{Strasser.2011}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=de82e76e1ff12f00b5acc29a878fac19}{%
+           family={Stra{ß}er},
+           familyi={S\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Technische Universität München}%
+      }
+      \list{location}{1}{%
+        {München}%
+      }
+      \list{publisher}{1}{%
+        {Herbert Utz Verlag}%
+      }
+      \strng{namehash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{fullhash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{fullhashraw}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{bibnamehash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{authorbibnamehash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{authornamehash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{authorfullhash}{de82e76e1ff12f00b5acc29a878fac19}
+      \strng{authorfullhashraw}{de82e76e1ff12f00b5acc29a878fac19}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{978-3-8316-4161-1}
+      \field{series}{Forschungsberichte IWB}
+      \field{shorttitle}{Greiftechnologie für technische Textilien}
+      \field{title}{Greiftechnologie für die automatisierte Handhabung von technischen Textilien in der Faserverbundfertigung}
+      \field{type}{phdthesis}
+      \field{urlday}{12}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{volume}{256}
+      \field{year}{2011}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.mec.ed.tum.de/fileadmin/w00cbp/iwb/Institut/Dissertationen/256_Strasser.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.mec.ed.tum.de/fileadmin/w00cbp/iwb/Institut/Dissertationen/256_Strasser.pdf
+      \endverb
+    \endentry
     \entry{ur5e_handbuch_2025}{manual}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=cebc23c04027201c8b35f8fdada0e866}{%
@@ -463,6 +895,48 @@
       \endverb
       \verb{url}
       \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
+      \endverb
+    \endentry
+    \entry{VDI2860.1990}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b72003ef20a8eeaaf8ea3204757fd44e}{%
+           family={{Verein Deutscher Ingenieure}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Düsseldorf}%
+      }
+      \list{publisher}{1}{%
+        {VDI-Verlag}%
+      }
+      \strng{namehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{bibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorbibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authornamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Ausgabe 1982-10, überprüft und bestätigt 1990-05; zurückgezogen 2018}
+      \field{shorttitle}{VDI 2860: Handhabungsfunktionen}
+      \field{title}{VDI 2860 Blatt 1: Montage- und Handhabungstechnik; Handhabungsfunktionen, Handhabungseinrichtungen; Begriffe, Definitionen, Symbole}
+      \field{urlday}{23}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{1990}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb VDI2860_Handhabungsfunktionen:Attachments/VDI2860_Handhabungsfunktionen.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
+      \endverb
+      \verb{url}
+      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
       \endverb
     \endentry
     \entry{HairpinTechnologyReview.2025}{article}{}{}
