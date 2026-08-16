@@ -1,0 +1,68 @@
+{
+  "parameter": {
+    "dicke": 5.0,
+    "laenge": 30.0,
+    "breite": 15.0,
+    "bohrung_d": 6.0,
+    "bohrung_randabstand": 7.5,
+    "z_kontakt": 25.0,
+    "z_delta": 10.0,
+    "spiel": 0.2,
+    "eingriffstiefe": 3.0,
+    "leg": "rechts",
+    "kontur_drehung": null,
+    "min_wandstaerke": 1.6,
+    "haltekraft": 5.0,
+    "reibwert": 0.3
+  },
+  "kennwerte": {
+    "n_querschnitte": 2,
+    "flaeche_mm2": 8.834,
+    "kontur_breite_x": 4.387,
+    "kontur_breite_y": 2.984,
+    "schwerpunkt": [
+      11.187,
+      -0.0
+    ],
+    "neigungswinkel_deg": 5.0,
+    "spiel_gesamt_mm": 0.637,
+    "y_nutmitte_mm": 29.129
+  },
+  "pruefung": [
+    {
+      "kriterium": "Restwand Nutgrund <-> Lagerbohrung",
+      "wert": 16.5,
+      "grenze": 1.6,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Seitliche Restwand",
+      "wert": 4.67,
+      "grenze": 1.6,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Selbsthemmung tan(alpha) <= mu",
+      "wert": 0.087,
+      "grenze": 0.3,
+      "einheit": "-",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Flaechenpressung auf Hairpin",
+      "wert": 0.333,
+      "grenze": 5.0,
+      "einheit": "N/mm2",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Materialabtrag gesamt",
+      "wert": 209.9,
+      "grenze": 0.0,
+      "einheit": "mm3",
+      "status": "OK"
+    }
+  ]
+}

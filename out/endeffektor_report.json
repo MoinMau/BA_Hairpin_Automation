@@ -1,0 +1,268 @@
+{
+  "referenz": {
+    "versatz": [
+      149.092,
+      0.0,
+      -13.0
+    ],
+    "bauraum": [
+      30.102,
+      18.0,
+      16.0
+    ],
+    "volumen": 2222.56,
+    "platte_z": [
+      10.0,
+      16.0
+    ],
+    "platte_y": [
+      -9.0,
+      9.0
+    ],
+    "trennebene_z": 10.0,
+    "hauptbohrung_d": 6.2,
+    "hauptbohrung_xy": [
+      16.692,
+      0.0
+    ],
+    "schlitz_halbbreite": 0.51,
+    "schlitz_x": [
+      19.75,
+      30.102
+    ],
+    "schraube_d": 3.2,
+    "schraube_xz": [
+      23.792,
+      13.0
+    ],
+    "senkung_d": 6.0,
+    "senkung_y": [
+      -6.0,
+      -4.0
+    ],
+    "eckradien": [
+      1.0,
+      2.0
+    ],
+    "flaechen": [
+      151,
+      75,
+      9
+    ]
+  },
+  "parameter": {
+    "spiel": 0.2,
+    "keil_aus_referenz": true,
+    "mass_toleranz": 0.02,
+    "volumen_toleranz": 0.5
+  },
+  "kennwerte": {
+    "grundkoerper_volumen_mm3": 1848.41,
+    "grundkoerper_solids": 1,
+    "keil_quelle": "Referenz (Platzhalter)",
+    "keil_volumen_mm3": 374.17,
+    "gesamt_volumen_mm3": 2222.56,
+    "gesamt_solids": 1,
+    "bauraum": [
+      30.102,
+      18.0,
+      16.0
+    ]
+  },
+  "pruefung_referenz": [
+    {
+      "kriterium": "Versatz korrekt (X-Minimum bei 0)",
+      "wert": 0.0,
+      "soll": 0.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Bauraum X",
+      "wert": 30.102,
+      "soll": 30.102,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Bauraum Y",
+      "wert": 18.0,
+      "soll": 18.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Bauraum Z",
+      "wert": 16.0,
+      "soll": 16.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Volumen",
+      "wert": 2222.563,
+      "soll": 2222.56,
+      "toleranz": 0.5,
+      "einheit": "mm3",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Plattenbreite Y",
+      "wert": 18.0,
+      "soll": 18.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Plattenoberkante Z",
+      "wert": 16.0,
+      "soll": 16.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Hauptbohrung gefunden (Anzahl Flaechen)",
+      "wert": 1,
+      "soll": 1,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Hauptbohrung Durchmesser",
+      "wert": 6.2,
+      "soll": 6.2,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Hauptbohrung Achse X",
+      "wert": 16.692,
+      "soll": 16.692,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Hauptbohrung Achse Y",
+      "wert": -0.0,
+      "soll": 0.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Klemmschraube gefunden (Anzahl Flaechen)",
+      "wert": 2,
+      "soll": 2,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Klemmschraube Durchmesser",
+      "wert": 3.2,
+      "soll": 3.2,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Klemmschraube Achse X",
+      "wert": 23.792,
+      "soll": 23.792,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Klemmschraube Achse Z",
+      "wert": 13.0,
+      "soll": 13.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Senkung gefunden (Anzahl Flaechen)",
+      "wert": 2,
+      "soll": 2,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Klemmschlitz: Waende bis zur Hinterkante",
+      "wert": 2,
+      "soll": 2,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Anzahl ebene Flaechen",
+      "wert": 151,
+      "soll": 151,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Anzahl B-Spline Flaechen",
+      "wert": 75,
+      "soll": 75,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Anzahl zylindrische Flaechen",
+      "wert": 9,
+      "soll": 9,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    }
+  ],
+  "pruefung_koerper": [
+    {
+      "kriterium": "Ergebnis ist EIN Solid",
+      "wert": 1,
+      "soll": 1,
+      "toleranz": 0,
+      "einheit": "",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Plattendicke Z",
+      "wert": 6.0,
+      "soll": 6.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Plattenbreite Y",
+      "wert": 18.0,
+      "soll": 18.0,
+      "toleranz": 0.02,
+      "einheit": "mm",
+      "status": "OK"
+    },
+    {
+      "kriterium": "Volumen = Referenzvolumen",
+      "wert": 2222.563,
+      "soll": 2222.56,
+      "toleranz": 0.5,
+      "einheit": "mm3",
+      "status": "OK"
+    }
+  ]
+}
