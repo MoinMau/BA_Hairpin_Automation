@@ -273,6 +273,8 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex
+INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
+INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/circuitikz/circuitikz.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
@@ -649,6 +651,11 @@ INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
@@ -674,6 +681,11 @@ INPUT ./docs/Anhang.tex
 INPUT ./docs/Anhang.tex
 INPUT ./docs/Anhang.tex
 INPUT docs/Anhang.tex
+INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/Lochraster_Nano.png
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex

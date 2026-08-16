@@ -1,15 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Vorlage.blg'
-[35] biber-darwin:342> INFO - === Sun Aug 16, 2026, 16:10:51
-[43] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
-[84] Biber.pm:1002> INFO - Found 20 citekeys in bib section 0
-[91] Biber.pm:4487> INFO - Processing section 0
-[96] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
-[97] bibtex.pm:1713> INFO - LaTeX decoding ...
-[110] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
-[194] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[194] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[194] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
-[194] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
-[208] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
-[213] bbl.pm:779> INFO - Output to Vorlage.bbl
+[38] biber-darwin:342> INFO - === Sun Aug 16, 2026, 20:20:04
+[47] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
+[87] Biber.pm:1002> INFO - Found 20 citekeys in bib section 0
+[95] Biber.pm:4487> INFO - Processing section 0
+[100] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
+[102] bibtex.pm:1713> INFO - LaTeX decoding ...
+[116] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
+[302] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[302] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[302] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
+[302] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
+[317] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
+[323] bbl.pm:779> INFO - Output to Vorlage.bbl

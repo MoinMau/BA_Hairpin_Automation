@@ -324,25 +324,127 @@ KLemmen gelöst werden. Dafür wird von der Steuerung der Befehl gegeben die Ser
 Roboterarm kann so den Hairpin nach oben aus dem Behältnis heben und diesen nun in die Laseranlage geben.
 
 \subsection{Elektrische Integration}\label{sec:ElektrischeIntegration}
-
-% ============================================================================
-% Einleitung: Aufbau in Ebenen -- Versorgung, Steuerung, Peripherie.
+Nachdem nun die Konstruktion der mechansichen Komponeten beschrieben wurde, muss die Wahl des zugehörigen Steurungssystem erläutert
+werden. Dieses System besteht aus eine Vielzahl an untereinander verschalteten elektronischen Komponeten. Es muss möglich sein auf
+Befehle einer Bedieneinheit oder Sensoren eine Aktion in Form der aktivierung von Motoren zu starten. Für die Realsierung wurde dafür
+in folgende drei Bereiche unterschieden: der Versorgung, der Steurung und der Peripherie.
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
-% 12V/5V, Wandlung, Massekonzept, Absicherung  -> Anforderung En1
+Zur Bereitstellung der benötigten Energie, wird das vorhandene 230 AC Niederspannungsnetz verwendet (vgl. En1). Mit einem AC-DC 
+Netzteil wird aus dem Wechselsappung eine Gleichspannung von 12V. Außerdem wird für weiter Komponten ein Spannung von 5V benötigt,
+die von einem dedizierten DC-DC Konverter mit der Eingangsspannung von 12V bereitgestellt wird. Das Gesamtesystem arbeitet mit 
+der gleichen Masse, die vom Netzteil bereitgestellt wird. Für die Auslegung dieser Komponenten bedarf es einer vorhrigen 
+Leistungsbedarf Analyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherunge und
+Konverter trotzdem ausgelegt sein sollten.\todo{Leistungsanalyse?}
 
 \subsubsection{Steuerungstopologie}\label{sec:Microcontroller}
-% Master/Slave-Aufteilung, Pegelwandlung, Lochrasterplatinen
-% PFLICHT-ABBILDUNG: Blockschaltbild der Steuerungstopologie
-% \todo{Blockschaltbild erstellen}
+Die Wahl der Steuerungstopologie wurde durch die in \cref{sec:Steuerungsarchitektur} beschriebende Vorteile eines hieraischen 
+Aufbaus getroffen. Eine Master-Slave Aufbau ermöglicht es den Master zu entlasten und zeitkritische Aktionen parallel laufen
+lassen zu könnnen. Auch die Modularität ermöglichte es einzelne Subsysteme Schrittweise zu testen und zuerweitern. In einem
+Fehlerfall haben die Slaves fest definierte Zustände, die bei Signalverlust eingehalten werden (vgl. Anforderung Sa1). 
+Trotz eines erhöhten Verdrahtungs- und Integrationsaufwand passte die offene Struktur zum Aufbau einer Prototypen Anlage.
 
-\subsubsection{Sensorik}\label{sec:Sensorik}
-% Welcher Sensortyp an welcher Stelle -- und WARUM dieser statt der
-% Alternativen aus \cref{sec:GrundlagenSensorik}. Kein Nacherzaehlen der
-% Funktionsprinzipien, die stehen schon in Kapitel 2.
-%
-%
-% ============================================================================
+Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtensystems. Die Wahl dieses 
+Mikrokontrollers wurde durch die erhöhte Rechenleistung für die Überwachung und das Anzeigen von Grafiken auf dem Bedienelement
+getroffen. Als erster Slave wurde ein Arduino Nano gewählt, der für die Ansteuerung aller Servomotoren zuständig ist. Dieser
+bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanäle. Ein ELEGOO Uno wurde als zweiter Slave genutzt, da dieser über
+eine passenden Treibereinheit zur Ansteuerung von Schrittmotoren verfügt. Auch wurde die Wahl deiser Komponenten gegen über einem
+SPS System durch die Verfügbarkeit und Kosten begründet (vgl. Anforderung St2).
+
+Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein Bedienelement und Sensoren
+übernimmt. Dieser erteilt dann bestimmte Aufgaben, wie ein Motor auf eine definierte Postion zu fahren an die Slaves. Außerdem 
+wird kontinuierlich abgefragt in welchem Zustand sich die Slaves bezüglich woran geganener Befehle befinden. Der ELEGOO Uno 
+ist mit seiner Treiberschaltung für die Steuerung der Schrittmotoren verantwortlich. Dabei sind die Endstops als einzige Sensoren
+direkt mit dem Slave verbunden, um die open-loop Regelung ohne den Einfluss von anderen Komponetnen zu ermöglichen. \todo{Wie funktioniert dei Treiberstuffe mit dem Uno, muss das rein?}
+Der Ardunio Nano bekommt die Position eines Servomotors druch den Master vorgegeben und gibt diese als PWM-Signal an den geforderten
+Servomotor weiter.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    block/.style  = {draw=black, line width=0.6pt, rounded corners=2pt,
+                     align=center, font=\small, text width=34mm,
+                     minimum height=11mm, inner sep=3pt},
+    master/.style = {block, fill=gray!25, text width=40mm},
+    slave/.style  = {block, fill=gray!12},
+    io/.style     = {block, fill=white},
+    akt/.style    = {block, fill=gray!5},
+    sig/.style    = {-{Stealth[length=2.2mm]}, line width=0.7pt},
+    bidir/.style  = {{Stealth[length=2.2mm]}-{Stealth[length=2.2mm]},
+                     line width=0.7pt},
+    lbl/.style    = {font=\footnotesize, fill=white, inner sep=1.5pt}
+  ]
+ 
+% ------------------------------------------------------------- Knoten
+\node[io]     (bedien)  at (-3.4, 4.2) {Bedieneinheit\\\footnotesize Display, Knöpfe};
+\node[io]     (sens)    at ( 3.4, 4.2) {Sensorik\\\footnotesize Lichtschranken};
+ 
+\node[master] (esp)     at ( 0.0, 2.1) {\textbf{ESP32}\\\footnotesize Master -- Ablaufsteuerung};
+ 
+\node[slave]  (uno)     at (-3.4, 0.0) {ELEGOO Uno\\\footnotesize Slave -- Schrittmotoren};
+\node[io, text width=30mm] (endstop) at (-7.4,-2.1) {Endlagenschalter};
+\node[slave]  (nano)    at ( 3.4, 0.0) {Arduino Nano\\\footnotesize Slave -- Servos};
+ 
+\node[akt]    (treiber) at (-3.4,-2.1) {Treiberstufen\\\footnotesize CNC-Shield};
+ 
+\node[akt]    (stepper) at (-3.4,-4.2) {Schrittmotoren\\\footnotesize Vibrationsschiene, Zuführachse};
+\node[akt]    (servo)   at ( 3.4,-2.1) {Servomotoren\\\footnotesize Sperrklinken, Klemmeinheit};
+ 
+% ------------------------------------------------------------- Kanten
+\draw[bidir] (bedien) -- (esp)
+  node[lbl, pos=0.55] {Eingaben / Anzeige};
+\draw[sig]   (sens)   -- (esp)
+  node[lbl, pos=0.55] {digital / analog};
+ 
+\draw[bidir] (esp) -- (uno)
+  node[lbl, pos=0.42] {I\textsuperscript{2}C};
+\draw[bidir] (esp) -- (nano)
+  node[lbl, pos=0.42] {I\textsuperscript{2}C};
+ 
+\draw[sig] (uno)     -- (treiber) node[lbl, pos=0.5] {Step / Dir / Enable};
+\draw[sig] (treiber) -- (stepper) node[lbl, pos=0.5] {Motorstrom};
+\draw[sig] (nano)    -- (servo)   node[lbl, pos=0.5] {PWM};
+\draw[sig] (endstop) -- (uno)     node[lbl, pos=0.3] {digital};
+ 
+% ------------------------------------------------------------- Ebenen
+\begin{scope}[on background layer]
+  \node[draw=gray, dashed, rounded corners=3pt, inner sep=6pt,
+        fit=(uno)(nano)] (ebene2) {};
+\end{scope}
+\node[font=\footnotesize\itshape, gray, anchor=south west, yshift=0.6mm]
+      at (ebene2.north west) {Slave-Ebene};
+ 
+\end{tikzpicture}
+\caption[Signalfluss der Steuerung]{Signalfluss Diagramm}
+\label{fig:Signalfluss}
+\end{figure}
+
+\subsubsection{Peripherie}\label{sec:Peripherie}
+\paragraph{Servomotoren} werden in zwei verschiedenen Größen eingesetzt. Die zwei Servomotoren des Vereinzelungssystems verwenden
+kräfigere DM449 Motoren. Für das Fiexierungssystem werden drei kleinere SG90 Servomotoren mit einer geringeren Kraft verwendet.
+Die Versorgung erfolgt durch eine GND und 5V Leitungen zu jedem Servomotor. 
+
+\paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als Nema 17 Motoren ausgeführt.
+
+\paragraph{Sensoren} werden als einfache Reflexlichttaster ausgeführt. Im aktuellen System ist einer dieser Sensoren an der Rutsche 
+angebracht.
+
+\paragraph{Bedienelemente} stellen ein Display und fünf Knöpfe für die Navigation da. Das Display wird über eine SPI Schnittstelle
+mit dem ESP32 verbunden. Die Knöpfe werden als einfach digitale Eingänge an die GPIO des ESP32 geführt.
+
+\subsubsection{Schaltplan}\label{sec:Schaltplan}
+In \cref{fig:Schaltplan} wird die konrekte Pinbelegung der einzelenen elektrischen Komponenten augezeigt. Nach dieser Schematic werden alle Bauteile 
+miteinander verbunden. Die Mikrocontroller werden jeweils auf einer eigenen Lochrasterplatine (vgl. Anhang) mit passend gebogenen
+Leitungen verlötet. Für die Abgänge zu den Motoren werden induviduelle Verlängerungskabel mit passendem Stecker verwendet (vgl. \cref{fig:Lochraster_Nano}). Für
+die Verbindung der Spannungsversorung und der I2C Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet.
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=0.8\linewidth]{figs/Schaltplan.png}
+	\caption{Schaltplan}
+	\label{fig:Schaltplan}
+\end{figure}
+
 \subsection{Steuerungssoftware}\label{sec:Software}
 % ============================================================================
 
