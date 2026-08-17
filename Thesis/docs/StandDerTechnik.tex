@@ -1,35 +1,32 @@
 \section{Stand der Technik}\label{sec:StandderTechnik}
-Im Folgenden werden aktuelle Produktionslinien und Methoden zum Abisolieren von Hairpins vorgestellt.
-Danach folgt eine Betrachtung des Grundsystems, auf das diese Arbeit aufbauen soll.
+Im Folgenden wird die akutelle Anlage zum Abisolieren der Hairpins, die als Ausgangspunkt für diese Arbeit genutzt wird, vorgestellt.
+Danach folgt eine Vorstellung von Subsystemen für die Erfüllung von Teilfunktionen.
 %
 %
 \subsection{Aktuelles System}\label{sec:AktuellesSystem}
-In diesem Abschnitt soll das aktuelle System, auf das in dieser Arbeit aufgebaut wird, eingegangen werden.
-Das System aus einer Laseranlage von Clean-Laser, die den eigentlichen Schritt der Abisolierung der Hairpins übernimmt.
+Das aktuelle System besteht aus einer Laseranlage von Clean-Laser, die den eigentlichen Schritt der Abisolierung der Hairpins übernimmt.
 Diese Anlage ist mit einem Roboterarm von Universal Robots gekoppelt. Der Arm steht neben dem Laser und übernimmt das 
-Einführen der Hairpins in die Laseranlage. Beide Systeme werden im Folgenden detaillierter beschrieben. Weiter soll zudem gezeigt werden,
+Einführen der Hairpins in die Laseranlage. Beide Systeme werden im Folgenden detaillierter beschrieben. Weiter soll gezeigt werden,
 wie das aktuell manuelle Abisolieren abläuft. Die folgende ~\cref{fig:laser_system_aufbau} zeigt den geometrischen Aufbau der Zelle
-für ein besseres Verständnis auf.\\
+für ein besseres Verständnis auf.
 %
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{figs/AbsiolierZelle.png}
   \caption{Gesamtansicht des Laserbearbeitungssystems, \cite[Abb.~2.1, S.~19]{CleanLaser2022}}
   \label{fig:laser_system_aufbau}
 \end{figure}
 %
-Der markierte Punkt 1 ist der Serverschrank, in dem viele Teile der Laseranlage verbaut sind. Die 2.
-zeigt die Schutzeinhausung des Lasers, die Nummer 5 ist die optische 2D-Laseroptik. All diese Subsysteme
-werden im Folgenden genauer beschrieben.
+Der markierte Punkt (1) ist der Serverschrank, in dem alle Steuerkomponenten der Laseranlage verbaut sind. Die (2)
+zeigt die Schutzeinhausung des Lasers, die (5) stellt die optische 2D-Laseroptik dar. 
 Der Roboterarm (4) führt die Hairpins in den individuellen Schutzdeckel (3). Für einen sicheren Betrieb
 ist zudem eine Absaugung (7) über Schläuche an die Schutzeinhausung angebracht (6). Diese sorgt für eine
-Absaugung der entstandenen Partikel beim Abisolieren.
+Absaugung der entstandenen Partikel beim Abisolieren.\smallskip
 Weiter ist in der \cref{fig:laser_system_aufbau} der Arbeitsbereich des Roboterarmes durch einen Zaun begrenzt.
 Diese Zelle sorgt für eine sichere Benutzung der Anlage. Die Maße dieser Zelle sind mit \todo{Maße der Zelle!}
-fest vorgegeben. In \cref{fig:AufbauAbisolierZelle} ist zudem eine Aluminium-Extrusions-Struktur, bei der
-es möglich ist Subsysteme zu montieren, die für den Roboterarm zu erreichen sind. Der Aufbau befindet sich in der
-gegenüberliegenden Ecke zum Laser, also in der \cref{fig:laser_system_aufbau} unten rechts. Hier werden
-bereits die unten beschriebenen Trays, usw. montiert.
+fest vorgegeben. Zudem ist eine, wie in \cref{fig:AufbauAbisolierZelle} zusehende, Trägertruktur eingebaut, an der
+es möglich ist Subsysteme zu montieren. Dieser Aufbau befindet sich in der
+gegenüberliegenden Ecke zum Laser, also in der \cref{fig:laser_system_aufbau} unten rechts.
 
 \begin{figure}[htbp]
 	\centering
@@ -40,31 +37,27 @@ bereits die unten beschriebenen Trays, usw. montiert.
 %
 %
 \subsubsection{Clean-Laser-Anlage}\label{sec:CleanLaser}
-Die Clean-Laser-Anlage ist für den eigentlichen Schritt der Abisolierung der Hairpins verantwortlich.
-Dafür wird ein Laserstrahl verwendet, der die Enden der Hairpins so bearbeitet, dass die Abisolierung
-abgetragen wird.
+Das Laserbearbeitungssystem ist eine Sonderanfertigung des Herstellers Clean Laser, welches einen CL 300GR Laser
+mit Optik Stamp 14 und einem Prozessmodul vereint. Dieses Gesamtsystem wird wireLine MIRROR static genannt,
+da der Laserstrahl so aufgeteilt werden muss, dass alle vier Seiten des Hairpins bearbeitet werden können.\medskip
 
-Das Laserbearbeitungssystem ist eine Sonderanfertigung des Herstellers, welches einen CL 300GR Laser
-mit Optik Stamp 14 und einem Prozessmodul. Dieses Gesamtsystem wird wireLine MIRROR static genannt,
-da der Laserstrahl so aufgeteilt werden muss, dass alle vier Seiten des Hairpins bearbeitet werden können.\\
-
-Die Laseremitierung ist bei diesem System in einem externen gekühlten Serverschrank, in dem auch
+Die Laseremitierung ist bei diesem System in den externen gekühlten Serverschrank, in dem auch
 weitere Versorgungseinheiten, wie der Industrie PC zur Steuerung, eine pneumatische Regelungsanlage und
 Siemens ET200SP Signalklemmen als Kommunikationsschnittstellen, verbaut sind. Der Laser ist
 als diodengepumpter Festkörperlaser ausgelegt, der mit 300W besonders beschädigungsarm metallische
-Bauteile bearbeiten kann. Die optische Strahlungsleistung ist so hoch, dass die Isolierung wie PEEK, PI und PAI\todo{Abkürzungsverzeichnis}
-optimal entfernt werden können. Weiter ist zu beachten, dass dieses System der Laserklasse 4 angehört und
+Bauteile bearbeiten kann. Die optische Strahlungsleistung ist so hoch, dass die Isolierung wie PEEK, PI und PAI
+optimal entfernt werden können (vgl. \cref{sec:Laser}). Weiter ist zu beachten, dass dieses System der Laserklasse 4 angehört und
 mit dem 1064nm Infrarotlaserstrahl für Menschen unsichtbar ist. Dies birgt Sicherheitsrisiken, die aber durch
-passende Schutzeinrichtungen und einer dementsprechenden Steuerung minimiert werden können.\\
+passende Schutzeinrichtungen und einer dementsprechenden Steuerung minimiert werden können.
 
-Nach dem Bereitstellen des Laserstrahls, wird dieser durch einen optischen Leiter in die Schutzeinhausung
+Nach dem Bereitstellen des Laserstrahls, wird dieser durch einen fiberoptischen Leiter in die Schutzeinhausung
 der eigentlichen Abisoliereinrichtung geführt. Hier wird der Laserstrahl durch Spiegel so abgelenkt, dass
 alle vier Kanten des zu bearbeitenden Hairpins erreicht werden können.
 Dazu gibt es zu den festverbauten Spiegeln in der Schutzeinhausung in der Laseroptik an sich (Stamp 14)
 die Möglichkeit den Laserstrahl in 2D, also X- und Y-Richtung, zu bewegen. In \cref{fig:laser_MIRROR_system} sieht man,
 dass diese Strahlenablenkung genutzt wird, um mit einem einmaligen Ausrichten der Spiegel, jeden Punkt am Hairpin zu erreichen.
 Der Vorteil dabei ist, dass keine vier Laser für jede Kante benötigt werden.
-Außerdem wird mit dem benötigten Gehäuse dieses System nun als Produkt der Laserklasse 1 klassifiziert.
+Außerdem kann dieses System mit dem individuellen Schutzdeckel nun als Produkt der Laserklasse 1 klassifiziert werden.\medskip
 
 Das Sicherheitssystem besteht aus vielen Sensoren, die einen sicheren Betrieb gewähren. So gibt es
 Notschalter, einen Türsensor und Metalldetektoren, die den Verschluss aller Serviceklappen und Ausgänge bestätigen.
@@ -72,6 +65,7 @@ Eine Vielzahl an weiteren Kontrollmechanismen geben dem Bedienelement und schlus
 Rückschluss auf den Status des Systems. Die Bedienung, erfolgt dabei durch die Erstellung eines eigenen Programmes
 und der Aktivierung dessen durch einen Fußknopf. Weiter ist es möglich den Befehl des Abisolierens durch einen
 externen Eingang, wie den Roboterarm, durchzuführen.
+
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.4\textwidth]{figs/wireLine MIRROR.png}
@@ -79,40 +73,37 @@ externen Eingang, wie den Roboterarm, durchzuführen.
   \label{fig:laser_MIRROR_system}
 \end{figure}
 
-\todo{- Wie lange braucht ein Durchlauf?}
 %
 %
 \subsubsection{Universal Robots Roboterarm}\label{sec:UniversalRobot}
 Der vorhandene Roboterarm ist ein 6-Drehgelenkarm von Universal Robots. Der UR5e hat eine maximale Nutzlast
 von 5\,kg. Als Endeffektor steht ein Greifersystem mit zwei pneumatisch betriebenen Linearaktuatoren zur Verfügung. Diese sind
-wiederum, je nach Hairpin-Form, so positioniert, dass mit einem Plastikaufsatz der Kupferdraht richtig gegriffen wird.\\
+wiederum, je nach Hairpin-Geometrie, so positioniert, dass mit einem Plastikaufsatz das Kupferband passend gegriffen werden kann.\medskip
+
 Die Steuerung und Programmierung erfolgt durch einen externen Touchscreen, auf dem mittels einer GUI passende
-Blöcke aufeinander geschoben werden oder einfach Einstellungen betätigt werden. Die pneumatische Steuerung des Endeffektors
+Blöcke für eine Programmierung aufeinander geschoben oder einfach Einstellungen betätigt werden können. Die pneumatische Steuerung des Endeffektors
 erfolgt durch die Verbindung einer Festo-Valve und den programmierbaren digitalen Ausgängen des Roboterarms.
-Die Wiederholgenauigkeit liegt bei ungefähr $\pm 0{,}03$\,mm und die Gelenke können sich maximal um 360° drehen.
-\PEMfootcite{ur5e_handbuch_2025}\\
+Die Wiederholgenauigkeit liegt bei ungefähr $\pm 0{,}03$\,mm und die Gelenke können sich maximal um 360° drehen
+\PEMfootcite{ur5e_handbuch_2025}.
 
 %
 \subsubsection{Gesamtverfahren}\label{sec:GesamtVerfahrenAktuell}
 Der bisherige Arbeitsablauf bestand bei diesem System daraus, dass Hairpins vorbereitet wurden, diese dann in
-der Zelle platziert wurden, der Roboterarm kalibriert und aktiviert wurde. Der letzte Schritt bestand dann
-nach dem Abisolieren im Laser die Hairpins in eine Ablage zu geben.
+der Zelle platziert wurden, der Roboterarm kalibriert und aktiviert wurde. Der letzte Schritt bestand dann die Hairpins
+nach dem Abisolieren aus dem Laser in eine Ablage zu geben.
 
 Dieses System basiert auf manuellen Eingriffen in wichtigen Schritten des Prozessflusses. So müssen für
-jede Hairpin-Art eigene Trays montiert werden, in denen die Hairpins gehalten werden können. Aktuell sind
+jede Hairpin-Geometrien eigene Trays montiert werden, in denen die Hairpins gehalten werden können. Aktuell sind
 diese einfache Aluminiumextrusionen mit montierten Füßen, die vorher im 3D-Drucker erstellt wurden. Der Bedienende
 muss nun nach einem Durchlauf von circa 10 Hairpins den Roboterarm deaktivieren und in der Zelle neue Hairpins
 platzieren. Erst danach kann der Roboterarm wieder aktiviert werden und ein weiterer Durchlauf der Abisolierung
-starten. Dies bringt zwei große Probleme mit sich:\\
-1. kein kontinuierlicher Prozessfluss,\\
-2. Rekalibrierung der Position der Hairpins,\\
-3. Anpassung der Trays an jede Hairpin-Art.\\
+starten.\medskip
 
-Der erste Punkt ist direkt ersichtlich und folgt durch die Pause, die entsteht, wenn der Bedienende die Zelle
+Das Problem dieses Prozesses folgt durch die Pause, die entsteht, wenn der Bedienende die Zelle
 betreten muss. Der zweite Punkt, muss nach jeder Inbetriebnahme geschehen, da sich die Trays verschieben können
 oder sich die Längen der Hairpins verändern. Außerdem müssen die Trays jedes Mal für den Hairpin passend vorhanden
 sein. Ist dies nicht der Fall muss eine neue Version erstellt und gedruckt werden. Dies bedeutet einen 
-weiteren Schritt im Prozess, der für das Umbauen benötigt wird.
+weiteren Schritt im Prozess, der für das Umbauen benötigt wird.\todo{Muss in Forschungslücke?}
 
 Die weiteren Schritte, wie die Bewegungen des Roboterarmes und die Abisolierung, erfolgen voll automatisch
 durch ein vorher definiertes Programm. Dieses ist einfach anpassbar und arbeitet über feste Taktzeiten.
@@ -121,37 +112,34 @@ Besondere Hairpin-Arten, wie die I-Pins unterliegen ähnlichen Arbeitsschritten,
 anders aufgebaut sind. 
 %
 %
-\subsection{Existierende Produktionen}\label{sec:RealeProduktionen}
-- Wie sehen aktuelle Serienproduktionen aus? Was ist der Unterschied zu Prototypenproduktion?\\
-- Welche Technologien werden eingesetzt?\\
-- Welche Taktzeiten werden erreicht? Welche Kosten entstehen? An einem Beispiel zeigen\\
-%
-%
 \subsection{Subsystem-Betrachtung}\label{sec:SubSystem}
 Die oben beschriebenen Anlagen lassen sich jeweils in mehrere Subsysteme unterteilen. Zur Analyse
 der verschiedenen Auslegungsmöglichkeiten wird die VDI 2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese
 Richtlinie wurde 2018 wegen einer teilweise veralteten Betrachtung zurückgezogen, ist aber für diesen
 Abschnitt dennoch relevant mit zu betrachten.
 
-In der Handhabungstechnik wird nämlich in die Teilfunktionen Speichern, Mengen verändern, Bewegen, Sichern
-und Kontrollieren unterschieden. Genau diese Themen werden im Folgenden detailliert betrachtet und analysiert.
+In der Handhabungstechnik wird in die Teilfunktionen Speichern, Mengen verändern, Bewegen, Sichern
+und Kontrollieren unterschieden. Genau diese Themen werden im Folgenden mittels realer Systeme detailliert betrachtet und analysiert.
 %
 \subsubsection{Lagerung}\label{sec:LagerungsSystem}
-Es gibt drei unterschiedliche Lagerarten:\PEMfootcite{MontageIndustriellenProduktion.2012}\\
-1. Ungeordnete Speicherung - Bunkern,\\
-2. Teilgeordnete Speicherung,\\
-3. Geordnete Speicherung - Magazinieren.\\
+Es gibt drei unterschiedliche Lagerarten\PEMfootcite{MontageIndustriellenProduktion.2012}:
+\begin{itemize}
+  \item Ungeordnete Speicherung - Bunkern
+  \item Teilgeordnete Speicherung
+  \item Geordnete Speicherung - Magazinieren
+\end{itemize}
+
 Das erste System wird in den meisten Fällen für Kleingut, welches schon in einem unsortierten Zustand 
 angeliefert wird, verwendet. Die Teile liegen also einfach als Schüttgut vor. Wichtig ist hier zu beachten,
-dass diese zwar ungeordnet sein dürfen aber nicht mit anderem Kleingut durchmischt werden. Vorteile eines
+dass diese zwar ungeordnet aber nicht mit anderem Kleingut durchmischt sein dürfen. Vorteile eines
 solchen Systems sind die kostengünstige Befüllung sowie eine hohe Speicherdichte und damit die große Puffermenge
 an Teilen. Auf der anderen Seite muss das Schüttgut meistens für den weiteren Produktionsprozess sauber
 geordnet werden. Hier entstehen typische Probleme wie das Verhaken der Teile untereinander oder ein möglicher
-Abrieb.
+Abrieb.\medskip
 
 Die teilgeordnete Speicherung ist ein Kompromiss aus beiden Welten. Hier sind die Teile in einer Dimension
-angeordnet. Sie sind also z. B. liegend auf einer Ebene orientiert und können so einfacher entnommen werden.
-Dies wird sehr häufig in Kombination mit der flexiblen Entnahme durch einen bildverarbeitungsgestützten Roboterarm
+angeordnet. Sie sind z. B. liegend auf einer Ebene orientiert und können so einfacher entnommen werden.
+Dies wird üblicherweise in Kombination mit der flexiblen Entnahme durch einen bildverarbeitungsgestützten Roboterarm
 mit passendem Greifer genutzt. Vorteile sind dabei die Vielfältigkeit der Teile, die mit dem passenden Greifer verwendet
 werden können. Als Nachteil ist wiederum, das ständige gezielte Nachfüllen von Teilen und einer im Vergleich zu
 anderen Systemen langsamen Taktzeit. Die größte Störgröße der letzten beiden Systeme ist jedoch die sogenannte Brückenbildung,
@@ -420,11 +408,6 @@ der Fall ist. Auch die Lagerungssysteme müssen zur weiteren Verwendung vereinze
 in \cref{sec:VereinzelungSystem}.
 %
 %
-\todo{Hairpin spezifischer???}
-\todo{- Welche Positionen müssen die Hairpins haben?
-- Wie können die Hairpins "gespeichert" werden?
-- Wie wird dafür gesorgt, dass nichts verhakt?}
-%
 \subsubsection{Vereinzelung}\label{sec:VereinzelungSystem}
 Nach der VDI 2860 braucht es für viele Prozesse eine Abtrennung von Werkstücken aus einem geordneten Strom. Genau für diesen
 Zweck gibt es unterschiedliche mechanische Ansätze\PEMfootcite{RNAAutomation.o.J.}. Ein häufig verwendeter Mechanismus ist dabei
@@ -459,12 +442,12 @@ Bauteile bewegen kann. Die häufigsten Ausführungen dieses Systems sind Rutsche
 über eine Ebene gleiten. Ein solcher Aufbau muss individuell an das Bauteil angepasst sein, wobei aber immer eine Höhendifferenz
 zwischen den Schnitt- und Übergabepunkten vorhanden sein muss. Außerdem muss für eine Bewegung physikalisch der passende Grenzwinkel
 zum Überwinden der Haftreibung\PEMfootcite{Reibung.2001} eingestellt sein:
-\begin{equation}
-  \tan(\alpha) = my_(H)
+\begin{equation}\label{eq:Grenzwinkel}
+  \tan \alpha = \mu_\text{H}
 \end{equation}
 Da im Normalfall die Gleitreibung kleiner als die Haftreibung ist, wird mit dieser Formel also der Winkel zwischen dem vertikalen 
 Boden und der schiefen Ebene beschrieben. Die Konstante muss individuell zwischen der Werkstoffpaarung, also zwischen Außenschicht des
-Bauteils und Beschaffenheit der schiefen Ebene. Der steilste Winkel beschreibt die Aufstellung im rechten Winkel mit einem Winkel von 90°.
+Bauteils und Beschaffenheit der schiefen Ebene. Der steilste Winkel beschreibt die Aufstellung im rechten Winkel mit einem Winkel von \qty{90}{\degree}.
 Hierbei ist aber zu beachten, dass dieser theoretische Wert in der Praxis selten verwendet wird, weil besonders bei kleineren Bauteilen
 die Gefahr besteht, dass sich diese überschlagen und in einer unerwünschten Lage ankommen. Weiter ist mit diesem System eine
 Geschwindigkeitskontrolle schwer möglich. Denn es muss verhindert werden, dass sich Bauteile verharken oder die Haftreibung nicht überwinden können.
@@ -544,10 +527,10 @@ auszugeben. In der Industrie werden hierfür zumeist Potentiometer verwendet, di
 Spannung ausgeben. Dies folgt dem einfachen Spannungsteiler-Prinzip: Über die gesamte Sensorlänge mit fest definiertem Widerstand wird eine
 Versorgungsspannung angelegt. Auf diesem Bereich wird nun ein Abnehmer platziert, der mit der zu bestimmenden Position des Schlittens
 verbunden ist. Ändert sich nun die Position des Abnehmers, verändert sich auch das Widerstandsverhältnis und damit die Spannung am Abnehmer.
-\begin{equation}
-  U_(Abnehmer) = U_(Versorgung) * R_(GND/Abnehmer) / (R_Gesamt)
+\begin{equation}\label{eq:Spannungsteiler}
+  U_\text{Abn} = U_\text{Vers} \cdot \frac{R_\text{Abn}}{R_\text{ges}}
 \end{equation}
-Die Endpunkte bilden einmal die niedrigste Spannung am Ground mit 0V und die höchste Spannung am Ende des Widerstandes mit der Versorgungsspannung.
+Die Endpunkte bilden einmal die niedrigste Spannung am Ground mit \qty{0}{\volt} und die höchste Spannung am Ende des Widerstandes mit der Versorgungsspannung.
 Für eine lineare Bewegung wird meist ein länglicher Widerstand verwendet. Es gibt aber auch Potentiometer in Rundausführung, die
 aber dem gleichen elektrischen Prinzip entsprechen. Der Vorteil dieses Prinzips, ist die einfache Kopplung an eine elektrische Regelung,
 da wie bereits erwähnt nur eine einfache analoge Spannung mit Umrechnung als Positionssignal gilt. Dieses schnelle und direkte Signal
