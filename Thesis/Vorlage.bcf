@@ -2372,49 +2372,49 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">refs/references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">IEA.2026</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">KBA.2026</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">ICCT.2026</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">ContinuousHairpinChallenges.2023</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">ManualVsAutomatedPicking.2022</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">Neidhoefer.1992</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">HairpinTechnologyReview.2025</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Goetz.2023</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">Stoelting.2011</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">Husain.2021</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">ComparativeReviewMotor.2023</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">Goetz.2023</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">ProductionProcessHairpinStator.2024</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">Glaessel2020Skinning</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">Eichler.2015</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">Huegel.2022</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">CleanLaser2022</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">Hering.2023</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">Hering.2023</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">IEA.2026</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">KBA.2026</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">ICCT.2026</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">ContinuousHairpinChallenges.2023</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">ManualVsAutomatedPicking.2022</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Neidhoefer.1992</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">HairpinTechnologyReview.2025</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Goetz.2023</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">Stoelting.2011</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Husain.2021</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">ComparativeReviewMotor.2023</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">Goetz.2023</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">ProductionProcessHairpinStator.2024</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Glaessel2020Skinning</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">Eichler.2015</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">Huegel.2022</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">CleanLaser2022</bcf:citekey>
     <bcf:citekey order="20" intorder="1">Hering.2023</bcf:citekey>
     <bcf:citekey order="21" intorder="1">Hering.2023</bcf:citekey>
     <bcf:citekey order="22" intorder="1">Hering.2023</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">ali_pneumatic_2009</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">Jamian.2020</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">Beater.2007</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">Stoelting.2011</bcf:citekey>
-    <bcf:citekey order="27" intorder="1">Stoelting.2011</bcf:citekey>
-    <bcf:citekey order="28" intorder="1">CleanLaser2022</bcf:citekey>
-    <bcf:citekey order="29" intorder="1">CleanLaser2022</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">Hering.2023</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">Hering.2023</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">ali_pneumatic_2009</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">Jamian.2020</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">Beater.2007</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">Stoelting.2011</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">Stoelting.2011</bcf:citekey>
     <bcf:citekey order="30" intorder="1">CleanLaser2022</bcf:citekey>
     <bcf:citekey order="31" intorder="1">CleanLaser2022</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">ur5e_handbuch_2025</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">VDI2860.1990</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">MontageIndustriellenProduktion.2012</bcf:citekey>
-    <bcf:citekey order="35" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="36" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">Werkstueckmagazin.2008</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">CleanLaser2022</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">CleanLaser2022</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">ur5e_handbuch_2025</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">VDI2860.1990</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">MontageIndustriellenProduktion.2012</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
     <bcf:citekey order="38" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="39" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">RNAAutomation.o.J.</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">Reibung.2001</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">Altintas.2011</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">Strasser.2011</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">Werkstueckmagazin.2008</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">RNAAutomation.o.J.</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">Reibung.2001</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">Altintas.2011</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">Strasser.2011</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
