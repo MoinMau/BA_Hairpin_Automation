@@ -176,6 +176,102 @@
       \field{title}{Pneumatic Drives: System Design, Modelling and Control}
       \field{year}{2007}
     \endentry
+    \entry{ManualVsAutomatedPicking.2022}{incollection}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=ade249575568bb25fb0363747c82db56}{%
+           family={Bitterling},
+           familyi={B\bibinitperiod},
+           given={Cristian},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=db5c8a510e3a992c3b8e49e1a2c02923}{%
+           family={Koreis},
+           familyi={K\bibinitperiod},
+           given={Jonas},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a8ac6c858d2dd279638c692e53a25b96}{%
+           family={Loske},
+           familyi={L\bibinitperiod},
+           given={Dominik},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b9aafdd342598bb64d7ee3f63d630a30}{%
+           family={Klumpp},
+           familyi={K\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=ffbd59a9dabac5ede5929895b0a8adca}{%
+           family={Kersten},
+           familyi={K\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod}}}%
+        {{hash=7bea099d35c5dae4a747a8f3486694e8}{%
+           family={Jahn},
+           familyi={J\bibinitperiod},
+           given={Carlos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0ff8248a55ba28fb4e3eb1fe1932837e}{%
+           family={Blecker},
+           familyi={B\bibinitperiod},
+           given={Thorsten},
+           giveni={T\bibinitperiod}}}%
+        {{hash=9e6b80bbd898dd12c4349a68379d3bd8}{%
+           family={Ringle},
+           familyi={R\bibinitperiod},
+           given={Christian\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {epubli}%
+      }
+      \strng{namehash}{3648c67afa2b89e5866d0a7e04c7e110}
+      \strng{fullhash}{5f291ba1905009d622c49e67458845d4}
+      \strng{fullhashraw}{5f291ba1905009d622c49e67458845d4}
+      \strng{bibnamehash}{3648c67afa2b89e5866d0a7e04c7e110}
+      \strng{authorbibnamehash}{3648c67afa2b89e5866d0a7e04c7e110}
+      \strng{authornamehash}{3648c67afa2b89e5866d0a7e04c7e110}
+      \strng{authorfullhash}{5f291ba1905009d622c49e67458845d4}
+      \strng{authorfullhashraw}{5f291ba1905009d622c49e67458845d4}
+      \strng{editorbibnamehash}{3d4ee6489211b98d5b3dc315546d060d}
+      \strng{editornamehash}{3d4ee6489211b98d5b3dc315546d060d}
+      \strng{editorfullhash}{c1c2f67942ae95db2e6b0f064ba95cf0}
+      \strng{editorfullhashraw}{c1c2f67942ae95db2e6b0f064ba95cf0}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{booktitle}{Changing Tides: The New Role of Resilience and Sustainability in Logistics and Supply Chain Management}
+      \field{isbn}{978-3-756541-95-9}
+      \field{month}{9}
+      \field{note}{Lizenz: CC BY-SA 4.0}
+      \field{series}{Proceedings of the Hamburg International Conference of Logistics (HICL)}
+      \field{shorttitle}{Manual vs. Automated Production and Picking}
+      \field{title}{Comparing manual and automated production and picking systems}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{volume}{33}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{327\bibrangedash 350}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.15480/882.4708
+      \endverb
+      \verb{urlraw}
+      \verb https://tore.tuhh.de/handle/11420/13934
+      \endverb
+      \verb{url}
+      \verb https://tore.tuhh.de/handle/11420/13934
+      \endverb
+    \endentry
     \entry{CleanLaser2022}{manual}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=feb7e5846831a503abc05a722a5518e3}{%
@@ -437,6 +533,45 @@
       \verb https://doi.org/10.1007/978-3-658-37252-1
       \endverb
     \endentry
+    \entry{IEA.2026}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b33b47b3008c8c47f90a77e0c2dd3060}{%
+           family={{International Energy Agency}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \list{organization}{1}{%
+        {IEA}%
+      }
+      \strng{namehash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{fullhash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{fullhashraw}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{bibnamehash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{authorbibnamehash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{authornamehash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{authorfullhash}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \strng{authorfullhashraw}{b33b47b3008c8c47f90a77e0c2dd3060}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Kapitel \enquote{Manufacturing and trade}; Lizenz: CC BY 4.0}
+      \field{shorttitle}{Global EV Outlook 2026}
+      \field{title}{Global EV Outlook 2026: Manufacturing and trade}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.iea.org/reports/global-ev-outlook-2026/manufacturing-and-trade
+      \endverb
+      \verb{url}
+      \verb https://www.iea.org/reports/global-ev-outlook-2026/manufacturing-and-trade
+      \endverb
+    \endentry
     \entry{Jamian.2020}{article}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=dd51885c0413980ab1bf009f058e2853}{%
@@ -504,6 +639,76 @@
       \verb https://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/12626
       \endverb
     \endentry
+    \entry{ContinuousHairpinChallenges.2023}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=b98c4fb4e9926c48a0cfc35d0672d0b4}{%
+           family={Kampker},
+           familyi={K\bibinitperiod},
+           given={Achim},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ea1b7af4013a1cdd23ba0383d41366c7}{%
+           family={Heimes},
+           familyi={H\bibinitperiod},
+           given={Heiner\bibnamedelima Hans},
+           giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=52c86d5a44420716d11f608bdca6166a}{%
+           family={Dorn},
+           familyi={D\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=532c9d9574cf34a30c99742afb0ef1cd}{%
+           family={Brans},
+           familyi={B\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8e99ecdcf4c8b9451551f59180e0d32e}{%
+           family={Stäck},
+           familyi={S\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{fullhash}{d76f8818e3a2fbaa87314f54b5695579}
+      \strng{fullhashraw}{d76f8818e3a2fbaa87314f54b5695579}
+      \strng{bibnamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authorbibnamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authornamehash}{8a88d2b758faf7153d1fd781a0591bcc}
+      \strng{authorfullhash}{d76f8818e3a2fbaa87314f54b5695579}
+      \strng{authorfullhashraw}{d76f8818e3a2fbaa87314f54b5695579}
+      \field{extraname}{1}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{2352-4847}
+      \field{journaltitle}{Energy Reports}
+      \field{note}{Lizenz: CC BY-NC-ND 4.0}
+      \field{number}{Supplement 1}
+      \field{shorttitle}{Challenges of Continuous Hairpin Technology}
+      \field{title}{Challenges of the continuous hairpin technology for production techniques}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{volume}{9}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{107\bibrangedash 114}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.egyr.2022.10.370
+      \endverb
+      \verb{urlraw}
+      \verb https://d-nb.info/1272863182/34
+      \endverb
+      \verb{url}
+      \verb https://d-nb.info/1272863182/34
+      \endverb
+    \endentry
     \entry{ProductionProcessHairpinStator.2024}{book}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=b98c4fb4e9926c48a0cfc35d0672d0b4}{%
@@ -551,6 +756,7 @@
       \strng{authornamehash}{8a88d2b758faf7153d1fd781a0591bcc}
       \strng{authorfullhash}{7f72b7136b69d08fedb88a4454773a1d}
       \strng{authorfullhashraw}{7f72b7136b69d08fedb88a4454773a1d}
+      \field{extraname}{2}
       \field{sortinit}{K}
       \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{labelnamesource}{author}
@@ -572,6 +778,47 @@
       \endverb
       \verb{url}
       \verb https://publications.rwth-aachen.de/record/1003088
+      \endverb
+    \endentry
+    \entry{KBA.2026}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=08f64d14ea5eb98a399471ef8d2fc1cb}{%
+           family={{Kraftfahrt-Bundesamt}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Flensburg}%
+      }
+      \list{organization}{1}{%
+        {Kraftfahrt-Bundesamt (KBA)}%
+      }
+      \strng{namehash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{fullhash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{fullhashraw}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{bibnamehash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{authorbibnamehash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{authornamehash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{authorfullhash}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \strng{authorfullhashraw}{08f64d14ea5eb98a399471ef8d2fc1cb}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{month}{1}
+      \field{note}{Veröffentlicht am 06.01.2026}
+      \field{number}{Pressemitteilung Nr. 01/2026}
+      \field{shorttitle}{Fahrzeugzulassungen 2025 -- Jahresbilanz}
+      \field{title}{Fahrzeugzulassungen im Dezember 2025 -- Jahresbilanz}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm01_2026_n_12_25_pm_komplett.html
+      \endverb
+      \verb{url}
+      \verb https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugzulassungen/2026/pm01_2026_n_12_25_pm_komplett.html
       \endverb
     \endentry
     \entry{MontageIndustriellenProduktion.2012}{book}{}{}
@@ -691,6 +938,80 @@
       \endverb
       \verb{url}
       \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+    \endentry
+    \entry{ICCT.2026}{report}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=c0788521b0c2e5c1e078a0ae813bc93d}{%
+           family={Plötz},
+           familyi={P\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=11b13dbdeed2524d37c5abd1ab05f0c9}{%
+           family={Link},
+           familyi={L\bibinitperiod},
+           given={Steffen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=40de812b77101b7b8ba82f760be48cdf}{%
+           family={Morrison},
+           familyi={M\bibinitperiod},
+           given={Kyle},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=03fcd3e97bab68af7df99db2bd9b6a81}{%
+           family={Tietge},
+           familyi={T\bibinitperiod},
+           given={Uwe},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a787f828aa0ef728f63f5105cb416aab}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Eyal},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=363a69ed0eb7ab2df930ad5efd1ea961}{%
+           family={Mock},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {International Council on Clean Transportation}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \strng{namehash}{60118a866a1d5d2b7a3f4d257fe34746}
+      \strng{fullhash}{36978e76d69a03ddc1d92c03f100d767}
+      \strng{fullhashraw}{36978e76d69a03ddc1d92c03f100d767}
+      \strng{bibnamehash}{60118a866a1d5d2b7a3f4d257fe34746}
+      \strng{authorbibnamehash}{60118a866a1d5d2b7a3f4d257fe34746}
+      \strng{authornamehash}{60118a866a1d5d2b7a3f4d257fe34746}
+      \strng{authorfullhash}{36978e76d69a03ddc1d92c03f100d767}
+      \strng{authorfullhashraw}{36978e76d69a03ddc1d92c03f100d767}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{month}{7}
+      \field{number}{ID 621}
+      \field{shorttitle}{Price and Market Trends BEV Germany}
+      \field{title}{Price and market trends of battery electric and internal combustion engine vehicles in Germany, 2020--2025}
+      \field{type}{Report}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://theicct.org/wp-content/uploads/2026/07/ID-621-%E2%80%93-Germany-market-trends_report_final.pdf
+      \endverb
+      \verb{url}
+      \verb https://theicct.org/wp-content/uploads/2026/07/ID-621-%E2%80%93-Germany-market-trends_report_final.pdf
       \endverb
     \endentry
     \entry{ComparativeReviewMotor.2023}{article}{}{}

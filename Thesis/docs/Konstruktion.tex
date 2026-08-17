@@ -330,7 +330,7 @@ Befehle einer Bedieneinheit oder Sensoren eine Aktion in Form der aktivierung vo
 in folgende drei Bereiche unterschieden: der Versorgung, der Steurung und der Peripherie.
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
-Zur Bereitstellung der benötigten Energie, wird das vorhandene 230 AC Niederspannungsnetz verwendet (vgl. En1). Mit einem AC-DC 
+Zur Bereitstellung der benötigten Energie, wird das vorhandene 230V AC Niederspannungsnetz verwendet (vgl. En1). Mit einem AC-DC 
 Netzteil wird aus dem Wechselsappung eine Gleichspannung von 12V. Außerdem wird für weiter Komponten ein Spannung von 5V benötigt,
 die von einem dedizierten DC-DC Konverter mit der Eingangsspannung von 12V bereitgestellt wird. Das Gesamtesystem arbeitet mit 
 der gleichen Masse, die vom Netzteil bereitgestellt wird. Für die Auslegung dieser Komponenten bedarf es einer vorhrigen 
@@ -443,15 +443,34 @@ die Verbindung der Spannungsversorung und der I2C Kommunikation werden Schraubkl
 	    \includegraphics[width=0.8\linewidth]{figs/Schaltplan.png}
 	\caption{Schaltplan}
 	\label{fig:Schaltplan}
-\end{figure}
+\end{figure}\todo{Einfügen des richtigen Schaltplans}
 
-\subsection{Steuerungssoftware}\label{sec:Software}
-% ============================================================================
+\subsection{Software}\label{sec:Software}
+Die Software dient als eigentliche Steuereinheit, in der Entscheidungen anhand von Daten getroffen werden. Der Ablauf dieser
+Entscheidungen sind fest definiert und können druch äußere Einflüsse die Sensoren oder dem Bedienelement verändert werden.
 
 \subsubsection{Architektur}\label{sec:CodeStruktur}
-% - Zustandsautomat, nichtblockierende Ablaufsteuerung, Modulschnitt
-% - Aufteilung Master / Slaves
-% - Normative Anknuepfung gehoert in die Grundlagen, hier nur die Umsetzung
+Je Mikrocontroller wird ein induvidueller Code verwendet. Hier druch werden Verantwortlichkeiten stark abgegrenzt. Die Kommunikation
+untereinander mittels I2C gibt es strenge Hierachien. Der Master (ESP32) kann dabei defineirte Adressen ansprechen. Der ELEGOO Uno
+wurde auf die Adresse 0x33 und der Ardunino Nano auf 0x32 festgelegt. Der Master kennt hierfür keine konkreten Werte für Motoren, 
+sondern nur vorgegebne Positionen mit Befehlen, die durch die Slaves eigenständig ausgeführt werden.
+Das Ziel ist den eigentlichen Ablauf des Programmes des Gesamtsystem so zu gestalten, dass es möglich ist mit einfach Blöcken eine
+Ablauf aufzubauen. Maßgeblich ist der Code des Masters verantwortlich. Hier wurde besonders auf eine nichtblockierende Ababeitung
+der Logik eingebaut. So kann jederzeit ein Signal für einen Stop oder ähnlcihes aufgenommen werden und das System befindet in keiner
+Loop oder Warteposition.
+Außerdem gibt es festgelegte Regeln für den Arduino Nano und ELEGOO Uno in denen die Bertriebsgrenzen der einzelen Subsysteme festgelegt
+ist. Wird also ausversehen ein flasches Signal vom Master übertragen, können sich die Motoren nicht durch Überlastungen beschädigen,
+da jeder Slave den Befehl gegen festgelegt Grenzen vergleicht und einen fehlerhaften Wert ignoriert.
+Für eine Block Programmierung werden einzelne Module benötigt: Für die Initialisierung fahren die Servomotoren auf ein festgelegte 
+Position und die Schrittmotoren werden mittels der Endstops gehomet. Nun kann für jeden Motor eine Position vorgegeben werden.
+Mit Warte oder Sensorblöcken kann eine Zeit oder Zustandssteuerung erfolgen. Mit diesen Blöcken lässt sich ein Gesamtablauf gestalten.
+
+
+\subsubsection{Bedienschnittstelle}
+% Display und Joystick, Betriebsarten (Einrichten / Automatik),
+% was der Bediener sieht und einstellen kann  -> Anforderungen B1, B2
+
+
 
 \subsubsection{Signalfluss und Kommunikation}\label{sec:Signalfluss}
 % - Befehlssatz, Quittierung, Timeouts
@@ -463,20 +482,9 @@ die Verbindung der Spannungsversorung und der I2C Kommunikation werden Schraubkl
 % - Verhalten bei ausbleibender Rueckmeldung / Kommunikationsfehler -> Si3
 %
 %
-% ============================================================================
-\subsection{Schnittstellen im Betrieb}\label{sec:Betriebsschnittstellen}
-% ============================================================================
 
-\subsubsection{Bedienschnittstelle}
-% Display und Joystick, Betriebsarten (Einrichten / Automatik),
-% was der Bediener sieht und einstellen kann  -> Anforderungen B1, B2
-
-\subsubsection{Schnittstelle zum Roboterarm}
-% Digitale I/O, Handshake-Ablauf, wer wartet auf wen  -> Anforderung Si1
-%
-%
-% ============================================================================
 \subsection{Zusammenfassung des Realisierungsstands}\label{sec:Realisierungsstand}
+
 % ============================================================================
 % 2-3 Absaetze: Was ist fertig, was ist provisorisch, was wurde bewusst
 % zurueckgestellt. Bruecke zu Kapitel 6.
