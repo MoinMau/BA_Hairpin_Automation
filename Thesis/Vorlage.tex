@@ -103,10 +103,17 @@
 	\usepackage{booktabs}
 	
 	% Einheiten:
-	% The SIunitx package enables the \SI{}{} command. It provides an easy way of working with (SI) units.
-	%\usepackage[decimalsymbol=comma]{siunitx}
-	%Eine Einfachere Version ist das untits packet.
-	\usepackage{units}
+	% Das Paket siunitx stellt \qty{Zahl}{Einheit}, \qtyrange{}{}{}, \num{} und \unit{} bereit.
+	% Achtung: NICHT zusammen mit dem Paket "units" laden, beide definieren \unit mit
+	% unterschiedlicher Syntax (units: \unit[1064]{nm} vs. siunitx: \qty{1064}{\nano\metre}).
+	\usepackage{siunitx}
+	\sisetup{
+		locale                = DE,     % deutsche Konventionen, u. a. Dezimalkomma
+		input-decimal-markers = {.,},   % Punkt und Komma als Eingabe erlaubt
+		range-phrase          = { bis },
+		range-units           = single, % "3 bis 4 eV" statt "3 eV bis 4 eV"
+		per-mode              = symbol,
+	}
 	
 	% URL:
 	% Clickable URL's can be made with this package: \url{}.
@@ -125,7 +132,7 @@
 
 	%für Grafiken direkt in Latex:
 	\usepackage{tikz}
-   	\usetikzlibrary{positioning, arrows.meta, fit, decorations.pathmorphing, backgrounds, calc}
+   	\usetikzlibrary{positioning, arrows.meta, fit, decorations.pathmorphing, backgrounds, calc, patterns}
 	\usepackage[european]{circuitikz}
 	\ctikzset{tripoles/mos style/arrows}
 
@@ -135,7 +142,13 @@
 \definecolor{rwthorange}{RGB}{246,168,0}    % F6A800
 \definecolor{rwthbordeaux}{RGB}{161,16,53}  % A11035
 \definecolor{rwthgrau}{RGB}{100,101,103}    % 646567
-	
+
+	%RWTH Sekundärabstufungen von Blau (75/50/25/10 %)
+\definecolor{rwthblau75}{RGB}{64,127,183}   % 407FB7
+\definecolor{rwthblau50}{RGB}{142,186,229}  % 8EBAE5
+\definecolor{rwthblau25}{RGB}{199,221,242}  % C7DDF2
+\definecolor{rwthblau10}{RGB}{232,241,250}  % E8F1FA
+
 	%Subfigures
 %	\usepackage{subfig}
 	

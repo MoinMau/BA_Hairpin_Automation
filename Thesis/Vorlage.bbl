@@ -435,6 +435,116 @@
       \verb https://www.ijmerr.com/uploadfile/2019/1011/20191011034832856.pdf
       \endverb
     \endentry
+    \entry{Goetz.2023}{online}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=2a260910c540a8341974d1d826355689}{%
+           family={Goetz},
+           familyi={G\bibinitperiod},
+           given={Stefan\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e16b7211ba8317f4223e0d564254d1f1}{%
+           family={Lizana\bibnamedelima F.},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a6f37efbb479037258c3d8f5eff02294}{%
+           family={Rivera},
+           familyi={R\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1271f5d2671f35db2ae7a9599a39c6c5}
+      \strng{fullhash}{d84f91917650e058b4d45a3a6650dc7e}
+      \strng{fullhashraw}{d84f91917650e058b4d45a3a6650dc7e}
+      \strng{bibnamehash}{d84f91917650e058b4d45a3a6650dc7e}
+      \strng{authorbibnamehash}{d84f91917650e058b4d45a3a6650dc7e}
+      \strng{authornamehash}{1271f5d2671f35db2ae7a9599a39c6c5}
+      \strng{authorfullhash}{d84f91917650e058b4d45a3a6650dc7e}
+      \strng{authorfullhashraw}{d84f91917650e058b4d45a3a6650dc7e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{eprintclass}{eess.SY}
+      \field{eprinttype}{arXiv}
+      \field{month}{12}
+      \field{note}{Preprint, eingereicht am 26.12.2023}
+      \field{shorttitle}{Hairpin Motors for Electromobility}
+      \field{title}{Hairpin Motors for Electromobility: Twists and Bends of a Technological Breakthrough that Initially Arrived A Century Too Soon}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2312.15830
+      \endverb
+      \verb{eprint}
+      \verb 2312.15830
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2312.15830
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2312.15830
+      \endverb
+    \endentry
+    \entry{Hering.2023}{book}{}{}
+      \name{editor}{2}{}{%
+        {{un=0,uniquepart=base,hash=29be8b370d75b426ff18a2557da6b5da}{%
+           family={Hering},
+           familyi={H\bibinitperiod},
+           given={Ekbert},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=56ae41fff0197628b15144a481a44934}{%
+           family={Schönfelder},
+           familyi={S\bibinitperiod},
+           given={Gert},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wiesbaden}%
+      }
+      \list{publisher}{1}{%
+        {Springer Vieweg}%
+      }
+      \strng{namehash}{e4dc30aba52a3ddce25db45ec733b5b0}
+      \strng{fullhash}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \strng{fullhashraw}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \strng{bibnamehash}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \strng{editorbibnamehash}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \strng{editornamehash}{e4dc30aba52a3ddce25db45ec733b5b0}
+      \strng{editorfullhash}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \strng{editorfullhashraw}{5e1c21ad5d6607cd0fd65f5c23f438f2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{3. Auflage}
+      \field{isbn}{978-3-658-39490-5}
+      \field{pagetotal}{857}
+      \field{shorttitle}{Sensoren in Wissenschaft und Technik}
+      \field{title}{Sensoren in Wissenschaft und Technik: Funktionsweise und Einsatzgebiete}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-658-39491-2
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-658-39491-2
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-658-39491-2
+      \endverb
+    \endentry
     \entry{GrundlagenHandhabungstechnik.2020}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=dd51491356eea0174873278d9ea5cab1}{%
@@ -531,6 +641,92 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1007/978-3-658-37252-1
+      \endverb
+    \endentry
+    \entry{Husain.2021}{article}{}{}
+      \name{author}{10}{}{%
+        {{un=0,uniquepart=base,hash=3f9108e8421737b65d45aff78fbbb4c6}{%
+           family={Husain},
+           familyi={H\bibinitperiod},
+           given={Iqbal},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b9b76e5191617dd76d9f8dddc40479f}{%
+           family={Ozpineci},
+           familyi={O\bibinitperiod},
+           given={Burak},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ea7162419d0b405753ab210420c4d133}{%
+           family={Islam},
+           familyi={I\bibinitperiod},
+           given={Md\bibnamedelima Sariful},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fa3be2a9c942332349045987118a578b}{%
+           family={Gurpinar},
+           familyi={G\bibinitperiod},
+           given={Emre},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9dc7d112fcb627681759512c2773981e}{%
+           family={Su},
+           familyi={S\bibinitperiod},
+           given={Gui-Jia},
+           giveni={G\bibinithyphendelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e9a1c5026fab52d56690cd37a1b78efc}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Wensong},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3336fe97983ee230cb5a035c5104ca3c}{%
+           family={Chowdhury},
+           familyi={C\bibinitperiod},
+           given={Shajjad},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9c142472c08059efc4bcd16475d796f1}{%
+           family={Xue},
+           familyi={X\bibinitperiod},
+           given={Lingxiao},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b791c73761ef008aeae8721d111d3752}{%
+           family={Rahman},
+           familyi={R\bibinitperiod},
+           given={Dhrubo},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5258f78745c7ca6d2bfdf3531777d564}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Raj},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{03d24e35fbc48d80a42a39bc944f8380}
+      \strng{fullhash}{065b5d402b87a477b922dae8d71be13c}
+      \strng{fullhashraw}{065b5d402b87a477b922dae8d71be13c}
+      \strng{bibnamehash}{03d24e35fbc48d80a42a39bc944f8380}
+      \strng{authorbibnamehash}{03d24e35fbc48d80a42a39bc944f8380}
+      \strng{authornamehash}{03d24e35fbc48d80a42a39bc944f8380}
+      \strng{authorfullhash}{065b5d402b87a477b922dae8d71be13c}
+      \strng{authorfullhashraw}{065b5d402b87a477b922dae8d71be13c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the IEEE}
+      \field{number}{6}
+      \field{title}{Electric Drive Technology Trends, Challenges, and Opportunities for Future Electric Vehicles}
+      \field{volume}{109}
+      \field{year}{2021}
+      \field{pages}{1039\bibrangedash 1059}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1109/JPROC.2020.3046112
       \endverb
     \endentry
     \entry{IEA.2026}{online}{}{}
@@ -938,6 +1134,51 @@
       \endverb
       \verb{url}
       \verb https://people.physik.hu-berlin.de/~mitdank/dist/scriptenm/reibung.htm
+      \endverb
+    \endentry
+    \entry{Neidhoefer.1992}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9f1b71a1aeb6c76fc293774864b15cb5}{%
+           family={Neidhöfer},
+           familyi={N\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{fullhash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{fullhashraw}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{bibnamehash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{authorbibnamehash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{authornamehash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{authorfullhash}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \strng{authorfullhashraw}{9f1b71a1aeb6c76fc293774864b15cb5}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0963-7346}
+      \field{journaltitle}{Engineering Science and Education Journal}
+      \field{month}{10}
+      \field{number}{5}
+      \field{shorttitle}{Evolution of the Synchronous Machine}
+      \field{title}{The evolution of the synchronous machine}
+      \field{urlday}{17}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{volume}{1}
+      \field{year}{1992}
+      \field{urldateera}{ce}
+      \field{pages}{239\bibrangedash 248}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1049/esej:19920050
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1049/esej:19920050
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1049/esej:19920050
       \endverb
     \endentry
     \entry{ICCT.2026}{report}{}{}

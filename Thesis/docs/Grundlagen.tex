@@ -1,156 +1,246 @@
 \section{Grundlagen}\label{sec:Grundlagen}
-Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Automatisierung der entsprechenden Produktionsprozesse beschrieben.
-Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die aktuelle Relevanz und das Potenzial
-dieser Technologie. Interessant für diese Arbeit ist zudem der Produktionsablauf eines Elektromotors mittels Hairpin-Technologie.
-Dabei wird insbesondere auf die Produktionsschritte und Verfahren des Abisolierens eingegangen. Zuletzt werden dann noch relevante Normen 
-und Vorgaben aufgeführt.
+Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Teilsystme für eine Automatisierung von definierten Produktionsprozessen beschrieben.
+Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die Betrachtung des Produktionsablaufs
+eines Elektromotors. Vertiefend wird auf den für diese Arbeit relevanten Abisolierprozess eingegangen. Zuletzt werden Systeme physikalisch
+erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktoren, aber Steuereinheiten
+und Normen, die im Gesamtsystem einsatz finden können.
 %
 %
 \subsection{Hairpin-Technologie}\label{sec:HairPinTechnologie}
 Die Hairpin-Technologie ist eine moderne Wickeltechnologie der Statoren von Elektromotoren. Dabei werden vorgeformte Kupferleitungen
-zum direkten Einführen in den Stator verwendet. Durch die Entwicklung in der Elektromobilität, wie der Batterietechnik, Leistungselektronik 
-und der Elektromotoren, hat die Hairpin-Technologie in den letzten Jahren weiter an Relevanz gewonnen.
+zum direkten Einführen in den Stator verwendet. Durch die Entwicklungen in der Elektromobilität hat die Hairpin-Technologie in den 
+letzten Jahren weiter an Relevanz gewonnen.
 %
 \subsubsection{Entwicklung}\label{sec:EntwicklungHairPin}
 Mit der Entdeckung der elektromagnetischen Induktion durch Michael Faraday im Jahr 1831 begann die Entwicklung von Elektromotoren.
-Die ersten elektrischen Maschinen wurden dabei aus gewickeltem Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
-es wurde nur nach einfachen Parametern wie den Kupferverlusten optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen
-kamen um 1900 die ersten Ideen auf, die Wicklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen. Dies bot nicht nur
+Die ersten elektrischen Maschinen wurden aus gewickeltem Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
+es wurde nur nach einfachen Parametern, wie den Kupferverlusten, optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen
+kamen um 1900 die ersten Ideen auf, die Wicklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen\PEMfootcite{Neidhoefer.1992}. Dies bot nicht nur
 eine erhöhte Kupferdrahtdichte (Füllfaktor), sondern auch eine verbesserte Kühlfähigkeit, mechanische Stabilität und verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
-Dieses Konzept entwickelte sich über das 20.\ Jahrhundert weiter und wird mittlerweile in fast allen Hochleistungsantrieben eingesetzt.
-Besonders die letzten Jahre zeigten den klaren Trend in der Elektromobilität und den angemeldeten Patenten.\\
+Dieses Konzept entwickelte sich über das 20. Jahrhundert weiter und wird mittlerweile in fast allen kompakten Traktionsantrieben für Elektrofahrzeuge eingesetzt\PEMfootcite[S. 15]{Goetz.2023}.
 %
 \subsubsection{Aufbau von modernen Elektromotoren}\label{sec:AufbauElektromotoren}
-Wie bereits beschrieben sind aktuelle Hochleistungs-Elektroantriebe meistens mit der Hairpin-Technologie aufgebaut.
-Es gibt dabei jedoch wieder verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\\
-Zunächst muss auf den allgemeinen Aufbau eines Elektromotors eingegangen werden. Es gibt zwei Hauptkomponenten:
-Den Stator und den Rotor. Dabei stellt der Stator zumeist den feststehenden äußeren Teil des Motors dar, in dem auch
-die Wicklungen verbaut werden. Der Rotor wiederum ist das rotierende Element des Motors,
-mit dem die Welle und damit die Kraft des Motors übertragen wird. Es gibt auch Motorkonfigurationen, bei denen der Stator innen
-sitzt und der Rotor außen rotiert, diese sind in Elektroantrieben für die E-Mobilität aber nicht im Einsatz.\todo{Sollte das nicht lieber raus?}
-Für den Betrieb braucht es aber noch weitere Bauteile: Die elektrische Energie muss bereitgestellt werden, der Strom
-muss passend transformiert werden und die Rotation muss mittels eines Getriebes passend übersetzt werden.
-In Bezug auf die E-Mobilität stammt die Energie meistens aus hochmodernen Batterie-Packs, die einen annähernden Gleichstrom
-ausgeben. Diese DC-Spannung muss dann je nach Bauart des Motors passend weitergegeben werden. Bei den weitverbreiteten PMSM-Motoren
-wird diese DC-Spannung für die Wicklungen in drei zueinander versetzten Phasen umgewandelt. Dabei werden Hochleistungs-FETs
-im Wechselrichter verwendet, um die Energie passend zur Drehzahl und geforderten Leistung in den 120° verschobenen Phasen zu leiten.
-Im Motor entsteht dann ein sich radial bewegendes Magnetfeld, welches den Rotor zur Rotation zwingt.
-Diese Drehbewegung wird dann in ein Getriebe geführt. Dieses ist entsprechend der Verwendung des Motors so angepasst,
-dass z.\ B.\ eine geringere Drehzahl für die Reifen eines Autos entsteht.\\
+Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meistens mit der Hairpin-Technologie aufgebaut.
+Die Vielzahl an unterschiedlichen Anforderungen an diese Motoren führen zu verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\bigskip
 
-Dieser Ablauf aus Energiebereitstellung, Einspeisung, Umwandlung und Drehzahlanpassung ist grundsätzlich bei jedem Elektromotor gleich. Anders ist es bei dem eigentlichen
-Aufbau des Motors:\\
-i. DC brushed motor;\\
-ii. DC brushless motor (BLDC);\\
-iii. Induction motor (IM);\\
-iv. Synchronous reluctance motor (SynRM);\\
-v. Switched reluctance motor (SRM);\\
-vi. Permanent magnet motor (PMSM);\\
-vii. Flux reversal motors\\
-\PEMfootcite{ComparativeReviewMotor.2023}
-\todo{Hier muss tiefer ins Detail gegangen werden, Abkürzungsverzeichnis!, Grafik}
+Eine elektrische Maschine besteht im Kern aus zwei Wirkpartnern: dem feststehenden
+Stator und dem rotierenden Rotor. Der Stator trägt in axial verlaufenden Nuten die
+stromführende Wicklung, während die dazwischenliegenden Zähne den magnetischen Fluss
+führen. Die Wicklung erzeugt ein umlaufendes Magnetfeld, dem der Rotor folgt und
+dessen Drehmoment über die Welle abgegriffen wird. Für die Fertigung ist damit die
+Nut die maßgebliche Randbedingung, da ihr Querschnitt begrenzt, wie viel Kupfer und
+wie viel Isolation untergebracht werden können\PEMfootcite{Stoelting.2011}.\medskip
+
+Im Traktionsantrieb hat sich die permanentmagneterregte Synchronmaschine (PMSM)
+durchgesetzt, da sie bei kompaktem Bauraum hohe Drehmoment- und Leistungsdichten
+erreicht\PEMfootcite{Husain.2021}. Sie wird über einen Wechselrichter mit
+dreiphasigem Strom gespeist, weshalb die Wicklung über mehrere Nuten verteilt und
+phasenrichtig verschaltet werden muss. Weitere Bauarten unterscheiden sich in der
+Art der Flusserzeugung im Rotor und in der zugehörigen Wicklungsart\PEMfootcite[S. 5]{ComparativeReviewMotor.2023}.\medskip
+
+Für die Ausführung der Statorwicklung stehen zwei Prinzipien zur Verfügung. Bei der
+Runddrahtwicklung wird lackisolierter Draht in die Nut eingebracht, wobei die Lage
+der einzelnen Drähte unbestimmt bleibt. Die Hairpin-Technologie verwendet stattdessen
+Kupferband mit rechteckigem Querschnitt, deren Position in der Nut definiert ist.
+Daraus ergeben sich der höhere Nutfüllfaktor und die verbesserte Wärmeabfuhr\PEMfootcite{Goetz.2023}.\medskip
+
+Da ein einzelner Hairpin lediglich zwei Nuten verbindet, entsteht die durchgehende
+Wicklung erst durch das Verbinden der Segmente am Wickelkopf. Jede dieser
+Kontaktstellen setzt blankes Kupfer voraus, weshalb die Isolierung der
+Hairpin-Enden vor dem Kontaktieren entfernt werden muss. Das Abisolieren ist damit
+ein zwingender Bestandteil der in \cref{sec:ProduktionsablaufHairPin}
+beschriebenen Prozesskette.
 %
 \subsubsection{Produktionsablauf}\label{sec:ProduktionsablaufHairPin}
 Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Stator-Art variieren.
-Grundsätzlich ist der Ablauf aber immer ähnlich:\\
-1. Kupferdraht richten\\
-2. Kupferdraht abisolieren\\
-3. Kupferdraht ablängen\\
-4. Kupferdraht biegen\\
-5. Statornuten isolieren\\
-6. Hairpins vormontieren\\
-7. Hairpins fügen\\
-8. Kupferenden freistellen\\
-9. Kupferenden schränken\\
-10. Kupferenden kontaktieren\\
-11. Verschalt-Elemente kontaktieren\\
-12. Kupferenden isolieren\\
-13. Stator imprägnieren\\
-14. Stator testen\\
-\todo{Grafik erstellen}
+Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion aber den in \cref{fig:Produktionsablauf} dargestellten Verlauf.
+
+\newcommand{\nr}[1]{%
+  \tikz[baseline=(n.base)]{\node[circle,fill=rwthblau,text=white,
+    font=\sffamily\bfseries\tiny,inner sep=0.6pt,minimum size=3.3mm] (n) {#1};}}
+ 
+% #1 = eindeutiger Name, #2 = fit-Liste, #3 = Beschriftung
+\newcommand{\phasenband}[3]{%
+  \node[fit=#2,inner sep=0pt,draw=none] (#1) {};
+  \draw[fill=rwthblau,draw=rwthblau,rounded corners=2pt]
+    ($(#1.north west)+(-12mm,1.5mm)$) rectangle ($(#1.south west)+(-4mm,-1.5mm)$);
+  \node[rotate=90,text=white,font=\sffamily\bfseries\tiny,align=center,text width=13mm]
+    at ($(#1.west)+(-8mm,0)$) {#3};}
+\begin{figure}[htbp]
+\centering
+
+
+\begin{tikzpicture}[
+  font=\sffamily\scriptsize,
+  s/.style={draw=rwthblau75,line width=0.6pt,fill=rwthblau10,rounded corners=2pt,
+    text width=2.45cm,align=left,inner xsep=4pt,inner ysep=4pt,minimum height=9.5mm},
+  hl/.style={s,draw=rwthblau,line width=1.1pt,fill=rwthblau25},
+  f/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthblau75,line width=0.6pt},
+  fw/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthgrau,line width=0.6pt},
+  alt/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthblau,line width=0.6pt,
+    dash pattern=on 1.3mm off 0.9mm},
+]
+ 
+% ===== Drahtvorbereitung =====
+\node[s]                         (s1) {\nr{1}\, Kupferband richten};
+\node[hl,right=3.5mm of s1]      (s2) {\nr{2}\, Kupferband abisolieren};
+\node[s,right=3.5mm of s2]       (s3) {\nr{3}\, Kupferband ablängen};
+\node[s,right=3.5mm of s3]       (s4) {\nr{4}\, Kupferband biegen};
+\foreach \a/\b in {s1/s2,s2/s3,s3/s4} \draw[f] (\a) -- (\b);
+ 
+% ===== Statormontage =====
+\node[s,below=9mm of s1.south west,anchor=north west] (s5)
+  {\nr{5}\, Statornuten isolieren};
+\node[s,right=3.5mm of s5]  (s6) {\nr{6}\, Hairpins vormontieren};
+\node[s,right=3.5mm of s6]  (s7) {\nr{7}\, Hairpins fügen};
+\foreach \a/\b in {s5/s6,s6/s7} \draw[f] (\a) -- (\b);
+ 
+% ===== Kontaktierung =====
+\node[s,below=9mm of s5.south west,anchor=north west] (s8)
+  {\nr{8}\, Kupferenden freistellen};
+\node[s,right=3.5mm of s8]  (s9)  {\nr{9}\, Kupferenden schränken};
+\node[s,right=3.5mm of s9]  (s10) {\nr{10}\, Kupferenden kontaktieren};
+\node[s,right=3.5mm of s10] (s11) {\nr{11}\, Verschalt-Elemente kontaktieren};
+\foreach \a/\b in {s8/s9,s9/s10,s10/s11} \draw[f] (\a) -- (\b);
+ 
+% ===== Finalisierung =====
+\node[s,below=9mm of s8.south west,anchor=north west] (s12)
+  {\nr{12}\, Kupferenden isolieren};
+\node[s,right=3.5mm of s12] (s13) {\nr{13}\, Stator imprägnieren};
+\node[s,right=3.5mm of s13] (s14) {\nr{14}\, Stator testen};
+\foreach \a/\b in {s12/s13,s13/s14} \draw[f] (\a) -- (\b);
+ 
+% ===== Reihenwechsel =====
+\draw[fw] (s4.south)  -- ++(0,-4.5mm) -| (s5.north);
+\draw[fw] (s7.south)  -- ++(0,-4.5mm) -| (s8.north);
+\draw[fw] (s11.south) -- ++(0,-4.5mm) -| (s12.north);
+ 
+% ===== Alternative Position in der Prototypenfertigung =====
+\draw[alt] (s2.north) -- ++(0,6mm) -- ($(s4.north)+(0,6mm)$) -- ($(s4.north)+(0,0.5pt)$);
+\node[font=\sffamily\scriptsize,text=rwthblau,anchor=south,inner sep=1.5pt]
+  at ($(s2.north)!0.5!(s4.north)+(0,6mm)$) {Prototypenfertigung: Abisolieren nach dem Biegen};
+ 
+% ===== Phasenbänder =====
+\phasenband{pA}{(s1)(s2)(s3)(s4)}{Draht-\\vorbereitung}
+\phasenband{pB}{(s5)(s6)(s7)}{Stator-\\montage}
+\phasenband{pC}{(s8)(s9)(s10)(s11)}{Kontak-\\tierung}
+\phasenband{pD}{(s12)(s13)(s14)}{Finali-\\sierung}
+ 
+\end{tikzpicture}
+\caption[Prozesskette der Hairpin-Statorproduktion]{Allgemeine Prozesskette der Hairpin-Statorproduktion}
+\label{fig:Produktionsablauf}
+\end{figure}
+
 
 Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus aufeinander gestapelten isolierten Blechen
-besteht, nicht betrachtet. Außerdem wird der Kupferdraht als fertiges auf Rollen gewickeltes Produkt angesehen. Die oben beschriebene
-Prozesskette entspricht einer Serienproduktion, bei der das Abisolieren vor dem Biegen des Kupferdrahtes positioniert ist. In
-der Prototypenproduktion ist dies nicht der Fall, da hier der Unterpunkt 2. hinter 4. kommt.
-\PEMfootcite{ProductionProcessHairpinStator.2024}
-Es beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner runden Form in eine exakt gerade
-Ausrichtung gebracht werden. Dazu muss der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung gerade gebogen werden.
+besteht, nicht betrachtet. Außerdem wird das Kupferband als fertiges auf Rollen gewickeltes Produkt angesehen. Die in \cref{fig:Produktionsablauf} aufgezeigte
+Prozesskette entspricht einer Serienproduktion\PEMfootcite{ProductionProcessHairpinStator.2024}. Für die
+die Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.\medskip
+
+Der Fertigungsprozess beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner runden Form in eine gerade
+Ausrichtung gebracht werden. Dazu wird der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung wieder gerade gebogen.
 Hier ist das Ziel, die Restkrümmung auf ein Minimum zu bringen, wobei Einflussfaktoren wie der Spulendurchmesser, Temperaturänderungen,
-Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke durch den Hersteller zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
-in der Produktion diese Abweichungen automatisiert entgegenzuwirken, jedoch muss meistens das Endprodukt kontrolliert und eine manuelle
-Adjustierung vorgenommen werden.\\\\
-Wie oben bereits beschrieben würde nun das Abisolieren des Kupferdrahts in der Serienproduktion passieren. Da dies ein wichtiger Bestandteil dieser
-Arbeit ist, wird dies unten noch einmal genauer betrachtet.\\\\
-Im nächsten Schritt wird der Kupferdraht je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass eine Deformation
-nicht entsteht. Außerdem entsteht mit dem Schneiden eine kleine Fase, die später beim Einsetzen der Hairpins in das Blechpaket hilft.\\\\
-Einer der komplizierteren Schritte ist das Biegen. Hier gibt es verschiedene Methoden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und Freies Biegen.
-Dabei wird in der Serienproduktion meist Gesenkbiegen verwendet, da zunächst nur die 2D-dimensionale U-Form des Hairpins gebogen werden muss und danach
+Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
+in der Produktion diese Abweichungen automatisiert anzupassen.\medskip
+
+In der Serienproduktion würde nun das Kupferband abisoliert werden. Da sich diese Arbeit um die Abisolierung in der Prototypenproduktion
+handelt, wird im weiterem Verlauf detailierten auf diesen Prozess eingegangen.\medskip
+
+Im nächsten Schritt wird das Kupferband je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass keine Deformationen
+des rechteckigen Kupferbandes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.\medskip
+
+Einer der komplizierteren Schritte ist das Biegen. Dies kann durch verschiedene Methoden erzielt werden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und freies Biegen.
+In der Serienproduktion wird hauptsächlich Gesenkbiegen verwendet, da zunächst nur die 2D-dimensionale U-Form des Hairpins gebogen werden muss und danach
 erst das Pressen in eine Form den 3D-dimensionalen Aufbau des fertigen Hairpins bringt. Dieser Prozess bietet neben einer hohen Geschwindigkeit auch
-eine hohe Prozess- und Wiederholgenauigkeit mit sich. In der Prototypenproduktion wiederum wird meist das CNC-Biegen bevorzugt, da durch das Erstellen
-jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung jeglicher Parameter möglich ist.\\\\
+eine hohe Prozess- und Wiederholgenauigkeit mit sich. Auf der anderen Seite wird in der Prototypenproduktio meist das CNC-Biegen bevorzugt, da durch das Erstellen
+jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung der Hairpin-Geometrien möglich ist.\medskip
+
 Als Vorbereitung des Stators gilt es, die Nuten des Blechpaketes für das Einführen der Hairpins zu isolieren.
-Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen Hairpins und geerdetem
-Blechpaket zu schaffen.\\\\
+Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen spannungführeneden Hairpins und geerdetem
+Blechpaket zu schaffen.\medskip
+
 Für ein besseres Einsetzen der Hairpins in das Blechpaket müssen diese vorpositioniert werden. Je nach Statortyp müssen hier
-mehrere Reihen an unterschiedlichen Hairpin-Größen vorbereitet werden.\\
+mehrere Reihen an unterschiedlichen Hairpin-Größen vorbereitet werden.\medskip
+
 Beim Fügen werden die Hairpins samt der Halterung für die Vorpositionierung in das Blechpaket eingeführt.
-Hier werden diese axial ausgerichtet und verpresst.\\\\
+Es folgt eine axiale Ausrichtung und Verpressung.\medskip
+
 Nun müssen die aus dem Blechpaket hervorstehenden Enden der Hairpins freigestellt werden. Dieser Vorgang ist wichtig,
-damit der nächste Prozess ohne Probleme verläuft. Beim Separieren wird jeder Hairpin so gezogen, dass diese als einzelne
-Beinchen hervorstehen.\\\\
-Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel so verformt werden, dass ein richtiges
-Verschweißen möglich ist. Die Hairpin-Enden liegen nun im richtigen Abstand neben ihrem richtigen Partner.\\\\
+damit der nächste Prozess ohne Probleme druchgeführt werden kann. Beim Separieren wird jeder Hairpin so verzogen, dass diese als einzelne
+Beinchen hervorstehen.\medskip
+
+Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel verformt werden, sodass alle Beinchen dicht beeinander liegen und
+ein gutes Verschweißen möglich ist. Die Hairpin-Enden liegen nun mit minimalem Abstand neben ihrem richtigen Partner.\medskip
+
 Das Laserschweißen dient der Kontaktierung der Hairpin-Enden. Hierbei werden mittels eines Laserstrahls immer zwei Kupferenden
-miteinander verschweißt. Hierbei ist auf hohe Genauigkeit zu setzen, da die Qualität der Schweißverbindungen großen Einfluss auf
-die elektrische Beschaffenheit des Motors hat.\\\\
-Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Elektromotor weitere Schritte beachtet werden.
+miteinander verschweißt. Es ist auf hohe Genauigkeit zu achten, da die Qualität der Schweißverbindungen großen Einfluss auf
+die elektrische Beschaffenheit des Motors hat.\medskip
+
+Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Tranktionsantrieb weitere Schritte beachtet werden.
 So müssen die Hairpins mit dem Verbindungselement zum Wechselrichter verbunden werden. Dazu wird im richtigen Schaltschema ein passender Kontaktring mit
-Anschlüssen verbunden.\\\\
-Da nun auf der einen Seite des Stators die gesamten gerade beschriebenen Schweißnähte offen liegen, müssen diese selbstverständlich
+den Anschlüssen verbunden.\medskip
+
+Wegen der offen liegenden Schweißnähte müssen diese
 zueinander isoliert werden. Um Kriechströme und Durchschläge zu vermeiden, wird eine Beschichtung aufgetragen.
-Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren.\todo{Was das?} \\\\
+Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren.\medskip
+
 Der vorletzte Schritt dieser Prozesskette ist das Imprägnieren des Stators. Hierbei wird ein Harz in die Nuten des Blechpaketes gegeben,
-um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.\\\\
-Der letzte Schritt beschreibt die Funktions- und Qualitätsprüfung. Dabei müssen die elektrischen Parameter den Anforderungen entsprechen. Dazu zählen
-die Isolationsfestigkeit und elektrische Leitfähigkeit. Weiterhin darf natürlich auch keine mechanische Beschädigung vorhanden sein.\\
+um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.\medskip
+
+Die Funktions- und Qualitätsprüfung erfolgt als letzter Schritt, bevor der Stator diese Produktionsabschnitt verlässt. Dabei müssen die 
+elektrischen Parameter, wie Isolationsfestigkeit, elektrishce Leitfähigkeit und mechanische Beschädigungen, den Anforderungen entsprechen.
 %
 %
 \subsection{Produktionsverfahren zum Abisolieren}\label{sec:ProduktionsverfahrenAbisolieren}
 Das Abisolieren der Hairpins hat großen Einfluss auf die Qualität des fertigen Stators, da es bei Fehlern zur
-Minderung des maximalen Stromflusses und damit der Gesamtleistung kommt. Wegen dieser Relevanz gibt es mehrere Methoden,
+Minderung des maximalen Stromflusses und damit der Gesamtleistung kommt. Wegen dieser Relevanz gibt es mehrere Methoden
 eine Abisolierung durchzuführen, die in diesem Abschnitt vorgestellt werden sollen. Dazu wird auf das Abisolieren durch rotierende Bürsten,
-mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen. \PEMfootcite{Glaessel2020Skinning}\\
-Außerdem kann die Position in der Prozesskette variiert werden. So ist meist für die Serienproduktion das Abisolieren
-vor dem Ablängen vorgesehen. In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung. Es wird hier erst
-nach dem Biegen eine Abisolierung in einer getrennten Station durchgeführt.
+mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen\PEMfootcite{Glaessel2020Skinning}.\medskip
+
+In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung. Wie in \cref{fig:Produktionsablauf} 
+aufgezeigt findet die Abisolierung erst nach dem Biegen in einem getrennten Produktionsschritt statt.
 %
-\subsubsection{Rotierende Bürsten}\label{sec:RotierendeBürsten}
-Bei dieser Abisolier-Methode werden rotierende Bürsten verwendet, die die Isolierschicht mechanisch abtragen sollen.
-Diese Bürsten sind meist als Stahldrähte gefertigt und die abgelöste Isolierung vom Kupferdraht wird abgesaugt. Dies
-bietet Vorteile wie einen einfachen Prozessaufwand und geringe Kosten. Dennoch gibt es große Probleme bei der Qualität
-dieser Methode durch Abnutzen der Bürsten. Auch kann es auftreten, dass der Hairpin mechanische Beschädigungen durch
-die rotierenden Bürsten annimmt.
+\subsubsection{Rotierende Bürsten}\label{sec:RotierendeBuersten}
+Beim Bürstenabisolieren wird die Isolierschicht mechanisch durch rotierende Bürsten
+abgetragen. Die Bürsten sind in der Regel mit Stahldrähten besetzt und werden über
+den zu entschichtenden Bereich geführt, während eine Absaugung das gelöste
+Isoliermaterial unmittelbar aus der Bearbeitungszone entfernt. Da das Verfahren ohne
+aufwendige Anlagentechnik auskommt, zeichnet es sich durch einen geringen
+Prozessaufwand und niedrige Kosten aus. Dem stehen deutliche Einschränkungen in der
+Prozessgüte gegenüber: Mit zunehmendem Verschleiß der Borsten verändert sich das
+Abtragsverhalten, sodass die Entschichtungsqualität über die Standzeit hinweg
+schwankt. Da der Abtrag ausschließlich über mechanischen Kontakt erfolgt, besteht
+zudem die Gefahr, den Hairpin selbst zu beschädigen.
 %
-\subsubsection{Fräsen}\label{sec:Fräsen}
-Eine weitere häufig verwendete Methode ist die Verwendung von Fräsern. Diese schaben das Isoliermaterial
-an der gewünschten Stelle ab. Dieser Prozess bedarf eines genauen Einstellens der Fräser, da auch Kupfermaterial abgetragen
-werden kann. Dies ist besonders problematisch, wenn sich der Kupferdraht in seinen Dimensionen ändert oder sich die Fräser abnutzen.
-Auch hier ist ein großer Nachteil die durch zu viel abgetragenes Material verschlechterte Leitfähigkeit durch den verringerten
-Kupferquerschnitt. Auf der anderen Seite haben wir definierte Schnittkanten und eine sehr reine Oberfläche.
+\subsubsection{Fräsen}\label{sec:Fraesen}
+Ein weiteres verbreitetes Verfahren ist das spanende Abtragen der Isolierschicht mit
+Fräsern. Diese trennen das Isoliermaterial an der vorgesehenen Position ab und
+erzeugen dabei definierte Schnittkanten sowie eine metallisch reine Oberfläche.
+Voraussetzung ist eine genaue Zustellung der Werkzeuge, da andernfalls auch Kupfer
+abgetragen wird. Kritisch ist dies vor allem bei schwankenden Leiterabmessungen und
+bei zunehmendem Werkzeugverschleiß, weil sich in beiden Fällen die tatsächliche
+Eingriffstiefe verändert. Ein zu großer Materialabtrag verringert den
+Leiterquerschnitt und damit die Leitfähigkeit des
+Hairpins.
 %
-\subsubsection{Induktives Erhitzen}\label{sec:InduktivesErhitzten}
-Da die Isolierung des Kupferdrahtes bei zu hoher Hitze schmilzt und verbrennt, kann man zum Abisolieren auch die Methode des induktiven
-Erhitzens verwenden. Dabei wird das abzuisolierende Material in die Mitte einer induktiven Spule gegeben und eine Spannung mit hoher
-Frequenz auf die Spule gegeben. Das erzeugte schnell wechselnde Magnetfeld führt zu im Kupferdraht induzierten Wirbelströmen, die zu extrem
-hohen Temperaturen im Kupfer führen. Im Endeffekt führt Hitze zur Verbrennung und damit zum Abtragen der Isolierung. Vorteile sind dabei
-die kurze Bearbeitungszeit und das kontaktlose Bearbeiten des Kupferdrahtes. Jedoch hat die große Hitze zur Folge, dass die blanke Oberfläche
-des Kupfers viel schneller oxidiert. Außerdem wird nicht nur der geplante Bereich abisoliert, sondern es kann auch durch die starke Wärmeleitung
-andere Teile der Isolierschicht beschädigt werden.
+\subsubsection{Induktives Erhitzen}\label{sec:InduktivesErhitzen}
+Da sich die Isolierung des Kupferdrahtes bei hohen Temperaturen thermisch zersetzt,
+lässt sich die Entschichtung auch rein thermisch über induktive Erwärmung
+realisieren. Dazu wird der abzuisolierende Bereich in eine Induktionsspule
+eingebracht, die mit einer hochfrequenten Wechselspannung beaufschlagt wird. Das
+schnell wechselnde Magnetfeld induziert Wirbelströme im Kupfer, die den Leiter lokal
+stark erwärmen und die Isolierschicht dadurch zersetzen. Da das Werkstück
+berührungslos bearbeitet wird, tritt kein Werkzeugverschleiß auf, und die
+Bearbeitungszeit ist kurz. Die eingebrachte Wärme wirkt jedoch in zwei Richtungen
+nachteilig: Zum einen oxidiert die freigelegte Kupferoberfläche deutlich schneller,
+zum anderen begrenzt die hohe Wärmeleitfähigkeit des Kupfers die räumliche
+Eingrenzung des Prozesses, sodass angrenzende Bereiche der Isolierschicht ebenfalls
+geschädigt werden können.
 %
 \subsubsection{Laser}\label{sec:Laser}
-In diesem Kapitel soll ein Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht und 2. wie dieses zum Abisolieren
-von Hairpins verwendet werden kann.\\
+Für die Analyse der Abisolierung mittels einer Laseranalge soll ein detialierter Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht 
+und 2. wie dieses zum Abisolieren von Hairpins verwendet werden kann.\bigskip
+
 Ein Laser basiert hauptsächlich auf den in \cref{fig:laser-prinzip} dargestellten drei physikalischen Effekten zwischen Photonen und Atomen. Dazu zählt die Absorption, die spontane Emission und 
 die stimulierte Emission von Photonen\PEMfootcite[S. 27-31]{Eichler.2015}. Gelangt Licht durch eine Materialschicht, wird dieses zu einem
 gewissen Teil absorbiert. Je nach Materialbeschaffenheit und Wellenlänge hat das Licht nach dem Durchdringen dieser Schicht eine geringere 
@@ -159,13 +249,13 @@ Dies geschieht, wenn ein Photon auf ein Atom im Grundzustand trifft. Dabei wird 
 Elektronen des betroffenen Atoms auf ein erhöhtes Energieniveau gehoben. Durch das zweite Phänomen, die spontane Emission, springt das Elektron
 des angeregten Atoms nach einer gewissen Zeit wieder in den Grundzustand zurück. Bei diesem Rücksprung wird die zuvor aufgenommene Energie 
 wieder als Lichtquant abgegeben. Hierbei ist wichtig zu erwähnen, dass die Richtung und Wellenlänge des emittierten Photons nicht mit dem
-absorbierten Photon übereinstimmen muss. Dieser Effekt ist schon länger durch Naturphänomene wie Fluoreszenz bekannt, würde aber für die Funktion
-des Lasers nicht ausreichen. Die stimulierte Emission bewirkt nämlich, dass aus den vereinzelten Emissionen eine Kettenreaktion entsteht. Kommt
-es dazu, dass ein Photon auf ein angeregtes Atom trifft, wird ein Photon emittiert, das die gleiche Wellenlänge und Phase wie das einfallende
-Photon hat. Für die große Intensität des Laserlichtes muss dieser Lawineneffekt weiter verstärkt werden. Dazu braucht es ein aktives Medium,
-welches die Atome zur Anregung und Emission bereitstellt und einen Resonator, der den Lawineneffekt weiter verstärkt. Das aktive Medium ist
+absorbierten Photon übereinstimmen muss und in alle Richtungen abgestrahlt wird. Dieser Effekt ist schon länger durch Naturphänomene wie Fluoreszenz bekannt, würde aber für die Funktion
+des Lasers alleine nicht ausreichen. Die stimulierte Emission bewirkt nämlich, dass aus den vereinzelten Emissionen eine Kettenreaktion entsteht. Kommt
+es nämlich dazu, dass ein Photon auf ein angeregtes Atom trifft, wird ein Photon emittiert, das die gleiche Wellenlänge und Phase wie das einfallende
+Photon hat. Für die große Intensität des Laserlichtes muss dieser Lawineneffekt weiter verstärkt werden. Es wird ein aktives Medium,
+welches die Atome zur Anregung und Emission bereitstellt und einen Resonator, der den Lawineneffekt weiter verstärkt, benötigt. Das aktive Medium ist
 meist ein bestimmter Kristall oder ein Gas, bei dem die Energieniveaus der benötigten Wellenlänge entsprechen. An den Enden dieses Mediums
-sind wie in \cref{fig:laser-prinzip} (b) zu sehen, zwei Spiegel, die das Laserlicht mehrfach durch das Medium schicken. Dabei gibt es eine
+sind wie in \cref{fig:laser-prinzip} (b) zu sehen, zwei Spiegel verbaut, die das Laserlicht mehrfach durch das Medium schicken. Dabei gibt es eine
 Seite des Resonators, die das gesamte Licht reflektiert. Gegenüberliegend gibt es einen teildurchlässigen Spiegel, der dafür sorgt, dass ein Teil
 des Lichtes den Aufbau verlassen kann. Dieses austretende Licht kann nur über weitere Spiegel oder eine Glasfaser zum benötigten Ort geleitet
 werden. Damit dieses Prinzip überhaupt im Dauerbetrieb funktioniert, muss dem gesamten System genau so viel Energie zugeführt werden, wie
@@ -262,7 +352,7 @@ Dazu werden Dioden oder andere kleine Laser verwendet um mehr Atome im angeregte
     \draw[beam, line width=1.6pt, -{Latex[length=2.6mm,width=2.2mm]}]
          (10.55,0) -- (13.1,0);
     \node[lbl, align=center, anchor=west] at (10.9,0.75)
-         {Laserstrahl\\[-2pt] $\lambda = \unit[1064]{nm}$};
+         {Laserstrahl\\[-2pt] $\lambda = \qty{1064}{\nano\metre}$};
 
     %% Pumpquelle
     \draw[pump] (3.6,-2.5) rectangle (8.4,-1.8);
@@ -272,8 +362,8 @@ Dazu werden Dioden oder andere kleine Laser verwendet um mehr Atome im angeregte
             (\x,-1.75) -- (\x,-0.78);}
 
     %% Beschriftungen
-    \node[lbl, align=center] at (1.68,-1.6)  {Rückspiegel\\[-2pt] $R \approx \unit[100]{\%}$};
-    \node[lbl, align=center] at (10.3,-1.6)  {Auskoppel-\\[-2pt] spiegel\\[-2pt] $R < \unit[100]{\%}$};
+    \node[lbl, align=center] at (1.68,-1.6)  {Rückspiegel\\[-2pt] $R \approx \qty{100}{\percent}$};
+    \node[lbl, align=center] at (10.3,-1.6)  {Auskoppel-\\[-2pt] spiegel\\[-2pt] $R < \qty{100}{\percent}$};
     \node[lbl, align=center] at (6.0,1.15)   {Aktives Medium};
     \node[lbl, align=center, anchor=east] at (1.35,0.55)
          {Verstärkung bei\\[-2pt] jedem Umlauf};
@@ -295,44 +385,45 @@ Fertigungsprozesse mittels Laser \enquote{auf der Umwandlung von auf das Werkst�
 Dabei gibt es drei Effekte, die beim Auftreffen des Laserlichtes auf die Werkstoffoberfläche auftreten können: Reflexion, Transmission
 und Absorption. Die Leistung des Laserlichtes teilt sich also in genau diese drei Teile auf:
 \begin{equation}
-  P_{Laser} = P_{Reflexion} + P_{Transmission} + P_{Absorption}
+  P_\mathrm{Laser} = P_\mathrm{Reflexion} + P_\mathrm{Transmission}
+                   + P_\mathrm{Absorption}
+  \label{eq:laserleistung}
 \end{equation}
 Die Reflexion besitzt dabei für die Bearbeitung des Werkstückes keine Wirkung und wird somit als Verlust betrachtet. Die Absorption ist
 wiederum der relevanteste Effekt, da die absorbierte Energie maßgeblich für den Temperaturanstieg verantwortlich ist. Für die Abisolierung
 der Hairpins ist zudem vorteilhaft, dass die Isolierung und der Leiter aus unterschiedlichen Materialien bestehen. So ist die Eindringtiefe
 des Laserlichts bei Polymeren wesentlich höher als die bei Kupfer. Somit erwärmt sich die Isolierung viel stärker und erreicht somit schneller
 die Verdampfungstemperatur zum Abtragen. Dies wird in Kombination mit einem extrem kurz gepulsten Laserlicht genutzt, um gezielt den
-Kupferdraht nicht zu beschädigen indem sich dieser zu stark erwärmt. Für das photochemische Abtragen von Material, wird so viel Energie
-in Form von Wärme zugeführt, dass die Moleküle von dem festen Zustand schmelzen und schlussendlich verdampfen. Auch ist es möglich
-Material photochemisch zu entfernen, indem die Bindungen der Moleküle durch die Energie des Laserlichtes aufgebrochen werden. Um dies für
+Kupferdraht nicht zu beschädigen indem sich dieser zu stark erwärmt. Für das photothermische Abtragen von Material, wird so viel Energie
+in Form von Wärme zugeführt, dass die Moleküle von dem festen Zustand schmelzen und schlussendlich verdampfen. Eine andere Möglichkeit ist das
+Material photochemisch zu entfernen, indem die Bindungen der Moleküle durch die Energie des Laserlichtes direkt aufgebrochen werden. Um dies für
 das in dieser Arbeit verwendete Setup zu untersuchen, lässt sich folgende Gleichung aufstellen:
 \begin{equation}
-  E_{Laser} = h * c / \lambda
+  E_\mathrm{Photon} = \frac{h \cdot c}{\lambda}
+  \label{eq:photonenenergie}
 \end{equation}
-Bei einer Wellenlänge von 1064 nm, die dem Laserlicht der Cleanlaser-Anlage entspricht, ergibt sich eine Energie von 1,1eV. Die Bindungsenergie von Polymeren liegt wiederum
-bei etwa 3-4eV. Somit ist die Energie des Laserlichtes nicht ausreichend, um die Bindungen der Moleküle aufzubrechen. Es muss sich dementsprechend
+Bei einer Wellenlänge von \qty{1064}{\nano\metre}, die dem Laserlicht der Cleanlaser-Anlage\PEMfootcite{CleanLaser2022} entspricht, ergibt sich eine Energie von \qty{1,17}{\electronvolt}. Die Bindungsenergie von Polymeren liegt wiederum
+bei etwa \qtyrange{3}{4}{\electronvolt}. Somit ist die Energie des Laserlichtes nicht ausreichend, um die Bindungen der Moleküle aufzubrechen. Es muss sich dementsprechend
 bei diesem Setup, um einen thermischen Prozess handeln. Außerdem ist ein physikalischer Schutz in diesen Prozess integriert. So wird der Laserstrahl
 nach dem Abtragen der Isolierung weitestgehend vom Kupferdraht reflektiert. Mit der Kopplung des Laserlichtpunktes mit einer Vorschubeinheit,
 lassen sich so ganze Oberflächen kontinuierlich bearbeiten.
-\todo{Probleme dieses Prozesses?}
-\todo{Was sind Mindestanforderungen?}
 %
 %
-\subsection{Sensorik}\label{sec:sensors}
+\subsection{Sensorik}\label{sec:Sensoren}
 %
-In dieser Arbeit ist gegenüber dem Bewegen von Teilen auch die Überwachung dieser von großer Wichtigkeit.
-So muss kontrolliert werden, ob einzelne Hairpins an bestimmten Positionen vorbeigekommen sind oder einfach nur
-vorhanden sind. Dafür müssen unterschiedliche Sensoren untersucht werden, um eine optimale Wahl zwischen
-geringen Fehlern in der Detektion, Robustheit und passender Geometrie zu treffen.
-Die betrachteten Sensoren teilen sich maßgeblich in optische Systeme, Feldeffekt-Sensoren und mechanische
+Für eine Automatisierung werden verschiedene Komponenten verwendet, wobei die Wahl der Sensorik ein wichtiger Bestandteil der
+Peripherie ist. In der zu realisierenden Analge muss beipielsweise kontrolliert werden, ob einzelne Hairpins bestimmte
+Positionen verlassen oder passiert haben. Dafür müssen unterschiedliche Sensortypen untersucht werden, um eine optimale Wahl zwischen
+geringen Fehlern in der Detektion, Robustheit und passender Geometrie treffen zu können.
+Die in dieser Arbeit betrachteten Sensoren teilen sich maßgeblich in optische Systeme, Feldeffekt-Sensoren und mechanische
 Taster auf.
 %
 %
-\subsubsection{Optische Sensoren}
-Bei diesen Systemen gibt es immer zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
-abgibt, zum anderen ein Fototransistor, der einfallendes Licht detektiert und als elektrisches Signal ausgibt.
-Dieses Signal wird zumeist als direkte analoge Spannung ausgegeben oder in einer internen Auswerteschaltung
-ausgewertet.
+\subsubsection{Optische Sensoren}\label{sec:OptischeSensoren}
+Bei diesen Systemen sind grundsätzlich zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
+abgibt und zum anderen ein Fototransistor, der einfallendes Licht detektieren kann.
+Dieses detektierte Signal wird zumeist als analoge Spannung ausgegeben oder in einer internen Auswerteschaltung gegen einen
+Refernezwert verglichen und als digitales Signal ausgegeben.\medskip
 
 Die Sendediode wird meist als einfach für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
 Hierbei besteht diese aus einem n-dotierten Leitungsband mit einem Überschuss an Elektronen und einem p-dotierten
@@ -340,70 +431,63 @@ Bereich, dem Valenzbereich. Wird nun eine Spannung in Durchlassrichtung angelegt
 des pn-Übergangs verschoben. Dadurch rekombinieren Elektronen des n-dotierten Bereichs mit den Löchern
 des energetisch niedrigeren Valenzbandes. Durch diesen Sprung in ein niedrigeres Energieniveau, wird Energie
 emittiert die mitunter als infrarotes Licht abgestrahlt wird.
-Eine andere häufige Quelle ist ein monochromatischer Laser. Dabei besteht dieser aus drei Bauteilen: Der Pumpe zur
-Energiezufuhr, dem aktiven Lasermedium und dem optischen Resonator. Bei der Energiezufuhr werden hierbei Elektronen
-auf ein höheres Energieniveau gehoben. Sind mehr Teilchen in einem angeregten Zustand als im Grundzustand
-beginnt die Laserwirkung und es entstehen spontane Emissionen. Bei diesen werden Photonen ausgesendet, die
-dem Energiesprung entsprechen. Trifft ein solcher Zündfunke auf ein weiteres angeregtes Atom entsteht eine
-Kettenreaktion durch eine stimulierte Emission. Hier ist es nämlich so, dass das anfängliche Photon die Energie
-vorgibt und das ausgelöste Photon eine exakte Kopie ist. Bewegen sich diese Photonen nun durch das aktive Medium und
-treffen auf einen der Spiegel wird dieser Effekt weiter verstärkt. Durch einen teildurchlässigen Spiegel auf der
-gegenüberliegenden Seite, tritt eine kontrollierte Menge der Photonen aus dem Laser aus.
-Den optischen Sendemodulen gegenüber registriert der Fototransistor die erzeugten Lichtstrahlen. Dabei ist
-dieser eine Kombination aus einer Fotodiode und einem NPN-Transistor. Die Diode besteht dabei wieder aus
+Dem optischen Sendemodul gegenüber registriert ein Fototransistor die erzeugten Lichtstrahlen. Dabei ist
+dieser eine Kombination aus einer Fotodiode und einem Bipolartransistor. Die Diode besteht wieder aus
 einem pn-Übergang. Fällt energiereiches Licht auf diese Schicht werden die Photonen absorbiert und
 Elektronen aus dem Valenzband in das Leitungsband gehoben. Dadurch entsteht eine Ladungstrennung, die einen
 Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom der proportional zur Bestrahlungsstärke
 ist. Dieser Strom wird nun zur weiteren Verstärkung an einen Bipolartransistor geleitet, der den
-niedrigen Fotostrom verstärkt ausgeben kann.\todo{Zu viel Detail, zu wenig in die Tiefe?}
+niedrigen Fotostrom verstärkt ausgeben kann und als Signal verwendet werden kann.\todo{Überarbeiten}
 
 \paragraph{Einweglichtschranken} sind eine physische Ausführung der oben beschriebenen Komponenten. Hierbei
-sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird so detektiert, dass der
-Lichtstrahl unterbrochen wird und dies als elektrisches Signal vom Fototransistor ausgegeben wird. Vorteil
-ist hierbei, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
-Geräte justiert und ausgerichtet werden.
+sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird detektiert, indem der
+Lichtstrahl unterbrochen wird und dies als elektrisches Signal ausgegeben wird. Als Vorteil
+diese Aufbaus gilt, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
+Geräte justiert und ausgerichtet werden\PEMfootcite[S. 137]{Hering.2023}.
 
-\paragraph{Reflexionslichtschranken} sind ähnlich zu Einweglichtschranken, wobei Sender und Empfänger hier
+\paragraph{Reflexionslichtschranken} arbeiten nach einem ähnlich Prinzip wie Einweglichtschranken, wobei Sender und Empfänger aber
 in einem Gehäuse verbaut sind. Es wird ein Reflektor verwendet, um den austretenden Lichtstrahl zurück auf
 den Detektor zu werfen. Der Vorteil dabei ist, dass nicht zu beiden Seiten Kabel sondern nur zu einer Seite
-verlegt werden müssen. Bei dem Detektieren von metallischen Objekten kann es jedoch zu Problemen kommen, dass
-der Sensor dieses Teil nicht detektiert, da der Lichtstrahl nun nicht mehr durch den Reflektor, sondern durch
-das Metall zurückgeworfen wird.
+verlegt werden müssen. Beim Detektieren von metallischen und spiegelnden Objekten kann es jedoch zu Problemen mit
+der Reflexion kommen. Wirft ein anderes Objekt den Lichtstrahl im gleichen Winkel zurück, nimmt der Sensor diese
+Änderung nicht wahr und es wird kein verädnertes Signal ausgegeben\PEMfootcite[S. 138]{Hering.2023}.
 
-\paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Denn auch
-hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt auf einen reflektierten Lichtstrahl kontrolliert.
-Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke von Hell/Dunkel einzustellen. Dies
-birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird.
+\paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Auch
+hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt bewusst auf reflektiertes Licht gewartet.
+Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke zwischen Reflektion (Objektdetektion) und Normalzustand einzustellen. Dies
+birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird\PEMfootcite[S. 137]{Hering.2023}.\medskip
 
 Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschiedene Oberflächen
 der zu registrierenden Teile die Genauigkeit stark beeinflussen.
 Auf der anderen Seite stehen Vorteile, wie eine sehr schnelle Detektion und ein großer Messbereich.
 %
 %
-\subsubsection{Feldeffekt-Sensoren}
+\subsubsection{Feld-Sensoren}
 %
 \paragraph{Induktive Sensoren} funktionieren über ein hochfrequentes Magnetfeld. Dabei besteht der Sensorkopf
 aus einer Spule mit Oszillator. Nähert sich nun ein elektrisch leitfähiges Objekt werden in diesem Wirbelströme
 induziert, die dem Schwingkreis des Sensors Energie entziehen. Dies bewirkt eine Amplitudenabsenkung, welche als
 elektrische Spannung detektiert und als Signal ausgegeben werden kann. Da die Voraussetzung für diesen Sensor
 die elektrische Leitfähigkeit ist, ist dieser Sensor robust gegen Staub, Feuchtigkeit, Schmutz und Licht. Außerdem
-führt die kontaktlose Messung  zu einem geringen Verschleiß und einer resultierenden Langlebigkeit. Für
+führt die kontaktlose Messung zu einem geringen Verschleiß und einer resultierenden Langlebigkeit\PEMfootcite[S. 34-36]{Hering.2023}. Für
 Nichteisenmetalle muss jedoch beachtet werden, dass die Detektion schwächer ist und ein geringer Abstand von Objekt
 zu Sensorkopf vorausgesetzt wird.
 %
 \paragraph{Kapazitive Sensoren} setzen nicht auf einen Schwingkreis sondern auf die Kapazitätsänderung einer
 Elektrode. Dabei gibt es üblicherweise zwei Verfahren zur Ermittlung dieser Kapazitätsänderung, die durch fast
-alle Materialien entsteht. Der Industriestandard funktioniert dabei über das Oszillator-Prinzip. Die Sensorelektrode
-mit ihrer Elektrode ist Teil eines Schwingkreises. Ändert sich nun die Kapazität ändert sich die Resonanzfrequenz,
-wobei dann wieder die verschobene Spannungsamplitude eingelesen werden kann. Ist ein gewisser Schwellwert erreicht, kann ein
-genaues binäres Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
+alle Materialien entsteht. Der Industriestandard funktioniert über das Oszillator-Prinzip. Die Sensorelektrode
+ist Teil eines elektrischen Schwingkreises. Ändert sich die Kapazität der Elektrode ändert sich ebenfalls die Resonanzfrequenz,
+wobei dies in einer verschobene Spannungsamplitude resultiert. Ist nach dem Einlesen dieser Spannung ein gewisser Schwellwert erreicht, kann ein
+digitale Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
 meist in Microcontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer 
-festen Spannung aufgeladen wird und dann die gespeicherte Ladung gezählt wird.
+festen Spannung aufgeladen wird und die in der Kapazität gespeicherten Ladung gezählt wird.
 \begin{equation}
-	Q = C * U
+    Q = C \cdot U \quad \Leftrightarrow \quad U_{C\text{ref}} = \frac{Q_{\text{gesamt}}}{C_{\text{ref}}}
 \end{equation}
-Dies geschieht indem in jedem Zyklus ein großer Referenzkondensator je nach Ladung der Sensorelektrode aufgeladen wird.
-Es wird dann detektiert nach dem wievielten Zyklus ein Schwellenwert der Kondensatorspannung erreicht wurde.
+Dies geschieht indem über ein festgelegten Zyklus ein großer Referenzkondensator die gepeicherte Ladung $Q_\text{sens}$ der Sensorelektrode aufnimmt.
+Während der jedes Zyklus addieren sich die Ladungen zu $Q_\text{gesamt}$ auf und die Spannung am Referenzkondesator steigt druch seine feste Kapazität $C_\text{ref}$ an.
+Erreicht die Kondesatorsapnnung $U_{C\text{ref}}$ einen Schwellenwert, wird die Anzahl der benötigten Zyklen als Signal weiterverarbeitet
+und zu einem Kapazitätswert der Sensorelektrode umgerechnet.
 So lässt sich die Größe der Kapazität der Sensorelektrode sehr genau und mit wenigen Fehlereinflüssen ermitteln.
 Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen eine gewisse Zeit für ein Ergebnis
 braucht.
@@ -411,72 +495,150 @@ braucht.
 \paragraph{Halleffekt-Sensoren} sind ein weiterer Sensortyp, welcher auf Magnetfelder reagiert. Dieser Sensor
 funktioniert so, dass in einem stromdurchflossenen Leiter die Elektronen durch ein Magnetfeld abgelenkt werden.
 Diese Ablenkung führt zu einer Überkonzentration und einem Defizit an Elektronen an den Rändern. Dieser Unterschied
-lässt sich als Spannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt aber
-voraus, dass ein ferromagnetisches oder magnetisches Objekt detektiert werden muss.
+lässt sich als Hallspannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt 
+voraus, dass ein ferromagnetisches oder permanentmagnetisches Objekt detektiert wird\PEMfootcite[S. 58-60]{Hering.2023}.
 %
 %
 \subsubsection{Mechanische Sensoren}
-
-Die letzte Gruppe an Sensoren zum Detektieren von Objekten ist die wohl trivialste Methode. Ein Taster, der
+Die letzte Gruppe an Sensoren zum Detektieren von Objekten ist die wohl trivialste Methode: ein Taster, der
 bei mechanischem Druck auslöst und ein klares elektrisches Signal ausgibt. Weiter gibt es noch die Möglichkeit
 kein separates Bauteil zu verwenden, sondern das Objekt selber als Leiter zu benutzen. Dabei könnte
-das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann ausgewertet werden
-kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf der genau
-vordefinierten Position landen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
+das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann elektronisch ausgewertet werden
+kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf ein
+vordefinierten Position treffen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
 und Verschmutzung leicht zu Fehlern führen.
 %
 %
-\subsection{Aktuatorik}\label{sec:Aktuatorik}
-Die Aktuatorik beschreibt den Bereich der Antriebstechnik. Es geht also um die Erzeugung von Bewegungen, aus Signalen
-von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktuatoren, die in der Industrie, Biomedizin und weiteren
-Anwendungen verwendet werden.
+\subsection{Aktorik}\label{sec:Aktorik}
+Die Aktorik beschreibt den Bereich der Antriebstechnik. Es geht also um die Erzeugung von Bewegungen, aus Signalen
+von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktoren mit unterschiedlichen Aufbau, für spezifische 
+Anforderungen in der Industrie.
 %
 \subsubsection{Pneumatik}
-Die Pneumatik ist eine sehr häufig angewendete Methode der Bewegungsrealisierung in der Industrie.\\
-\cref{fig:PneumatikZylinder} zeigt einen groben Aufbau eines pneumatischen Zylinders. Das Funktionsprinzip
-ist, dass Druckluft (meist 6 bar) mittels elektronisch gesteuerten Reglern in die Kammern strömt. Zum Ausfahren
-des Zylinders wird beispielsweise Druck auf Anschluss A gegeben und die rechte Kammer mit Anschluss B entlüftet wird.
-Die ausgeübte Kraft ergibt sich zu
+Die Pneumatik ist eine sehr häufig angewendete Methode der Bewegungsrealisierung in der Industrie.\medskip
+\cref{fig:Pneumatikzylinder} zeigt einen groben Aufbau eines pneumatischen Zylinders. Das Funktionsprinzip
+ist, dass Druckluft mittels elektronisch gesteuerten Reglern in die Kammern strömt. Zum Ausfahren
+des Zylinders wird beispielsweise Druck auf Anschluss 1 gegeben, während die rechte Kammer mit Anschluss 2 entlüftet wird.
+Die beim Ausfahren wirkende Kraft ergibt sich aus dem anliegenden Druck und der wirksamen Kolbenfläche zu
 \begin{equation}
-	F = p * A
+  F_\mathrm{aus} = p \cdot A_\mathrm{K} \cdot \eta ,
+  \qquad A_\mathrm{K} = \frac{\pi}{4} \, d_\mathrm{K}^{2}
+  \label{eq:pneumatik_ausfahren}
 \end{equation}
-abzüglich der Reibung. Ein Einfahren der Kolbenstange erfolgt durch das Wechseln des Drucks in den jeweiligen Kammern.
+wobei der Wirkungsgrad $\eta$ die Reibung zwischen Kolbendichtung und Zylinderrohr
+berücksichtigt. Beim Einfahren verringert die Kolbenstange die wirksame Fläche zur
+Ringfläche, sodass bei gleichem Druck eine geringere Kraft zur Verfügung steht:
+\begin{equation}
+  F_\mathrm{ein} = p \cdot \left( A_\mathrm{K} - A_\mathrm{St} \right) \cdot \eta ,
+  \qquad A_\mathrm{St} = \frac{\pi}{4} \, d_\mathrm{St}^{2}
+  \label{eq:pneumatik_einfahren}
+\end{equation}
+Der Druck p wird durch die angeschlossenen Druckluftleitung definiert. Die Fläche $A_\mathrm{K}$ stellt die vom
+Zylinder effektive runden Oberfläche und $A_\mathrm{St}$ die des Stängels dar. In  Ein Einfahren der Kolbenstange erfolgt durch das Wechseln des Drucks in den jeweiligen Kammern.
 Hierbei ist zu beachten, dass die effektive Kolbenfläche hier durch die Stange weiter reduziert ist und somit eine geringe
-Kraft erreicht wird.\\\\
+Kraft erreicht wird.\medskip
 
 \begin{figure}[htbp]
-    \centering
-        \includesvg[width=0.7\textwidth]{figs/pneumatikzylinder_schnitt} 
-    \caption{Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders}
-    \label{fig:PneumatikZylinder}
+\centering
+\begin{tikzpicture}[
+  font=\sffamily\scriptsize,
+  wand/.style={draw=rwthgrau,line width=0.7pt,pattern=north east lines,
+               pattern color=rwthgrau!60},
+  lbl/.style={font=\sffamily\scriptsize,text=rwthgrau},
+  leader/.style={rwthgrau,line width=0.4pt},
+  luft/.style={-{Stealth[length=2mm,width=1.6mm]},rwthblau,line width=0.8pt},
+  bem/.style={{Stealth[length=1.6mm,width=1.3mm]}-{Stealth[length=1.6mm,width=1.3mm]},
+              rwthblau,line width=0.5pt},
+]
+\def\xl{0}   \def\xr{9}      % Rohr aussen
+\def\yb{0}   \def\yt{2.6}
+\def\w{0.28}                 % Wandstaerke
+\def\xk{3.65} \def\dk{0.7}    % Kolben
+\def\yrb{1.02} \def\yrt{1.58}% Kolbenstange
+ 
+% ---- Kammern ----
+\fill[rwthblau25] (\xl+\w,\yb+\w) rectangle (\xk,\yt-\w);
+\fill[rwthblau10] (\xk+\dk,\yb+\w) rectangle (\xr-\w,\yt-\w);
+\fill[white] (\xk+\dk,\yrb) rectangle (\xr-\w,\yrt);
+ 
+% ---- Zylinderrohr ----
+\fill[wand] (\xl,\yb) rectangle (\xr,\yb+\w);
+\fill[wand] (\xl,\yt-\w) rectangle (\xr,\yt);
+\fill[wand] (\xl,\yb) rectangle (\xl+\w,\yt);
+\fill[wand] (\xr-\w,\yb) rectangle (\xr,\yrb);
+\fill[wand] (\xr-\w,\yrt) rectangle (\xr,\yt);
+\draw[draw=rwthgrau,line width=0.7pt] (\xl,\yb) rectangle (\xr,\yt);
+ 
+% ---- Kolben + Stange ----
+\fill[rwthblau75,draw=rwthblau,line width=0.7pt]
+     (\xk,\yb+\w) rectangle (\xk+\dk,\yt-\w);
+\fill[rwthblau25,draw=rwthblau,line width=0.7pt]
+     (\xk+\dk,\yrb) rectangle (10.6,\yrt);
+ 
+\draw[rwthblau,line width=0.5pt] (\xk,\yb+\w+0.12) -- (\xk+\dk,\yb+\w+0.12);
+\draw[rwthblau,line width=0.5pt] (\xk,\yt-\w-0.12) -- (\xk+\dk,\yt-\w-0.12);
+ 
+% ---- Anschluesse ----
+\draw[wand] (0.9,\yt) rectangle (1.5,\yt+0.42);
+\draw[wand] (7.5,\yt) rectangle (8.1,\yt+0.42);
+\draw[luft] (1.2,\yt+0.95) -- (1.2,\yt+0.1);
+\draw[luft] (7.8,\yt+0.1) -- (7.8,\yt+0.95);
+ 
+% ---- Bewegungsrichtung ----
+\draw[-{Stealth[length=3mm,width=2.4mm]},rwthblau,line width=1.1pt]
+     (9.9,2.15) -- (11.6,2.15);
+\node[lbl,text=rwthblau,anchor=south] at (10.75,2.27) {Ausfahren};
+ 
+% ---- Bemassung ----
+\draw[bem] ($(\xk,\yb+\w)+(-0.35,0)$) -- ($(\xk,\yt-\w)+(-0.35,0)$);
+\node[lbl,text=rwthblau,anchor=east] at ($(\xk,1.3)+(-0.42,0)$) {$d_\mathrm{K}$};
+\draw[bem] (10.85,\yrb) -- (10.85,\yrt);
+\node[lbl,text=rwthblau,anchor=west] at (10.95,1.3) {$d_\mathrm{St}$};
+ 
+% ---- Beschriftungen ----
+\node[lbl,anchor=south] at (1.2,\yt+1.02) {Zuluft, Anschluss 1};
+\node[lbl,anchor=south] at (7.8,\yt+1.02) {Abluft, Anschluss 2};
+\draw[leader] (0.45,\yb-0.08) -- (0.45,-0.75);
+\node[lbl,anchor=north] at (0.45,-0.72) {Zylinderrohr};
+\draw[leader] (\xk+0.5*\dk,\yb+\w) -- (\xk+0.5*\dk,-0.75);
+\node[lbl,anchor=north] at (\xk+0.5*\dk,-0.72) {Kolben};
+\draw[leader] (9.9,\yrb) -- (9.9,-0.75);
+\node[lbl,anchor=north] at (9.9,-0.72) {Kolbenstange};
+\node[lbl,text=rwthblau] at (1.9,1.3) {$p$};
+ 
+\end{tikzpicture}
+\caption[Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders]{Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders}
+\label{fig:Pneumatikzylinder}
 \end{figure}
 
 Es gibt eine Menge Vorteile für pneumatische Systeme: So ist ein solches System im Vergleich zu anderen Aktuatoren leichter
 und in sehr kleinen Baugrößen verfügbar.\PEMfootcite{ali_pneumatic_2009}
 Außerdem bietet es eine extreme Kraft- und Geschwindigkeitsdichte, obwohl der Aufbau einfach ist und wenige bewegte Teile
 beinhaltet. Zudem ist es möglich dauerhaft die maximale Kraft zu halten ohne die Dauerleistungsfähigkeit zu unterbrechen.
-Weiter ist eine Ansteuerung für ein Aus- und Einfahren des Zylinders mit einfachen binären Signalen möglich.\\
+Weiter ist eine Ansteuerung für ein Aus- und Einfahren des Zylinders mit einfachen binären Signalen möglich.\medskip
+
 Dem stehen erhebliche regelungstechnische Einschränkungen gegenüber. Aufgrund der Kompressibilität der Luft, 
 hoher Reibkräfte sowie des Totbandes der Ventilschieberbewegung weist ein pneumatischer Antrieb ein stark 
 nichtlineares Verhalten auf, wodurch eine genaue Positionierung in Zwischenstellungen nur mit erheblichem 
-regelungstechnischem Aufwand erreichbar ist.\PEMfootcite{Jamian.2020}
+regelungstechnischem Aufwand erreichbar ist\PEMfootcite{Jamian.2020}.
 Hinzu kommen Nichtlinearitäten durch ungleichmäßigen Ventildurchfluss und Laufzeitverzögerungen der Druckluft.\PEMfootcite{Beater.2007}
 %
 \subsubsection{Elektromechanische Aktuatorik}
 Elektromechanische Antriebe wandeln elektrische Energie über einen Motor in eine rotatorische Bewegung, die durch ein 
 Übertragungselement in eine translatorische Bewegung überführt wird. Dabei gibt es Systeme mit Lageregelung, die die aktuelle
 Motorposition als Signal zurückgeben, oder Systeme ohne eine externe Überprüfung. Genau hierfür gibt es zwei gängige Motorarten,
-den Servomotor mit einer internen Regelung und einen Schrittmotor, der normalerweise ohne eine Lageregelung auskommt. Dabei ist schon
-der Aufbau und die Ansteuerung völlig unterschiedlich.\\
+den Servomotor mit einer internen Regelung und einen Schrittmotor, der normalerweise ohne eine Lageregelung auskommt.\medskip
+
+\paragraph{Motoren}
 Ein Servomotor besitzt einen geschlossenen Regelkreis: Ein Encoder erfasst die Ist-Lage, die Regelung korrigiert die Abweichung 
 kontinuierlich und meldet eine Überschreitung der zulässigen Abweichung als Störung.\PEMfootcite{Stoelting.2011}
-Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht die Position anzufahren. Dabei zieht der 
+Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht die Position anzufahren. Dabei bezieht der 
 Motor je nach benötigter Kraft und Geschwindigkeit die passende Menge an elektrischer Leistung. Physisch sind Servomotoren meist
-darauf ausgelegt, eine geringe Drehzahl mit aber einem hohen Drehmoment zu erreichen. Dazu wird mit einem Getriebe die hohe Drehzahl
-des Elektromotors in eine geringe Drehzahl umgewandelt. Dies wiederum bedeutet aber auch erhöhte Kosten und einen erhöhten Bauraum.
-Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren der Positionen übernimmt.\\
+darauf ausgelegt, eine geringe Drehzahl mit einem hohen Drehmoment zu erreichen. Dazu wird mit einem Getriebe die hohe Drehzahl
+des Elektromotors in eine geringere Drehzahl umgewandelt. Dies wiederum bedeutet aber auch erhöhte Kosten und einen erhöhten Bauraum.
+Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren der Positionen übernimmt.\medskip
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \begin{tikzpicture}[
     font=\small,
@@ -507,13 +669,14 @@ Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren d
 
 Der Schrittmotor wiederum wandelt elektrische Impulse in diskrete Winkelschritte um. Hier ist es also möglich ohne Lagerückführung
 zu arbeiten, da jeder Impuls ein fest definierter Schrittwinkel ist.\cref{fig:schrittmotor-prinzip} Bei diesem Betrieb müssen aber die Betriebsgrenzen eingehalten
-werden, da sonst Schritte unbemerkt übersprungen werden können.\PEMfootcite{Stoelting.2011} Dies stellt ein großes Problem dar, weil
+werden, da sonst Schritte unbemerkt übersprungen werden können\PEMfootcite{Stoelting.2011}. Dies stellt ein großes Problem dar, weil
 die aktuelle Ist-Position nicht sicher festgestellt werden kann. Für eine dementsprechende Kalibrierung verwenden viele Systeme Endstops
-oder Schalter mit denen dann eine feste Position definiert werden kann und dann von da aus gezählt werden kann. Die folgende Abbildung
-zeigt das grundsätzliche Prinzip der schrittweisen Rotation der Schrittmotoren, dabei haben reale Motoren weitaus mehr Pole und können somit
+oder Schalter mit denen dann eine feste Position definiert werden kann. Von dieser lassen sich unter der Annahme eines fehlerfreien Betriebes Schrittezählen und aufaddieren.\medskip
+
+Die folgende \cref{fig:schrittmotor-prinzip} zeigt das grundsätzliche Prinzip der schrittweisen Rotation der Schrittmotoren, dabei haben reale Motoren weitaus mehr Pole und können somit
 sehr genaue Schritte erzielen. Eines der größten Probleme von Schrittmotoren ist dabei nicht nur die begrenzte Schrittgröße, sondern besonders
-die starke Hitzeentwicklung, da dauerhaft der maximale Haltestrom fließen muss, da die wirkende Kraft auf die Welle nicht gemessen werden kann
-und somit zur Reduzierung eines Übersprungs immer an sein muss.\
+die starke Hitzeentwicklung. Dies leigt am dauerhaft fleißenden Haltestrom, der für die Fixierung der Welle benötigt wird. Wird der Motor nämlich
+deaktiviert, können bei wirkender Kraft auf die Welle nicht regesriebare Übersprünge passieren und eine neu Initialisierung muss durchgeführt werden.
 
 \begin{figure}[htbp]
   \centering
@@ -591,17 +754,18 @@ und somit zur Reduzierung eines Übersprungs immer an sein muss.\
   \label{fig:schrittmotor-prinzip}
 \end{figure}
 
+\paragraph{Mechanische Übersetztung}
 Weiter gibt es mehrere Möglichkeiten die rotatorische Bewegung je nach Bedarf in eine lineare Bewegung umzuwandeln. 
 Der Servomotor wird meistens in Verbindung mit einem Zahnriemen oder einer festen geraden Zahnstange verwendet.\cref{fig:uebertragungselemente} Dabei arbeitet
 dieses System meistens in einem kleinen festen Bereich, da die meisten Servomotoren nur auf eine volle Umdrehung ausgelegt sind. 
-Hier wird besonders eine hohe Genauigkeit und Kraft ermöglicht.\\
+Hier wird besonders eine hohe Genauigkeit und Kraft ermöglicht.\medskip
 
-Auf der anderen Seite bietet der Schrittmotor die Möglichkeit ohne Limits zu rotieren. Dies wird häufig in Kombination mit einer Spindel
+Auf der anderen Seite bietet der Schrittmotor die Möglichkeit ohne Beschränkungen zu rotieren. Dies wird häufig in Kombination mit einer Spindel
 eingesetzt, die durch ihr Gewinde einen Schlitten mit Mutter linear bewegen kann. Mit einer passenden Steigung in der Spindel kann man
 mit diesem Setup extrem genaue Punkte anfahren. Auch ein Zahnriemen kann sehr gut mit einem Schrittmotor
-verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sind.\\
+verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sind.\medskip
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \resizebox{\linewidth}{!}{%
   \begin{tikzpicture}[
@@ -691,38 +855,40 @@ Eingang stellt dabei das Feedback von Sensoren oder einer Bedieneinheit da. Als 
 an Aktuatoren oder andere Systeme schickt.
 
 \subsubsection{Steuerungsarchitektur}\label{sec:Steuerungsarchitektur}
-Die Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung bestehen. Dabei muss die zeitkritische
-Ansteuerung und die Koordination des Gesamtablaufs analysiert werden. Der Aufbau diese Systems wird dabei aus mehreren Ebenen bestehen,
+Die zu entwickelnde Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung bestehen. Dabei muss die zeitkritische
+Ansteuerung und die Koordination des Gesamtablaufs analysiert werden. Der Aufbau dieses Systems wird dabei aus mehreren Ebenen bestehen,
 die die einzelnen Aufgaben untereinander verteilen. Das Hieraische Prinpzip ist dabei in die direkten Steuereinheiten der Aktuatoren
-und in die Koordinationseinheit unterteilt.
+und in die Koordinationseinheit unterteilt.\bigskip
 
-Für die Entwicklung eines solchen Systems lässt sich in einem zentralen, hiearischen und heterarchischen Aufbau unterteilen.
+Für die Entwicklung eines solchen Systems lässt sich in einen zentralen, hiearischen und heterarchischen Aufbau unterteilen.
 Diese System müssen für die Wahl auf das Ausfallverhalten, der Reaktionszeit, die Erweiterbarkeit, den Integrationsaufwand und
-die Testbarkeit einzelner Subsysteme geprüft werden. 
+die Testbarkeit einzelner Subsysteme geprüft werden.\bigskip 
 
 Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktoren) zur Steurerungseinheit.
 Diese verarbeitet die Daten direkt und schickt Befehle wiederzurück. Als Vorteile sind ein einfacher physischer und programiertechischer
 Aufbau, sowie eine einfache Datenkosistenz. Dem gegenüber stehen wegen dem Nutzen eines Hauptknoten die geringe Ausfallsicherheit. 
-Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtesystem in einem unsichern oder fehlerhaften Status. Außerdem
+Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtesystem in einem unsichern oder fehlerhaften Zustand. Außerdem
 lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im vorhinein festgelegt werden müssen.
-Auch das Prüfen einzelner Subsysteme ist nach der Montage aller Komponetten und Anbauteile möglich.
-Der nächste Schritt, die hierarchische Steuerungsarchitektur, aus einer Pyramide mit mehreren Steurungsebenen aufgebaut. Dabei
-deligiert jede Ebene Aufgaben an die darunterleigende Ebene, die diese selbstständig und mit lokalen Details löst. Die höchste 
-Ebene dient der Koordination und dem Behalten des globalen Überblicks. Dieses Prinzip ermöglicht eine enorme Skalierbarkeit,
-da Subsystem eigenständig arbeiten können und nur die Befehle eines Masters befolgen muss. Diese klaren und strukturierten 
+Auch das Prüfen einzelner Subsysteme ist erst nach der Montage aller Komponenten und Anbauteile möglich.\medskip
+
+Der nächste Schritt, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steurungsebenen aufgebaut. Dabei
+deligiert jede Ebene Aufgaben an die darunterliegende Ebene, die diese selbstständig löst. Die höchste 
+Ebene dient der Koordination der globalen Parameter. Dieses Prinzip ermöglicht eine enorme Skalierbarkeit,
+da Subsystem eigenständig arbeiten können und nur den Befehlen eines Masters folgen muss. Diese klaren und strukturierten 
 Zuständigkeiten führen zu einer Entlastung der Hauptebene und können Fehler begrenzen. Auch besteht die Möglichkeit weitere
 Subsysteme nachträglich einzugliedern. Als Nachteile gelten hier der starre und lange Informations- und Entscheidungsfluss 
-durch alle Ebenen, sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkablung der einzelen Ebenen.
+durch alle Ebenen, sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkablung der einzelen Ebenen.\medskip
+
 Das komplexeste und modernste System arbeite nach dem heterarischen Prinzip. Hier wird ebenfalls in mehrere Subsysteme aufgeteilt, 
 wobei aber die Kommunikation und Aufgabenverteilung über Prioritätssysteme untereinander verhandelt wird. Dies bietet eine
 extreme Felxibilität und eine hohe Ausfallsicherheit, da das System nicht statisch festgelegt ist. Es wird als optimierte 
-Methode zu einem statischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationszeiten minimiert werden und eine 
-Überprüfung einzelner Ebenen weiterhin erhalten bleibt. Die Herausforderung sind hierbei aber eine komplexe Programmierung 
-und ein schwer vorhersehbares Systemverhalten.
+Methode zu dem hieraischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationszwege minimiert werden. Zudem lassen
+sich einzelner Ebenen weiterhin überprüfen. Die Herausforderung sind hierbei aber eine komplexe Programmierung 
+und ein schwer vorhersehbares Systemverhalten.\medskip
 
-Für ein konkreten Aufbau werden die einzelenn Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
-arbitet nach dem hieraischen Prinzip, bei dem der Master eine Abfrage oder Befehl initialisiert und ein Slave nur nach Erhalt
-dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selber welche Peripehriegeraäte
+Für ein konkreten Beipiel-Aufbau werden die einzelenn Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
+arbeitet nach dem hieraischen Prinzip, bei dem der Master eine Abfrage oder Befehl initialisiert und ein Slave nur nach Erhalt
+dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selber welche Peripehriegeräte
 angesprochen werden müssen. Aus dieser festen Zuteilung folgt ein zyklisches Abfragen und damit ein kollisionsfreier Buszuriff. 
 Ein Bus beschreibt dabei die Kommunikationsschnittstellen zwischen den einzelnen Komponenten, die aber durch festgelegte Bandbreiten
 beschränkt sind. Das beschriebene Beipiel entspricht einem einfachen Aufbau, wo bei komplexere Systeme mit weiteren gestaffelten Ebenen
@@ -774,61 +940,71 @@ arbeitet.
 \end{figure}
  
 
-\subsubsection{Mikrocontroller}
+\subsubsection{Mikrocontroller}\label{sec:Mikrocontroller}
 Der Mirkokontrroller bietet sich als Ein-Chip-System hevorragend als Steuerbaustein an. Ein solcher Controller kommt mit interner
 Recheneinheit, Speicher und einer integrierten Peripherie zur Steuerung der Aus- und Eingänge. Diese Peripherie stellt
-einen Hauptvorteil gegenüber eines handelsüblichen Computern, der über mehr Rechenleistung verfügt, dar.
+einen Hauptvorteil gegenüber eines handelsüblichen Computers, der über mehr Rechenleistung verfügt, dar.
 
 Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar. Der Timer wird zum 
-Erzeugen von Steuersignale oder interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogespannungen verwednet. Dieser
-wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzeten Auflösung ein. Ein 
-GPIO Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
-ein die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
+Erzeugen von Steuersignalen oder interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogespannungen verwednet. Dieser
+wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzeten Auflösung um. Ein 
+GPIO-Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
+die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
 
-Als Logikpegel gibt zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des 
+Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des 
 Mikrocontrollers, die Höhe eines digitalen Signals und die maximale zulässige Spannung an den einzelen Aus- und Eingängen. In den
 Datenblättern der konkreten Komponete sind zulässige kurzzeitige Spitzenwerte, für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
 für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegt, gibt es nach geschaltete Treiberstufen.
 Für eine Kompatibilität zwischen zwei Spannungsebenen bedarf es eines Pegelwandelers, der die jeweilige Signalhöhe anpasst.
 
-In der Industrie werden vermehrt SPS-Systeme von Herstellern wie Beckhoff oder Festo verwendet. Diese sind auf Echtzeitanwendungen 
-und industielle Robustheit optimiert. Besonders die Beschaffungskosten und eine geringe Individualsierbarkeit stellt dieses System
-auf Prbleme bei dem Prototypenbau.\todo{Kann das nciht raus?}
+In der Industrie werden vermehrt SPS-Systeme im Gegensatzt zu Mirkocontrolleren verwendet. Diese sind auf Echtzeitanwendungen 
+und industielle Robustheit optimiert. Außerdem gibt es Standartisierungen, die eine hohe Komaptibilität zwischen 
+Peripheriegeräten ermöglicht. Besonders die Beschaffungskosten und eine geringe Individualsierbarkeit auf Layoutebene stellt 
+für den Prototypenbau Probleme dar.
 
 \subsubsection{Signalübertragung}
 Für das Übertragen von Signalen unterscheidet man in der Kodierungsart der Daten und den Teilnehmern einer Signalleitung. Ein Bussystem
-definiert sich durch mehrere an einer Leitung befindlichen Teilnehemern. Einfache Signale wiederum besitzen nur zwei Teilnemher und 
+definiert sich durch mehrere an einer Leitung befindlichen Teilnehemern. Einfache Signale wiederum besitzen nur zwei Teilnehmer und 
 der Imfomationsfluss ist fest vom Sender zum Empfänger definiert. Die Information kann in unterschiedlichen Eigenschaften einer
 elektrischen Spannung kodiert sein. So lassen sich Parameter wie Amplitude und Frequenz entsprechen Ausgeben und wieder Einlesen.
 
 \paragraph{Digitale Schaltsignale}     
-arbeiten mit zwei definierten Schaltpegeln, die meist der Versogungsspannung und Ground entsprechen. Für das Schalten eines LOW
+arbeiten mit zwei definierten Schaltpegeln, die meist der Versogungsspannung und GND entsprechen. Für das Schalten eines LOW
 Ausgangs wird GND also die niedrigste Spannung auf die Leitung gegeben. Beim Schalten eines HIGH Ausgangs wird wiederum 
 weggeschaltet und der Ausgang schwebt auf einem undifinerten Wert. Hierfür muss ein externer oder ein intern verbauter Pull-up-Widerstand
 eingesetzt werden, um den Pegel aktiv mittels der Versorgungsspannung auf HIGH zu ziehen. Durch das Einlesen ebend dieser 
 HIGH und LOW Pegel, lassen sich einfache Schaltvorgänge durchführen.
 
 \paragraph{Analoge Spannungssignale}
-basieren auf dem kontinierlichen Wert deren Amplitude. Zum Beispiel wandlet ein Sensor die zu messende Größe in einen Spannungswert
-um. Dieser wandert dann druch die Leitung bis zu einem ADC, der dieses kontinuierliche Signale in einen diskreten Spannungswert umwandelt.
+basieren auf dem kontinierlichen Wert deren Amplitude. Zum Beispiel wandelt ein Sensor die zu messende Größe in einen Spannungswert
+um. Dieser wandert dann durch die Leitung bis zu einem ADC, der dieses kontinuierliche Signale in einen diskreten Spannungswert umwandelt.
 Diese binäre Zahl kann dann vom Chip ausgewertet werden. Wichtig ist hierbei die Auflösung des ADC, die durch Quantisierungfehler
-und den Abtastschritten bedingt ist. Außerdem wird immer gegen einen Referenzwert verglichen, der nicht höher als die Versorgungsspannung
+und den Abtastschritten bedingt ist (vgl. \cref{sec:Mikrocontroller}). Außerdem wird immer gegen einen Referenzwert verglichen, der nicht höher als die Versorgungsspannung
 ist. Aus diesem Grund müssen bei Signalen mit höhere Amplitude ein dedizierter Spannungsteiler für die Verringerung der Spannung
-am Eingang des ADC eingesetzt werden.
+am Eingang des ADC eingesetzt werden. Das Ausgeben einer analogen Spannung erfolgt auschließlich durch Sensoren, da das künstliche
+Erzeugen einen geoßen Aufwand an elektrischen Komponenten benötigen würde.
 
 \paragraph{Pulsweitenmodulation} 
-nutzt geschaltet digitale Pegel mit definirter Frequenz und Tastgrad. Innerhalb einer Periode wird also bis zum Wert des Tastgrades
-der Ausgang auf HIGH gestellt und die restiliche Zeit auf LOW. Eine Möglichkeit dieses Signal zu verwenden ist es den arithmetischen 
-Mittelwert der Perioden einzusetzten. So lassen sich durch elektrische Filter und Lasten ein gleiches Leistungsniveau einzustellen,
-wie mit einer variablen Spannungs- und Stromquellen. Die Frequnez ist bei diesem Prinzip frei wählbar.
+nutzt ein digitales Rechtecksignal mit fester Frequenz, dessen Tastgrad (das
+Verhältnis der HIGH-Dauer zur Periodendauer) die eigentliche Information trägt.
+Für dessen Auswertung sind zwei Prinzipien gebräuchlich.
 
-Eine andere Möglichkeit nutzt die absolute Impulsdauer zur Rekonstruktion des Tastgerades. Damit lässt sich verlässlich und ohne
-Störfaktoren ein Wert übermitteln. Für dieses Prinzip müssen Sender und Empfänger für die gleiche festgelgte Frequenz arbeiten.
+Beim ersten wird der zeitliche Mittelwert des Signals genutzt. Träge Lasten oder
+nachgeschaltete Filter glätten die Schaltflanken, sodass sich über den Tastgrad
+dasselbe Leistungsniveau einstellen lässt wie mit einer variablen Spannungsquelle.
+Die Frequenz muss dafür deutlich oberhalb der Zeitkonstante der Last liegen, ist
+darüber hinaus aber frei wählbar.
+
+Beim zweiten Prinzip trägt die absolute Impulsdauer den Wert, wie es bei der
+Ansteuerung von Servomotoren üblich ist. Da die Information in der Zeit und nicht in
+der Amplitude liegt, ist die Übertragung unempfindlich gegenüber Schwankungen der
+Versorgungsspannung. Voraussetzung ist, dass Sender und Empfänger denselben
+Impulsdauerbereich verwenden.
 
 \subsubsection{Bussysteme}
-Ein Bussystem arbeitet nicht starr wie die voher beschireben einfach Signalübertragungen. Allgemein verwenden mehrere Teilnehmer 
+Ein Bussystem arbeitet nicht starr wie die voher beschriebenen einfachen Signalübertragungen. Allgemein verwenden mehrere Teilnehmer 
 mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Der Vorteile dieser Systeme ist eine bidirektionaler 
-Informationsfluss und einen geringeren Leitungsaufwand gegenpber den einfachen direkt Verbindungen. Die konkreten Systeme
+Informationsfluss und einen geringeren Leitungsaufwand gegenüber den einfachen direkt Verbindungen. Die konkreten Systeme
 lassen sich in syschrone mit einer dedizierten Taktleitung und asysnchrone Prinzipien mit festgelegter Baudrate unterscheiden.
 In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgezeigt und verglichen.
 
@@ -869,14 +1045,14 @@ In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgeze
 
 \paragraph{I\textsuperscript{2}C}
 funktioniert über zwei Leitungen mit Pull-up-Widerständen. Die beiden Leitungen sind jeweils für das Vorgeben einer Clock (SCL)
-für eine Sychronisation des gesamten Systems und dem Führen der eigentlichen Daten (SDA). Elektronsich kann dabei jeder Teilnehmer
-nur aktiv auf ein LOW Pegel schalten und das Treiben auf HIGH wird druch die Verbindung der Pull-up-Widerstände gegen die Versorgungsspannung
-erzielt. Die Clock gibt der Frequnez des gesamten Systm vor in dem je Periode zwischen HIGH und LOW gewechselt wird.
+für eine Sychronisation des gesamten Systems und dem Führen der eigentlichen Daten (SDA) zuständig. Elektronsich kann dabei jeder Teilnehmer
+nur aktiv auf ein LOW Pegel schalten und das Treiben auf HIGH wird durch die Verbindung der Pull-up-Widerstände gegen die Versorgungsspannung
+erzielt. Die Clock gibt die Frequenz des gesamten Systems vor, in dem jede Periode zwischen HIGH und LOW gewechselt wird.
 Das Kommunizieren beginnt mit der Start-Bedingung durch den Master, die die SDA-Leitung, während SCL auf HIGH steht, aktiv auf LOW.
-Danach folgt im Takt der Glock das senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK) 
-in dem dieer die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentiche Datenübertragung, die Stückweise in
-8-Bit Paketen mit nachfolgender Bestätigung eines Paketes druch ein ACK erfolgt. Der Master beendet die Übertragung, indem er 
-die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen diese Prinzip sit druch eine
+Danach folgt im Takt der Clock das senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK) 
+in dem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung, die Stückweise in
+8-Bit Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK erfolgt. Der Master beendet die Übertragung, indem er 
+die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzip ist durch eine
 maximale Teilnehmeranzahl und Leitungslänge beschränkt. 
 
 \subsubsection{Leistungselektronik und Motortreiber}
@@ -886,10 +1062,10 @@ die einer weiteren Kontrolle unterliegen. Als Motortreiber für Schrittmotoren w
 mit vier hochleistungs Mosfets verwendet. Wie in \cref{fig:h-bruecke} aufgezeigt, lässt sich die Versogungsspannung des Motors Vm auf
 die Wicklung geben. Da der Stromansteig durch die Induktivität L der Wicklung begrenzt ist, kann die Leistung und damit das Drehmoment
 nicht mehr durch schnelleres Schalten erzeilt werden. Es ist zu beachten, dass die Mosfets eines Halbzweiges niemals gleichzeitig
-sodnern nur mit einem Verzögerungsglied geschaltet werden dürfen, da sonst hohe Kurzschlussströme entstehen können. Durch das Umschalten
-der Mosfetkombination, kann die Stromrichtung druch die Wicklung umgedreht werden. Dabei arbeiten T1, T4 und T3, T2 als Paar.
-Die Besonderheit bei Schrittmotoren ist der Einsatz von gegneineander verschibene Wirkungströme zum Erzeugen eiens Mikroschrittes.
-Druch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.\todo{Umschreiben!}
+sondern nur mit einem Verzögerungsglied geschaltet werden dürfen, da sonst hohe Kurzschlussströme entstehen können. Durch das Umschalten
+der Mosfetkombination, kann die Stromrichtung durch die Wicklung umgedreht werden. Dabei arbeiten T1, T4 und T3, T2 als Paar.
+Die Besonderheit bei Schrittmotoren ist der Einsatz von gegneineander verschubene Wirkungströme zum Erzeugen eines Mikroschrittes.
+Durch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.
 
 \begin{figure}[htbp]
   \centering
@@ -945,19 +1121,12 @@ Druch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.\t
   \label{fig:h-bruecke}
 \end{figure}
 
-\subsection{Normen}\label{sec:NormenVorgaben}
-Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 und 2206 beschriebenen Methoden. Diese werden in \cref{sec:Anforderung} genauer
+\subsection{Verfahren}\label{sec:Verfahren}
+Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 beschriebene Methode zur Entwicklung von Produktionssstemen. Diese werden in \cref{sec:Anforderung} genauer
 beschrieben, wobei es aber hilft jetzt schonmal kurz darzustellen nach welchem Prinzip in dieser
 Arbeit verfahren wird. So wird das am Ende zu entwickelnde Gesamtsystem in mehrere Subsysteme unterteilt.
 Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkt und Anforderungen. Für eine Analyse und Betrachtung wird
 also je nach Tiefe nur der innere Aufbau, der die festgelegten Anforderungen erfüllen muss, betrachtet oder nur die Schnittstellen der einzelnen Subsysteme.
 In dieser Arbeit wird es also immer eine Abstufung zwischen detaillierter und grober Betrachtung geben, damit die Komplexität des Gesamtsystems
 in einzelne Abschnitte unterteilt werden kann. Im Folgenden sollen weitere Sicherheits- und andere Normen beschrieben werden.
-
-\subsubsection{Sicherheit}\label{sec:Sicherheit}
-\todo{DIN EN ISO 12100, DIN EN ISO 13849-1}
-%
-\subsubsection{Verfahren zur Bedienung}
-\todo{Wie geht man mit dem Bediener um, gibt es da Verfahren und System?}
-%
-%
+\todo{WEG?}
