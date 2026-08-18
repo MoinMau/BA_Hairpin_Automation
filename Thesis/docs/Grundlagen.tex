@@ -1,9 +1,9 @@
 \section{Grundlagen}\label{sec:Grundlagen}
-Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Teilsystme für eine Automatisierung von definierten Produktionsprozessen beschrieben.
+Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Teilsysteme für eine Automatisierung von definierten Produktionsprozessen beschrieben.
 Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die Betrachtung des Produktionsablaufs
 eines Elektromotors. Vertiefend wird auf den für diese Arbeit relevanten Abisolierprozess eingegangen. Zuletzt werden Systeme physikalisch
-erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktoren, aber Steuereinheiten
-und Normen, die im Gesamtsystem einsatz finden können.
+erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktoren, aber auch Steuereinheiten
+und Normen, die im Gesamtsystem Einsatz finden können.
 %
 %
 \subsection{Hairpin-Technologie}\label{sec:HairPinTechnologie}
@@ -15,13 +15,13 @@ letzten Jahren weiter an Relevanz gewonnen.
 Mit der Entdeckung der elektromagnetischen Induktion durch Michael Faraday im Jahr 1831 begann die Entwicklung von Elektromotoren.
 Die ersten elektrischen Maschinen wurden aus gewickeltem Kupferdraht hergestellt. Dies galt lange Zeit als Stand der Technik und
 es wurde nur nach einfachen Parametern, wie den Kupferverlusten, optimiert. Mit der Weiterentwicklung und immer höheren Anforderungen
-kamen um 1900 die ersten Ideen auf, die Wicklungen nicht aus rundem Draht sondern aus flachem Kupferband herzustellen\PEMfootcite{Neidhoefer.1992}. Dies bot nicht nur
+kamen um 1900 die ersten Ideen auf, die Wicklungen nicht aus rundem Draht, sondern aus flachem Kupferband herzustellen\PEMfootcite{Neidhoefer.1992}. Dies bot nicht nur
 eine erhöhte Kupferdrahtdichte (Füllfaktor), sondern auch eine verbesserte Kühlfähigkeit, mechanische Stabilität und verbesserte Isolierung.\PEMfootcite{HairpinTechnologyReview.2025}
 Dieses Konzept entwickelte sich über das 20. Jahrhundert weiter und wird mittlerweile in fast allen kompakten Traktionsantrieben für Elektrofahrzeuge eingesetzt\PEMfootcite[S. 15]{Goetz.2023}.
 %
 \subsubsection{Aufbau von modernen Elektromotoren}\label{sec:AufbauElektromotoren}
 Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meistens mit der Hairpin-Technologie aufgebaut.
-Die Vielzahl an unterschiedlichen Anforderungen an diese Motoren führen zu verschiedene Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\bigskip
+Die Vielzahl an unterschiedlichen Anforderungen an diese Motoren führt zu verschiedenen Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\bigskip
 
 Eine elektrische Maschine besteht im Kern aus zwei Wirkpartnern: dem feststehenden
 Stator und dem rotierenden Rotor. Der Stator trägt in axial verlaufenden Nuten die
@@ -41,7 +41,7 @@ Art der Flusserzeugung im Rotor und in der zugehörigen Wicklungsart\PEMfootcite
 Für die Ausführung der Statorwicklung stehen zwei Prinzipien zur Verfügung. Bei der
 Runddrahtwicklung wird lackisolierter Draht in die Nut eingebracht, wobei die Lage
 der einzelnen Drähte unbestimmt bleibt. Die Hairpin-Technologie verwendet stattdessen
-Kupferband mit rechteckigem Querschnitt, deren Position in der Nut definiert ist.
+Kupferband mit rechteckigem Querschnitt, dessen Position in der Nut definiert ist.
 Daraus ergeben sich der höhere Nutfüllfaktor und die verbesserte Wärmeabfuhr\PEMfootcite{Goetz.2023}.\medskip
 
 Da ein einzelner Hairpin lediglich zwei Nuten verbindet, entsteht die durchgehende
@@ -135,7 +135,7 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
 Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus aufeinander gestapelten isolierten Blechen
 besteht, nicht betrachtet. Außerdem wird das Kupferband als fertiges auf Rollen gewickeltes Produkt angesehen. Die in \cref{fig:Produktionsablauf} aufgezeigte
 Prozesskette entspricht einer Serienproduktion\PEMfootcite{ProductionProcessHairpinStator.2024}. Für die
-die Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.\medskip
+Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.\medskip
 
 Der Fertigungsprozess beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner runden Form in eine gerade
 Ausrichtung gebracht werden. Dazu wird der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung wieder gerade gebogen.
@@ -143,20 +143,20 @@ Hier ist das Ziel, die Restkrümmung auf ein Minimum zu bringen, wobei Einflussf
 Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
 in der Produktion diese Abweichungen automatisiert anzupassen.\medskip
 
-In der Serienproduktion würde nun das Kupferband abisoliert werden. Da sich diese Arbeit um die Abisolierung in der Prototypenproduktion
-handelt, wird im weiterem Verlauf detailierten auf diesen Prozess eingegangen.\medskip
+In der Serienproduktion würde nun das Kupferband abisoliert werden. Da es sich in dieser Arbeit um die Abisolierung in der Prototypenproduktion
+handelt, wird im weiteren Verlauf detaillierter auf diesen Prozess eingegangen.\medskip
 
 Im nächsten Schritt wird das Kupferband je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass keine Deformationen
 des rechteckigen Kupferbandes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.\medskip
 
 Einer der komplizierteren Schritte ist das Biegen. Dies kann durch verschiedene Methoden erzielt werden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und freies Biegen.
-In der Serienproduktion wird hauptsächlich Gesenkbiegen verwendet, da zunächst nur die 2D-dimensionale U-Form des Hairpins gebogen werden muss und danach
-erst das Pressen in eine Form den 3D-dimensionalen Aufbau des fertigen Hairpins bringt. Dieser Prozess bietet neben einer hohen Geschwindigkeit auch
-eine hohe Prozess- und Wiederholgenauigkeit mit sich. Auf der anderen Seite wird in der Prototypenproduktio meist das CNC-Biegen bevorzugt, da durch das Erstellen
+In der Serienproduktion wird hauptsächlich Gesenkbiegen verwendet, da zunächst nur die zweidimensionale U-Form des Hairpins gebogen werden muss und danach
+erst das Pressen in eine Form den dreidimensionalen Aufbau des fertigen Hairpins bringt. Dieser Prozess bringt neben einer hohen Geschwindigkeit auch
+eine hohe Prozess- und Wiederholgenauigkeit mit sich. Auf der anderen Seite wird in der Prototypenproduktion meist das CNC-Biegen bevorzugt, da durch das Erstellen
 jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung der Hairpin-Geometrien möglich ist.\medskip
 
 Als Vorbereitung des Stators gilt es, die Nuten des Blechpaketes für das Einführen der Hairpins zu isolieren.
-Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen spannungführeneden Hairpins und geerdetem
+Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen spannungsführenden Hairpins und geerdetem
 Blechpaket zu schaffen.\medskip
 
 Für ein besseres Einsetzen der Hairpins in das Blechpaket müssen diese vorpositioniert werden. Je nach Statortyp müssen hier
@@ -166,17 +166,17 @@ Beim Fügen werden die Hairpins samt der Halterung für die Vorpositionierung in
 Es folgt eine axiale Ausrichtung und Verpressung.\medskip
 
 Nun müssen die aus dem Blechpaket hervorstehenden Enden der Hairpins freigestellt werden. Dieser Vorgang ist wichtig,
-damit der nächste Prozess ohne Probleme druchgeführt werden kann. Beim Separieren wird jeder Hairpin so verzogen, dass diese als einzelne
+damit der nächste Prozess ohne Probleme durchgeführt werden kann. Beim Separieren wird jeder Hairpin so verzogen, dass diese als einzelne
 Beinchen hervorstehen.\medskip
 
-Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel verformt werden, sodass alle Beinchen dicht beeinander liegen und
+Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel verformt werden, sodass alle Beinchen dicht beieinander liegen und
 ein gutes Verschweißen möglich ist. Die Hairpin-Enden liegen nun mit minimalem Abstand neben ihrem richtigen Partner.\medskip
 
 Das Laserschweißen dient der Kontaktierung der Hairpin-Enden. Hierbei werden mittels eines Laserstrahls immer zwei Kupferenden
 miteinander verschweißt. Es ist auf hohe Genauigkeit zu achten, da die Qualität der Schweißverbindungen großen Einfluss auf
 die elektrische Beschaffenheit des Motors hat.\medskip
 
-Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Tranktionsantrieb weitere Schritte beachtet werden.
+Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Traktionsantrieb weitere Schritte beachtet werden.
 So müssen die Hairpins mit dem Verbindungselement zum Wechselrichter verbunden werden. Dazu wird im richtigen Schaltschema ein passender Kontaktring mit
 den Anschlüssen verbunden.\medskip
 
@@ -187,8 +187,8 @@ Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren
 Der vorletzte Schritt dieser Prozesskette ist das Imprägnieren des Stators. Hierbei wird ein Harz in die Nuten des Blechpaketes gegeben,
 um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.\medskip
 
-Die Funktions- und Qualitätsprüfung erfolgt als letzter Schritt, bevor der Stator diese Produktionsabschnitt verlässt. Dabei müssen die 
-elektrischen Parameter, wie Isolationsfestigkeit, elektrishce Leitfähigkeit und mechanische Beschädigungen, den Anforderungen entsprechen.
+Die Funktions- und Qualitätsprüfung erfolgt als letzter Schritt, bevor der Stator diesen Produktionsabschnitt verlässt. Dabei müssen die
+elektrischen Parameter, wie Isolationsfestigkeit, elektrische Leitfähigkeit und mechanische Beschädigungen, den Anforderungen entsprechen.
 %
 %
 \subsection{Produktionsverfahren zum Abisolieren}\label{sec:ProduktionsverfahrenAbisolieren}
@@ -238,7 +238,7 @@ Eingrenzung des Prozesses, sodass angrenzende Bereiche der Isolierschicht ebenfa
 geschädigt werden können.
 %
 \subsubsection{Laser}\label{sec:Laser}
-Für die Analyse der Abisolierung mittels einer Laseranalge soll ein detialierter Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht 
+Für die Analyse der Abisolierung mittels einer Laseranlage soll ein detaillierter Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht
 und 2. wie dieses zum Abisolieren von Hairpins verwendet werden kann.\bigskip
 
 Ein Laser basiert hauptsächlich auf den in \cref{fig:laser-prinzip} dargestellten drei physikalischen Effekten zwischen Photonen und Atomen. Dazu zählt die Absorption, die spontane Emission und 
@@ -248,19 +248,19 @@ Intensität und damit eine geringere Energie. Diese Differenz wird zum einen Tei
 Dies geschieht, wenn ein Photon auf ein Atom im Grundzustand trifft. Dabei wird die Energie des Photons bei der Absorption abgegeben und die 
 Elektronen des betroffenen Atoms auf ein erhöhtes Energieniveau gehoben. Durch das zweite Phänomen, die spontane Emission, springt das Elektron
 des angeregten Atoms nach einer gewissen Zeit wieder in den Grundzustand zurück. Bei diesem Rücksprung wird die zuvor aufgenommene Energie 
-wieder als Lichtquant abgegeben. Hierbei ist wichtig zu erwähnen, dass die Richtung und Wellenlänge des emittierten Photons nicht mit dem
-absorbierten Photon übereinstimmen muss und in alle Richtungen abgestrahlt wird. Dieser Effekt ist schon länger durch Naturphänomene wie Fluoreszenz bekannt, würde aber für die Funktion
+wieder als Lichtquant abgegeben. Hierbei ist wichtig zu erwähnen, dass Richtung und Wellenlänge des emittierten Photons nicht mit denen des
+absorbierten Photons übereinstimmen müssen und in alle Richtungen abgestrahlt wird. Dieser Effekt ist schon länger durch Naturphänomene wie Fluoreszenz bekannt, würde aber für die Funktion
 des Lasers alleine nicht ausreichen. Die stimulierte Emission bewirkt nämlich, dass aus den vereinzelten Emissionen eine Kettenreaktion entsteht. Kommt
 es nämlich dazu, dass ein Photon auf ein angeregtes Atom trifft, wird ein Photon emittiert, das die gleiche Wellenlänge und Phase wie das einfallende
-Photon hat. Für die große Intensität des Laserlichtes muss dieser Lawineneffekt weiter verstärkt werden. Es wird ein aktives Medium,
-welches die Atome zur Anregung und Emission bereitstellt und einen Resonator, der den Lawineneffekt weiter verstärkt, benötigt. Das aktive Medium ist
+Photon hat. Für die große Intensität des Laserlichtes muss dieser Lawineneffekt weiter verstärkt werden. Es werden ein aktives Medium,
+welches die Atome zur Anregung und Emission bereitstellt, und ein Resonator, der den Lawineneffekt weiter verstärkt, benötigt. Das aktive Medium ist
 meist ein bestimmter Kristall oder ein Gas, bei dem die Energieniveaus der benötigten Wellenlänge entsprechen. An den Enden dieses Mediums
 sind wie in \cref{fig:laser-prinzip} (b) zu sehen, zwei Spiegel verbaut, die das Laserlicht mehrfach durch das Medium schicken. Dabei gibt es eine
 Seite des Resonators, die das gesamte Licht reflektiert. Gegenüberliegend gibt es einen teildurchlässigen Spiegel, der dafür sorgt, dass ein Teil
-des Lichtes den Aufbau verlassen kann. Dieses austretende Licht kann nur über weitere Spiegel oder eine Glasfaser zum benötigten Ort geleitet
+des Lichtes den Aufbau verlassen kann. Dieses austretende Licht kann nun über weitere Spiegel oder eine Glasfaser zum benötigten Ort geleitet
 werden. Damit dieses Prinzip überhaupt im Dauerbetrieb funktioniert, muss dem gesamten System genau so viel Energie zugeführt werden, wie
 durch die Abstrahlung des Laserlichtes entzogen wird. Dies geschieht durch eine Pumpquelle, die eine ausreichend hohe Besetzungsinversion bereitstellt.
-Dazu werden Dioden oder andere kleine Laser verwendet um mehr Atome im angeregten Zustand zu halten, als im Grundzustand.
+Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregten Zustand zu halten als im Grundzustand.
 
 \begin{figure}[htbp]
   \centering
@@ -393,8 +393,8 @@ Die Reflexion besitzt dabei für die Bearbeitung des Werkstückes keine Wirkung 
 wiederum der relevanteste Effekt, da die absorbierte Energie maßgeblich für den Temperaturanstieg verantwortlich ist. Für die Abisolierung
 der Hairpins ist zudem vorteilhaft, dass die Isolierung und der Leiter aus unterschiedlichen Materialien bestehen. So ist die Eindringtiefe
 des Laserlichts bei Polymeren wesentlich höher als die bei Kupfer. Somit erwärmt sich die Isolierung viel stärker und erreicht somit schneller
-die Verdampfungstemperatur zum Abtragen. Dies wird in Kombination mit einem extrem kurz gepulsten Laserlicht genutzt, um gezielt den
-Kupferdraht nicht zu beschädigen indem sich dieser zu stark erwärmt. Für das photothermische Abtragen von Material, wird so viel Energie
+die Verdampfungstemperatur zum Abtragen. Dies wird in Kombination mit einem extrem kurz gepulsten Laserlicht genutzt, um zu vermeiden, dass der
+Kupferdraht dadurch beschädigt wird, dass sich dieser zu stark erwärmt. Für das photothermische Abtragen von Material, wird so viel Energie
 in Form von Wärme zugeführt, dass die Moleküle von dem festen Zustand schmelzen und schlussendlich verdampfen. Eine andere Möglichkeit ist das
 Material photochemisch zu entfernen, indem die Bindungen der Moleküle durch die Energie des Laserlichtes direkt aufgebrochen werden. Um dies für
 das in dieser Arbeit verwendete Setup zu untersuchen, lässt sich folgende Gleichung aufstellen:
@@ -412,7 +412,7 @@ lassen sich so ganze Oberflächen kontinuierlich bearbeiten.
 \subsection{Sensorik}\label{sec:Sensoren}
 %
 Für eine Automatisierung werden verschiedene Komponenten verwendet, wobei die Wahl der Sensorik ein wichtiger Bestandteil der
-Peripherie ist. In der zu realisierenden Analge muss beipielsweise kontrolliert werden, ob einzelne Hairpins bestimmte
+Peripherie ist. In der zu realisierenden Anlage muss beispielsweise kontrolliert werden, ob einzelne Hairpins bestimmte
 Positionen verlassen oder passiert haben. Dafür müssen unterschiedliche Sensortypen untersucht werden, um eine optimale Wahl zwischen
 geringen Fehlern in der Detektion, Robustheit und passender Geometrie treffen zu können.
 Die in dieser Arbeit betrachteten Sensoren teilen sich maßgeblich in optische Systeme, Feldeffekt-Sensoren und mechanische
@@ -423,38 +423,38 @@ Taster auf.
 Bei diesen Systemen sind grundsätzlich zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
 abgibt und zum anderen ein Fototransistor, der einfallendes Licht detektieren kann.
 Dieses detektierte Signal wird zumeist als analoge Spannung ausgegeben oder in einer internen Auswerteschaltung gegen einen
-Refernezwert verglichen und als digitales Signal ausgegeben.\medskip
+Referenzwert verglichen und als digitales Signal ausgegeben.\medskip
 
-Die Sendediode wird meist als einfach für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
+Die Sendediode wird meist als einfache, für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
 Hierbei besteht diese aus einem n-dotierten Leitungsband mit einem Überschuss an Elektronen und einem p-dotierten
 Bereich, dem Valenzbereich. Wird nun eine Spannung in Durchlassrichtung angelegt, wird die Potenzialbarriere
 des pn-Übergangs verschoben. Dadurch rekombinieren Elektronen des n-dotierten Bereichs mit den Löchern
 des energetisch niedrigeren Valenzbandes. Durch diesen Sprung in ein niedrigeres Energieniveau, wird Energie
-emittiert die mitunter als infrarotes Licht abgestrahlt wird.
+emittiert, die mitunter als infrarotes Licht abgestrahlt wird.
 Dem optischen Sendemodul gegenüber registriert ein Fototransistor die erzeugten Lichtstrahlen. Dabei ist
 dieser eine Kombination aus einer Fotodiode und einem Bipolartransistor. Die Diode besteht wieder aus
 einem pn-Übergang. Fällt energiereiches Licht auf diese Schicht werden die Photonen absorbiert und
 Elektronen aus dem Valenzband in das Leitungsband gehoben. Dadurch entsteht eine Ladungstrennung, die einen
-Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom der proportional zur Bestrahlungsstärke
+Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom, der proportional zur Bestrahlungsstärke
 ist. Dieser Strom wird nun zur weiteren Verstärkung an einen Bipolartransistor geleitet, der den
-niedrigen Fotostrom verstärkt ausgeben kann und als Signal verwendet werden kann.\todo{Überarbeiten}
+niedrigen Fotostrom verstärkt ausgeben kann, sodass er als Signal verwendet werden kann.\todo{Überarbeiten}
 
 \paragraph{Einweglichtschranken} sind eine physische Ausführung der oben beschriebenen Komponenten. Hierbei
 sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird detektiert, indem der
 Lichtstrahl unterbrochen wird und dies als elektrisches Signal ausgegeben wird. Als Vorteil
-diese Aufbaus gilt, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
+dieses Aufbaus gilt, dass das Licht die Strecke nur einmal durchlaufen muss. Auf der anderen Seite müssen zwei getrennte
 Geräte justiert und ausgerichtet werden\PEMfootcite[S. 137]{Hering.2023}.
 
-\paragraph{Reflexionslichtschranken} arbeiten nach einem ähnlich Prinzip wie Einweglichtschranken, wobei Sender und Empfänger aber
+\paragraph{Reflexionslichtschranken} arbeiten nach einem ähnlichen Prinzip wie Einweglichtschranken, wobei Sender und Empfänger aber
 in einem Gehäuse verbaut sind. Es wird ein Reflektor verwendet, um den austretenden Lichtstrahl zurück auf
-den Detektor zu werfen. Der Vorteil dabei ist, dass nicht zu beiden Seiten Kabel sondern nur zu einer Seite
+den Detektor zu werfen. Der Vorteil dabei ist, dass nicht zu beiden Seiten Kabel, sondern nur zu einer Seite
 verlegt werden müssen. Beim Detektieren von metallischen und spiegelnden Objekten kann es jedoch zu Problemen mit
 der Reflexion kommen. Wirft ein anderes Objekt den Lichtstrahl im gleichen Winkel zurück, nimmt der Sensor diese
-Änderung nicht wahr und es wird kein verädnertes Signal ausgegeben\PEMfootcite[S. 138]{Hering.2023}.
+Änderung nicht wahr und es wird kein verändertes Signal ausgegeben\PEMfootcite[S. 138]{Hering.2023}.
 
 \paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Auch
 hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt bewusst auf reflektiertes Licht gewartet.
-Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke zwischen Reflektion (Objektdetektion) und Normalzustand einzustellen. Dies
+Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke zwischen Reflexion (Objektdetektion) und Normalzustand einzustellen. Dies
 birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird\PEMfootcite[S. 137]{Hering.2023}.\medskip
 
 Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschiedene Oberflächen
@@ -476,17 +476,17 @@ zu Sensorkopf vorausgesetzt wird.
 \paragraph{Kapazitive Sensoren} setzen nicht auf einen Schwingkreis sondern auf die Kapazitätsänderung einer
 Elektrode. Dabei gibt es üblicherweise zwei Verfahren zur Ermittlung dieser Kapazitätsänderung, die durch fast
 alle Materialien entsteht. Der Industriestandard funktioniert über das Oszillator-Prinzip. Die Sensorelektrode
-ist Teil eines elektrischen Schwingkreises. Ändert sich die Kapazität der Elektrode ändert sich ebenfalls die Resonanzfrequenz,
-wobei dies in einer verschobene Spannungsamplitude resultiert. Ist nach dem Einlesen dieser Spannung ein gewisser Schwellwert erreicht, kann ein
-digitale Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
-meist in Microcontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer 
-festen Spannung aufgeladen wird und die in der Kapazität gespeicherten Ladung gezählt wird.
+ist Teil eines elektrischen Schwingkreises. Ändert sich die Kapazität der Elektrode, ändert sich ebenfalls die Resonanzfrequenz,
+wobei dies in einer verschobenen Spannungsamplitude resultiert. Ist nach dem Einlesen dieser Spannung ein gewisser Schwellwert erreicht, kann ein
+digitales Signal ausgegeben werden. Die andere Methode bedarf eines geringeren Hardwareaufwands und wird
+meist in Mikrocontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer
+festen Spannung aufgeladen wird und die in der Kapazität gespeicherte Ladung gezählt wird.
 \begin{equation}
     Q = C \cdot U \quad \Leftrightarrow \quad U_{C\text{ref}} = \frac{Q_{\text{gesamt}}}{C_{\text{ref}}}
 \end{equation}
-Dies geschieht indem über ein festgelegten Zyklus ein großer Referenzkondensator die gepeicherte Ladung $Q_\text{sens}$ der Sensorelektrode aufnimmt.
-Während der jedes Zyklus addieren sich die Ladungen zu $Q_\text{gesamt}$ auf und die Spannung am Referenzkondesator steigt druch seine feste Kapazität $C_\text{ref}$ an.
-Erreicht die Kondesatorsapnnung $U_{C\text{ref}}$ einen Schwellenwert, wird die Anzahl der benötigten Zyklen als Signal weiterverarbeitet
+Dies geschieht, indem über einen festgelegten Zyklus ein großer Referenzkondensator die gespeicherte Ladung $Q_\text{sens}$ der Sensorelektrode aufnimmt.
+Während jedes Zyklus addieren sich die Ladungen zu $Q_\text{gesamt}$ auf und die Spannung am Referenzkondensator steigt durch seine feste Kapazität $C_\text{ref}$ an.
+Erreicht die Kondensatorspannung $U_{C\text{ref}}$ einen Schwellenwert, wird die Anzahl der benötigten Zyklen als Signal weiterverarbeitet
 und zu einem Kapazitätswert der Sensorelektrode umgerechnet.
 So lässt sich die Größe der Kapazität der Sensorelektrode sehr genau und mit wenigen Fehlereinflüssen ermitteln.
 Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen eine gewisse Zeit für ein Ergebnis
@@ -504,14 +504,14 @@ Die letzte Gruppe an Sensoren zum Detektieren von Objekten ist die wohl trivials
 bei mechanischem Druck auslöst und ein klares elektrisches Signal ausgibt. Weiter gibt es noch die Möglichkeit
 kein separates Bauteil zu verwenden, sondern das Objekt selber als Leiter zu benutzen. Dabei könnte
 das leitende Objekt einen Kurzschluss zwischen zwei Elektroden verursachen, welcher dann elektronisch ausgewertet werden
-kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf ein
-vordefinierten Position treffen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
+kann. Diese beiden Methoden haben jedoch den Nachteil, dass das zu registrierende Objekt auf eine
+vordefinierte Position treffen muss, damit eine Detektion verlässlich funktioniert. Außerdem können Verschleiß
 und Verschmutzung leicht zu Fehlern führen.
 %
 %
 \subsection{Aktorik}\label{sec:Aktorik}
 Die Aktorik beschreibt den Bereich der Antriebstechnik. Es geht also um die Erzeugung von Bewegungen, aus Signalen
-von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktoren mit unterschiedlichen Aufbau, für spezifische 
+von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktoren mit unterschiedlichem Aufbau für spezifische
 Anforderungen in der Industrie.
 %
 \subsubsection{Pneumatik}
@@ -533,9 +533,9 @@ Ringfläche, sodass bei gleichem Druck eine geringere Kraft zur Verfügung steht
   \qquad A_\mathrm{St} = \frac{\pi}{4} \, d_\mathrm{St}^{2}
   \label{eq:pneumatik_einfahren}
 \end{equation}
-Der Druck p wird durch die angeschlossenen Druckluftleitung definiert. Die Fläche $A_\mathrm{K}$ stellt die vom
-Zylinder effektive runden Oberfläche und $A_\mathrm{St}$ die des Stängels dar. In  Ein Einfahren der Kolbenstange erfolgt durch das Wechseln des Drucks in den jeweiligen Kammern.
-Hierbei ist zu beachten, dass die effektive Kolbenfläche hier durch die Stange weiter reduziert ist und somit eine geringe
+Der Druck $p$ wird durch die angeschlossene Druckluftleitung definiert. Die Fläche $A_\mathrm{K}$ stellt die vom
+Zylinder effektiv wirksame runde Oberfläche und $A_\mathrm{St}$ die des Stängels dar. Ein Einfahren der Kolbenstange erfolgt durch das Wechseln des Drucks in den jeweiligen Kammern.
+Hierbei ist zu beachten, dass die effektive Kolbenfläche hier durch die Stange weiter reduziert ist und somit eine geringere
 Kraft erreicht wird.\medskip
 
 \begin{figure}[htbp]
@@ -614,7 +614,7 @@ Kraft erreicht wird.\medskip
 Es gibt eine Menge Vorteile für pneumatische Systeme: So ist ein solches System im Vergleich zu anderen Aktuatoren leichter
 und in sehr kleinen Baugrößen verfügbar.\PEMfootcite{ali_pneumatic_2009}
 Außerdem bietet es eine extreme Kraft- und Geschwindigkeitsdichte, obwohl der Aufbau einfach ist und wenige bewegte Teile
-beinhaltet. Zudem ist es möglich dauerhaft die maximale Kraft zu halten ohne die Dauerleistungsfähigkeit zu unterbrechen.
+beinhaltet. Zudem ist es möglich, dauerhaft die maximale Kraft zu halten, ohne die Dauerleistungsfähigkeit zu unterbrechen.
 Weiter ist eine Ansteuerung für ein Aus- und Einfahren des Zylinders mit einfachen binären Signalen möglich.\medskip
 
 Dem stehen erhebliche regelungstechnische Einschränkungen gegenüber. Aufgrund der Kompressibilität der Luft, 
@@ -632,7 +632,7 @@ den Servomotor mit einer internen Regelung und einen Schrittmotor, der normalerw
 \paragraph{Motoren}
 Ein Servomotor besitzt einen geschlossenen Regelkreis: Ein Encoder erfasst die Ist-Lage, die Regelung korrigiert die Abweichung 
 kontinuierlich und meldet eine Überschreitung der zulässigen Abweichung als Störung.\PEMfootcite{Stoelting.2011}
-Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht die Position anzufahren. Dabei bezieht der 
+Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht, die Position anzufahren. Dabei bezieht der 
 Motor je nach benötigter Kraft und Geschwindigkeit die passende Menge an elektrischer Leistung. Physisch sind Servomotoren meist
 darauf ausgelegt, eine geringe Drehzahl mit einem hohen Drehmoment zu erreichen. Dazu wird mit einem Getriebe die hohe Drehzahl
 des Elektromotors in eine geringere Drehzahl umgewandelt. Dies wiederum bedeutet aber auch erhöhte Kosten und einen erhöhten Bauraum.
@@ -668,15 +668,15 @@ Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren d
 \end{figure}
 
 Der Schrittmotor wiederum wandelt elektrische Impulse in diskrete Winkelschritte um. Hier ist es also möglich ohne Lagerückführung
-zu arbeiten, da jeder Impuls ein fest definierter Schrittwinkel ist.\cref{fig:schrittmotor-prinzip} Bei diesem Betrieb müssen aber die Betriebsgrenzen eingehalten
+zu arbeiten, da jeder Impuls ein fest definierter Schrittwinkel ist (vgl. \cref{fig:schrittmotor-prinzip}). Bei diesem Betrieb müssen aber die Betriebsgrenzen eingehalten
 werden, da sonst Schritte unbemerkt übersprungen werden können\PEMfootcite{Stoelting.2011}. Dies stellt ein großes Problem dar, weil
 die aktuelle Ist-Position nicht sicher festgestellt werden kann. Für eine dementsprechende Kalibrierung verwenden viele Systeme Endstops
-oder Schalter mit denen dann eine feste Position definiert werden kann. Von dieser lassen sich unter der Annahme eines fehlerfreien Betriebes Schrittezählen und aufaddieren.\medskip
+oder Schalter, mit denen dann eine feste Position definiert werden kann. Von dieser lassen sich unter der Annahme eines fehlerfreien Betriebes Schritte zählen und aufaddieren.\medskip
 
 Die folgende \cref{fig:schrittmotor-prinzip} zeigt das grundsätzliche Prinzip der schrittweisen Rotation der Schrittmotoren, dabei haben reale Motoren weitaus mehr Pole und können somit
 sehr genaue Schritte erzielen. Eines der größten Probleme von Schrittmotoren ist dabei nicht nur die begrenzte Schrittgröße, sondern besonders
-die starke Hitzeentwicklung. Dies leigt am dauerhaft fleißenden Haltestrom, der für die Fixierung der Welle benötigt wird. Wird der Motor nämlich
-deaktiviert, können bei wirkender Kraft auf die Welle nicht regesriebare Übersprünge passieren und eine neu Initialisierung muss durchgeführt werden.
+die starke Hitzeentwicklung. Dies liegt am dauerhaft fließenden Haltestrom, der für die Fixierung der Welle benötigt wird. Wird der Motor nämlich
+deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übersprünge passieren und eine neue Initialisierung muss durchgeführt werden.
 
 \begin{figure}[htbp]
   \centering
@@ -754,9 +754,9 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht regesriebare Übers
   \label{fig:schrittmotor-prinzip}
 \end{figure}
 
-\paragraph{Mechanische Übersetztung}
-Weiter gibt es mehrere Möglichkeiten die rotatorische Bewegung je nach Bedarf in eine lineare Bewegung umzuwandeln. 
-Der Servomotor wird meistens in Verbindung mit einem Zahnriemen oder einer festen geraden Zahnstange verwendet.\cref{fig:uebertragungselemente} Dabei arbeitet
+\paragraph{Mechanische Übersetzung}
+Weiter gibt es mehrere Möglichkeiten, die rotatorische Bewegung je nach Bedarf in eine lineare Bewegung umzuwandeln.
+Der Servomotor wird meistens in Verbindung mit einem Zahnriemen oder einer festen geraden Zahnstange verwendet (vgl. \cref{fig:uebertragungselemente}). Dabei arbeitet
 dieses System meistens in einem kleinen festen Bereich, da die meisten Servomotoren nur auf eine volle Umdrehung ausgelegt sind. 
 Hier wird besonders eine hohe Genauigkeit und Kraft ermöglicht.\medskip
 
@@ -850,49 +850,49 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
 %
 %
 \subsection{Steuerungstechnik}\label{sec:Steuerungstechnik}
-Für eine Steuerung der mechatronischen Systeme bedarf es eines eletrischen Systems, welches Signale verarbeitet und schaltet. Der 
-Eingang stellt dabei das Feedback von Sensoren oder einer Bedieneinheit da. Als Ausgang werden alle Befehle gesehen, die Signale
-an Aktuatoren oder andere Systeme schickt.
+Für eine Steuerung der mechatronischen Systeme bedarf es eines elektrischen Systems, welches Signale verarbeitet und schaltet. Der
+Eingang stellt dabei das Feedback von Sensoren oder einer Bedieneinheit dar. Als Ausgang werden alle Befehle gesehen, die Signale
+an Aktuatoren oder andere Systeme schicken.
 
 \subsubsection{Steuerungsarchitektur}\label{sec:Steuerungsarchitektur}
-Die zu entwickelnde Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderung an die Steurung bestehen. Dabei muss die zeitkritische
+Die zu entwickelnde Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderungen an die Steuerung bestehen. Dabei müssen die zeitkritische
 Ansteuerung und die Koordination des Gesamtablaufs analysiert werden. Der Aufbau dieses Systems wird dabei aus mehreren Ebenen bestehen,
-die die einzelnen Aufgaben untereinander verteilen. Das Hieraische Prinpzip ist dabei in die direkten Steuereinheiten der Aktuatoren
+die die einzelnen Aufgaben untereinander verteilen. Das hierarchische Prinzip ist dabei in die direkten Steuereinheiten der Aktuatoren
 und in die Koordinationseinheit unterteilt.\bigskip
 
-Für die Entwicklung eines solchen Systems lässt sich in einen zentralen, hiearischen und heterarchischen Aufbau unterteilen.
-Diese System müssen für die Wahl auf das Ausfallverhalten, der Reaktionszeit, die Erweiterbarkeit, den Integrationsaufwand und
-die Testbarkeit einzelner Subsysteme geprüft werden.\bigskip 
+Für die Entwicklung eines solchen Systems lässt sich in einen zentralen, hierarchischen und heterarchischen Aufbau unterteilen.
+Diese Systeme müssen für die Wahl auf das Ausfallverhalten, die Reaktionszeit, die Erweiterbarkeit, den Integrationsaufwand und
+die Testbarkeit einzelner Subsysteme geprüft werden.\bigskip
 
-Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktoren) zur Steurerungseinheit.
-Diese verarbeitet die Daten direkt und schickt Befehle wiederzurück. Als Vorteile sind ein einfacher physischer und programiertechischer
-Aufbau, sowie eine einfache Datenkosistenz. Dem gegenüber stehen wegen dem Nutzen eines Hauptknoten die geringe Ausfallsicherheit. 
-Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtesystem in einem unsichern oder fehlerhaften Zustand. Außerdem
-lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im vorhinein festgelegt werden müssen.
+Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktoren) zur Steuerungseinheit.
+Diese verarbeitet die Daten direkt und schickt Befehle wieder zurück. Als Vorteile sind ein einfacher physischer und programmiertechnischer
+Aufbau sowie eine einfache Datenkonsistenz zu nennen. Dem gegenüber steht wegen der Nutzung eines Hauptknotens die geringe Ausfallsicherheit.
+Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtsystem in einem unsicheren oder fehlerhaften Zustand. Außerdem
+lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im Vorhinein festgelegt werden müssen.
 Auch das Prüfen einzelner Subsysteme ist erst nach der Montage aller Komponenten und Anbauteile möglich.\medskip
 
-Der nächste Schritt, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steurungsebenen aufgebaut. Dabei
-deligiert jede Ebene Aufgaben an die darunterliegende Ebene, die diese selbstständig löst. Die höchste 
+Der nächste Schritt, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steuerungsebenen aufgebaut. Dabei
+delegiert jede Ebene Aufgaben an die darunterliegende Ebene, die diese selbstständig löst. Die höchste
 Ebene dient der Koordination der globalen Parameter. Dieses Prinzip ermöglicht eine enorme Skalierbarkeit,
-da Subsystem eigenständig arbeiten können und nur den Befehlen eines Masters folgen muss. Diese klaren und strukturierten 
-Zuständigkeiten führen zu einer Entlastung der Hauptebene und können Fehler begrenzen. Auch besteht die Möglichkeit weitere
-Subsysteme nachträglich einzugliedern. Als Nachteile gelten hier der starre und lange Informations- und Entscheidungsfluss 
-durch alle Ebenen, sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkablung der einzelen Ebenen.\medskip
+da Subsysteme eigenständig arbeiten können und nur den Befehlen eines Masters folgen müssen. Diese klaren und strukturierten
+Zuständigkeiten führen zu einer Entlastung der Hauptebene und können Fehler begrenzen. Auch besteht die Möglichkeit, weitere
+Subsysteme nachträglich einzugliedern. Als Nachteile gelten hier der starre und lange Informations- und Entscheidungsfluss
+durch alle Ebenen sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkabelung der einzelnen Ebenen.\medskip
 
-Das komplexeste und modernste System arbeite nach dem heterarischen Prinzip. Hier wird ebenfalls in mehrere Subsysteme aufgeteilt, 
+Das komplexeste und modernste System arbeitet nach dem heterarchischen Prinzip. Hier wird ebenfalls in mehrere Subsysteme aufgeteilt,
 wobei aber die Kommunikation und Aufgabenverteilung über Prioritätssysteme untereinander verhandelt wird. Dies bietet eine
-extreme Felxibilität und eine hohe Ausfallsicherheit, da das System nicht statisch festgelegt ist. Es wird als optimierte 
-Methode zu dem hieraischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationszwege minimiert werden. Zudem lassen
-sich einzelner Ebenen weiterhin überprüfen. Die Herausforderung sind hierbei aber eine komplexe Programmierung 
+extreme Flexibilität und eine hohe Ausfallsicherheit, da das System nicht statisch festgelegt ist. Es wird als optimierte
+Methode zu dem hierarchischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationswege minimiert werden. Zudem lassen
+sich einzelne Ebenen weiterhin überprüfen. Die Herausforderungen sind hierbei aber eine komplexe Programmierung
 und ein schwer vorhersehbares Systemverhalten.\medskip
 
-Für ein konkreten Beipiel-Aufbau werden die einzelenn Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
-arbeitet nach dem hieraischen Prinzip, bei dem der Master eine Abfrage oder Befehl initialisiert und ein Slave nur nach Erhalt
-dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selber welche Peripehriegeräte
-angesprochen werden müssen. Aus dieser festen Zuteilung folgt ein zyklisches Abfragen und damit ein kollisionsfreier Buszuriff. 
+Für einen konkreten Beispiel-Aufbau werden die einzelnen Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
+arbeitet nach dem hierarchischen Prinzip, bei dem der Master eine Abfrage oder einen Befehl initialisiert und ein Slave nur nach Erhalt
+dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selbst, welche Peripheriegeräte
+angesprochen werden müssen. Aus dieser festen Zuteilung folgt ein zyklisches Abfragen und damit ein kollisionsfreier Buszugriff.
 Ein Bus beschreibt dabei die Kommunikationsschnittstellen zwischen den einzelnen Komponenten, die aber durch festgelegte Bandbreiten
-beschränkt sind. Das beschriebene Beipiel entspricht einem einfachen Aufbau, wo bei komplexere Systeme mit weiteren gestaffelten Ebenen
-arbeitet.
+beschränkt sind. Das beschriebene Beispiel entspricht einem einfachen Aufbau, wobei komplexere Systeme mit weiteren gestaffelten Ebenen
+arbeiten.
 
 \begin{figure}[htbp]
   \centering
@@ -941,48 +941,48 @@ arbeitet.
  
 
 \subsubsection{Mikrocontroller}\label{sec:Mikrocontroller}
-Der Mirkokontrroller bietet sich als Ein-Chip-System hevorragend als Steuerbaustein an. Ein solcher Controller kommt mit interner
+Der Mikrocontroller bietet sich als Ein-Chip-System hervorragend als Steuerbaustein an. Ein solcher Controller kommt mit interner
 Recheneinheit, Speicher und einer integrierten Peripherie zur Steuerung der Aus- und Eingänge. Diese Peripherie stellt
-einen Hauptvorteil gegenüber eines handelsüblichen Computers, der über mehr Rechenleistung verfügt, dar.
+einen Hauptvorteil gegenüber einem handelsüblichen Computer, der über mehr Rechenleistung verfügt, dar.
 
-Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar. Der Timer wird zum 
-Erzeugen von Steuersignalen oder interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogespannungen verwednet. Dieser
-wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzeten Auflösung um. Ein 
+Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar. Der Timer wird zum
+Erzeugen von Steuersignalen oder für interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogspannungen verwendet. Dieser
+wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzten Auflösung um. Ein
 GPIO-Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
 die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
 
 Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des 
-Mikrocontrollers, die Höhe eines digitalen Signals und die maximale zulässige Spannung an den einzelen Aus- und Eingängen. In den
-Datenblättern der konkreten Komponete sind zulässige kurzzeitige Spitzenwerte, für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
-für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegt, gibt es nach geschaltete Treiberstufen.
-Für eine Kompatibilität zwischen zwei Spannungsebenen bedarf es eines Pegelwandelers, der die jeweilige Signalhöhe anpasst.
+Mikrocontrollers, die Höhe eines digitalen Signals und die maximal zulässige Spannung an den einzelnen Aus- und Eingängen. In den
+Datenblättern der konkreten Komponente sind zulässige kurzzeitige Spitzenwerte für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
+für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegen, gibt es nachgeschaltete Treiberstufen.
+Für eine Kompatibilität zwischen zwei Spannungsebenen bedarf es eines Pegelwandlers, der die jeweilige Signalhöhe anpasst.
 
-In der Industrie werden vermehrt SPS-Systeme im Gegensatzt zu Mirkocontrolleren verwendet. Diese sind auf Echtzeitanwendungen 
-und industielle Robustheit optimiert. Außerdem gibt es Standartisierungen, die eine hohe Komaptibilität zwischen 
-Peripheriegeräten ermöglicht. Besonders die Beschaffungskosten und eine geringe Individualsierbarkeit auf Layoutebene stellt 
+In der Industrie werden vermehrt SPS-Systeme im Gegensatz zu Mikrocontrollern verwendet. Diese sind auf Echtzeitanwendungen
+und industrielle Robustheit optimiert. Außerdem gibt es Standardisierungen, die eine hohe Kompatibilität zwischen
+Peripheriegeräten ermöglichen. Besonders die Beschaffungskosten und eine geringe Individualisierbarkeit auf Layoutebene stellen
 für den Prototypenbau Probleme dar.
 
 \subsubsection{Signalübertragung}
 Für das Übertragen von Signalen unterscheidet man in der Kodierungsart der Daten und den Teilnehmern einer Signalleitung. Ein Bussystem
-definiert sich durch mehrere an einer Leitung befindlichen Teilnehemern. Einfache Signale wiederum besitzen nur zwei Teilnehmer und 
-der Imfomationsfluss ist fest vom Sender zum Empfänger definiert. Die Information kann in unterschiedlichen Eigenschaften einer
-elektrischen Spannung kodiert sein. So lassen sich Parameter wie Amplitude und Frequenz entsprechen Ausgeben und wieder Einlesen.
+definiert sich durch mehrere an einer Leitung befindliche Teilnehmer. Einfache Signale wiederum besitzen nur zwei Teilnehmer und
+der Informationsfluss ist fest vom Sender zum Empfänger definiert. Die Information kann in unterschiedlichen Eigenschaften einer
+elektrischen Spannung kodiert sein. So lassen sich Parameter wie Amplitude und Frequenz entsprechend ausgeben und wieder einlesen.
 
 \paragraph{Digitale Schaltsignale}     
-arbeiten mit zwei definierten Schaltpegeln, die meist der Versogungsspannung und GND entsprechen. Für das Schalten eines LOW
-Ausgangs wird GND also die niedrigste Spannung auf die Leitung gegeben. Beim Schalten eines HIGH Ausgangs wird wiederum 
-weggeschaltet und der Ausgang schwebt auf einem undifinerten Wert. Hierfür muss ein externer oder ein intern verbauter Pull-up-Widerstand
-eingesetzt werden, um den Pegel aktiv mittels der Versorgungsspannung auf HIGH zu ziehen. Durch das Einlesen ebend dieser 
-HIGH und LOW Pegel, lassen sich einfache Schaltvorgänge durchführen.
+arbeiten mit zwei definierten Schaltpegeln, die meist der Versorgungsspannung und GND entsprechen. Für das Schalten eines LOW-Ausgangs
+wird GND, also die niedrigste Spannung, auf die Leitung gegeben. Beim Schalten eines HIGH-Ausgangs wird wiederum
+weggeschaltet und der Ausgang schwebt auf einem undefinierten Wert. Hierfür muss ein externer oder ein intern verbauter Pull-up-Widerstand
+eingesetzt werden, um den Pegel aktiv mittels der Versorgungsspannung auf HIGH zu ziehen. Durch das Einlesen eben dieser
+HIGH- und LOW-Pegel lassen sich einfache Schaltvorgänge durchführen.
 
 \paragraph{Analoge Spannungssignale}
-basieren auf dem kontinierlichen Wert deren Amplitude. Zum Beispiel wandelt ein Sensor die zu messende Größe in einen Spannungswert
-um. Dieser wandert dann durch die Leitung bis zu einem ADC, der dieses kontinuierliche Signale in einen diskreten Spannungswert umwandelt.
-Diese binäre Zahl kann dann vom Chip ausgewertet werden. Wichtig ist hierbei die Auflösung des ADC, die durch Quantisierungfehler
-und den Abtastschritten bedingt ist (vgl. \cref{sec:Mikrocontroller}). Außerdem wird immer gegen einen Referenzwert verglichen, der nicht höher als die Versorgungsspannung
-ist. Aus diesem Grund müssen bei Signalen mit höhere Amplitude ein dedizierter Spannungsteiler für die Verringerung der Spannung
-am Eingang des ADC eingesetzt werden. Das Ausgeben einer analogen Spannung erfolgt auschließlich durch Sensoren, da das künstliche
-Erzeugen einen geoßen Aufwand an elektrischen Komponenten benötigen würde.
+basieren auf dem kontinuierlichen Wert ihrer Amplitude. Zum Beispiel wandelt ein Sensor die zu messende Größe in einen Spannungswert
+um. Dieser wandert dann durch die Leitung bis zu einem ADC, der dieses kontinuierliche Signal in einen diskreten Spannungswert umwandelt.
+Diese binäre Zahl kann dann vom Chip ausgewertet werden. Wichtig ist hierbei die Auflösung des ADC, die durch Quantisierungsfehler
+und die Abtastschritte bedingt ist (vgl. \cref{sec:Mikrocontroller}). Außerdem wird immer gegen einen Referenzwert verglichen, der nicht höher als die Versorgungsspannung
+ist. Aus diesem Grund muss bei Signalen mit höherer Amplitude ein dedizierter Spannungsteiler für die Verringerung der Spannung
+am Eingang des ADC eingesetzt werden. Das Ausgeben einer analogen Spannung erfolgt ausschließlich durch Sensoren, da das künstliche
+Erzeugen einen großen Aufwand an elektrischen Komponenten benötigen würde.
 
 \paragraph{Pulsweitenmodulation} 
 nutzt ein digitales Rechtecksignal mit fester Frequenz, dessen Tastgrad (das
@@ -1002,11 +1002,11 @@ Versorgungsspannung. Voraussetzung ist, dass Sender und Empfänger denselben
 Impulsdauerbereich verwenden.
 
 \subsubsection{Bussysteme}
-Ein Bussystem arbeitet nicht starr wie die voher beschriebenen einfachen Signalübertragungen. Allgemein verwenden mehrere Teilnehmer 
-mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Der Vorteile dieser Systeme ist eine bidirektionaler 
-Informationsfluss und einen geringeren Leitungsaufwand gegenüber den einfachen direkt Verbindungen. Die konkreten Systeme
-lassen sich in syschrone mit einer dedizierten Taktleitung und asysnchrone Prinzipien mit festgelegter Baudrate unterscheiden.
-In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgezeigt und verglichen.
+Ein Bussystem arbeitet nicht starr wie die vorher beschriebenen einfachen Signalübertragungen. Allgemein verwenden mehrere Teilnehmer
+mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Die Vorteile dieser Systeme sind ein bidirektionaler
+Informationsfluss und ein geringerer Leitungsaufwand gegenüber den einfachen direkten Verbindungen. Die konkreten Systeme
+lassen sich in synchrone Prinzipien mit einer dedizierten Taktleitung und asynchrone Prinzipien mit festgelegter Baudrate unterscheiden.
+In \cref{tab:bussysteme} werden unterschiedliche Prinzipien gegeneinander aufgezeigt und verglichen.
 
 \begin{table}[htbp]
   \centering
@@ -1034,7 +1034,7 @@ In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgeze
  
     I\textsuperscript{2}C & 2 & synchron & mehrere &
       Adressierung im Protokoll, Open-Drain; Leitungslänge durch
-      Buskapazitaet begrenzt \\[3pt]
+      Buskapazität begrenzt \\[3pt]
  
     CAN & 2 & asynchron & mehrere &
       Differenzielle Übertragung mit Prioritätsvergabe und Prüfsumme;
@@ -1045,27 +1045,27 @@ In \cref{tab:bussysteme} werden unterschiedliche Prinzpien gegeneinadner aufgeze
 
 \paragraph{I\textsuperscript{2}C}
 funktioniert über zwei Leitungen mit Pull-up-Widerständen. Die beiden Leitungen sind jeweils für das Vorgeben einer Clock (SCL)
-für eine Sychronisation des gesamten Systems und dem Führen der eigentlichen Daten (SDA) zuständig. Elektronsich kann dabei jeder Teilnehmer
-nur aktiv auf ein LOW Pegel schalten und das Treiben auf HIGH wird durch die Verbindung der Pull-up-Widerstände gegen die Versorgungsspannung
-erzielt. Die Clock gibt die Frequenz des gesamten Systems vor, in dem jede Periode zwischen HIGH und LOW gewechselt wird.
-Das Kommunizieren beginnt mit der Start-Bedingung durch den Master, die die SDA-Leitung, während SCL auf HIGH steht, aktiv auf LOW.
-Danach folgt im Takt der Clock das senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK) 
-in dem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung, die Stückweise in
-8-Bit Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK erfolgt. Der Master beendet die Übertragung, indem er 
-die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzip ist durch eine
-maximale Teilnehmeranzahl und Leitungslänge beschränkt. 
+für eine Synchronisation des gesamten Systems und dem Führen der eigentlichen Daten (SDA) zuständig. Elektronisch kann dabei jeder Teilnehmer
+nur aktiv auf einen LOW-Pegel schalten und das Treiben auf HIGH wird durch die Verbindung der Pull-up-Widerstände gegen die Versorgungsspannung
+erzielt. Die Clock gibt die Frequenz des gesamten Systems vor, indem jede Periode zwischen HIGH und LOW gewechselt wird.
+Das Kommunizieren beginnt mit der Start-Bedingung durch den Master, der die SDA-Leitung, während SCL auf HIGH steht, aktiv auf LOW zieht.
+Danach folgt im Takt der Clock das Senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK),
+indem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung erfolgen, die stückweise in
+8-Bit-Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK abläuft. Der Master beendet die Übertragung, indem er
+die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzips sind durch eine
+maximale Teilnehmeranzahl und Leitungslänge beschränkt.
 
 \subsubsection{Leistungselektronik und Motortreiber}
-Da die Ausgänge der Mikrocontroller auf einen bestimmten maximalen Strom, der unter dem für den Betrieb von Motoren benötigt wird,ausgelegt 
-ist, bedarf es einer weiteren zwischen Einheit für die Steuerung. Außerdem entstehen unter hohen Leistungen Wärme und Induktionsspannungen,
-die einer weiteren Kontrolle unterliegen. Als Motortreiber für Schrittmotoren wird je Wicklung eine H-Brücke 
-mit vier hochleistungs Mosfets verwendet. Wie in \cref{fig:h-bruecke} aufgezeigt, lässt sich die Versogungsspannung des Motors Vm auf
-die Wicklung geben. Da der Stromansteig durch die Induktivität L der Wicklung begrenzt ist, kann die Leistung und damit das Drehmoment
-nicht mehr durch schnelleres Schalten erzeilt werden. Es ist zu beachten, dass die Mosfets eines Halbzweiges niemals gleichzeitig
+Da die Ausgänge der Mikrocontroller auf einen bestimmten maximalen Strom, der unter dem für den Betrieb von Motoren benötigten Strom liegt,
+ausgelegt sind, bedarf es einer weiteren Zwischeneinheit für die Steuerung. Außerdem entstehen unter hohen Leistungen Wärme und Induktionsspannungen,
+die einer weiteren Kontrolle unterliegen. Als Motortreiber für Schrittmotoren wird je Wicklung eine H-Brücke
+mit vier Hochleistungs-MOSFETs verwendet. Wie in \cref{fig:h-bruecke} aufgezeigt, lässt sich die Versorgungsspannung des Motors $V_\mathrm{M}$ auf
+die Wicklung geben. Da der Stromanstieg durch die Induktivität $L$ der Wicklung begrenzt ist, kann die Leistung und damit das Drehmoment
+nicht mehr durch schnelleres Schalten erzielt werden. Es ist zu beachten, dass die MOSFETs eines Halbzweiges niemals gleichzeitig,
 sondern nur mit einem Verzögerungsglied geschaltet werden dürfen, da sonst hohe Kurzschlussströme entstehen können. Durch das Umschalten
-der Mosfetkombination, kann die Stromrichtung durch die Wicklung umgedreht werden. Dabei arbeiten T1, T4 und T3, T2 als Paar.
-Die Besonderheit bei Schrittmotoren ist der Einsatz von gegneineander verschubene Wirkungströme zum Erzeugen eines Mikroschrittes.
-Durch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.
+der MOSFET-Kombination kann die Stromrichtung durch die Wicklung umgedreht werden. Dabei arbeiten T1, T4 und T3, T2 als Paar.
+Die Besonderheit bei Schrittmotoren ist der Einsatz von gegeneinander verschobenen Wicklungsströmen zum Erzeugen eines Mikroschrittes.
+Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
 
 \begin{figure}[htbp]
   \centering
@@ -1122,10 +1122,10 @@ Durch häufiges Umschalten kann eine genaue Zwischenpostion angefahren werden.
 \end{figure}
 
 \subsection{Verfahren}\label{sec:Verfahren}
-Diese Arbeit ist stark orientiert an den Verfahren der in der VDI 2221 beschriebene Methode zur Entwicklung von Produktionssstemen. Diese werden in \cref{sec:Anforderung} genauer
-beschrieben, wobei es aber hilft jetzt schonmal kurz darzustellen nach welchem Prinzip in dieser
+Diese Arbeit orientiert sich stark an den Verfahren der in der VDI 2221 beschriebenen Methode zur Entwicklung von Produktionssystemen. Diese werden in \cref{sec:Anforderung} genauer
+beschrieben, wobei es aber hilft, jetzt schon einmal kurz darzustellen, nach welchem Prinzip in dieser
 Arbeit verfahren wird. So wird das am Ende zu entwickelnde Gesamtsystem in mehrere Subsysteme unterteilt.
-Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkt und Anforderungen. Für eine Analyse und Betrachtung wird
+Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkte und Anforderungen. Für eine Analyse und Betrachtung wird
 also je nach Tiefe nur der innere Aufbau, der die festgelegten Anforderungen erfüllen muss, betrachtet oder nur die Schnittstellen der einzelnen Subsysteme.
 In dieser Arbeit wird es also immer eine Abstufung zwischen detaillierter und grober Betrachtung geben, damit die Komplexität des Gesamtsystems
 in einzelne Abschnitte unterteilt werden kann. Im Folgenden sollen weitere Sicherheits- und andere Normen beschrieben werden.

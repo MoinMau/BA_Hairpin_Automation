@@ -608,13 +608,13 @@ INPUT ./figs/wireLine MIRROR.png
 INPUT ./figs/wireLine MIRROR.png
 INPUT ./figs/wireLine MIRROR.png
 INPUT ./figs/wireLine MIRROR.png
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx9.tfm
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT docs/Konzept.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri9.tfm
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx9.tfm
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex

@@ -1,5 +1,5 @@
 \section{Realisierung}\label{sec:Realisierung}
-Nach dem Abschluss des theoretischen Teils dieser Arbeit, steht die Konzeptvariante fest und die konkrete Umsetzung kann erfolgen.
+Nach dem Abschluss des theoretischen Teils dieser Arbeit steht die Konzeptvariante fest und die konkrete Umsetzung kann erfolgen.
 In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und dem Bau der Anlage dargestellt werden.
 %
 %
@@ -18,7 +18,7 @@ elektrische System wurden parallel externe Komponenten zur Steuerung festgelegt 
 dieses Schaltplanes wurde eine Schematic in KiCad angefertigt. Nach dem festgelegten Schaltplan wurden dann die einzelnen Komponenten
 mit Kabeln und selbst gelegten Leitungen auf einer Lochrasterplatine verbunden. Zur schrittweisen Initialisierung der Anlage wurde
 als Entwicklungshilfe des Codes GitHub verwendet. Git ermöglicht es, Code schrittweise aufzubauen und einfach zwischen Versionen
-zu wechseln. Dieser Prozess wurde weiter durch die Verwendung von DeepSeek~V4 unterstützt, der als Co-Worker für das Schreiben
+zu wechseln. Dieser Prozess wurde weiter durch die Verwendung von DeepSeek~V4 unterstützt, das als Co-Worker für das Schreiben
 und Fixen von Code diente.
 
 Diese Aufzählung beschreibt zwar alle verwendeten Werkzeuge, soll aber nicht als zeitliche Darstellung der Realisierung dienen.
@@ -40,13 +40,13 @@ sie stehen als Werkmaterial in großer Anzahl zur Verfügung und können bei feh
 
 \paragraph{Additive Fertigung} bietet die Möglichkeit komplexe Formen auf günstigem und schnellem Wege herzustellen. Diese Fertigungsmethode
 basiert auf dem schichtweisen Auftrag von Material. Durch diesen Prozess können aus zweidimensionalen Layern verbundene
-dreidimensionale Objekte entstehen. Als Material kann für diese Verfahren grundsätzlich Metall, Nylon und Polymere in Frage kommen.
+dreidimensionale Objekte entstehen. Als Material können für diese Verfahren grundsätzlich Metall, Nylon und Polymere in Frage kommen.
 Für das Auftragen muss das Grundmaterial jedoch zum Schmelzen gebracht werden, damit es durch eine Nozzle mit definierter Höhe und Breite
 auf das Druckbett aufgetragen werden kann. Genau in diesem Punkt unterscheidet sich auch die Komplexität des 3D-Druckes für das eingesetzte
 Material. Ein Polymer kann mit viel weniger Aufwand erhitzt und bewegt werden. In den letzten Jahren gab es einen großen Entwicklungssprung
 für eben diese FDM (Fused Deposition Modeling) Drucker, die die Kosten und Geschwindigkeit für einen Druck mit bestimmten Materialien ermöglichen.
 Die am häufigsten zum Einsatz kommenden Materialien sind dabei ABS (Acrylnitril-Butadien-Styrol-Copolymer), PLA (Polylactide), PETG (Polyethylenterephthalatglycol),
-Nylon und TPU (Thermoplastisches Polyurethan) wobei es noch weitere selten verwendete Spezialmaterialien gibt. Für diese Arbeit wurde
+Nylon und TPU (Thermoplastisches Polyurethan), wobei es noch weitere selten verwendete Spezialmaterialien gibt. Für diese Arbeit wurde
 PLA als Wahl für das Material von gedruckten Bauteilen getroffen. Besonders die einfache Handhabung, hohe Belastbarkeit und
 Verfügbarkeit waren der Grund dieser Wahl.
 \todo{Quellen für diese Wahl???}
@@ -152,7 +152,7 @@ gelagerten Halterung~2 mit Zahnstange aufgebaut. Die vertikale Lagerung der Halt
 montierte Kugellager. Diese bieten die Möglichkeit, dass Halterung~2 mit einem geringen Widerstand und Toleranzen in die vertikale
 Richtung bewegt werden kann. 
 Für eine Vibration des Gesamtsystems wird also die rotatorische Bewegung des Motors über die Zahnrad-Zahnstangen-Kombination
-in eine lineare Bewegung übertragen. Wird dem Schrittmotor also der Befehl für eine Oszillation gegeben wird dies in eine vertikale
+in eine lineare Bewegung übertragen. Wird dem Schrittmotor also der Befehl für eine Oszillation gegeben, wird dies in eine vertikale
 Vibration übertragen, die in die Trageschiene übergeht.
 
 Die Entscheidung für die Wahl dieses Prinzips ist die hohe Variabilität durch
@@ -178,7 +178,7 @@ der Komplexität gegen ein weiteres gelagertes lineares System entschieden.
 
 \paragraph{Antrieb und elektrisches System}
 Für das elektrische System wurde wie bereits erwähnt ein Schrittmotor verwendet. Im Vergleich zu anderen Motoren bietet ein
-Schrittmotor die passende Mischung aus Genauigkeit, Geschwindigkeit und Belastbarkeit (vgl. \cref{sec:Aktuatorik}).
+Schrittmotor die passende Mischung aus Genauigkeit, Geschwindigkeit und Belastbarkeit (vgl. \cref{sec:Aktorik}).
 Ein Servomotor mit Getriebe ist wegen mangelnder Geschwindigkeit keine Option für ein Vibrationssystem.
 Diese Wahl bedarf jedoch eines weiteren Systems zur Positionserfassung.
 Aus diesem Grund wird für den eingefahrenen Zustand der Halterung~2 ein Endstop benötigt, der eben diesen Punkt als Signal an die
@@ -209,10 +209,10 @@ Die Befestigung der Schlitten erfolgt auf zwei Linearschienen, die wiederum an d
 wird zudem auf beiden Seiten durch hängende Aluminiumextrusionen gehalten. Der Einsatz der Linearschienen bietet die Möglichkeit
 den Abstand der Schlitten zueinander anzupassen. Dafür wurde ein Schraube-Mutter-System so integriert, dass durch Drehen einer
 Sechskantschraube in den Halterungen 3 und 4 die Schlitten sehr genau bewegt werden können. Zudem wurden die vier Kontaktpunkte
-eines Schlittens auf den beiden Linearschienen so designt, dass bewusste Aussparungen und ein angepasster Durchmesser verwendet wurde,
-der einen optimalen Kompromiss zwischen Halt und Rutschen darstellt. Da durch den Anpressdruck der Hairpins die lineare Bewegungseinheit
-hohe Kräfte bei minimalen Toleranzen erleben darf, wurden die Halterungen der Verbindungsstangen als metallische Linearlager ausgeführt.
-Diese ermöglichen trotz wirkender Kräfte eine leichte lineare Bewegung, welche den Servomotoren zugute kommt.
+eines Schlittens auf den beiden Linearschienen so designt, dass bewusste Aussparungen und ein angepasster Durchmesser verwendet wurden,
+die einen optimalen Kompromiss zwischen Halt und Rutschen darstellen. Da die lineare Bewegungseinheit durch den Anpressdruck der Hairpins
+hohe Kräfte bei minimalen Toleranzen aufnehmen muss, wurden die Halterungen der Verbindungsstangen als metallische Linearlager ausgeführt.
+Diese ermöglichen trotz wirkender Kräfte eine leichte lineare Bewegung, welche den Servomotoren zugutekommt.
 Die Endeffektoren müssen zudem so designt werden, dass ein Schnitt zwischen den Hairpins ohne Verharkung möglich ist. Dafür müssen
 diese an die Form und Biegung des oberen Teils angepasst werden. Ziel sollte aber sein, ein möglichst variantenstarkes Design für
 einen geringeren Wechsel der Endeffektoren zu finden.
@@ -222,31 +222,31 @@ Für die Vereinzelung wurden zwei Servomotoren verwendet. Dies hat den Grund, da
 werden muss, weil die Hairpins meist nur eine Höhe von 3-4mm aufweisen. Außerdem müssen keine hohen Geschwindigkeiten und lange Strecken
 umgesetzt werden. Die Wahl des Servomotors entspricht also genau diesen Anforderungen und ist in der passenden kompakten Form vorhanden.
 Durch die interne Lageregelung ist kein externer Sensor zur Bestimmung der Position notwendig. Zur Kontrolle der Vereinzelung wird
-in diesem System noch kein Sensor verwendet, da dies auch im späteren Schritt, der Überführung ausreichend ist.
+in diesem System noch kein Sensor verwendet, da dies auch im späteren Schritt, der Überführung, ausreichend ist.
 
 \subsubsection{Überführung}\label{sec:Ueberfuehrung}
-Wegen eines begrenzten Platzangebotes in der Trägerstruktur sind die beiden Subsysteme physisch übereinander angeordnet (vgl \cref{Abbildung gesamt}).
-Das Ziel diese Systems ist die Überführung der Hairpins zwischen diesen Subsystemen. Dazu wurde wie in \cref{sec:Konzeptauswahl} entschieden
+Wegen eines begrenzten Platzangebotes in der Trägerstruktur sind die beiden Subsysteme physisch übereinander angeordnet (vgl. \cref{Abbildung gesamt}).
+Das Ziel dieses Systems ist die Überführung der Hairpins zwischen diesen Subsystemen. Dazu wurde, wie in \cref{sec:Konzeptauswahl} entschieden,
 eine rein passive Rutsche gewählt.
 
 \paragraph{Schnittstellen} 
 
-Da die Überführung als rein passives System funktioniert, gibt es keine elektrischen Schnittstellen. Die mechanischen Schnittstelle
-stellen dabei die Übernahme des vereinzelten Haripins aus der Vereinzelung und die Übergabe diese Hairpins in das folgende Zuführsystem 
+Da die Überführung als rein passives System funktioniert, gibt es keine elektrischen Schnittstellen. Die mechanischen Schnittstellen
+stellen dabei die Übernahme des vereinzelten Hairpins aus der Vereinzelung und die Übergabe dieses Hairpins in das folgende Zuführsystem
 dar.
 
 \paragraph{Aufbau und Auslegung}
 
 Allgemein besteht die Rutsche aus drei Segmenten. Alle diese Segmente sind als Schale ausgeführt. Zwei Ränder an den Außenseiten
-verhindern ein seitliches Rausfallen der Hairpins. Zudem wurde in die Mitte einen an die Biegung der Oberseite der Hairpins
-angepasste Einkerbung mit eingebracht. Diese hilft mit einer leicht angeschrägten Unterseite den Hairpin stabil in der Mitte
-der Schale zu halten. Der obere Teil dieser Segmente ist eine sich konvex öffnenene Schale. Dies dient dem besseren Fangen für den 
-Übergang der Hairpin vom Vereinzelungs- in das Überführungssystem. Das mittlere Teil ist eines einfaches lineares Segment ohne Besodnerheiten.
-Der unterste Teil ist als Trichter kontruiert, der die Hairpins sicher in das Zuführsystem überführen soll. Die Wahl des Trichters
-ergab sich durch erste Tests, bei denen eine einfache Schale für fehlerhafte Lagen der Hairpins in der im folgenden Erklärten
-Fixiereinheit aufzeigten.
+verhindern ein seitliches Herausfallen der Hairpins. Zudem wurde in der Mitte eine an die Biegung der Oberseite der Hairpins
+angepasste Einkerbung eingebracht. Diese hilft mit einer leicht angeschrägten Unterseite, den Hairpin stabil in der Mitte
+der Schale zu halten. Der obere Teil dieser Segmente ist eine sich konvex öffnende Schale. Dies dient dem besseren Fangen für den
+Übergang der Hairpins vom Vereinzelungs- in das Überführungssystem. Das mittlere Teil ist ein einfaches lineares Segment ohne Besonderheiten.
+Der unterste Teil ist als Trichter konstruiert, der die Hairpins sicher in das Zuführsystem überführen soll. Die Wahl des Trichters
+ergab sich durch erste Tests, bei denen eine einfache Schale zu fehlerhaften Lagen der Hairpins in der im Folgenden erklärten
+Fixiereinheit führte.
 Der Grenzwinkel dieses Systems setzt sich aus der Haftreibung zwischen dem Isoliermaterial des Hairpins, dem PLA der Rutsche und
-den Kontkatflächen zwischen beiden Materilien.\todo{Rechnung zum Grenzwinkel}
+den Kontaktflächen zwischen beiden Materialien zusammen.\todo{Rechnung zum Grenzwinkel}
 
 \begin{figure}[htbp]
 	\centering
@@ -256,28 +256,28 @@ den Kontkatflächen zwischen beiden Materilien.\todo{Rechnung zum Grenzwinkel}
 \end{figure}
 
 \subsection{Zuführsystem}\label{sec:Zufuehrsystem}
-Diese Subsystem hat dei Aufgabe alle restlichen Teilfunktionen zu lösen und einen Übergabe eines einzelenen Hairpins and den 
-Roboterarm zu ermöglichen. Dabei ist auf eine hohe Genauigkeit, die variablen Hairpin Geomeitrien und eine eine ekltrische
+Dieses Subsystem hat die Aufgabe, alle restlichen Teilfunktionen zu lösen und eine Übergabe eines einzelnen Hairpins an den
+Roboterarm zu ermöglichen. Dabei ist auf eine hohe Genauigkeit, die variablen Hairpin-Geometrien und eine elektrische
 Steuerung zu achten.
 
 \subsubsection{Schnittstellen}
-Mechanisch Gesehen ist der Eingang dieses Subsystems der vereinzelte Hairpin aus der Überführung. Der Ausgang beschreibt widerum
-die definierte Übergabeposition an den Roboterarm. Als elektrisches Signal wird die Steurung eines Schrittmotors für das Transportieren
+Mechanisch gesehen ist der Eingang dieses Subsystems der vereinzelte Hairpin aus der Überführung. Der Ausgang beschreibt wiederum
+die definierte Übergabeposition an den Roboterarm. Als elektrisches Signal wird die Steuerung eines Schrittmotors für das Transportieren
 benötigt. Auch die Fixiereinheit muss elektronisch eingestellt werden.
 
 \subsubsection{Übernahme und Fixierung}
 Dieser Teil des Zuführsystems besteht aus einem Behälter und elektronisch angetriebenen Klemmen. Durch die Rutsche des Überführungssystems
-wird ein Hairpin in stehender Lage in diesen Behälter gegeben. Hier folgt das Schließen und Ausrichten des Hairpins durch die 
-Klemmen. Diese Einheit sitzt auf einem Transportsystem, welchse für den Wechsel der Postion verantwortlich ist.
+wird ein Hairpin in stehender Lage in diesen Behälter gegeben. Hier folgt das Schließen und Ausrichten des Hairpins durch die
+Klemmen. Diese Einheit sitzt auf einem Transportsystem, welches für den Wechsel der Position verantwortlich ist.
 
 \paragraph{Aufbau und Wirkprinzip}
-Der in \cref{fig:Kraftschlussklemme} augezeigte Behälter ist mit den gleichen Dimensionen wie die der Segmente der Rutsche konstruiert. Der Übergang
-zwischen beiden Systemen stellt somit eine geringere Verhakungsgefahr da. Landet nun also ein Hairpin in diesem Behälter, kommen die Klemmen zum
-Einsatz. Nach einer passenden Kalibrierung auf die Hairpingeometrie, können die Seitenklemmen auf die definierte Postion ausfahren.
-Dies ermöglicht das Ausrichten des Hairpins genau auf die Mitte und fixiert zudem das seitliches Verrutschen. Die Bewegung übernimmt
-dabei ein einfacher Servomotor, der mit einem Ausleger verbunden ist. Die Hauptkleme dient zum Aufrichten des Hairpins. Da die 
-Rutsche in einem Winkel montiert ist, werden die Hairpin ebenfalls in dieser schrägen Lage übernommen. Schließt die Hauptklemme
-nach der Ausrichtung der Seitenklemmen lässt sich als der Hairpin Punkt genau Positionieren. Als Referenzeben für die vertikale
+Der in \cref{fig:Kraftschlussklemme} aufgezeigte Behälter ist mit den gleichen Dimensionen wie die Segmente der Rutsche konstruiert. Der Übergang
+zwischen beiden Systemen stellt somit eine geringere Verhakungsgefahr dar. Landet nun also ein Hairpin in diesem Behälter, kommen die Klemmen zum
+Einsatz. Nach einer passenden Kalibrierung auf die Hairpingeometrie können die Seitenklemmen auf die definierte Position ausfahren.
+Dies ermöglicht das Ausrichten des Hairpins genau auf die Mitte und verhindert zudem ein seitliches Verrutschen. Die Bewegung übernimmt
+dabei ein einfacher Servomotor, der mit einem Ausleger verbunden ist. Die Hauptklemme dient zum Aufrichten des Hairpins. Da die
+Rutsche in einem Winkel montiert ist, werden die Hairpins ebenfalls in dieser schrägen Lage übernommen. Schließt die Hauptklemme
+nach der Ausrichtung der Seitenklemmen, lässt sich so der Hairpin punktgenau positionieren. Als Referenzebene für die vertikale
 Richtung dient dabei die längere Außenwand des Behälters.
 
 \begin{figure}[htbp]
@@ -289,74 +289,74 @@ Richtung dient dabei die längere Außenwand des Behälters.
 
 \paragraph{Konstruktive Auslegung}
 Der Behälter wird mit vier Schrauben auf dem in \cref{sec:TransportSystem} aufgezeigten Transportsystem montiert. Für das Ein- und
-Ausfahren der Klemmen wird die rotatorische Bewegung der Servomotoren mittels eines Auslegers und einer Verbidungsstange auf die
-linear bewegten Klemmen übertragen. Dabei sind die Seitenklemmen so konstruiert, dass jeweils zwei einfach Führungsschienen die
-Bewegungsrichtung auf eine Richutng beschränken und das gesamte System stabilisieren. Dieses Verfahren wurde gewählt, da dieses 
+Ausfahren der Klemmen wird die rotatorische Bewegung der Servomotoren mittels eines Auslegers und einer Verbindungsstange auf die
+linear bewegten Klemmen übertragen. Dabei sind die Seitenklemmen so konstruiert, dass jeweils zwei einfache Führungsschienen die
+Bewegungsrichtung auf eine Richtung beschränken und das gesamte System stabilisieren. Dieses Verfahren wurde gewählt, da dieses
 System einen geringen Montageaufwand benötigt und durch die nach außen zeigenden Schienen keine Einschränkungen für die Innenwände
-des Behäters. Die Hauptklemme wiederum wurde mit Einkerbungen gestalltet in den diese Verläuft. Auch hier ist ein einfacher 
+des Behälters entstehen. Die Hauptklemme wiederum wurde mit Einkerbungen gestaltet, in denen diese verläuft. Auch hier ist ein einfacher
 Aufbau möglich.\todo{bessere Begründungen}
 
 \paragraph{Antrieb und Sensorik}
-Wie bereits erwähnt, wird für die Aktuatorik der Klemmen kleine Servomotoren verwenden. Diese Wahl wurde aus Gründen des Platzmangels
-und der präzisen Ansteuerung getroffen. Zu dem sind durch die kurzen Bewegungsstrecken der Klemmen die beschränkte Rotation dieser
-Motoren kein Problem für dieses System. Für das detektieren des Hairpins in dem Behälter wurde ein kapazitiver Sensor geplant. 
-Da dieses System gegenüber anderen Sensoriken verlässlich jegliche Verädenrungen in der Umgebung des Sensors erkennen kann, bietet
-sich dies besonders bei Variablen Geomtrien und damit Postionen an. Dieses Konzept ist aber wegen erhöhter Komplexität im Bau nicht
+Wie bereits erwähnt, werden für die Aktorik der Klemmen kleine Servomotoren verwendet. Diese Wahl wurde aus Gründen des Platzmangels
+und der präzisen Ansteuerung getroffen. Zudem ist durch die kurzen Bewegungsstrecken der Klemmen die beschränkte Rotation dieser
+Motoren kein Problem für dieses System. Für das Detektieren des Hairpins in dem Behälter wurde ein kapazitiver Sensor geplant.
+Da dieses System gegenüber anderen Sensoriken verlässlich jegliche Veränderungen in der Umgebung des Sensors erkennen kann, bietet
+sich dies besonders bei variablen Geometrien und damit Positionen an. Dieses Konzept ist aber wegen erhöhter Komplexität im Bau nicht
 realisiert worden.
 
 \subsubsection{Transport und Positionierung}\label{sec:Transportsystem}
-Der Behälter mit dem fixierten Hairpin muss aus dem Überfühungssystem herausbewegt werden und zur Übergabe Postion des Roboterarmes
+Der Behälter mit dem fixierten Hairpin muss aus dem Überführungssystem herausbewegt und zur Übergabeposition des Roboterarmes
 gefahren werden.
 
 \paragraph{Aufbau und Wirkprinzip}
-Die Führung besteht aus dem Spindelantrieb mit Schirttmotor, zwei Führungsschienen und einen Schlitten, der alle drei Teile verbindet.
-Der Schlitten besitzt zwei lineare Lager, die auf den Führungschienen für eine reibungslose Befestigung sorgen und die Möglichkeit
+Die Führung besteht aus dem Spindelantrieb mit Schrittmotor, zwei Führungsschienen und einem Schlitten, der alle drei Teile verbindet.
+Der Schlitten besitzt zwei lineare Lager, die auf den Führungsschienen für eine reibungslose Befestigung sorgen, und die Möglichkeit,
 den Behälter der Fixiereinheit mit vier Schrauben zu montieren. Die Rotation der Spindel sorgt für die Bewegung aus der Tragstruktur
-raus. 
+heraus.
 
 \paragraph{Antrieb und Referenzierung}
 Für die Positionsermittlung wird das bekannte Verfahren mit Endstop und einer open-loop Steuerung eingesetzt.
 
 \subsubsection{Übergabe an den Roboterarm}
-Nachdem die Kraftschlussklemme durch den Spindelantrieb an eine definierte Postion gefahren wurde, greift der Roboterarm mit einem
-angepassten Greifer den oberen Teil des Hairpins. In einem festdefinierten Zeitfenster müssen nun die Beine des Hairpins aus den
-KLemmen gelöst werden. Dafür wird von der Steuerung der Befehl gegeben die Servomotoren zum Einziehen der Klemmen zu bewegen. Der
+Nachdem die Kraftschlussklemme durch den Spindelantrieb an eine definierte Position gefahren wurde, greift der Roboterarm mit einem
+angepassten Greifer den oberen Teil des Hairpins. In einem fest definierten Zeitfenster müssen nun die Beine des Hairpins aus den
+Klemmen gelöst werden. Dafür wird von der Steuerung der Befehl gegeben die Servomotoren zum Einziehen der Klemmen zu bewegen. Der
 Roboterarm kann so den Hairpin nach oben aus dem Behältnis heben und diesen nun in die Laseranlage geben.
 
 \subsection{Elektrische Integration}\label{sec:ElektrischeIntegration}
-Nachdem nun die Konstruktion der mechansichen Komponeten beschrieben wurde, muss die Wahl des zugehörigen Steurungssystem erläutert
-werden. Dieses System besteht aus eine Vielzahl an untereinander verschalteten elektronischen Komponeten. Es muss möglich sein auf
-Befehle einer Bedieneinheit oder Sensoren eine Aktion in Form der aktivierung von Motoren zu starten. Für die Realsierung wurde dafür
-in folgende drei Bereiche unterschieden: der Versorgung, der Steurung und der Peripherie.
+Nachdem nun die Konstruktion der mechanischen Komponenten beschrieben wurde, muss die Wahl des zugehörigen Steuerungssystems erläutert
+werden. Dieses System besteht aus einer Vielzahl an untereinander verschalteten elektronischen Komponenten. Es muss möglich sein, auf
+Befehle einer Bedieneinheit oder von Sensoren eine Aktion in Form der Aktivierung von Motoren zu starten. Für die Realisierung wurde dafür
+in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und die Peripherie.
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
-Zur Bereitstellung der benötigten Energie, wird das vorhandene 230V AC Niederspannungsnetz verwendet (vgl. En1). Mit einem AC-DC 
-Netzteil wird aus dem Wechselsappung eine Gleichspannung von 12V. Außerdem wird für weiter Komponten ein Spannung von 5V benötigt,
-die von einem dedizierten DC-DC Konverter mit der Eingangsspannung von 12V bereitgestellt wird. Das Gesamtesystem arbeitet mit 
-der gleichen Masse, die vom Netzteil bereitgestellt wird. Für die Auslegung dieser Komponenten bedarf es einer vorhrigen 
-Leistungsbedarf Analyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherunge und
+Zur Bereitstellung der benötigten Energie wird das vorhandene 230V AC Niederspannungsnetz verwendet (vgl. En1). Mit einem
+AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von 12V erzeugt. Außerdem wird für weitere Komponenten eine Spannung von 5V benötigt,
+die von einem dedizierten DC-DC-Konverter mit der Eingangsspannung von 12V bereitgestellt wird. Das Gesamtsystem arbeitet mit
+der gleichen Masse, die vom Netzteil bereitgestellt wird. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
+Leistungsbedarfsanalyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherungen und
 Konverter trotzdem ausgelegt sein sollten.\todo{Leistungsanalyse?}
 
 \subsubsection{Steuerungstopologie}\label{sec:Microcontroller}
-Die Wahl der Steuerungstopologie wurde durch die in \cref{sec:Steuerungsarchitektur} beschriebende Vorteile eines hieraischen 
-Aufbaus getroffen. Eine Master-Slave Aufbau ermöglicht es den Master zu entlasten und zeitkritische Aktionen parallel laufen
-lassen zu könnnen. Auch die Modularität ermöglichte es einzelne Subsysteme Schrittweise zu testen und zuerweitern. In einem
-Fehlerfall haben die Slaves fest definierte Zustände, die bei Signalverlust eingehalten werden (vgl. Anforderung Sa1). 
-Trotz eines erhöhten Verdrahtungs- und Integrationsaufwand passte die offene Struktur zum Aufbau einer Prototypen Anlage.
+Die Wahl der Steuerungstopologie wurde durch die in \cref{sec:Steuerungsarchitektur} beschriebenen Vorteile eines hierarchischen
+Aufbaus getroffen. Ein Master-Slave-Aufbau ermöglicht es, den Master zu entlasten und zeitkritische Aktionen parallel laufen
+lassen zu können. Auch die Modularität ermöglichte es, einzelne Subsysteme schrittweise zu testen und zu erweitern. In einem
+Fehlerfall haben die Slaves fest definierte Zustände, die bei Signalverlust eingehalten werden (vgl. Anforderung Sa1).
+Trotz eines erhöhten Verdrahtungs- und Integrationsaufwands passte die offene Struktur zum Aufbau einer Prototypenanlage.
 
-Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtensystems. Die Wahl dieses 
-Mikrokontrollers wurde durch die erhöhte Rechenleistung für die Überwachung und das Anzeigen von Grafiken auf dem Bedienelement
+Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtsystems. Die Wahl dieses
+Mikrocontrollers wurde durch die erhöhte Rechenleistung für die Überwachung und das Anzeigen von Grafiken auf dem Bedienelement
 getroffen. Als erster Slave wurde ein Arduino Nano gewählt, der für die Ansteuerung aller Servomotoren zuständig ist. Dieser
-bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanäle. Ein ELEGOO Uno wurde als zweiter Slave genutzt, da dieser über
-eine passenden Treibereinheit zur Ansteuerung von Schrittmotoren verfügt. Auch wurde die Wahl deiser Komponenten gegen über einem
-SPS System durch die Verfügbarkeit und Kosten begründet (vgl. Anforderung St2).
+bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanälen. Ein ELEGOO Uno wurde als zweiter Slave genutzt, da dieser über
+eine passende Treibereinheit zur Ansteuerung von Schrittmotoren verfügt. Auch wurde die Wahl dieser Komponenten gegenüber einem
+SPS-System durch die Verfügbarkeit und Kosten begründet (vgl. Anforderung St2).
 
 Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein Bedienelement und Sensoren
-übernimmt. Dieser erteilt dann bestimmte Aufgaben, wie ein Motor auf eine definierte Postion zu fahren an die Slaves. Außerdem 
-wird kontinuierlich abgefragt in welchem Zustand sich die Slaves bezüglich woran geganener Befehle befinden. Der ELEGOO Uno 
+übernimmt. Dieser erteilt dann bestimmte Aufgaben, wie einen Motor auf eine definierte Position zu fahren, an die Slaves. Außerdem
+wird kontinuierlich abgefragt, in welchem Zustand sich die Slaves bezüglich vorangegangener Befehle befinden. Der ELEGOO Uno
 ist mit seiner Treiberschaltung für die Steuerung der Schrittmotoren verantwortlich. Dabei sind die Endstops als einzige Sensoren
-direkt mit dem Slave verbunden, um die open-loop Regelung ohne den Einfluss von anderen Komponetnen zu ermöglichen. \todo{Wie funktioniert dei Treiberstuffe mit dem Uno, muss das rein?}
-Der Ardunio Nano bekommt die Position eines Servomotors druch den Master vorgegeben und gibt diese als PWM-Signal an den geforderten
+direkt mit dem Slave verbunden, um die open-loop Regelung ohne den Einfluss von anderen Komponenten zu ermöglichen. \todo{Wie funktioniert dei Treiberstuffe mit dem Uno, muss das rein?}
+Der Arduino Nano bekommt die Position eines Servomotors durch den Master vorgegeben und gibt diese als PWM-Signal an den geforderten
 Servomotor weiter.
 
 \begin{figure}[htbp]
@@ -421,22 +421,22 @@ Servomotor weiter.
 
 \subsubsection{Peripherie}\label{sec:Peripherie}
 \paragraph{Servomotoren} werden in zwei verschiedenen Größen eingesetzt. Die zwei Servomotoren des Vereinzelungssystems verwenden
-kräfigere DM449 Motoren. Für das Fiexierungssystem werden drei kleinere SG90 Servomotoren mit einer geringeren Kraft verwendet.
-Die Versorgung erfolgt durch eine GND und 5V Leitungen zu jedem Servomotor. 
+kräftigere DM449-Motoren. Für das Fixierungssystem werden drei kleinere SG90-Servomotoren mit einer geringeren Kraft verwendet.
+Die Versorgung erfolgt durch eine GND- und eine 5V-Leitung zu jedem Servomotor.
 
 \paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als Nema 17 Motoren ausgeführt.
 
 \paragraph{Sensoren} werden als einfache Reflexlichttaster ausgeführt. Im aktuellen System ist einer dieser Sensoren an der Rutsche 
 angebracht.
 
-\paragraph{Bedienelemente} stellen ein Display und fünf Knöpfe für die Navigation da. Das Display wird über eine SPI Schnittstelle
-mit dem ESP32 verbunden. Die Knöpfe werden als einfach digitale Eingänge an die GPIO des ESP32 geführt.
+\paragraph{Bedienelemente} stellen ein Display und fünf Knöpfe für die Navigation dar. Das Display wird über eine SPI-Schnittstelle
+mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an die GPIO des ESP32 geführt.
 
 \subsubsection{Schaltplan}\label{sec:Schaltplan}
-In \cref{fig:Schaltplan} wird die konrekte Pinbelegung der einzelenen elektrischen Komponenten augezeigt. Nach dieser Schematic werden alle Bauteile 
+In \cref{fig:Schaltplan} wird die konkrete Pinbelegung der einzelnen elektrischen Komponenten aufgezeigt. Nach dieser Schematic werden alle Bauteile
 miteinander verbunden. Die Mikrocontroller werden jeweils auf einer eigenen Lochrasterplatine (vgl. Anhang) mit passend gebogenen
-Leitungen verlötet. Für die Abgänge zu den Motoren werden induviduelle Verlängerungskabel mit passendem Stecker verwendet (vgl. \cref{fig:Lochraster_Nano}). Für
-die Verbindung der Spannungsversorung und der I2C Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet.
+Leitungen verlötet. Für die Abgänge zu den Motoren werden individuelle Verlängerungskabel mit passendem Stecker verwendet (vgl. \cref{fig:Lochraster_Nano}). Für
+die Verbindung der Spannungsversorgung und der I2C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet.
 
 \begin{figure}[htbp]
 	\centering
@@ -447,23 +447,23 @@ die Verbindung der Spannungsversorung und der I2C Kommunikation werden Schraubkl
 
 \subsection{Software}\label{sec:Software}
 Die Software dient als eigentliche Steuereinheit, in der Entscheidungen anhand von Daten getroffen werden. Der Ablauf dieser
-Entscheidungen sind fest definiert und können druch äußere Einflüsse die Sensoren oder dem Bedienelement verändert werden.
+Entscheidungen ist fest definiert und kann durch äußere Einflüsse der Sensoren oder des Bedienelements verändert werden.
 
 \subsubsection{Architektur}\label{sec:CodeStruktur}
-Je Mikrocontroller wird ein induvidueller Code verwendet. Hier druch werden Verantwortlichkeiten stark abgegrenzt. Die Kommunikation
-untereinander mittels I2C gibt es strenge Hierachien. Der Master (ESP32) kann dabei defineirte Adressen ansprechen. Der ELEGOO Uno
-wurde auf die Adresse 0x33 und der Ardunino Nano auf 0x32 festgelegt. Der Master kennt hierfür keine konkreten Werte für Motoren, 
-sondern nur vorgegebne Positionen mit Befehlen, die durch die Slaves eigenständig ausgeführt werden.
-Das Ziel ist den eigentlichen Ablauf des Programmes des Gesamtsystem so zu gestalten, dass es möglich ist mit einfach Blöcken eine
-Ablauf aufzubauen. Maßgeblich ist der Code des Masters verantwortlich. Hier wurde besonders auf eine nichtblockierende Ababeitung
-der Logik eingebaut. So kann jederzeit ein Signal für einen Stop oder ähnlcihes aufgenommen werden und das System befindet in keiner
+Je Mikrocontroller wird ein individueller Code verwendet. Hierdurch werden Verantwortlichkeiten stark abgegrenzt. Für die Kommunikation
+untereinander mittels I2C gibt es strenge Hierarchien. Der Master (ESP32) kann dabei definierte Adressen ansprechen. Der ELEGOO Uno
+wurde auf die Adresse 0x33 und der Arduino Nano auf 0x32 festgelegt. Der Master kennt hierfür keine konkreten Werte für Motoren,
+sondern nur vorgegebene Positionen mit Befehlen, die durch die Slaves eigenständig ausgeführt werden.
+Das Ziel ist es, den eigentlichen Ablauf des Programmes des Gesamtsystems so zu gestalten, dass es möglich ist, mit einfachen Blöcken einen
+Ablauf aufzubauen. Maßgeblich ist der Code des Masters verantwortlich. Hier wurde besonders auf eine nichtblockierende Abarbeitung
+der Logik geachtet. So kann jederzeit ein Signal für einen Stop oder Ähnliches aufgenommen werden und das System befindet sich in keiner
 Loop oder Warteposition.
-Außerdem gibt es festgelegte Regeln für den Arduino Nano und ELEGOO Uno in denen die Bertriebsgrenzen der einzelen Subsysteme festgelegt
-ist. Wird also ausversehen ein flasches Signal vom Master übertragen, können sich die Motoren nicht durch Überlastungen beschädigen,
-da jeder Slave den Befehl gegen festgelegt Grenzen vergleicht und einen fehlerhaften Wert ignoriert.
-Für eine Block Programmierung werden einzelne Module benötigt: Für die Initialisierung fahren die Servomotoren auf ein festgelegte 
+Außerdem gibt es festgelegte Regeln für den Arduino Nano und den ELEGOO Uno, in denen die Betriebsgrenzen der einzelnen Subsysteme festgelegt
+sind. Wird also aus Versehen ein falsches Signal vom Master übertragen, können sich die Motoren nicht durch Überlastungen beschädigen,
+da jeder Slave den Befehl mit festgelegten Grenzen vergleicht und einen fehlerhaften Wert ignoriert.
+Für eine Blockprogrammierung werden einzelne Module benötigt: Für die Initialisierung fahren die Servomotoren auf eine festgelegte
 Position und die Schrittmotoren werden mittels der Endstops gehomet. Nun kann für jeden Motor eine Position vorgegeben werden.
-Mit Warte oder Sensorblöcken kann eine Zeit oder Zustandssteuerung erfolgen. Mit diesen Blöcken lässt sich ein Gesamtablauf gestalten.
+Mit Warte- oder Sensorblöcken kann eine Zeit- oder Zustandssteuerung erfolgen. Mit diesen Blöcken lässt sich ein Gesamtablauf gestalten.
 
 
 \subsubsection{Bedienschnittstelle}
