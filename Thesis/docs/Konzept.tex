@@ -1,31 +1,33 @@
 \section{Konzept \& Anforderungsanalyse}\label{sec:Konzept}
-Dieser Abschnitt beschreibt einen der größeren Teile dieser Arbeit. Hier soll detailliert gezeigt werden, wie das System
+In diesem Abschnitt soll detailliert gezeigt werden, wie das System
 zur automatischen Abisolierung in der Prototypenproduktion aussehen soll und welche Entscheidungen auf diesem Weg
-getroffen wurden.\\
-Dafür sollten noch einmal grob die Anforderungen und Bedingungen dargelegt werden:\\
-Das System, das entwickelt werden soll, muss in der Lage sein, aus einer hängenden Reihe von Hairpins einzelne dieser
+getroffen wurden.\medskip
+Dafür sollten noch einmal grob die Anforderungen und Bedingungen dargelegt werden:\smallskip
+Das System, das entwickelt werden soll, muss in der Lage sein, aus einer hängenden Reihe einzelne Hairpins
 an den Roboter zu übergeben. Dabei dürfen die Hairpins nicht beschädigt werden und die Übergabe an den Roboterarm
-muss mit einer festen Taktzeit und einer hohen Wiederholgenauigkeit geschehen.\\
+muss mit einer festen Taktzeit und einer hohen Wiederholgenauigkeit geschehen.\medskip
 Zunächst musste sich ein grober Aufbau einer solchen Anlage angesehen werden. Dafür wurden zwei primäre zu erledigende
-Arbeitsschritte festgelegt:\\
-1. Die Vereinzelung der Hairpins,\\
-2. Die Zuführung und Übergabe eines einzelnen Hairpins an den Roboterarm.\\
-Der genaue Aufbau dieser Subsysteme wird im späteren Teil dieses Abschnittes weiter erläutert. Zunächst muss man sich
-einen Überblick über die technischen Möglichkeiten verschaffen. 
-%
+Arbeitsschritte festgelegt:
+\begin{enumerate}
+  \item Die Vereinzelung der Hairpins
+  \item Die Zuführung und Übergabe eines einzelnen Hairpins an den Roboterarm
+\end{enumerate}
+Der genaue Aufbau dieser Subsysteme wird im späteren Teil dieses Abschnittes weiter erläutert. 
 %
 \subsection{Anforderungen}\label{sec:Anforderung}
 Diese Bachelorarbeit orientiert sich für die Erarbeitung des automatisierten Abisoliersystems an der VDI 2221.
 In dieser ist beschrieben, wie ein systematischer und phasenweiser Entwicklungsprozess eines Produktes aussieht.
-Der Grundgedanke ist dabei, Anforderungen festzulegen, Funktionsstrukturen und Lösungskonzepte festzulegen und 
-zuletzt das Gesamtsystem zu gestalten.\\
+Der Grundgedanke ist dabei, Anforderungen, Funktionsstrukturen und Lösungskonzepte festzulegen und 
+zuletzt das Gesamtsystem zu gestalten.\medskip
+
 Wichtigster Teil der Anforderungsliste ist es dabei, die Anforderungen nach Forderung (F) und Wunsch (W) zu klassifizieren.
 Es wird also unterschieden, ob eine Bestimmung für den Betrieb des Gesamtsystems relevant ist oder nur zu
-dessen Verbesserung führt.\\
-Die Festlegung der Anforderungen stammt aus den aus der Forschungsfrage folgenden Bedingungen für das Gesamtsystem.
-Weiter ist natürlich relevant, wie das bestehende System aussieht und wie hier das Zusammenspiel gestaltet wird.
+dessen Verbesserung führt.\medskip
+
+Die Festlegung der Anforderungen stammt aus der Forschungsfrage folgenden Bedingungen für das Gesamtsystem.
+Weiter muss beachtet werden, wie die bestehende Anlage aussieht und ein Zusammenspiel gestaltet werden kann.
 Bei manchen Parametern wurden wiederum Betriebsgrenzen festgelegt, die wie ein externer Kundenwunsch betrachtet
-werden können.\\
+werden können.\medskip
 
 \begin{longtable}{@{} p{0.9cm} c p{8.4cm} p{3.2cm} @{}}
 \caption{Anforderungsliste des Vereinzelungs- und Zuführsystems nach VDI~2221
@@ -48,8 +50,8 @@ werden können.\\
 
 \multicolumn{4}{@{}l}{\textbf{Leistungs- und Gütemerkmale}}\\
 \addlinespace[2pt]
-L1 & F & Bereitstellungszeit je Hairpin unterschreitet die Zykluszeit der Zelle; das System bildet zu keinem Zeitpunkt den Engpass & $\leq 30\,$s (Ziel: $\leq 25\,$s)\\
-L2 & F & Wiederholgenauigkeit der Übergabeposition & $\leq 0{,}5\,$mm\\
+L1 & F & Bereitstellungszeit je Hairpin unterschreitet die Zykluszeit der Zelle; das System bildet zu keinem Zeitpunkt den Engpass & $\leq 30\,$s \\
+L2 & F & Wiederholgenauigkeit der Übergabeposition & $\leq 2\,$mm\\
 L3 & F & Durchsatz ohne manuelles Nachladen & $\geq 25\,$Stk.\\
 L4 & F & Hairpins bleiben unbeschädigt (Isolierung/Geometrie) & $\leq 1\,\%$\\
 L5 & F & Anlage weist hohe Prozessstabilität auf & --\\
@@ -58,7 +60,7 @@ L5 & F & Anlage weist hohe Prozessstabilität auf & --\\
 \multicolumn{4}{@{}l}{\textbf{Geometrie}}\\
 \addlinespace[2pt]
 G1 & F & Unterbringung im vorhandenen Bauraum der Zelle (Aluminiumgestell) & $\langle B\times T\times H\rangle$\\ % Maße eintragen
-G2 & F & Übergabeposition im Arbeitsraum des Roboterarms UR5e, kollisionsfrei erreichbar & --\\
+G2 & F & Übergabeposition im Arbeitsraum des Roboterarms UR5e, kompatibel mit dem vorhandenen Greifer & --\\
 G3 & F & Zuführung der Hairpins in hängender Lage & --\\
 G4 & W & Manuelle Justage der Übergabeposition (Schienensystem) & --\\
 \addlinespace
@@ -71,7 +73,7 @@ K2 & F & Transport in eine definierte, reproduzierbare Endlage & --\\
 
 \multicolumn{4}{@{}l}{\textbf{Stoff / Material}}\\
 \addlinespace[2pt]
-St1 & F & Verarbeitung variierender Hairpin-Geometrien & Spektrum $\langle\ldots\rangle$\\ % Bereich definieren
+St1 & F & Verarbeitung variierender Hairpin-Geometrien & --\\
 St2 & W & Verwendung kostengünstiger, prototypentauglicher Werkstoffe für den Aufbau & --\\
 \addlinespace
 
@@ -79,13 +81,13 @@ St2 & W & Verwendung kostengünstiger, prototypentauglicher Werkstoffe für den 
 \addlinespace[2pt]
 Si1 & W & Definierte Signalschnittstelle zum Roboterarm & digital (I/O)\\
 Si2 & W & Rückmeldung der Endlage über Sensorik & --\\
-Si3 & F & Robuste interne Kommunikation & Fehlerrate $\langle\ldots\rangle$\\
+Si3 & F & Robuste interne Kommunikation & --\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Energie}}\\
 \addlinespace[2pt]
 En1 & F & Elektrische Versorgung aus vorhandener Infrastruktur & AC 230\,V \\
-En2 & F & Versorgung aus vorhandener Infrastruktur ohne große Anpassung & Druckluft 5bar, kein Vakuum\\
+En2 & F & Versorgung aus vorhandener Infrastruktur ohne große Anpassung & Druckluft (5bar), kein Vakuum\\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Sicherheit}}\\
@@ -111,8 +113,6 @@ Mo1 & F & Einfachheit gegenüber Komplexität & --\\
 Diese Punkte wurden in sich priorisiert bearbeitet. So wurde innerhalb der Forderungen zwischen geringfügigen Anforderungen
 und solchen, die das Gesamtsystem maßgeblich beschreiben, unterschieden. Auch die Wunschanforderungen wurden nach Aufwand zu Nutzen
 abgewogen. Dieses Gesamtbild und die Priorisierung wurden verwendet, um in Arbeitspakete zu unterteilen.
-
-\todo{Welche Wunschanforderungen gibt es noch?}
 %
 \subsection{Gesamtarchitektur}\label{sec:Architektur}
 In diesem Abschnitt soll betrachtet werden, in welche Subsysteme unterteilt wurde und wie hier entschieden wurde.
@@ -120,29 +120,23 @@ Dafür müssen die Arbeitsschritte in Verbindung mit dem bestehenden System aufg
 einmal rückläufig zu beschreiben: Der Roboterarm muss die Hairpins für die Abisolierung greifen können. Dafür
 muss ein Hairpin so bereitgestellt werden, dass dieser an einer fixen Position und an den Angriffspunkten des Greifers
 des Roboterarmes übergeben wird. Es muss also ein vereinzelter Hairpin aus der restlichen Anlage herausfahren.
-Vorher musste also aus einer Vielzahl von Hairpins einer isoliert übergeben werden. Nach Anforderungen muss 
-das System also einmal mit Hairpins beladen werden, sodass ein Vorrat an diesen vorhanden ist.\\
-
-Aus diesem System haben sich zwei wichtige Subsysteme gebildet: die Vereinzelung und die Zuführung.
-Diese besitzen Schnittstellen, die untereinander verbunden werden, sodass das Gesamtsystem entsteht.
-Nach der VDI 2221 wird dieser Ablauf in der im nächsten Unterpunkt beleuchteten Funktionsstruktur aufgezeigt.
-Danach werden die einzelnen Schritte mit unterschiedlichen Lösungsansätzen beleuchtet.
-Als letzter Schritt kommt dann die Entscheidung welche Prinzipien oder Ansätze für den jeweiligen Schritt
-verwendet werden.
+Vorher musste aus einer Vielzahl ein Hairpin isoliert übergeben werden. Nach Anforderungen muss 
+das System einmalig mit Hairpins beladen werden, sodass dann für einen Druchlauf ein Vorrat vorhanden ist.
 %
 %
 \subsubsection{Funktionsstruktur}
-Wie bereits beschrieben, gliedert sich die in der Arbeit erarbeitete Anlage in das aktuelle System ein. Als Anfangspunkt dieses 
+Wie bereits beschrieben, gliedert sich die in der Arbeit erarbeitete Anlage in das aktuelle System ein. Der Ablauf der
+einzelen Teilschritte ist in \cref{fig:funktionsstruktur} aufgezeigt. Als Anfangspunkt dieses 
 Systems gilt die Beladung mit Hairpins. Es muss also ein Vorrat an Hairpins in die Anlage gegeben werden, der dann am Ende
 vereinzelt an den vorhandenen Roboterarm übergeben werden muss. Im Vereinzelungssystem müssen dafür die Hairpins bevorratet
 und dem eigentlichen Vereinzelungsmechanismus zugeführt werden. Die Vereinzelung hat die Aufgabe, aus dem angelieferten Bündel
-von Hairpins einzelne dieser wieder auszugeben. Die Schnittstelle dient als Verbindung der Subsysteme und muss den einzelnen Hairpin
+von Hairpins einzelne dieser wieder auszugeben. Die Überführung dient als Verbindung der Subsysteme und muss den einzelnen Hairpin
 des Vereinzelungssystems in das Zuführsystem bringen. In diesem muss der Hairpin zunächst angenommen und fixiert werden. Dies dient
 dazu, einen sicheren Transport aus der Anlage zu ermöglichen. Außerdem muss in diesem Schritt schon bedacht werden, dass die Fixierung
 eine spätere Übergabe an den Roboterarm ermöglicht. Weiter muss der transportierte Hairpin auf eine fest definierte Position fahren.
 Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm funktionieren.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
   font=\footnotesize,
@@ -189,10 +183,10 @@ aktiven Subsystemen.}
 %
 %
 \subsubsection{Morphologischer Kasten}\label{sec:Morph}
-Die aufgeführten Prinzipien wurden aus den in \cref{sec:SubSystem} beschriebenen und erklärten Möglichkeiten abgeleitet. Der Morphologische
+Die hier aufgeführten Prinzipien wurden aus den in \cref{sec:SubSystem} erklärten Varianten abgeleitet. Der Morphologische
 Kasten soll den Entscheidungsprozess übersichtlich veranschaulichen. Wichtig ist zu benennen, dass ein mechanischer Aufbau
-manchmal mehrere Funktionen auf einmal lösen kann. Aus diesem Grund kann es in \cref{tab:morph} Überschneidungen oder Wiederholungen
-geben. Dies wird aber in den nachfolgenden Abschnitten detaillierter und nachvollziehbarer beschrieben.
+in einigen Fällen mehrere Funktionen zusammen lösen kann. Für eine bessere Übersicht wurden für die \cref{tab:morph} 
+bereits vier Prinzipien je Teilfunktion im vorhinein festgelegt.
 
 \definecolor{groupgray}{gray}{0.90}
 \definecolor{kogray}{gray}{0.55}
@@ -208,8 +202,8 @@ geben. Dies wird aber in den nachfolgenden Abschnitten detaillierter und nachvol
 \setlength{\tabcolsep}{5pt}
 
 \begin{longtable}{@{} L{2.5cm} L{2.8cm} L{2.8cm} L{2.8cm} L{2.5cm} @{}}
-\caption{Morphologischer Kasten der Teilfunktionen. Grau hinterlegt das gewählte
-Lösungsprinzip (Variante~A); hochgestellte Buchstaben kennzeichnen die
+\caption{Morphologischer Kasten der Teilfunktionen. Blau hinterlegt das gewählte
+Lösungsprinzip; hochgestellte Buchstaben kennzeichnen die
 Zugehörigkeit zu den Konzeptvarianten, grau gesetzte Prinzipien wurden im
 K.-o.-Filter ausgeschieden.}
 \label{tab:morph}\\
@@ -246,8 +240,8 @@ erfüllen können. Im nächsten Schritt werden mit den verbliebenen Prinzipien K
 Die beste Kombination wird weiter analysiert und wird dann in der Realisierung konkret ausgearbeitet.
 
 \subsubsection{Prinzipanalyse gegenüber Anforderungen}\label{sec:Prinzipanalyse}
-Für die Analyse und das Begründen des K.-o.-Filters wird Schritt für Schritt durch die Zeilen gegangen. Eine Prüfung gegen die
-Anforderungen und weitere technische Randbedingungen erfolgt im gleichen Zuge.
+Für die Analyse und das Begründen des K.-o.-Filters wird Schritt für Schritt durch die Zeilen gegangen. Dieser gilt als Prüfung gegen die
+Anforderungen und weitere technische Randbedingungen.
 
 \paragraph{Bevorraten} Bei diesen Prinzipien scheiden das System der ortsfesten Nester und das Kettenmagazin aus, weil diese
 nicht die Anforderung G3 erfüllen können. Für das potenzielle Nutzen dieser Prinzipien wäre ein weiteres System zur Beladung
@@ -257,7 +251,7 @@ nötig. Dies bietet keinen Vorteil in Hinblick auf Prozesssicherheit und Automat
 Förderband nicht genutzt werden, da laut Anforderung G3 die Hairpins in einer für diese Systeme falschen Lage eingegeben werden.
 
 \paragraph{Vereinzeln} Bei diesem Unterpunkt ist die Anforderung St1 ausschlaggebend für den Ausschluss des Zellenrads und Greifers.
-Durch die geforderte hohe Variantenvielfalt der Hairpins ist das Konstruieren eines Greifers nur schwer möglich. Dieser müsste
+Durch die geforderte hohe Variantenvielfalt der Hairpin-Geometrien ist das Konstruieren eines Greifers für das Greifen in ein Bündel nur schwer möglich. Dieser müsste
 austauschbar und variabel montiert werden, was zudem auch der Wunschanforderung In1 widersprechen würde. Auch beim Zellenrad steht
 die Wunschanforderung St2 diesem System entgegen, da für die Sperrigkeit der Hairpins ein großer und komplexer Aufbau nötig wäre.
 
@@ -265,11 +259,11 @@ die Wunschanforderung St2 diesem System entgegen, da für die Sperrigkeit der Ha
 keine Anforderungen verletzt werden. Doch vergleicht man die Prinzipien gegeneinander, so lässt sich der aktive Schieber als schlechte
 Wahl deklarieren. In Anforderung Mo1 ist vorausgesetzt, dass das Gesamtsystem eine einfache Montage ermöglichen und Komplexität
 verringern soll. Bei einem aktiven Schieber wären externe Antriebe, eine Regelung und weitere Bauteile nötig, die die Prozesssicherheit
-durch mehr Fehlerquellen minimieren.
+minimiert.
 
-\paragraph{Übernehmen \& Fixieren} Nach Anforderung En2 entfällt die Vakuumfixierung direkt, da kein Vakuumdrucksystem vorhanden
-ist. Aber auch ein pneumatisches System fällt im ersten Stadium dieser Arbeit weg, weil eine Luftdruck-Steuerungseinheit nicht
-vorhanden ist und eine Regelung dieser eine erhöhte Komplexität mit sich bringt.
+\paragraph{Übernehmen \& Fixieren} Nach Anforderung En2 entfällt die Vakuumfixierung, da kein Vakuumdrucksystem vorhanden
+ist. Auch ein pneumatisches System muss zunächst ingoriert werden, weil keine Luftdruck-Steuerungseinheit
+vorhanden ist und eine Regelung dieser eine erhöhte Komplexität mit sich bringen würde.
 
 \paragraph{Transportieren} Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
 
@@ -288,7 +282,7 @@ des Roboterarmes, welcher nicht Teil dieser Arbeit ist, vorgegeben.
 \subsubsection{Verträglichkeitsbetrachtung}\label{sec:Verträglichkeit}
 Im nächsten Schritt muss analysiert werden, welche Systeme überhaupt miteinander kompatibel sind. Dafür werden die Prinzipien
 miteinander verglichen, die noch nicht durch die Prinzipienanalyse entfernt wurden. Die in \cref{tab:morph} grau geschriebenen Prinzipien
-werden für diese Arbeit nicht mehr als nutzbar oder relevant eingestuft.
+werden für diese Arbeit als unbrauchbar eingestuft.
 
 Für die folgende Verträglichkeitsbetrachtung bot es sich an, jeweils zwei Varianten in den einzelnen Subsystemen zu betrachten.
 Aus diesem Grund wird als Startpunkt die Wahl eines der zwei Bevorratungssysteme getroffen und anhand dessen das resultierende
@@ -350,7 +344,7 @@ die Anforderung L2 benötigt. In diesem Zuge kann ebenfalls die Positionierung m
 Arbeitsbereiches durch die Hairpin-Geometrien, sind die Betriebsbereiche für den Motor des Spindelantriebes festgelegt. Die
 Wahl eines open-loop Sensorsystems ist passend und die Komplexität wird weiter reduziert.
 
-Für das Übergeben folgt aus der Kraftschluss-Klemme automatisch das aktive Freigeben.
+Für das Übergeben an den Roboterarm folgt aus der Kraftschluss-Klemme automatisch das aktive Freigeben.
 
 \paragraph{Variante B} Diese Konzeptvariante startet mit dem Bevorraten nach dem Schachtmagazin. Aus der Verträglichkeitsbetrachtung
 folgt für das Nachführen das Prinzip der Schwerkraft und für die Vereinzelung der Trennschieber. Für diese Variante bietet sich bei der
@@ -370,14 +364,78 @@ closed-loop System zu verwenden, damit die Wiederholgenauigkeit nach Anforderung
 Wegen des rein mechanischen Aufbaus des Formschluss-Nests muss der Roboterarm für die Übergabe den Hairpin selbstständig aus
 dem Nest lösen. Ein aktives Freigeben ist ohne steuerbare Bewegungseinheit nicht möglich.
 
-\subsubsection{Vergleich der Konzeptvarianten}
-Die im vorherigen Abschnitt festgelegten Konzeptvarianten müssen nun gegeneinander verglichen werden. Dazu bietet es sich
-an zunächst die beiden Subsysteme getrennt zu vergleichen.
+\subsubsection{Vergleich der Konzeptvarianten}\label{sec:Variantenvergleich}
+Da beide Varianten sämtliche Forderungen erfüllen, erfolgt der Vergleich anhand der
+Kriterien, in denen sie sich unterscheiden. \Cref{tab:variantenvergleich} stellt diese
+gegenüber.
 
-\paragraph{Vereinzelung} Bei diesem System müssen die Varianten vom Ausgangspunkt verglichen werden. Dieser ist nach Anforderung
-G3 die Hairpins in einer hängenden Lage anzunehmen. Die Variante A nutzt das Reihenmagazin, das exakt der Anlieferung der Hairpins
-entspricht. Das Schachtmagazin der Variante B wiederum, bräuchte einen weiteren Arbeitsschritt der die Befüllung und Lageänderung der
-Hairpins übernimmt. Dieser zusätzliche Schritt wirkt sich wieder auf die verringerte Prozessstabilität aus, die nach Anforderung
-L5 möglichst hoch bleiben soll. 
-\todo{Hier muss weiter verglichen werden!!!}
+\begin{table}[htbp]
+\centering
+\caption[Vergleich der Konzeptvarianten]{Vergleich der Konzeptvarianten anhand der
+  unterscheidenden Kriterien}
+\label{tab:variantenvergleich}
+\small
+\begin{tabularx}{\textwidth}{@{} p{2.6cm} >{\raggedright\arraybackslash}X
+                              >{\raggedright\arraybackslash}X @{}}
+\toprule
+\textbf{Kriterium} & \textbf{Variante A} & \textbf{Variante B}\\
+\midrule
+Lageerhalt \newline (G3)
+  & Hairpins werden in der Anlieferungslage übernommen
+  & zusätzlicher Arbeitsschritt für Umladen und Lagewechsel erforderlich\\
+\addlinespace
+Geometrie\-bereich \newline (St1)
+  & Vibrationsbefürderung und Lagerung ohne Anpassung über den Geometriebereich wirksam
+  & Magazindesign und Schieberkontur je Geometrie anzupassen\\
+\addlinespace
+Bedien\-eingriff \newline (B2)
+  & Nachladen ohne Lageänderung
+  & Befüllen des Magazins in geänderter Lage\\
+\addlinespace
+Taktzeit \newline (L1)
+  & Spindelantrieb begrenzt die Verfahrgeschwindigkeit
+  & Zahnriemen ermöglicht kürzere Verfahrzeiten\\
+\addlinespace
+Systemkomplexität \newline (Mo1)
+  & passive Überführung, Positionierung im \emph{open loop}
+  & angetriebenes Förderband, Positionierung im \emph{closed loop}\\
+\addlinespace
+Bauteilbelastung \newline (L4)
+  & Klemmung der Hairpin durch exteren Krafteinwirkung
+  & Einfaches Ablegen des Hairpin ins Formschluss Nest\\
+\addlinespace
+Positionier\-genauigkeit \newline (L2)
+  & Lage wird im \emph{open loop} aus der Referenzfahrt fortgeschrieben
+  & Rückführung über \emph{closed loop} erkennt Abweichungen unmittelbar\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Variante~B weist in drei Kriterien Vorteile auf. Der Zahnriemenantrieb erlaubt
+kürzere Verfahrzeiten, die \emph{closed-loop}-Rückführung erkennt
+Positionsabweichungen unmittelbar, und das Ablegen in das Formschluss-Nest kommt
+ohne aufgebrachte Klemmkraft aus. Diese Vorteile schlagen für den vorliegenden
+Anwendungsfall jedoch nicht durch: Der Arbeitsbereich des Transprotsystems ist
+durch den Geometriebereich der Hairpins fest begrenzt, sodass die
+Anforderung~L2 bereits im \emph{open loop} erwartbar eingehalten wird. Eine
+Rückführung erhöht damit vor allem die Systemkomplexität, ohne einen
+funktionalen Gewinn zu erzeugen. Gleiches gilt für die Taktzeit, da das System
+nach Anforderung~L1 lediglich unterhalb der Zykluszeit der Zelle bleiben muss und
+eine weitere Verkürzung ohne Nutzen bleibt, solange es nicht den Engpass bildet.\medskip
+
+Ausschlaggebend sind demgegenüber der Lageerhalt und der abgedeckte
+Geometriebereich. Variante~A übernimmt die Hairpins unmittelbar in ihrer
+Anlieferungslage, während Variante~B einen zusätzlichen Prozessschritt für das
+Umladen erfordert. Dieser Schritt wirkt zweifach nachteilig: Er verringert die
+Prozessstabilität nach L5 und verlagert das Ausrichten der Hairpins zurück in die
+Verantwortung des Bedienpersonals, was der Wunschanforderung~B2 entgegensteht.
+Hinzu kommt, dass Magazingeometrie und Schieberkontur der Variante~B je
+Hairpin-Geometrie anzupassen sind. Damit verfehlt sie genau jene
+Umrüstfreiheit, die nach Anforderung~St1 den Kern der Aufgabenstellung bildet.\medskip
+
+Für die weitere Ausarbeitung wird daher Variante~A gewählt. Bewusst in Kauf
+genommen werden dabei die geringere Verfahrgeschwindigkeit, der Verzicht auf eine
+Lagerückführung sowie die Krafteinwirkung der Klemmung auf den Hairpin, deren
+Auswirkung auf Anforderung~L4 in \cref{sec:Validierung} messtechnisch zu
+überprüfen ist.
 

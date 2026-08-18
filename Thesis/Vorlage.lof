@@ -13,13 +13,14 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces wireLINE MIRROR System - Laserstrahlführung, \blx@tocontentsinit {0}\cite [Abb. Bearbeitungsoptik, S.~42]{CleanLaser2022}}}{22}{figure.arabicsection.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Prinzipskizzen ausgewählter Zuführprinzipien}}{24}{figure.arabicsection.3.4}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Bauformen geordneter Magazine}}{25}{figure.arabicsection.3.5}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Funktionsstruktur des Gesamtsystems; der Teilefluss (Hairpin) verläuft von oben nach unten. Das Überführen bildet die Schnittstelle zwischen den beiden aktiven Subsystemen.}}{33}{figure.arabicsection.4.1}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Funktionsstruktur des Gesamtsystems; der Teilefluss (Hairpin) verläuft von oben nach unten. Das Überführen bildet die Schnittstelle zwischen den beiden aktiven Subsystemen.}}{32}{figure.arabicsection.4.1}%
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Fertigungsgerechtes Gelenk im 3D-Druck}}{39}{figure.arabicsection.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Aufbau der Vibrationsschiene}}{41}{figure.arabicsection.5.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Aufbau der Vibrationsschiene}}{40}{figure.arabicsection.5.2}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Aufbau der Vereinzelungseinheit}}{42}{figure.arabicsection.5.3}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Aufbau eines Segments der Überführungseinheit/Rutsche}}{43}{figure.arabicsection.5.4}%
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Aufbau der Kraftschlussklemme}}{44}{figure.arabicsection.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Signalfluss der Steuerung}}{47}{figure.arabicsection.5.6}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Schaltplan}}{48}{figure.arabicsection.5.7}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Signalfluss der Steuerung}}{46}{figure.arabicsection.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Schaltplan}}{47}{figure.arabicsection.5.7}%
 \contentsline {figure}{\numberline {B.1}{\ignorespaces Aufbau der Lochrasterplatine mit dem Arduino Nano}}{56}{figure.B.1}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Aufbau des realsisierten Gesamtsystems in der Trägerstruktur}}{57}{figure.B.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

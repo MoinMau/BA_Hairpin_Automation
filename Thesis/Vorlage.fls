@@ -615,6 +615,7 @@ INPUT ./docs/Konzept.tex
 INPUT ./docs/Konzept.tex
 INPUT docs/Konzept.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri9.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
@@ -645,6 +646,10 @@ INPUT ./figs/Schaltplan.png
 INPUT ./figs/Schaltplan.png
 INPUT ./figs/Schaltplan.png
 INPUT ./figs/Schaltplan.png
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
@@ -661,10 +666,6 @@ INPUT ./docs/Zusammenfassung.tex
 INPUT ./docs/Zusammenfassung.tex
 INPUT docs/Zusammenfassung.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
-INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT ./docs/Anhang.tex
 INPUT ./docs/Anhang.tex
 INPUT ./docs/Anhang.tex
@@ -675,6 +676,11 @@ INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/image.png
+INPUT ./figs/image.png
+INPUT ./figs/image.png
+INPUT ./figs/image.png
+INPUT ./figs/image.png
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
