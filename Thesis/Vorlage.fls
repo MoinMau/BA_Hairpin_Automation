@@ -655,6 +655,16 @@ INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT docs/Validierung_Tests.tex
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx7.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx5.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib10.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib7.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib5.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmbsy10.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmbsy7.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmbsy5.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT ./docs/Diskussion.tex
 INPUT ./docs/Diskussion.tex
 INPUT ./docs/Diskussion.tex
@@ -694,6 +704,7 @@ INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi8.pfb
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmib10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr12.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr6.pfb

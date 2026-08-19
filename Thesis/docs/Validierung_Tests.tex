@@ -1,9 +1,92 @@
 \section{Validierung und Tests}\label{sec:ValidierungTests}
-%
+Nach dem Abschluss der Realisierung folgt die messtechnische Überprüfung des Aufbaus. Dabei wird zwischen zwei Ebenen unterschieden:
+Zum einen die Verfiktation, die die einzelenen Subsysteme isoliert betrachtet, und zum anderen die Validierung, die den Gesamtablauf
+gegen die Anforderungen aus der \cref{tab:anforderungen} bewertet. Eine Trennung ist hier sinnvoll, da sich sonst die Ursache von Fehlern
+im Gesamtsystem nicht eindeutig zuordnen lassen.\medskip
+
+Für ein einheitliches Schema werden alle Versuche in die selben Blöcke unterteilt. Dies dient einer besseren Übersicht und Überprüfung.
+Grundsätzlich werden zuerst die Prüfkriterien festgelegt, dann der eigentliche Messaufbau erklärt, dannach folgt die Durchführung mit
+Ergebnissen und einer schlussendlichen Bewertung.\medskip
+
+Der folgende Prüfplan (vgl.\cref{tab:pruefplan}) zeigt alle durchgeführten Test auf. Für die Durchführung wurde der in der \cref{sec:Realisierungsstand}
+beschriebene Aufbau verwendet. Die Steuerung erfolgte durch eine an den Test spezifische Softwarestand, der aber ebenfalls in der 
+Tabelle aufgezeigt wird. Da zu diesem Zeitpunkt wie beschrieben die Prozesssensoren noch nicht in das Gesamtsystem eingepflegt wurden
+und dis nur der Wunschanforderung Si2 entspricht, werden dazu in dieser Arbeit keine Messreihen angefertigt. In einem späteren Verlauf
+sollte dies aber wieder in betracht gezogen werden.
+
+\begin{table}[htbp]
+  \centering
+  \caption[Prüfplan der Versuchsreihen]{Prüfplan der Verifikations- und
+    Validierungsversuche. Die Spalte \emph{Anforderung} verweist auf die
+    Anforderungsliste in Tabelle~\cref{tab:anforderungen}, die Spalte
+    \emph{Commit} auf den zum Messzeitpunkt eingesetzten Firmware-Stand
+    im Git-Repository.}
+  \label{tab:pruefplan}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l X l l c@{}}
+    \toprule
+    \textbf{ID} & \textbf{Beschreibung} & \textbf{Anforderung}
+      & \textbf{Commit} & $\boldsymbol{n}$ \\
+    \midrule
+    \multicolumn{5}{@{}l}{\itshape Verifikation der Subsysteme
+      (Abschnitt~\ref{sec:VerifikationSubsysteme})} \\
+    \addlinespace[2pt]
+    T-01 & Positionstreue der Sperrklinkenschlitten, gemessen an der
+           Linearstange und am Endeffektor
+         & L2, K2 & \texttt{64c26cc} & $2\times10$ \\
+    T-02 & Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung
+           (0 bis 100 Hairpins)
+         & St1, L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
+    T-03 & Positionsstreuung des Transportsystems nach Referenzfahrt
+           im open loop
+         & L2, K2 & \texttt{c52c878} & $20$ \\
+    T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellen und
+           seitliche Verschiebung
+         & L2, L4 & \texttt{1f3c873} & $20$ \\
+    T-05 & Vereinzelungstreue über vier Hairpin-Geometrien, Bewertung
+           nach Fehlercode 0 bis 5
+         & K1, St1, L5 & \texttt{--} & $4\times25$ \\
+    \addlinespace[4pt]
+    \multicolumn{5}{@{}l}{\itshape Validierung im Gesamtablauf
+      (Abschnitt~\ref{sec:systemtest})} \\
+    \addlinespace[2pt]
+    S-01 & Bereitstellungszeit je Hairpin vom Startsignal bis zur
+           Freigabe an den Roboterarm
+         & L1 & \texttt{--} & $\geq 20$ \\
+    S-02 & Wiederholgenauigkeit der Übergabeposition im
+           Roboterkoordinatensystem
+         & L2, K2 & \texttt{--} & $\geq 20$ \\
+    S-03 & Dauerlauf bis zum ersten erforderlichen Bedieneingriff
+         & L3, L5, B1 & \texttt{--} & $3$ \\
+    S-04 & Beschädigung der Hairpins im Vergleich zu einer manuell
+           gehandhabten Referenzgruppe
+         & L4 & \texttt{--} & $\geq 25$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 %
 \subsection{Verifikation der Subsysteme}\label{sec:VerifikationSubsysteme}
-\todo{Allgemeiner Testaufbau}
+Die Verifikation der Subsysteme dient dem Nachweis, dass die in Kapitel 5 aufgebauten Baugruppen die ihnen zugeordneten 
+Anforderungen isoliert erfüllen. Die getrennte Betrachtung erlaubt es, wiederkehrende Fehlermuster frühzeitg zu identifiziern
+und einem spezifischen System zuzuordnen. Wird dies nicht getan, kann es bei der Valdierung des Gesamtsystems zu Problemen
+in der Suche nach der exakten Fehlerquelle geben.\medskip
+
+Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zunächst die Akuatoren der einzelnen Subsysteme
+getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und Schnittstellen dieser Systeme.\medskip
+
+Für das Testen der Aktoren wird nach dem Prüfkriterium der Auslenkung untersucht. Diese wird in den folgenden Messreihen
+für die Begründung und Überprfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird deutlich
+erklärt wie der Wert der Auslenkung für ein Konklution der Ergebnisse.
 %
+\subsubsection{Allgemeiner Messaufbau}
+Die Auslenkung wird mit einer Messuhr ausgelesen. Diese besteht aus einem Tastkopf und einem Messblatt mit Messzeiger, der
+den Ausschlag anzeigt. Dies gehschiet mit einer Leseauflösung von unter 0,5mm. Diese Messuhr ist mit einem Arm und einen Magenten
+verbunden. So lässt sich der Tastkopf mit der Fixierung der Halterung an jede Postion platzieren. Zum Überprüfen von Abweichungen
+in der Auslenkung wird dieses Messsystem auf die Hälfte des Messbereiches und der maximalen Auslenkung des Aktuators normiert.
+Nun könnnen vordefinierte Bewegungsabläufe abgefahren werden und die Werte abgelesen und notiert werden. 
+Es ist bei den Messwerten auf kleine Messunsicherheiten bezüglich dem Widerstand des Taskopfes und dafür benötigten erhöhten Kraft
+zu achten.
+
 \subsubsection{Vibrationseinheit}
 \todo{Messaufbau, Egrebnisse}
 %
@@ -16,6 +99,8 @@
 \subsubsection{Fixierungssytem}
 \todo{Messaufbau, Egrebnisse}
 %
+\todo{Test für einzelne Subsystem Funktionen: Rutsche, Fixieren und Positioniernen}
+\todo{Was ist mit Servomotren des Nestes? Müssen hier nicht auch erstmal die Motoren geprüft werden?}
 %
 \subsection{Systemtest im Gesamtablauf}\label{sec:Systemtest}
 %
