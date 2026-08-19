@@ -14,7 +14,7 @@
 \contentsline {subsubsection}{\numberline {2.1.3}Produktionsablauf}{4}{subsubsection.arabicsection.2.1.3}%
 \contentsline {subsection}{\numberline {2.2}Produktionsverfahren zum Abisolieren}{6}{subsection.arabicsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Rotierende Bürsten}{6}{subsubsection.arabicsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Fräsen}{7}{subsubsection.arabicsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2}Fräsen}{6}{subsubsection.arabicsection.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.3}Induktives Erhitzen}{7}{subsubsection.arabicsection.2.2.3}%
 \contentsline {subsubsection}{\numberline {2.2.4}Laser}{7}{subsubsection.arabicsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.3}Sensorik}{9}{subsection.arabicsection.2.3}%
@@ -24,12 +24,12 @@
 \contentsline {paragraph}{\nonumberline Reflexlichttaster}{10}{paragraph*.5}%
 \contentsline {subsubsection}{\numberline {2.3.2}Feld-Sensoren}{10}{subsubsection.arabicsection.2.3.2}%
 \contentsline {paragraph}{\nonumberline Induktive Sensoren}{10}{paragraph*.6}%
-\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{10}{paragraph*.7}%
+\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{11}{paragraph*.7}%
 \contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{11}{paragraph*.8}%
 \contentsline {subsubsection}{\numberline {2.3.3}Mechanische Sensoren}{11}{subsubsection.arabicsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Aktorik}{11}{subsection.arabicsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Aktuatorik}{11}{subsection.arabicsection.2.4}%
 \contentsline {subsubsection}{\numberline {2.4.1}Pneumatik}{11}{subsubsection.arabicsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktorik}{12}{subsubsection.arabicsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktuatorik}{12}{subsubsection.arabicsection.2.4.2}%
 \contentsline {paragraph}{\nonumberline Motoren}{13}{paragraph*.9}%
 \contentsline {paragraph}{\nonumberline Mechanische Übersetzung}{13}{paragraph*.10}%
 \contentsline {subsection}{\numberline {2.5}Steuerungstechnik}{14}{subsection.arabicsection.2.5}%
@@ -37,7 +37,7 @@
 \contentsline {subsubsection}{\numberline {2.5.2}Mikrocontroller}{15}{subsubsection.arabicsection.2.5.2}%
 \contentsline {subsubsection}{\numberline {2.5.3}Signalübertragung}{16}{subsubsection.arabicsection.2.5.3}%
 \contentsline {paragraph}{\nonumberline Digitale Schaltsignale}{16}{paragraph*.11}%
-\contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{16}{paragraph*.12}%
+\contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{17}{paragraph*.12}%
 \contentsline {paragraph}{\nonumberline Pulsweitenmodulation}{17}{paragraph*.13}%
 \contentsline {subsubsection}{\numberline {2.5.4}Bussysteme}{17}{subsubsection.arabicsection.2.5.4}%
 \contentsline {paragraph}{\nonumberline I\textsuperscript {2}C}{17}{paragraph*.14}%
@@ -128,8 +128,8 @@
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{51}{paragraph*.54}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{51}{paragraph*.55}%
 \contentsline {paragraph}{\nonumberline Bewertung}{51}{paragraph*.56}%
-\contentsline {subsubsection}{\numberline {6.1.3}Vibrationseinheit T-02}{52}{subsubsection.arabicsection.6.1.3}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{52}{paragraph*.57}%
+\contentsline {subsubsection}{\numberline {6.1.3}Vibrationseinheit T-02}{51}{subsubsection.arabicsection.6.1.3}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{51}{paragraph*.57}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{52}{paragraph*.58}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{52}{paragraph*.59}%
 \contentsline {paragraph}{\nonumberline Bewertung}{52}{paragraph*.60}%
@@ -142,7 +142,7 @@
 \contentsline {paragraph}{\nonumberline Prüfziel}{52}{paragraph*.65}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{52}{paragraph*.66}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{52}{paragraph*.67}%
-\contentsline {paragraph}{\nonumberline Bewertung}{53}{paragraph*.68}%
+\contentsline {paragraph}{\nonumberline Bewertung}{52}{paragraph*.68}%
 \contentsline {subsubsection}{\numberline {6.1.6}Fixierungssytem: Kraftklemmen Seite T-06}{53}{subsubsection.arabicsection.6.1.6}%
 \contentsline {paragraph}{\nonumberline Prüfziel}{53}{paragraph*.69}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{53}{paragraph*.70}%

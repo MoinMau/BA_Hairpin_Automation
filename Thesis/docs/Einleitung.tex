@@ -13,7 +13,7 @@ Dieser Prozess lässt sich besonders mit der Transformation im Mobilitätssektor
 Die Elektrifizierung des Verkehrs entstand ursprünglich aus einer Vision des umweltbewussteren
 Transports. Dieser Gedanke wurde zunächst in Forschungsprojekten verfolgt, um eine Machbarkeit
 von E-Fahrzeugen zu demonstrieren. Parallel dazu gab es massive Fortschritte in der Batterietechnik,
-Leistungselektronik, Antriebstechnik und Materialforschung, die alle dazu beitragen sollten, dass 
+Leistungselektronik, Antriebstechnik und Materialforschung, die alle dazu beitragen sollten, dass
 das Konzept des E-Autos alltagstauglich wurde.
 
 Hier begann nun eine Entwicklung, die sehr typisch für moderne Wirtschaftstrends ist: Die
@@ -93,11 +93,11 @@ sich für welche Teilfunktion entschieden wurde und wie das reale System konstru
 wurde, folgt die Verifizierung der Konzepte und Ideen durch Versuchsreihen bezüglich der vorher festgelegten Anforderungen wie
 der Genauigkeit, Taktzeit und Fehlerquote. Im letzten Schritt bedarf es dann einer Analyse der zuvor durchgeführten Versuchsreihen
 im Hinblick auf die erfüllten Anforderungen. Weiter müssen Optimierungsschritte und Probleme aufgezeigt werden, um abschließend
-die Beantwortung der Forschungsfrage zu verifizieren.\\
+die Beantwortung der Forschungsfrage zu verifizieren.
 
 \newcommand{\kap}[2]{%
   \colorbox{#1}{\makebox[2.2mm][c]{\textcolor{white}{\bfseries\tiny #2}}}}
- 
+
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
@@ -110,7 +110,7 @@ die Beantwortung der Forschungsfrage zu verifizieren.\\
   flow/.style={-{Stealth[length=2.2mm,width=1.8mm]},rwthgrau,line width=0.9pt},
   zu/.style={-{Stealth[length=2.2mm,width=1.8mm]},#1,line width=0.9pt},
 ]
- 
+
 % ---------------- Theoretischer Hintergrund ----------------
 \node[schritte=rwthblau] (s1) {%
   \kap{rwthblau}{1}\enspace Relevanz und Problembetrachtung\\[2pt]
@@ -122,7 +122,7 @@ die Beantwortung der Forschungsfrage zu verifizieren.\\
   \kap{rwthblau}{4}\enspace Konzept und Anforderungsanalyse};
 \node[thema=rwthblau,right=9mm of s1] (t1) {Theoretischer Hintergrund};
 \draw[zu=rwthblau] (s1) -- (t1);
- 
+
 % ---------------- Praktische Umsetzung ----------------
 \node[schritte=rwthgruen,below=7mm of s1.south west,anchor=north west] (s2) {%
   \kap{rwthgruen}{5}\enspace Realisierung mit konkreten Komponenten\\[2pt]
@@ -130,7 +130,7 @@ die Beantwortung der Forschungsfrage zu verifizieren.\\
   \kap{rwthgruen}{5}\enspace Problembehebung};
 \node[thema=rwthgruen,right=9mm of s2] (t2) {Praktische Umsetzung};
 \draw[zu=rwthgruen] (s2) -- (t2);
- 
+
 % ---------------- Versuchsreihen ----------------
 % Weisser Text auf Orange ist zu kontrastarm -> text=black
 \node[schritte=rwthorange,below=7mm of s2.south west,anchor=north west] (s3) {%
@@ -138,7 +138,7 @@ die Beantwortung der Forschungsfrage zu verifizieren.\\
   \kap{rwthorange}{6}\enspace Prüfung der Anforderungen};
 \node[thema=rwthorange,text=black,right=9mm of s3] (t3) {Versuchsreihen};
 \draw[zu=rwthorange] (s3) -- (t3);
- 
+
 % ---------------- Erkenntnisse ----------------
 \node[schritte=rwthbordeaux,below=7mm of s3.south west,anchor=north west] (s4) {%
   \kap{rwthbordeaux}{7}\enspace Diskussion\\[2pt]
@@ -146,12 +146,12 @@ die Beantwortung der Forschungsfrage zu verifizieren.\\
   \kap{rwthbordeaux}{8}\enspace Fazit};
 \node[thema=rwthbordeaux,right=9mm of s4] (t4) {Erkenntnisse};
 \draw[zu=rwthbordeaux] (s4) -- (t4);
- 
+
 % ---------------- Fluss zwischen den Themenbloecken ----------------
 \foreach \a/\b in {s1/s2,s2/s3,s3/s4}
   \draw[flow] ($(\a.south west)!0.35!(\a.south east)$)
            -- ($(\b.north west)!0.35!(\b.north east)$);
- 
+
 \end{tikzpicture}
 \caption[Aufbau der Arbeit]{Struktureller Aufbau der Gesamtarbeit}
 \label{fig:AufbauArbeit}

@@ -2,13 +2,13 @@
 Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Teilsysteme für eine Automatisierung von definierten Produktionsprozessen beschrieben.
 Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die Betrachtung des Produktionsablaufs
 eines Elektromotors. Vertiefend wird auf den für diese Arbeit relevanten Abisolierprozess eingegangen. Zuletzt werden Systeme physikalisch
-erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktoren, aber auch Steuereinheiten
+erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktuatoren, aber auch Steuereinheiten
 und Normen, die im Gesamtsystem Einsatz finden können.
 %
 %
 \subsection{Hairpin-Technologie}\label{sec:HairPinTechnologie}
 Die Hairpin-Technologie ist eine moderne Wickeltechnologie der Statoren von Elektromotoren. Dabei werden vorgeformte Kupferleitungen
-zum direkten Einführen in den Stator verwendet. Durch die Entwicklungen in der Elektromobilität hat die Hairpin-Technologie in den 
+zum direkten Einführen in den Stator verwendet. Durch die Entwicklungen in der Elektromobilität hat die Hairpin-Technologie in den
 letzten Jahren weiter an Relevanz gewonnen.
 %
 \subsubsection{Entwicklung}\label{sec:EntwicklungHairPin}
@@ -21,7 +21,7 @@ Dieses Konzept entwickelte sich über das 20. Jahrhundert weiter und wird mittle
 %
 \subsubsection{Aufbau von modernen Elektromotoren}\label{sec:AufbauElektromotoren}
 Wie bereits beschrieben sind aktuelle Hochleistungselektroantriebe meistens mit der Hairpin-Technologie aufgebaut.
-Die Vielzahl an unterschiedlichen Anforderungen an diese Motoren führt zu verschiedenen Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.\bigskip
+Die Vielzahl an unterschiedlichen Anforderungen an diese Motoren führt zu verschiedenen Bauarten, die in diesem Abschnitt genauer beschrieben werden sollen.
 
 Eine elektrische Maschine besteht im Kern aus zwei Wirkpartnern: dem feststehenden
 Stator und dem rotierenden Rotor. Der Stator trägt in axial verlaufenden Nuten die
@@ -29,20 +29,20 @@ stromführende Wicklung, während die dazwischenliegenden Zähne den magnetische
 führen. Die Wicklung erzeugt ein umlaufendes Magnetfeld, dem der Rotor folgt und
 dessen Drehmoment über die Welle abgegriffen wird. Für die Fertigung ist damit die
 Nut die maßgebliche Randbedingung, da ihr Querschnitt begrenzt, wie viel Kupfer und
-wie viel Isolation untergebracht werden können\PEMfootcite{Stoelting.2011}.\medskip
+wie viel Isolation untergebracht werden können\PEMfootcite{Stoelting.2011}.
 
 Im Traktionsantrieb hat sich die permanentmagneterregte Synchronmaschine (PMSM)
 durchgesetzt, da sie bei kompaktem Bauraum hohe Drehmoment- und Leistungsdichten
 erreicht\PEMfootcite{Husain.2021}. Sie wird über einen Wechselrichter mit
 dreiphasigem Strom gespeist, weshalb die Wicklung über mehrere Nuten verteilt und
 phasenrichtig verschaltet werden muss. Weitere Bauarten unterscheiden sich in der
-Art der Flusserzeugung im Rotor und in der zugehörigen Wicklungsart\PEMfootcite[S. 5]{ComparativeReviewMotor.2023}.\medskip
+Art der Flusserzeugung im Rotor und in der zugehörigen Wicklungsart\PEMfootcite[S. 5]{ComparativeReviewMotor.2023}.
 
 Für die Ausführung der Statorwicklung stehen zwei Prinzipien zur Verfügung. Bei der
 Runddrahtwicklung wird lackisolierter Draht in die Nut eingebracht, wobei die Lage
 der einzelnen Drähte unbestimmt bleibt. Die Hairpin-Technologie verwendet stattdessen
 Kupferband mit rechteckigem Querschnitt, dessen Position in der Nut definiert ist.
-Daraus ergeben sich der höhere Nutfüllfaktor und die verbesserte Wärmeabfuhr\PEMfootcite{Goetz.2023}.\medskip
+Daraus ergeben sich der höhere Nutfüllfaktor und die verbesserte Wärmeabfuhr\PEMfootcite{Goetz.2023}.
 
 Da ein einzelner Hairpin lediglich zwei Nuten verbindet, entsteht die durchgehende
 Wicklung erst durch das Verbinden der Segmente am Wickelkopf. Jede dieser
@@ -58,7 +58,7 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
 \newcommand{\nr}[1]{%
   \tikz[baseline=(n.base)]{\node[circle,fill=rwthblau,text=white,
     font=\sffamily\bfseries\tiny,inner sep=0.6pt,minimum size=3.3mm] (n) {#1};}}
- 
+
 % #1 = eindeutiger Name, #2 = fit-Liste, #3 = Beschriftung
 \newcommand{\phasenband}[3]{%
   \node[fit=#2,inner sep=0pt,draw=none] (#1) {};
@@ -68,7 +68,6 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
     at ($(#1.west)+(-8mm,0)$) {#3};}
 \begin{figure}[htbp]
 \centering
-
 
 \begin{tikzpicture}[
   font=\sffamily\scriptsize,
@@ -80,21 +79,21 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
   alt/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthblau,line width=0.6pt,
     dash pattern=on 1.3mm off 0.9mm},
 ]
- 
+
 % ===== Drahtvorbereitung =====
 \node[s]                         (s1) {\nr{1}\, Kupferband richten};
 \node[hl,right=3.5mm of s1]      (s2) {\nr{2}\, Kupferband abisolieren};
 \node[s,right=3.5mm of s2]       (s3) {\nr{3}\, Kupferband ablängen};
 \node[s,right=3.5mm of s3]       (s4) {\nr{4}\, Kupferband biegen};
 \foreach \a/\b in {s1/s2,s2/s3,s3/s4} \draw[f] (\a) -- (\b);
- 
+
 % ===== Statormontage =====
 \node[s,below=9mm of s1.south west,anchor=north west] (s5)
   {\nr{5}\, Statornuten isolieren};
 \node[s,right=3.5mm of s5]  (s6) {\nr{6}\, Hairpins vormontieren};
 \node[s,right=3.5mm of s6]  (s7) {\nr{7}\, Hairpins fügen};
 \foreach \a/\b in {s5/s6,s6/s7} \draw[f] (\a) -- (\b);
- 
+
 % ===== Kontaktierung =====
 \node[s,below=9mm of s5.south west,anchor=north west] (s8)
   {\nr{8}\, Kupferenden freistellen};
@@ -102,90 +101,89 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
 \node[s,right=3.5mm of s9]  (s10) {\nr{10}\, Kupferenden kontaktieren};
 \node[s,right=3.5mm of s10] (s11) {\nr{11}\, Verschalt-Elemente kontaktieren};
 \foreach \a/\b in {s8/s9,s9/s10,s10/s11} \draw[f] (\a) -- (\b);
- 
+
 % ===== Finalisierung =====
 \node[s,below=9mm of s8.south west,anchor=north west] (s12)
   {\nr{12}\, Kupferenden isolieren};
 \node[s,right=3.5mm of s12] (s13) {\nr{13}\, Stator imprägnieren};
 \node[s,right=3.5mm of s13] (s14) {\nr{14}\, Stator testen};
 \foreach \a/\b in {s12/s13,s13/s14} \draw[f] (\a) -- (\b);
- 
+
 % ===== Reihenwechsel =====
 \draw[fw] (s4.south)  -- ++(0,-4.5mm) -| (s5.north);
 \draw[fw] (s7.south)  -- ++(0,-4.5mm) -| (s8.north);
 \draw[fw] (s11.south) -- ++(0,-4.5mm) -| (s12.north);
- 
+
 % ===== Alternative Position in der Prototypenfertigung =====
 \draw[alt] (s2.north) -- ++(0,6mm) -- ($(s4.north)+(0,6mm)$) -- ($(s4.north)+(0,0.5pt)$);
 \node[font=\sffamily\scriptsize,text=rwthblau,anchor=south,inner sep=1.5pt]
   at ($(s2.north)!0.5!(s4.north)+(0,6mm)$) {Prototypenfertigung: Abisolieren nach dem Biegen};
- 
+
 % ===== Phasenbänder =====
 \phasenband{pA}{(s1)(s2)(s3)(s4)}{Draht-\\vorbereitung}
 \phasenband{pB}{(s5)(s6)(s7)}{Stator-\\montage}
 \phasenband{pC}{(s8)(s9)(s10)(s11)}{Kontak-\\tierung}
 \phasenband{pD}{(s12)(s13)(s14)}{Finali-\\sierung}
- 
+
 \end{tikzpicture}
 \caption[Prozesskette der Hairpin-Statorproduktion]{Allgemeine Prozesskette der Hairpin-Statorproduktion}
 \label{fig:Produktionsablauf}
 \end{figure}
 
-
 Bei dieser Aufzählung wird die Produktion des Stator-Blechpaketes, welches aus aufeinander gestapelten isolierten Blechen
 besteht, nicht betrachtet. Außerdem wird das Kupferband als fertiges auf Rollen gewickeltes Produkt angesehen. Die in \cref{fig:Produktionsablauf} aufgezeigte
 Prozesskette entspricht einer Serienproduktion\PEMfootcite{ProductionProcessHairpinStator.2024}. Für die
-Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.\medskip
+Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.
 
 Der Fertigungsprozess beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner runden Form in eine gerade
 Ausrichtung gebracht werden. Dazu wird der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung wieder gerade gebogen.
 Hier ist das Ziel, die Restkrümmung auf ein Minimum zu bringen, wobei Einflussfaktoren wie der Spulendurchmesser, Temperaturänderungen,
 Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
-in der Produktion diese Abweichungen automatisiert anzupassen.\medskip
+in der Produktion diese Abweichungen automatisiert anzupassen.
 
 In der Serienproduktion würde nun das Kupferband abisoliert werden. Da es sich in dieser Arbeit um die Abisolierung in der Prototypenproduktion
-handelt, wird im weiteren Verlauf detaillierter auf diesen Prozess eingegangen.\medskip
+handelt, wird im weiteren Verlauf detaillierter auf diesen Prozess eingegangen.
 
 Im nächsten Schritt wird das Kupferband je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass keine Deformationen
-des rechteckigen Kupferbandes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.\medskip
+des rechteckigen Kupferbandes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.
 
 Einer der komplizierteren Schritte ist das Biegen. Dies kann durch verschiedene Methoden erzielt werden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und freies Biegen.
 In der Serienproduktion wird hauptsächlich Gesenkbiegen verwendet, da zunächst nur die zweidimensionale U-Form des Hairpins gebogen werden muss und danach
 erst das Pressen in eine Form den dreidimensionalen Aufbau des fertigen Hairpins bringt. Dieser Prozess bringt neben einer hohen Geschwindigkeit auch
 eine hohe Prozess- und Wiederholgenauigkeit mit sich. Auf der anderen Seite wird in der Prototypenproduktion meist das CNC-Biegen bevorzugt, da durch das Erstellen
-jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung der Hairpin-Geometrien möglich ist.\medskip
+jeder einzelnen Biegung mittels spezieller Werkzeuge eine schnelle Anpassung der Hairpin-Geometrien möglich ist.
 
 Als Vorbereitung des Stators gilt es, die Nuten des Blechpaketes für das Einführen der Hairpins zu isolieren.
 Dazu wird vorgeformtes Isolierpapier in die Nuten eingeschoben, um eine weitere Isolation zwischen spannungsführenden Hairpins und geerdetem
-Blechpaket zu schaffen.\medskip
+Blechpaket zu schaffen.
 
 Für ein besseres Einsetzen der Hairpins in das Blechpaket müssen diese vorpositioniert werden. Je nach Statortyp müssen hier
-mehrere Reihen an unterschiedlichen Hairpin-Größen vorbereitet werden.\medskip
+mehrere Reihen an unterschiedlichen Hairpin-Größen vorbereitet werden.
 
 Beim Fügen werden die Hairpins samt der Halterung für die Vorpositionierung in das Blechpaket eingeführt.
-Es folgt eine axiale Ausrichtung und Verpressung.\medskip
+Es folgt eine axiale Ausrichtung und Verpressung.
 
 Nun müssen die aus dem Blechpaket hervorstehenden Enden der Hairpins freigestellt werden. Dieser Vorgang ist wichtig,
 damit der nächste Prozess ohne Probleme durchgeführt werden kann. Beim Separieren wird jeder Hairpin so verzogen, dass diese als einzelne
-Beinchen hervorstehen.\medskip
+Beinchen hervorstehen.
 
 Beim Verschränken können nun die einzelnen Beinchen von einer mehrgängigen Spindel verformt werden, sodass alle Beinchen dicht beieinander liegen und
-ein gutes Verschweißen möglich ist. Die Hairpin-Enden liegen nun mit minimalem Abstand neben ihrem richtigen Partner.\medskip
+ein gutes Verschweißen möglich ist. Die Hairpin-Enden liegen nun mit minimalem Abstand neben ihrem richtigen Partner.
 
 Das Laserschweißen dient der Kontaktierung der Hairpin-Enden. Hierbei werden mittels eines Laserstrahls immer zwei Kupferenden
 miteinander verschweißt. Es ist auf hohe Genauigkeit zu achten, da die Qualität der Schweißverbindungen großen Einfluss auf
-die elektrische Beschaffenheit des Motors hat.\medskip
+die elektrische Beschaffenheit des Motors hat.
 
 Nachdem der Stator grundsätzlich zusammengebaut wurde, müssen für den Einbau in einen Traktionsantrieb weitere Schritte beachtet werden.
 So müssen die Hairpins mit dem Verbindungselement zum Wechselrichter verbunden werden. Dazu wird im richtigen Schaltschema ein passender Kontaktring mit
-den Anschlüssen verbunden.\medskip
+den Anschlüssen verbunden.
 
 Wegen der offen liegenden Schweißnähte müssen diese
 zueinander isoliert werden. Um Kriechströme und Durchschläge zu vermeiden, wird eine Beschichtung aufgetragen.
-Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren.\medskip
+Dies kann durch Wirbelstromverfahren, im Tauch- oder Träufelverfahren passieren.
 
 Der vorletzte Schritt dieser Prozesskette ist das Imprägnieren des Stators. Hierbei wird ein Harz in die Nuten des Blechpaketes gegeben,
-um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.\medskip
+um die Hairpins zu fixieren, eine bessere Wärmeleitung zu ermöglichen und eine weitere elektrische Isolierschicht zu gewährleisten.
 
 Die Funktions- und Qualitätsprüfung erfolgt als letzter Schritt, bevor der Stator diesen Produktionsabschnitt verlässt. Dabei müssen die
 elektrischen Parameter, wie Isolationsfestigkeit, elektrische Leitfähigkeit und mechanische Beschädigungen, den Anforderungen entsprechen.
@@ -195,9 +193,9 @@ elektrischen Parameter, wie Isolationsfestigkeit, elektrische Leitfähigkeit und
 Das Abisolieren der Hairpins hat großen Einfluss auf die Qualität des fertigen Stators, da es bei Fehlern zur
 Minderung des maximalen Stromflusses und damit der Gesamtleistung kommt. Wegen dieser Relevanz gibt es mehrere Methoden
 eine Abisolierung durchzuführen, die in diesem Abschnitt vorgestellt werden sollen. Dazu wird auf das Abisolieren durch rotierende Bürsten,
-mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen\PEMfootcite{Glaessel2020Skinning}.\medskip
+mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen\PEMfootcite{Glaessel2020Skinning}.
 
-In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung. Wie in \cref{fig:Produktionsablauf} 
+In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung. Wie in \cref{fig:Produktionsablauf}
 aufgezeigt findet die Abisolierung erst nach dem Biegen in einem getrennten Produktionsschritt statt.
 %
 \subsubsection{Rotierende Bürsten}\label{sec:RotierendeBuersten}
@@ -239,15 +237,15 @@ geschädigt werden können.
 %
 \subsubsection{Laser}\label{sec:Laser}
 Für die Analyse der Abisolierung mittels einer Laseranlage soll ein detaillierter Überblick über zwei Themen geschaffen werden: 1. Wie das Laserlicht entsteht
-und 2. wie dieses zum Abisolieren von Hairpins verwendet werden kann.\bigskip
+und 2. wie dieses zum Abisolieren von Hairpins verwendet werden kann.
 
-Ein Laser basiert hauptsächlich auf den in \cref{fig:laser-prinzip} dargestellten drei physikalischen Effekten zwischen Photonen und Atomen. Dazu zählt die Absorption, die spontane Emission und 
+Ein Laser basiert hauptsächlich auf den in \cref{fig:laser-prinzip} dargestellten drei physikalischen Effekten zwischen Photonen und Atomen. Dazu zählt die Absorption, die spontane Emission und
 die stimulierte Emission von Photonen\PEMfootcite[S. 27-31]{Eichler.2015}. Gelangt Licht durch eine Materialschicht, wird dieses zu einem
-gewissen Teil absorbiert. Je nach Materialbeschaffenheit und Wellenlänge hat das Licht nach dem Durchdringen dieser Schicht eine geringere 
+gewissen Teil absorbiert. Je nach Materialbeschaffenheit und Wellenlänge hat das Licht nach dem Durchdringen dieser Schicht eine geringere
 Intensität und damit eine geringere Energie. Diese Differenz wird zum einen Teil in Wärme umgewandelt zum anderen aber auch in angeregte Atome.
-Dies geschieht, wenn ein Photon auf ein Atom im Grundzustand trifft. Dabei wird die Energie des Photons bei der Absorption abgegeben und die 
+Dies geschieht, wenn ein Photon auf ein Atom im Grundzustand trifft. Dabei wird die Energie des Photons bei der Absorption abgegeben und die
 Elektronen des betroffenen Atoms auf ein erhöhtes Energieniveau gehoben. Durch das zweite Phänomen, die spontane Emission, springt das Elektron
-des angeregten Atoms nach einer gewissen Zeit wieder in den Grundzustand zurück. Bei diesem Rücksprung wird die zuvor aufgenommene Energie 
+des angeregten Atoms nach einer gewissen Zeit wieder in den Grundzustand zurück. Bei diesem Rücksprung wird die zuvor aufgenommene Energie
 wieder als Lichtquant abgegeben. Hierbei ist wichtig zu erwähnen, dass Richtung und Wellenlänge des emittierten Photons nicht mit denen des
 absorbierten Photons übereinstimmen müssen und in alle Richtungen abgestrahlt wird. Dieser Effekt ist schon länger durch Naturphänomene wie Fluoreszenz bekannt, würde aber für die Funktion
 des Lasers alleine nicht ausreichen. Die stimulierte Emission bewirkt nämlich, dass aus den vereinzelten Emissionen eine Kettenreaktion entsteht. Kommt
@@ -374,7 +372,7 @@ Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregt
   \end{tikzpicture}}
   \caption[Physikalisches Funktionsprinzip des Lasers]%
           {Physikalisches Funktionsprinzip des Lasers. (a) Die drei
-           Wechselwirkungen zwischen Photon und Atom. (b) Aufbau aus drei Komponenten: 
+           Wechselwirkungen zwischen Photon und Atom. (b) Aufbau aus drei Komponenten:
            Pumpquelle, aktives Medium und Resonator.}
   \label{fig:laser-prinzip}
 \end{figure}
@@ -423,7 +421,7 @@ Taster auf.
 Bei diesen Systemen sind grundsätzlich zwei Komponenten verbaut: Zum einen eine Sendediode, die einen definierten Lichtstrahl
 abgibt und zum anderen ein Fototransistor, der einfallendes Licht detektieren kann.
 Dieses detektierte Signal wird zumeist als analoge Spannung ausgegeben oder in einer internen Auswerteschaltung gegen einen
-Referenzwert verglichen und als digitales Signal ausgegeben.\medskip
+Referenzwert verglichen und als digitales Signal ausgegeben.
 
 Die Sendediode wird meist als einfache, für das menschliche Auge nicht sichtbare Infrarot-LED ausgeführt.
 Hierbei besteht diese aus einem n-dotierten Leitungsband mit einem Überschuss an Elektronen und einem p-dotierten
@@ -455,7 +453,7 @@ der Reflexion kommen. Wirft ein anderes Objekt den Lichtstrahl im gleichen Winke
 \paragraph{Reflexlichttaster} arbeiten mit dem eben beschriebenen Problem des Reflektierens. Auch
 hier sind Sender und Empfänger in einem Gehäuse, nur wird jetzt bewusst auf reflektiertes Licht gewartet.
 Dieser Vorgang kann je nach Situation angepasst werden, um die Stärke zwischen Reflexion (Objektdetektion) und Normalzustand einzustellen. Dies
-birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird\PEMfootcite[S. 137]{Hering.2023}.\medskip
+birgt Probleme in der Kalibrierung des Systems, damit zuverlässig ein aussagekräftiges Signal ausgegeben wird\PEMfootcite[S. 137]{Hering.2023}.
 
 Insgesamt haben aber alle diese Systeme den Nachteil, dass Fremdlicht, Schmutz und verschiedene Oberflächen
 der zu registrierenden Teile die Genauigkeit stark beeinflussen.
@@ -495,7 +493,7 @@ braucht.
 \paragraph{Halleffekt-Sensoren} sind ein weiterer Sensortyp, welcher auf Magnetfelder reagiert. Dieser Sensor
 funktioniert so, dass in einem stromdurchflossenen Leiter die Elektronen durch ein Magnetfeld abgelenkt werden.
 Diese Ablenkung führt zu einer Überkonzentration und einem Defizit an Elektronen an den Rändern. Dieser Unterschied
-lässt sich als Hallspannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt 
+lässt sich als Hallspannung einlesen und damit die gemessene Magnetfeldstärke ermitteln. Dieses Prinzip setzt
 voraus, dass ein ferromagnetisches oder permanentmagnetisches Objekt detektiert wird\PEMfootcite[S. 58-60]{Hering.2023}.
 %
 %
@@ -509,13 +507,14 @@ vordefinierte Position treffen muss, damit eine Detektion verlässlich funktioni
 und Verschmutzung leicht zu Fehlern führen.
 %
 %
-\subsection{Aktorik}\label{sec:Aktorik}
-Die Aktorik beschreibt den Bereich der Antriebstechnik. Es geht also um die Erzeugung von Bewegungen, aus Signalen
-von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktoren mit unterschiedlichem Aufbau für spezifische
+\subsection{Aktuatorik}\label{sec:Aktorik}
+Die Aktuatorik beschreibt den Bereich der Antriebstechnik. Es geht also um die Erzeugung von Bewegungen, aus Signalen
+von einer Steuereinheit. Heutzutage gibt es eine Vielzahl von Aktuatoren mit unterschiedlichem Aufbau für spezifische
 Anforderungen in der Industrie.
 %
 \subsubsection{Pneumatik}
-Die Pneumatik ist eine sehr häufig angewendete Methode der Bewegungsrealisierung in der Industrie.\medskip
+Die Pneumatik ist eine sehr häufig angewendete Methode der Bewegungsrealisierung in der Industrie.
+
 \cref{fig:Pneumatikzylinder} zeigt einen groben Aufbau eines pneumatischen Zylinders. Das Funktionsprinzip
 ist, dass Druckluft mittels elektronisch gesteuerten Reglern in die Kammern strömt. Zum Ausfahren
 des Zylinders wird beispielsweise Druck auf Anschluss 1 gegeben, während die rechte Kammer mit Anschluss 2 entlüftet wird.
@@ -536,7 +535,7 @@ Ringfläche, sodass bei gleichem Druck eine geringere Kraft zur Verfügung steht
 Der Druck $p$ wird durch die angeschlossene Druckluftleitung definiert. Die Fläche $A_\mathrm{K}$ stellt die vom
 Zylinder effektiv wirksame runde Oberfläche und $A_\mathrm{St}$ die des Stängels dar. Ein Einfahren der Kolbenstange erfolgt durch das Wechseln des Drucks in den jeweiligen Kammern.
 Hierbei ist zu beachten, dass die effektive Kolbenfläche hier durch die Stange weiter reduziert ist und somit eine geringere
-Kraft erreicht wird.\medskip
+Kraft erreicht wird.
 
 \begin{figure}[htbp]
 \centering
@@ -555,12 +554,12 @@ Kraft erreicht wird.\medskip
 \def\w{0.28}                 % Wandstaerke
 \def\xk{3.65} \def\dk{0.7}    % Kolben
 \def\yrb{1.02} \def\yrt{1.58}% Kolbenstange
- 
+
 % ---- Kammern ----
 \fill[rwthblau25] (\xl+\w,\yb+\w) rectangle (\xk,\yt-\w);
 \fill[rwthblau10] (\xk+\dk,\yb+\w) rectangle (\xr-\w,\yt-\w);
 \fill[white] (\xk+\dk,\yrb) rectangle (\xr-\w,\yrt);
- 
+
 % ---- Zylinderrohr ----
 \fill[wand] (\xl,\yb) rectangle (\xr,\yb+\w);
 \fill[wand] (\xl,\yt-\w) rectangle (\xr,\yt);
@@ -568,33 +567,33 @@ Kraft erreicht wird.\medskip
 \fill[wand] (\xr-\w,\yb) rectangle (\xr,\yrb);
 \fill[wand] (\xr-\w,\yrt) rectangle (\xr,\yt);
 \draw[draw=rwthgrau,line width=0.7pt] (\xl,\yb) rectangle (\xr,\yt);
- 
+
 % ---- Kolben + Stange ----
 \fill[rwthblau75,draw=rwthblau,line width=0.7pt]
      (\xk,\yb+\w) rectangle (\xk+\dk,\yt-\w);
 \fill[rwthblau25,draw=rwthblau,line width=0.7pt]
      (\xk+\dk,\yrb) rectangle (10.6,\yrt);
- 
+
 \draw[rwthblau,line width=0.5pt] (\xk,\yb+\w+0.12) -- (\xk+\dk,\yb+\w+0.12);
 \draw[rwthblau,line width=0.5pt] (\xk,\yt-\w-0.12) -- (\xk+\dk,\yt-\w-0.12);
- 
+
 % ---- Anschluesse ----
 \draw[wand] (0.9,\yt) rectangle (1.5,\yt+0.42);
 \draw[wand] (7.5,\yt) rectangle (8.1,\yt+0.42);
 \draw[luft] (1.2,\yt+0.95) -- (1.2,\yt+0.1);
 \draw[luft] (7.8,\yt+0.1) -- (7.8,\yt+0.95);
- 
+
 % ---- Bewegungsrichtung ----
 \draw[-{Stealth[length=3mm,width=2.4mm]},rwthblau,line width=1.1pt]
      (9.9,2.15) -- (11.6,2.15);
 \node[lbl,text=rwthblau,anchor=south] at (10.75,2.27) {Ausfahren};
- 
+
 % ---- Bemassung ----
 \draw[bem] ($(\xk,\yb+\w)+(-0.35,0)$) -- ($(\xk,\yt-\w)+(-0.35,0)$);
 \node[lbl,text=rwthblau,anchor=east] at ($(\xk,1.3)+(-0.42,0)$) {$d_\mathrm{K}$};
 \draw[bem] (10.85,\yrb) -- (10.85,\yrt);
 \node[lbl,text=rwthblau,anchor=west] at (10.95,1.3) {$d_\mathrm{St}$};
- 
+
 % ---- Beschriftungen ----
 \node[lbl,anchor=south] at (1.2,\yt+1.02) {Zuluft, Anschluss 1};
 \node[lbl,anchor=south] at (7.8,\yt+1.02) {Abluft, Anschluss 2};
@@ -605,7 +604,7 @@ Kraft erreicht wird.\medskip
 \draw[leader] (9.9,\yrb) -- (9.9,-0.75);
 \node[lbl,anchor=north] at (9.9,-0.72) {Kolbenstange};
 \node[lbl,text=rwthblau] at (1.9,1.3) {$p$};
- 
+
 \end{tikzpicture}
 \caption[Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders]{Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders}
 \label{fig:Pneumatikzylinder}
@@ -615,28 +614,28 @@ Es gibt eine Menge Vorteile für pneumatische Systeme: So ist ein solches System
 und in sehr kleinen Baugrößen verfügbar.\PEMfootcite{ali_pneumatic_2009}
 Außerdem bietet es eine extreme Kraft- und Geschwindigkeitsdichte, obwohl der Aufbau einfach ist und wenige bewegte Teile
 beinhaltet. Zudem ist es möglich, dauerhaft die maximale Kraft zu halten, ohne die Dauerleistungsfähigkeit zu unterbrechen.
-Weiter ist eine Ansteuerung für ein Aus- und Einfahren des Zylinders mit einfachen binären Signalen möglich.\medskip
+Weiter ist eine Ansteuerung für ein Aus- und Einfahren des Zylinders mit einfachen binären Signalen möglich.
 
-Dem stehen erhebliche regelungstechnische Einschränkungen gegenüber. Aufgrund der Kompressibilität der Luft, 
-hoher Reibkräfte sowie des Totbandes der Ventilschieberbewegung weist ein pneumatischer Antrieb ein stark 
-nichtlineares Verhalten auf, wodurch eine genaue Positionierung in Zwischenstellungen nur mit erheblichem 
+Dem stehen erhebliche regelungstechnische Einschränkungen gegenüber. Aufgrund der Kompressibilität der Luft,
+hoher Reibkräfte sowie des Totbandes der Ventilschieberbewegung weist ein pneumatischer Antrieb ein stark
+nichtlineares Verhalten auf, wodurch eine genaue Positionierung in Zwischenstellungen nur mit erheblichem
 regelungstechnischem Aufwand erreichbar ist\PEMfootcite{Jamian.2020}.
 Hinzu kommen Nichtlinearitäten durch ungleichmäßigen Ventildurchfluss und Laufzeitverzögerungen der Druckluft.\PEMfootcite{Beater.2007}
 %
-\subsubsection{Elektromechanische Aktorik}\label{sec:eletrischeAktorik}
-Elektromechanische Antriebe wandeln elektrische Energie über einen Motor in eine rotatorische Bewegung, die durch ein 
+\subsubsection{Elektromechanische Aktuatorik}\label{sec:eletrischeAktorik}
+Elektromechanische Antriebe wandeln elektrische Energie über einen Motor in eine rotatorische Bewegung, die durch ein
 Übertragungselement in eine translatorische Bewegung überführt wird. Dabei gibt es Systeme mit Lageregelung, die die aktuelle
 Motorposition als Signal zurückgeben, oder Systeme ohne eine externe Überprüfung. Genau hierfür gibt es zwei gängige Motorarten,
-den Servomotor mit einer internen Regelung und einen Schrittmotor, der normalerweise ohne eine Lageregelung auskommt.\medskip
+den Servomotor mit einer internen Regelung und einen Schrittmotor, der normalerweise ohne eine Lageregelung auskommt.
 
 \paragraph{Motoren}
-Ein Servomotor besitzt einen geschlossenen Regelkreis: Ein Encoder erfasst die Ist-Lage, die Regelung korrigiert die Abweichung 
+Ein Servomotor besitzt einen geschlossenen Regelkreis: Ein Encoder erfasst die Ist-Lage, die Regelung korrigiert die Abweichung
 kontinuierlich und meldet eine Überschreitung der zulässigen Abweichung als Störung.\PEMfootcite{Stoelting.2011}
-Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht, die Position anzufahren. Dabei bezieht der 
+Somit gibt die übergeordnete Steuerung nur eine fixe Position vor und es wird versucht, die Position anzufahren. Dabei bezieht der
 Motor je nach benötigter Kraft und Geschwindigkeit die passende Menge an elektrischer Leistung. Physisch sind Servomotoren meist
 darauf ausgelegt, eine geringe Drehzahl mit einem hohen Drehmoment zu erreichen. Dazu wird mit einem Getriebe die hohe Drehzahl
 des Elektromotors in eine geringere Drehzahl umgewandelt. Dies wiederum bedeutet aber auch erhöhte Kosten und einen erhöhten Bauraum.
-Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren der Positionen übernimmt.\medskip
+Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren der Positionen übernimmt.
 
 \begin{figure}[htbp]
   \centering
@@ -654,11 +653,11 @@ Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren d
     \node[chain, right=16mm of steu]                   (mot)  {Motor\\[-3pt]{\scriptsize rotatorisch}};
     \node[chain, right=16mm of mot, minimum width=40mm] (ueb) {Übertragungselement\\[-3pt]{\scriptsize Spindel / Zahnriemen}};
     \node[fb, below=18mm of mot, minimum width=28mm]    (enc) {Encoder\\[-3pt]{\scriptsize im Servomotor}};
- 
+
     \draw[sig] (steu) -- (mot);
     \draw[sig] (mot)  -- (ueb);
     \draw[sig] (ueb.south) -- ++(0,-9mm) node[lbl, below] {Lineare Bewegung};
- 
+
     \draw[dsig] (mot.south) -- (enc.north);
     \draw[dsig] (enc.west) -| (steu.south) node[lbl, pos=0.28, below] {Istwert};
   \end{tikzpicture}
@@ -671,7 +670,7 @@ Der Schrittmotor wiederum wandelt elektrische Impulse in diskrete Winkelschritte
 zu arbeiten, da jeder Impuls ein fest definierter Schrittwinkel ist (vgl. \cref{fig:schrittmotor-prinzip}). Bei diesem Betrieb müssen aber die Betriebsgrenzen eingehalten
 werden, da sonst Schritte unbemerkt übersprungen werden können\PEMfootcite{Stoelting.2011}. Dies stellt ein großes Problem dar, weil
 die aktuelle Ist-Position nicht sicher festgestellt werden kann. Für eine dementsprechende Kalibrierung verwenden viele Systeme Endstops
-oder Schalter, mit denen dann eine feste Position definiert werden kann. Von dieser lassen sich unter der Annahme eines fehlerfreien Betriebes Schritte zählen und aufaddieren.\medskip
+oder Schalter, mit denen dann eine feste Position definiert werden kann. Von dieser lassen sich unter der Annahme eines fehlerfreien Betriebes Schritte zählen und aufaddieren.
 
 Die folgende \cref{fig:schrittmotor-prinzip} zeigt das grundsätzliche Prinzip der schrittweisen Rotation der Schrittmotoren, dabei haben reale Motoren weitaus mehr Pole und können somit
 sehr genaue Schritte erzielen. Eines der größten Probleme von Schrittmotoren ist dabei nicht nur die begrenzte Schrittgröße, sondern besonders
@@ -691,14 +690,14 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
     lbl/.style    = {font=\scriptsize, text=gray!85},
     mov/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85}
   ]
- 
+
   %% #1 = x-Versatz, #2 = Polwinkel, #3 = Stil
   \newcommand{\statorpol}[3]{%
     \begin{scope}[shift={(#1,0)}, rotate=#2]
       \fill[#3] (1.15,-0.34) rectangle (2.2,0.34);
       \draw[#3] (1.15,-0.34) rectangle (2.2,0.34);
     \end{scope}}
- 
+
   \newcommand{\wicklung}[3]{%
     \begin{scope}[shift={(#1,0)}, rotate=#2]
       \foreach \r in {1.35,1.58,1.81} {
@@ -706,7 +705,7 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
         \draw[#3] (\r,-0.34) arc (180:360:0.09);
       }
     \end{scope}}
- 
+
   %% #1 = x-Versatz, #2 = Rotorwinkel
   \newcommand{\rotor}[2]{%
     \begin{scope}[shift={(#1,0)}, rotate=#2]
@@ -718,7 +717,7 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
       \node[font=\scriptsize, rotate={-(#2)}] at (0,-0.45) {S};
       \fill[gray!45] (0,0) circle (0.13);
     \end{scope}}
- 
+
   %% ---------------- Zustand 1 ----------------
   \node[font=\small] at (0,3.0) {Phase A bestromt};
   \draw[stat] (0,0) circle (2.2);
@@ -729,7 +728,7 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
   \rotor{0}{0}
   \node[lbl] at (0, 2.5) {A};   \node[lbl] at (2.5, 0) {B};
   \node[lbl] at (0,-2.5) {A$'$};\node[lbl] at (-2.5,0) {B$'$};
- 
+
   %% ---------------- Zustand 2 ----------------
   \node[font=\small] at (6.5,3.0) {Phase B bestromt};
   \draw[stat] (6.5,0) circle (2.2);
@@ -740,10 +739,10 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
   \rotor{6.5}{-90}
   \node[lbl] at (6.5, 2.5) {A};   \node[lbl] at (9.0, 0) {B};
   \node[lbl] at (6.5,-2.5) {A$'$};\node[lbl] at (4.0, 0) {B$'$};
- 
+
   \draw[mov] ([shift={(6.5,0)}]90:1.05) arc (90:8:1.05);
   \node[lbl] at (6.5,-3.05) {Rotor dreht um einen Schrittwinkel};
- 
+
   \end{tikzpicture}
   \caption[Funktionsprinzip des zweiphasigen Schrittmotors]%
           {Funktionsprinzip des zweiphasigen Schrittmotors. Das Weiterschalten
@@ -757,13 +756,13 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
 \paragraph{Mechanische Übersetzung}
 Weiter gibt es mehrere Möglichkeiten, die rotatorische Bewegung je nach Bedarf in eine lineare Bewegung umzuwandeln.
 Der Servomotor wird meistens in Verbindung mit einem Zahnriemen oder einer festen geraden Zahnstange verwendet (vgl. \cref{fig:uebertragungselemente}). Dabei arbeitet
-dieses System meistens in einem kleinen festen Bereich, da die meisten Servomotoren nur auf eine volle Umdrehung ausgelegt sind. 
-Hier wird besonders eine hohe Genauigkeit und Kraft ermöglicht.\medskip
+dieses System meistens in einem kleinen festen Bereich, da die meisten Servomotoren nur auf eine volle Umdrehung ausgelegt sind.
+Hier wird besonders eine hohe Genauigkeit und Kraft ermöglicht.
 
 Auf der anderen Seite bietet der Schrittmotor die Möglichkeit ohne Beschränkungen zu rotieren. Dies wird häufig in Kombination mit einer Spindel
 eingesetzt, die durch ihr Gewinde einen Schlitten mit Mutter linear bewegen kann. Mit einer passenden Steigung in der Spindel kann man
 mit diesem Setup extrem genaue Punkte anfahren. Auch ein Zahnriemen kann sehr gut mit einem Schrittmotor
-verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sind.\medskip
+verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sind.
 
 \begin{figure}[htbp]
   \centering
@@ -776,27 +775,27 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
     tit/.style   = {font=\fontsize{14}{16}\selectfont},
     mov/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, gray!85}
   ]
- 
+
   %% ================= Spindeltrieb =================
   \node[tit] at (3.3,2.6) {Spindeltrieb};
- 
+
   \fill[motor] (0,0) rectangle (1.4,1.4);       \draw[motor] (0,0) rectangle (1.4,1.4);
   \fill[trans] (1.4,0.55) rectangle (6.4,0.85); \draw[trans] (1.4,0.55) rectangle (6.4,0.85);
   \foreach \x in {1.6,1.9,2.2,2.5,3.9,4.2,4.5,4.8,5.1,5.4,5.7,6.0}
     {\draw[teal!60, thin] (\x,0.55) -- (\x+0.2,0.85);}
   \fill[carr]  (2.8,0.25) rectangle (3.8,1.15); \draw[carr]  (2.8,0.25) rectangle (3.8,1.15);
   \fill[motor] (6.4,0.45) rectangle (6.6,0.95); \draw[motor] (6.4,0.45) rectangle (6.6,0.95);
- 
+
   \node[lbl, anchor=north] at (0.7,-0.05) {Motor};
   \node[lbl, anchor=north] at (5.2, 0.38) {Spindel};
   \node[lbl, anchor=south] at (3.3, 1.22) {Mutter};
   \draw[mov] (2.9,-1.75) -- (4.2,-1.75);
- 
+
   \draw[gray!30, thin] (7.6,-2.15) -- (7.6,2.4);
- 
+
   %% ================= Zahnriementrieb =================
   \node[tit] at (12.5,2.6) {Zahnriementrieb};
- 
+
   \fill[motor] (8.5,0) rectangle (9.9,1.4);     \draw[motor] (8.5,0) rectangle (9.9,1.4);
   \fill[trans] (10.5,0.7) circle (0.6);         \draw[trans] (10.5,0.7) circle (0.6);
   \fill[trans] (14.5,0.7) circle (0.6);         \draw[trans] (14.5,0.7) circle (0.6);
@@ -805,19 +804,19 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \draw[teal!70, thin] (14.5,1.3) arc (90:-90:0.6);
   \draw[teal!70, thin] (10.5,1.3) arc (90:270:0.6);
   \fill[carr] (12.0,1.3) rectangle (13.0,1.85); \draw[carr] (12.0,1.3) rectangle (13.0,1.85);
- 
+
   \node[lbl, anchor=north] at (9.2,-0.05)  {Motor};
   \node[lbl, anchor=north] at (11.6,-0.05) {Zahnriemen};
   \node[lbl, anchor=south] at (12.5,1.92)  {Schlitten};
   \draw[mov] (11.8,-1.75) -- (13.1,-1.75);
- 
+
   \draw[gray!30, thin] (16.1,-2.15) -- (16.1,2.4);
- 
+
   %% ================= Zahnstangentrieb =================
   \node[tit] at (21.0,2.6) {Zahnstangentrieb};
- 
+
   \fill[motor] (17.0,0) rectangle (18.4,1.4);   \draw[motor] (17.0,0) rectangle (18.4,1.4);
- 
+
   % Ritzel: Grundkreis + 16 Zaehne (Teilung am Teilkreis r=0.8: 2*pi*0.8/16 = 0.314)
   \fill[trans] (19.3,0.7) circle (0.72);        \draw[trans] (19.3,0.7) circle (0.72);
   \foreach \i in {0,...,15} {
@@ -827,7 +826,7 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
       \draw[trans] (0.70,-0.09) -- (0.88,-0.055) -- (0.88,0.055) -- (0.70,0.09) -- cycle;
     \end{scope}}
   \fill[motor] (19.3,0.7) circle (0.13);
- 
+
   % Zahnstange: Koerper + Zaehne mit gleicher Teilung
   \fill[trans] (18.3,-0.9) rectangle (23.8,-0.35);
   \draw[trans] (18.3,-0.9) rectangle (23.8,-0.35);
@@ -835,12 +834,12 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
     \pgfmathsetmacro\x{18.55+0.314*\i}
     \fill[trans] (\x-0.09,-0.35) -- (\x-0.055,-0.18) -- (\x+0.055,-0.18) -- (\x+0.09,-0.35) -- cycle;
     \draw[trans] (\x-0.09,-0.35) -- (\x-0.055,-0.18) -- (\x+0.055,-0.18) -- (\x+0.09,-0.35) -- cycle;}
- 
+
   \node[lbl, anchor=north] at (17.2,-0.05) {Motor};
   \node[lbl, anchor=south] at (19.3, 1.68) {Ritzel};
   \node[lbl, anchor=north] at (21.9,-1.0)  {Zahnstange};
   \draw[mov] (20.4,-1.75) -- (21.7,-1.75);
- 
+
   \end{tikzpicture}}
   \caption[Übertragungselemente zur Wandlung rotatorischer in translatorische Bewegung]%
           {Skizzenhafte Darstellung der Übertragungselemente zur Wandlung der rotatorischen Motorbewegung in
@@ -858,18 +857,18 @@ an Aktuatoren oder andere Systeme schicken.
 Die zu entwickelnde Anlage wird aus mehreren Subsystemen mit verschiedensten Anforderungen an die Steuerung bestehen. Dabei müssen die zeitkritische
 Ansteuerung und die Koordination des Gesamtablaufs analysiert werden. Der Aufbau dieses Systems wird dabei aus mehreren Ebenen bestehen,
 die die einzelnen Aufgaben untereinander verteilen. Das hierarchische Prinzip ist dabei in die direkten Steuereinheiten der Aktuatoren
-und in die Koordinationseinheit unterteilt.\bigskip
+und in die Koordinationseinheit unterteilt.
 
 Für die Entwicklung eines solchen Systems lässt sich in einen zentralen, hierarchischen und heterarchischen Aufbau unterteilen.
 Diese Systeme müssen für die Wahl auf das Ausfallverhalten, die Reaktionszeit, die Erweiterbarkeit, den Integrationsaufwand und
-die Testbarkeit einzelner Subsysteme geprüft werden.\bigskip
+die Testbarkeit einzelner Subsysteme geprüft werden.
 
-Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktoren) zur Steuerungseinheit.
+Ein zentrales System funktioniert über eine direkte Kommunikation von Peripherie (Sensoren und Aktuatoren) zur Steuerungseinheit.
 Diese verarbeitet die Daten direkt und schickt Befehle wieder zurück. Als Vorteile sind ein einfacher physischer und programmiertechnischer
 Aufbau sowie eine einfache Datenkonsistenz zu nennen. Dem gegenüber steht wegen der Nutzung eines Hauptknotens die geringe Ausfallsicherheit.
 Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtsystem in einem unsicheren oder fehlerhaften Zustand. Außerdem
 lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im Vorhinein festgelegt werden müssen.
-Auch das Prüfen einzelner Subsysteme ist erst nach der Montage aller Komponenten und Anbauteile möglich.\medskip
+Auch das Prüfen einzelner Subsysteme ist erst nach der Montage aller Komponenten und Anbauteile möglich.
 
 Der nächste Schritt, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steuerungsebenen aufgebaut. Dabei
 delegiert jede Ebene Aufgaben an die darunterliegende Ebene, die diese selbstständig löst. Die höchste
@@ -877,14 +876,14 @@ Ebene dient der Koordination der globalen Parameter. Dieses Prinzip ermöglicht 
 da Subsysteme eigenständig arbeiten können und nur den Befehlen eines Masters folgen müssen. Diese klaren und strukturierten
 Zuständigkeiten führen zu einer Entlastung der Hauptebene und können Fehler begrenzen. Auch besteht die Möglichkeit, weitere
 Subsysteme nachträglich einzugliedern. Als Nachteile gelten hier der starre und lange Informations- und Entscheidungsfluss
-durch alle Ebenen sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkabelung der einzelnen Ebenen.\medskip
+durch alle Ebenen sowie ein erhöhter Integrationsaufwand durch die gegenseitige Verkabelung der einzelnen Ebenen.
 
 Das komplexeste und modernste System arbeitet nach dem heterarchischen Prinzip. Hier wird ebenfalls in mehrere Subsysteme aufgeteilt,
 wobei aber die Kommunikation und Aufgabenverteilung über Prioritätssysteme untereinander verhandelt wird. Dies bietet eine
 extreme Flexibilität und eine hohe Ausfallsicherheit, da das System nicht statisch festgelegt ist. Es wird als optimierte
 Methode zu dem hierarchischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationswege minimiert werden. Zudem lassen
 sich einzelne Ebenen weiterhin überprüfen. Die Herausforderungen sind hierbei aber eine komplexe Programmierung
-und ein schwer vorhersehbares Systemverhalten.\medskip
+und ein schwer vorhersehbares Systemverhalten.
 
 Für einen konkreten Beispiel-Aufbau werden die einzelnen Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
 arbeitet nach dem hierarchischen Prinzip, bei dem der Master eine Abfrage oder einen Befehl initialisiert und ein Slave nur nach Erhalt
@@ -912,33 +911,32 @@ arbeiten.
     dsig/.style   = {sig, dashed, dash pattern=on 1.2mm off 0.9mm},
     lbl/.style    = {font=\scriptsize, text=gray!85}
   ]
- 
+
   %% ---------------- Master ----------------
   \node[master] (m) at (0,0) {Master\\[-3pt]{\scriptsize Koordination des Ablaufs}};
- 
+
   %% ---------------- Bus ----------------
   \draw[bus] (-4.2,-1.9) -- (4.2,-1.9);
   \node[lbl, anchor=west] at (4.35,-1.9) {Bus};
- 
+
   %% ---------------- Signalrichtungen ----------------
   \draw[sig]  (-0.55,-0.62) -- (-0.55,-1.78) node[lbl, midway, left]  {Befehl};
   \draw[dsig] ( 0.55,-1.78) -- ( 0.55,-0.62) node[lbl, midway, right] {Antwort};
- 
+
   %% ---------------- Slaves und Peripherie ----------------
-  \foreach \x/\n/\p in {-3/1/{Aktoren}, 0/2/{Sensoren}, 3/n/{Peripherie}} {
+  \foreach \x/\n/\p in {-3/1/{Aktuatoren}, 0/2/{Sensoren}, 3/n/{Peripherie}} {
     \node[slave] (s\n) at (\x,-3.2) {Slave~\n};
     \node[peri]  (p\n) at (\x,-4.8) {\p};
     \draw[stub] (\x,-1.9) -- (s\n.north);
     \draw[sig]  (s\n.south) -- (p\n.north);
   }
   \node[lbl] at (1.5,-3.2) {$\cdots$};
- 
+
   \end{tikzpicture}
   \caption[Aufbau in einer Master-Slave-Architektur]%
           {Aufbau in einer Master-Slave-Architektur.}
   \label{fig:master-slave}
 \end{figure}
- 
 
 \subsubsection{Mikrocontroller}\label{sec:Mikrocontroller}
 Der Mikrocontroller bietet sich als Ein-Chip-System hervorragend als Steuerbaustein an. Ein solcher Controller kommt mit interner
@@ -951,7 +949,7 @@ wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Span
 GPIO-Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
 die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
 
-Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des 
+Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des
 Mikrocontrollers, die Höhe eines digitalen Signals und die maximal zulässige Spannung an den einzelnen Aus- und Eingängen. In den
 Datenblättern der konkreten Komponente sind zulässige kurzzeitige Spitzenwerte für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
 für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegen, gibt es nachgeschaltete Treiberstufen.
@@ -968,7 +966,7 @@ definiert sich durch mehrere an einer Leitung befindliche Teilnehmer. Einfache S
 der Informationsfluss ist fest vom Sender zum Empfänger definiert. Die Information kann in unterschiedlichen Eigenschaften einer
 elektrischen Spannung kodiert sein. So lassen sich Parameter wie Amplitude und Frequenz entsprechend ausgeben und wieder einlesen.
 
-\paragraph{Digitale Schaltsignale}     
+\paragraph{Digitale Schaltsignale}
 arbeiten mit zwei definierten Schaltpegeln, die meist der Versorgungsspannung und GND entsprechen. Für das Schalten eines LOW-Ausgangs
 wird GND, also die niedrigste Spannung, auf die Leitung gegeben. Beim Schalten eines HIGH-Ausgangs wird wiederum
 weggeschaltet und der Ausgang schwebt auf einem undefinierten Wert. Hierfür muss ein externer oder ein intern verbauter Pull-up-Widerstand
@@ -984,7 +982,7 @@ ist. Aus diesem Grund muss bei Signalen mit höherer Amplitude ein dedizierter S
 am Eingang des ADC eingesetzt werden. Das Ausgeben einer analogen Spannung erfolgt ausschließlich durch Sensoren, da das künstliche
 Erzeugen einen großen Aufwand an elektrischen Komponenten benötigen würde.
 
-\paragraph{Pulsweitenmodulation} 
+\paragraph{Pulsweitenmodulation}
 nutzt ein digitales Rechtecksignal mit fester Frequenz, dessen Tastgrad (das
 Verhältnis der HIGH-Dauer zur Periodendauer) die eigentliche Information trägt.
 Für dessen Auswertung sind zwei Prinzipien gebräuchlich.
@@ -1027,15 +1025,15 @@ In \cref{tab:bussysteme} werden unterschiedliche Prinzipien gegeneinander aufgez
     UART & 2 & asynchron & 2 &
       Punkt-zu-Punkt ohne Adressierung; Baudrate muss beidseitig
       übereinstimmen \\[3pt]
- 
+
     SPI & $3+n$ & synchron & $1+n$ &
       Vollduplex und hohe Datenrate; je Teilnehmer eine zusätzliche
       Auswahlleitung \\[3pt]
- 
+
     I\textsuperscript{2}C & 2 & synchron & mehrere &
       Adressierung im Protokoll, Open-Drain; Leitungslänge durch
       Buskapazität begrenzt \\[3pt]
- 
+
     CAN & 2 & asynchron & mehrere &
       Differenzielle Übertragung mit Prioritätsvergabe und Prüfsumme;
       hohe Störfestigkeit \\
@@ -1074,18 +1072,18 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
       ar/.style={-{Latex[length=3mm,width=2.6mm]}, draw=orange!80!red,
                  line width=2.4pt, opacity=.75}
     ]
- 
+
     %% ---- Strompfad, durchgehend hinterlegt ----
     \draw[hl] (1.6,4.6) -- (1.6,1.35) -- (5.4,1.35) -- (5.4,-1.2) -- (1.6,-1.2);
     \draw[ar] (1.6,4.0) -- (1.6,3.2);
     \draw[ar] (2.6,1.35) -- (3.4,1.35);
     \draw[ar] (5.4,0.4) -- (5.4,-0.4);
- 
+
     %% ---- Schienen ----
     \draw (0,4.6) node[left]{$V_{\mathrm{M}}$} -- (7,4.6);
     \draw (0,-1.2) -- (7,-1.2);
     \node[right] at (7,-1.2) {GND};
- 
+
     %% ---- Linker Zweig ----
     \draw (1.6,4.6) -- (1.6,3.55);
     \node[nigfete, bodydiode, anchor=D] (T1) at (1.6,3.55) {};
@@ -1094,7 +1092,7 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
     \node[nigfete, bodydiode, anchor=D] (T2) at (1.6,1.35) {};
     \node[left=3mm] at (T2.gate) {$T_2$};
     \draw (T2.S) -- (1.6,-1.2);
- 
+
     %% ---- Rechter Zweig ----
     \draw (5.4,4.6) -- (5.4,3.55);
     \node[nigfete, bodydiode, anchor=D] (T3) at (5.4,3.55) {};
@@ -1103,15 +1101,15 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
     \node[nigfete, bodydiode, anchor=D] (T4) at (5.4,1.35) {};
     \node[left=3mm] at (T4.gate) {$T_4$};
     \draw (T4.S) -- (5.4,-1.2);
- 
+
     %% ---- Wicklung ----
     \draw (A) -- (2.4,1.35) to[L, l=$L$] (3.6,1.35) -- (B);
- 
+
     \node[circle,fill,inner sep=1.1pt] at (A) {};
     \node[circle,fill,inner sep=1.1pt] at (B) {};
     \node[above left=-1pt and -2pt] at (A) {A};
     \node[above right=-1pt and -2pt] at (B) {B};
- 
+
   \end{circuitikz}
   \caption[Aufbau einer H-Bruecke]%
           {Aufbau einer H-Bruecke aus zwei Halbbrueckenzweigen. Die Wicklung

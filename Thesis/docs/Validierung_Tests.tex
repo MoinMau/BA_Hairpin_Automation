@@ -2,14 +2,14 @@
 Nach dem Abschluss der Realisierung folgt die messtechnische Überprüfung des Aufbaus. Dabei wird zwischen zwei Ebenen unterschieden:
 Zum einen die Verfiktation, die die einzelenen Subsysteme isoliert betrachtet, und zum anderen die Validierung, die den Gesamtablauf
 gegen die Anforderungen aus der \cref{tab:anforderungen} bewertet. Eine Trennung ist hier sinnvoll, da sich sonst die Ursache von Fehlern
-im Gesamtsystem nicht eindeutig zuordnen lassen.\medskip
+im Gesamtsystem nicht eindeutig zuordnen lassen.
 
 Für ein einheitliches Schema werden alle Versuche in die selben Blöcke unterteilt. Dies dient einer besseren Übersicht und Überprüfung.
 Grundsätzlich werden zuerst die Prüfkriterien festgelegt, dann der eigentliche Messaufbau erklärt, dannach folgt die Durchführung mit
-Ergebnissen und einer schlussendlichen Bewertung.\medskip
+Ergebnissen und einer schlussendlichen Bewertung.
 
 Der folgende Prüfplan (vgl.\cref{tab:pruefplan}) zeigt alle durchgeführten Test auf. Für die Durchführung wurde der in der \cref{sec:Realisierungsstand}
-beschriebene Aufbau verwendet. Die Steuerung erfolgte durch eine an den Test spezifische Softwarestand, der aber ebenfalls in der 
+beschriebene Aufbau verwendet. Die Steuerung erfolgte durch eine an den Test spezifische Softwarestand, der aber ebenfalls in der
 Tabelle aufgezeigt wird. Da zu diesem Zeitpunkt wie beschrieben die Prozesssensoren noch nicht in das Gesamtsystem eingepflegt wurden
 und dis nur der Wunschanforderung Si2 entspricht, werden dazu in dieser Arbeit keine Messreihen angefertigt. In einem späteren Verlauf
 sollte dies aber wieder in betracht gezogen werden.
@@ -64,15 +64,15 @@ sollte dies aber wieder in betracht gezogen werden.
 \end{table}
 %
 \subsection{Verifikation der Subsysteme}\label{sec:VerifikationSubsysteme}
-Die Verifikation der Subsysteme dient dem Nachweis, dass die in Kapitel 5 aufgebauten Baugruppen die ihnen zugeordneten 
+Die Verifikation der Subsysteme dient dem Nachweis, dass die in Kapitel 5 aufgebauten Baugruppen die ihnen zugeordneten
 Anforderungen isoliert erfüllen. Die getrennte Betrachtung erlaubt es, wiederkehrende Fehlermuster frühzeitg zu identifiziern
 und einem spezifischen System zuzuordnen. Wird dies nicht getan, kann es bei der Valdierung des Gesamtsystems zu Problemen
-in der Suche nach der exakten Fehlerquelle geben.\medskip
+in der Suche nach der exakten Fehlerquelle geben.
 
-Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zunächst die Akuatoren der einzelnen Subsysteme
-getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und Schnittstellen dieser Systeme.\medskip
+Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zunächst die Aktuatoren der einzelnen Subsysteme
+getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und Schnittstellen dieser Systeme.
 
-Für das Testen der Aktoren wird nach dem Prüfkriterium der Auslenkung untersucht. Diese wird in den folgenden Messreihen
+Für das Testen der Aktuatoren wird nach dem Prüfkriterium der Auslenkung untersucht. Diese wird in den folgenden Messreihen
 für die Begründung und Überprüfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird deutlich
 erklärt wie der Wert der Auslenkung für ein Konklution der Ergebnisse.
 %
@@ -83,22 +83,22 @@ Zahnradgetriebe auf einen Zeiger übertragen und auf einer Skala mit einem
 Skalenteilungswert von \SI{0,01}{\milli\meter} angezeigt wird. Die Messuhr ist
 über einen Gelenkarm mit einem Magnetfuß verbunden, sodass der Tastkopf
 unabhängig von der Anlagenstruktur an jeder benötigten Position starr fixiert
-werden kann.\medskip
+werden kann.
 
 Für das Starten einer Messreihe wird der Tastkopf an einem definierten Punkt eines zu überprüfendes Systems angesetzt. Dabei ist
-darauf zu achten, dass die Messuhr bei maximaler Auslenkung des Aktuators auf die Hälfte des Messbereiches vorgespannt wird. 
-Diese Normierung dient der Überpfrüfung von Abweichungen in beide Richtungen hinsichtlich dem zu frühen Stoppen. 
+darauf zu achten, dass die Messuhr bei maximaler Auslenkung des Aktuators auf die Hälfte des Messbereiches vorgespannt wird.
+Diese Normierung dient der Überpfrüfung von Abweichungen in beide Richtungen hinsichtlich dem zu frühen Stoppen.
 Nach dem Schritt der Kalibrierung können vordefinierte Bewegungsabläufe abgefahren werden, die die Anforderungen im Alltagsbetrieb
-wiederspeigeln. Druch künstlich eingebaute Wartezeiten lassen sich nun die Messwerte ablesen und notieren. Bei einer Ablesung auf 
-einen halben Skalenteil ergibt sich eine Ablesegrenze von \SI{\pm0,005}{\milli\meter}.\medskip
+wiederspeigeln. Druch künstlich eingebaute Wartezeiten lassen sich nun die Messwerte ablesen und notieren. Bei einer Ablesung auf
+einen halben Skalenteil ergibt sich eine Ablesegrenze von \SI{\pm0,005}{\milli\meter}.
 
 Je nach Aufbau gibt es verschiedene Messungenauigkeiten, wobei der Widerstand des Tastkopfes und das Ablesen der Werte vom Ziffernblatt
 bei jedem Durchlauf vorhanden ist. Zur Minimierung von Ableseungenauigkeiten wurde besonders auf eine widerholt gleichmäßige
 Köperhaltung und optimale Draufsicht geachtet. Für die Überwindung der minimalen Kraft druch die mechanische Feder in der Messuhr
-muss hier individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.\medskip
+muss hier individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.
 
 Jeder Versuch wird mit n 20 Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische für den ersten Test dargestellt
-und soll für eine bessere Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte 
+und soll für eine bessere Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte
 dargestellt.
 
 \subsubsection{Sperrklinken T-01}
@@ -106,7 +106,7 @@ dargestellt.
 \paragraph{Prüfziel}
 In diesem Test soll die Postionstreue der Sperrklinkenschlitten überprüft. Dies dient der Überprüfung, ob es in diesem Aktuatorensystem
 allgemeine Fehler auftreten. Auch kann mittels den Werten der Abweichung ein genauer Einschätzung für das Vereinzelungssystem gegeben
-werden. Dieser Test dient keinem direkten Vergleich gegenüber einer konkreten Anforderung, sondern für eine bessere Analyse der valdierenden 
+werden. Dieser Test dient keinem direkten Vergleich gegenüber einer konkreten Anforderung, sondern für eine bessere Analyse der valdierenden
 Tests.
 
 \paragraph{Spezifischer Aufbau}\label{sec:TastkopfBSP}
@@ -195,7 +195,6 @@ je Servomotor aufgeteilt. Zudem wurde der Antastpunkt einmal auf blanken Stahl u
 \subsection{Bewertung gegen Anforderungsliste}\label{sec:Testbewertung}
 - Vergleich gegen Anforderung\\
 \todo{Vergleich gegen vorherigen Prozess!}
-
 
 %\subsection{Ausfall-Betrachtung}\label{sec:Ausfall}
 %- Was passiert, wenn ein Subsystem, Spannungsversorgung versagt?\\

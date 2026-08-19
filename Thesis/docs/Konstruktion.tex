@@ -7,10 +7,10 @@ In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und de
 %
 Wie schon in \cref{sec:Konzeptauswahl} angewendet, wird auch in der Realisierung in die verschiedenen Subsysteme unterteilt.
 Dies ist hilfreich, da Schnittstellen definiert, Bauteile in Gruppen realisiert werden können und die Komplexität
-je Subsystem minimiert wird.\medskip
+je Subsystem minimiert wird.
 
 Für die Ausarbeitung werden aus den Teilfunktionen der gewählten Variante konkrete Skizzen erstellt. Diese sollen zunächst eine
-grobe Beschreibung für das Realsystem darstellen. Nach diesem Schritt folgt das Erstellen des realen Objektes in einem CAD-Programm. 
+grobe Beschreibung für das Realsystem darstellen. Nach diesem Schritt folgt das Erstellen des realen Objektes in einem CAD-Programm.
 In dieser Arbeit wurde die Studenten-Lizenz
 von Autodesk Fusion~360 verwendet. Auch elektromechanische Komponenten werden in diesem Prozess mit eingeplant. Nach der
 Erstellung aller Subsysteme am Computer, konnten die einzelnen Bauteile gefertigt und montiert werden. Für das
@@ -48,23 +48,23 @@ PLA als Wahl für das Material von gedruckten Bauteilen getroffen. Besonders die
 Verfügbarkeit waren der Grund dieser Wahl.
 
 \paragraph{Fertigungsgerechte Gestaltung von Gelenken} wird in dieser Arbeit für den Einsatz von einfachen Gelenken verwendet.
-Ein Gelenk verbindet zwei Bauteile so miteinander, dass ihnen genau ein rotatorischer Freiheitsgrad verbleibt. Konstruktiv wird 
-dies üblicherweise über einen zylindrischen Zapfen gelöst, der in einer entsprechenden Bohrung des Gegenstücks geführt wird. In 
-der klassischen Umsetzung sind Zapfen und Lagerauge getrennte Bauteile, die über einen Stift oder eine Buchse gefügt werden.\medskip
+Ein Gelenk verbindet zwei Bauteile so miteinander, dass ihnen genau ein rotatorischer Freiheitsgrad verbleibt. Konstruktiv wird
+dies üblicherweise über einen zylindrischen Zapfen gelöst, der in einer entsprechenden Bohrung des Gegenstücks geführt wird. In
+der klassischen Umsetzung sind Zapfen und Lagerauge getrennte Bauteile, die über einen Stift oder eine Buchse gefügt werden.
 
-Da die Bauteile dieser Arbeit im 3D-Druck-Verfahren gefertigt werden, wird stattdessen ein einteiliger Ansatz verwendet. Zapfen 
-und Lagerauge werden als ein einziges Bauteil modelliert und lediglich durch einen schmalen Spalt voneinander getrennt (\cref{fig:PrintInPlace}\,a). 
-Dieser Spalt liegt im Bereich weniger Zehntelmillimeter und damit unterhalb dessen, was das Druckverfahren sauber auflösen kann. 
+Da die Bauteile dieser Arbeit im 3D-Druck-Verfahren gefertigt werden, wird stattdessen ein einteiliger Ansatz verwendet. Zapfen
+und Lagerauge werden als ein einziges Bauteil modelliert und lediglich durch einen schmalen Spalt voneinander getrennt (\cref{fig:PrintInPlace}\,a).
+Dieser Spalt liegt im Bereich weniger Zehntelmillimeter und damit unterhalb dessen, was das Druckverfahren sauber auflösen kann.
 Beim Druck entstehen an diesen Stellen deshalb keine vollständig getrennten Flächen, sondern schmale Materialbrücken,
-die beide Elemente zunächst zusammenhalten (\cref{fig:PrintInPlace}\,b).\medskip
+die beide Elemente zunächst zusammenhalten (\cref{fig:PrintInPlace}\,b).
 
-Diese Materialbrücken wirken als bewusst eingeplante Sollbruchstelle. Wird das fertig gedruckte Bauteil einmalig mit einer 
-definierten Kraft belastet, lösen sich die Brücken und der Zapfen ist in der Bohrung frei beweglich (\cref{fig:PrintInPlace}\,c). 
-Das Gelenk entsteht damit unmittelbar aus dem Druckprozess, ohne Stifte, Buchsen oder ein zusätzliches Gehäuse.\medskip
+Diese Materialbrücken wirken als bewusst eingeplante Sollbruchstelle. Wird das fertig gedruckte Bauteil einmalig mit einer
+definierten Kraft belastet, lösen sich die Brücken und der Zapfen ist in der Bohrung frei beweglich (\cref{fig:PrintInPlace}\,c).
+Das Gelenk entsteht damit unmittelbar aus dem Druckprozess, ohne Stifte, Buchsen oder ein zusätzliches Gehäuse.
 
 Der Vorteil dieses Vorgehens liegt im Wegfall von Zusatzteilen sowie in der kurzen Iterationszeit, da eine geänderte
 Gelenkgeometrie nach einem einzigen Druckvorgang zur Verfügung steht. Dem gegenüber stehen deutlich geringere
-übertragbare Kräfte als bei metallischen Gelenken. Für die hier auftretenden geringen Belastungen ist das Prinzip 
+übertragbare Kräfte als bei metallischen Gelenken. Für die hier auftretenden geringen Belastungen ist das Prinzip
 dennoch eine geeignete Lösung.
 
 \begin{figure}[htbp]
@@ -76,7 +76,7 @@ dennoch eine geeignete Lösung.
     bez/.style     = {font=\footnotesize, align=center},
     titel/.style   = {font=\footnotesize}
   ]
- 
+
 % ------------------------------------------------ (a) Konstruktion im CAD
 \begin{scope}
   \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
@@ -88,7 +88,7 @@ dennoch eine geeignete Lösung.
   \draw[thin] (la.south) -- (0.51,0.51);
   \node[titel] at (0,-1.9) {(a) Konstruktion des Gelenks};
 \end{scope}
- 
+
 % ------------------------------------------------ (b) nach dem Druck
 \begin{scope}[xshift=3.9cm]
   \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
@@ -110,7 +110,7 @@ dennoch eine geeignete Lösung.
   \draw[thin] (lc.south) -- (0.51,0.51);
   \node[titel] at (0,-1.9) {(c) nach dem Lösen};
 \end{scope}
- 
+
 \end{tikzpicture}
 \caption[Fertigungsgerechtes Gelenk im 3D-Druck]{Schematische
 Schnittdarstellung eines im Druckprozess erzeugten Gelenks: (a) Zapfen und
@@ -145,7 +145,7 @@ und Halterung~2 als bewegbar anzunehmen ist. Die Halterungen werden auf den zwei
 zu der in \cref{sec:AktuellesSystem} beschriebenen Treägerstruktur darstellen. Die Vibrationseinheit ist aus einem Schrittmotor mit Zahnrad und der
 gelagerten Halterung~2 mit Zahnstange aufgebaut. Die vertikale Lagerung der Halterung~2 erfolgt durch an der Vibrationseinheit
 montierte Kugellager. Diese bieten die Möglichkeit, dass Halterung~2 mit einem geringen Widerstand und Toleranzen in die vertikale
-Richtung bewegt werden kann. 
+Richtung bewegt werden kann.
 Für eine Vibration des Gesamtsystems wird also die rotatorische Bewegung des Motors über die Zahnrad-Zahnstangen-Kombination
 in eine lineare Bewegung übertragen. Wird dem Schrittmotor also der Befehl für eine Oszillation gegeben, wird dies in eine vertikale
 Vibration übertragen, die in die Trageschiene übergeht.
@@ -163,12 +163,12 @@ Befestigung montiert werden würde, haben keine Möglichkeit die Trägerschiene 
 
 \paragraph{Gelenke und Freiheitsgrade}
 Mechanisch ist für die Auf- und Abbewegung das Gelenk~1 an Halterung~1 wichtig. Dieses fixiert die Vibrationsschiene und ermöglicht
-ausschließlich die Rotation um eine Achse. 
+ausschließlich die Rotation um eine Achse.
 Auch auf der sich bewegenden Halterung~2 muss als Verbindungsstück ein Gelenk mit zusätzlicher linearer Verschiebung sitzen.
 Gelenk~1 und Gelenk~2 sind nach demselben in \cref{sec:Randbedingungen} beschriebenen Herstellungsverfahren gefertigt worden.
-Die Verbindung zwischen Vibrationsschiene und dem Gelenk~2 bedarf jedoch einer weiteren Anforderung. Da der vertikale Hub 
-den Angriffspunkt auf der Schiene verschiebt, muss diese Verbindung die Möglichkeit haben, linear auf der Schiene verschiebbar 
-zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde aus Gründen 
+Die Verbindung zwischen Vibrationsschiene und dem Gelenk~2 bedarf jedoch einer weiteren Anforderung. Da der vertikale Hub
+den Angriffspunkt auf der Schiene verschiebt, muss diese Verbindung die Möglichkeit haben, linear auf der Schiene verschiebbar
+zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde aus Gründen
 der Komplexität gegen eine expilzit gelagerte Verbindung entschieden.
 
 \paragraph{Antrieb und elektrisches System}
@@ -187,10 +187,10 @@ montiert. Die Vereinzelung ist dabei in hängender Lage ausgeführt, damit eine 
 %
 \paragraph{Aufbau und Wirkprinzip}
 Grundsätzlich besteht die Vereinzelung aus zwei linearen Bewegungseinheiten. Zum Erzeugen einer festen und definierten linearen
-Bewegung wurde ein Schlitten mit Servomotor und einer Zahnrad-Zahnstangen-Kombination verwendet. Dieses Prinzip wurde wie in 
+Bewegung wurde ein Schlitten mit Servomotor und einer Zahnrad-Zahnstangen-Kombination verwendet. Dieses Prinzip wurde wie in
 \cref{fig:Vereinzelungseinheit} aufgezeigt doppelt ausgeführt. Die rotatorische Bewegung wird hier ebenfalls in eine vertikale
-Auf- und Abbewegung umgesetzt. Am Ende dieser Bewegungshalterung sitzen die Sperrklinken und Endeffektoren, die die eigentliche 
-Trennung der Hairpins durchführen. 
+Auf- und Abbewegung umgesetzt. Am Ende dieser Bewegungshalterung sitzen die Sperrklinken und Endeffektoren, die die eigentliche
+Trennung der Hairpins durchführen.
 
 \begin{figure}[htbp]
 	\centering
@@ -288,9 +288,9 @@ des Behälters entstehen. Die Hauptklemme wiederum wurde mit Einkerbungen gestal
 Aufbau möglich.
 
 \paragraph{Antrieb und Sensorik}
-Wie bereits erwähnt, werden für die Aktorik der Klemmen kleine Servomotoren verwendet. Diese Wahl wurde aus Gründen des Platzmangels
+Wie bereits erwähnt, werden für die Aktuatorik der Klemmen kleine Servomotoren verwendet. Diese Wahl wurde aus Gründen des Platzmangels
 und der präzisen Ansteuerung getroffen. Zudem ist durch die kurzen Bewegungsstrecken der Klemmen die beschränkte Rotation dieser
-Motoren kein Problem für dieses System. Wie in \cref{sec:eletrischeAktorik} aufgezeigt bedarf es für Servomotoren keine exteren Sensorik. 
+Motoren kein Problem für dieses System. Wie in \cref{sec:eletrischeAktorik} aufgezeigt bedarf es für Servomotoren keine exteren Sensorik.
 
 \subsubsection{Transport und Positionierung}\label{sec:Transportsystem}
 Der Behälter mit dem fixierten Hairpin muss aus dem Überführungssystem herausbewegt und zur Übergabeposition des Roboterarmes
@@ -332,13 +332,13 @@ lassen zu können. Auch die Modularität ermöglichte es, einzelne Subsysteme sc
 Fehlerfall haben die Slaves fest definierte Zustände, die bei Signalverlust eingehalten werden (vgl. Anforderung Sa1).
 Trotz eines erhöhten Verdrahtungs- und Integrationsaufwands eignet sich die offene Struktur für den Aufbau einer Prototypenanlage.
 
-Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtsystems. Ausschlaggebend für die Wahl 
-dieses Mikrocontrollers war seine höhere Rechenleistung, die eine zuverlässige Überwachung sowie die Anzeige von Grafiken auf 
+Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtsystems. Ausschlaggebend für die Wahl
+dieses Mikrocontrollers war seine höhere Rechenleistung, die eine zuverlässige Überwachung sowie die Anzeige von Grafiken auf
 dem Bedienelement ermöglicht. Als erster Slave wurde ein Arduino Nano gewählt, der für die Ansteuerung aller Servomotoren zuständig ist. Dieser
 bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanälen. Ein ELEGOO Uno wurde als zweiter Slave genutzt, da dieser über
-eine passende Treibereinheit zur Ansteuerung von Schrittmotoren verfügt. 
+eine passende Treibereinheit zur Ansteuerung von Schrittmotoren verfügt.
 
-Gegenüber einem SPS-System begründet sich die Wahl dieser 
+Gegenüber einem SPS-System begründet sich die Wahl dieser
 Komponenten vor allem durch deren hohe Verfügbarkeit und Kostenvorteile (vgl. Anforderung St2)..
 
 Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein Bedienelement und Sensoren
@@ -364,38 +364,38 @@ Servomotor weiter.
                      line width=0.7pt},
     lbl/.style    = {font=\footnotesize, fill=white, inner sep=1.5pt}
   ]
- 
+
 % ------------------------------------------------------------- Knoten
 \node[io]     (bedien)  at (-3.4, 4.2) {Bedieneinheit\\\footnotesize Display, Knöpfe};
 \node[io]     (sens)    at ( 3.4, 4.2) {Sensorik\\\footnotesize Lichtschranken};
- 
+
 \node[master] (esp)     at ( 0.0, 2.1) {\textbf{ESP32}\\\footnotesize Master -- Ablaufsteuerung};
- 
+
 \node[slave]  (uno)     at (-3.4, 0.0) {ELEGOO Uno\\\footnotesize Slave -- Schrittmotoren};
 \node[io, text width=30mm] (endstop) at (-7.4,-2.1) {Endlagenschalter};
 \node[slave]  (nano)    at ( 3.4, 0.0) {Arduino Nano\\\footnotesize Slave -- Servos};
- 
+
 \node[akt]    (treiber) at (-3.4,-2.1) {Treiberstufen\\\footnotesize CNC-Shield};
- 
+
 \node[akt]    (stepper) at (-3.4,-4.2) {Schrittmotoren\\\footnotesize Vibrationsschiene, Zuführachse};
 \node[akt]    (servo)   at ( 3.4,-2.1) {Servomotoren\\\footnotesize Sperrklinken, Klemmeinheit};
- 
+
 % ------------------------------------------------------------- Kanten
 \draw[bidir] (bedien) -- (esp)
   node[lbl, pos=0.55] {Eingaben / Anzeige};
 \draw[sig]   (sens)   -- (esp)
   node[lbl, pos=0.55] {digital / analog};
- 
+
 \draw[bidir] (esp) -- (uno)
   node[lbl, pos=0.42] {I\textsuperscript{2}C};
 \draw[bidir] (esp) -- (nano)
   node[lbl, pos=0.42] {I\textsuperscript{2}C};
- 
+
 \draw[sig] (uno)     -- (treiber) node[lbl, pos=0.5] {Step / Dir / Enable};
 \draw[sig] (treiber) -- (stepper) node[lbl, pos=0.5] {Motorstrom};
 \draw[sig] (nano)    -- (servo)   node[lbl, pos=0.5] {PWM};
 \draw[sig] (endstop) -- (uno)     node[lbl, pos=0.3] {digital};
- 
+
 % ------------------------------------------------------------- Ebenen
 \begin{scope}[on background layer]
   \node[draw=gray, dashed, rounded corners=3pt, inner sep=6pt,
@@ -403,7 +403,7 @@ Servomotor weiter.
 \end{scope}
 \node[font=\footnotesize\itshape, gray, anchor=south west, yshift=0.6mm]
       at (ebene2.north west) {Slave-Ebene};
- 
+
 \end{tikzpicture}
 \caption[Signalfluss der Steuerung]{Signalfluss Diagramm}
 \label{fig:Signalfluss}
@@ -416,7 +416,7 @@ Die Versorgung erfolgt durch eine GND- und eine 5V-Leitung zu jedem Servomotor.
 
 \paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als Nema 17 Motoren ausgeführt.
 
-\paragraph{Prozessensoren} werden als einfache Reflexlichttaster zum Regestrieren eines passierden Hairpins verwendet. 
+\paragraph{Prozessensoren} werden als einfache Reflexlichttaster zum Regestrieren eines passierden Hairpins verwendet.
 Im aktuellen System ist die Platzierung eines solchen Sensors an der Rutsche der Überführung geplant. Es gibt noch
 weiter mögliche Positionen für diesen Prozesssensor, wie z. B. an der Vibrationseinheit zur Detetkion von
 neu beladenen Hairpins. Auch ist der Einsatz eines kapazitiven Sensors an der Fixiereinheit sinnvoll, um die Überprüfung der
@@ -461,7 +461,7 @@ unmittelbar verarbeitet wird und der Ablauf nicht in einer Warteschleife verharr
 Ergänzend hinterlegt jeder Slave die Betriebsgrenzen der ihm zugeordneten Subsysteme.
 Ein empfangener Befehl wird vor der Ausführung gegen diese Grenzen geprüft und bei
 Überschreitung verworfen. Fehlerhafte Vorgaben des Masters führen somit nicht zur
-Überlastung der Antriebe. Bei einem Not-Halt (vgl. Anforderung Sa1) wird der Befehl zum Stoppen jedes 
+Überlastung der Antriebe. Bei einem Not-Halt (vgl. Anforderung Sa1) wird der Befehl zum Stoppen jedes
 Motors ausgegeben.
 
 Ziel dieser Aufteilung ist ein Gesamtablauf, der sich aus einzelnen Bausteinen
