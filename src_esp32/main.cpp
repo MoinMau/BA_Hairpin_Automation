@@ -38,12 +38,14 @@ enum SequenceState {
   P2_Y_ROBOT_WAIT,
   P2_Y_BACK,         P2_Y_BACK_WAIT,
   P2_DONE,
-  // ── PROGRAMM 3 (nur Servos, keine Achsen) ──
+  // ── PROGRAMM 3 (wie P2, ohne Vereinzelung und ohne Vibration) ──
   P3_SERVO_INIT,     P3_SERVO_INIT_WAIT,
-  P3_SERVO_FEED1,    P3_SERVO_FEED1_WAIT,
-  P3_SERVO_FEED2,    P3_SERVO_FEED2_WAIT,
+  P3_HOME_Y,         P3_HOME_Y_WAIT,
+  P3_POSITION_Y,     P3_POSITION_Y_WAIT,
+  P3_PRE_CLOSE_WAIT,
   P3_SERVO_CHANGE,   P3_SERVO_CHANGE_WAIT,
-  P3_SERVO_RESET,    P3_SERVO_RESET_WAIT,
+  P3_Y_FORWARD,      P3_Y_FORWARD_WAIT,
+  P3_END_WAIT,
   P3_DONE,
 };
 SequenceState currentSeqState = SEQ_IDLE;
@@ -518,7 +520,7 @@ void printMasterHelp() {
   Serial.println(F("  h       -> Zeigt diese Befehlsmatrix an"));
   Serial.println(F("  t       -> Beendet den Master-Testmodus"));
   Serial.println(F("runp2_... für Programm 2"));
-  Serial.println(F("runp3_... für Programm 3 (nur Servos)"));
+  Serial.println(F("runp3_... für Programm 3 (Y homen, Servos, Position)"));
   Serial.println(F("==================================================================\n"));
 }
 
@@ -880,13 +882,13 @@ void updateSequence() {
       break;
 
     // ============================================================
-    // PROGRAMM 3: Nur Servos (keine Achsen-Bewegung)
+    // PROGRAMM 3: Wie P2, ohne Vereinzelung und ohne Vibration
+    //   Servos oeffnen -> Y homen -> Y zurueck auf Position
+    //   -> Servos schliessen -> Y +7000 -> warten
     // ============================================================
 
     case P3_SERVO_INIT:
-      Serial.println(F("P3 [1/5] Servos Grundstellung..."));
-      servo_set(0, 0);
-      servo_set(1, 0);
+      Serial.println(F("P3 [1/5] Servos oeffnen..."));
       servo_set(2, 0);
       servo_set(3, 800);
       servo_set(4, 500);
@@ -896,43 +898,49 @@ void updateSequence() {
 
     case P3_SERVO_INIT_WAIT:
       if (now - seqStepStartTime >= 1500) {
-        Serial.println(F("  -> Servos in Grundstellung."));
-        currentSeqState = P3_SERVO_FEED1;
+        Serial.println(F("  -> Servos geoeffnet."));
+        currentSeqState = P3_HOME_Y;
       }
       break;
 
-    case P3_SERVO_FEED1:
-      Serial.println(F("P3 Servo ausfahren"));
-      servo_set(3, 450);
-      currentSeqState = P3_SERVO_FEED1_WAIT;
-      seqStepStartTime = now;
+    case P3_HOME_Y:
+      Serial.println(F("P3 [2/5] Linearachse Y homen..."));
+      axis_home(AXIS_Y);
+      currentSeqState = P3_HOME_Y_WAIT;
       break;
 
-    case P3_SERVO_FEED1_WAIT:
-      if (now - seqStepStartTime >= 8000) {
-        Serial.println(F("  -> Servo in Position."));
-        currentSeqState = P3_DONE;
+    case P3_HOME_Y_WAIT:
+      if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("  -> Y gehomt."));
+        currentSeqState = P3_POSITION_Y;
       }
       break;
 
-    case P3_SERVO_FEED2:
-      Serial.println(F("P3 [3/5] Vereinzelung 2"));
-      servo_set(3, 300);
-      currentSeqState = P3_SERVO_FEED2_WAIT;
-      seqStepStartTime = now;
+    case P3_POSITION_Y:
+      Serial.println(F("P3 [3/5] Y auf Position..."));
+      axis_abs(AXIS_Y, -7500, 2000);
+      currentSeqState = P3_POSITION_Y_WAIT;
       break;
 
-    case P3_SERVO_FEED2_WAIT:
-      if (now - seqStepStartTime >= 1500) {
-        Serial.println(F("  -> Vereinzelung fertig."));
+    case P3_POSITION_Y_WAIT:
+      if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("  -> Y positioniert. 5s warten..."));
+        currentSeqState = P3_PRE_CLOSE_WAIT;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case P3_PRE_CLOSE_WAIT:
+      if (now - seqStepStartTime >= 5000) {
+        Serial.println(F("  -> Wartezeit vor dem Schliessen beendet."));
         currentSeqState = P3_SERVO_CHANGE;
       }
       break;
 
     case P3_SERVO_CHANGE:
-      Serial.println(F("P3 [4/5] Servos umschalten..."));
-      servo_set(2, 300);
-      servo_set(3, 500);
+      Serial.println(F("P3 [4/5] Servos schliessen..."));
+      servo_set(2, 430);//550 for 64mm pin, 430 for 69mm
+      servo_set(3, 380);//350 for 64mm pin, 380 for 69mm
       servo_set(4, 60);
       currentSeqState = P3_SERVO_CHANGE_WAIT;
       seqStepStartTime = now;
@@ -940,25 +948,28 @@ void updateSequence() {
 
     case P3_SERVO_CHANGE_WAIT:
       if (now - seqStepStartTime >= 1500) {
-        Serial.println(F("  -> Servos umgeschaltet."));
-        currentSeqState = P3_SERVO_RESET;
+        Serial.println(F("  -> Servos geschlossen."));
+        currentSeqState = P3_Y_FORWARD;
       }
       break;
 
-    case P3_SERVO_RESET:
-      Serial.println(F("P3 [5/5] Servos zurueck in Grundstellung..."));
-      servo_set(0, 1000);
-      servo_set(1, 100);
-      servo_set(2, 0);
-      servo_set(3, 800);
-      servo_set(4, 500);
-      currentSeqState = P3_SERVO_RESET_WAIT;
-      seqStepStartTime = now;
+    case P3_Y_FORWARD:
+      Serial.println(F("P3 [5/5] Y +7000 Steps..."));
+      axis_rel(AXIS_Y, 7000, 2000);
+      currentSeqState = P3_Y_FORWARD_WAIT;
       break;
 
-    case P3_SERVO_RESET_WAIT:
-      if (now - seqStepStartTime >= 1500) {
-        Serial.println(F("  -> Servos zurueckgesetzt."));
+    case P3_Y_FORWARD_WAIT:
+      if (!is_axis_busy(AXIS_Y)) {
+        Serial.println(F("  -> Y vorn. 5s warten..."));
+        currentSeqState = P3_END_WAIT;
+        seqStepStartTime = now;
+      }
+      break;
+
+    case P3_END_WAIT:
+      if (now - seqStepStartTime >= 30000) {
+        Serial.println(F("  -> Wartezeit beendet."));
         currentSeqState = P3_DONE;
       }
       break;
