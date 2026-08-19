@@ -980,7 +980,7 @@ void updateSequence() {
       break;
 
     case P3_FEED1:
-      servo_set(1, 1000);
+      servo_set(1, 1050);
       Serial.println(F("  -> Vereinzelung 1"));
       currentSeqState = P3_FEED1_WAIT;
       seqStepStartTime = now;
@@ -1015,8 +1015,8 @@ void updateSequence() {
 
     case P3_SERVO_CHANGE:
       Serial.println(F("P3 [5/7] Servos umschalten..."));
-      servo_set(2, 430);//550 for 64mm pin, 430 for 69mm, 430 for 70mm
-      servo_set(3, 370);//350 for 64mm pin, 380 for 69mm, 370 for 70mm
+      servo_set(2, 430);//550 for 64mm pin, 430 for 69mm, 430 for 70mm, 580 for 62mm
+      servo_set(3, 380);//350 for 64mm pin, 380 for 69mm, 370 for 70mm, 350 for 62mm
       servo_set(4, 60);
       currentSeqState = P3_SERVO_CHANGE_WAIT;
       seqStepStartTime = now;
