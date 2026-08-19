@@ -1,0 +1,402 @@
+\subsection{Messwerte der Verifikationsversuche}\label{sec:AnhangMesswerte}
+Die folgenden Tabellen enthalten die Rohdaten der in \cref{tab:pruefplan} aufgeführten
+Verifikationsversuche T-01 bis T-05. Die Werte sind unverändert aus den Messprotokollen
+übernommen. Die Spalte \emph{RUN} bezeichnet den fortlaufenden Durchlauf einer Messreihe,
+die Spalte \emph{Abweichung} den an der Messuhr abgelesenen Wert nach der jeweils
+angegebenen Normierung.
+\todo{Einheit der Messuhrablesung festlegen (Skalenteile bzw. \unit{\milli\meter}) und in den Tabellenköpfen ergänzen.}
+
+%----------------------------------------------------------------------
+% T-01
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-01: Sperrklinken (Gearlinear-System)]{Messwerte des Versuchs
+    T-01 zur Positionstreue der Sperrklinkenschlitten. Setup: Messuhr an der
+    Linearstange bzw.\ am Endeffektor, je zehn Durchführungen pro Messstelle.
+    Die Messung an der Linearstange erfolgte direkt auf Stahl.}
+  \label{tab:mess_T01}
+  \small
+  \begin{tabular}{@{}cS[table-format=2.1]cS[table-format=2.1]@{}}
+    \toprule
+    \multicolumn{2}{c}{\textbf{Linearstange (direkt auf Stahl)}}
+      & \multicolumn{2}{c}{\textbf{Endeffektor}} \\
+    \multicolumn{2}{c}{Normierung auf 35}
+      & \multicolumn{2}{c}{Normierung auf 50} \\
+    \cmidrule(r){1-2}\cmidrule(l){3-4}
+    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{RUN} & {\textbf{Abweichung}} \\
+    \midrule
+     1 & 35   & 11 & 58   \\
+     2 & 35   & 12 & 59   \\
+     3 & 34   & 13 & 55   \\
+     4 & 34   & 14 & 55   \\
+     5 & 32   & 15 & 57   \\
+     6 & 33.4 & 16 & 61.5 \\
+     7 & 34   & 17 & 57.5 \\
+     8 & 35.5 & 18 & 54.5 \\
+     9 & 36   & 19 & 57   \\
+    10 & 34.5 & 20 & 56   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-02
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-02: Vibrationseinheit]{Messwerte des Versuchs T-02 zur
+    Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung. Setup: Anfahren
+    des Endschalters, Vibration, einige Schritte höher, anschließend Messung der
+    Abweichung. Die Messreihe mit 25 Hairpins wurde bei einer Normierung auf 10
+    aufgenommen und in \cref{tab:mess_T02b} bei einer Normierung auf 50
+    fortgesetzt. Die Werte dieser Reihe stimmen mit denen der unbeladenen Reihe
+    überein.}
+  \label{tab:mess_T02a}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}c*{7}{S[table-format=3.2]}@{}}
+    \toprule
+    & \multicolumn{7}{c}{\textbf{Beladung (Anzahl Hairpins, je \qty{22.9}{\gram})}} \\
+    \cmidrule(l){2-8}
+    \textbf{RUN} & {0} & {100} & {80} & {60} & {40} & {25} & {10} \\
+    \midrule
+    \multicolumn{1}{@{}l}{\itshape Normierung}
+      & {\itshape 10} & {\itshape 350} & {\itshape 350} & {\itshape 350}
+      & {\itshape 50} & {\itshape 10} & {\itshape 50} \\
+    \midrule
+     1 & 40 & 110 & 320.5 & 3.12  & 19   & 40 & 83   \\
+     2 & 10 &   0 & 350   & 311   & 53   & 10 & 83.5 \\
+     3 & 39 &   0 & 321   & 312   & 19   & 39 & 83.5 \\
+     4 & 10 &   0 & 349   & 277   & 53   & 10 & 51   \\
+     5 & 41 &   0 & 320   & 342   &  0   & 41 & 83   \\
+     6 &  9 &   0 & 350   & 279   & 53   &  9 & 51   \\
+     7 & 40 & 261 & 320.5 & 310   & 18   & 40 & 84   \\
+     8 &  0 &   0 & 350   & 278   & 52.5 &  0 & 52   \\
+     9 & 40 &   0 & 320.5 & 343   & 18.5 & 40 & 84   \\
+    10 &  0 & 227 & 350   & 278.5 & 52   &  0 & 52.5 \\
+    11 & 39 &   0 & 320.5 & 311   & 18   & 39 & 85   \\
+    12 & 10 & 330 & 350   & 279   & 52   & 10 & 52   \\
+    13 & 40 &   0 & 320.5 & 310   & 18   & 40 & 84   \\
+    14 & 10 &   0 & 349.5 & 278   & 51.5 & 10 & 52   \\
+    15 & 11 &   0 & 320   & 310   & 11   & 11 & 83   \\
+    16 &  0 & 770 & 349.5 & 278   & 51   &  0 & 52   \\
+    17 &  9 &   0 & 320   & 309   & 17   &  9 & 82.5 \\
+    18 &  0 & 481 & 349.5 & 278   & 51   &  0 & 50   \\
+    19 & 38 &   0 & 320   & 310   & 11.5 & 38 & 83   \\
+    20 &  0 & 317 & 348   & 278   & 51   &  0 & 51   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-02: Fortsetzung 25 Hairpins]{Fortsetzung der Messreihe mit
+    25 Hairpins aus Versuch T-02, Durchläufe 21 bis 40 bei einer Normierung auf 50.}
+  \label{tab:mess_T02b}
+  \small
+  \begin{tabular}{@{}cS[table-format=2.1]cS[table-format=2.1]@{}}
+    \toprule
+    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{RUN} & {\textbf{Abweichung}} \\
+    \midrule
+    21 & 81   & 31 & 79   \\
+    22 & 49   & 32 & 46   \\
+    23 & 80.5 & 33 & 78   \\
+    24 & 48.5 & 34 & 45   \\
+    25 & 80   & 35 & 78   \\
+    26 & 48.5 & 36 & 45   \\
+    27 & 81   & 37 & 77.5 \\
+    28 & 49   & 38 & 45.5 \\
+    29 & 81   & 39 & 77.5 \\
+    30 & 48   & 40 & 45   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-03
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-03: Transportsystem]{Messwerte des Versuchs T-03 zur
+    Positionsstreuung des Transportsystems im open loop. Setup: Endstop anfahren,
+    3000 Schritte zurück und halten, 200 Schritte hin und her, 300 Schritte extra
+    für die Messung. Normierung auf 350.}
+  \label{tab:mess_T03}
+  \small
+  \begin{tabular}{@{}cS[table-format=3.1]cS[table-format=3.1]@{}}
+    \toprule
+    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{RUN} & {\textbf{Abweichung}} \\
+    \midrule
+     1 & 359   & 11 & 358.5 \\
+     2 & 358   & 12 & 358.5 \\
+     3 & 358.5 & 13 & 362   \\
+     4 & 358.5 & 14 & 359   \\
+     5 & 359   & 15 & 359   \\
+     6 & 358   & 16 & 364   \\
+     7 & 358.5 & 17 & 358.5 \\
+     8 & 360.5 & 18 & 359   \\
+     9 & 360   & 19 & 359   \\
+    10 & 358   & 20 & 360   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-04
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-04: Fixierungssystem]{Messwerte des Versuchs T-04 zur
+    Lagetreue des Hairpins in der Fixierung. Setup: Teilung in zwei Richtungen,
+    reines Aufstellen und seitliche Verschiebung. Normierung auf 50.}
+  \label{tab:mess_T04}
+  \small
+  \begin{tabularx}{\textwidth}{@{}cS[table-format=2.1]X@{}}
+    \toprule
+    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{Bemerkung} \\
+    \midrule
+     1 & 21   & Normierung auf 50 \\
+     2 & 71.5 & Hairpin wird im Trichter gelassen \\
+     3 & 61.5 & Servos schalten voll durch \\
+     4 & 64.5 & keine Vibration der Linearachse \\
+     5 & 60   & \\
+     6 & 49   & \\
+     7 & 39.5 & \\
+     8 & 71   & \\
+     9 & 40   & \\
+    10 & 63   & \\
+    11 & 64   & \\
+    12 & 31.5 & \\
+    13 & 47   & \\
+    14 & 45   & \\
+    15 & 62   & \\
+    16 & 20   & \\
+    17 & 19   & \\
+    18 & 61   & \\
+    19 & 56   & \\
+    20 & 49.5 & \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-05
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Geometrien der Hairpins in Versuch T-05]{Geometrien der in Versuch T-05
+    verwendeten Hairpin-Varianten. Alle Durchläufe wurden mit dem Endeffektor
+    TestV1 durchgeführt.}
+  \label{tab:mess_T05_geom}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l S[table-format=2.2] S[table-format=1.2] S[table-format=3.0] X@{}}
+    \toprule
+    \textbf{Variante} & {\textbf{Breite}} & {\textbf{Kupferbreite}}
+      & {\textbf{Länge}} & \textbf{Bemerkung} \\
+    & {\unit{\milli\meter}} & {\unit{\milli\meter}} & {\unit{\milli\meter}} & \\
+    \midrule
+    A & 72.74 & 2.15 & 155 & nicht entgratete Füße, oberste Lage Wafios, kupferfarben \\
+    B & 65    & 2.15 & 153 & verschieden lange Füße, zweite Lage von oben, Wafios \\
+    C & 64.5  & 2.3  & 145 & fünfte Lage von oben, großer Ständer \\
+    D & 69.55 & 2.30 & 184 & zweite Lage von oben, großer Ständer \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption[Fehlercodes des Versuchs T-05]{Fehlercodes zur Bewertung der
+    Vereinzelung in Versuch T-05.}
+  \label{tab:mess_T05_codes}
+  \small
+  \begin{tabularx}{\textwidth}{@{}cX@{}}
+    \toprule
+    \textbf{Code} & \textbf{Bedeutung} \\
+    \midrule
+    0 & kein Fehler, alles innerhalb der Toleranz \\
+    1 & schräg im Trichter (seitwärts) \\
+    2 & doppelte Ausgabe \\
+    3 & Herausspringen aus der Rutsche \\
+    4 & schräg aus dem Trichter gefallen \\
+    5 & ein Bein im Trichter, eins außerhalb \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-05: Vereinzelung]{Messwerte des Versuchs T-05 zur
+    Vereinzelungstreue. Setup: 25 Hairpins geladen, Homing-Vibration, Vereinzeln,
+    \qty{10}{\second} warten, anschließend Entnahme des Hairpins aus dem Hopper.
+    Die Bewertung erfolgt nach den Fehlercodes aus \cref{tab:mess_T05_codes},
+    die Varianten A bis D sind in \cref{tab:mess_T05_geom} beschrieben.}
+  \label{tab:mess_T05}
+  \small
+  \begin{tabular}{@{}ccccc@{}}
+    \toprule
+    & \multicolumn{4}{c}{\textbf{Fehlercode je Hairpin-Variante}} \\
+    \cmidrule(l){2-5}
+    \textbf{RUN} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} \\
+    \midrule
+     1 & 0 & 2 & 0 & 0 \\
+     2 & 3 & 2 & 0 & 0 \\
+     3 & 3 & 0 & 0 & 0 \\
+     4 & 0 & 2 & 0 & 0 \\
+     5 & 0 & 2 & 0 & 0 \\
+     6 & 0 & 0 & 0 & 0 \\
+     7 & 0 & 2 & 0 & 0 \\
+     8 & 1 & 0 & 0 & 0 \\
+     9 & 0 & 2 & 0 & 0 \\
+    10 & 0 & 0 & 0 & 0 \\
+    11 & 0 & 2 & 0 & 0 \\
+    12 & 0 & 2 & 0 & 0 \\
+    13 & 0 & 2 & 0 & 0 \\
+    14 & 1 & 2 & 0 & 0 \\
+    15 & 3 & 2 & 5 & 0 \\
+    16 & 4 & 2 & 0 & 0 \\
+    17 & 4 & 2 & 4 & 2 \\
+    18 & 3 & 2 & 0 & 2 \\
+    19 & 0 & 2 & 0 & 2 \\
+    20 & 5 & 2 & 0 & 0 \\
+    21 & 5 & 2 & 0 & 0 \\
+    22 & 0 & 0 & 0 & 0 \\
+    23 & 0 & 0 & 0 & 0 \\
+    24 & 0 & 2 & 0 & 2 \\
+    25 & 0 & 0 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-06
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-06: Servomotoren des Fixierungssystems]{Messwerte des
+    Versuchs T-06 zu den Servomotoren des Fixierungssystems. Setup: 20 Durchläufe
+    je Seite, Normierung auf 350. Bei Servo~2 konnte die Messuhr nur schlecht
+    platziert werden, weshalb dort mit einer erhöhten Messunsicherheit zu rechnen
+    ist. Für Servo~3 war die Platzierung besser.}
+  \label{tab:mess_T06}
+  \small
+  \begin{tabular}{@{}cS[table-format=3.1]S[table-format=3.1]@{}}
+    \toprule
+    \textbf{RUN} & {\textbf{Servo 2}} & {\textbf{Servo 3}} \\
+    \midrule
+     1 & 176   & 343   \\
+     2 & 172   & 342   \\
+     3 & 176   & 343   \\
+     4 & 176.5 & 340   \\
+     5 & 176   & 339.5 \\
+     6 & 175   & 337   \\
+     7 & 176   & 336.5 \\
+     8 & 176   & 333   \\
+     9 & 176   & 331   \\
+    10 & 176   & 329   \\
+    11 & 176   & 329   \\
+    12 & 175.5 & 329   \\
+    13 & 176.5 & 328   \\
+    14 & 176   & 327   \\
+    15 & 175   & 324   \\
+    16 & 175.5 & 325   \\
+    17 & 175   & 324   \\
+    18 & 175.5 & 321   \\
+    19 & 175   & 321   \\
+    20 & 175.5 & 321   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-07
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-07: Positionierung des Transportsystems]{Messwerte des
+    Versuchs T-07 zur Positionierung im Gesamtverbund des Transportsystems.
+    Setup: 25 Hairpins unterschiedlicher Länge, Homen der Linearachse, Anfahren
+    der Position, Ablesen der Abweichung mit dem Messschieber. Durchgang~1 wurde
+    mit einem \qty{64}{\milli\meter}-Pin aus der fünften Reihe des Ständers
+    durchgeführt (Normierung längs \qty{5}{\milli\meter}, schräg
+    \qty{4}{\milli\meter}), Durchgang~2 mit einem \qty{69}{\milli\meter}-Pin aus
+    der zweiten Reihe (Normierung längs \qty{7.5}{\milli\meter}, schräg
+    \qty{4}{\milli\meter}).}
+  \label{tab:mess_T07}
+  \small
+  \begin{tabular}{@{}c S[table-format=1.2] S[table-format=1.2] S[table-format=1.2] S[table-format=1.2]@{}}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Durchgang 1 (\qty{64}{\milli\meter})}}
+    & \multicolumn{2}{c}{\textbf{Durchgang 2 (\qty{69}{\milli\meter})}} \\
+    \cmidrule(lr){2-3}\cmidrule(l){4-5}
+    \textbf{RUN} & {\textbf{schräg}} & {\textbf{längs}}
+                 & {\textbf{schräg}} & {\textbf{längs}} \\
+    & {\unit{\milli\meter}} & {\unit{\milli\meter}}
+    & {\unit{\milli\meter}} & {\unit{\milli\meter}} \\
+    \midrule
+     1 & 7.33 & 2.22 & 7.4  & 3.78 \\
+     2 & 7.93 & 2.11 & 7.98 & 3.86 \\
+     3 & 7.52 & 1.85 & 7.63 & 4.65 \\
+     4 & 7.25 & 1.92 & 8.01 & 4.94 \\
+     5 & 7.19 & 1.53 & 7.88 & 4.49 \\
+     6 & 8.09 & 1.85 & 7.81 & 4.79 \\
+     7 & 7.59 & 1.81 & 8.1  & 4.66 \\
+     8 & 7.54 & 1.45 & 7.63 & 5.4  \\
+     9 & 7.97 & 1.42 & 8.13 & 4.54 \\
+    10 & 7.7  & 2.05 & 8.16 & 4.4  \\
+    11 & 7.85 & 1.63 & 7.99 & 4.99 \\
+    12 & 8.1  & 1.6  & 8.15 & 5.07 \\
+    13 & 7.53 & 1.36 & 8.18 & 4.71 \\
+    14 & 7.9  & 1.69 & 8.1  & 5.14 \\
+    15 & 7.74 & 1.83 & 7.79 & 4.91 \\
+    16 & 7.89 & 1.66 & 8.24 & 5.3  \\
+    17 & 7.99 & 1.91 & 8.19 & 5.2  \\
+    18 & 7.35 & 1.61 & 8.24 & 5.21 \\
+    19 & 8.25 & 2.26 & 7.89 & 5.5  \\
+    20 & 7.61 & 1.24 & 7.82 & 4.82 \\
+    21 & 7.99 & 1.9  & 7.99 & 5.08 \\
+    22 & 7.8  & 1.72 & 8.14 & 5.58 \\
+    23 & 7.48 & 1.66 & 7.94 & 5.31 \\
+    24 & 7.57 & 1.82 & 7.69 & 5.09 \\
+    25 & 8.24 & 2.1  & 8.1  & 5.5  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Zusätzlich zu den in \cref{tab:mess_T07} aufgeführten Abweichungen wurde in Versuch
+T-07 die Höhenlage geprüft. Dabei wurde der \qty{69}{\milli\meter}-Pin aus der
+zweiten Reihe des Ständers bei einer Normierung auf \qty{0}{\milli\meter}
+verwendet. Alle 25 Durchläufe wurden ohne feststellbare Höhenabweichung als
+einwandfrei bewertet.
+
+%----------------------------------------------------------------------
+% T-08
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-08: Gesamtsystem]{Ergebnisse des Versuchs T-08 zum
+    Gesamtdurchlauf bei einer Taktzeit von \qty{43}{\second}. Je Durchgang wurden
+    zehn Durchläufe protokolliert und nach fehlerfreiem Ablauf beziehungsweise
+    aufgetretener Störung bewertet.}
+  \label{tab:mess_T08}
+  \small
+  \begin{tabularx}{\textwidth}{@{}cXXX@{}}
+    \toprule
+    \textbf{RUN} & \textbf{Durchgang 1} & \textbf{Durchgang 2}
+      & \textbf{Durchgang 3} \\
+    \midrule
+     1 & fehlerfrei & fehlerfrei & fehlerfrei \\
+     2 & fehlerfrei & fehlerfrei & fehlerfrei \\
+     3 & fehlerfrei & fehlerfrei & Vereinzelung verhakt \\
+     4 & Timing     & fehlerfrei & fehlerfrei \\
+     5 & fehlerfrei & fehlerfrei & fehlerfrei \\
+     6 & fehlerfrei & fehlerfrei & fehlerfrei \\
+     7 & fehlerfrei & Vereinzelung verhakt & fehlerfrei \\
+     8 & Timing     & fehlerfrei & fehlerfrei \\
+     9 & fehlerfrei & fehlerfrei & fehlerfrei \\
+    10 & fehlerfrei & fehlerfrei & Timing \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\clearpage

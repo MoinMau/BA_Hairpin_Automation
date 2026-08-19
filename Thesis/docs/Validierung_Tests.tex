@@ -33,33 +33,31 @@ sollte dies aber wieder in betracht gezogen werden.
     \addlinespace[2pt]
     T-01 & Positionstreue der Sperrklinkenschlitten, gemessen an der
            Linearstange und am Endeffektor
-         & L2, K2 & \texttt{64c26cc} & $2\times10$ \\
+         & -- & \texttt{64c26cc} & $2\times10$ \\
     T-02 & Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung
            (0 bis 100 Hairpins)
          & St1, L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
     T-03 & Positionsstreuung des Transportsystems nach Referenzfahrt
-           im open loop
          & L2, K2 & \texttt{c52c878} & $20$ \\
     T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellen und
            seitliche Verschiebung
          & L2, L4 & \texttt{1f3c873} & $20$ \\
-    T-05 & Vereinzelungstreue über vier Hairpin-Geometrien, Bewertung
-           nach Fehlercode 0 bis 5
-         & K1, St1, L5 & \texttt{--} & $4\times25$ \\
+    T-06 & Positionstreue der seitlichen Kraftklemmen, gemessen
+            an Angriffsflächen
+         & L2, K2 & \texttt{--} & $4\times25$ \\
     \addlinespace[4pt]
     \multicolumn{5}{@{}l}{\itshape Validierung im Gesamtablauf
       (Abschnitt~\ref{sec:systemtest})} \\
     \addlinespace[2pt]
-    S-01 & Bereitstellungszeit je Hairpin vom Startsignal bis zur
-           Freigabe an den Roboterarm
-         & L1 & \texttt{--} & $\geq 20$ \\
-    S-02 & Wiederholgenauigkeit der Übergabeposition im
+    T-05 & Vereinzelungstreue über vier Hairpin-Geometrien, Bewertung
+           nach Fehlercode 0 bis 5
+         & K1, St1, L5 & \texttt{--} & $4\times25$ \\
+    T-07 & Wiederholgenauigkeit der Übergabeposition im
            Roboterkoordinatensystem
          & L2, K2 & \texttt{--} & $\geq 20$ \\
-    S-03 & Dauerlauf bis zum ersten erforderlichen Bedieneingriff
+    T-08 & Dauerlauftest
          & L3, L5, B1 & \texttt{--} & $3$ \\
-    S-04 & Beschädigung der Hairpins im Vergleich zu einer manuell
-           gehandhabten Referenzgruppe
+    T-09 & Beschädigung der Hairpins durch Gesamtsystem
          & L4 & \texttt{--} & $\geq 25$ \\
     \bottomrule
   \end{tabularx}
@@ -75,32 +73,102 @@ Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zun
 getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und Schnittstellen dieser Systeme.\medskip
 
 Für das Testen der Aktoren wird nach dem Prüfkriterium der Auslenkung untersucht. Diese wird in den folgenden Messreihen
-für die Begründung und Überprfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird deutlich
+für die Begründung und Überprüfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird deutlich
 erklärt wie der Wert der Auslenkung für ein Konklution der Ergebnisse.
 %
 \subsubsection{Allgemeiner Messaufbau}
-Die Auslenkung wird mit einer Messuhr ausgelesen. Diese besteht aus einem Tastkopf und einem Messblatt mit Messzeiger, der
-den Ausschlag anzeigt. Dies gehschiet mit einer Leseauflösung von unter 0,5mm. Diese Messuhr ist mit einem Arm und einen Magenten
-verbunden. So lässt sich der Tastkopf mit der Fixierung der Halterung an jede Postion platzieren. Zum Überprüfen von Abweichungen
-in der Auslenkung wird dieses Messsystem auf die Hälfte des Messbereiches und der maximalen Auslenkung des Aktuators normiert.
-Nun könnnen vordefinierte Bewegungsabläufe abgefahren werden und die Werte abgelesen und notiert werden. 
-Es ist bei den Messwerten auf kleine Messunsicherheiten bezüglich dem Widerstand des Taskopfes und dafür benötigten erhöhten Kraft
-zu achten.
+Die Auslenkung wird mit einer Messuhr des Typs Mahr MarCator 810\,S erfasst.
+Diese besteht aus einem Tastkopf, dessen axiale Verschiebung über ein
+Zahnradgetriebe auf einen Zeiger übertragen und auf einer Skala mit einem
+Skalenteilungswert von \SI{0,01}{\milli\meter} angezeigt wird. Die Messuhr ist
+über einen Gelenkarm mit einem Magnetfuß verbunden, sodass der Tastkopf
+unabhängig von der Anlagenstruktur an jeder benötigten Position starr fixiert
+werden kann.\medskip
 
-\subsubsection{Vibrationseinheit}
-\todo{Messaufbau, Egrebnisse}
+Für das Starten einer Messreihe wird der Tastkopf an einem definierten Punkt eines zu überprüfendes Systems angesetzt. Dabei ist
+darauf zu achten, dass die Messuhr bei maximaler Auslenkung des Aktuators auf die Hälfte des Messbereiches vorgespannt wird. 
+Diese Normierung dient der Überpfrüfung von Abweichungen in beide Richtungen hinsichtlich dem zu frühen Stoppen. 
+Nach dem Schritt der Kalibrierung können vordefinierte Bewegungsabläufe abgefahren werden, die die Anforderungen im Alltagsbetrieb
+wiederspeigeln. Druch künstlich eingebaute Wartezeiten lassen sich nun die Messwerte ablesen und notieren. Bei einer Ablesung auf 
+einen halben Skalenteil ergibt sich eine Ablesegrenze von \SI{\pm0,005}{\milli\meter}.\medskip
+
+Je nach Aufbau gibt es verschiedene Messungenauigkeiten, wobei der Widerstand des Tastkopfes und das Ablesen der Werte vom Ziffernblatt
+bei jedem Durchlauf vorhanden ist. Zur Minimierung von Ableseungenauigkeiten wurde besonders auf eine widerholt gleichmäßige
+Köperhaltung und optimale Draufsicht geachtet. Für die Überwindung der minimalen Kraft druch die mechanische Feder in der Messuhr
+muss hier individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.\medskip
+
+Jeder Versuch wird mit n 20 Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische für den ersten Test dargestellt
+und soll für eine bessere Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte 
+dargestellt.
+
+\subsubsection{Sperrklinken T-01}
+
+\paragraph{Prüfziel}
+In diesem Test soll die Postionstreue der Sperrklinkenschlitten überprüft. Dies dient der Überprüfung, ob es in diesem Aktuatorensystem
+allgemeine Fehler auftreten. Auch kann mittels den Werten der Abweichung ein genauer Einschätzung für das Vereinzelungssystem gegeben
+werden. Dieser Test dient keinem direkten Vergleich gegenüber einer konkreten Anforderung, sondern für eine bessere Analyse der valdierenden 
+Tests.
+
+\paragraph{Spezifischer Aufbau}\label{sec:TastkopfBSP}
+Der Tastkopf wird für diesen Test einfach an die Sperrklinkenschlittenenden angesetzt. Der Durchlauf des Tests wurde auf je 10 Fahrten
+je Servomotor aufgeteilt. Zudem wurde der Antastpunkt einmal auf blanken Stahl und den eigentlichen Sperrklinken angesetzt. Die
+\cref{fig:PosTastkop_T-01} zeigt den Realen Aufbau mit Messuhr und Vereinzelungssystem.
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=0.8\linewidth]{figs/TastKopf_T-01.JPG}
+	\caption{Positionierung der Messuhr für T-01}
+	\label{fig:PosTastkop_T-01}
+\end{figure}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
+
 %
-\subsubsection{Sperrklinken}
-\todo{Messaufbau, Egrebnisse}
+\subsubsection{Vibrationseinheit T-02}
+
+\paragraph{Prüfziel}
+
+\paragraph{Spezifischer Aufbau}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
+
 %
-\subsubsection{Transportsystem}
-\todo{Messaufbau, Egrebnisse}
+\subsubsection{Transportsystem T-03}
+
+\paragraph{Prüfziel}
+
+\paragraph{Spezifischer Aufbau}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
+
 %
-\subsubsection{Fixierungssytem}
-\todo{Messaufbau, Egrebnisse}
+\subsubsection{Fixierungssytem: Hairpinaufstellung T-04}
+
+\paragraph{Prüfziel}
+
+\paragraph{Spezifischer Aufbau}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
+
 %
-\todo{Test für einzelne Subsystem Funktionen: Rutsche, Fixieren und Positioniernen}
-\todo{Was ist mit Servomotren des Nestes? Müssen hier nicht auch erstmal die Motoren geprüft werden?}
+\subsubsection{Fixierungssytem: Kraftklemmen Seite T-06}
+
+\paragraph{Prüfziel}
+
+\paragraph{Spezifischer Aufbau}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
+
 %
 \subsection{Systemtest im Gesamtablauf}\label{sec:Systemtest}
 %
@@ -108,17 +176,15 @@ zu achten.
 - Wie werden die Tests gemacht?\\
 - Worauf muss geachtet werden?\\
 - Welche Testreihen werden gemacht?\\
+
 %
-\subsubsection{Versuchsreihe Taktzeit}\label{sec:VR_Taktzeit}
-- Tabelle, etc. für Versuchsreihe nach Prüfung der Taktzeit\\
-%
-\subsubsection{Versuchsreihe Wiederholgenauigkeit}\label{sec:VR_Wiederholgenauigkeit}
+\subsubsection{Versuchsreihe Wiederholgenauigkeit T-07}\label{sec:VR_Wiederholgenauigkeit}
 - Tabelle, etc. für Versuchsreihe nach Prüfung der Wiederholgenauigkeit\\
 %
-\subsubsection{Versuchsreihe Dauerlauf}\label{sec:VR_Durchsatz}
+\subsubsection{Versuchsreihe Dauerlauf T-05, T-08}\label{sec:VR_Durchsatz}
 - Tabelle, etc. für Versuchsreihe nach Optimierung/Änderung des Durchsatzes von verarbeiteten Hairpins\\
 %
-\subsubsection{Versuchsreihe Beschädigung}\label{sec:VR_Beschädigung}
+\subsubsection{Versuchsreihe Beschädigung T-09}\label{sec:VR_Beschädigung}
 - Tabelle, etc. für Versuchsreihe nach Prüfung der Beschädigung/Veränderung der Hairpins\\
 %
 %
