@@ -36,28 +36,28 @@ sollte dies aber wieder in betracht gezogen werden.
          & -- & \texttt{64c26cc} & $2\times10$ \\
     T-02 & Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung
            (0 bis 100 Hairpins)
-         & L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
+         & L3, L5, B1 & \texttt{f0a308a} & $7\times20$ \\
     T-03 & Positionsstreuung des Transportsystems nach Referenzfahrt
          & L2, K2 & \texttt{c52c878} & $20$ \\
     T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellung
          & L2 & \texttt{1f3c873} & $20$ \\
     T-06 & Positionstreue der seitlichen Kraftklemmen, gemessen
             an Angriffsflächen
-         & L2, K2 & \texttt{--} & $4\times25$ \\
+         & L2, K2 & \texttt{6665777} & $2\times20$ \\
     \addlinespace[4pt]
     \multicolumn{5}{@{}l}{\itshape Validierung im Gesamtablauf
       (Abschnitt~\ref{sec:systemtest})} \\
     \addlinespace[2pt]
-    T-05 & Vereinzelungstreue über vier Hairpin-Geometrien, Bewertung
-           nach Fehlercode 0 bis 5
-         & K1, St1, L5 & \texttt{--} & $4\times25$ \\
     T-07 & Wiederholgenauigkeit der Übergabeposition im
            Roboterkoordinatensystem
-         & L2, K2 & \texttt{--} & $\geq 20$ \\
+         & L2, K2 & \texttt{cb0f169} & $2\times25$ \\
+    T-05 & Vereinzelungstreue über vier Hairpin-Geometrien, Bewertung
+           nach Fehlercode 0 bis 5
+         & K1, St1, L5 & \texttt{84a2ec1} & $4\times25$ \\
     T-08 & Dauerlauftest
-         & L3, L5, B1 & \texttt{--} & $3$ \\
+         & L3, L5, B1 & \texttt{2ad640d} & $3\times25$ \\
     T-09 & Beschädigung der Hairpins durch Gesamtsystem
-         & L4 & \texttt{--} & $\geq 25$ \\
+         & L4 & \texttt{dad5324} & $\geq 25$ \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -161,7 +161,7 @@ Virbationsmotors und den Stabilisrenden Druck druch das Gewicht der Beladung erk
 jedoch klar die Überlastung des Systms zu erklennen. Die Spanne dieser Messreihe liegt bei 7,7mm, was für eine Betrieb nicht vertretbar
 ist. Weiter ist noch zu nennen, das es während dieser Messreihen keine Probleme bezüglich des verhakens von Hairpins gab und
 diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden und ein weitere Eingriff 
-war zu keinem Zeitpunkt nötig.
+war zu keinem Zeitpunkt nötig.\todo{bimodal Auswerten}
 
 \paragraph{Bewertung}
 Da die beschriebenen Abweichung für den Betrieb des Vereinzleungssystem für eine Anzhal von bis zu 40 Hairpins im Rahmen bleiben,
@@ -236,22 +236,114 @@ druch die Reibung von PLA auf PLA einen erhöhten Widerstand für die Linearebew
 dar, weil die Betriebsbereiche sowieso eingehalten werden und die Belastung im Normalfall nicht auftreten sollten.
 
 
-\subsection{Systemtest im Gesamtablauf}\label{sec:Systemtest}
+\subsection{Validierung im Gesamtablauf}\label{sec:Systemtest}
+Nach den ersten Tests zu Verifkation der Aktuatoren folgen nun die eigentlcihen Systemtests. Zunächst werden die einzelnen Subsysteme
+geprüft. Bevor dann ein Gesamt- und Dauerlauf Test durchgeführt wird. Diese Messreihen werden auf einen Durchgang von n=20 gesetzt.
+Zuletzt werden sich mögliche Beschädigungen angeguckt.
 
-\subsubsection{Versuchsaufbau und Durchführung}\label{sec:Versuchsaufbau}
-- Wie werden die Tests gemacht?\\
-- Worauf muss geachtet werden?\\
-- Welche Testreihen werden gemacht?\\
+\subsubsection{Zuführungssystem: Wiederholgenauigkeit T-07}\label{sec:VR_Wiederholgenauigkeit}
+
+\paragraph{Prüfziel}
+Dieser Test greift die bereits positiv durchgeführten Testläufe, T-04 und T-06, weiter auf und überprüft nun das gesamte Zuführsystem 
+in einer Validierung. Es wird also Abschließend auf die Anforderung L2 und K2 geprüft und sollten nach diesem Test endgültig validiert
+sein.
+
+\paragraph{Spezifischer Aufbau}
+Allgemein wird hier schon das gesamte Zuführsystem geprüft, indem ein Hairpin manuell auf die Rutsche gelegt wird und nun die gleiche
+Sequenz wie im Dauerbetrieb abgefahren wird. Im Trichter der Überführung wird der Hairpin also fixiert und bewegt sich so mit dem
+Transprotsystem zur festgelegten Übergabeposition. An diesem Punkt wird die Squenz gestopt und alle Abweichungen vermessen und notiert.
+Für eben dieses Abmessen wurde ein Messschieber in Kombination mit einer Messschablone druchgeführt. In \cref{fig:Messschablone_T-07} lässt sich
+eben dieses Setup erkennen. Die Position der Schablone wurde in der Nähe des oberen Biegepunktes platziert und variert so
+mit der Höhe des zu vermessenden Hairpins. Die Ausrichtung in die x- (Längs in Richtung des Transportsystems) und die y- Richtung
+(Orthogonal zu Richtung des Transportsystems) erfolgt durch das festlegen eines Hairpin Beines in die Mitte der Messschablone.
+Für eine Valdierung auch mit varierter Hairpin-Geometrie wurden zwei Durchläufe mit unterscheidlichen Längen und
+Breiten durchgeführt. Eine Versuchsreihe bezüglich der Höhe wurde ebenso druchgeführt. Dabei wurde eine obere Grenze durch eine
+Ebene Fläche festgelegt und eine Abweichung bezüglich des Abstandes zu dieser notiert. 
+
+\begin{figure}[htbp]
+	\centering
+	    \includegraphics[width=0.6\linewidth]{figs/T07_Messschablone_beschriftet.jpg}
+	\caption{Positionierung der Messschablone für T-01}
+	\label{fig:Messschablone_T-07}
+\end{figure}
+
+\paragraph{Ergebnis}
+Der erste Durchgang hat in y-Richtung eine Standardabweichung von 0,301mm und eine Spanne von 1,06mm und in x-Richtung 
+eine Standardabweichung von 0,263mm und eine Spanne von 1,02mm. In beiden Richtungen sind beide Werte sehr ähnlich.
+Für eine maximale Ablenkung von der Ausgangsposition lässt sich der Satz des Pythgoras auf die Spannenwerte anwenden:
+%sqrt(1,06^2+1,02^2)= 1,471mm 
+Für den zweiten Durchgang lässt sich der eben beschriebene Prozess genauso umsetzen. In y-Richtung wurde eine Standardabweichung 
+von 0,218mm und eine Spanne von 0,84mm und in x-Richtung eine Standardabweichung von 0,464mm und eine Spanne von 1,8mm bestimmt.
+Auch hier lässt sich die Auslenkung zu:
+%sqrt(0,84^2+1,8^2)= 1,986mm berechenen.
+Die Versuchsreihe zur Höhe ergab keinerlei Auffälligkeiten und aus diesem Grund nciht weiter konkretisiert. Es ist anzunehemn, dass
+die Position nicht durch die Höhe des Hairpins verändert wird. 
+
+\paragraph{Bewertung}
+Es folgt also, dass Anforderung L2 und K2 voll umgänglich erfüllt werden, da beide Druchläufe eine worst-case Abweichung von <2mm 
+haben. Es ist zu nennen, dass nach den Standardabweichungen die alle unter 0,5mm liegen und so eine deutlich genauer Anfahrt der Übergabe 
+Position zu erwarten ist. Weiter ist zu erkennen, dass ein längere Hairpin zu mehr Abweichung führt. Da aber ein längerer Hairpin
+nicht vorgesehen ist sind die Betribesbereiche hier erfüllt.
+%
+\subsubsection{Vereinzelungssystem: Vereinzelungstreue T-05}\label{sec:VR_Vereinzelungstreue}
+
+\paragraph{Prüfziel}
+Bei der Überprüfung des Vereinzelungssystem wurde die anschließende Überführung in Form der Rutsche direkt mit geprüft. Hier sollen
+wiederkehrende Feherlquellen in diesen Subsystemen detektiert werden und die Anforderungen K1, St1 und L5 validiert werden.
+Durch den vorgelagerten Test T-01 lässt sich eine Fehlerquelle, die bezüglich des Antriebs der Vereinzelung ausgeht, ausschließen.
+
+\paragraph{Spezifischer Aufbau}
+Der Aufbau entspricht dem Anfang eines Dauerlaufes im Betrieb, wobei ein vereinzelter Hairpin manuell aus dem Trichter der Überführung
+genommen wird. Dieser Ablauf startet mit dem Beladen von 25 Hairpins auf die Vibrationsschiene und der nachfolgenden Vereinzelung
+der Hairpins aus dem Bündel. Diese Rutschen dann wie im Normalbetrieb die Überführung runter und der Ablauf wird hier gestoppt.
+Nach einem Fehlerprotokoll werden während des Druchganges alle Probleme oder Auffälligkeiten notiert. Besonders zur Begründung
+der Anforderung St1 wurden vier unterschiedliche Hairpin-Geometerien gewählt. Hierbei waren nicht nur äußeren Maße verschieden
+sondern auch die Biegung am Kopf des Hairpins. Der Endeffektor(Sperrklinken) der Linearstangen war fest auf eine Version (TestV1)
+festgelegt und wurde nicht variert.
+
+\paragraph{Ergebnis}
+An den verschiedenen Fehlerquoten in \cref{tab:mess_T05} lässt sich direkt erkennen, dass die Vereinzelung stark von den Hairpin-Geometrien
+abhängt. Insteressant ist jedoch, dass die Hairpinlänge keinen Einfluss auf eben diese Fehlerquoten hat, da die Hairpin-Varianten 
+C und D den größten Längenunterschied von 39mm mit den geringesten Fehlerquoten haben. Weiter muss analysiert in welchem System genau
+die Fehler aufgetreten sind. So zeigt sich, dass wenn eine zu den Sperrklinken passende Hairpin-Geometrie gewählt wurde, keine Fehler
+in der Vereinzelung auftreten. Vergleicht man Variante A und C so treten diese erst im späteren Verlauf durch die Rutsche auf. Zu Variante
+A ist zu nennen, dass die Beine nicht sauber Entgratet wurden und sich schneller in der Rutsche verhaken konnten. An Variante B ist
+klar die Geomoetrie Abhängigkeit zu den Sperrklinken, hier wurde ein nicht passende Geometrie gewählt und es traten einschließlich
+in der Vereinzelung fehler auf.
+
+\paragraph{Bewertung}
+Dieses Messergebnis zeigt klare Verletzung der Anforderung St1, da das System nicht direkt mit jeder Hairpin-Geometrie einwandfrei
+funktioniert. Da aber durch eine gute Kalibirierung und eine der Hairpin-Geometrie angepassten Sperrklinken Kombination, dennoch
+ein fehlerarmer Betrieb möglich ist. Dies setzt zwar die Wunschanforderung B2 aus, weil das Bedienperson zu Beginn eines Hairpin-Geometrie
+wechsels die Endeffektoren der Vereinzelung austasuchen oder anpassne muss. Weiter sind beschädigte Hairpins nicht mit diesem System
+kompatibel. Bei einer perfekten der Anlage ist sind die anderne Anforderung tortzdem erfüllt.
 
 %
-\subsubsection{Versuchsreihe Wiederholgenauigkeit T-07}\label{sec:VR_Wiederholgenauigkeit}
-- Tabelle, etc. für Versuchsreihe nach Prüfung der Wiederholgenauigkeit\\
-%
-\subsubsection{Versuchsreihe Dauerlauf T-05, T-08}\label{sec:VR_Durchsatz}
-- Tabelle, etc. für Versuchsreihe nach Optimierung/Änderung des Durchsatzes von verarbeiteten Hairpins\\
-%
-\subsubsection{Versuchsreihe Beschädigung T-09}\label{sec:VR_Beschädigung}
-- Tabelle, etc. für Versuchsreihe nach Prüfung der Beschädigung/Veränderung der Hairpins\\
+\subsubsection{Dauerlauf T-08}\label{sec:VR_Durchsatz}
+
+Der Dauerlauf stellt das gesamte System auf die Probe. Alle Subsysteme müssen zusammen arbeiten und in allen Schnittstellen 
+funktionieren. Wie in der Realsisierung (vgl. \cref{sec:Realisierungsstand}) erklärt, werden bis jetzt keine der geplanten
+Prozesssensoren verwendet und eine Steurung erfolgt nach festen Zeiten. Aus diesem Grund sind an vielen Stellen in der Prozessketten
+erhöhte Wartezeiten eingebaut, die zur Erhöhung der Prozesssicherheit dienen. Aktuell liegt diese Druchlaufszeit bei 43sekunden 
+und erfüllt damit Anforderung L1. Werden in Zukunft auch die Prozesssensoren mit einbezogen, lässt sich dieses Zeitintervall weiter
+minimieren. 
+
+Auch die Übergabe des Hairpins an den Roboterarm erfolgt Zeit gesteuert und bedarf einer genauen Kalibrierung und 
+Synchronisation durch den Bediener. Der Test spiegelt den Dauerlauf wieder, wobei der Roboterarm aber keine vollständige 
+Fahrt zum Laser druchführt, sondern nur die Aufnahme, ein kurzes Bewegen und das Abgeben des Hairpins durchläuft. 
+Die Wahl des Hairpins belief sich auf eine zu den Endeffektoren der Vereinzelung kompatiblen Geometrie.
+Es wurden drei Druchläufe a n = 25 durchgeführt. In der ersten Messreihe entstanden drei Timeout Fehler zwischen Roboterarm und
+Zuführsystem, die sich aber durch eine optimeirten Kalibirerung minimiert werden konnten. In den nächsten beiden Druchläufen
+gab es wiederum jeweils eine Fehler in der Vereinzelung druch Verharkung. Sonst lief hier alles Einwandfrei.
+
+\subsubsection{Beschädigungen T-09}\label{sec:VR_Beschädigung}
+\paragraph{Prüfziel}
+
+\paragraph{Spezifischer Aufbau}
+
+\paragraph{Ergebnis}
+
+\paragraph{Bewertung}
 %
 %
 \subsection{Fehlerbetrachtung}\label{sec:Fehlerbetrachtung}
@@ -261,6 +353,13 @@ dar, weil die Betriebsbereiche sowieso eingehalten werden und die Belastung im N
 \subsection{Bewertung gegen Anforderungsliste}\label{sec:Testbewertung}
 - Vergleich gegen Anforderung\\
 \todo{Vergleich gegen vorherigen Prozess!}
+
+%\subsubsection{Versuchsaufbau und Durchführung}\label{sec:Versuchsaufbau}
+%- Wie werden die Tests gemacht?\\
+%- Worauf muss geachtet werden?\\
+%- Welche Testreihen werden gemacht?\\
+
+%
 
 %\subsection{Ausfall-Betrachtung}\label{sec:Ausfall}
 %- Was passiert, wenn ein Subsystem, Spannungsversorgung versagt?\\
