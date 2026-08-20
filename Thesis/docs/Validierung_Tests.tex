@@ -1,18 +1,18 @@
 \section{Validierung und Tests}\label{sec:ValidierungTests}
 Nach dem Abschluss der Realisierung folgt die messtechnische Überprüfung des Aufbaus. Dabei wird zwischen zwei Ebenen unterschieden:
-Zum einen die Verfiktation, die die einzelenen Subsysteme isoliert betrachtet, und zum anderen die Validierung, die den Gesamtablauf
-gegen die Anforderungen aus der \cref{tab:anforderungen} bewertet. Eine Trennung ist hier sinnvoll, da sich sonst die Ursache von Fehlern
-im Gesamtsystem nicht eindeutig zuordnen lassen.
+zum einen die Verifikation, die die einzelnen Subsysteme isoliert betrachtet, und zum anderen die Validierung, die den Gesamtablauf
+gegen die Anforderungen aus \cref{tab:anforderungen} bewertet. Eine Trennung ist hier sinnvoll, da sich sonst die Ursache von Fehlern
+im Gesamtsystem nicht eindeutig zuordnen lässt.
 
-Für ein einheitliches Schema werden alle Versuche in die selben Blöcke unterteilt. Dies dient einer besseren Übersicht und Überprüfung.
-Grundsätzlich werden zuerst die Prüfkriterien festgelegt, dann der eigentliche Messaufbau erklärt, dannach folgt die Durchführung mit
-Ergebnissen und einer schlussendlichen Bewertung.
+Für ein einheitliches Schema werden alle Versuche in dieselben Blöcke unterteilt. Dies dient einer besseren Übersicht und Überprüfung.
+Grundsätzlich werden zuerst die Prüfkriterien festgelegt, dann wird der eigentliche Messaufbau erklärt, danach folgt die Durchführung mit
+Ergebnissen und einer abschließenden Bewertung.
 
-Der folgende Prüfplan (vgl.\cref{tab:pruefplan}) zeigt alle durchgeführten Test auf. Für die Durchführung wurde der in der \cref{sec:Realisierungsstand}
-beschriebene Aufbau verwendet. Die Steuerung erfolgte durch eine an den Test spezifische Softwarestand, der aber ebenfalls in der
-Tabelle aufgezeigt wird. Da zu diesem Zeitpunkt wie beschrieben die Prozesssensoren noch nicht in das Gesamtsystem eingepflegt wurden
-und dis nur der Wunschanforderung Si2 entspricht, werden dazu in dieser Arbeit keine Messreihen angefertigt. In einem späteren Verlauf
-sollte dies aber wieder in betracht gezogen werden.
+Der folgende Prüfplan (vgl.\ \cref{tab:pruefplan}) zeigt alle durchgeführten Tests auf. Für die Durchführung wurde der in
+\cref{sec:Realisierungsstand} beschriebene Aufbau verwendet. Die Steuerung erfolgte durch einen an den jeweiligen Test angepassten
+Softwarestand, der ebenfalls in der Tabelle aufgezeigt wird. Da zu diesem Zeitpunkt, wie beschrieben, die Prozesssensoren noch nicht in
+das Gesamtsystem eingepflegt wurden und dies nur der Wunschanforderung Si2 entspricht, werden dazu in dieser Arbeit keine Messreihen
+angefertigt. In einem späteren Verlauf sollte dies aber wieder in Betracht gezogen werden.
 
 \begin{table}[htbp]
   \centering
@@ -46,7 +46,7 @@ sollte dies aber wieder in betracht gezogen werden.
          & L2, K2 & \texttt{6665777} & $2\times20$ \\
     \addlinespace[4pt]
     \multicolumn{5}{@{}l}{\itshape Validierung im Gesamtablauf
-      (Abschnitt~\ref{sec:systemtest})} \\
+      (Abschnitt~\ref{sec:Systemtest})} \\
     \addlinespace[2pt]
     T-07 & Wiederholgenauigkeit der Übergabeposition im
            Roboterkoordinatensystem
@@ -64,277 +64,295 @@ sollte dies aber wieder in betracht gezogen werden.
 %
 \subsection{Verifikation der Subsysteme}\label{sec:VerifikationSubsysteme}
 Die Verifikation der Subsysteme dient dem Nachweis, dass die in Kapitel 5 aufgebauten Baugruppen die ihnen zugeordneten
-Anforderungen isoliert erfüllen. Die getrennte Betrachtung erlaubt es, wiederkehrende Fehlermuster frühzeitg zu identifiziern
-und einem spezifischen System zuzuordnen. Wird dies nicht getan, kann es bei der Valdierung des Gesamtsystems zu Problemen
-in der Suche nach der exakten Fehlerquelle geben.
+Anforderungen isoliert erfüllen. Die getrennte Betrachtung erlaubt es, wiederkehrende Fehlermuster frühzeitig zu identifizieren
+und einem spezifischen System zuzuordnen. Wird dies nicht getan, kann es bei der Validierung des Gesamtsystems zu Problemen
+bei der Suche nach der exakten Fehlerquelle kommen.
 
-Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zunächst die Aktuatoren der einzelnen Subsysteme
-getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und Schnittstellen dieser Systeme.
+Wie im vorgestellten Prüfplan (vgl.\ \cref{tab:pruefplan}) dargelegt, werden zunächst die Aktuatoren der einzelnen Subsysteme
+getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und der Schnittstellen dieser Systeme.
 
 Für das Testen der Aktuatoren wird nach dem Prüfkriterium der Auslenkung untersucht. Diese wird in den folgenden Messreihen
-für die Begründung und Überprüfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird deutlich
-erklärt wie der Wert der Auslenkung für ein Konklution der Ergebnisse.
+für die Begründung und Überprüfung von unterschiedlichen Anforderungen verwendet. Im jeweiligen Abschnitt wird erläutert,
+wie der Wert der Auslenkung zur Schlussfolgerung aus den Ergebnissen herangezogen wird.
 %
 \subsubsection{Allgemeiner Messaufbau}
 Die Auslenkung wird mit einer Messuhr des Typs Mahr MarCator 810\,S erfasst.
 Diese besteht aus einem Tastkopf, dessen axiale Verschiebung über ein
 Zahnradgetriebe auf einen Zeiger übertragen und auf einer Skala mit einem
-Skalenteilungswert von \SI{0,01}{\milli\meter} angezeigt wird. Die Messuhr ist
+Skalenteilungswert von \qty{0.01}{\milli\meter} angezeigt wird. Die Messuhr ist
 über einen Gelenkarm mit einem Magnetfuß verbunden, sodass der Tastkopf
 unabhängig von der Anlagenstruktur an jeder benötigten Position starr fixiert
 werden kann.
 
-Für das Starten einer Messreihe wird der Tastkopf an einem definierten Punkt eines zu überprüfendes Systems angesetzt. Dabei ist
+Für das Starten einer Messreihe wird der Tastkopf an einem definierten Punkt eines zu überprüfenden Systems angesetzt. Dabei ist
 darauf zu achten, dass die Messuhr bei maximaler Auslenkung des Aktuators auf die Hälfte des Messbereiches vorgespannt wird.
-Diese Normierung dient der Überpfrüfung von Abweichungen in beide Richtungen hinsichtlich dem zu frühen Stoppen.
+Diese Normierung dient der Überprüfung von Abweichungen in beide Richtungen, also auch hinsichtlich eines zu frühen Stoppens.
 Nach dem Schritt der Kalibrierung können vordefinierte Bewegungsabläufe abgefahren werden, die die Anforderungen im Alltagsbetrieb
-wiederspeigeln. Druch künstlich eingebaute Wartezeiten lassen sich nun die Messwerte ablesen und notieren. Bei einer Ablesung auf
-einen halben Skalenteil ergibt sich eine Ablesegrenze von \SI{\pm0,005}{\milli\meter}.
+widerspiegeln. Durch künstlich eingebaute Wartezeiten lassen sich nun die Messwerte ablesen und notieren. Bei einer Ablesung auf
+einen halben Skalenteil ergibt sich eine Ablesegrenze von \qty{\pm0.005}{\milli\meter}.
 
 Je nach Aufbau gibt es verschiedene Messungenauigkeiten, wobei der Widerstand des Tastkopfes und das Ablesen der Werte vom Ziffernblatt
-bei jedem Durchlauf vorhanden ist. Zur Minimierung von Ableseungenauigkeiten wurde besonders auf eine widerholt gleichmäßige
-Köperhaltung und optimale Draufsicht geachtet. Für die Überwindung der minimalen Kraft druch die mechanische Feder in der Messuhr
-muss hier individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.
+bei jedem Durchlauf vorhanden sind. Zur Minimierung von Ableseungenauigkeiten wurde besonders auf eine wiederholt gleichmäßige
+Körperhaltung und eine optimale Draufsicht geachtet. Für die Überwindung der minimalen Kraft durch die mechanische Feder in der Messuhr
+muss individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.
 
-Jeder Versuch wird mit n 20 Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische Aufbau für den ersten Test dargestellt
-und soll für eine bessere Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte
-notiert und aufgearbeitet. In \cref{sec:AnhangMesswerte} werden die Berechnungen der zu den Messwerten erläutert
+Jeder Versuch wird mit $n = 20$ Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische Aufbau für den ersten Test dargestellt
+und soll einer besseren Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte
+notiert und aufgearbeitet. In \cref{sec:AnhangMesswerte} werden die Berechnungen zu den Messwerten erläutert.
 
 \subsubsection{Sperrklinken T-01}
 
 \paragraph{Prüfziel}
-In diesem Test soll die Postionstreue der Sperrklinkenschlitten überprüft. Dies dient der Überprüfung, ob es in diesem Aktuatorensystem
-allgemeine Fehler auftreten. Auch kann mittels den Werten der Abweichung ein genauer Einschätzung für das Vereinzelungssystem gegeben
-werden. Dieser Test dient keinem direkten Vergleich gegenüber einer konkreten Anforderung, sondern für eine bessere Analyse der valdierenden
+In diesem Test soll die Positionstreue der Sperrklinkenschlitten überprüft werden. Dies dient der Überprüfung, ob in diesem Aktuatorensystem
+allgemeine Fehler auftreten. Auch kann mittels der Werte der Abweichung eine genauere Einschätzung für das Vereinzelungssystem gegeben
+werden. Dieser Test dient keinem direkten Vergleich gegenüber einer konkreten Anforderung, sondern einer besseren Analyse der validierenden
 Tests.
 
 \paragraph{Spezifischer Aufbau}\label{sec:TastkopfBSP}
 Der Tastkopf wird für diesen Test einfach an die Sperrklinkenschlittenenden angesetzt. Der Durchlauf des Tests wurde auf je 10 Fahrten
-je Servomotor aufgeteilt. Zudem wurde der Antastpunkt einmal auf blanken Stahl und den eigentlichen Sperrklinken angesetzt. Die
-\cref{fig:PosTastkop_T-01} zeigt den Realen Aufbau mit Messuhr und Vereinzelungssystem.
+je Servomotor aufgeteilt. Zudem wurde der Antastpunkt einmal auf blankem Stahl und einmal an den eigentlichen Sperrklinken angesetzt.
+\Cref{fig:PosTastkop_T-01} zeigt den realen Aufbau mit Messuhr und Vereinzelungssystem.
 
 \begin{figure}[htbp]
 	\centering
-	    \includegraphics[width=0.8\linewidth]{figs/TastKopf_T-01.JPG}
+	    \includegraphics[width=0.6\linewidth]{figs/T01_Messaufbau_beschriftet.jpg}
 	\caption{Positionierung der Messuhr für T-01}
 	\label{fig:PosTastkop_T-01}
 \end{figure}
 
 \paragraph{Ergebnis}
-Die Werte dieser Messreihe stehen in \cref{tab:mess_T01} und sind bereits mit Mittelwert, Standardabweichung und Spanne R versehen.
-Vergleicht man die beiden Druchläufe (n = 10) so lassen sich für die Messungung direkt auf der Linearstange eine Standardabweichung s
-von 0,011mm und bei der Messung an der Sperrklinke eine Standardabweichung von 0,021mm festestellen. Der doppelte Wert der zweiten
-Messung lässt sich, durch die erhöhte Felxibilität des PLAs des Endeffektors erklären. Auch bei der Betrachtung der Spanne R 
-(0,04mm bei der Linearstange, 0,07mm bei dem Endeffektor) lässt sich feststellen, dass es keinen Messwert Ausreißer in diesen
-Durchläufen gab. Daraus folgt eine kosntante Funktion des Systems ohne ein fehlerhalftes Verhalten.
+Die Werte dieser Messreihe stehen in \cref{tab:mess_T01} und sind bereits mit Mittelwert, Standardabweichung und Spanne $R$ versehen.
+Vergleicht man die beiden Durchläufe ($n = 10$), so lassen sich für die Messung direkt auf der Linearstange eine Standardabweichung $s$
+von \qty{0.011}{\milli\meter} und bei der Messung an der Sperrklinke eine Standardabweichung von \qty{0.021}{\milli\meter} feststellen.
+Der doppelte Wert der zweiten Messung lässt sich durch die erhöhte Flexibilität des PLAs des Endeffektors erklären. Auch bei der
+Betrachtung der Spanne $R$ (\qty{0.04}{\milli\meter} bei der Linearstange, \qty{0.07}{\milli\meter} beim Endeffektor) lässt sich
+feststellen, dass es keine Messwertausreißer in diesen Durchläufen gab. Daraus folgt eine konstante Funktion des Systems ohne
+fehlerhaftes Verhalten.
 
 \paragraph{Bewertung}
-Auschlaggebend bei diesem Tests ist der Befund, dass es keine Probleme, wie ein nicht Ausführen von Bewegungen oder einer Überlastung
-der Atkuatoren durch zu weites Ausfahren. Außerdem sind die geringe Standardabweichung ein Zeichen für die hohe Präzision, die der
-Vereinzelung zu gute kommt und eine optimale Präzension erreicht werden kann. Das Prüfziel wurde also mit einem psotivien Fazit 
-beantwortet und die Servomotoren der Vereinzekung sollten keine Fehlerquelle im Verlauf der Arbeit darstellen.
+Ausschlaggebend bei diesem Test ist der Befund, dass keine Probleme wie ein Nichtausführen von Bewegungen oder eine Überlastung
+der Aktuatoren durch zu weites Ausfahren aufgetreten sind. Außerdem ist die geringe Standardabweichung ein Zeichen für die hohe Präzision,
+die der Vereinzelung zugutekommt und mit der eine optimale Präzision erreicht werden kann. Das Prüfziel wurde also mit einem positiven
+Fazit beantwortet, und die Servomotoren der Vereinzelung sollten keine Fehlerquelle im Verlauf der Arbeit darstellen.
 %
 \subsubsection{Vibrationseinheit T-02}
 
 \paragraph{Prüfziel}
 Das maßgebliche Ziel dieser Messreihe ist der Nachweis für die Anforderung L3, da dieses System als einziges Nadelöhr für die
-Zuladung der Hairpins gilt. Weiter werden die Anfroederungen B1 und L5 (vgl. \cref{tab:anforderungen}) geprüft, wobei hierfür keine kontkreten Messwerte erhoben
-werden, sondern eine Bewertung nach Kriterien der ausführenden Testperson erfolgt.
+Zuladung der Hairpins gilt. Weiter werden die Anforderungen B1 und L5 (vgl.\ \cref{tab:anforderungen}) geprüft, wobei hierfür keine
+konkreten Messwerte erhoben werden, sondern eine Bewertung nach Kriterien der ausführenden Testperson erfolgt.
 
 \paragraph{Spezifischer Aufbau}
-Der Aufbau ist ähnlich zu dem in \cref{fig:PosTastkop_T-01} abgebildeten Grundaufbau, nur das dir Tastkopf am Ende der Vibrationsschiene
-positioniert wurde. Dazu wurde diese druch die Vibrationseinheit auf ein maximum Ausgefahren und die Messuhr kopfüber auf das Aluminium
-angesetzt. Für die Überprüfung der Anforderungen fährt die Virbrationseinheit feste Schritte, die einen Inialisierung des Schrittmotors,
-ein Vibrationsteil und die Anfahrt auf die maximale Auslenkung beinhaltet. Am Ende eines Durchlaufes lässt sich diese Auslenkung ablesen
-und damit die Korrektheit der Abfahrten verrifizieren. Weiter wurden gestafelte Beladungen mit Hairpins getestet, um nicht nur die 
-Anforderungen zu bestätigen sondern auch die wahren Betriebsgrenzen zu ermitteln.
- 
+Der Aufbau ist ähnlich zu dem in \cref{fig:PosTastkop_T-01} abgebildeten Grundaufbau, nur dass der Tastkopf am Ende der Vibrationsschiene
+positioniert wurde. Dazu wurde diese durch die Vibrationseinheit auf ein Maximum ausgefahren und die Messuhr kopfüber auf das Aluminium
+angesetzt. Für die Überprüfung der Anforderungen fährt die Vibrationseinheit feste Schritte, die eine Initialisierung des Schrittmotors,
+einen Vibrationsteil und die Anfahrt auf die maximale Auslenkung beinhalten. Am Ende eines Durchlaufes lässt sich diese Auslenkung ablesen
+und damit die Korrektheit der Abfahrten verifizieren. Weiter wurden gestaffelte Beladungen mit Hairpins getestet, um nicht nur die
+Anforderungen zu bestätigen, sondern auch die wahren Betriebsgrenzen zu ermitteln.
+
 \paragraph{Ergebnis}
-Die Messwerte zeigen ein ungewöhnliches Verhalten in der Gleichmäßigkeit auf. So springen die Werte ca. alle zwei Druchläufe um
-einen bestimten Hub. Dies lässt sich nicht eindeutig erklären, da keine Fehler im Code oder mechanischen Aufbau gefunden wurden,
-die ein solches Verhalten verursachen würden. Aus diesem Grund ist die Spanne R und Standardabweichung s etwas erhöhter als Angenommen.
-Dennoch ist intersannt, dass die Standardabweichung bis eine Beladung von 40 Hairpins und dem resultierenden Gesamtgewicht von 0,916kg
-konstant unter 0,2mm bleibt. Auch die maximalen und minimalen Auslenkungen bleiben unter 0,55mm. Ab 60 Hairpins steigen dies Werte
-und die Genauigkeit des Systems wird inkonsistenter. Bei 80 Hairpins ist laut Messung aber trotzdem nochmal ein Optimum erreicht, da der
-Wert der Standardabnweichung hier bei einem Minimum von 0,15mm liegt. Dies lässt sich durch einer noch nciht vorhandenen Überlast des
-Virbationsmotors und den Stabilisrenden Druck druch das Gewicht der Beladung erklären. Ab einem Gewicht von 2,29kg (100 Hairpins) ist 
-jedoch klar die Überlastung des Systms zu erklennen. Die Spanne dieser Messreihe liegt bei 7,7mm, was für eine Betrieb nicht vertretbar
-ist. Weiter ist noch zu nennen, das es während dieser Messreihen keine Probleme bezüglich des verhakens von Hairpins gab und
-diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden und ein weitere Eingriff 
+Die Messwerte zeigen ein ungewöhnliches Verhalten in der Gleichmäßigkeit auf. So springen die Werte ca. alle zwei Durchläufe um
+einen bestimmten Hub. Dies lässt sich nicht eindeutig erklären, da keine Fehler im Code oder im mechanischen Aufbau gefunden wurden,
+die ein solches Verhalten verursachen würden. Aus diesem Grund sind die Spanne $R$ und die Standardabweichung $s$ etwas höher als angenommen.
+Dennoch ist interessant, dass die Standardabweichung bis zu einer Beladung von 40 Hairpins und dem resultierenden Gesamtgewicht von
+\qty{0.916}{\kilo\gram} konstant unter \qty{0.2}{\milli\meter} bleibt. Auch die maximalen und minimalen Auslenkungen bleiben unter
+\qty{0.55}{\milli\meter}. Ab 60 Hairpins steigen diese Werte, und die Genauigkeit des Systems wird inkonsistenter. Bei 80 Hairpins ist
+laut Messung aber trotzdem nochmal ein Optimum erreicht, da der Wert der Standardabweichung hier bei einem Minimum von
+\qty{0.15}{\milli\meter} liegt. Dies lässt sich durch eine noch nicht vorhandene Überlast des Vibrationsmotors und den stabilisierenden
+Druck durch das Gewicht der Beladung erklären. Ab einem Gewicht von \qty{2.29}{\kilo\gram} (100 Hairpins) ist jedoch klar die Überlastung
+des Systems zu erkennen. Die Spanne dieser Messreihe liegt bei \qty{7.7}{\milli\meter}, was für einen Betrieb nicht vertretbar
+ist. Weiter ist noch zu nennen, dass es während dieser Messreihen keine Probleme bezüglich des Verhakens von Hairpins gab und
+diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden, und ein weiterer Eingriff
 war zu keinem Zeitpunkt nötig.\todo{bimodal Auswerten}
 
 \paragraph{Bewertung}
-Da die beschriebenen Abweichung für den Betrieb des Vereinzleungssystem für eine Anzhal von bis zu 40 Hairpins im Rahmen bleiben,
-ist die wichtigeste Anroderung L3 erfüllt. Zudem lässt sich das System sogar über die Anroderungen hinaus mit maximal 80 Hairpins (1,832kg) 
-belasten. Auch die anderen Anforderungen sind durch die Beobachtungen während der Messungen bestätigt. 
+Da die beschriebenen Abweichungen für den Betrieb des Vereinzelungssystems für eine Anzahl von bis zu 40 Hairpins im Rahmen bleiben,
+ist die wichtigste Anforderung L3 erfüllt. Zudem lässt sich das System sogar über die Anforderungen hinaus mit maximal 80 Hairpins
+(\qty{1.832}{\kilo\gram}) belasten. Auch die anderen Anforderungen sind durch die Beobachtungen während der Messungen bestätigt.
 
 \subsubsection{Transportsystem T-03}
 
 \paragraph{Prüfziel}
-In diesem Test wird ähnlich zu dem ersten Test ein bestimmter Aktuator überprüft. Im Transprotsystem hat der Schrittmotor dabei große
-Einwirkung auf die in Anorderung L2 und K2 (vgl. \cref{tab:anforderungen})festgelegte genaue Positionierung des Hairpins bei der Übergabe an den Roboterarm.
+In diesem Test wird ähnlich zum ersten Test ein bestimmter Aktuator überprüft. Im Transportsystem hat der Schrittmotor dabei großen
+Einfluss auf die in den Anforderungen L2 und K2 (vgl.\ \cref{tab:anforderungen}) festgelegte genaue Positionierung des Hairpins bei der
+Übergabe an den Roboterarm.
 
 \paragraph{Spezifischer Aufbau}
-Der Tastkopf der Messuhr wurde wie in den bereits druchgeführten Messreihen an der maximalen Auslenkung des Schlittens des Transportsystems
-platziert. Die Schritte eines Druchlaufes sahen die Initialsierung mittels Endstop, dann eine schnelle Fahrt mit Abbremsen und einem doppelten
-Richtungswechsel und einer schlussendlich langsamen Fahrt zum definierten Endpunkt.
+Der Tastkopf der Messuhr wurde wie in den bereits durchgeführten Messreihen an der maximalen Auslenkung des Schlittens des Transportsystems
+platziert. Die Schritte eines Durchlaufes sahen die Initialisierung mittels Endstop vor, dann eine schnelle Fahrt mit Abbremsen und einem
+doppelten Richtungswechsel und schlussendlich eine langsame Fahrt zum definierten Endpunkt.
 
 \paragraph{Ergebnis}
-Die gemessene Standardabweichung liegt bei 0,015mm und die Spanne bei 0,06mm. Diese beide Werte zeigen die enorme Präzension dieses
-Systems auf. Es gab keine Asureißer und damit kein Fehlerhaftes verhalten.
+Die gemessene Standardabweichung liegt bei \qty{0.015}{\milli\meter} und die Spanne bei \qty{0.06}{\milli\meter}. Diese beiden Werte zeigen
+die enorme Präzision dieses Systems auf. Es gab keine Ausreißer und damit kein fehlerhaftes Verhalten.
 
 \paragraph{Bewertung}
-Dadurch das die gemessenne Werte weit unter der gefordernten Abweichung von < 2mm liegt, kann dieses Subsystem zu keinem Fehler in
-der gesamt Postionierung des Hairpins sein. 
+Dadurch, dass die gemessenen Werte weit unter der geforderten Abweichung von $<\qty{2}{\milli\meter}$ liegen, kann dieses Subsystem keine
+Fehlerquelle in der gesamten Positionierung des Hairpins sein.
 %
-\subsubsection{Fixierungssytem: Hairpinaufstellung T-04}
+\subsubsection{Fixierungssystem: Hairpinaufstellung T-04}
 
 \paragraph{Prüfziel}
-Für die positionsgenaue Übergabe müssen die Hairpins im Fixiersystem auf eine korekte Aufstellung kontrolliert werden. Es wird also
-überprüft, ob die Hauptklemme (vgl. \cref{fig:Kraftschlussklemme}) den Hairpin waagerecht und wiederholend aufstellt. Dies dient dem
-Nachweiß für die Schrittweise Betrachtung der Anforderung L2.
+Für die positionsgenaue Übergabe müssen die Hairpins im Fixiersystem auf eine korrekte Aufstellung kontrolliert werden. Es wird also
+überprüft, ob die Hauptklemme (vgl.\ \cref{fig:Kraftschlussklemme}) den Hairpin waagerecht und wiederholgenau aufstellt. Dies dient dem
+Nachweis für die schrittweise Betrachtung der Anforderung L2.
 
 \paragraph{Spezifischer Aufbau}
-In diesem Test wurden außschließlich die Kraftklemmen bewegt. Der Transprotschlitten wurde auf eine Postion festgelegt und der Tastkopf
-an der Oberseite des Hairpins angesetzt. Hierbei ist zu beachten, dass wegen der Länge des Hairpins und dem dadurch resultierende
-verstärkt wirkenden Hebelkraft dies Messung auf erhebliche Abweichungen kommen kann. Auch ist ein gleicher Antastpunkt beim wiederholten
-Durchführen der Messreihen schwer zu realisieren, da die Hairpins eine geringe Breite haben. 
-Der allgemeine Druchlauf sah vor, dass der Prüfhairpin dauerhaft im Behälter blieb und nur die Kraftklemmen jedesmal schlossen.
+In diesem Test wurden ausschließlich die Kraftklemmen bewegt. Der Transportschlitten wurde auf eine Position festgelegt und der Tastkopf
+an der Oberseite des Hairpins angesetzt. Hierbei ist zu beachten, dass wegen der Länge des Hairpins und der dadurch resultierenden,
+verstärkt wirkenden Hebelkraft diese Messung erhebliche Abweichungen aufweisen kann. Auch ist ein gleicher Antastpunkt beim wiederholten
+Durchführen der Messreihen schwer zu realisieren, da die Hairpins eine geringe Breite haben.
+Der allgemeine Durchlauf sah vor, dass der Prüfhairpin dauerhaft im Behälter blieb und nur die Kraftklemmen jedes Mal schlossen.
 
 \paragraph{Ergebnis}
-Trotz der vorhin beschriebenen Messprobleme ergab dieser Durchlauf eine Standardabweichung von nur 0,167mm. Auch die Maximale Spanne
-belief sich auf 0,525mm.
+Trotz der zuvor beschriebenen Messprobleme ergab dieser Durchlauf eine Standardabweichung von nur \qty{0.167}{\milli\meter}. Auch die
+maximale Spanne belief sich auf \qty{0.525}{\milli\meter}.
 
 \paragraph{Bewertung}
-Beide Werte zeigen, dass wie bei T-03 dieses Teilsystem der Anroderung L2 nicht entgegensteht. Dennoch müssen im weiteren Verlauf 
-die Messungenaugkeiten durch weitere Tests minimiert werden. Außerdem ist der seitliche Versatz des Hairpins nicht berücksichtigt
+Beide Werte zeigen, dass wie bei T-03 dieses Teilsystem der Anforderung L2 nicht entgegensteht. Dennoch müssen im weiteren Verlauf
+die Messungenauigkeiten durch weitere Tests minimiert werden. Außerdem ist der seitliche Versatz des Hairpins nicht berücksichtigt
 worden.
 
 
 \subsubsection{Fixierungssytem: seitliche Kraftklemmen Seite T-06}
 
 \paragraph{Prüfziel}
-Für die Überprüfung der seitlichen sollen zunächst die beiden dafür benötigten Kraftklemmen verifiziert werden. Die entspricht dementsprechend
-auch dem Kontrollieren der beiden Servomotoren der jeweiligen Achse.
+Für die Überprüfung der seitlichen Positionierung sollen zunächst die beiden dafür benötigten Kraftklemmen verifiziert werden. Dies entspricht
+dementsprechend auch dem Kontrollieren der beiden Servomotoren der jeweiligen Achse.
 
 \paragraph{Spezifischer Aufbau}
-Der Aufbau sieht vor den Tastkopf direkt auf den Oberflächen der seitlichen Kraftklemmen zu platzieren. Diese Messreihe wurde für je
+Der Aufbau sieht vor, den Tastkopf direkt auf den Oberflächen der seitlichen Kraftklemmen zu platzieren. Diese Messreihe wurde für je
 eine Seite durchgeführt. Hierbei ist zu erwähnen, dass wegen der Größe der vorhandenen Messuhr keine optimale Platzierung im Behälter
-möglich war. Da diese Postionierung aber in der Messriehe sleber nicht verändert worden ist, lassen sich die Werte innerhalb der
-Messreihe weiter vergleichen und bewerten. Ein Durchlauf sah vor jede Klemme ein mal ganz ein zu fahren und danach auf die kalibrierte 
-Position aus fahren zu lassen. 
+möglich war. Da diese Positionierung aber in der Messreihe selber nicht verändert worden ist, lassen sich die Werte innerhalb der
+Messreihe weiter vergleichen und bewerten. Ein Durchlauf sah vor, jede Klemme einmal ganz einzufahren und danach auf die kalibrierte
+Position ausfahren zu lassen.
 
 \paragraph{Ergebnis}
-Bei der ersten Messreihe mit der rechten Seite (Servo2) wurde eine sehr geringe Standardabweichung von 0,01mm und Spanne von 0,045mm
-gemessen. Bei der zweiten Messreihe mit der linken Seite (Servo3) wurde eine etwas höhere Standardabweichung von 0,076 und Spanne von
-0,22 ermittelt. Dies etwas erhöhten Werte lassen sich auf das Material zurückzuführen, da beim genauerm Betrachten eine abfallende
-Tendenz der Messwerte zu sehen ist. 
+Bei der ersten Messreihe mit der rechten Seite (Servo2) wurden eine sehr geringe Standardabweichung von \qty{0.01}{\milli\meter} und eine
+Spanne von \qty{0.045}{\milli\meter} gemessen. Bei der zweiten Messreihe mit der linken Seite (Servo3) wurden eine etwas höhere
+Standardabweichung von \qty{0.076}{\milli\meter} und eine Spanne von \qty{0.22}{\milli\meter} ermittelt. Diese etwas erhöhten Werte lassen
+sich auf das Material zurückführen, da bei genauerer Betrachtung eine abfallende Tendenz der Messwerte zu sehen ist.
 \paragraph{Bewertung}
-Beide Messreihen erfüllen dennoch die in Anforderung L2 vorgegebene Positionsgenauigkeit. Für die Auffälligkeit in der zweiten Messreihe
-könnten durch die Konstruktion und das Material bedingten Ungenauigkeiten entstehen. So haben die Kraftklemmen bei einer höheren Kraftbelastung
-druch die Reibung von PLA auf PLA einen erhöhten Widerstand für die Linearebewegung druch die Servomotoren. Dies stellt aber kein Problem
-dar, weil die Betriebsbereiche sowieso eingehalten werden und die Belastung im Normalfall nicht auftreten sollten.
+Beide Messreihen erfüllen dennoch die in Anforderung L2 vorgegebene Positionsgenauigkeit. Die Auffälligkeit in der zweiten Messreihe
+könnte durch konstruktions- und materialbedingte Ungenauigkeiten entstehen. So haben die Kraftklemmen bei einer höheren Kraftbelastung
+durch die Reibung von PLA auf PLA einen erhöhten Widerstand für die Linearbewegung durch die Servomotoren. Dies stellt aber kein Problem
+dar, weil die Betriebsbereiche ohnehin eingehalten werden und die Belastung im Normalfall nicht auftreten sollte.
 
 
 \subsection{Validierung im Gesamtablauf}\label{sec:Systemtest}
-Nach den ersten Tests zu Verifkation der Aktuatoren folgen nun die eigentlcihen Systemtests. Zunächst werden die einzelnen Subsysteme
-geprüft. Bevor dann ein Gesamt- und Dauerlauf Test durchgeführt wird. Diese Messreihen werden auf einen Durchgang von n=20 gesetzt.
-Zuletzt werden sich mögliche Beschädigungen angeguckt.
+Nach den ersten Tests zur Verifikation der Aktuatoren folgen nun die eigentlichen Systemtests. Zunächst werden die einzelnen Subsysteme
+geprüft, bevor dann ein Gesamt- und Dauerlauftest durchgeführt wird. Diese Messreihen werden auf einen Durchgang von $n = 20$ gesetzt.
+Zuletzt werden mögliche Beschädigungen betrachtet.
 
 \subsubsection{Zuführungssystem: Wiederholgenauigkeit T-07}\label{sec:VR_Wiederholgenauigkeit}
 
 \paragraph{Prüfziel}
-Dieser Test greift die bereits positiv durchgeführten Testläufe, T-04 und T-06, weiter auf und überprüft nun das gesamte Zuführsystem 
-in einer Validierung. Es wird also Abschließend auf die Anforderung L2 und K2 geprüft und sollten nach diesem Test endgültig validiert
-sein.
+Dieser Test greift die bereits positiv durchgeführten Testläufe T-04 und T-06 weiter auf und überprüft nun das gesamte Zuführsystem
+in einer Validierung. Es wird also abschließend auf die Anforderungen L2 und K2 geprüft; diese sollten nach diesem Test endgültig
+validiert sein.
 
 \paragraph{Spezifischer Aufbau}
 Allgemein wird hier schon das gesamte Zuführsystem geprüft, indem ein Hairpin manuell auf die Rutsche gelegt wird und nun die gleiche
 Sequenz wie im Dauerbetrieb abgefahren wird. Im Trichter der Überführung wird der Hairpin also fixiert und bewegt sich so mit dem
-Transprotsystem zur festgelegten Übergabeposition. An diesem Punkt wird die Squenz gestopt und alle Abweichungen vermessen und notiert.
-Für eben dieses Abmessen wurde ein Messschieber in Kombination mit einer Messschablone druchgeführt. In \cref{fig:Messschablone_T-07} lässt sich
-eben dieses Setup erkennen. Die Position der Schablone wurde in der Nähe des oberen Biegepunktes platziert und variert so
-mit der Höhe des zu vermessenden Hairpins. Die Ausrichtung in die x- (Längs in Richtung des Transportsystems) und die y- Richtung
-(Orthogonal zu Richtung des Transportsystems) erfolgt durch das festlegen eines Hairpin Beines in die Mitte der Messschablone.
-Für eine Valdierung auch mit varierter Hairpin-Geometrie wurden zwei Durchläufe mit unterscheidlichen Längen und
-Breiten durchgeführt. Eine Versuchsreihe bezüglich der Höhe wurde ebenso druchgeführt. Dabei wurde eine obere Grenze durch eine
-Ebene Fläche festgelegt und eine Abweichung bezüglich des Abstandes zu dieser notiert. 
+Transportsystem zur festgelegten Übergabeposition. An diesem Punkt wird die Sequenz gestoppt und alle Abweichungen werden vermessen und
+notiert. Für eben dieses Abmessen wurde ein Messschieber in Kombination mit einer Messschablone verwendet. In
+\cref{fig:Messschablone_T-07} lässt sich eben dieses Setup erkennen. Die Position der Schablone wurde in der Nähe des oberen Biegepunktes
+platziert und variiert so mit der Höhe des zu vermessenden Hairpins. Die Ausrichtung in die x- (längs in Richtung des Transportsystems)
+und die y-Richtung (orthogonal zur Richtung des Transportsystems) erfolgt durch das Festlegen eines Hairpin-Beines in die Mitte der
+Messschablone. Für eine Validierung auch mit variierter Hairpin-Geometrie wurden zwei Durchläufe mit unterschiedlichen Längen und
+Breiten durchgeführt. Eine Versuchsreihe bezüglich der Höhe wurde ebenso durchgeführt. Dabei wurde eine obere Grenze durch eine
+ebene Fläche festgelegt und eine Abweichung bezüglich des Abstandes zu dieser notiert.
 
 \begin{figure}[htbp]
 	\centering
-	    \includegraphics[width=0.6\linewidth]{figs/T07_Messschablone_beschriftet.jpg}
-	\caption{Positionierung der Messschablone für T-01}
+	    \includegraphics[width=0.4\linewidth]{figs/T07_Messschablone_beschriftet.jpg}
+	\caption{Positionierung der Messschablone für T-07}
 	\label{fig:Messschablone_T-07}
 \end{figure}
 
 \paragraph{Ergebnis}
-Der erste Durchgang hat in y-Richtung eine Standardabweichung von 0,301mm und eine Spanne von 1,06mm und in x-Richtung 
-eine Standardabweichung von 0,263mm und eine Spanne von 1,02mm. In beiden Richtungen sind beide Werte sehr ähnlich.
-Für eine maximale Ablenkung von der Ausgangsposition lässt sich der Satz des Pythgoras auf die Spannenwerte anwenden:
-%sqrt(1,06^2+1,02^2)= 1,471mm 
-Für den zweiten Durchgang lässt sich der eben beschriebene Prozess genauso umsetzen. In y-Richtung wurde eine Standardabweichung 
-von 0,218mm und eine Spanne von 0,84mm und in x-Richtung eine Standardabweichung von 0,464mm und eine Spanne von 1,8mm bestimmt.
-Auch hier lässt sich die Auslenkung zu:
-%sqrt(0,84^2+1,8^2)= 1,986mm berechenen.
-Die Versuchsreihe zur Höhe ergab keinerlei Auffälligkeiten und aus diesem Grund nciht weiter konkretisiert. Es ist anzunehemn, dass
-die Position nicht durch die Höhe des Hairpins verändert wird. 
+Der erste Durchgang hat in y-Richtung eine Standardabweichung von \qty{0.301}{\milli\meter} und eine Spanne von \qty{1.06}{\milli\meter}
+und in x-Richtung eine Standardabweichung von \qty{0.263}{\milli\meter} und eine Spanne von \qty{1.02}{\milli\meter}. In beiden Richtungen
+sind beide Werte sehr ähnlich. Für eine maximale Ablenkung von der Ausgangsposition lässt sich der Satz des Pythagoras auf die
+Spannenwerte anwenden:
+%
+\begin{equation}
+  R_{\mathrm{ges}} = \sqrt{R_y^2 + R_x^2}
+  = \sqrt{(\qty{1.06}{\milli\meter})^2 + (\qty{1.02}{\milli\meter})^2}
+  = \qty{1.471}{\milli\meter}
+  \label{eq:T07_Durchgang1}
+\end{equation}
+%
+Für den zweiten Durchgang lässt sich der eben beschriebene Prozess genauso umsetzen. In y-Richtung wurden eine Standardabweichung
+von \qty{0.218}{\milli\meter} und eine Spanne von \qty{0.84}{\milli\meter} und in x-Richtung eine Standardabweichung von
+\qty{0.464}{\milli\meter} und eine Spanne von \qty{1.8}{\milli\meter} bestimmt. Auch hier lässt sich die Auslenkung berechnen zu:
+%
+\begin{equation}
+  R_{\mathrm{ges}} = \sqrt{R_y^2 + R_x^2}
+  = \sqrt{(\qty{0.84}{\milli\meter})^2 + (\qty{1.8}{\milli\meter})^2}
+  = \qty{1.986}{\milli\meter}
+  \label{eq:T07_Durchgang2}
+\end{equation}
+%
+Die Versuchsreihe zur Höhe ergab keinerlei Auffälligkeiten und wird aus diesem Grund nicht weiter konkretisiert. Es ist anzunehmen, dass
+die Position nicht durch die Höhe des Hairpins verändert wird.
 
 \paragraph{Bewertung}
-Es folgt also, dass Anforderung L2 und K2 voll umgänglich erfüllt werden, da beide Druchläufe eine worst-case Abweichung von <2mm 
-haben. Es ist zu nennen, dass nach den Standardabweichungen die alle unter 0,5mm liegen und so eine deutlich genauer Anfahrt der Übergabe 
-Position zu erwarten ist. Weiter ist zu erkennen, dass ein längere Hairpin zu mehr Abweichung führt. Da aber ein längerer Hairpin
-nicht vorgesehen ist sind die Betribesbereiche hier erfüllt.
+Es folgt also, dass die Anforderungen L2 und K2 vollumfänglich erfüllt werden, da beide Durchläufe eine Worst-Case-Abweichung von
+$<\qty{2}{\milli\meter}$ haben. Es ist zu nennen, dass nach den Standardabweichungen, die alle unter \qty{0.5}{\milli\meter} liegen, eine
+deutlich genauere Anfahrt der Übergabeposition zu erwarten ist. Weiter ist zu erkennen, dass ein längerer Hairpin zu mehr Abweichung führt.
+Da aber ein längerer Hairpin nicht vorgesehen ist, sind die Betriebsbereiche hier erfüllt.
 %
 \subsubsection{Vereinzelungssystem: Vereinzelungstreue T-05}\label{sec:VR_Vereinzelungstreue}
 
 \paragraph{Prüfziel}
-Bei der Überprüfung des Vereinzelungssystem wurde die anschließende Überführung in Form der Rutsche direkt mit geprüft. Hier sollen
-wiederkehrende Feherlquellen in diesen Subsystemen detektiert werden und die Anforderungen K1, St1 und L5 validiert werden.
-Durch den vorgelagerten Test T-01 lässt sich eine Fehlerquelle, die bezüglich des Antriebs der Vereinzelung ausgeht, ausschließen.
+Bei der Überprüfung des Vereinzelungssystems wurde die anschließende Überführung in Form der Rutsche direkt mit geprüft. Hier sollen
+wiederkehrende Fehlerquellen in diesen Subsystemen detektiert und die Anforderungen K1, St1 und L5 validiert werden.
+Durch den vorgelagerten Test T-01 lässt sich eine Fehlerquelle, die vom Antrieb der Vereinzelung ausgeht, ausschließen.
 
 \paragraph{Spezifischer Aufbau}
 Der Aufbau entspricht dem Anfang eines Dauerlaufes im Betrieb, wobei ein vereinzelter Hairpin manuell aus dem Trichter der Überführung
 genommen wird. Dieser Ablauf startet mit dem Beladen von 25 Hairpins auf die Vibrationsschiene und der nachfolgenden Vereinzelung
-der Hairpins aus dem Bündel. Diese Rutschen dann wie im Normalbetrieb die Überführung runter und der Ablauf wird hier gestoppt.
-Nach einem Fehlerprotokoll werden während des Druchganges alle Probleme oder Auffälligkeiten notiert. Besonders zur Begründung
-der Anforderung St1 wurden vier unterschiedliche Hairpin-Geometerien gewählt. Hierbei waren nicht nur äußeren Maße verschieden
-sondern auch die Biegung am Kopf des Hairpins. Der Endeffektor(Sperrklinken) der Linearstangen war fest auf eine Version (TestV1)
-festgelegt und wurde nicht variert.
+der Hairpins aus dem Bündel. Diese rutschen dann wie im Normalbetrieb die Überführung hinunter, und der Ablauf wird hier gestoppt.
+Nach einem Fehlerprotokoll werden während des Durchganges alle Probleme oder Auffälligkeiten notiert. Besonders zur Begründung
+der Anforderung St1 wurden vier unterschiedliche Hairpin-Geometrien gewählt. Hierbei waren nicht nur die äußeren Maße verschieden,
+sondern auch die Biegung am Kopf des Hairpins. Der Endeffektor (Sperrklinken) der Linearstangen war fest auf eine Version (TestV1)
+festgelegt und wurde nicht variiert.
 
 \paragraph{Ergebnis}
 An den verschiedenen Fehlerquoten in \cref{tab:mess_T05} lässt sich direkt erkennen, dass die Vereinzelung stark von den Hairpin-Geometrien
-abhängt. Insteressant ist jedoch, dass die Hairpinlänge keinen Einfluss auf eben diese Fehlerquoten hat, da die Hairpin-Varianten 
-C und D den größten Längenunterschied von 39mm mit den geringesten Fehlerquoten haben. Weiter muss analysiert in welchem System genau
-die Fehler aufgetreten sind. So zeigt sich, dass wenn eine zu den Sperrklinken passende Hairpin-Geometrie gewählt wurde, keine Fehler
-in der Vereinzelung auftreten. Vergleicht man Variante A und C so treten diese erst im späteren Verlauf durch die Rutsche auf. Zu Variante
-A ist zu nennen, dass die Beine nicht sauber Entgratet wurden und sich schneller in der Rutsche verhaken konnten. An Variante B ist
-klar die Geomoetrie Abhängigkeit zu den Sperrklinken, hier wurde ein nicht passende Geometrie gewählt und es traten einschließlich
-in der Vereinzelung fehler auf.
+abhängt. Interessant ist jedoch, dass die Hairpinlänge keinen Einfluss auf eben diese Fehlerquoten hat, da die Hairpin-Varianten
+C und D den größten Längenunterschied von \qty{39}{\milli\meter} mit den geringsten Fehlerquoten aufweisen. Weiter muss analysiert werden,
+in welchem System genau die Fehler aufgetreten sind. So zeigt sich, dass keine Fehler in der Vereinzelung auftreten, wenn eine zu den
+Sperrklinken passende Hairpin-Geometrie gewählt wurde. Vergleicht man Variante A und C, so treten diese erst im späteren Verlauf durch die
+Rutsche auf. Zu Variante A ist zu nennen, dass die Beine nicht sauber entgratet wurden und sich schneller in der Rutsche verhaken konnten.
+An Variante B ist die Geometrieabhängigkeit zu den Sperrklinken klar zu erkennen: Hier wurde eine nicht passende Geometrie gewählt, und es
+traten einschließlich in der Vereinzelung Fehler auf.
 
 \paragraph{Bewertung}
-Dieses Messergebnis zeigt klare Verletzung der Anforderung St1, da das System nicht direkt mit jeder Hairpin-Geometrie einwandfrei
-funktioniert. Da aber durch eine gute Kalibirierung und eine der Hairpin-Geometrie angepassten Sperrklinken Kombination, dennoch
-ein fehlerarmer Betrieb möglich ist. Dies setzt zwar die Wunschanforderung B2 aus, weil das Bedienperson zu Beginn eines Hairpin-Geometrie
-wechsels die Endeffektoren der Vereinzelung austasuchen oder anpassne muss. Weiter sind beschädigte Hairpins nicht mit diesem System
-kompatibel. Bei einer perfekten der Anlage ist sind die anderne Anforderung tortzdem erfüllt.
+Dieses Messergebnis zeigt eine klare Verletzung der Anforderung St1, da das System nicht direkt mit jeder Hairpin-Geometrie einwandfrei
+funktioniert. Dennoch ist durch eine gute Kalibrierung und eine der Hairpin-Geometrie angepasste Sperrklinken-Kombination ein
+fehlerarmer Betrieb möglich. Dies setzt zwar die Wunschanforderung B2 aus, weil die Bedienperson zu Beginn eines
+Hairpin-Geometriewechsels die Endeffektoren der Vereinzelung austauschen oder anpassen muss. Weiter sind beschädigte Hairpins nicht mit
+diesem System kompatibel. Bei einer perfekten Kalibrierung der Anlage sind die anderen Anforderungen trotzdem erfüllt.
 
 %
 \subsubsection{Dauerlauf T-08}\label{sec:VR_Durchsatz}
 
-Der Dauerlauf stellt das gesamte System auf die Probe. Alle Subsysteme müssen zusammen arbeiten und in allen Schnittstellen 
-funktionieren. Wie in der Realsisierung (vgl. \cref{sec:Realisierungsstand}) erklärt, werden bis jetzt keine der geplanten
-Prozesssensoren verwendet und eine Steurung erfolgt nach festen Zeiten. Aus diesem Grund sind an vielen Stellen in der Prozessketten
-erhöhte Wartezeiten eingebaut, die zur Erhöhung der Prozesssicherheit dienen. Aktuell liegt diese Druchlaufszeit bei 43sekunden 
+Der Dauerlauf stellt das gesamte System auf die Probe. Alle Subsysteme müssen zusammenarbeiten und in allen Schnittstellen
+funktionieren. Wie in der Realisierung (vgl.\ \cref{sec:Realisierungsstand}) erklärt, werden bis jetzt keine der geplanten
+Prozesssensoren verwendet, und eine Steuerung erfolgt nach festen Zeiten. Aus diesem Grund sind an vielen Stellen in der Prozesskette
+erhöhte Wartezeiten eingebaut, die zur Erhöhung der Prozesssicherheit dienen. Aktuell liegt diese Durchlaufzeit bei \qty{43}{\second}
 und erfüllt damit Anforderung L1. Werden in Zukunft auch die Prozesssensoren mit einbezogen, lässt sich dieses Zeitintervall weiter
-minimieren. 
+minimieren.
 
-Auch die Übergabe des Hairpins an den Roboterarm erfolgt Zeit gesteuert und bedarf einer genauen Kalibrierung und 
-Synchronisation durch den Bediener. Der Test spiegelt den Dauerlauf wieder, wobei der Roboterarm aber keine vollständige 
-Fahrt zum Laser druchführt, sondern nur die Aufnahme, ein kurzes Bewegen und das Abgeben des Hairpins durchläuft. 
-Die Wahl des Hairpins belief sich auf eine zu den Endeffektoren der Vereinzelung kompatiblen Geometrie.
-Es wurden drei Druchläufe a n = 25 durchgeführt. In der ersten Messreihe entstanden drei Timeout Fehler zwischen Roboterarm und
-Zuführsystem, die sich aber durch eine optimeirten Kalibirerung minimiert werden konnten. In den nächsten beiden Druchläufen
-gab es wiederum jeweils eine Fehler in der Vereinzelung druch Verharkung. Sonst lief hier alles Einwandfrei.
+Auch die Übergabe des Hairpins an den Roboterarm erfolgt zeitgesteuert und bedarf einer genauen Kalibrierung und
+Synchronisation durch den Bediener. Der Test spiegelt den Dauerlauf wider, wobei der Roboterarm aber keine vollständige
+Fahrt zum Laser durchführt, sondern nur die Aufnahme, ein kurzes Bewegen und das Abgeben des Hairpins durchläuft.
+Die Wahl des Hairpins belief sich auf eine zu den Endeffektoren der Vereinzelung kompatible Geometrie.
+Es wurden drei Durchläufe à $n = 25$ durchgeführt. In der ersten Messreihe entstanden drei Timeout-Fehler zwischen Roboterarm und
+Zuführsystem, die aber durch eine optimierte Kalibrierung minimiert werden konnten. In den nächsten beiden Durchläufen
+gab es wiederum jeweils einen Fehler in der Vereinzelung durch Verhakung. Sonst lief hier alles einwandfrei.
 
 \subsubsection{Beschädigungen T-09}\label{sec:VR_Beschädigung}
 \paragraph{Prüfziel}
@@ -365,4 +383,3 @@ gab es wiederum jeweils eine Fehler in der Vereinzelung druch Verharkung. Sonst 
 %- Was passiert, wenn ein Subsystem, Spannungsversorgung versagt?\\
 %- FMEA Betrachtung!\\
 %- Sicherheitsregeln für Produktionsanlagen?\\
-
