@@ -1,6 +1,6 @@
 \subsection{Messwerte der Verifikationsversuche}\label{sec:AnhangMesswerte}
 Die folgenden Tabellen enthalten die Rohdaten der in \cref{tab:pruefplan} aufgeführten
-Verifikationsversuche. Die Spalte \emph{RUN} bezeichnet den fortlaufenden Durchlauf
+Verifikationsversuche. Die Spalte \emph{Durchlauf} bezeichnet den fortlaufenden Durchlauf
 einer Messreihe.
 
 Die Messprotokolle wurden in Skalenteilen der Messuhr geführt. Bei einem
@@ -73,6 +73,7 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 %----------------------------------------------------------------------
 % T-02
 %----------------------------------------------------------------------
+
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-02: Vibrationseinheit]{Messwerte des Versuchs T-02 zur
@@ -80,7 +81,7 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
     Beladung geordnet. Setup: Anfahren des Endschalters, Vibration, einige Schritte
     höher, anschließend Messung der Abweichung. $x$ bezeichnet den Ablesewert,
     $\Delta$ die Abweichung vom Mittelwert der jeweiligen Messreihe nach
-    \cref{eq:abweichung}. Die Masse ist aus der Stückzahl und der protokollierten
+    \cref{eq:abweichung}. Die Masse ist aus der Stückzahl und der
     Einzelmasse von \qty{22.9}{\gram} je Hairpin berechnet. Fortsetzung in
     \cref{tab:mess_T02b}.}
   \label{tab:mess_T02a}
@@ -168,50 +169,6 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
   \end{tabular}
 \end{table}
 
-Die in \cref{tab:mess_T02a,tab:mess_T02b} angegebenen Kennwerte $s$ und $R$ beziehen
-sich auf die jeweils vollständige Messreihe. Sie sind nur eingeschränkt als
-Streuungsmaß zu lesen, da die Ablesewerte innerhalb einer Messreihe zwischen zwei
-wiederkehrenden Niveaus wechseln und der Mittelwert damit zwischen beiden Niveaus zu
-liegen kommt. Dies zeigt sich auch im Vorzeichenwechsel der Spalte $\Delta$ von
-Durchlauf zu Durchlauf. Eine getrennte Auswertung der beiden Niveaus findet sich in
-\cref{tab:mess_T02_zustaende}.
-
-\begin{table}[htbp]
-  \centering
-  \caption[T-02: Auswertung nach Niveaus]{Getrennte Auswertung der beiden
-    wiederkehrenden Ablesenivaus aus \cref{tab:mess_T02a,tab:mess_T02b}. Die Zuordnung erfolgt
-    über den Median der jeweiligen Messreihe. Die Amplitude bezeichnet den Abstand
-    der beiden Niveaumittelwerte und ist als einzige Kenngröße dieses Versuchs
-    unabhängig vom Normierungswert.}
-  \label{tab:mess_T02_zustaende}
-  \small
-  \begin{tabular}{@{}r S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]@{}}
-    \toprule
-    \textbf{Beladung} & \multicolumn{2}{c}{\textbf{unteres Niveau}}
-      & \multicolumn{2}{c}{\textbf{oberes Niveau}} & {\textbf{Amplitude}} \\
-    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-6}
-    {Hairpins} & {$\bar{x}$} & {$s$} & {$\bar{x}$} & {$s$} & {$\Delta\bar{x}$} \\
-    & {\unit{\milli\meter}} & {\unit{\milli\meter}} & {\unit{\milli\meter}}
-    & {\unit{\milli\meter}} & {\unit{\milli\meter}} \\
-    \midrule
-      0 & 0.053 & 0.051 & 0.364 & 0.096 & 0.312 \\
-     10 & 0.546 & 0.098 & 0.836 & 0.007 & 0.290 \\
-     25 & 0.470 & 0.018 & 0.794 & 0.015 & 0.324 \\
-     40 & 0.150 & 0.060 & 0.520 & 0.008 & 0.370 \\
-     60 & 2.812 & 0.098 & 3.171 & 0.134 & 0.359 \\
-     80 & 3.204 & 0.003 & 3.495 & 0.006 & 0.292 \\
-    100 & 0.000 & 0.000 & 3.566 & 2.142 & 3.566 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Für die Beladungen von 10 bis 80 Hairpins liegt die Amplitude zwischen
-\qty{0.290}{\milli\meter} und \qty{0.370}{\milli\meter} und zeigt damit keine
-ausgeprägte Abhängigkeit von der Beladung. Die Messreihe mit 100 Hairpins fällt aus
-diesem Bild heraus: 13 der 20 Ablesungen betragen exakt null, die übrigen streuen mit
-$s = \qty{2.142}{\milli\meter}$ ohne erkennbare Systematik. Bei einer Beladung von
-\qty{2.29}{\kilo\gram} führt die Vibrationseinheit die Bewegung folglich in der
-Mehrzahl der Durchläufe nicht mehr aus.
 
 %----------------------------------------------------------------------
 % T-03
@@ -221,23 +178,44 @@ Mehrzahl der Durchläufe nicht mehr aus.
   \caption[Messwerte T-03: Transportsystem]{Messwerte des Versuchs T-03 zur
     Positionsstreuung des Transportsystems im open loop. Setup: Endstop anfahren,
     3000 Schritte zurück und halten, 200 Schritte hin und her, 300 Schritte extra
-    für die Messung. Normierung auf 350.}
+    für die Messung. $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom
+    Mittelwert der Messreihe nach \cref{eq:abweichung}.}
   \label{tab:mess_T03}
   \small
-  \begin{tabular}{@{}cS[table-format=3.1]cS[table-format=3.1]@{}}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}c *{2}{S[table-format=+1.3]}@{}}
     \toprule
-    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{RUN} & {\textbf{Abweichung}} \\
+    & \multicolumn{2}{c}{\textbf{Transportsystem}} \\
+    \cmidrule(l){2-3}
+    \multicolumn{1}{@{}l}{Normierung / \unit{\milli\meter}} & \multicolumn{2}{c}{3.50} \\
     \midrule
-     1 & 359   & 11 & 358.5 \\
-     2 & 358   & 12 & 358.5 \\
-     3 & 358.5 & 13 & 362   \\
-     4 & 358.5 & 14 & 359   \\
-     5 & 359   & 15 & 359   \\
-     6 & 358   & 16 & 364   \\
-     7 & 358.5 & 17 & 358.5 \\
-     8 & 360.5 & 18 & 359   \\
-     9 & 360   & 19 & 359   \\
-    10 & 358   & 20 & 360   \\
+    \textbf{Durchlauf} & {$x$} & {$\Delta$} \\
+    & {\unit{\milli\meter}} & {\unit{\milli\meter}} \\
+    \midrule
+     1 & 3.590 & -0.003 \\
+     2 & 3.580 & -0.013 \\
+     3 & 3.585 & -0.008 \\
+     4 & 3.585 & -0.008 \\
+     5 & 3.590 & -0.003 \\
+     6 & 3.580 & -0.013 \\
+     7 & 3.585 & -0.008 \\
+     8 & 3.605 & +0.012 \\
+     9 & 3.600 & +0.007 \\
+    10 & 3.580 & -0.013 \\
+    11 & 3.585 & -0.008 \\
+    12 & 3.585 & -0.008 \\
+    13 & 3.620 & +0.027 \\
+    14 & 3.590 & -0.003 \\
+    15 & 3.590 & -0.003 \\
+    16 & 3.640 & +0.047 \\
+    17 & 3.585 & -0.008 \\
+    18 & 3.590 & -0.003 \\
+    19 & 3.590 & -0.003 \\
+    20 & 3.600 & +0.007 \\
+    \midrule
+    \multicolumn{1}{@{}l}{Mittelwert $\bar{x}$} & 3.593 & \\
+    \multicolumn{1}{@{}l}{Standardabw. $s$} &  & 0.015 \\
+    \multicolumn{1}{@{}l}{Spanne $R$} &  & 0.060 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -249,35 +227,103 @@ Mehrzahl der Durchläufe nicht mehr aus.
   \centering
   \caption[Messwerte T-04: Fixierungssystem]{Messwerte des Versuchs T-04 zur
     Lagetreue des Hairpins in der Fixierung. Setup: Teilung in zwei Richtungen,
-    reines Aufstellen und seitliche Verschiebung. Normierung auf 50.}
+    reines Aufstellen und seitliche Verschiebung. $x$ bezeichnet den Ablesewert,
+    $\Delta$ die Abweichung vom Mittelwert der Messreihe nach
+    \cref{eq:abweichung}. Im Messprotokoll wurden zu einzelnen Durchläufen
+    Beobachtungen vermerkt: In Durchlauf~2 wurde der Hairpin im Trichter gelassen,
+    in Durchlauf~3 schalteten die Servos voll durch und in Durchlauf~4 erfolgte
+    keine Vibration der Linearachse.}
   \label{tab:mess_T04}
   \small
-  \begin{tabularx}{\textwidth}{@{}cS[table-format=2.1]X@{}}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}c *{2}{S[table-format=+1.3]}@{}}
     \toprule
-    \textbf{RUN} & {\textbf{Abweichung}} & \textbf{Bemerkung} \\
+    & \multicolumn{2}{c}{\textbf{Fixierungssystem}} \\
+    \cmidrule(l){2-3}
+    \multicolumn{1}{@{}l}{Normierung / \unit{\milli\meter}} & \multicolumn{2}{c}{0.50} \\
     \midrule
-     1 & 21   & Normierung auf 50 \\
-     2 & 71.5 & Hairpin wird im Trichter gelassen \\
-     3 & 61.5 & Servos schalten voll durch \\
-     4 & 64.5 & keine Vibration der Linearachse \\
-     5 & 60   & \\
-     6 & 49   & \\
-     7 & 39.5 & \\
-     8 & 71   & \\
-     9 & 40   & \\
-    10 & 63   & \\
-    11 & 64   & \\
-    12 & 31.5 & \\
-    13 & 47   & \\
-    14 & 45   & \\
-    15 & 62   & \\
-    16 & 20   & \\
-    17 & 19   & \\
-    18 & 61   & \\
-    19 & 56   & \\
-    20 & 49.5 & \\
+    \textbf{Durchlauf} & {$x$} & {$\Delta$} \\
+    & {\unit{\milli\meter}} & {\unit{\milli\meter}} \\
+    \midrule
+     1 & 0.210 & -0.288 \\
+     2 & 0.715 & +0.217 \\
+     3 & 0.615 & +0.117 \\
+     4 & 0.645 & +0.147 \\
+     5 & 0.600 & +0.102 \\
+     6 & 0.490 & -0.008 \\
+     7 & 0.395 & -0.103 \\
+     8 & 0.710 & +0.212 \\
+     9 & 0.400 & -0.098 \\
+    10 & 0.630 & +0.132 \\
+    11 & 0.640 & +0.142 \\
+    12 & 0.315 & -0.183 \\
+    13 & 0.470 & -0.028 \\
+    14 & 0.450 & -0.048 \\
+    15 & 0.620 & +0.122 \\
+    16 & 0.200 & -0.298 \\
+    17 & 0.190 & -0.308 \\
+    18 & 0.610 & +0.112 \\
+    19 & 0.560 & +0.062 \\
+    20 & 0.495 & -0.003 \\
+    \midrule
+    \multicolumn{1}{@{}l}{Mittelwert $\bar{x}$} & 0.498 & \\
+    \multicolumn{1}{@{}l}{Standardabw. $s$} &  & 0.167 \\
+    \multicolumn{1}{@{}l}{Spanne $R$} &  & 0.525 \\
     \bottomrule
-  \end{tabularx}
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+% T-06
+%----------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \caption[Messwerte T-06: Servomotoren des Fixierungssystems]{Messwerte des
+    Versuchs T-06 zu den Servomotoren des Fixierungssystems. Setup: 20 Durchläufe
+    je Seite. $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom Mittelwert
+    der jeweiligen Messreihe nach \cref{eq:abweichung}. Bei Servo~2 konnte die
+    Messuhr nur schlecht platziert werden, weshalb dort mit einer erhöhten
+    Messunsicherheit zu rechnen ist; für Servo~3 war die Platzierung besser. Die
+    Messreihe von Servo~3 weist eine gerichtete Drift auf, sodass $s$ und $R$ dort
+    nicht die Streuung, sondern im Wesentlichen den Betrag dieser Drift wiedergeben.}
+  \label{tab:mess_T06}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}c *{4}{S[table-format=+1.3]}@{}}
+    \toprule
+     & \multicolumn{2}{c}{\textbf{Servo 2}} & \multicolumn{2}{c}{\textbf{Servo 3}} \\
+    \cmidrule(lr){2-3}\cmidrule(l){4-5}
+    \multicolumn{1}{@{}l}{Normierung / \unit{\milli\meter}} & \multicolumn{2}{c}{3.50} & \multicolumn{2}{c}{3.50} \\
+    \midrule
+    \textbf{Durchlauf} & {$x$} & {$\Delta$} & {$x$} & {$\Delta$} \\
+     & {\unit{\milli\meter}} & {\unit{\milli\meter}} & {\unit{\milli\meter}} & {\unit{\milli\meter}} \\
+    \midrule
+     1 & 1.760 & +0.005 & 3.430 & +0.119 \\
+     2 & 1.720 & -0.036 & 3.420 & +0.109 \\
+     3 & 1.760 & +0.005 & 3.430 & +0.119 \\
+     4 & 1.765 & +0.010 & 3.400 & +0.089 \\
+     5 & 1.760 & +0.005 & 3.395 & +0.084 \\
+     6 & 1.750 & -0.006 & 3.370 & +0.059 \\
+     7 & 1.760 & +0.005 & 3.365 & +0.054 \\
+     8 & 1.760 & +0.005 & 3.330 & +0.019 \\
+     9 & 1.760 & +0.005 & 3.310 & -0.002 \\
+    10 & 1.760 & +0.005 & 3.290 & -0.022 \\
+    11 & 1.760 & +0.005 & 3.290 & -0.022 \\
+    12 & 1.755 & -0.001 & 3.290 & -0.022 \\
+    13 & 1.765 & +0.010 & 3.280 & -0.032 \\
+    14 & 1.760 & +0.005 & 3.270 & -0.042 \\
+    15 & 1.750 & -0.006 & 3.240 & -0.072 \\
+    16 & 1.755 & -0.001 & 3.250 & -0.062 \\
+    17 & 1.750 & -0.006 & 3.240 & -0.072 \\
+    18 & 1.755 & -0.001 & 3.210 & -0.102 \\
+    19 & 1.750 & -0.006 & 3.210 & -0.102 \\
+    20 & 1.755 & -0.001 & 3.210 & -0.102 \\
+    \midrule
+    \multicolumn{1}{@{}l}{Mittelwert $\bar{x}$} & 1.756 &  & 3.312 &  \\
+    \multicolumn{1}{@{}l}{Standardabw. $s$} &  & 0.010 &  & 0.076 \\
+    \multicolumn{1}{@{}l}{Spanne $R$} &  & 0.045 &  & 0.220 \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
 %----------------------------------------------------------------------
@@ -370,44 +416,6 @@ Mehrzahl der Durchläufe nicht mehr aus.
 
 %----------------------------------------------------------------------
 % T-06
-%----------------------------------------------------------------------
-\begin{table}[htbp]
-  \centering
-  \caption[Messwerte T-06: Servomotoren des Fixierungssystems]{Messwerte des
-    Versuchs T-06 zu den Servomotoren des Fixierungssystems. Setup: 20 Durchläufe
-    je Seite, Normierung auf 350. Bei Servo~2 konnte die Messuhr nur schlecht
-    platziert werden, weshalb dort mit einer erhöhten Messunsicherheit zu rechnen
-    ist. Für Servo~3 war die Platzierung besser.}
-  \label{tab:mess_T06}
-  \small
-  \begin{tabular}{@{}cS[table-format=3.1]S[table-format=3.1]@{}}
-    \toprule
-    \textbf{RUN} & {\textbf{Servo 2}} & {\textbf{Servo 3}} \\
-    \midrule
-     1 & 176   & 343   \\
-     2 & 172   & 342   \\
-     3 & 176   & 343   \\
-     4 & 176.5 & 340   \\
-     5 & 176   & 339.5 \\
-     6 & 175   & 337   \\
-     7 & 176   & 336.5 \\
-     8 & 176   & 333   \\
-     9 & 176   & 331   \\
-    10 & 176   & 329   \\
-    11 & 176   & 329   \\
-    12 & 175.5 & 329   \\
-    13 & 176.5 & 328   \\
-    14 & 176   & 327   \\
-    15 & 175   & 324   \\
-    16 & 175.5 & 325   \\
-    17 & 175   & 324   \\
-    18 & 175.5 & 321   \\
-    19 & 175   & 321   \\
-    20 & 175.5 & 321   \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 %----------------------------------------------------------------------
 % T-07
 %----------------------------------------------------------------------

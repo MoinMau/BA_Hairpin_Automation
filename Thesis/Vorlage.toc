@@ -137,34 +137,34 @@
 \contentsline {paragraph}{\nonumberline Prüfziel}{56}{paragraph*.61}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{56}{paragraph*.62}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.63}%
-\contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.64}%
-\contentsline {subsubsection}{\numberline {6.1.5}Fixierungssytem: Hairpinaufstellung T-04}{56}{subsubsection.arabicsection.6.1.5}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{56}{paragraph*.65}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{56}{paragraph*.66}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.67}%
+\contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.64}%
+\contentsline {subsubsection}{\numberline {6.1.5}Fixierungssytem: Hairpinaufstellung T-04}{57}{subsubsection.arabicsection.6.1.5}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.65}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.66}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.67}%
 \contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.68}%
-\contentsline {subsubsection}{\numberline {6.1.6}Fixierungssytem: Kraftklemmen Seite T-06}{57}{subsubsection.arabicsection.6.1.6}%
+\contentsline {subsubsection}{\numberline {6.1.6}Fixierungssytem: seitliche Kraftklemmen Seite T-06}{57}{subsubsection.arabicsection.6.1.6}%
 \contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.69}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.70}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.71}%
-\contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.72}%
-\contentsline {subsection}{\numberline {6.2}Systemtest im Gesamtablauf}{57}{subsection.arabicsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Versuchsaufbau und Durchführung}{57}{subsubsection.arabicsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Versuchsreihe Wiederholgenauigkeit T-07}{57}{subsubsection.arabicsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.3}Versuchsreihe Dauerlauf T-05, T-08}{57}{subsubsection.arabicsection.6.2.3}%
-\contentsline {subsubsection}{\numberline {6.2.4}Versuchsreihe Beschädigung T-09}{57}{subsubsection.arabicsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.3}Fehlerbetrachtung}{57}{subsection.arabicsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Bewertung gegen Anforderungsliste}{57}{subsection.arabicsection.6.4}%
-\contentsline {section}{\numberline {7}Diskussion}{58}{section.arabicsection.7}%
-\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{58}{subsection.arabicsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{58}{subsubsection.arabicsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagsbetrieb}{58}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungsvorschläge}{58}{subsubsection.arabicsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{58}{subsection.arabicsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Ausblick}{58}{subsection.arabicsection.7.3}%
-\contentsline {section}{\numberline {8}Zusammenfassung}{59}{section.arabicsection.8}%
-\contentsline {section}{\numberline {A}Literatur}{60}{appendix.A}%
-\contentsline {section}{\numberline {B}Anhang}{63}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Messwerte der Verifikationsversuche}{65}{subsection.B.1}%
-\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{73}{appendix.C}%
+\contentsline {paragraph}{\nonumberline Bewertung}{58}{paragraph*.72}%
+\contentsline {subsection}{\numberline {6.2}Systemtest im Gesamtablauf}{58}{subsection.arabicsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Versuchsaufbau und Durchführung}{58}{subsubsection.arabicsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Versuchsreihe Wiederholgenauigkeit T-07}{58}{subsubsection.arabicsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Versuchsreihe Dauerlauf T-05, T-08}{58}{subsubsection.arabicsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Versuchsreihe Beschädigung T-09}{58}{subsubsection.arabicsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.3}Fehlerbetrachtung}{58}{subsection.arabicsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Bewertung gegen Anforderungsliste}{58}{subsection.arabicsection.6.4}%
+\contentsline {section}{\numberline {7}Diskussion}{59}{section.arabicsection.7}%
+\contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{59}{subsection.arabicsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Probleme}{59}{subsubsection.arabicsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Bewertung für den Alltagsbetrieb}{59}{subsubsection.arabicsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Verbesserungsvorschläge}{59}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Erkenntnisse \& Limitationen}{59}{subsection.arabicsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Ausblick}{59}{subsection.arabicsection.7.3}%
+\contentsline {section}{\numberline {8}Zusammenfassung}{60}{section.arabicsection.8}%
+\contentsline {section}{\numberline {A}Literatur}{61}{appendix.A}%
+\contentsline {section}{\numberline {B}Anhang}{64}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Messwerte der Verifikationsversuche}{66}{subsection.B.1}%
+\contentsline {section}{\numberline {C}Eidesstattliche Versicherung}{74}{appendix.C}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

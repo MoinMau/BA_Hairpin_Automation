@@ -39,9 +39,8 @@ sollte dies aber wieder in betracht gezogen werden.
          & L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
     T-03 & Positionsstreuung des Transportsystems nach Referenzfahrt
          & L2, K2 & \texttt{c52c878} & $20$ \\
-    T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellen und
-           seitliche Verschiebung
-         & L2, L4 & \texttt{1f3c873} & $20$ \\
+    T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellung
+         & L2 & \texttt{1f3c873} & $20$ \\
     T-06 & Positionstreue der seitlichen Kraftklemmen, gemessen
             an Angriffsflächen
          & L2, K2 & \texttt{--} & $4\times25$ \\
@@ -139,7 +138,7 @@ beantwortet und die Servomotoren der Vereinzekung sollten keine Fehlerquelle im 
 
 \paragraph{Prüfziel}
 Das maßgebliche Ziel dieser Messreihe ist der Nachweis für die Anforderung L3, da dieses System als einziges Nadelöhr für die
-Zuladung der Hairpins gilt. Weiter werden die Anfroederungen B1 und L5 geprüft, wobei hierfür keine kontkreten Messwerte erhoben
+Zuladung der Hairpins gilt. Weiter werden die Anfroederungen B1 und L5 (vgl. \cref{tab:anforderungen}) geprüft, wobei hierfür keine kontkreten Messwerte erhoben
 werden, sondern eine Bewertung nach Kriterien der ausführenden Testperson erfolgt.
 
 \paragraph{Spezifischer Aufbau}
@@ -163,44 +162,82 @@ jedoch klar die Überlastung des Systms zu erklennen. Die Spanne dieser Messreih
 ist. Weiter ist noch zu nennen, das es während dieser Messreihen keine Probleme bezüglich des verhakens von Hairpins gab und
 diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden und ein weitere Eingriff 
 war zu keinem Zeitpunkt nötig.
-\paragraph{Bewertung}
 
-%
+\paragraph{Bewertung}
+Da die beschriebenen Abweichung für den Betrieb des Vereinzleungssystem für eine Anzhal von bis zu 40 Hairpins im Rahmen bleiben,
+ist die wichtigeste Anroderung L3 erfüllt. Zudem lässt sich das System sogar über die Anroderungen hinaus mit maximal 80 Hairpins (1,832kg) 
+belasten. Auch die anderen Anforderungen sind durch die Beobachtungen während der Messungen bestätigt. 
+
 \subsubsection{Transportsystem T-03}
 
 \paragraph{Prüfziel}
+In diesem Test wird ähnlich zu dem ersten Test ein bestimmter Aktuator überprüft. Im Transprotsystem hat der Schrittmotor dabei große
+Einwirkung auf die in Anorderung L2 und K2 (vgl. \cref{tab:anforderungen})festgelegte genaue Positionierung des Hairpins bei der Übergabe an den Roboterarm.
 
 \paragraph{Spezifischer Aufbau}
+Der Tastkopf der Messuhr wurde wie in den bereits druchgeführten Messreihen an der maximalen Auslenkung des Schlittens des Transportsystems
+platziert. Die Schritte eines Druchlaufes sahen die Initialsierung mittels Endstop, dann eine schnelle Fahrt mit Abbremsen und einem doppelten
+Richtungswechsel und einer schlussendlich langsamen Fahrt zum definierten Endpunkt.
 
 \paragraph{Ergebnis}
+Die gemessene Standardabweichung liegt bei 0,015mm und die Spanne bei 0,06mm. Diese beide Werte zeigen die enorme Präzension dieses
+Systems auf. Es gab keine Asureißer und damit kein Fehlerhaftes verhalten.
 
 \paragraph{Bewertung}
-
+Dadurch das die gemessenne Werte weit unter der gefordernten Abweichung von < 2mm liegt, kann dieses Subsystem zu keinem Fehler in
+der gesamt Postionierung des Hairpins sein. 
 %
 \subsubsection{Fixierungssytem: Hairpinaufstellung T-04}
 
 \paragraph{Prüfziel}
+Für die positionsgenaue Übergabe müssen die Hairpins im Fixiersystem auf eine korekte Aufstellung kontrolliert werden. Es wird also
+überprüft, ob die Hauptklemme (vgl. \cref{fig:Kraftschlussklemme}) den Hairpin waagerecht und wiederholend aufstellt. Dies dient dem
+Nachweiß für die Schrittweise Betrachtung der Anforderung L2.
 
 \paragraph{Spezifischer Aufbau}
+In diesem Test wurden außschließlich die Kraftklemmen bewegt. Der Transprotschlitten wurde auf eine Postion festgelegt und der Tastkopf
+an der Oberseite des Hairpins angesetzt. Hierbei ist zu beachten, dass wegen der Länge des Hairpins und dem dadurch resultierende
+verstärkt wirkenden Hebelkraft dies Messung auf erhebliche Abweichungen kommen kann. Auch ist ein gleicher Antastpunkt beim wiederholten
+Durchführen der Messreihen schwer zu realisieren, da die Hairpins eine geringe Breite haben. 
+Der allgemeine Druchlauf sah vor, dass der Prüfhairpin dauerhaft im Behälter blieb und nur die Kraftklemmen jedesmal schlossen.
 
 \paragraph{Ergebnis}
+Trotz der vorhin beschriebenen Messprobleme ergab dieser Durchlauf eine Standardabweichung von nur 0,167mm. Auch die Maximale Spanne
+belief sich auf 0,525mm.
 
 \paragraph{Bewertung}
+Beide Werte zeigen, dass wie bei T-03 dieses Teilsystem der Anroderung L2 nicht entgegensteht. Dennoch müssen im weiteren Verlauf 
+die Messungenaugkeiten durch weitere Tests minimiert werden. Außerdem ist der seitliche Versatz des Hairpins nicht berücksichtigt
+worden.
 
-%
-\subsubsection{Fixierungssytem: Kraftklemmen Seite T-06}
+
+\subsubsection{Fixierungssytem: seitliche Kraftklemmen Seite T-06}
 
 \paragraph{Prüfziel}
+Für die Überprüfung der seitlichen sollen zunächst die beiden dafür benötigten Kraftklemmen verifiziert werden. Die entspricht dementsprechend
+auch dem Kontrollieren der beiden Servomotoren der jeweiligen Achse.
 
 \paragraph{Spezifischer Aufbau}
+Der Aufbau sieht vor den Tastkopf direkt auf den Oberflächen der seitlichen Kraftklemmen zu platzieren. Diese Messreihe wurde für je
+eine Seite durchgeführt. Hierbei ist zu erwähnen, dass wegen der Größe der vorhandenen Messuhr keine optimale Platzierung im Behälter
+möglich war. Da diese Postionierung aber in der Messriehe sleber nicht verändert worden ist, lassen sich die Werte innerhalb der
+Messreihe weiter vergleichen und bewerten. Ein Durchlauf sah vor jede Klemme ein mal ganz ein zu fahren und danach auf die kalibrierte 
+Position aus fahren zu lassen. 
 
 \paragraph{Ergebnis}
-
+Bei der ersten Messreihe mit der rechten Seite (Servo2) wurde eine sehr geringe Standardabweichung von 0,01mm und Spanne von 0,045mm
+gemessen. Bei der zweiten Messreihe mit der linken Seite (Servo3) wurde eine etwas höhere Standardabweichung von 0,076 und Spanne von
+0,22 ermittelt. Dies etwas erhöhten Werte lassen sich auf das Material zurückzuführen, da beim genauerm Betrachten eine abfallende
+Tendenz der Messwerte zu sehen ist. 
 \paragraph{Bewertung}
+Beide Messreihen erfüllen dennoch die in Anforderung L2 vorgegebene Positionsgenauigkeit. Für die Auffälligkeit in der zweiten Messreihe
+könnten durch die Konstruktion und das Material bedingten Ungenauigkeiten entstehen. So haben die Kraftklemmen bei einer höheren Kraftbelastung
+druch die Reibung von PLA auf PLA einen erhöhten Widerstand für die Linearebewegung druch die Servomotoren. Dies stellt aber kein Problem
+dar, weil die Betriebsbereiche sowieso eingehalten werden und die Belastung im Normalfall nicht auftreten sollten.
 
-%
+
 \subsection{Systemtest im Gesamtablauf}\label{sec:Systemtest}
-%
+
 \subsubsection{Versuchsaufbau und Durchführung}\label{sec:Versuchsaufbau}
 - Wie werden die Tests gemacht?\\
 - Worauf muss geachtet werden?\\
