@@ -701,6 +701,9 @@ INPUT ./docs/Messwerte.tex
 INPUT ./docs/Messwerte.tex
 INPUT ./docs/Messwerte.tex
 INPUT docs/Messwerte.tex
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr8.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr6.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
@@ -712,6 +715,7 @@ OUTPUT Vorlage.run.xml
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi8.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmib10.pfb

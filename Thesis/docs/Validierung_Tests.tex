@@ -36,7 +36,7 @@ sollte dies aber wieder in betracht gezogen werden.
          & -- & \texttt{64c26cc} & $2\times10$ \\
     T-02 & Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung
            (0 bis 100 Hairpins)
-         & St1, L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
+         & L3, L5, B1 & \texttt{f0a308a} & $6\times20$ \\
     T-03 & Positionsstreuung des Transportsystems nach Referenzfahrt
          & L2, K2 & \texttt{c52c878} & $20$ \\
     T-04 & Lagetreue des Hairpins in der Fixierung, Aufstellen und
@@ -97,9 +97,9 @@ bei jedem Durchlauf vorhanden ist. Zur Minimierung von Ableseungenauigkeiten wur
 Köperhaltung und optimale Draufsicht geachtet. Für die Überwindung der minimalen Kraft druch die mechanische Feder in der Messuhr
 muss hier individuell nach Messung beurteilt werden, wie ausschlaggebend diese Einwirkung auf das Messergebnis ist.
 
-Jeder Versuch wird mit n 20 Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische für den ersten Test dargestellt
+Jeder Versuch wird mit n 20 Durchläufen ausgeführt. In \cref{fig:PosTastkop_T-01} ist der spezifische Aufbau für den ersten Test dargestellt
 und soll für eine bessere Vorstellung der anderen Aufbauten dienen. Die jeweiligen Messwerte der Tests sind im Anhang unter Messwerte
-dargestellt.
+notiert und aufgearbeitet. In \cref{sec:AnhangMesswerte} werden die Berechnungen der zu den Messwerten erläutert
 
 \subsubsection{Sperrklinken T-01}
 
@@ -122,18 +122,47 @@ je Servomotor aufgeteilt. Zudem wurde der Antastpunkt einmal auf blanken Stahl u
 \end{figure}
 
 \paragraph{Ergebnis}
+Die Werte dieser Messreihe stehen in \cref{tab:mess_T01} und sind bereits mit Mittelwert, Standardabweichung und Spanne R versehen.
+Vergleicht man die beiden Druchläufe (n = 10) so lassen sich für die Messungung direkt auf der Linearstange eine Standardabweichung s
+von 0,011mm und bei der Messung an der Sperrklinke eine Standardabweichung von 0,021mm festestellen. Der doppelte Wert der zweiten
+Messung lässt sich, durch die erhöhte Felxibilität des PLAs des Endeffektors erklären. Auch bei der Betrachtung der Spanne R 
+(0,04mm bei der Linearstange, 0,07mm bei dem Endeffektor) lässt sich feststellen, dass es keinen Messwert Ausreißer in diesen
+Durchläufen gab. Daraus folgt eine kosntante Funktion des Systems ohne ein fehlerhalftes Verhalten.
 
 \paragraph{Bewertung}
-
+Auschlaggebend bei diesem Tests ist der Befund, dass es keine Probleme, wie ein nicht Ausführen von Bewegungen oder einer Überlastung
+der Atkuatoren durch zu weites Ausfahren. Außerdem sind die geringe Standardabweichung ein Zeichen für die hohe Präzision, die der
+Vereinzelung zu gute kommt und eine optimale Präzension erreicht werden kann. Das Prüfziel wurde also mit einem psotivien Fazit 
+beantwortet und die Servomotoren der Vereinzekung sollten keine Fehlerquelle im Verlauf der Arbeit darstellen.
 %
 \subsubsection{Vibrationseinheit T-02}
 
 \paragraph{Prüfziel}
+Das maßgebliche Ziel dieser Messreihe ist der Nachweis für die Anforderung L3, da dieses System als einziges Nadelöhr für die
+Zuladung der Hairpins gilt. Weiter werden die Anfroederungen B1 und L5 geprüft, wobei hierfür keine kontkreten Messwerte erhoben
+werden, sondern eine Bewertung nach Kriterien der ausführenden Testperson erfolgt.
 
 \paragraph{Spezifischer Aufbau}
-
+Der Aufbau ist ähnlich zu dem in \cref{fig:PosTastkop_T-01} abgebildeten Grundaufbau, nur das dir Tastkopf am Ende der Vibrationsschiene
+positioniert wurde. Dazu wurde diese druch die Vibrationseinheit auf ein maximum Ausgefahren und die Messuhr kopfüber auf das Aluminium
+angesetzt. Für die Überprüfung der Anforderungen fährt die Virbrationseinheit feste Schritte, die einen Inialisierung des Schrittmotors,
+ein Vibrationsteil und die Anfahrt auf die maximale Auslenkung beinhaltet. Am Ende eines Durchlaufes lässt sich diese Auslenkung ablesen
+und damit die Korrektheit der Abfahrten verrifizieren. Weiter wurden gestafelte Beladungen mit Hairpins getestet, um nicht nur die 
+Anforderungen zu bestätigen sondern auch die wahren Betriebsgrenzen zu ermitteln.
+ 
 \paragraph{Ergebnis}
-
+Die Messwerte zeigen ein ungewöhnliches Verhalten in der Gleichmäßigkeit auf. So springen die Werte ca. alle zwei Druchläufe um
+einen bestimten Hub. Dies lässt sich nicht eindeutig erklären, da keine Fehler im Code oder mechanischen Aufbau gefunden wurden,
+die ein solches Verhalten verursachen würden. Aus diesem Grund ist die Spanne R und Standardabweichung s etwas erhöhter als Angenommen.
+Dennoch ist intersannt, dass die Standardabweichung bis eine Beladung von 40 Hairpins und dem resultierenden Gesamtgewicht von 0,916kg
+konstant unter 0,2mm bleibt. Auch die maximalen und minimalen Auslenkungen bleiben unter 0,55mm. Ab 60 Hairpins steigen dies Werte
+und die Genauigkeit des Systems wird inkonsistenter. Bei 80 Hairpins ist laut Messung aber trotzdem nochmal ein Optimum erreicht, da der
+Wert der Standardabnweichung hier bei einem Minimum von 0,15mm liegt. Dies lässt sich durch einer noch nciht vorhandenen Überlast des
+Virbationsmotors und den Stabilisrenden Druck druch das Gewicht der Beladung erklären. Ab einem Gewicht von 2,29kg (100 Hairpins) ist 
+jedoch klar die Überlastung des Systms zu erklennen. Die Spanne dieser Messreihe liegt bei 7,7mm, was für eine Betrieb nicht vertretbar
+ist. Weiter ist noch zu nennen, das es während dieser Messreihen keine Probleme bezüglich des verhakens von Hairpins gab und
+diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden und ein weitere Eingriff 
+war zu keinem Zeitpunkt nötig.
 \paragraph{Bewertung}
 
 %

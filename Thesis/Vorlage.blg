@@ -1,17 +1,17 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Vorlage.blg'
-[59] biber-darwin:342> INFO - === Wed Aug 19, 2026, 22:09:28
-[75] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
-[144] Biber.pm:1002> INFO - Found 30 citekeys in bib section 0
-[157] Biber.pm:4487> INFO - Processing section 0
+[59] biber-darwin:342> INFO - === Thu Aug 20, 2026, 11:15:26
+[73] Biber.pm:421> INFO - Reading 'Vorlage.bcf'
+[147] Biber.pm:1002> INFO - Found 30 citekeys in bib section 0
+[159] Biber.pm:4487> INFO - Processing section 0
 [167] Biber.pm:4678> INFO - Looking for bibtex file 'refs/references.bib' for section 0
-[170] bibtex.pm:1713> INFO - LaTeX decoding ...
-[202] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
-[426] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[426] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[426] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
-[426] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
-[469] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
-[500] bbl.pm:779> INFO - Output to Vorlage.bbl
-[501] Biber.pm:132> WARN - I didn't find a database entry for 'Hesse.2020' (section 0)
-[501] Biber.pm:134> INFO - WARNINGS: 1
+[169] bibtex.pm:1713> INFO - LaTeX decoding ...
+[200] bibtex.pm:1519> INFO - Found BibTeX data source 'refs/references.bib'
+[413] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[413] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[413] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'de-DE'
+[413] Biber.pm:4313> INFO - No sort tailoring available for locale 'de-DE'
+[445] bbl.pm:676> INFO - Writing 'Vorlage.bbl' with encoding 'UTF-8'
+[460] bbl.pm:779> INFO - Output to Vorlage.bbl
+[460] Biber.pm:132> WARN - I didn't find a database entry for 'Hesse.2020' (section 0)
+[460] Biber.pm:134> INFO - WARNINGS: 1
