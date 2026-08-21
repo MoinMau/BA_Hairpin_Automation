@@ -143,10 +143,11 @@ Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm 
 \centering
 \begin{tikzpicture}[
   font=\footnotesize,
-  block/.style={draw, rounded corners, minimum width=3.6cm, minimum height=0.8cm,
+  block/.style={draw=figKontur, line width=0.6pt, rounded corners,
+                minimum width=3.6cm, minimum height=0.8cm,
                 align=center, fill=white},
-  io/.style={align=center, font=\footnotesize\itshape},
-  flow/.style={-{Stealth[length=2.4mm]}, thick},
+  io/.style={align=center, font=\footnotesize\itshape, text=figText},
+  flow/.style={-{Stealth[length=2.4mm]}, thick, figAkzent},
   node distance=4mm
 ]
 \node[io] (in) {Hairpin-Vorrat};
@@ -170,13 +171,18 @@ Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm 
 \draw[flow] (pos)  -- (ueb);
 \draw[flow] (ueb)  -- (out);
 
-\node[draw, dashed, rounded corners, inner sep=6pt, fit=(bev)(nach)(ver)] (s1) {};
-\node[right=3mm of s1, align=left, font=\footnotesize\bfseries] {Vereinzelungs-\\system};
+\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=6pt,
+      fit=(bev)(nach)(ver)] (s1) {};
+\node[right=3mm of s1, align=left, font=\footnotesize\bfseries, text=figAkzent]
+      {Vereinzelungs-\\system};
 
-\node[draw, dashed, rounded corners, inner sep=6pt, fit=(fix)(tra)(pos)(ueb)] (s2) {};
-\node[right=3mm of s2, align=left, font=\footnotesize\bfseries] {Zuführ-\\system};
+\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=6pt,
+      fit=(fix)(tra)(pos)(ueb)] (s2) {};
+\node[right=3mm of s2, align=left, font=\footnotesize\bfseries, text=figAkzent]
+      {Zuführ-\\system};
 
-\node[left=3mm of ufh, align=right, font=\footnotesize\itshape] {Schnittstelle};
+\node[left=3mm of ufh, align=right, font=\footnotesize\itshape, text=figText]
+      {Schnittstelle};
 \end{tikzpicture}
 \caption{Funktionsstruktur des Gesamtsystems; der Teilefluss (Hairpin) verläuft von
 oben nach unten. Das Überführen bildet die Schnittstelle zwischen den beiden
@@ -191,8 +197,8 @@ Kasten soll den Entscheidungsprozess übersichtlich veranschaulichen. Wichtig is
 in einigen Fällen mehrere Funktionen zusammen lösen kann. Für eine bessere Übersicht wurden für die \cref{tab:morph}
 bereits vier Prinzipien je Teilfunktion im vorhinein festgelegt.
 
-\definecolor{groupgray}{gray}{0.90}
-\definecolor{kogray}{gray}{0.55}
+\colorlet{groupgray}{RWTHBlau25}
+\colorlet{kogray}{figKonturHell}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcommand{\altA}[1]{\cellcolor{groupgray}\textbf{#1}\,\textsuperscript{A}} % gewählt
 \newcommand{\altB}[1]{#1\,\textsuperscript{B}}                                 % Variante B

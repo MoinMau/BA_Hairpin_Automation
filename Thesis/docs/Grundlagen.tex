@@ -56,13 +56,13 @@ Die Produktion von Hairpin-Statoren kann je nach Anforderungen oder Stator-Art v
 Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion aber den in \cref{fig:Produktionsablauf} dargestellten Verlauf.
 
 \newcommand{\nr}[1]{%
-  \tikz[baseline=(n.base)]{\node[circle,fill=rwthblau,text=white,
+  \tikz[baseline=(n.base)]{\node[circle,fill=figAkzent,text=white,
     font=\sffamily\bfseries\tiny,inner sep=0.6pt,minimum size=3.3mm] (n) {#1};}}
 
 % #1 = eindeutiger Name, #2 = fit-Liste, #3 = Beschriftung
 \newcommand{\phasenband}[3]{%
   \node[fit=#2,inner sep=0pt,draw=none] (#1) {};
-  \draw[fill=rwthblau,draw=rwthblau,rounded corners=2pt]
+  \draw[fill=figAkzent,draw=figAkzent,rounded corners=2pt]
     ($(#1.north west)+(-12mm,1.5mm)$) rectangle ($(#1.south west)+(-4mm,-1.5mm)$);
   \node[rotate=90,text=white,font=\sffamily\bfseries\tiny,align=center,text width=13mm]
     at ($(#1.west)+(-8mm,0)$) {#3};}
@@ -71,12 +71,12 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
 
 \begin{tikzpicture}[
   font=\sffamily\scriptsize,
-  s/.style={draw=rwthblau75,line width=0.6pt,fill=rwthblau10,rounded corners=2pt,
+  s/.style={draw=figAkzentMittel,line width=0.6pt,fill=figAkzentZart,rounded corners=2pt,
     text width=2.45cm,align=left,inner xsep=4pt,inner ysep=4pt,minimum height=9.5mm},
-  hl/.style={s,draw=rwthblau,line width=1.1pt,fill=rwthblau25},
-  f/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthblau75,line width=0.6pt},
-  fw/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthgrau,line width=0.6pt},
-  alt/.style={-{Stealth[length=1.8mm,width=1.4mm]},rwthblau,line width=0.6pt,
+  hl/.style={s,draw=figAkzent,line width=1.1pt,fill=figAkzentFlaeche},
+  f/.style={-{Stealth[length=1.8mm,width=1.4mm]},figAkzentMittel,line width=0.6pt},
+  fw/.style={-{Stealth[length=1.8mm,width=1.4mm]},figKontur,line width=0.6pt},
+  alt/.style={-{Stealth[length=1.8mm,width=1.4mm]},figAkzent,line width=0.6pt,
     dash pattern=on 1.3mm off 0.9mm},
 ]
 
@@ -116,7 +116,7 @@ Grundsätzlich folgt der Ablauf der einzelnen Prozesse in der Serienproduktion a
 
 % ===== Alternative Position in der Prototypenfertigung =====
 \draw[alt] (s2.north) -- ++(0,6mm) -- ($(s4.north)+(0,6mm)$) -- ($(s4.north)+(0,0.5pt)$);
-\node[font=\sffamily\scriptsize,text=rwthblau,anchor=south,inner sep=1.5pt]
+\node[font=\sffamily\scriptsize,text=figAkzent,anchor=south,inner sep=1.5pt]
   at ($(s2.north)!0.5!(s4.north)+(0,6mm)$) {Prototypenfertigung: Abisolieren nach dem Biegen};
 
 % ===== Phasenbänder =====
@@ -265,22 +265,25 @@ Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregt
   \resizebox{\linewidth}{!}{%
   \begin{tikzpicture}[
     font=\small,
-    lvl/.style     = {draw=gray!75, thin},
-    elec/.style    = {draw=gray!60, thin, fill=violet!55},
+    % Struktur (Niveaus, Spiegel, Pumpe) grau, Energie (Photon, Strahl,
+    % Elektron) blau - so ist auf einen Blick sichtbar, was traegt und
+    % was wirkt.
+    lvl/.style     = {draw=figKonturHell, thin},
+    elec/.style    = {draw=figAkzent, thin, fill=figAkzent},
     photon/.style  = {decorate, decoration={snake, amplitude=0.5mm,
                       segment length=1.8mm, post length=1.6mm},
-                      draw=orange!85, line width=0.5pt,
+                      draw=figAkzent, line width=0.5pt,
                       -{Latex[length=1.6mm,width=1.3mm]}},
-    trans/.style   = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85},
-    lbl/.style     = {font=\scriptsize, text=gray!85},
-    pan/.style     = {font=\scriptsize, text=gray!70},
-    mirror/.style  = {draw=gray!70, line width=1pt, fill=gray!25},
-    mirrorout/.style = {draw=gray!70, line width=1pt, fill=gray!8},
-    medium/.style  = {draw=teal!70, thin, fill=teal!12},
-    pump/.style    = {draw=violet!60, thin, fill=violet!10},
-    beam/.style    = {draw=orange!80, line width=0.6pt},
+    trans/.style   = {-{Latex[length=1.8mm,width=1.4mm]}, thin, figKontur},
+    lbl/.style     = {font=\scriptsize, text=figText},
+    pan/.style     = {font=\scriptsize, text=figText},
+    mirror/.style  = {draw=figKontur, line width=1pt, fill=figFlaecheTief},
+    mirrorout/.style = {draw=figKontur, line width=1pt, fill=figFlaeche},
+    medium/.style  = {draw=figAkzentMittel, thin, fill=figAkzentZart},
+    pump/.style    = {draw=figKontur, thin, fill=figFlaeche},
+    beam/.style    = {draw=figAkzent, line width=0.6pt},
     dim/.style     = {{Latex[length=1.4mm,width=1.1mm]}-{Latex[length=1.4mm,width=1.1mm]},
-                      thin, gray!70}
+                      thin, figKonturHell}
   ]
 
   %% ============================================================
@@ -334,13 +337,13 @@ Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregt
     \draw[medium] (3.6,-0.7) rectangle (8.4,0.7);
     \foreach \x in {4.0,4.6,...,8.2} {
       \foreach \y in {-0.42,0,0.42} {
-        \fill[violet!45] (\x,\y) circle (0.055);}}
+        \fill[figAkzentMittel] (\x,\y) circle (0.055);}}
 
     %% Spiegel
     \draw[mirror]    (1.5,-1.15)   rectangle (1.85,1.15);
     \draw[mirrorout] (10.15,-1.15) rectangle (10.5,1.15);
     \foreach \y in {-1.0,-0.8,...,1.0} {
-      \draw[gray!60, line width=0.3pt] (1.5,\y) -- (1.85,\y+0.13);}
+      \draw[figKonturHell, line width=0.3pt] (1.5,\y) -- (1.85,\y+0.13);}
 
     %% im Resonator umlaufender Strahl
     \draw[beam, -{Latex[length=1.8mm,width=1.4mm]}] (1.9,0.28) -- (10.1,0.28);
@@ -356,7 +359,7 @@ Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregt
     \draw[pump] (3.6,-2.5) rectangle (8.4,-1.8);
     \node[font=\scriptsize] at (6.0,-2.15) {Pumpquelle};
     \foreach \x in {4.2,5.1,...,8.0} {
-      \draw[-{Latex[length=1.6mm,width=1.3mm]}, violet!65, thin]
+      \draw[-{Latex[length=1.6mm,width=1.3mm]}, figAkzentMittel, thin]
             (\x,-1.75) -- (\x,-0.78);}
 
     %% Beschriftungen
@@ -541,13 +544,13 @@ Kraft erreicht wird.
 \centering
 \begin{tikzpicture}[
   font=\sffamily\scriptsize,
-  wand/.style={draw=rwthgrau,line width=0.7pt,pattern=north east lines,
-               pattern color=rwthgrau!60},
-  lbl/.style={font=\sffamily\scriptsize,text=rwthgrau},
-  leader/.style={rwthgrau,line width=0.4pt},
-  luft/.style={-{Stealth[length=2mm,width=1.6mm]},rwthblau,line width=0.8pt},
+  wand/.style={draw=figKontur,line width=0.7pt,pattern=north east lines,
+               pattern color=figKonturHell},
+  lbl/.style={font=\sffamily\scriptsize,text=figText},
+  leader/.style={figKonturHell,line width=0.4pt},
+  luft/.style={-{Stealth[length=2mm,width=1.6mm]},figAkzent,line width=0.8pt},
   bem/.style={{Stealth[length=1.6mm,width=1.3mm]}-{Stealth[length=1.6mm,width=1.3mm]},
-              rwthblau,line width=0.5pt},
+              figAkzent,line width=0.5pt},
 ]
 \def\xl{0}   \def\xr{9}      % Rohr aussen
 \def\yb{0}   \def\yt{2.6}
@@ -556,8 +559,8 @@ Kraft erreicht wird.
 \def\yrb{1.02} \def\yrt{1.58}% Kolbenstange
 
 % ---- Kammern ----
-\fill[rwthblau25] (\xl+\w,\yb+\w) rectangle (\xk,\yt-\w);
-\fill[rwthblau10] (\xk+\dk,\yb+\w) rectangle (\xr-\w,\yt-\w);
+\fill[figAkzentFlaeche] (\xl+\w,\yb+\w) rectangle (\xk,\yt-\w);
+\fill[figAkzentZart] (\xk+\dk,\yb+\w) rectangle (\xr-\w,\yt-\w);
 \fill[white] (\xk+\dk,\yrb) rectangle (\xr-\w,\yrt);
 
 % ---- Zylinderrohr ----
@@ -566,16 +569,16 @@ Kraft erreicht wird.
 \fill[wand] (\xl,\yb) rectangle (\xl+\w,\yt);
 \fill[wand] (\xr-\w,\yb) rectangle (\xr,\yrb);
 \fill[wand] (\xr-\w,\yrt) rectangle (\xr,\yt);
-\draw[draw=rwthgrau,line width=0.7pt] (\xl,\yb) rectangle (\xr,\yt);
+\draw[draw=figKontur,line width=0.7pt] (\xl,\yb) rectangle (\xr,\yt);
 
 % ---- Kolben + Stange ----
-\fill[rwthblau75,draw=rwthblau,line width=0.7pt]
+\fill[figTeilFlaeche,draw=figAkzent,line width=0.7pt]
      (\xk,\yb+\w) rectangle (\xk+\dk,\yt-\w);
-\fill[rwthblau25,draw=rwthblau,line width=0.7pt]
+\fill[figAkzentFlaeche,draw=figAkzent,line width=0.7pt]
      (\xk+\dk,\yrb) rectangle (10.6,\yrt);
 
-\draw[rwthblau,line width=0.5pt] (\xk,\yb+\w+0.12) -- (\xk+\dk,\yb+\w+0.12);
-\draw[rwthblau,line width=0.5pt] (\xk,\yt-\w-0.12) -- (\xk+\dk,\yt-\w-0.12);
+\draw[figAkzent,line width=0.5pt] (\xk,\yb+\w+0.12) -- (\xk+\dk,\yb+\w+0.12);
+\draw[figAkzent,line width=0.5pt] (\xk,\yt-\w-0.12) -- (\xk+\dk,\yt-\w-0.12);
 
 % ---- Anschluesse ----
 \draw[wand] (0.9,\yt) rectangle (1.5,\yt+0.42);
@@ -584,15 +587,15 @@ Kraft erreicht wird.
 \draw[luft] (7.8,\yt+0.1) -- (7.8,\yt+0.95);
 
 % ---- Bewegungsrichtung ----
-\draw[-{Stealth[length=3mm,width=2.4mm]},rwthblau,line width=1.1pt]
+\draw[-{Stealth[length=3mm,width=2.4mm]},figAkzent,line width=1.1pt]
      (9.9,2.15) -- (11.6,2.15);
-\node[lbl,text=rwthblau,anchor=south] at (10.75,2.27) {Ausfahren};
+\node[lbl,text=figAkzent,anchor=south] at (10.75,2.27) {Ausfahren};
 
 % ---- Bemassung ----
 \draw[bem] ($(\xk,\yb+\w)+(-0.35,0)$) -- ($(\xk,\yt-\w)+(-0.35,0)$);
-\node[lbl,text=rwthblau,anchor=east] at ($(\xk,1.3)+(-0.42,0)$) {$d_\mathrm{K}$};
+\node[lbl,text=figAkzent,anchor=east] at ($(\xk,1.3)+(-0.42,0)$) {$d_\mathrm{K}$};
 \draw[bem] (10.85,\yrb) -- (10.85,\yrt);
-\node[lbl,text=rwthblau,anchor=west] at (10.95,1.3) {$d_\mathrm{St}$};
+\node[lbl,text=figAkzent,anchor=west] at (10.95,1.3) {$d_\mathrm{St}$};
 
 % ---- Beschriftungen ----
 \node[lbl,anchor=south] at (1.2,\yt+1.02) {Zuluft, Anschluss 1};
@@ -603,7 +606,7 @@ Kraft erreicht wird.
 \node[lbl,anchor=north] at (\xk+0.5*\dk,-0.72) {Kolben};
 \draw[leader] (9.9,\yrb) -- (9.9,-0.75);
 \node[lbl,anchor=north] at (9.9,-0.72) {Kolbenstange};
-\node[lbl,text=rwthblau] at (1.9,1.3) {$p$};
+\node[lbl,text=figAkzent] at (1.9,1.3) {$p$};
 
 \end{tikzpicture}
 \caption[Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders]{Schnittzeichnung eines doppeltwirkenden Pneumatikzylinders}
@@ -643,11 +646,13 @@ Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren d
     font=\small,
     box/.style   = {draw, thin, rounded corners=2pt, align=center,
                     minimum width=32mm, minimum height=13mm},
-    chain/.style = {box, fill=violet!8,  draw=violet!55},
-    fb/.style    = {box, fill=orange!10, draw=orange!60},
-    sig/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, gray!85},
-    dsig/.style  = {sig, dashed, dash pattern=on 1.4mm off 1mm},
-    lbl/.style   = {font=\scriptsize, text=gray!85}
+    % Vorwaertskette blau (Wirkrichtung), Rueckfuehrung grau gestrichelt.
+    chain/.style = {box, fill=figAkzentZart, draw=figAkzentMittel},
+    fb/.style    = {box, fill=figFlaeche,    draw=figKontur},
+    sig/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, figAkzent},
+    dsig/.style  = {-{Latex[length=2mm,width=1.6mm]}, thin, figKontur,
+                    dashed, dash pattern=on 1.4mm off 1mm},
+    lbl/.style   = {font=\scriptsize, text=figText}
   ]
     \node[chain]                                       (steu) {Steuerung\\[-3pt]{\scriptsize Sollwertvorgabe}};
     \node[chain, right=16mm of steu]                   (mot)  {Motor\\[-3pt]{\scriptsize rotatorisch}};
@@ -681,14 +686,17 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
   \centering
   \begin{tikzpicture}[
     font=\small,
-    stat/.style   = {draw=gray!70,   thin, fill=gray!12},
-    live/.style   = {draw=orange!80, thin, fill=orange!25},
-    coil/.style   = {draw=violet!70, line width=0.35pt},
-    coilon/.style = {draw=orange!90, line width=0.5pt},
-    rotN/.style   = {draw=gray!60, thin, fill=violet!25},
-    rotS/.style   = {draw=gray!60, thin, fill=teal!18},
-    lbl/.style    = {font=\scriptsize, text=gray!85},
-    mov/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85}
+    % Bestromt = blau und kraeftig, unbestromt = grau und hell.
+    % N- und S-Pol trennen sich zusaetzlich ueber die Flaechenhelligkeit,
+    % damit die Zuordnung auch im Graustufendruck lesbar bleibt.
+    stat/.style   = {draw=figKontur,  thin, fill=figFlaeche},
+    live/.style   = {draw=figAkzent,  thin, fill=figAkzentFlaeche},
+    coil/.style   = {draw=figKonturHell, line width=0.35pt},
+    coilon/.style = {draw=figAkzent,     line width=0.6pt},
+    rotN/.style   = {draw=figKontur, thin, fill=figTeilFlaeche},
+    rotS/.style   = {draw=figKontur, thin, fill=figFlaeche},
+    lbl/.style    = {font=\scriptsize, text=figText},
+    mov/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, figAkzent}
   ]
 
   %% #1 = x-Versatz, #2 = Polwinkel, #3 = Stil
@@ -711,11 +719,11 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
     \begin{scope}[shift={(#1,0)}, rotate=#2]
       \fill[rotN] (-0.9,0) arc (180:0:0.9) -- cycle;
       \fill[rotS] ( 0.9,0) arc (0:-180:0.9) -- cycle;
-      \draw[gray!60, thin] (0,0) circle (0.9);
-      \draw[gray!60, thin] (-0.9,0) -- (0.9,0);
+      \draw[figKontur, thin] (0,0) circle (0.9);
+      \draw[figKontur, thin] (-0.9,0) -- (0.9,0);
       \node[font=\scriptsize, rotate={-(#2)}] at (0, 0.45) {N};
       \node[font=\scriptsize, rotate={-(#2)}] at (0,-0.45) {S};
-      \fill[gray!45] (0,0) circle (0.13);
+      \fill[figKontur] (0,0) circle (0.13);
     \end{scope}}
 
   %% ---------------- Zustand 1 ----------------
@@ -768,12 +776,12 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \centering
   \resizebox{\linewidth}{!}{%
   \begin{tikzpicture}[
-    motor/.style = {draw=gray!70,   thin, fill=gray!18},
-    trans/.style = {draw=teal!70,   thin, fill=teal!15},
-    carr/.style  = {draw=violet!70, thin, fill=violet!12},
-    lbl/.style   = {font=\fontsize{11}{13}\selectfont, text=gray!85},
-    tit/.style   = {font=\fontsize{14}{16}\selectfont},
-    mov/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, gray!85}
+    motor/.style = {draw=figKontur,       thin, fill=figFlaeche},
+    trans/.style = {draw=figAkzentMittel, thin, fill=figAkzentFlaeche},
+    carr/.style  = {draw=figAkzent, line width=0.8pt, fill=figTeilFlaeche},
+    lbl/.style   = {font=\fontsize{11}{13}\selectfont, text=figText},
+    tit/.style   = {font=\fontsize{14}{16}\selectfont, text=figAkzent},
+    mov/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, figAkzent}
   ]
 
   %% ================= Spindeltrieb =================
@@ -782,7 +790,7 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \fill[motor] (0,0) rectangle (1.4,1.4);       \draw[motor] (0,0) rectangle (1.4,1.4);
   \fill[trans] (1.4,0.55) rectangle (6.4,0.85); \draw[trans] (1.4,0.55) rectangle (6.4,0.85);
   \foreach \x in {1.6,1.9,2.2,2.5,3.9,4.2,4.5,4.8,5.1,5.4,5.7,6.0}
-    {\draw[teal!60, thin] (\x,0.55) -- (\x+0.2,0.85);}
+    {\draw[figAkzentMittel, thin] (\x,0.55) -- (\x+0.2,0.85);}
   \fill[carr]  (2.8,0.25) rectangle (3.8,1.15); \draw[carr]  (2.8,0.25) rectangle (3.8,1.15);
   \fill[motor] (6.4,0.45) rectangle (6.6,0.95); \draw[motor] (6.4,0.45) rectangle (6.6,0.95);
 
@@ -791,7 +799,7 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \node[lbl, anchor=south] at (3.3, 1.22) {Mutter};
   \draw[mov] (2.9,-1.75) -- (4.2,-1.75);
 
-  \draw[gray!30, thin] (7.6,-2.15) -- (7.6,2.4);
+  \draw[figKonturHell, thin] (7.6,-2.15) -- (7.6,2.4);
 
   %% ================= Zahnriementrieb =================
   \node[tit] at (12.5,2.6) {Zahnriementrieb};
@@ -799,10 +807,10 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \fill[motor] (8.5,0) rectangle (9.9,1.4);     \draw[motor] (8.5,0) rectangle (9.9,1.4);
   \fill[trans] (10.5,0.7) circle (0.6);         \draw[trans] (10.5,0.7) circle (0.6);
   \fill[trans] (14.5,0.7) circle (0.6);         \draw[trans] (14.5,0.7) circle (0.6);
-  \draw[teal!70, thin] (10.5,1.3) -- (14.5,1.3);
-  \draw[teal!70, thin] (10.5,0.1) -- (14.5,0.1);
-  \draw[teal!70, thin] (14.5,1.3) arc (90:-90:0.6);
-  \draw[teal!70, thin] (10.5,1.3) arc (90:270:0.6);
+  \draw[figAkzentMittel, thin] (10.5,1.3) -- (14.5,1.3);
+  \draw[figAkzentMittel, thin] (10.5,0.1) -- (14.5,0.1);
+  \draw[figAkzentMittel, thin] (14.5,1.3) arc (90:-90:0.6);
+  \draw[figAkzentMittel, thin] (10.5,1.3) arc (90:270:0.6);
   \fill[carr] (12.0,1.3) rectangle (13.0,1.85); \draw[carr] (12.0,1.3) rectangle (13.0,1.85);
 
   \node[lbl, anchor=north] at (9.2,-0.05)  {Motor};
@@ -810,7 +818,7 @@ verwendet werden, da hier hohe Geschwindigkeiten und lange Strecken möglich sin
   \node[lbl, anchor=south] at (12.5,1.92)  {Schlitten};
   \draw[mov] (11.8,-1.75) -- (13.1,-1.75);
 
-  \draw[gray!30, thin] (16.1,-2.15) -- (16.1,2.4);
+  \draw[figKonturHell, thin] (16.1,-2.15) -- (16.1,2.4);
 
   %% ================= Zahnstangentrieb =================
   \node[tit] at (21.0,2.6) {Zahnstangentrieb};
@@ -898,18 +906,21 @@ arbeiten.
   \begin{tikzpicture}[
     font=\small,
     box/.style    = {draw, thin, rounded corners=2pt, align=center},
-    master/.style = {box, fill=violet!10, draw=violet!60,
+    % Hierarchie ueber die Blaustufe: Master kraeftig, Slave mittel,
+    % Peripherie neutral grau.
+    master/.style = {box, fill=figAkzentFlaeche, draw=figAkzent, line width=0.8pt,
                      minimum width=32mm, minimum height=11mm},
-    slave/.style  = {box, fill=teal!12,   draw=teal!65,
+    slave/.style  = {box, fill=figAkzentZart,    draw=figAkzentMittel,
                      minimum width=24mm, minimum height=11mm},
-    peri/.style   = {box, fill=gray!8,    draw=gray!60,
+    peri/.style   = {box, fill=figFlaeche,       draw=figKontur,
                      minimum width=24mm, minimum height=8mm,
                      font=\scriptsize},
-    bus/.style    = {draw=gray!75, line width=1pt},
-    stub/.style   = {draw=gray!75, thin},
-    sig/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, gray!85},
-    dsig/.style   = {sig, dashed, dash pattern=on 1.2mm off 0.9mm},
-    lbl/.style    = {font=\scriptsize, text=gray!85}
+    bus/.style    = {draw=figAkzent, line width=1pt},
+    stub/.style   = {draw=figAkzentMittel, thin},
+    sig/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, figKontur},
+    dsig/.style   = {-{Latex[length=1.8mm,width=1.4mm]}, thin, figKontur,
+                     dashed, dash pattern=on 1.2mm off 0.9mm},
+    lbl/.style    = {font=\scriptsize, text=figText}
   ]
 
   %% ---------------- Master ----------------
@@ -1068,9 +1079,11 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
 \begin{figure}[htbp]
   \centering
   \begin{circuitikz}[
-      hl/.style={draw=orange!80!red, line width=2.4pt, opacity=.45},
-      ar/.style={-{Latex[length=3mm,width=2.6mm]}, draw=orange!80!red,
-                 line width=2.4pt, opacity=.75}
+      % Der Strompfad wird blau hinterlegt; die Schaltung selbst bleibt
+      % schwarz, damit die Hinterlegung als eigene Ebene lesbar ist.
+      hl/.style={draw=figAkzent, line width=2.4pt, opacity=.30},
+      ar/.style={-{Latex[length=3mm,width=2.6mm]}, draw=figAkzent,
+                 line width=2.4pt, opacity=.65}
     ]
 
     %% ---- Strompfad, durchgehend hinterlegt ----

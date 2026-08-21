@@ -70,11 +70,11 @@ dennoch eine geeignete Lösung.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    aussen/.style  = {fill=gray!20, draw=black, line width=0.6pt},
-    bohrung/.style = {fill=white,   draw=black, line width=0.6pt},
-    innen/.style   = {fill=gray!55, draw=black, line width=0.6pt},
-    bez/.style     = {font=\footnotesize, align=center},
-    titel/.style   = {font=\footnotesize}
+    aussen/.style  = {fill=figFlaeche,      draw=figKontur,     line width=0.6pt},
+    bohrung/.style = {fill=white,           draw=figKontur,     line width=0.6pt},
+    innen/.style   = {fill=figTeilFlaeche,  draw=figTeilKontur, line width=0.6pt},
+    bez/.style     = {font=\footnotesize, align=center, text=figText},
+    titel/.style   = {font=\footnotesize, text=figText}
   ]
 
 % ------------------------------------------------ (a) Konstruktion im CAD
@@ -85,7 +85,7 @@ dennoch eine geeignete Lösung.
   \node[font=\tiny] at (0,0) {Zapfen};
   \node[font=\tiny] at (-0.95,-1.08) {Lagerauge};
   \node[bez] (la) at (0,2.05) {geplanter Spalt};
-  \draw[thin] (la.south) -- (0.51,0.51);
+  \draw[thin, figKonturHell] (la.south) -- (0.51,0.51);
   \node[titel] at (0,-1.9) {(a) Konstruktion des Gelenks};
 \end{scope}
 
@@ -95,9 +95,9 @@ dennoch eine geeignete Lösung.
   \draw[bohrung] (0,0) circle (0.85);
   \draw[innen]   (0,0) circle (0.60);
   \foreach \a in {30,120,210,300}{%
-    \draw[line width=2.2pt] (\a:0.57) -- (\a:0.88);}
+    \draw[line width=2.2pt, figAkzent] (\a:0.57) -- (\a:0.88);}
   \node[bez] (lb) at (0,2.05) {Materialbrücken als\\Sollbruchstelle};
-  \draw[thin] (lb.south) -- (30:0.72);
+  \draw[thin, figKonturHell] (lb.south) -- (30:0.72);
   \node[titel] at (0,-1.9) {(b) nach dem 3D-Druck};
 \end{scope}
 % ------------------------------------------------ (c) nach dem Loesen
@@ -105,9 +105,9 @@ dennoch eine geeignete Lösung.
   \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
   \draw[bohrung] (0,0) circle (0.85);
   \draw[innen]   (0,0) circle (0.60);
-  \draw[->, line width=0.9pt] (-50:0.42) arc (-50:190:0.42);
+  \draw[->, line width=0.9pt, figAkzent] (-50:0.42) arc (-50:190:0.42);
   \node[bez] (lc) at (0,2.05) {ein rotatorischer\\Freiheitsgrad};
-  \draw[thin] (lc.south) -- (0.51,0.51);
+  \draw[thin, figKonturHell] (lc.south) -- (0.51,0.51);
   \node[titel] at (0,-1.9) {(c) nach dem Lösen};
 \end{scope}
 
@@ -352,17 +352,18 @@ Servomotor weiter.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    block/.style  = {draw=black, line width=0.6pt, rounded corners=2pt,
+    block/.style  = {draw=figKontur, line width=0.6pt, rounded corners=2pt,
                      align=center, font=\small, text width=34mm,
                      minimum height=11mm, inner sep=3pt},
-    master/.style = {block, fill=gray!25, text width=40mm},
-    slave/.style  = {block, fill=gray!12},
+    master/.style = {block, fill=figAkzentFlaeche, draw=figAkzent,
+                     line width=1pt, text width=40mm},
+    slave/.style  = {block, fill=figAkzentZart, draw=figAkzentMittel},
     io/.style     = {block, fill=white},
-    akt/.style    = {block, fill=gray!5},
-    sig/.style    = {-{Stealth[length=2.2mm]}, line width=0.7pt},
+    akt/.style    = {block, fill=figFlaeche},
+    sig/.style    = {-{Stealth[length=2.2mm]}, line width=0.7pt, figKontur},
     bidir/.style  = {{Stealth[length=2.2mm]}-{Stealth[length=2.2mm]},
-                     line width=0.7pt},
-    lbl/.style    = {font=\footnotesize, fill=white, inner sep=1.5pt}
+                     line width=0.7pt, figKontur},
+    lbl/.style    = {font=\footnotesize, fill=white, inner sep=1.5pt, text=figText}
   ]
 
 % ------------------------------------------------------------- Knoten
@@ -398,10 +399,10 @@ Servomotor weiter.
 
 % ------------------------------------------------------------- Ebenen
 \begin{scope}[on background layer]
-  \node[draw=gray, dashed, rounded corners=3pt, inner sep=6pt,
+  \node[draw=figAkzentMittel, dashed, rounded corners=3pt, inner sep=6pt,
         fit=(uno)(nano)] (ebene2) {};
 \end{scope}
-\node[font=\footnotesize\itshape, gray, anchor=south west, yshift=0.6mm]
+\node[font=\footnotesize\itshape, text=figAkzent, anchor=south west, yshift=0.6mm]
       at (ebene2.north west) {Slave-Ebene};
 
 \end{tikzpicture}

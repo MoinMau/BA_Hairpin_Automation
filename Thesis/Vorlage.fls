@@ -308,6 +308,16 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcirclabel.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcircvoltage.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcirccurrent.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/circuitikz/pgfcircflow.tex
+INPUT ./styles/rwthcolors.tex
+INPUT ./styles/rwthcolors.tex
+INPUT ./styles/rwthcolors.tex
+INPUT ./styles/rwthcolors.tex
+INPUT styles/rwthcolors.tex
+INPUT ./styles/abbildungsstil.tex
+INPUT ./styles/abbildungsstil.tex
+INPUT ./styles/abbildungsstil.tex
+INPUT ./styles/abbildungsstil.tex
+INPUT styles/abbildungsstil.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty

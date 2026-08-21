@@ -135,24 +135,21 @@
 	\usepackage{svg}
 	\usepackage{graphicx}
 
+	%Farben: muss vor tikz und vor den RWTH-Farbdefinitionen geladen werden.
+	\usepackage{xcolor}
+
 	%für Grafiken direkt in Latex:
 	\usepackage{tikz}
    	\usetikzlibrary{positioning, arrows.meta, fit, decorations.pathmorphing, backgrounds, calc, patterns}
 	\usepackage[european]{circuitikz}
 	\ctikzset{tripoles/mos style/arrows}
 
-	%RWTH Farben, bitte gegenprüfen!
-\definecolor{rwthblau}{RGB}{0,84,159}       % 00549F
-\definecolor{rwthgruen}{RGB}{87,171,39}     % 57AB27
-\definecolor{rwthorange}{RGB}{246,168,0}    % F6A800
-\definecolor{rwthbordeaux}{RGB}{161,16,53}  % A11035
-\definecolor{rwthgrau}{RGB}{100,101,103}    % 646567
+	%RWTH Corporate-Design-Farben (offizielle Werte, siehe styles/rwthcolors.tex)
+	\input{styles/rwthcolors}
 
-	%RWTH Sekundärabstufungen von Blau (75/50/25/10 %)
-\definecolor{rwthblau75}{RGB}{64,127,183}   % 407FB7
-\definecolor{rwthblau50}{RGB}{142,186,229}  % 8EBAE5
-\definecolor{rwthblau25}{RGB}{199,221,242}  % C7DDF2
-\definecolor{rwthblau10}{RGB}{232,241,250}  % E8F1FA
+	%Einheitliche Bedeutungsebene fuer alle selbst erzeugten Abbildungen.
+	%Muss NACH rwthcolors und nach tikz geladen werden.
+	\input{styles/abbildungsstil}
 
 	%Subfigures
 %	\usepackage{subfig}
@@ -174,9 +171,8 @@
 	%Array für Tabellen
 	\usepackage{array}
 	
-	%Transparent und Farben
+	%Transparent (xcolor ist bereits oben geladen)
 	\usepackage{transparent}	
-	\usepackage{xcolor}
 	
 	%TabularX
 	\usepackage{tabularx}

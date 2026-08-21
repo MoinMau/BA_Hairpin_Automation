@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Einheitlicher Stil fuer alle selbst erzeugten Abbildungen
+%%
+%%  Grundgedanke: Alle TikZ-Grafiken der Arbeit verwenden ausschliesslich
+%%  RWTH-Blau, RWTH-Grau (= Schwarz 75 %) und Schwarz. Statt in den
+%%  einzelnen Abbildungen konkrete Farben zu nennen, wird hier eine
+%%  BEDEUTUNGSEBENE definiert: jede Rolle bekommt einen Namen, die
+%%  Abbildungen benennen nur noch die Rolle. Aendert man eine Zuordnung
+%%  hier, zieht die Aenderung durch das gesamte Dokument.
+%%
+%%  Zwei Ebenen:
+%%    neutral (Grau)  - Rahmen, Gehaeuse, Struktur, unbeteiligte Teile
+%%    aktiv   (Blau)  - Fokus der Abbildung, Signal, bewegte oder
+%%                      bestromte Elemente, das Werkstueck
+%%
+%%  Graustufen-Druck: Blau 100 (Grauwert ~78) und Grau (~101) liegen im
+%%  Schwarzweissdruck dicht beieinander. Eine Unterscheidung wird daher
+%%  NIE allein ueber den Farbton getragen, sondern immer zusaetzlich
+%%  ueber Linienstaerke oder Flaechenhelligkeit. Die unten gewaehlten
+%%  Flaechen sind dafuer bewusst weit auseinandergelegt:
+%%    figFlaeche  ECEDED (~237) | figTeilFlaeche 8EBAE5 (~180)
+%%    figAkzentFlaeche C7DDF2 (~221) wird nur gegen Weiss gesetzt.
+%%
+%%  Benoetigt: styles/rwthcolors.tex muss vorher geladen sein.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% --- neutrale Ebene: Struktur ----------------------------------------
+\colorlet{figKontur}{RWTHSchwarz75}        % 646567  Standardkontur
+\colorlet{figKonturHell}{RWTHSchwarz50}    % 9C9E9F  Hilfs- und Hinterlinien
+\colorlet{figFlaeche}{RWTHSchwarz10}       % ECEDED  neutrale Flaeche
+\colorlet{figFlaecheTief}{RWTHSchwarz25}   % CFD1D2  neutrale Flaeche, kraeftiger
+\colorlet{figText}{RWTHSchwarz75}          % 646567  Beschriftung
+
+%% --- aktive Ebene: Fokus ---------------------------------------------
+\colorlet{figAkzent}{RWTHBlau100}          % 00549F  Hauptakzent
+\colorlet{figAkzentMittel}{RWTHBlau75}     % 407FB7  zweite Stufe
+\colorlet{figAkzentFlaeche}{RWTHBlau25}    % C7DDF2  Akzentflaeche
+\colorlet{figAkzentZart}{RWTHBlau10}       % E8F1FA  Akzentflaeche, sehr hell
+
+%% --- Werkstueck: dokumentweit identisch ------------------------------
+%% Der Hairpin bzw. das gefoerderte Bauteil sieht in JEDER Abbildung
+%% gleich aus. Das ist der optische rote Faden durch die Arbeit.
+\colorlet{figTeilKontur}{RWTHBlau100}
+\colorlet{figTeilFlaeche}{RWTHBlau50}      % 8EBAE5, im S/W-Druck klar dunkler
+
+%% --- Linienstaerken ---------------------------------------------------
+%% Zentral gesetzt, damit alle Abbildungen dieselbe Strichhierarchie
+%% haben. Die Akzentstaerke ist bewusst deutlich groesser, damit die
+%% Unterscheidung auch ohne Farbe traegt.
+\newlength{\figLWfein}   \setlength{\figLWfein}{0.4pt}
+\newlength{\figLWnormal} \setlength{\figLWnormal}{0.6pt}
+\newlength{\figLWakzent} \setlength{\figLWakzent}{1.0pt}
+
+%% --- gemeinsame TikZ-Stile -------------------------------------------
+%% Werden ueber \tikzset global bereitgestellt und koennen in jeder
+%% Abbildung direkt verwendet oder lokal ueberschrieben werden.
+\tikzset{
+  %% Flaechen und Konturen
+  figstruktur/.style   = {draw=figKontur, line width=\figLWnormal, fill=figFlaeche},
+  figstrukturleer/.style = {draw=figKontur, line width=\figLWnormal, fill=white},
+  figaktiv/.style      = {draw=figAkzent, line width=\figLWakzent, fill=figAkzentFlaeche},
+  figteil/.style       = {draw=figTeilKontur, line width=\figLWfein, fill=figTeilFlaeche},
+  %% Beschriftung
+  figlbl/.style        = {font=\sffamily\scriptsize, text=figText},
+  figlblakzent/.style  = {font=\sffamily\scriptsize, text=figAkzent},
+  %% Pfeile
+  figpfeil/.style      = {-{Stealth[length=2mm,width=1.6mm]}, draw=figKontur,
+                          line width=\figLWnormal},
+  figpfeilakzent/.style= {-{Stealth[length=2mm,width=1.6mm]}, draw=figAkzent,
+                          line width=\figLWakzent},
+  figpfeilfein/.style  = {-{Stealth[length=1.6mm,width=1.3mm]}, draw=figKonturHell,
+                          line width=\figLWfein},
+  figmass/.style       = {{Stealth[length=1.4mm,width=1.1mm]}-{Stealth[length=1.4mm,width=1.1mm]},
+                          draw=figAkzent, line width=\figLWfein},
+}

@@ -1,0 +1,126 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Farbpalette des RWTH Corporate Design
+%%
+%%  Quelle: offizielle CD-Farbdefinitionen der RWTH Aachen,
+%%          gespiegelt unter github.com/ifs-rwth-aachen/RWTH-Colors
+%%          (LaTeX/rwthcolors.tex und CSS/rwth-colors.css, gegengeprueft
+%%           am 21.08.2026 - beide Quellen stimmen exakt ueberein).
+%%
+%%  Die RWTH definiert eine Hausfarbe (Blau) und elf Sekundaerfarben,
+%%  jede in fuenf Abstufungen: 100 / 75 / 50 / 25 / 10 Prozent.
+%%  Die Abstufungen sind KEINE rechnerischen Aufhellungen, sondern vom
+%%  CD einzeln festgelegt - daher hier explizit ausgeschrieben und
+%%  nicht ueber xcolor-Mischungen (blau!75) erzeugt.
+%%
+%%  Benennung: RWTH<Farbe><Stufe>, z. B. \color{RWTHBlau75}
+%%  Zusaetzlich unten Kurz-Aliase fuer die im Text genutzten Farben.
+%%
+%%  Benoetigt: \usepackage{xcolor} VOR diesem \input.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Hausfarbe -----------------------------------------------------------
+\definecolor{RWTHBlau100}{RGB}{0,84,159}       % 00549F  Logo-Primaerfarbe
+\definecolor{RWTHBlau75}{RGB}{64,127,183}      % 407FB7
+\definecolor{RWTHBlau50}{RGB}{142,186,229}     % 8EBAE5  Logo-Sekundaerfarbe
+\definecolor{RWTHBlau25}{RGB}{199,221,242}     % C7DDF2
+\definecolor{RWTHBlau10}{RGB}{232,241,250}     % E8F1FA
+
+%% Sekundaerfarben -----------------------------------------------------
+% Schwarz (die 75%-Stufe ist das CD-Grau)
+\definecolor{RWTHSchwarz100}{RGB}{0,0,0}       % 000000
+\definecolor{RWTHSchwarz75}{RGB}{100,101,103}  % 646567
+\definecolor{RWTHSchwarz50}{RGB}{156,158,159}  % 9C9E9F
+\definecolor{RWTHSchwarz25}{RGB}{207,209,210}  % CFD1D2
+\definecolor{RWTHSchwarz10}{RGB}{236,237,237}  % ECEDED
+
+% Magenta
+\definecolor{RWTHMagenta100}{RGB}{227,0,102}   % E30066
+\definecolor{RWTHMagenta75}{RGB}{233,96,136}   % E96088
+\definecolor{RWTHMagenta50}{RGB}{241,158,177}  % F19EB1
+\definecolor{RWTHMagenta25}{RGB}{249,210,218}  % F9D2DA
+\definecolor{RWTHMagenta10}{RGB}{253,238,240}  % FDEEF0
+
+% Gelb
+\definecolor{RWTHGelb100}{RGB}{255,237,0}      % FFED00
+\definecolor{RWTHGelb75}{RGB}{255,240,85}      % FFF055
+\definecolor{RWTHGelb50}{RGB}{255,245,155}     % FFF59B
+\definecolor{RWTHGelb25}{RGB}{255,250,209}     % FFFAD1
+\definecolor{RWTHGelb10}{RGB}{255,253,238}     % FFFDEE
+
+% Petrol
+\definecolor{RWTHPetrol100}{RGB}{0,97,101}     % 006165
+\definecolor{RWTHPetrol75}{RGB}{45,127,131}    % 2D7F83
+\definecolor{RWTHPetrol50}{RGB}{125,164,167}   % 7DA4A7
+\definecolor{RWTHPetrol25}{RGB}{191,208,209}   % BFD0D1
+\definecolor{RWTHPetrol10}{RGB}{230,236,236}   % E6ECEC
+
+% Tuerkis
+\definecolor{RWTHTuerkis100}{RGB}{0,152,161}   % 0098A1
+\definecolor{RWTHTuerkis75}{RGB}{0,177,183}    % 00B1B7
+\definecolor{RWTHTuerkis50}{RGB}{137,204,207}  % 89CCCF
+\definecolor{RWTHTuerkis25}{RGB}{202,231,231}  % CAE7E7
+\definecolor{RWTHTuerkis10}{RGB}{235,246,246}  % EBF6F6
+
+% Gruen
+\definecolor{RWTHGruen100}{RGB}{87,171,39}     % 57AB27
+\definecolor{RWTHGruen75}{RGB}{141,192,96}     % 8DC060
+\definecolor{RWTHGruen50}{RGB}{184,214,152}    % B8D698
+\definecolor{RWTHGruen25}{RGB}{221,235,206}    % DDEBCE
+\definecolor{RWTHGruen10}{RGB}{242,247,236}    % F2F7EC
+
+% Maigruen
+\definecolor{RWTHMaigruen100}{RGB}{189,205,0}  % BDCD00
+\definecolor{RWTHMaigruen75}{RGB}{208,217,92}  % D0D95C
+\definecolor{RWTHMaigruen50}{RGB}{224,230,154} % E0E69A
+\definecolor{RWTHMaigruen25}{RGB}{240,243,208} % F0F3D0
+\definecolor{RWTHMaigruen10}{RGB}{249,250,237} % F9FAED
+
+% Orange
+\definecolor{RWTHOrange100}{RGB}{246,168,0}    % F6A800
+\definecolor{RWTHOrange75}{RGB}{250,190,80}    % FABE50
+\definecolor{RWTHOrange50}{RGB}{253,212,143}   % FDD48F
+\definecolor{RWTHOrange25}{RGB}{254,234,201}   % FEEAC9
+\definecolor{RWTHOrange10}{RGB}{255,247,234}   % FFF7EA
+
+% Rot
+\definecolor{RWTHRot100}{RGB}{204,7,30}        % CC071E
+\definecolor{RWTHRot75}{RGB}{216,92,65}        % D85C41
+\definecolor{RWTHRot50}{RGB}{230,150,121}      % E69679
+\definecolor{RWTHRot25}{RGB}{243,205,187}      % F3CDBB
+\definecolor{RWTHRot10}{RGB}{250,235,227}      % FAEBE3
+
+% Bordeaux
+\definecolor{RWTHBordeaux100}{RGB}{161,16,53}  % A11035
+\definecolor{RWTHBordeaux75}{RGB}{182,82,86}   % B65256
+\definecolor{RWTHBordeaux50}{RGB}{205,139,135} % CD8B87
+\definecolor{RWTHBordeaux25}{RGB}{229,197,192} % E5C5C0
+\definecolor{RWTHBordeaux10}{RGB}{245,232,229} % F5E8E5
+
+% Violett
+\definecolor{RWTHViolett100}{RGB}{97,33,88}    % 612158
+\definecolor{RWTHViolett75}{RGB}{131,78,117}   % 834E75
+\definecolor{RWTHViolett50}{RGB}{168,133,158}  % A8859E
+\definecolor{RWTHViolett25}{RGB}{210,192,205}  % D2C0CD
+\definecolor{RWTHViolett10}{RGB}{237,229,234}  % EDE5EA
+
+% Lila
+\definecolor{RWTHLila100}{RGB}{122,111,172}    % 7A6FAC
+\definecolor{RWTHLila75}{RGB}{155,145,193}     % 9B91C1
+\definecolor{RWTHLila50}{RGB}{188,181,215}     % BCB5D7
+\definecolor{RWTHLila25}{RGB}{222,218,235}     % DEDAEB
+\definecolor{RWTHLila10}{RGB}{242,240,247}     % F2F0F7
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Kurz-Aliase fuer die im Fliesstext und in den TikZ-Grafiken
+%%  verwendeten Farben. Ohne Stufenangabe ist immer 100 % gemeint.
+%%  Aendert man hier den Bezug, aendert sich die Grafik dokumentweit.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\colorlet{rwthblau}{RWTHBlau100}
+\colorlet{rwthblau75}{RWTHBlau75}
+\colorlet{rwthblau50}{RWTHBlau50}
+\colorlet{rwthblau25}{RWTHBlau25}
+\colorlet{rwthblau10}{RWTHBlau10}
+\colorlet{rwthgruen}{RWTHGruen100}
+\colorlet{rwthorange}{RWTHOrange100}
+\colorlet{rwthbordeaux}{RWTHBordeaux100}
+\colorlet{rwthgrau}{RWTHSchwarz75}   % das CD-Grau ist Schwarz 75 %

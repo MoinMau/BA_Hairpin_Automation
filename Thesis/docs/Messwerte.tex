@@ -514,11 +514,12 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
   \centering
   \begin{tikzpicture}[
       scale=0.0246,
-      cu/.style = {fill=black!14, draw=black!80, line width=0.4pt, line join=round},
-      ma/.style = {-{Stealth[length=4pt]}, thin, black!80},
-      dm/.style = {|<->|, thin, black!80},
-      lb/.style = {font=\scriptsize},
-      ti/.style = {font=\scriptsize\bfseries}]
+      % Der Hairpin ist wie in allen uebrigen Abbildungen blau gefuellt.
+      cu/.style = {fill=figTeilFlaeche, draw=figTeilKontur, line width=0.4pt, line join=round},
+      ma/.style = {-{Stealth[length=4pt]}, thin, figKontur},
+      dm/.style = {|<->|, thin, figAkzent},
+      lb/.style = {font=\scriptsize, text=figText},
+      ti/.style = {font=\scriptsize\bfseries, text=figText}]
   
     %------------------------------------------------ (a) Vorderansicht
     \fill[cu]

@@ -161,12 +161,14 @@ werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährl
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-  font=\scriptsize,
-  part/.style={draw, fill=black!15, minimum width=2.6mm, minimum height=1.3mm,
+  font=\scriptsize, figKontur,
+  % Das Werkstueck ist in jeder Abbildung der Arbeit gleich eingefaerbt.
+  part/.style={draw=figTeilKontur, fill=figTeilFlaeche, line width=0.4pt,
+               minimum width=2.6mm, minimum height=1.3mm,
                inner sep=0pt, outer sep=0pt},
-  fl/.style={-{Stealth[length=1.8mm]}, thick},
-  thin fl/.style={-{Stealth[length=1.4mm]}},
-  lbl/.style={align=center, font=\scriptsize}
+  fl/.style={-{Stealth[length=1.8mm]}, thick, figAkzent},
+  thin fl/.style={-{Stealth[length=1.4mm]}, figAkzent},
+  lbl/.style={align=center, font=\scriptsize, text=figText}
 ]
 
 %% ---------------- (a) Vibrationswendelförderer ----------------
@@ -174,9 +176,9 @@ werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährl
   \draw[thick] (0.35,0) -- (0.05,2.0);
   \draw[thick] (2.15,0) -- (2.45,2.0);
   \draw[thick] (0.35,0) -- (2.15,0);
-  \draw[gray] (0.30,0.35) -- (2.20,0.55);
-  \draw[gray] (0.24,0.85) -- (2.26,1.05);
-  \draw[gray] (0.18,1.35) -- (2.32,1.55);
+  \draw[figKonturHell] (0.30,0.35) -- (2.20,0.55);
+  \draw[figKonturHell] (0.24,0.85) -- (2.26,1.05);
+  \draw[figKonturHell] (0.18,1.35) -- (2.32,1.55);
   \node[part] at (0.75,0.44) {};  \node[part] at (1.55,0.52) {};
   \node[part] at (0.95,0.96) {};  \node[part] at (1.80,1.06) {};
   \node[part] at (1.30,1.48) {};
@@ -189,12 +191,12 @@ werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährl
   \node[part] at (2.72,1.68) {};
   \draw[thin fl] (3.05,1.60) -- (3.35,1.48);
   \foreach \x in {0.55,1.25,1.95}{
-    \draw[gray] (\x,0) -- ++(0.18,-0.30) -- ++(-0.18,-0.20) -- ++(0.18,-0.25);
+    \draw[figKonturHell] (\x,0) -- ++(0.18,-0.30) -- ++(-0.18,-0.20) -- ++(0.18,-0.25);
   }
-  \draw[thick, fill=black!8] (0.30,-0.95) rectangle (2.20,-0.75);
-  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray]
+  \draw[thick, fill=figFlaeche] (0.30,-0.95) rectangle (2.20,-0.75);
+  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, figKonturHell]
         (2.55,-0.55) arc (-20:20:1.1);
-  \node[gray, right=0.5mm] at (2.75,-0.20) {Schwingung};
+  \node[text=figText, right=0.5mm] at (2.75,-0.20) {Schwingung};
 \end{scope}
 
 %% ---------------- (b) Stufenförderer ----------------
@@ -211,9 +213,9 @@ werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährl
   \node[part] at (1.27,0.62) {};  \node[part] at (1.72,1.02) {};
   \node[part] at (2.17,1.42) {};  \node[part] at (2.62,1.82) {};
   \foreach \x in {1.30,1.75,2.20}{
-    \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray] (\x,0.20) -- (\x,0.42);
+    \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, figKonturHell] (\x,0.20) -- (\x,0.42);
   }
-  \node[gray, align=center] at (1.75,-0.02) {Hubbewegung};
+  \node[text=figText, align=center] at (1.75,-0.02) {Hubbewegung};
   \draw[thick] (2.85,1.75) -- (3.35,1.58);
   \draw[thin fl] (3.20,1.48) -- (3.50,1.36);
 \end{scope}
@@ -224,25 +226,25 @@ werden, damit die Erkennung und Bereitstellung von freiliegenden Teilen gewährl
   \node[part, rotate=30] at (0.28,1.48) {};
   \node[part, rotate=-20] at (0.48,1.44) {};
   \draw[thin fl] (0.52,1.22) -- (0.62,0.85);
-  \draw[thick, fill=black!5] (0.15,0.45) rectangle (3.05,0.62);
-  \node[gray, below=0.5mm] at (1.60,0.45) {Backlight-Fläche};
+  \draw[thick, fill=figFlaeche] (0.15,0.45) rectangle (3.05,0.62);
+  \node[text=figText, below=0.5mm] at (1.60,0.45) {Backlight-Fläche};
   \node[part, rotate=20] at (0.60,0.72) {};
   \node[part, rotate=-55] at (1.05,0.70) {};
   \node[part, rotate=80] at (1.45,0.73) {};
   \node[part, rotate=-15] at (1.95,0.70) {};
   \node[part, rotate=45] at (2.45,0.72) {};
-  \draw[thick, fill=black!10] (1.35,2.05) rectangle (1.95,2.35);
+  \draw[thick, fill=figFlaeche] (1.35,2.05) rectangle (1.95,2.35);
   \draw[thick] (1.55,2.05) -- (1.55,1.92) -- (1.75,1.92) -- (1.75,2.05);
   \node[above=0.3mm] at (1.65,2.35) {Kamera};
-  \draw[gray, dashed] (1.55,1.90) -- (0.70,0.78);
-  \draw[gray, dashed] (1.75,1.90) -- (2.55,0.78);
+  \draw[figKonturHell, dashed] (1.55,1.90) -- (0.70,0.78);
+  \draw[figKonturHell, dashed] (1.75,1.90) -- (2.55,0.78);
   \draw[thick] (2.60,1.85) -- (2.60,1.45);
   \draw[thick] (2.42,1.45) -- (2.78,1.45);
   \draw[thick] (2.42,1.45) -- (2.42,1.15);
   \draw[thick] (2.78,1.45) -- (2.78,1.15);
   \draw[thin fl] (2.60,1.98) -- (2.60,2.30);
   \node[above=0.3mm] at (2.60,2.30) {Roboter};
-  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, gray] (0.75,0.28) -- (1.35,0.28);
+  \draw[{Stealth[length=1.3mm]}-{Stealth[length=1.3mm]}, figKonturHell] (0.75,0.28) -- (1.35,0.28);
 \end{scope}
 
 \node[lbl] at (1.65,-1.55) {(a) Vibrationswendelförderer};
@@ -301,12 +303,13 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-  font=\scriptsize,
-  wp/.style={draw, fill=black!15, minimum width=3.2mm, minimum height=1.4mm,
+  font=\scriptsize, figKontur,
+  wp/.style={draw=figTeilKontur, fill=figTeilFlaeche, line width=0.4pt,
+             minimum width=3.2mm, minimum height=1.4mm,
              inner sep=0pt, outer sep=0pt},
-  fl/.style={-{Stealth[length=1.7mm]}, thick},
-  tf/.style={-{Stealth[length=1.4mm]}, gray},
-  lbl/.style={align=center, font=\scriptsize}
+  fl/.style={-{Stealth[length=1.7mm]}, thick, figAkzent},
+  tf/.style={-{Stealth[length=1.4mm]}, figKonturHell},
+  lbl/.style={align=center, font=\scriptsize, text=figText}
 ]
 
 %% ---- (a) Schachtmagazin ----
@@ -314,11 +317,11 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
   \draw[thick] (0.55,0.30) -- (0.55,2.60);
   \draw[thick] (2.05,0.30) -- (2.05,2.60);
   \foreach \y in {0.55,0.85,1.15,1.45,1.75,2.05,2.35}{
-    \draw[fill=black!15] (0.62,\y) rectangle (1.98,\y+0.17);
+    \draw[draw=figTeilKontur, line width=0.4pt, fill=figTeilFlaeche] (0.62,\y) rectangle (1.98,\y+0.17);
   }
   \draw[tf] (2.45,2.35) -- (2.45,1.05);
-  \node[gray, rotate=90, anchor=south] at (2.62,1.30) {Schwerkraft};
-  \draw[thick, fill=black!8] (0.30,0.05) rectangle (1.20,0.25);
+  \node[text=figText, rotate=90, anchor=south] at (2.62,1.30) {Schwerkraft};
+  \draw[thick, fill=figFlaeche] (0.30,0.05) rectangle (1.20,0.25);
   \draw[fl] (1.30,0.15) -- (2.20,0.15);
 \end{scope}
 
@@ -330,7 +333,7 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
       arc (180:360:0.14) -- (\x+0.14,2.28);
   }
   \draw[fl] (0.70,2.62) -- (2.40,2.62);
-  \node[gray] at (1.55,1.25) {geordnet, lagedefiniert};
+  \node[text=figText] at (1.55,1.25) {geordnet, lagedefiniert};
   \draw[tf] (2.70,2.05) -- (3.10,2.05);
 \end{scope}
 
@@ -339,13 +342,13 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
   \begin{scope}[shift={(1.55,1.55)}]
     \draw[thick] (0,0) circle (0.92);
     \draw[thick] (0,0) circle (0.30);
-    \foreach \a in {0,45,...,315}{ \draw[gray] (\a:0.30) -- (\a:0.92); }
+    \foreach \a in {0,45,...,315}{ \draw[figKonturHell] (\a:0.30) -- (\a:0.92); }
     \foreach \a in {22,67,112,157,202,247,292}{
       \node[wp, rotate=\a] at (\a:0.62) {};
     }
     \draw[{Stealth[length=1.5mm]}-, thick] (1.10,0.35) arc (30:-30:1.25);
   \end{scope}
-  \node[gray] at (2.95,0.95) {Takt};
+  \node[text=figText] at (2.95,0.95) {Takt};
   \draw[tf] (1.55,0.50) -- (1.55,0.12);
 \end{scope}
 
@@ -365,12 +368,12 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
 %% ---- (e) Palettenmagazin / Tray ----
 \begin{scope}[shift={(5.20,-3.75)}]
   \draw[thick] (0.30,0.65) rectangle (3.00,2.35);
-  \foreach \x in {0.975,1.65,2.325}{ \draw[gray] (\x,0.65) -- (\x,2.35); }
-  \foreach \y in {1.2166,1.7833}{ \draw[gray] (0.30,\y) -- (3.00,\y); }
+  \foreach \x in {0.975,1.65,2.325}{ \draw[figKonturHell] (\x,0.65) -- (\x,2.35); }
+  \foreach \y in {1.2166,1.7833}{ \draw[figKonturHell] (0.30,\y) -- (3.00,\y); }
   \foreach \x in {0.6375,1.3125,1.9875,2.6625}{
     \foreach \y in {0.94,1.50,2.07}{ \node[wp] at (\x,\y) {}; }
   }
-  \node[gray] at (1.65,0.30) {ortsfeste Nester};
+  \node[text=figText] at (1.65,0.30) {ortsfeste Nester};
 \end{scope}
 
 %% ---- (f) Werkstückgurt ----
@@ -381,7 +384,7 @@ Auch hier muss eine solche Rolle vorbereitet oder von extern bezogen werden. Die
   \draw[thick] (0.85,1.82) -- (3.10,1.82);
   \foreach \x in {1.35,1.85,2.35,2.85}{ \node[wp] at (\x,1.97) {}; }
   \draw[fl] (1.60,2.45) -- (2.60,2.45);
-  \node[gray] at (1.85,1.20) {Rolle};
+  \node[text=figText] at (1.85,1.20) {Rolle};
   \draw[tf] (3.20,1.97) -- (3.55,1.97);
 \end{scope}
 
