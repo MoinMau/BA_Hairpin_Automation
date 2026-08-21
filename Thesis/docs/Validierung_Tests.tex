@@ -372,6 +372,47 @@ Dennoch sollte im Schritt der Optimierung dieser Teil mit beachtet werden und ev
 
 \subsection{Zusammenfassung der Tests}\label{sec:Testbewertung}
 Diese Tests vergleichen gegen alle  geforderten Anforderungen, die nicht schon durch die Realsisierung oder das Konzept an sich bestätigt 
-wurden. Eine jeweilige Beurteilung der Ergebnisse ist bereits in den einzelenen Testabnschnitten erfolgt. Im nächsten Schritt
+wurden. Eine jeweilige Beurteilung der Ergebnisse ist bereits in den einzelenen Testabnschnitten erfolgt. Eine Zusammenfassung dieser
+Ergebnisse lassen sich in \cref{tab:anforderungsabgleich} an der Zuordunung der Anforderungen kompakt darstellen.
+Im nächsten Schritt
 bedarf es eine Optimierung und Behebung der Fehlerquellen. Dafür werden im nächsten Kapitel eben solche Vorschläge ausgearbeitet,
 die die konkrete Umsetzung aber nciht mehr in dieser Arbeit beinhalten.
+
+\begin{table}[htbp]
+  \centering
+  \caption[Abgleich der messtechnisch geprüften Anforderungen]{Abgleich der
+    messtechnisch geprüften Anforderungen aus \cref{tab:anforderungen} mit den
+    Ergebnissen der Versuche nach \cref{tab:pruefplan}.
+    Status: $\bullet$ erfüllt, $\circ$ eingeschränkt erfüllt.}
+  \label{tab:anforderungsabgleich}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{@{}l l X l c@{}}
+    \toprule
+    \textbf{Nr.} & \textbf{Soll} & \textbf{Ist} & \textbf{Nachweis}
+      & \textbf{Status} \\
+    \midrule
+    L1 & $\leq\qty{60}{\second}$ & \qty{43}{\second} Durchlaufzeit
+       & T-08 & $\bullet$ \\
+    L2 & $\leq\qty{2}{\milli\meter}$ & \qtyrange{1.20}{1.54}{\milli\meter}
+         als $3s$ über beide Durchgänge & T-03, T-04, T-06, T-07
+       & $\bullet$ \\
+    L3 & $\geq\qty{25}{Stk.}$ & Betrieb bis \qty{80}{Stk.}
+         (\qty{1.832}{\kilo\gram}) ohne Nachladen & T-02, T-08
+       & $\bullet$ \\
+    L4 & $\leq\qty{1}{\percent}$ & Isolierung ohne Befund; Geometrie
+         5 von 20 mit Abweichung ${\leq}\qty{1}{\milli\meter}$ & T-09
+       & $\circ$ \\
+    L5 & --- & \qty{93.3}{\percent} fehlerfreie Zyklen im Dauerlauf
+       & T-05, T-08 & $\bullet$ \\
+    K1 & \qty{1}{Stk./Zyklus} & \qty{22}{\percent} Doppelausgaben, ausschließlich
+         bei nicht angepasster Geometrie & T-05 & $\circ$ \\
+    K2 & --- & reproduzierbare Endlage innerhalb L2 & T-03, T-07
+       & $\bullet$ \\
+    St1 & --- & Sperrklinken müssen an die Geometrie angepasst werden
+       & T-05 & $\circ$ \\
+    B1 & --- & einmaliges Beladen, danach kein Eingriff erforderlich
+       & T-02, T-08 & $\bullet$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
