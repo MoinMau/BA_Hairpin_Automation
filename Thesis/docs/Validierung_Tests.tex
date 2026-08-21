@@ -1,4 +1,4 @@
-\section{Validierung und Tests}\label{sec:ValidierungTests}
+\section{Verifikation und Validierung}\label{sec:ValidierungTests}
 Nach dem Abschluss der Realisierung folgt die messtechnische Überprüfung des Aufbaus. Dabei wird zwischen zwei Ebenen unterschieden:
 zum einen die Verifikation, die die einzelnen Subsysteme isoliert betrachtet, und zum anderen die Validierung, die den Gesamtablauf
 gegen die Anforderungen aus \cref{tab:anforderungen} bewertet. Eine Trennung ist hier sinnvoll, da sich sonst die Ursache von Fehlern
@@ -55,7 +55,7 @@ angefertigt. In einem späteren Verlauf sollte dies aber wieder in Betracht gezo
            nach Fehlercode 0 bis 5
          & K1, St1, L5 & \texttt{84a2ec1} & $4\times25$ \\
     T-08 & Dauerlauftest
-         & L3, L5, B1 & \texttt{2ad640d} & $3\times25$ \\
+         & L1, L3, L5, B1 & \texttt{2ad640d} & $3\times25$ \\
     T-09 & Beschädigung der Hairpins durch Gesamtsystem
          & L4 & \texttt{dad5324} & $\geq 25$ \\
     \bottomrule
@@ -355,31 +355,23 @@ Zuführsystem, die aber durch eine optimierte Kalibrierung minimiert werden konn
 gab es wiederum jeweils einen Fehler in der Vereinzelung durch Verhakung. Sonst lief hier alles einwandfrei.
 
 \subsubsection{Beschädigungen T-09}\label{sec:VR_Beschädigung}
-\paragraph{Prüfziel}
+Der letzte Test beschreibt die Überprüfung der Hairpins bei einem Gesamt durchlauf auf Beschädigungen (vgl. Anforderung L4).
+Dazu wurden zwei Hairpinvarianten vor und nach jedem Durchlauf auf ihre Geometriekorrektheit getestet. Es wurden zur Geometrie
+passende Fromschablonen für eine Abweichung der Biegung verwendet. Zudem wurde die Beine der Hairpins mit einer flachen Oberfläche
+verglichen. Bevor jeder Hairpin in die Anlage gegeben wurde, gab es eine Vorprüfung nach genau diesen Kriterien. Nach einem Gesamtdurchlauf
+wurden dies Wiederholt und Veränderungen als Baweichungen notiert. Da dieser Test einen erhöhten Arbeitsaufwand beinhaltet wurde
+auf sich auf n 10 Durchläufe mit zwei Hairpins beschränkt.
 
-\paragraph{Spezifischer Aufbau}
+In \cref{tab:mess_T09} sind die Befunde nach Kategorien sortiert. Wichitg zu nennen ist, dass es keinerlei sichtbare Beschädigungen
+an der Isolierung der Hairpins gefunden wurde. Die Messreihen lassen jedoch erkennen, dass es starke Unterschiede in den Abweichungen
+vom verscheidenen Hairpin-Geometrien gibt. Besonders die Länge und die Kupferbandbreite haben einen starken Einfluss. Für längere
+Hairpin-Geometrien sind besonders die Beine betroffen. Es muss sich aber die Stärke dieser Abweichungen angeguckt werden. Diese liegt
+bei <= 1mm und ist im Normalbetrieb nicht als Fehlerhaft zu deklairieren und Anforderung L4 kann als bestätigt angesehen werden. 
+Dennoch sollte im Schritt der Optimierung dieser Teil mit beachtet werden und evtl. verbessert werden.\todo{Toleranz argument auf Laserschweiß anlage beziehen!}
+\todo{Ehrlcih zwischen Isolierschäden < 1\% und Geometrie schäden >1\% }
 
-\paragraph{Ergebnis}
-
-\paragraph{Bewertung}
-%
-%
-\subsection{Fehlerbetrachtung}\label{sec:Fehlerbetrachtung}
-- Einschätzung der eintretenden Fehler!\\
-%
-%
-\subsection{Bewertung gegen Anforderungsliste}\label{sec:Testbewertung}
-- Vergleich gegen Anforderung\\
-\todo{Vergleich gegen vorherigen Prozess!}
-
-%\subsubsection{Versuchsaufbau und Durchführung}\label{sec:Versuchsaufbau}
-%- Wie werden die Tests gemacht?\\
-%- Worauf muss geachtet werden?\\
-%- Welche Testreihen werden gemacht?\\
-
-%
-
-%\subsection{Ausfall-Betrachtung}\label{sec:Ausfall}
-%- Was passiert, wenn ein Subsystem, Spannungsversorgung versagt?\\
-%- FMEA Betrachtung!\\
-%- Sicherheitsregeln für Produktionsanlagen?\\
+\subsection{Zusammenfassung der Tests}\label{sec:Testbewertung}
+Diese Tests vergleichen gegen alle  geforderten Anforderungen, die nicht schon durch die Realsisierung oder das Konzept an sich bestätigt 
+wurden. Eine jeweilige Beurteilung der Ergebnisse ist bereits in den einzelenen Testabnschnitten erfolgt. Im nächsten Schritt
+bedarf es eine Optimierung und Behebung der Fehlerquellen. Dafür werden im nächsten Kapitel eben solche Vorschläge ausgearbeitet,
+die die konkrete Umsetzung aber nciht mehr in dieser Arbeit beinhalten.

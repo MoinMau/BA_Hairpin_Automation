@@ -681,11 +681,6 @@ INPUT ./docs/Diskussion.tex
 INPUT ./docs/Diskussion.tex
 INPUT ./docs/Diskussion.tex
 INPUT docs/Diskussion.tex
-INPUT ./docs/Zusammenfassung.tex
-INPUT ./docs/Zusammenfassung.tex
-INPUT ./docs/Zusammenfassung.tex
-INPUT ./docs/Zusammenfassung.tex
-INPUT docs/Zusammenfassung.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT ./docs/Anhang.tex
 INPUT ./docs/Anhang.tex
@@ -719,6 +714,7 @@ INPUT ./docs/Messwerte.tex
 INPUT docs/Messwerte.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr8.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr6.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx8.tfm
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
 INPUT ./docs/Erklaerung.tex
@@ -728,6 +724,7 @@ INPUT Vorlage.aux
 INPUT Vorlage.run.xml
 OUTPUT Vorlage.run.xml
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx8.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmex10.pfb

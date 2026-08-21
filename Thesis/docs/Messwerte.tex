@@ -7,7 +7,7 @@ Die Messprotokolle wurden in Skalenteilen der Messuhr geführt. Bei einem
 Skalenteilungswert von \qty{0.01}{\milli\meter} entspricht ein Skalenteil
 \qty{10}{\micro\meter}; alle Werte sind hier bereits in Millimeter umgerechnet.
 Der vor jeder Messreihe eingestellte Normierungswert dient ausschließlich dazu, den
-Tastkopf in die Mitte des Messbereichs vorzuspannen, damit Auslenkungen in beide
+Tastkopf vorzuspannen, damit Auslenkungen in beide
 Richtungen erfasst werden können. Er wurde von Hand eingestellt und stellt keine
 rückführbare Referenz dar. Der absolute Ablesewert einer Messreihe ist damit für sich
 genommen nicht aussagekräftig und zwischen Messreihen nicht vergleichbar.
@@ -36,11 +36,12 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-01: Sperrklinken (Gearlinear-System)]{Messwerte des Versuchs
-    T-01 zur Positionstreue der Sperrklinkenschlitten. Setup: Messuhr an der
-    Linearstange bzw.\ am Endeffektor, je zehn Durchführungen pro Messstelle.
-    Die Messung an der Linearstange erfolgte direkt auf Stahl. $x$ bezeichnet den
+    T-01 zur Positionstreue der Sperrklinkenschlitten.\\
+    Setup: Messuhr an der
+    Linearstange bzw. am Endeffektor, je zehn Durchführungen pro Messstelle.\\
+    $x$ bezeichnet den
     Ablesewert, $\Delta$ die Abweichung vom Mittelwert der jeweiligen Messreihe
-    nach \cref{eq:abweichung}.}
+    nach \cref{eq:abweichung}.\\}
   \label{tab:mess_T01}
   \small
   \begin{tabular}{@{}c S[table-format=1.2] S[table-format=+1.3] S[table-format=1.2] S[table-format=+1.3]@{}}
@@ -78,12 +79,14 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
   \centering
   \caption[Messwerte T-02: Vibrationseinheit]{Messwerte des Versuchs T-02 zur
     Auslenkung der Vibrationseinheit in Abhängigkeit der Beladung, nach steigender
-    Beladung geordnet. Setup: Anfahren des Endschalters, Vibration, einige Schritte
-    höher, anschließend Messung der Abweichung. $x$ bezeichnet den Ablesewert,
+    Beladung geordnet.\\
+    Setup: Anfahren des Endschalters, Vibration, weiter Schritte
+    zum Antastpunkt, Messung.\\
+     $x$ bezeichnet den Ablesewert,
     $\Delta$ die Abweichung vom Mittelwert der jeweiligen Messreihe nach
     \cref{eq:abweichung}. Die Masse ist aus der Stückzahl und der
     Einzelmasse von \qty{22.9}{\gram} je Hairpin berechnet. Fortsetzung in
-    \cref{tab:mess_T02b}.}
+    \cref{tab:mess_T02b}.\\}
   \label{tab:mess_T02a}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -127,7 +130,7 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 
 \begin{table}[htbp]
   \centering
-  \caption[Messwerte T-02 (Fortsetzung)]{Fortsetzung von \cref{tab:mess_T02a}.}
+  \caption[Messwerte T-02 (Fortsetzung)]{Fortsetzung von \cref{tab:mess_T02a}.\\}
   \label{tab:mess_T02b}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -176,9 +179,10 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-03: Transportsystem]{Messwerte des Versuchs T-03 zur
-    Positionsstreuung des Transportsystems im open loop. Setup: Endstop anfahren,
-    3000 Schritte zurück und halten, 200 Schritte hin und her, 300 Schritte extra
-    für die Messung. $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom
+    Positionsstreuung des Transportsystems.\\
+    Setup: Endstop anfahren, 3000 Schritte Richtung Antastpunkt und halten, doppelter Richtungswechsel, weiter zum Antastpunkt,
+    Messung.\\
+    $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom
     Mittelwert der Messreihe nach \cref{eq:abweichung}.}
   \label{tab:mess_T03}
   \small
@@ -223,16 +227,14 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 %----------------------------------------------------------------------
 % T-04
 %----------------------------------------------------------------------
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \caption[Messwerte T-04: Fixierungssystem]{Messwerte des Versuchs T-04 zur
-    Lagetreue des Hairpins in der Fixierung. Setup: Teilung in zwei Richtungen,
-    reines Aufstellen und seitliche Verschiebung. $x$ bezeichnet den Ablesewert,
+    Lagetreue des Hairpins in der Fixierung.\\
+    Setup: Hairpin im Behälter, Aufstellen durch Aktivierung der Hauptklemme, Messung.\\
+    $x$ bezeichnet den Ablesewert,
     $\Delta$ die Abweichung vom Mittelwert der Messreihe nach
-    \cref{eq:abweichung}. Im Messprotokoll wurden zu einzelnen Durchläufen
-    Beobachtungen vermerkt: In Durchlauf~2 wurde der Hairpin im Trichter gelassen,
-    in Durchlauf~3 schalteten die Servos voll durch und in Durchlauf~4 erfolgte
-    keine Vibration der Linearachse.}
+    \cref{eq:abweichung}.\\}
   \label{tab:mess_T04}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -279,13 +281,10 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-06: Servomotoren des Fixierungssystems]{Messwerte des
-    Versuchs T-06 zu den Servomotoren des Fixierungssystems. Setup: 20 Durchläufe
-    je Seite. $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom Mittelwert
-    der jeweiligen Messreihe nach \cref{eq:abweichung}. Bei Servo~2 konnte die
-    Messuhr nur schlecht platziert werden, weshalb dort mit einer erhöhten
-    Messunsicherheit zu rechnen ist; für Servo~3 war die Platzierung besser. Die
-    Messreihe von Servo~3 weist eine gerichtete Drift auf, sodass $s$ und $R$ dort
-    nicht die Streuung, sondern im Wesentlichen den Betrag dieser Drift wiedergeben.}
+    Versuchs T-06 zu den Servomotoren des Fixierungssystems.\\
+    Setup: Ausfahren der seitlichen Kraftklemme, Messung, Einfahren.\\
+    $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom Mittelwert
+    der jeweiligen Messreihe nach \cref{eq:abweichung}.\\}
   \label{tab:mess_T06}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -332,18 +331,17 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-07: Positionierung des Transportsystems]{Messwerte des
-    Versuchs T-07 zur Positionierung des Transportsystems.
+    Versuchs T-07 zur Positionierung des Transportsystems.\\[\smallskipamount]
     Setup: 25 Hairpins unterschiedlicher Länge, Homen der Linearachse, Anfahren
-    der Position, Ablesen der Abweichung in x- und y-Richtung mit dem Messschieber. 
-    $x$ bezeichnet den
-    Ablesewert, $\Delta$ die Abweichung vom Mittelwert der jeweiligen Messreihe
-    nach \cref{eq:abweichung}. Die verwendeten Pins stimmen mit den Varianten C
-    und D aus Versuch T-05 überein (vgl. \cref{tab:mess_T05}).
-    Zusätzlich zu den hier aufgeführten Abweichungen wurde in Versuch
-    T-07 die Höhenlage geprüft. Dabei wurde ein Hairpin mit einer Höhennormierung von \qty{0}{\milli\meter}
-    verwendet. Alle 25 Durchläufe wurden ohne feststellbare Höhenabweichung als
-    einwandfrei bewertet. Aus diesem Grund erfolgt keine Darstellung dieser Messreihe 
-    in einer dedizierten Tabelle.}
+    der Übergabeposition, Ablesen der Abweichung in x- und y-Richtung mit dem
+    Messschieber.\\[\smallskipamount]
+    Zusätzlich zu den hier aufgeführten Abweichungen wurde in Versuch T-07 die
+    Höhenlage geprüft. Dabei wurde ein Hairpin mit einer Höhennormierung von
+    \qty{0}{\milli\meter} verwendet. Alle 25 Durchläufe wurden ohne feststellbare
+    Höhenabweichung als einwandfrei bewertet. Aus diesem Grund erfolgt keine
+    Darstellung dieser Messreihe in einer dedizierten Tabelle.\\[\smallskipamount]
+    $x$ bezeichnet den Ablesewert, $\Delta$ die Abweichung vom Mittelwert der
+    jeweiligen Messreihe nach \cref{eq:abweichung}.}
   \label{tab:mess_T07}
   \small
   \setlength{\tabcolsep}{3pt}
@@ -401,13 +399,11 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-05: Vereinzelung]{Messwerte des Versuchs T-05 zur
-    Vereinzelungstreue über vier Hairpin-Geometrien. Setup: 25 Hairpins geladen,
-    Homing-Vibration, Vereinzeln, \qty{10}{\second} warten, anschließend Entnahme
-    des Hairpins aus dem Hopper. Alle Durchgänge wurden mit dem Endeffektor TestV1
-    durchgeführt. Der obere Block gibt die Geometrie der jeweiligen Variante an,
-    der mittlere den je Durchlauf protokollierten Fehlercode und der untere dessen
-    Häufigkeit; die Zeilenbeschriftungen des Häufigkeitsblocks nennen zugleich die
-    Bedeutung der Codes.}
+    Vereinzelungstreue über vier Hairpin-Geometrien.\\
+    Setup: 25 Hairpins geladen, Vibration, Vereinzelung, anschließend Entnahme
+    des Hairpins aus dem Trichter, Fehler notieren.\\
+    Alle Durchgänge wurden mit dem Endeffektor TestV1
+    durchgeführt.\\}
   \label{tab:mess_T05}
   \small
   \setlength{\tabcolsep}{6pt}
@@ -467,16 +463,10 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
 \begin{table}[htbp]
   \centering
   \caption[Messwerte T-09: Beschädigung der Hairpins]{Messwerte des Versuchs T-09
-    zur Beschädigung der Hairpins. Setup: Durchlauf verschiedener Hairpins über
-    Vereinzelung, Rutsche und Fixierung; die Bewertung erfolgt durch Vergleich
-    einer Aufnahme vor und nach dem Durchlauf. Der obere Block gibt die Geometrie
-    der jeweiligen Variante an, der mittlere den je Durchlauf festgestellten
-    Befund und der untere dessen Häufigkeit; die Zeilenbeschriftungen des
-    Häufigkeitsblocks nennen zugleich die Bedeutung der Codes. Die Codes wurden
-    aus den im Messprotokoll notierten Beobachtungen abgeleitet. Zu Durchlauf~5
-    der Variante 1207 ist zusätzlich vermerkt, dass ein Fehler durch die
-    Vereinzelung auftrat; dieser betrifft den Prozessablauf und nicht den Zustand
-    des Hairpins.}
+    zur Beschädigung der Hairpins.\\
+    Setup: Durchlauf verschiedener Hairpins über
+    Gesamtsystem; die Bewertung erfolgt durch Vergleich
+    einer Aufnahme vor und nach dem Durchlauf. \\}
   \label{tab:mess_T09}
   \small
   \setlength{\tabcolsep}{6pt}
@@ -504,7 +494,7 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
     \midrule
     \multicolumn{1}{@{}l}{\itshape Häufigkeit je Befundcode} & \multicolumn{2}{c}{} \\
     \multicolumn{1}{@{}l}{\quad 0 --- keine feststellbare Abweichung} & 9 & 6 \\
-    \multicolumn{1}{@{}l}{\quad 1 --- leichte Abweichung an der Außenkante} & 1 & 0 \\
+    \multicolumn{1}{@{}l}{\quad 1 --- Bein waagrecht gebogen, ${<}\qty{1}{\milli\meter}$} & 1 & 0 \\
     \multicolumn{1}{@{}l}{\quad 2 --- Bein nach innen gebogen, ${<}\qty{1}{\milli\meter}$} & 0 & 1 \\
     \multicolumn{1}{@{}l}{\quad 3 --- Bein nach außen gebogen, ${<}\qty{1}{\milli\meter}$} & 0 & 1 \\
     \multicolumn{1}{@{}l}{\quad 4 --- Bein nach außen gebogen, ca.\ \qty{1}{\milli\meter}} & 0 & 2 \\
@@ -513,5 +503,79 @@ Normierungswert und beschreiben die Wiederholpräzision des jeweiligen Subsystem
     \bottomrule
   \end{tabular}
 \end{table}
+
+%Alle noch wartenden Tabellen-Floats ausgeben, bevor die Abbildung folgt.
+%Ohne diese Sperre wuerde die Abbildung vorgezogen, da LaTeX fuer figure und
+%table getrennte Warteschlangen fuehrt und die Reihenfolge nur innerhalb
+%derselben Float-Art garantiert ist.
+\clearpage
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      scale=0.0246,
+      cu/.style = {fill=black!14, draw=black!80, line width=0.4pt, line join=round},
+      ma/.style = {-{Stealth[length=4pt]}, thin, black!80},
+      dm/.style = {|<->|, thin, black!80},
+      lb/.style = {font=\scriptsize},
+      ti/.style = {font=\scriptsize\bfseries}]
+  
+    %------------------------------------------------ (a) Vorderansicht
+    \fill[cu]
+        (30.16,-119.27) -- (34.71,-119.22) -- (34.71,3.28) -- (34.51,4.78) -- (34.11,6.18) -- (33.31,7.68) --
+        (31.66,9.53) -- (30.56,10.33) -- (4.16,25.93) -- (3.16,26.43) -- (1.36,26.93) -- (-1.54,26.93) --
+        (-3.24,26.43) -- (-4.24,25.93) -- (-30.94,10.13) -- (-32.99,8.28) -- (-34.19,6.18) -- (-34.69,4.58) --
+        (-34.79,-118.72) -- (-30.19,-118.72) -- (-30.09,4.08) -- (-29.69,4.98) -- (-28.64,6.13) -- (-26.34,7.53) --
+        (-2.24,21.83) -- (-1.04,22.33) -- (0.56,22.43) -- (1.96,21.93) -- (28.06,6.43) -- (29.41,5.28) --
+        (30.11,3.78) -- (30.16,-119.27) -- cycle;
+    \node[lb,anchor=south] at (0,30) {Kopf};
+    \draw[ma] (-52,-95) -- (-36.5,-95);
+    \node[lb,anchor=east] at (-54,-95) {Bein};
+    \draw[ma] (-36.5,-30) -- (-52,-30);
+    \node[lb,anchor=east] at (-54,-30) {nach au\ss{}en};
+    \draw[ma] (-28.5,-30) -- (-13,-30);
+    \node[lb,anchor=west,text width=1cm,align=left] at (-11,-30) {nach innen};
+    \draw[dm] (-34.8,-133) -- (34.7,-133);
+    \node[lb,fill=white,inner sep=1pt] at (0,-133) {Breite};
+    \draw[dm] (75,-119.3) -- (75,26.9);
+    \node[lb,rotate=90,fill=white,inner sep=1pt] at (75,-46) {L\"ange};
+    \node[ti] at (0,-158) {(a) Vorderansicht};
+  
+    %------------------------------------------------ (b) Seitenansicht
+    \fill[cu]
+        (148.23,-119.27) -- (151.78,-119.22) -- (151.68,3.98) -- (152.08,5.88) -- (154.88,10.48) -- (156.38,13.58) --
+        (157.58,16.78) -- (158.18,18.98) -- (158.78,22.38) -- (158.78,25.58) -- (158.58,25.98) -- (158.13,26.13) --
+        (157.63,26.83) -- (157.03,27.03) -- (154.93,26.93) -- (153.88,25.78) -- (153.98,23.88) -- (153.78,21.68) --
+        (152.88,17.28) -- (151.78,13.98) -- (150.48,11.08) -- (149.58,9.78) -- (149.08,8.38) -- (148.38,5.58) --
+        (148.18,3.58) -- (148.23,-119.27) -- cycle;
+    \node[lb,anchor=west,text width=2.15cm,align=left] at (163.0,-45) {waagerechter Versatz};
+    \draw[ma] (162.0,-45) -- (153.5,-45);
+    \draw[dm] (148.2,-133) -- (152.0,-133);
+    \node[lb,anchor=west] at (157.0,-133) {Kupferbreite};
+    \node[ti] at (153.0,-158) {(b) Seitenansicht};
+  
+    %------------------------------------------------ (c) Draufsicht
+    \fill[cu]
+        (306.16,-47.82) -- (315.36,-44.82) -- (322.56,-43.22) -- (330.56,-42.22) -- (338.56,-42.02) -- (340.06,-41.42) --
+        (341.56,-40.22) -- (342.46,-39.82) -- (344.86,-39.92) -- (349.66,-40.52) -- (358.26,-42.32) -- (366.46,-44.92) --
+        (373.16,-47.82) -- (373.96,-47.82) -- (374.31,-47.47) -- (374.71,-46.57) -- (374.71,-45.87) -- (374.06,-45.32) --
+        (368.96,-43.12) -- (363.66,-41.22) -- (358.86,-39.82) -- (350.16,-38.02) -- (345.36,-37.42) -- (341.76,-37.22) --
+        (340.16,-37.82) -- (338.36,-39.42) -- (331.26,-39.62) -- (325.26,-40.22) -- (318.46,-41.42) -- (313.36,-42.72) --
+        (305.66,-45.32) -- (305.21,-45.77) -- (305.21,-46.47) -- (305.51,-47.37) -- (306.16,-47.82) -- cycle;
+    \draw[ma] (320.0,-32) -- (320.0,-40.6);
+    \node[lb,anchor=east] at (332.0,-29) {Au\ss{}enkante};
+    \draw[ma] (349.0,-32) -- (341.5,-38.6);
+    \node[lb,anchor=north] at (320.0,-58) {Innenkante};
+    \draw[dm] (305.2,-94) -- (374.7,-94);
+    \node[lb,fill=white,inner sep=1pt] at (340.0,-94) {Breite};
+    \node[ti] at (340.0,-158) {(c) Draufsicht};
+  \end{tikzpicture}
+
+  \caption[Ansichten des Hairpins zur Einordnung der Befunde aus T-09]{Ansichten
+    des Hairpins zur Einordnung der in \cref{tab:mess_T09} verwendeten
+    Befundcodes.}
+  \label{fig:HairpinAnsichten_T09}
+\end{figure}
+
 
 \clearpage
