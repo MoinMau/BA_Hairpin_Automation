@@ -506,37 +506,3 @@ Diese Einschränkungen betreffen die Prozessüberwachung und die Anbindung an di
 \cref{sec:ValidierungTests} beschriebenen Versuchsreihen ist aber dennoch der  Aufbau in diesem Zustand
 einsetzbar und alle gefordernten Anforderungen wurden erfüllt.
 
-% =====================================================================
-%  Nicht messtechnisch geprüfte Anforderungen
-% =====================================================================
-\begin{table}[htbp]
-  \centering
-  \caption[Nachweis der übrigen Anforderungen]{Nachweis der übrigen
-    Anforderungen aus \cref{tab:anforderungen}. Diese ergeben sich aus der
-    Konzeptauswahl und der Realisierung und bedürfen keiner eigenen Messreihe.}
-  \label{tab:anforderungsabgleich_konstruktiv}
-  \small
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabularx}{\textwidth}{@{}l X l@{}}
-    \toprule
-    \textbf{Nr.} & \textbf{Nachweis} & \textbf{Status} \\
-    \midrule
-    G1--G3 & Aufbau im vorhandenen Aluminiumgestell, Übergabeposition im
-             Arbeitsraum des UR5e, hängende Zuführung
-           & konstruktiv \\
-    G4, Fm1, In1, St2 & Schienensystem, additive Fertigung und
-             Standardkomponenten & konstruktiv \\
-    Si1, Si3 & digitale Signalschnittstelle und interne Kommunikation
-             & realisiert \\
-    Si2 & Sensorik zur Endlagenrückmeldung nicht umgesetzt
-             & offen \\
-    En1, En2 & Betrieb an \qty{230}{\volt} ohne Druckluft und Vakuum
-             & realisiert \\
-    Sa1 & definierter sicherer Zustand bei Not-Halt & realisiert \\
-    B2 & Bedienperson muss bei Geometriewechsel eingreifen & offen \\
-    Mo1 & Verzicht auf Lageregelung und Zusatzsensorik & konstruktiv \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\todo{Wie soll das wo rein?}

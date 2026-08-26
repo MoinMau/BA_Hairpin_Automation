@@ -1,63 +1,76 @@
 \section{Diskussion \& Fazit}\label{sec:Diskussion}
-In diesem Kaptiel soll die gesamte Arbeit reflektiert werden. In \cref{sec:Testbewertung} wurden bereits die Anforderungen mit
-der entsprechenden Bilanz dargestellt. Dabei wurden nicht alle Anforderungen entsprechend optimal erfüllt. Aus diesem Grund
-werden im folgenden Optimierungsschirtte dargelegt, die die auftretenden Fehler minimieren würden.
+Die Anforderungsbilanz in \cref{sec:Testbewertung} weist das entwickelte System gegenüber den Forderungen der
+Anforderungsliste als funktionsfähig aus. Darüber hinaus haben die Versuchsreihen gezeigt, an welchen Stellen
+der Aufbau am empfindlichsten auf veränderte Randbedingungen reagiert. Diese Befunde bilden den Ausgangspunkt
+der folgenden Weiterentwicklung.
 %
 %
 \subsection{Optimierungspotenzial}\label{sub:Optimierungspotezial}
-Es wird in fünf verschiedenen Themen unterscheiden. Bei dem Aufbau einer solchen Analge bedarf es einen intensiven Kreilauf zwischen
-Systemtest und Optimierung. Aus diesem Grund werden hier die von obern nach untern relevantesten Optimierungsschritte vorgeschlagen.
-Wichtig zu benennen ist, dass die auftretenden Probleme zunächst keine schwäche der Arbeit sind, sondern bei richtiger 
-Handhabung und dem beschrieben Kreislauf zu einer professionellen Herangehensweise werden.
+Der Entwicklungsprozess nach VDI~2221 sieht vor, dass sich Konstruktion und Erprobung abwechseln. Die
+Versuchsreihen aus \cref{sec:VerifikationSubsysteme} waren entsprechend darauf ausgelegt, die Empfindlichkeiten des
+Aufbaus gezielt sichtbar zu machen. Die daraus abgeleiteten Maßnahmen sind nach abnehmender Wirkung geordnet.
 %
 \subsubsection{Geometrieabhängigkeit der Vereinzelung}\label{sub:HF-Vereinzelung}
-Wie in der Messreihe T-05 (vgl. \cref{sec:VR_Vereinzelungstreue}) herausgefunden müssen die Sperrklinken/Endeffektoren auf die Hairpin-Geometrie
-angpasst werden. Um eine Reduktion der Fehlerquellen zu ermöglcihen, gibt es dafür zwei mögliche Lösungsschritte. Die erste 
-herangehensweise beinhaltet weitere Messreihen und eine neu Konstruktion für die Ermittlung der optimalen Endeffektorkombination.
-Eine anderer für den allgemeinen Prozess sichereren Weg wäre die Erstellung einzelner Endeffektorkombinationen für die verwendete
-Hairpin-Geometrie. Letzers könnte über ein generatives Design Modell entstehen, welches dann über ein AM-Drucker in kurzer zeit
-hergestellt werden könnte. Den Wechsel könnte das Bedienpersonal dann durch das Lösen zweier Schrauben unkompliziert und schnell
-druchführen. Eine nachfolgende Kalibierung des System ist ebenfalls einfach möglich. 
-Diese Möglichkeiten würden Probleme stark dezimieren und der Mehraufwand ist nur bei einem Hairpin-Geometrie Wechsel nötig.
+Wie in der Messreihe T-05 (vgl. \cref{sec:VR_Vereinzelungstreue}) identifiziert müssen die Endeffektoren auf die Hairpin-Geometrie
+angpasst werden. Die aktuelle Variante einer festen Endeffektorkombination ließe sich zwar über weiter Messreihen optimieren, 
+bliebe jedoch weiter ein Kompromiss zu Lasten der Randbereiche der Hairpin-Geometrien. Robuster wäre der Einsatz von einer
+an jede Hairpin-Geometrie angepassten Endeffektorenkombination. Dies könnte durch ein generatives Design, welches sich 
+individuell und automatisch anpasst, und einer nachfolgenden Fertigung mittels eines AM-Druckers schnell und einfach erstellen.
+Dieser Mehraufwand entsteht dabei ausschließlich beim Geometriewechsel und beschränkt sich auf das Lösen zweier Schrauben 
+sowie eine anschließende Kalibrierung. Die Forderung St1 wird auf Systemebene erfüllt, wobei die Wunschanforderung B2 beim 
+Variantenwechsel ausgesetzt wird.
 
 \subsubsection{Prozesssicherheit der Überführung}\label{sub:HF-Ueberfuehrung}
 Die Rutsche der Überführung lässt sich als das einfachste System deklarieren, dennoch gab es auch hier Fehlerquellen. Besonders die
 schmalen Lücken zwischen den Segmenten, der offene Aufbau und die abrupte Schnittstelle zwischen gleiten und stoppen im Behälter
-sorgen für viele Problemstellen. Auch hier gibt es weider mehrer Lösungwege: Ein Weg wäre dieses Überfühurngsprinzip druch ein
-neues Konzept zu ersetzten, welches evtl. eine direkte Übergabe zwischen Vereinzelung und Zuführsystem vorsieht. In diesem Fall
-müssen aber auch Kriterien wie die Länge der Hairpins beachtet werden, die eine aufwenidiges Umrüsten der Anlage bei ein solchem 
-Konzept vorsehen müsste. Eine einfachere Möglichketi würde die bestehede Rutsche mit einem abnehmbaren Deckel und einer innen Beschichtung
-zu versehen. Der Deckel würde gegen Rausspringen sorgen und eine richitg gewäahlte Beschichtung für einen flüssigen Übergang 
-der Segmente und eine Haftreibung steigung zur Minimierung der Fallgeschwindigkeit der Hairpins.
+sorgen für viele Problemstellen. Ein abnehmbarer Deckel schließt den Querschnitt und könnte das Herausspringen, ohne den 
+in \cref{sec:Konzeptauswahl} maßgeblichen Vorteil der Rutsche gegenüber dem Fallschacht aufzugeben, dass Verhakungen 
+zugänglich bleiben, verhindern. Weiter könnte eine Innenbeschichtung die Absätze zwischen den Segmenten eliminieren und 
+würde über einen definierten Gleitreibungskoeffizienten die Auftreffgeschwindigkeit im Trichter einstellen.
+
+Ein Ersatz der Überführung durch eine direkte Übergabe zwischen Vereinzelung und Zuführsystem wäre auch denkbar, 
+erforderte jedoch ein Umrüsten bei jeder Hairpinlänge. Dieses Umrüsten bedarf eines Arbeitsaufwendiges Verschieben der einzelnen
+Subsysteme und widerspricht der Anforderung B2.
 
 \subsubsection{Prozessueberwachung und Taktzeit}\label{sub:HF-Sensorik}
-Wie in der Realisiserung (\cref{sec:Realisierungsstand}) bereis erwähnt sind jegliche Prozesssensonsorik noch nciht im allgemeine 
-Gesamtablauf mit eingebunden. Die akutelle Steurung über festgelegte Wartezeiten, lässt sich durch eben diese Daten dahin optimeiren,
-dass ein kürzerer Gesamtdruchlauf zu erwarten ist. Desweiteren kann durch den Einsatz eines Endstops für den Roboterarm ebenfalls ein
-genaues Timing abgestimmt werden. So wäre es möglich, dass der Roboterarm die Entnahme eines Hairpins aus der Fixiereinheit durch
-betätigen des Schalters bestätigt und nun beide System mit dem gleichen Intervall arbeiten können.
+Wie in der Realisiserung (\cref{sec:Realisierungsstand}) bereis erwähnt ist die Prozesssensonsorik bewusst noch nicht in die
+Ablaufsteuerung eingebunden. Die aktuelle Steurung erfolgt deshalb über festgelegte Wartezeiten und stützt sich nicht auf
+den tatsächlichen Anlagenzustand. Werden die Sensorsignale ausgewertet lässt sich eine Fehlerbehandlung implemtieren oder
+die gesetzten Sicherheitspuffer des derzeitgen Ablaufes als psotiver Nebeneffekt minimieren.
+Konkret lässt sich dies auf die Übergabe der Hairpins auf den Roboterarm übertragen, die durch eine manuelle Synchronisation
+durch ein Rückmeldesignal ersetzen könnte. Nach Wunschanforderung Si1 würde so das Gesamtsystem flüssig funktionieren.
 
 \subsubsection{Werkstoffe und Verschleiss}\label{sub:HF-Werkstoffe}
-Weiter sind wie in Anforderung St2 vorgegeben die Wahl der verwendeten Werkstoffe und Komponenten anzupassen. Bei einem verifizierten
-Dauerbetrieb, lässt sich das PLA beispielsweise druch Aluminum gefräste formen ersetzten oder die Servomotoren druch qualitativ höhere
-Motoren für den industeriellen gebrauch ändern. Diese Anpassungen wirken dem Verschleiß und einem möglcihen Materialversagen entgegen.
-\todo{Diese Texte müssen besser strukturiert werden.}
+Die Wahl kostengünstiger, additiv verarbeitbarer Werkstoffe folgt der Wunschanforderung St2 und hat sich für den Prototypenaufbau 
+bewährt. Für einen dauerhaften Betrieb verschiebt sich jedoch der Anwendungsfall und damit die Anforderung selbst.
+Besonders an Bauelementen bei denen verstärkt Reibung auftritt, wie den Kraftklemmen, lassen sich Verschleißärmere Matrialien,
+wie gefräste Aluminiumteile einsetzten. Auch ein Wechsel zu hochwertigeren Motoren, könnte ein Prozessasufall bei einem 
+Dauerbertrieb minimieren. Diese Maßnahmen beruhen jedoch nur auf Erwartungen und sollten erst nach tiefer gehender Prüfung
+des Gesamtsystems umgesetzt werden.
 
-\subsubsection{Alltagsbetrieb \& Limitationen}\label{sub:Erkenntnisse}
-Beim der allgemeinen Arbeit mit der entwickelten Analge ist aufgedallen, dass varieredne Ergebisse je nach Kalibrierung erzeilt 
-wurden.
-Die Limitationen dieses Systems sind im aktuellen Stand durch die Endeffektoren und den kompatiblen Hairpin-Geometrie begrenzt.
-Zudem müssen unbeschädigte Hairpins vorliegen. 
-Die Messreihen müssen für den Betrieb im Dauerlauf widerholt werden. Bei einer hohen Anzahl an Druchläufen können weitere Fehler
-auftreten, die noch nciht ermittelt werden konnten. Außerdem wurden die Ergebnisse mit den vorhandenen Mitteln druchgeführt,
-zur Postionsreferenzierung könnten zum beispiel kontkatlose mess methoden eingesetzt werden. 
+\subsection{Alltagsbetrieb \& Limitationen}\label{sub:Erkenntnisse}
+Der Betrieb der Anlage hat gezeigt, dass die Ergebnisse merklich von der Kalibrierung abhängen; ein
+dokumentiertes Einrichtverfahren ist deshalb Voraussetzung für reproduzierbare Ergebnisse im Alltag. Ebenso
+fehlt bislang ein definierter Wiederanlauf: Tritt eine Verhakung auf, muss die Bedienperson eingreifen, sodass
+der rein überwachende Betrieb nach Anforderung B2 noch nicht erreicht ist.
 
+Neben diesen Grenzen des Systems ist die Aussagekraft der Validierung selbst durch den Umfang der Versuche begrenzt.
+Die Messreihen umfassen zwischen 10 und 25 Durchläufen, der Dauerlauf drei Durchgänge zu je 25 Zyklen. Aussagen zum 
+Langzeitverhalten, insbesondere zu Verschleiß und selten auftretenden Fehlerbildern, lassen sich daraus nicht ableiten.
+Der Dauerlauf umfasste zudem keinen vollständigen Zellenzyklus einschließlich des Laserprozesses. Dies stellt
+jedoch nicht Teil dieser Arbeit dar und wird durch eine andere Arbeit verifiziert. Die entsprechenden Anforderungen
+für die Übergabe sind erfüllt und gestestet.
 
 \subsection{Fazit}\label{sec:Fazit}
+Ziel dieser Arbeit war die Entwicklung eines Systems, das Hairpins vereinzelt und einem Roboterarm zur
+Laserabisolierung zuführt. Ausgehend von einer Anforderungsliste nach VDI~2221 wurden Lösungsprinzipien in
+einem morphologischen Kasten gegenübergestellt, zu zwei Konzeptvarianten verdichtet und die gewählte Variante
+konstruktiv, elektrisch und softwareseitig umgesetzt. Der Aufbau wurde anschließend auf Ebene der Subsysteme
+verifiziert und danach im Gesamtablauf validiert.
+
 Zu endgültigen Beantwortung der Forschungsfrage "Wie kann ein System zur automatisierten Abisolierung von Hairpins in der 
 Prototypenproduktion aussehen?".
 Konkret kann ein solches System aus den drei Stufen zusammengesetzt werden: Vereinzleung, Überführung und Zuführung in Kombination
 mit einem Roboterarm und einer Laserabisolieranlage Aufgebaut werden.  
-\todo{muss hier auch nochmal Roboterarm mit Laser erklärt werden?}
 %
 %
