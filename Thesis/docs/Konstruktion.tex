@@ -314,7 +314,7 @@ Roboterarm kann so den Hairpin nach oben aus dem Behältnis heben und diesen nun
 \subsection{Elektrische Integration}\label{sec:ElektrischeIntegration}
 Nachdem nun die Konstruktion der mechanischen Komponenten beschrieben wurde, muss die Wahl des zugehörigen Steuerungssystems erläutert
 werden. Dieses System besteht aus einer Vielzahl an untereinander verschalteten elektronischen Komponenten. Es muss möglich sein, auf
-Befehle einer Bedieneinheit oder von Sensoren zu reagieren und eine Aktion zu starten. Für die Realisierung wurde dafür
+Befehle eines HMI oder von Sensoren zu reagieren und eine Aktion zu starten. Für die Realisierung wurde dafür
 in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und die Peripherie.
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
@@ -334,14 +334,14 @@ Trotz eines erhöhten Verdrahtungs- und Integrationsaufwands eignet sich die off
 
 Für den Master wurde ein ESP32 verwendet. Dieser dient der Steuerung und Überwachung des Gesamtsystems. Ausschlaggebend für die Wahl
 dieses Mikrocontrollers war seine höhere Rechenleistung, die eine zuverlässige Überwachung sowie die Anzeige von Grafiken auf
-dem Bedienelement ermöglicht. Als erster Slave wurde ein Arduino Nano gewählt, der für die Ansteuerung aller Servomotoren zuständig ist. Dieser
+dem HMI ermöglicht. Als erster Slave wurde ein Arduino Nano gewählt, der für die Ansteuerung aller Servomotoren zuständig ist. Dieser
 bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanälen. Ein ELEGOO Uno wurde als zweiter Slave genutzt, da dieser über
 eine passende Treibereinheit zur Ansteuerung von Schrittmotoren verfügt.
 
 Gegenüber einem SPS-System begründet sich die Wahl dieser
 Komponenten vor allem durch deren hohe Verfügbarkeit und Kostenvorteile (vgl. Anforderung St2)..
 
-Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein Bedienelement und Sensoren
+Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein HMI und Sensoren
 übernimmt. Dieser erteilt dann bestimmte Aufgaben, wie einen Motor auf eine definierte Position zu fahren, an die Slaves. Außerdem
 wird kontinuierlich abgefragt, in welchem Zustand sich die Slaves bezüglich vorangegangener Befehle befinden. Der ELEGOO Uno
 ist mit seiner Treiberschaltung für die Steuerung der Schrittmotoren verantwortlich. Dabei sind die Endstops als einzige Sensoren
@@ -367,7 +367,7 @@ Servomotor weiter.
   ]
 
 % ------------------------------------------------------------- Knoten
-\node[io]     (bedien)  at (-3.4, 4.2) {Bedieneinheit\\\footnotesize Display, Knöpfe};
+\node[io]     (bedien)  at (-3.4, 4.2) {HMI\\\footnotesize Display, Knöpfe};
 \node[io]     (sens)    at ( 3.4, 4.2) {Sensorik\\\footnotesize Lichtschranken};
 
 \node[master] (esp)     at ( 0.0, 2.1) {\textbf{ESP32}\\\footnotesize Master -- Ablaufsteuerung};
@@ -424,7 +424,7 @@ neu beladenen Hairpins. Auch ist der Einsatz eines kapazitiven Sensors an der Fi
 Rutsche zu gewährleisten. Wegen des Integrationsaufwandes, mangelnder Zeit und der auschließlichen Erfüllung einer Wunschanforderung (Si2),
 werden diese Sensoren zunächst nicht mit realsisiert.
 
-\paragraph{Bedienelemente} stellen ein Display und fünf Knöpfe für die Navigation dar. Das Display wird über eine SPI-Schnittstelle
+\paragraph{HMI} besteht aus einem Display und fünf Knöpfen für die Navigation. Das Display wird über eine SPI-Schnittstelle
 mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an die GPIO des ESP32 geführt.
 
 \subsubsection{Schaltplan}\label{sec:Schaltplan}
@@ -444,7 +444,7 @@ die Verbindung der Spannungsversorgung und der I2C-Kommunikation werden Schraubk
 Die Software bildet die eigentliche Steuerungsebene des Systems, in der Entscheidungen
 anhand der vorliegenden Sensordaten getroffen werden. Der Entscheidungsablauf ist fest
 definiert und wird zur Laufzeit durch die Signale der Sensorik und die Eingaben am
-Bedienelement beeinflusst.
+HMI beeinflusst.
 
 \subsubsection{Architektur}\label{sec:CodeStruktur}
 Jeder Mikrocontroller führt ein eigenes Programm aus, wodurch die Verantwortlichkeiten
@@ -473,7 +473,7 @@ anschließend für jeden Motor eine Zielposition vor, während Warte- und Sensor
 eine zeit- beziehungsweise zustandsabhängige Steuerung ermöglichen. Aus der
 Kombination dieser Bausteine entsteht der vollständige Prozessablauf.
 
-\subsubsection{Bedienschnittstelle}\label{sec:Bedienschnittstelle}
+\subsubsection{HMI}\label{sec:HMI}
 Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von 2,8"
 und fünf Tasten. Vier davon dienen der Navigation in den Richtungen auf, ab, links und
 rechts, die fünfte bestätigt die Auswahl.
@@ -495,7 +495,7 @@ ist damit in der Lage, Hairpins aus dem Vorrat zu vereinzeln, zu überführen un
 Drei Aspekte wurden im Rahmen dieser zunächst Arbeit bewusst zurückgestellt. Die Prozesssensorik ist
 mechanisch montiert, jedoch noch nicht in die Ablaufsteuerung eingebunden. Die
 Zustandsüberwachung erfolgt bislang nicht über Sensorsignale, sondern über feste
-Zeitvorgaben. Das Bedienelement ist hardwareseitig vorbereitet, die
+Zeitvorgaben. Das HMI ist hardwareseitig vorbereitet, die
 Auswahl des Ablaufprogramms erfolgt derzeit jedoch noch über einen extern
 angeschlossenen Rechner. Die Übergabe an den Roboterarm ist zudem rein zeitgesteuert
 ausgeführt, da bisher keine direkte Kommunikationsschnittstelle zur bestehenden

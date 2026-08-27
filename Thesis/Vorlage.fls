@@ -326,6 +326,10 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/multirow/bigstrut.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/multirow/bigstrut.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/xltabular/xltabular.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/xltabular/xltabular.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/ltablex/ltablex.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/ltablex/ltablex.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
@@ -549,12 +553,12 @@ INPUT glos/Formelzeichen.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT ./Vorlage.lof
 INPUT ./Vorlage.lof
 INPUT Vorlage.lof
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 OUTPUT Vorlage.lof
 INPUT ./Vorlage.lot
 INPUT ./Vorlage.lot

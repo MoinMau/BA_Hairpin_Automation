@@ -9,29 +9,65 @@
 	$Q_\text{sens}$ & \unit{\coulomb} & Ladung der Sensorelektrode \\
 	$Q_\text{gesamt}$ & \unit{\coulomb} & über alle Zyklen aufsummierte Ladung \\
 	$C_\text{ref}$ & \unit{\farad} & Kapazität des Referenzkondensators \\
-	$U_{C\text{ref}}$ & \unit{\volt} & Spannung am Referenzkondensator \bigstrut[b] \\[0.75cm]
-	
-	\textbf{Abkürzung} &  & \textbf{Beschreibung} \bigstrut[t] \\
-	\hline
-	DC &   & direct current -> Gleichstrom \\
-	AC &  & alternating current -> Wechselstrom \\
-	FET &   & Field-Effect-Transistor \\
-	z. B. &   & zum Beispiel \\
-	CAD &  & Computer Aid Design\\
-	ADC &  & Analog Digital Wandler\\
-	PWM &  & Pulsweitenmodulation\\
-	SDA &  & Serial Data Line\\
-	SCL &  & Serial Clock Line\\
-	vgl.&  & vergleiche\\
-	PMSM&  & Permanentmagenterregte Strommaschine\\
-	SPS&  & Speicherprogrammierbare Steuerung\\
-	GND&  & Ground, Erde\\
-	PAI&  & Polyamidimid\\
-	PEEK&  & Polyetheretherketon\\
-	PI&  & Polyimid
+	$U_{C\text{ref}}$ & \unit{\volt} & Spannung am Referenzkondensator \bigstrut[b] \\
 \end{tabularx}
 
-%Sortiert wird alphabetisch, ungeachtet der Groß- und Kleinschreibung.
+\vspace{0.75cm}
+
+% Abkuerzungen thematisch gruppiert, innerhalb der Gruppen alphabetisch.
+% xltabular statt tabularx, damit die Liste ueber die Seite umbrechen kann.
+\hspace{0.7cm}
+\begin{xltabular}{15.1cm}{llX}
+	\textbf{Abkürzung} &  & \textbf{Beschreibung} \bigstrut[t] \\
+	\hline
+	\endfirsthead
+	\textbf{Abkürzung} &  & \textbf{Beschreibung} \bigstrut[t] \\
+	\hline
+	\endhead
+
+	\multicolumn{3}{@{}l}{\textit{Elektrotechnik und Steuerung}\bigstrut[t]} \\
+	AC & & alternating current, Wechselstrom \\
+	ADC & & Analog-Digital-Wandler \\
+	DC & & direct current, Gleichstrom \\
+	FET & & Field-Effect-Transistor \\
+	GND & & Ground, Erde \\
+	GPIO & & General Purpose Input/Output \\
+	LED & & Light Emitting Diode, Leuchtdiode \\
+	MOSFET & & Metal-Oxide-Semiconductor Field-Effect-Transistor \\
+	PMSM & & permanentmagneterregte Synchronmaschine \\
+	PWM & & Pulsweitenmodulation \\
+	SPS & & Speicherprogrammierbare Steuerung \\
+
+	\multicolumn{3}{@{}l}{\textit{Kommunikation und Bussysteme}\bigstrut[t]} \\
+	ACK & & Acknowledge, Bestätigung eines Datenpakets \\
+	CAN & & Controller Area Network \\
+	I\textsuperscript{2}C & & Inter-Integrated Circuit \\
+	SCL & & Serial Clock Line \\
+	SDA & & Serial Data Line \\
+	SPI & & Serial Peripheral Interface \\
+	UART & & Universal Asynchronous Receiver Transmitter \\
+
+	\multicolumn{3}{@{}l}{\textit{Bedienung und Anzeige}\bigstrut[t]} \\
+	GUI & & Graphical User Interface, grafische Benutzeroberfläche \\
+	HMI & & Human-Machine-Interface, Bedienschnittstelle \\
+	TFT & & Thin-Film-Transistor \\
+
+	\multicolumn{3}{@{}l}{\textit{Fertigungsverfahren}\bigstrut[t]} \\
+	AM & & Additive Manufacturing, additive Fertigung \\
+	CAD & & Computer Aided Design \\
+	CNC & & Computerized Numerical Control \\
+	FDM & & Fused Deposition Modeling \\
+
+	\multicolumn{3}{@{}l}{\textit{Werkstoffe}\bigstrut[t]} \\
+	ABS & & Acrylnitril-Butadien-Styrol-Copolymer \\
+	PAI & & Polyamidimid \\
+	PEEK & & Polyetheretherketon \\
+	PETG & & Polyethylenterephthalat-Glykol \\
+	PI & & Polyimid \\
+	PLA & & Polylactide \\
+	TPU & & thermoplastisches Polyurethan \\
+
+\end{xltabular}
+
+%Innerhalb der Gruppen wird alphabetisch sortiert, ungeachtet der Groß- und Kleinschreibung.
 %Griechische Buchstaben werden nach den lateinischen angeführt.
-%Dieses Beispiel zeigt wie man die Tabelle manuell aufbauen könnte.
-%Es gibt jedoch auch Pakete die bei der Erstellung von Verzeichnissen unterstützen können.
