@@ -32,7 +32,7 @@ Ein Ersatz der Überführung durch eine direkte Übergabe zwischen Vereinzelung 
 erforderte jedoch ein Umrüsten bei jeder Hairpinlänge. Dieses Umrüsten bedarf eines Arbeitsaufwendiges Verschieben der einzelnen
 Subsysteme und widerspricht der Anforderung B2.
 
-\subsubsection{Prozessueberwachung und Taktzeit}\label{sub:HF-Sensorik}
+\subsubsection{Prozessüberwachung und Taktzeit}\label{sub:HF-Sensorik}
 Wie in der Realisiserung (\cref{sec:Realisierungsstand}) bereis erwähnt ist die Prozesssensonsorik bewusst noch nicht in die
 Ablaufsteuerung eingebunden. Die aktuelle Steurung erfolgt deshalb über festgelegte Wartezeiten und stützt sich nicht auf
 den tatsächlichen Anlagenzustand. Werden die Sensorsignale ausgewertet lässt sich eine Fehlerbehandlung implemtieren oder
@@ -40,7 +40,7 @@ die gesetzten Sicherheitspuffer des derzeitgen Ablaufes als psotiver Nebeneffekt
 Konkret lässt sich dies auf die Übergabe der Hairpins auf den Roboterarm übertragen, die durch eine manuelle Synchronisation
 durch ein Rückmeldesignal ersetzen könnte. Nach Wunschanforderung Si1 würde so das Gesamtsystem flüssig funktionieren.
 
-\subsubsection{Werkstoffe und Verschleiss}\label{sub:HF-Werkstoffe}
+\subsubsection{Werkstoffe und Verschleiß}\label{sub:HF-Werkstoffe}
 Die Wahl kostengünstiger, additiv verarbeitbarer Werkstoffe folgt der Wunschanforderung St2 und hat sich für den Prototypenaufbau 
 bewährt. Für einen dauerhaften Betrieb verschiebt sich jedoch der Anwendungsfall und damit die Anforderung selbst.
 Besonders an Bauelementen bei denen verstärkt Reibung auftritt, wie den Kraftklemmen, lassen sich Verschleißärmere Matrialien,
@@ -68,9 +68,18 @@ einem morphologischen Kasten gegenübergestellt, zu zwei Konzeptvarianten verdic
 konstruktiv, elektrisch und softwareseitig umgesetzt. Der Aufbau wurde anschließend auf Ebene der Subsysteme
 verifiziert und danach im Gesamtablauf validiert.
 
-Zu endgültigen Beantwortung der Forschungsfrage "Wie kann ein System zur automatisierten Abisolierung von Hairpins in der 
-Prototypenproduktion aussehen?".
-Konkret kann ein solches System aus den drei Stufen zusammengesetzt werden: Vereinzleung, Überführung und Zuführung in Kombination
-mit einem Roboterarm und einer Laserabisolieranlage Aufgebaut werden.  
+Damit lässt sich die Forschungsfrage "Wie kann ein System zur automatisierten Abisolierung von Hairpins in der 
+Prototypenproduktion aussehen?" beantworten:
+Dieses System gliedert sich in die drei aufeinanderfolgenden Stufen Vereinzelung, Überführung und Zuführung 
+und ergänzt die bestehende Zelle aus Roboterarm und Laseranlage. Die Übergabeposition wird mit Standardabweichungen 
+unter 0,5 mm und einer maximalen Abweichung unter den geforderten 2 mm angefahren, die Zykluszeit beträgt 43 s 
+gegenüber den geforderten 60 s, und ein Vorrat von 25 Hairpins wird ohne manuelles Nachladen und ohne Beschädigung 
+der Isolierung verarbeitet.
+
+Rückblickend wäre die Geometrieabhängigkeit der Vereinzelung durch ein frühes Funktionsmuster der Sperrklinken 
+bereits vor der Detailkonstruktion erkennbar gewesen; der morphologische Kasten bewertete dieses Prinzip als 
+geometrieunabhängiger, als es sich im Versuch erwiesen hat. Die gestufte Prüfung von den Subsystemen zum Gesamtablauf 
+hat sich dagegen bewährt, da sie die Zuordnung der Fehlerbilder zu einzelnen Baugruppen erst ermöglichte.
+Der nächste Entwicklungszyklus würde an genau diesen Befunden ansetzen und Fehlerstellen minimieren.
 %
 %

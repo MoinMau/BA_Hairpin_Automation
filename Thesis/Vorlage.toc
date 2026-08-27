@@ -166,10 +166,10 @@
 \contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{62}{subsection.arabicsection.7.1}%
 \contentsline {subsubsection}{\numberline {7.1.1}Geometrieabhängigkeit der Vereinzelung}{62}{subsubsection.arabicsection.7.1.1}%
 \contentsline {subsubsection}{\numberline {7.1.2}Prozesssicherheit der Überführung}{62}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Prozessueberwachung und Taktzeit}{63}{subsubsection.arabicsection.7.1.3}%
-\contentsline {subsubsection}{\numberline {7.1.4}Werkstoffe und Verschleiss}{63}{subsubsection.arabicsection.7.1.4}%
+\contentsline {subsubsection}{\numberline {7.1.3}Prozessüberwachung und Taktzeit}{62}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.4}Werkstoffe und Verschleiß}{63}{subsubsection.arabicsection.7.1.4}%
 \contentsline {subsection}{\numberline {7.2}Alltagsbetrieb \& Limitationen}{63}{subsection.arabicsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Fazit}{64}{subsection.arabicsection.7.3}%
+\contentsline {subsection}{\numberline {7.3}Fazit}{63}{subsection.arabicsection.7.3}%
 \contentsline {section}{\numberline {A}Literatur}{65}{appendix.A}%
 \contentsline {section}{\numberline {B}Anhang}{68}{appendix.B}%
 \contentsline {subsection}{\numberline {B.1}Messwerte der Verifikationsversuche}{70}{subsection.B.1}%
