@@ -4,9 +4,8 @@
 \contentsline {section}{\numberline {III}Tabellenverzeichnis}{vii}{section.3}%
 \contentsline {section}{\numberline {1}Einleitung}{1}{section.arabicsection.1}%
 \contentsline {subsection}{\numberline {1.1}Motivation}{1}{subsection.arabicsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Zielsetzung}{2}{subsection.arabicsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Aufgabenstellung}{2}{subsection.arabicsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Aufbau der Arbeit}{2}{subsection.arabicsection.1.4}%
+\contentsline {subsection}{\numberline {1.2}Zielsetzung der Arbeit}{2}{subsection.arabicsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Aufbau der Arbeit}{2}{subsection.arabicsection.1.3}%
 \contentsline {section}{\numberline {2}Grundlagen}{4}{section.arabicsection.2}%
 \contentsline {subsection}{\numberline {2.1}Hairpin-Technologie}{4}{subsection.arabicsection.2.1}%
 \contentsline {subsubsection}{\numberline {2.1.1}Entwicklung}{4}{subsubsection.arabicsection.2.1.1}%
@@ -19,28 +18,28 @@
 \contentsline {subsubsection}{\numberline {2.2.4}Laser}{8}{subsubsection.arabicsection.2.2.4}%
 \contentsline {subsection}{\numberline {2.3}Sensorik}{10}{subsection.arabicsection.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.1}Optische Sensoren}{10}{subsubsection.arabicsection.2.3.1}%
-\contentsline {paragraph}{\nonumberline Einweglichtschranken}{11}{paragraph*.3}%
-\contentsline {paragraph}{\nonumberline Reflexionslichtschranken}{11}{paragraph*.4}%
-\contentsline {paragraph}{\nonumberline Reflexlichttaster}{11}{paragraph*.5}%
+\contentsline {paragraph}{\nonumberline Einweglichtschranken}{11}{paragraph*.2}%
+\contentsline {paragraph}{\nonumberline Reflexionslichtschranken}{11}{paragraph*.3}%
+\contentsline {paragraph}{\nonumberline Reflexlichttaster}{11}{paragraph*.4}%
 \contentsline {subsubsection}{\numberline {2.3.2}Feld-Sensoren}{11}{subsubsection.arabicsection.2.3.2}%
-\contentsline {paragraph}{\nonumberline Induktive Sensoren}{11}{paragraph*.6}%
-\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{12}{paragraph*.7}%
-\contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{12}{paragraph*.8}%
+\contentsline {paragraph}{\nonumberline Induktive Sensoren}{11}{paragraph*.5}%
+\contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{12}{paragraph*.6}%
+\contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{12}{paragraph*.7}%
 \contentsline {subsubsection}{\numberline {2.3.3}Mechanische Sensoren}{12}{subsubsection.arabicsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.4}Aktuatorik}{12}{subsection.arabicsection.2.4}%
 \contentsline {subsubsection}{\numberline {2.4.1}Pneumatik}{13}{subsubsection.arabicsection.2.4.1}%
 \contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktuatorik}{14}{subsubsection.arabicsection.2.4.2}%
-\contentsline {paragraph}{\nonumberline Motoren}{14}{paragraph*.9}%
-\contentsline {paragraph}{\nonumberline Mechanische Übersetzung}{15}{paragraph*.10}%
+\contentsline {paragraph}{\nonumberline Motoren}{14}{paragraph*.8}%
+\contentsline {paragraph}{\nonumberline Mechanische Übersetzung}{15}{paragraph*.9}%
 \contentsline {subsection}{\numberline {2.5}Steuerungstechnik}{15}{subsection.arabicsection.2.5}%
 \contentsline {subsubsection}{\numberline {2.5.1}Steuerungsarchitektur}{16}{subsubsection.arabicsection.2.5.1}%
 \contentsline {subsubsection}{\numberline {2.5.2}Mikrocontroller}{17}{subsubsection.arabicsection.2.5.2}%
 \contentsline {subsubsection}{\numberline {2.5.3}Signalübertragung}{17}{subsubsection.arabicsection.2.5.3}%
-\contentsline {paragraph}{\nonumberline Digitale Schaltsignale}{18}{paragraph*.11}%
-\contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{18}{paragraph*.12}%
-\contentsline {paragraph}{\nonumberline Pulsweitenmodulation}{18}{paragraph*.13}%
+\contentsline {paragraph}{\nonumberline Digitale Schaltsignale}{18}{paragraph*.10}%
+\contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{18}{paragraph*.11}%
+\contentsline {paragraph}{\nonumberline Pulsweitenmodulation}{18}{paragraph*.12}%
 \contentsline {subsubsection}{\numberline {2.5.4}Bussysteme}{18}{subsubsection.arabicsection.2.5.4}%
-\contentsline {paragraph}{\nonumberline I\textsuperscript {2}C}{19}{paragraph*.14}%
+\contentsline {paragraph}{\nonumberline I\textsuperscript {2}C}{19}{paragraph*.13}%
 \contentsline {subsubsection}{\numberline {2.5.5}Leistungselektronik und Motortreiber}{19}{subsubsection.arabicsection.2.5.5}%
 \contentsline {subsection}{\numberline {2.6}Verfahren}{20}{subsection.arabicsection.2.6}%
 \contentsline {section}{\numberline {3}Stand der Technik}{21}{section.arabicsection.3}%
@@ -62,59 +61,59 @@
 \contentsline {subsubsection}{\numberline {4.2.2}Morphologischer Kasten}{34}{subsubsection.arabicsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.3}Konzeptauswahl}{35}{subsection.arabicsection.4.3}%
 \contentsline {subsubsection}{\numberline {4.3.1}Prinzipanalyse gegenüber Anforderungen}{35}{subsubsection.arabicsection.4.3.1}%
-\contentsline {paragraph}{\nonumberline Bevorraten}{35}{paragraph*.18}%
-\contentsline {paragraph}{\nonumberline Nachführen}{35}{paragraph*.19}%
-\contentsline {paragraph}{\nonumberline Vereinzeln}{35}{paragraph*.20}%
-\contentsline {paragraph}{\nonumberline Überführen}{35}{paragraph*.21}%
-\contentsline {paragraph}{\nonumberline Übernehmen \& Fixieren}{37}{paragraph*.22}%
-\contentsline {paragraph}{\nonumberline Transportieren}{37}{paragraph*.23}%
-\contentsline {paragraph}{\nonumberline Positionieren}{37}{paragraph*.24}%
-\contentsline {paragraph}{\nonumberline Übergeben}{37}{paragraph*.25}%
+\contentsline {paragraph}{\nonumberline Bevorraten}{35}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Nachführen}{35}{paragraph*.18}%
+\contentsline {paragraph}{\nonumberline Vereinzeln}{35}{paragraph*.19}%
+\contentsline {paragraph}{\nonumberline Überführen}{35}{paragraph*.20}%
+\contentsline {paragraph}{\nonumberline Übernehmen \& Fixieren}{37}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline Transportieren}{37}{paragraph*.22}%
+\contentsline {paragraph}{\nonumberline Positionieren}{37}{paragraph*.23}%
+\contentsline {paragraph}{\nonumberline Übergeben}{37}{paragraph*.24}%
 \contentsline {subsubsection}{\numberline {4.3.2}Verträglichkeitsbetrachtung}{37}{subsubsection.arabicsection.4.3.2}%
-\contentsline {paragraph}{\nonumberline Schachtmagazin}{37}{paragraph*.26}%
-\contentsline {paragraph}{\nonumberline Reihenmagazin}{38}{paragraph*.27}%
-\contentsline {paragraph}{\nonumberline Zuführsystem}{38}{paragraph*.28}%
+\contentsline {paragraph}{\nonumberline Schachtmagazin}{37}{paragraph*.25}%
+\contentsline {paragraph}{\nonumberline Reihenmagazin}{38}{paragraph*.26}%
+\contentsline {paragraph}{\nonumberline Zuführsystem}{38}{paragraph*.27}%
 \contentsline {subsubsection}{\numberline {4.3.3}Festlegung der Konzeptvarianten}{38}{subsubsection.arabicsection.4.3.3}%
-\contentsline {paragraph}{\nonumberline Variante A}{38}{paragraph*.29}%
-\contentsline {paragraph}{\nonumberline Variante B}{39}{paragraph*.30}%
+\contentsline {paragraph}{\nonumberline Variante A}{38}{paragraph*.28}%
+\contentsline {paragraph}{\nonumberline Variante B}{39}{paragraph*.29}%
 \contentsline {subsubsection}{\numberline {4.3.4}Vergleich der Konzeptvarianten}{39}{subsubsection.arabicsection.4.3.4}%
 \contentsline {section}{\numberline {5}Realisierung}{41}{section.arabicsection.5}%
 \contentsline {subsection}{\numberline {5.1}Vorgehen und verwendete Werkzeuge}{41}{subsection.arabicsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Konstruktive Randbedingungen}{41}{subsection.arabicsection.5.2}%
-\contentsline {paragraph}{\nonumberline Aluminiumprofile}{41}{paragraph*.31}%
-\contentsline {paragraph}{\nonumberline Additive Fertigung}{41}{paragraph*.32}%
-\contentsline {paragraph}{\nonumberline Fertigungsgerechte Gestaltung von Gelenken}{42}{paragraph*.33}%
+\contentsline {paragraph}{\nonumberline Aluminiumprofile}{41}{paragraph*.30}%
+\contentsline {paragraph}{\nonumberline Additive Fertigung}{41}{paragraph*.31}%
+\contentsline {paragraph}{\nonumberline Fertigungsgerechte Gestaltung von Gelenken}{42}{paragraph*.32}%
 \contentsline {subsection}{\numberline {5.3}Vereinzelungssystem}{43}{subsection.arabicsection.5.3}%
 \contentsline {subsubsection}{\numberline {5.3.1}Schnittstellen}{43}{subsubsection.arabicsection.5.3.1}%
 \contentsline {subsubsection}{\numberline {5.3.2}Bevorratung und Nachführung}{43}{subsubsection.arabicsection.5.3.2}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{43}{paragraph*.34}%
-\contentsline {paragraph}{\nonumberline Gelenke und Freiheitsgrade}{43}{paragraph*.35}%
-\contentsline {paragraph}{\nonumberline Antrieb und elektrisches System}{44}{paragraph*.36}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{43}{paragraph*.33}%
+\contentsline {paragraph}{\nonumberline Gelenke und Freiheitsgrade}{43}{paragraph*.34}%
+\contentsline {paragraph}{\nonumberline Antrieb und elektrisches System}{44}{paragraph*.35}%
 \contentsline {subsubsection}{\numberline {5.3.3}Vereinzelung}{44}{subsubsection.arabicsection.5.3.3}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{44}{paragraph*.37}%
-\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{44}{paragraph*.38}%
-\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{45}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{44}{paragraph*.36}%
+\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{44}{paragraph*.37}%
+\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{45}{paragraph*.38}%
 \contentsline {subsection}{\numberline {5.4}Überführung}{45}{subsection.arabicsection.5.4}%
 \contentsline {subsubsection}{\numberline {5.4.1}Schnittstellen}{46}{subsubsection.arabicsection.5.4.1}%
-\contentsline {paragraph}{\nonumberline Aufbau und Auslegung}{46}{paragraph*.40}%
+\contentsline {paragraph}{\nonumberline Aufbau und Auslegung}{46}{paragraph*.39}%
 \contentsline {subsection}{\numberline {5.5}Zuführsystem}{47}{subsection.arabicsection.5.5}%
 \contentsline {subsubsection}{\numberline {5.5.1}Schnittstellen}{47}{subsubsection.arabicsection.5.5.1}%
 \contentsline {subsubsection}{\numberline {5.5.2}Übernahme und Fixierung}{47}{subsubsection.arabicsection.5.5.2}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{47}{paragraph*.42}%
-\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{47}{paragraph*.43}%
-\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{47}{paragraph*.44}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{47}{paragraph*.41}%
+\contentsline {paragraph}{\nonumberline Konstruktive Auslegung}{47}{paragraph*.42}%
+\contentsline {paragraph}{\nonumberline Antrieb und Sensorik}{47}{paragraph*.43}%
 \contentsline {subsubsection}{\numberline {5.5.3}Transport und Positionierung}{48}{subsubsection.arabicsection.5.5.3}%
-\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{48}{paragraph*.45}%
-\contentsline {paragraph}{\nonumberline Antrieb und Referenzierung}{48}{paragraph*.46}%
+\contentsline {paragraph}{\nonumberline Aufbau und Wirkprinzip}{48}{paragraph*.44}%
+\contentsline {paragraph}{\nonumberline Antrieb und Referenzierung}{48}{paragraph*.45}%
 \contentsline {subsubsection}{\numberline {5.5.4}Übergabe an den Roboterarm}{48}{subsubsection.arabicsection.5.5.4}%
 \contentsline {subsection}{\numberline {5.6}Elektrische Integration}{49}{subsection.arabicsection.5.6}%
 \contentsline {subsubsection}{\numberline {5.6.1}Spannungsversorgung}{49}{subsubsection.arabicsection.5.6.1}%
 \contentsline {subsubsection}{\numberline {5.6.2}Steuerungstopologie}{49}{subsubsection.arabicsection.5.6.2}%
 \contentsline {subsubsection}{\numberline {5.6.3}Peripherie}{50}{subsubsection.arabicsection.5.6.3}%
-\contentsline {paragraph}{\nonumberline Servomotoren}{50}{paragraph*.48}%
-\contentsline {paragraph}{\nonumberline Schrittmotoren}{50}{paragraph*.49}%
-\contentsline {paragraph}{\nonumberline Prozessensoren}{50}{paragraph*.50}%
-\contentsline {paragraph}{\nonumberline HMI}{50}{paragraph*.51}%
+\contentsline {paragraph}{\nonumberline Servomotoren}{50}{paragraph*.47}%
+\contentsline {paragraph}{\nonumberline Schrittmotoren}{50}{paragraph*.48}%
+\contentsline {paragraph}{\nonumberline Prozessensoren}{50}{paragraph*.49}%
+\contentsline {paragraph}{\nonumberline HMI}{50}{paragraph*.50}%
 \contentsline {subsubsection}{\numberline {5.6.4}Schaltplan}{51}{subsubsection.arabicsection.5.6.4}%
 \contentsline {subsection}{\numberline {5.7}Software}{51}{subsection.arabicsection.5.7}%
 \contentsline {subsubsection}{\numberline {5.7.1}Architektur}{51}{subsubsection.arabicsection.5.7.1}%
@@ -124,41 +123,41 @@
 \contentsline {subsection}{\numberline {6.1}Verifikation der Subsysteme}{53}{subsection.arabicsection.6.1}%
 \contentsline {subsubsection}{\numberline {6.1.1}Allgemeiner Messaufbau}{54}{subsubsection.arabicsection.6.1.1}%
 \contentsline {subsubsection}{\numberline {6.1.2}Sperrklinken T-01}{54}{subsubsection.arabicsection.6.1.2}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{54}{paragraph*.53}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{54}{paragraph*.54}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{55}{paragraph*.55}%
-\contentsline {paragraph}{\nonumberline Bewertung}{55}{paragraph*.56}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{54}{paragraph*.52}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{54}{paragraph*.53}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{55}{paragraph*.54}%
+\contentsline {paragraph}{\nonumberline Bewertung}{55}{paragraph*.55}%
 \contentsline {subsubsection}{\numberline {6.1.3}Vibrationseinheit T-02}{55}{subsubsection.arabicsection.6.1.3}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{55}{paragraph*.57}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{55}{paragraph*.58}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.59}%
-\contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.61}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{55}{paragraph*.56}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{55}{paragraph*.57}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.58}%
+\contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.60}%
 \contentsline {subsubsection}{\numberline {6.1.4}Transportsystem T-03}{56}{subsubsection.arabicsection.6.1.4}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{56}{paragraph*.62}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{56}{paragraph*.63}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.64}%
-\contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.65}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{56}{paragraph*.61}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{56}{paragraph*.62}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.63}%
+\contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.64}%
 \contentsline {subsubsection}{\numberline {6.1.5}Fixierungssystem: Hairpinaufstellung T-04}{57}{subsubsection.arabicsection.6.1.5}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.66}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.67}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.68}%
-\contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.69}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.65}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.66}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.67}%
+\contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.68}%
 \contentsline {subsubsection}{\numberline {6.1.6}Fixierungssytem: Seitenklemmen T-06}{57}{subsubsection.arabicsection.6.1.6}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.70}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.71}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.72}%
-\contentsline {paragraph}{\nonumberline Bewertung}{58}{paragraph*.73}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.69}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.70}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.71}%
+\contentsline {paragraph}{\nonumberline Bewertung}{58}{paragraph*.72}%
 \contentsline {subsection}{\numberline {6.2}Validierung im Gesamtablauf}{58}{subsection.arabicsection.6.2}%
 \contentsline {subsubsection}{\numberline {6.2.1}Zuführungssystem: Wiederholgenauigkeit T-07}{58}{subsubsection.arabicsection.6.2.1}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{58}{paragraph*.74}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{58}{paragraph*.75}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{58}{paragraph*.76}%
-\contentsline {paragraph}{\nonumberline Bewertung}{59}{paragraph*.77}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{58}{paragraph*.73}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{58}{paragraph*.74}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{58}{paragraph*.75}%
+\contentsline {paragraph}{\nonumberline Bewertung}{59}{paragraph*.76}%
 \contentsline {subsubsection}{\numberline {6.2.2}Vereinzelungssystem: Vereinzelungstreue T-05}{59}{subsubsection.arabicsection.6.2.2}%
-\contentsline {paragraph}{\nonumberline Prüfziel}{59}{paragraph*.78}%
-\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{59}{paragraph*.79}%
-\contentsline {paragraph}{\nonumberline Ergebnis}{59}{paragraph*.80}%
-\contentsline {paragraph}{\nonumberline Bewertung}{60}{paragraph*.81}%
+\contentsline {paragraph}{\nonumberline Prüfziel}{59}{paragraph*.77}%
+\contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{59}{paragraph*.78}%
+\contentsline {paragraph}{\nonumberline Ergebnis}{59}{paragraph*.79}%
+\contentsline {paragraph}{\nonumberline Bewertung}{60}{paragraph*.80}%
 \contentsline {subsubsection}{\numberline {6.2.3}Dauerlauf T-08}{60}{subsubsection.arabicsection.6.2.3}%
 \contentsline {subsubsection}{\numberline {6.2.4}Beschädigungen T-09}{60}{subsubsection.arabicsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.3}Zusammenfassung der Tests}{61}{subsection.arabicsection.6.3}%

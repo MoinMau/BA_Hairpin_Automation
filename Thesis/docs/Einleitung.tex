@@ -42,7 +42,7 @@ weitgehende Automatisierung hilfreich\PEMfootcite{ContinuousHairpinChallenges.20
 Abisolierens in der Prototypenfertigung bietet das Potenzial, Geschwindigkeit, Kosten und
 Sicherheit in der Entwicklung zu optimieren.
 
-\subsection{Zielsetzung}\label{sec:Zielsetzung}
+\subsection{Zielsetzung der Arbeit}\label{sec:Zielsetzung}
 Der hohe Bedarf an verschiedensten elektrischen Antriebssystemen hat zur Folge, dass viele
 Systeme der Hairpintechnologie erforscht und weiterentwickelt werden müssen. Um eine vielfältige
 und variable Forschung zu ermöglichen, ist eine gut funktionierende Prototypenproduktion nötig.
@@ -51,8 +51,8 @@ fertigen. Dazu werden, wie weiter unten beschrieben, Produktionsverfahren verwen
 einfache Variation der Geometrie oder Eigenschaften forcieren. Aber nicht nur die Verfahren selbst müssen passend
 ausgelegt werden, sondern auch die Geschwindigkeit und die Arbeitsintensität müssen aufeinander
 abgestimmt werden. Es bietet sich an, ein hohes Maß an Arbeitsschritten zu automatisieren.
-Dies bringt neben den Vorteilen wie erhöhter Geschwindigkeit, Sicherheit und niedrigen Kosten auch
-Herausforderungen mit sich\PEMfootcite[S. 332]{ManualVsAutomatedPicking.2022}. Denn besonders in der Prototypenproduktion
+Dies bringt neben den Vorteilen wie erhöhter Geschwindigkeit, Sicherheit und niedrigen Kosten\PEMfootcite[S. 332]{ManualVsAutomatedPicking.2022} auch
+Herausforderungen mit sich. Denn besonders in der Prototypenproduktion
 müssen Systeme entwickelt werden, die mit einer großen Variantenvielfalt des Endproduktes kompatibel sind.
 
 In dieser Arbeit soll der Prozess des Abisolierens der Hairpins analysiert werden.
@@ -68,18 +68,17 @@ Ziel ist es, ein passendes Konzept aufzubauen und dieses anhand von Messreihen z
 Die konkreten Anforderungen werden im Verlauf detaillierter aufgezeigt, wobei die Grundsätze der Prototypenproduktion
 und der Automatisierung als Leitfaden gelten. Zu diesen gehören unter anderem die Verarbeitung von variablen
 Hairpin-Geometrien und das minimale manuelle Eingreifen in den Ablauf des Gesamtsystems.
-%
-%
-\subsection{Aufgabenstellung}\label{sec:Aufgabenstellung}
-Aus der Zielsetzung folgt die Entwicklung eines Gesamtsystems, welches die Hairpinenden automatisiert und
-präzise abisoliert. Der Fokus dieser Arbeit liegt auf der Konzeption, Realisierung und dem Testen
-des Zuführsystems.
+
+Der Fokus dieser Arbeit liegt auf der Konzeption, Realisierung und dem Testen
+eines Vereinzelungs- und Zuführsystems.
 Um diese Ziele zu erfüllen, wird in mehrere Arbeitspakete unterteilt: Zunächst muss sich in
 bestehende Systeme eingearbeitet und ein Konzept erstellt werden. Weiterführend muss
 dieses Konzept konkretisiert und ausgearbeitet werden. In der Konstruktionsphase wird das
 entwickelte Konzept aufgebaut. Als Letztes folgt die Test- und Optimierungsphase. Aus diesen Arbeitspaketen
-leitet sich also die allgemeine Forschungsfrage ab: Wie kann ein System zur automatisierten
-Abisolierung von Hairpins in der Prototypenproduktion aussehen?\todo{Doppelt? Forschungsfrage in die Zielsetzung?}
+leitet sich demnach die  Forschungsfrage ab: 
+
+Wie kann ein System zur automatisierten
+Abisolierung von Hairpins in der Prototypenproduktion aussehen?
 %
 %
 \subsection{Aufbau der Arbeit}\label{sec:AblaufThesis}
@@ -146,7 +145,7 @@ die Beantwortung der Forschungsfrage zu verifizieren.
 \node[schritte={figKontur}{figFlaeche},below=7mm of s3.south west,anchor=north west] (s4) {%
   \kap{7}\enspace Diskussion\\[2pt]
   \kap{7}\enspace Optimierungsvorschläge\\[2pt]
-  \kap{8}\enspace Fazit};
+  \kap{7}\enspace Fazit};
 \node[thema=figKontur,right=9mm of s4] (t4) {Erkenntnisse};
 \draw[zu=figKontur] (s4) -- (t4);
 
