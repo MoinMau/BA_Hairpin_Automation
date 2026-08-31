@@ -3,7 +3,7 @@ Im folgenden Kapitel werden Grundlagen zur Hairpin-Technologie und Teilsysteme f
 Dazu wird zunächst auf die Entwicklung der Hairpin-Technologie eingegangen, darauf folgt die Betrachtung des Produktionsablaufs
 eines Elektromotors. Vertiefend wird auf den für diese Arbeit relevanten Abisolierprozess eingegangen. Zuletzt werden Systeme physikalisch
 erläutert, die Anwendung im Aufbau der Anlage finden könnten. Dazu gehören Peripherie wie Sensoren und Aktuatoren, aber auch Steuereinheiten
-und Normen, die im Gesamtsystem Einsatz finden können.
+und Normen, die im Gesamtsystem eingesetzt werden können.
 %
 %
 \subsection{Hairpin-Technologie}\label{sec:HairPinTechnologie}
@@ -136,7 +136,7 @@ Prozesskette entspricht einer Serienproduktion\PEMfootcite{ProductionProcessHair
 Prototypenproduktion ist dies nicht der Fall, da wie aufgezeigt die Abisolierung nach dem Biegen des Kupferbandes erfolgt.
 
 Der Fertigungsprozess beginnt mit einer Rolle an isoliertem Kupferdraht. Dieser muss aus seiner runden Form in eine gerade
-Ausrichtung gebracht werden. Dazu wird der Draht in den zwei Achsrichtungen entgegen seiner natürlichen Biegung wieder gerade gebogen.
+Ausrichtung gebracht werden. Dazu wird der Draht in den zwei Achsrichtungen entgegen seiner ursprünglichen Biegung wieder gerade gebogen.
 Hier ist das Ziel, die Restkrümmung auf ein Minimum zu bringen, wobei Einflussfaktoren wie der Spulendurchmesser, Temperaturänderungen,
 Kaltverformungseffekte und Ungenauigkeiten bei Isolierschicht und Kupferdrahtdicke zu berücksichtigen sind. Es gibt Möglichkeiten, durch Messungen
 in der Produktion diese Abweichungen automatisiert anzupassen.
@@ -144,8 +144,8 @@ in der Produktion diese Abweichungen automatisiert anzupassen.
 In der Serienproduktion würde nun das Kupferband abisoliert werden. Da es sich in dieser Arbeit um die Abisolierung in der Prototypenproduktion
 handelt, wird im weiteren Verlauf detaillierter auf diesen Prozess eingegangen.
 
-Im nächsten Schritt wird das Kupferband je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern so geschnitten, dass keine Deformationen
-des rechteckigen Kupferbandes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.
+Im nächsten Schritt wird das Kupferband je nach Anforderung passend abgelängt. Hierfür wird mit zwei Messern derart geschnitten, dass keine Deformationen
+des rechteckigen Kupferbandquerschnittes entstehen. Außerdem werden durch spezielle Schneidtechniken kleine Fasen an den Enden erzeugt, die später beim Einsetzen der Hairpins in das Blechpaket helfen.
 
 Einer der komplizierteren Schritte ist das Biegen. Dies kann durch verschiedene Methoden erzielt werden: CNC-Biegen, Schwenkbiegen, Gesenkbiegen und freies Biegen.
 In der Serienproduktion wird hauptsächlich Gesenkbiegen verwendet, da zunächst nur die zweidimensionale U-Form des Hairpins gebogen werden muss und danach
@@ -196,7 +196,7 @@ eine Abisolierung durchzuführen, die in diesem Abschnitt vorgestellt werden sol
 mit Schabwerkzeugen, induktives Erhitzen und den Laser eingegangen\PEMfootcite{Glaessel2020Skinning}.
 
 In der Prototypenproduktion ist dieser Schritt entkoppelt von der Drahtvorbereitung. Wie in \cref{fig:Produktionsablauf}
-aufgezeigt findet die Abisolierung erst nach dem Biegen in einem getrennten Produktionsschritt statt.
+aufgezeigt, findet die Abisolierung erst nach dem Biegen in einem getrennten Produktionsschritt statt.
 %
 \subsubsection{Rotierende Bürsten}\label{sec:RotierendeBuersten}
 Beim Bürstenabisolieren wird die Isolierschicht mechanisch durch rotierende Bürsten
@@ -228,8 +228,8 @@ realisieren. Dazu wird der abzuisolierende Bereich in eine Induktionsspule
 eingebracht, die mit einer hochfrequenten Wechselspannung beaufschlagt wird. Das
 schnell wechselnde Magnetfeld induziert Wirbelströme im Kupfer, die den Leiter lokal
 stark erwärmen und die Isolierschicht dadurch zersetzen. Da das Werkstück
-berührungslos bearbeitet wird, tritt kein Werkzeugverschleiß auf, und die
-Bearbeitungszeit ist kurz. Die eingebrachte Wärme wirkt jedoch in zwei Richtungen
+berührungslos bearbeitet wird, tritt kein Werkzeugverschleiß und Kupferabrieb auf, und es können kurze
+Bearbeitungszeiten erreicht werden. Die eingebrachte Wärme wirkt jedoch in zwei Richtungen
 nachteilig: Zum einen oxidiert die freigelegte Kupferoberfläche deutlich schneller,
 zum anderen begrenzt die hohe Wärmeleitfähigkeit des Kupfers die räumliche
 Eingrenzung des Prozesses, sodass angrenzende Bereiche der Isolierschicht ebenfalls
@@ -258,16 +258,13 @@ Seite des Resonators, die das gesamte Licht reflektiert. Gegenüberliegend gibt 
 des Lichtes den Aufbau verlassen kann. Dieses austretende Licht kann nun über weitere Spiegel oder eine Glasfaser zum benötigten Ort geleitet
 werden. Damit dieses Prinzip überhaupt im Dauerbetrieb funktioniert, muss dem gesamten System genau so viel Energie zugeführt werden, wie
 durch die Abstrahlung des Laserlichtes entzogen wird. Dies geschieht durch eine Pumpquelle, die eine ausreichend hohe Besetzungsinversion bereitstellt.
-Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregten Zustand zu halten als im Grundzustand.
+Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregten Zustand als im Grundzustand zu halten.
 
 \begin{figure}[htbp]
   \centering
   \resizebox{\linewidth}{!}{%
   \begin{tikzpicture}[
     font=\small,
-    % Struktur (Niveaus, Spiegel, Pumpe) grau, Energie (Photon, Strahl,
-    % Elektron) blau - so ist auf einen Blick sichtbar, was traegt und
-    % was wirkt.
     lvl/.style     = {draw=figKonturHell, thin},
     elec/.style    = {draw=figAkzent, thin, fill=figAkzent},
     photon/.style  = {decorate, decoration={snake, amplitude=0.5mm,
@@ -289,7 +286,6 @@ Dazu werden Dioden oder andere kleine Laser verwendet, um mehr Atome im angeregt
   %% ============================================================
   %% (a) Wechselwirkung zwischen Photon und Atom
   %% ============================================================
-  %% #1 = x-Versatz, #2 = Überschrift
   \newcommand{\niveaus}[2]{%
     \begin{scope}[shift={(#1,0)}]
       \draw[lvl] (-1.0,0)   -- (1.0,0);

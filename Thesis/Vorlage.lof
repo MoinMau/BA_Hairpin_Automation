@@ -8,12 +8,12 @@
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Übertragungselemente zur Wandlung rotatorischer in translatorische Bewegung}}{15}{figure.arabicsection.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Aufbau in einer Master-Slave-Architektur}}{17}{figure.arabicsection.2.7}%
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Aufbau einer H-Bruecke}}{20}{figure.arabicsection.2.8}%
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Gesamtansicht des Laserbearbeitungssystems, \blx@tocontentsinit {0}\cite [Abb.~2.1, S.~19]{CleanLaser2022}}}{21}{figure.arabicsection.3.1}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Gesamtansicht des Laserbearbeitungssystems}}{21}{figure.arabicsection.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Aufbau der Abisolierzelle mit Roboterarm und Laser}}{22}{figure.arabicsection.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces wireLINE MIRROR System - Laserstrahlführung, \blx@tocontentsinit {0}\cite [Abb. Bearbeitungsoptik, S.~42]{CleanLaser2022}}}{23}{figure.arabicsection.3.3}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces wireLINE MIRROR System -- Laserstrahlführung}}{23}{figure.arabicsection.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Prinzipskizzen ausgewählter Zuführprinzipien}}{25}{figure.arabicsection.3.4}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Bauformen geordneter Magazine}}{26}{figure.arabicsection.3.5}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Funktionsstruktur des Gesamtsystems; der Teilefluss (Hairpin) verläuft von oben nach unten. Das Überführen bildet die Schnittstelle zwischen den beiden aktiven Subsystemen.}}{36}{figure.arabicsection.4.1}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Funktionsstruktur des Gesamtsystems}}{36}{figure.arabicsection.4.1}%
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Fertigungsgerechtes Gelenk im 3D-Druck}}{42}{figure.arabicsection.5.1}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Aufbau der Vibrationsschiene}}{44}{figure.arabicsection.5.2}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Aufbau der Vereinzelungseinheit}}{45}{figure.arabicsection.5.3}%
@@ -24,8 +24,8 @@
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Positionierung der Messuhr für T-01}}{55}{figure.arabicsection.6.1}%
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Positionierung der Messschablone für T-07}}{59}{figure.arabicsection.6.2}%
 \contentsline {figure}{\numberline {B.1}{\ignorespaces Aufbau der Lochrasterplatine mit dem Arduino Nano}}{68}{figure.B.1}%
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Aufbau des realsisierten Gesamtsystems in der Trägerstruktur}}{68}{figure.B.2}%
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Aufbau des Zuführsystem mit Hairpin in Kraftklemme mit Transportsystem}}{69}{figure.B.3}%
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Daraufsicht des Vereinzelungssystems}}{69}{figure.B.4}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Aufbau des realisierten Gesamtsystems in der Trägerstruktur}}{68}{figure.B.2}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Aufbau des Zuführsystems mit einem Hairpin eingespannt in der Kraftklemme des Transportsystems}}{69}{figure.B.3}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Daraufsicht des realen Vereinzelungssystems in der Trägerstruktur}}{69}{figure.B.4}%
 \contentsline {figure}{\numberline {B.5}{\ignorespaces Ansichten des Hairpins zur Einordnung der Befunde aus T-09}}{79}{figure.B.5}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

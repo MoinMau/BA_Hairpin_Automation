@@ -142,7 +142,7 @@
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.66}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.67}%
 \contentsline {paragraph}{\nonumberline Bewertung}{57}{paragraph*.68}%
-\contentsline {subsubsection}{\numberline {6.1.6}Fixierungssytem: Seitenklemmen T-06}{57}{subsubsection.arabicsection.6.1.6}%
+\contentsline {subsubsection}{\numberline {6.1.6}Fixierungssystem: Seitenklemmen T-06}{57}{subsubsection.arabicsection.6.1.6}%
 \contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.69}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.70}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.71}%
