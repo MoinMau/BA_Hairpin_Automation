@@ -26,7 +26,7 @@
 \contentsline {paragraph}{\nonumberline Kapazitive Sensoren}{12}{paragraph*.6}%
 \contentsline {paragraph}{\nonumberline Halleffekt-Sensoren}{12}{paragraph*.7}%
 \contentsline {subsubsection}{\numberline {2.3.3}Mechanische Sensoren}{12}{subsubsection.arabicsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.4}Aktuatorik}{12}{subsection.arabicsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Aktuatorik}{13}{subsection.arabicsection.2.4}%
 \contentsline {subsubsection}{\numberline {2.4.1}Pneumatik}{13}{subsubsection.arabicsection.2.4.1}%
 \contentsline {subsubsection}{\numberline {2.4.2}Elektromechanische Aktuatorik}{14}{subsubsection.arabicsection.2.4.2}%
 \contentsline {paragraph}{\nonumberline Motoren}{14}{paragraph*.8}%
@@ -34,11 +34,11 @@
 \contentsline {subsection}{\numberline {2.5}Steuerungstechnik}{15}{subsection.arabicsection.2.5}%
 \contentsline {subsubsection}{\numberline {2.5.1}Steuerungsarchitektur}{16}{subsubsection.arabicsection.2.5.1}%
 \contentsline {subsubsection}{\numberline {2.5.2}Mikrocontroller}{17}{subsubsection.arabicsection.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.5.3}Signalübertragung}{17}{subsubsection.arabicsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.3}Signalübertragung}{18}{subsubsection.arabicsection.2.5.3}%
 \contentsline {paragraph}{\nonumberline Digitale Schaltsignale}{18}{paragraph*.10}%
 \contentsline {paragraph}{\nonumberline Analoge Spannungssignale}{18}{paragraph*.11}%
 \contentsline {paragraph}{\nonumberline Pulsweitenmodulation}{18}{paragraph*.12}%
-\contentsline {subsubsection}{\numberline {2.5.4}Bussysteme}{18}{subsubsection.arabicsection.2.5.4}%
+\contentsline {subsubsection}{\numberline {2.5.4}Bussysteme}{19}{subsubsection.arabicsection.2.5.4}%
 \contentsline {paragraph}{\nonumberline I\textsuperscript {2}C}{19}{paragraph*.13}%
 \contentsline {subsubsection}{\numberline {2.5.5}Leistungselektronik und Motortreiber}{19}{subsubsection.arabicsection.2.5.5}%
 \contentsline {subsection}{\numberline {2.6}Verfahren}{20}{subsection.arabicsection.2.6}%
@@ -112,7 +112,7 @@
 \contentsline {subsubsection}{\numberline {5.6.3}Peripherie}{50}{subsubsection.arabicsection.5.6.3}%
 \contentsline {paragraph}{\nonumberline Servomotoren}{50}{paragraph*.47}%
 \contentsline {paragraph}{\nonumberline Schrittmotoren}{50}{paragraph*.48}%
-\contentsline {paragraph}{\nonumberline Prozessensoren}{50}{paragraph*.49}%
+\contentsline {paragraph}{\nonumberline Prozesssensoren}{50}{paragraph*.49}%
 \contentsline {paragraph}{\nonumberline HMI}{50}{paragraph*.50}%
 \contentsline {subsubsection}{\numberline {5.6.4}Schaltplan}{51}{subsubsection.arabicsection.5.6.4}%
 \contentsline {subsection}{\numberline {5.7}Software}{51}{subsection.arabicsection.5.7}%
@@ -137,7 +137,7 @@
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{56}{paragraph*.62}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{56}{paragraph*.63}%
 \contentsline {paragraph}{\nonumberline Bewertung}{56}{paragraph*.64}%
-\contentsline {subsubsection}{\numberline {6.1.5}Fixierungssystem: Hairpinaufstellung T-04}{57}{subsubsection.arabicsection.6.1.5}%
+\contentsline {subsubsection}{\numberline {6.1.5}Fixierungssystem: Hairpin-Aufstellung T-04}{57}{subsubsection.arabicsection.6.1.5}%
 \contentsline {paragraph}{\nonumberline Prüfziel}{57}{paragraph*.65}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{57}{paragraph*.66}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.67}%
@@ -148,7 +148,7 @@
 \contentsline {paragraph}{\nonumberline Ergebnis}{57}{paragraph*.71}%
 \contentsline {paragraph}{\nonumberline Bewertung}{58}{paragraph*.72}%
 \contentsline {subsection}{\numberline {6.2}Validierung im Gesamtablauf}{58}{subsection.arabicsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Zuführungssystem: Wiederholgenauigkeit T-07}{58}{subsubsection.arabicsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.1}Zuführsystem: Wiederholgenauigkeit T-07}{58}{subsubsection.arabicsection.6.2.1}%
 \contentsline {paragraph}{\nonumberline Prüfziel}{58}{paragraph*.73}%
 \contentsline {paragraph}{\nonumberline Spezifischer Aufbau}{58}{paragraph*.74}%
 \contentsline {paragraph}{\nonumberline Ergebnis}{58}{paragraph*.75}%
@@ -165,10 +165,10 @@
 \contentsline {subsection}{\numberline {7.1}Optimierungspotenzial}{62}{subsection.arabicsection.7.1}%
 \contentsline {subsubsection}{\numberline {7.1.1}Geometrieabhängigkeit der Vereinzelung}{62}{subsubsection.arabicsection.7.1.1}%
 \contentsline {subsubsection}{\numberline {7.1.2}Prozesssicherheit der Überführung}{62}{subsubsection.arabicsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Prozessüberwachung und Taktzeit}{62}{subsubsection.arabicsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.3}Prozessüberwachung und Taktzeit}{63}{subsubsection.arabicsection.7.1.3}%
 \contentsline {subsubsection}{\numberline {7.1.4}Werkstoffe und Verschleiß}{63}{subsubsection.arabicsection.7.1.4}%
 \contentsline {subsection}{\numberline {7.2}Alltagsbetrieb \& Limitationen}{63}{subsection.arabicsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Fazit}{63}{subsection.arabicsection.7.3}%
+\contentsline {subsection}{\numberline {7.3}Fazit}{64}{subsection.arabicsection.7.3}%
 \contentsline {section}{\numberline {A}Literatur}{65}{appendix.A}%
 \contentsline {section}{\numberline {B}Anhang}{68}{appendix.B}%
 \contentsline {subsection}{\numberline {B.1}Messwerte der Verifikationsversuche}{70}{subsection.B.1}%

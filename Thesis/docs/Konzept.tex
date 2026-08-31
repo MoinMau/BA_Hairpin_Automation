@@ -18,7 +18,7 @@ Arbeitsschritte festgelegt:
 Der genaue Aufbau dieser Subsysteme wird im späteren Teil dieses Abschnittes weiter erläutert.
 %
 \subsection{Anforderungen}\label{sec:Anforderung}
-Diese Bachelorarbeit orientiert sich für die Erarbeitung des automatisierten Abisoliersystems an der VDI 2221.
+Diese Bachelorarbeit orientiert sich für die Erarbeitung des automatisierten Abisoliersystems an der VDI~2221.
 In dieser ist beschrieben, wie ein systematischer und phasenweiser Entwicklungsprozess eines Produktes aussieht.
 Der Grundgedanke ist dabei, Anforderungen, Funktionsstrukturen und Lösungskonzepte festzulegen und
 zuletzt das Gesamtsystem zu gestalten.
@@ -125,12 +125,12 @@ einmal rückläufig zu beschreiben: Der Roboterarm muss die Hairpins für die Ab
 muss ein Hairpin so bereitgestellt werden, dass dieser an einer fixen Position und an den Angriffspunkten des Greifers
 des Roboterarmes übergeben wird. Es muss also ein vereinzelter Hairpin aus der restlichen Anlage herausfahren.
 Vorher musste aus einer Vielzahl ein Hairpin isoliert übergeben werden. Nach Anforderungen muss
-das System einmalig mit Hairpins beladen werden, sodass dann für einen Druchlauf ein Vorrat vorhanden ist.
+das System einmalig mit Hairpins beladen werden, sodass dann für einen Durchlauf ein Vorrat vorhanden ist.
 %
 %
 \subsubsection{Funktionsstruktur}
 Wie bereits beschrieben, gliedert sich die in der Arbeit erarbeitete Anlage in das aktuelle System ein. Der Ablauf der
-einzelen Teilschritte ist in \cref{fig:funktionsstruktur} aufgezeigt. Als Anfangspunkt dieses
+einzelnen Teilschritte ist in \cref{fig:funktionsstruktur} aufgezeigt. Als Anfangspunkt dieses
 Systems gilt die Beladung mit Hairpins. Es muss also ein Vorrat an Hairpins in die Anlage gegeben werden, der dann am Ende
 vereinzelt an den vorhandenen Roboterarm übergeben werden muss. Im Vereinzelungssystem müssen dafür die Hairpins bevorratet
 und dem eigentlichen Vereinzelungsmechanismus zugeführt werden. Die Vereinzelung hat die Aufgabe, aus dem angelieferten Bündel
@@ -197,7 +197,7 @@ Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm 
 Die hier aufgeführten Prinzipien wurden aus den in \cref{sec:SubSystem} erklärten Varianten abgeleitet. Der Morphologische
 Kasten soll den Entscheidungsprozess übersichtlich veranschaulichen. Wichtig ist zu benennen, dass ein mechanischer Aufbau
 in einigen Fällen mehrere Funktionen zusammen lösen kann. Für eine bessere Übersicht wurden für die \cref{tab:morph}
-bereits vier Prinzipien je Teilfunktion im vorhinein festgelegt.
+bereits vier Prinzipien je Teilfunktion im Vorhinein festgelegt.
 
 \colorlet{groupgray}{RWTHBlau25}
 \colorlet{kogray}{figKonturHell}
@@ -270,10 +270,10 @@ die Wunschanforderung St2 diesem System entgegen, da für die Sperrigkeit der Ha
 keine Anforderungen verletzt werden. Doch vergleicht man die Prinzipien gegeneinander, so lässt sich der aktive Schieber als schlechte
 Wahl deklarieren. In Anforderung Mo1 ist vorausgesetzt, dass das Gesamtsystem eine einfache Montage ermöglichen und Komplexität
 verringern soll. Bei einem aktiven Schieber wären externe Antriebe, eine Regelung und weitere Bauteile nötig, die die Prozesssicherheit
-minimiert.
+minimieren.
 
 \paragraph{Übernehmen \& Fixieren} Nach Anforderung En2 entfällt die Vakuumfixierung, da kein Vakuumdrucksystem vorhanden
-ist. Auch ein pneumatisches System muss zunächst ingoriert werden, weil keine Luftdruck-Steuerungseinheit
+ist. Auch ein pneumatisches System muss zunächst ignoriert werden, weil keine Luftdruck-Steuerungseinheit
 vorhanden ist und eine Regelung dieser eine erhöhte Komplexität mit sich bringen würde.
 
 \paragraph{Transportieren} Auch hier entfällt der Pneumatikzylinder aus den gleichen Gründen wie im vorherigen Abschnitt.
@@ -352,7 +352,7 @@ zugeordnet. Für die weitere Betrachtung wird die Kraftschluss-Klemme der Varian
 Für das Transportieren bietet der Spindelantrieb gegenüber einem Zahnantrieb eine höhere Genauigkeit. Diese wird besonders für
 die Anforderung L2 benötigt. In diesem Zuge kann ebenfalls die Positionierung mit analysiert werden. Durch die Festlegung des
 Arbeitsbereiches durch die Hairpin-Geometrien, sind die Betriebsbereiche für den Motor des Spindelantriebes festgelegt. Die
-Wahl eines open-loop Sensorsystems ist passend und die Komplexität wird weiter reduziert.
+Wahl eines open-loop-Sensorsystems ist passend und die Komplexität wird weiter reduziert.
 
 Für das Übergeben an den Roboterarm folgt aus der Kraftschluss-Klemme automatisch das aktive Freigeben.
 
@@ -369,7 +369,7 @@ Dies hat den praktischen Vorteil, dass sich ein solches System schneller bewegen
 der Verletzung der Anforderung L1 geringer und andere Teilfunktionen haben die Möglichkeit, langsamere Prinzipien einzusetzen.
 
 Diese schnelleren Bewegungen führen jedoch automatisch zu höheren Kräften. Es bietet sich also an für die Positionierung ein
-closed-loop System zu verwenden, damit die Wiederholgenauigkeit nach Anforderung L2 weiter erreicht werden kann.
+closed-loop-System zu verwenden, damit die Wiederholgenauigkeit nach Anforderung L2 weiter erreicht werden kann.
 
 Wegen des rein mechanischen Aufbaus des Formschluss-Nests muss der Roboterarm für die Übergabe den Hairpin selbstständig aus
 dem Nest lösen. Ein aktives Freigeben ist ohne steuerbare Bewegungseinheit nicht möglich.
@@ -407,16 +407,16 @@ Taktzeit \newline (L1)
   & Zahnriemen ermöglicht kürzere Verfahrzeiten\\
 \addlinespace
 Systemkomplexität \newline (Mo1)
-  & passive Überführung, Positionierung im \emph{open loop}
-  & angetriebenes Förderband, Positionierung im \emph{closed loop}\\
+  & passive Überführung, Positionierung im \emph{open-loop}
+  & angetriebenes Förderband, Positionierung im \emph{closed-loop}\\
 \addlinespace
 Bauteilbelastung \newline (L4)
   & Klemmung der Hairpin durch exteren Krafteinwirkung
   & Einfaches Ablegen des Hairpin ins Formschluss Nest\\
 \addlinespace
 Positionier\-genauigkeit \newline (L2)
-  & Lage wird im \emph{open loop} aus der Referenzfahrt fortgeschrieben
-  & Rückführung über \emph{closed loop} erkennt Abweichungen unmittelbar\\
+  & Lage wird im \emph{open-loop} aus der Referenzfahrt fortgeschrieben
+  & Rückführung über \emph{closed-loop} erkennt Abweichungen unmittelbar\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -425,9 +425,9 @@ Variante~B weist in drei Kriterien Vorteile auf. Der Zahnriemenantrieb erlaubt
 kürzere Verfahrzeiten, die \emph{closed-loop}-Rückführung erkennt
 Positionsabweichungen unmittelbar, und das Ablegen in das Formschluss-Nest kommt
 ohne aufgebrachte Klemmkraft aus. Diese Vorteile schlagen für den vorliegenden
-Anwendungsfall jedoch nicht durch: Der Arbeitsbereich des Transprotsystems ist
+Anwendungsfall jedoch nicht durch: Der Arbeitsbereich des Transportsystems ist
 durch den Geometriebereich der Hairpins fest begrenzt, sodass die
-Anforderung~L2 bereits im \emph{open loop} erwartbar eingehalten wird. Eine
+Anforderung~L2 bereits im \emph{open-loop} erwartbar eingehalten wird. Eine
 Rückführung erhöht damit vor allem die Systemkomplexität, ohne einen
 funktionalen Gewinn zu erzeugen. Gleiches gilt für die Taktzeit, da das System
 nach Anforderung~L1 lediglich unterhalb der Zykluszeit der Zelle bleiben muss und

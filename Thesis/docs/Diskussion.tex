@@ -12,9 +12,9 @@ Aufbaus gezielt sichtbar zu machen. Die daraus abgeleiteten Maßnahmen sind nach
 %
 \subsubsection{Geometrieabhängigkeit der Vereinzelung}\label{sub:HF-Vereinzelung}
 Wie in der Messreihe T-05 (vgl. \cref{sec:VR_Vereinzelungstreue}) identifiziert müssen die Endeffektoren auf die Hairpin-Geometrie
-angpasst werden. Die aktuelle Variante einer festen Endeffektorkombination ließe sich zwar über weiter Messreihen optimieren, 
+angepasst werden. Die aktuelle Variante einer festen Endeffektorkombination ließe sich zwar über weitere Messreihen optimieren, 
 bliebe jedoch weiter ein Kompromiss zu Lasten der Randbereiche der Hairpin-Geometrien. Robuster wäre der Einsatz von einer
-an jede Hairpin-Geometrie angepassten Endeffektorenkombination. Dies könnte durch ein generatives Design, welches sich 
+an jede Hairpin-Geometrie angepassten Endeffektorkombination. Dies könnte durch ein generatives Design, welches sich 
 individuell und automatisch anpasst, und einer nachfolgenden Fertigung mittels eines AM-Druckers schnell und einfach erstellen.
 Dieser Mehraufwand entsteht dabei ausschließlich beim Geometriewechsel und beschränkt sich auf das Lösen zweier Schrauben 
 sowie eine anschließende Kalibrierung. Die Forderung St1 wird auf Systemebene erfüllt, wobei die Wunschanforderung B2 beim 
@@ -29,23 +29,23 @@ zugänglich bleiben, verhindern. Weiter könnte eine Innenbeschichtung die Absä
 würde über einen definierten Gleitreibungskoeffizienten die Auftreffgeschwindigkeit im Trichter einstellen.
 
 Ein Ersatz der Überführung durch eine direkte Übergabe zwischen Vereinzelung und Zuführsystem wäre auch denkbar, 
-erforderte jedoch ein Umrüsten bei jeder Hairpinlänge. Dieses Umrüsten bedarf eines Arbeitsaufwendiges Verschieben der einzelnen
+erforderte jedoch ein Umrüsten bei jeder Hairpin-Länge. Dieses Umrüsten bedarf eines arbeitsaufwendigen Verschiebens der einzelnen
 Subsysteme und widerspricht der Anforderung B2.
 
 \subsubsection{Prozessüberwachung und Taktzeit}\label{sub:HF-Sensorik}
-Wie in der Realisiserung (\cref{sec:Realisierungsstand}) bereis erwähnt ist die Prozesssensonsorik bewusst noch nicht in die
-Ablaufsteuerung eingebunden. Die aktuelle Steurung erfolgt deshalb über festgelegte Wartezeiten und stützt sich nicht auf
-den tatsächlichen Anlagenzustand. Werden die Sensorsignale ausgewertet lässt sich eine Fehlerbehandlung implemtieren oder
-die gesetzten Sicherheitspuffer des derzeitgen Ablaufes als psotiver Nebeneffekt minimieren.
+Wie in der Realisierung (\cref{sec:Realisierungsstand}) bereits erwähnt ist die Prozesssensorik bewusst noch nicht in die
+Ablaufsteuerung eingebunden. Die aktuelle Steuerung erfolgt deshalb über festgelegte Wartezeiten und stützt sich nicht auf
+den tatsächlichen Anlagenzustand. Werden die Sensorsignale ausgewertet lässt sich eine Fehlerbehandlung implementieren oder
+die gesetzten Sicherheitspuffer des derzeitigen Ablaufes als positiver Nebeneffekt minimieren.
 Konkret lässt sich dies auf die Übergabe der Hairpins auf den Roboterarm übertragen, die durch eine manuelle Synchronisation
-durch ein Rückmeldesignal ersetzen könnte. Nach Wunschanforderung Si1 würde so das Gesamtsystem flüssig funktionieren.
+durch ein Rückmeldesignal ersetzt werden könnte. Nach Wunschanforderung Si1 würde so das Gesamtsystem flüssig funktionieren.
 
 \subsubsection{Werkstoffe und Verschleiß}\label{sub:HF-Werkstoffe}
 Die Wahl kostengünstiger, additiv verarbeitbarer Werkstoffe folgt der Wunschanforderung St2 und hat sich für den Prototypenaufbau 
 bewährt. Für einen dauerhaften Betrieb verschiebt sich jedoch der Anwendungsfall und damit die Anforderung selbst.
-Besonders an Bauelementen bei denen verstärkt Reibung auftritt, wie den Kraftklemmen, lassen sich Verschleißärmere Matrialien,
-wie gefräste Aluminiumteile einsetzten. Auch ein Wechsel zu hochwertigeren Motoren, könnte ein Prozessasufall bei einem 
-Dauerbertrieb minimieren. Diese Maßnahmen beruhen jedoch nur auf Erwartungen und sollten erst nach tiefer gehender Prüfung
+Besonders an Bauelementen, bei denen verstärkt Reibung auftritt, wie den Kraftklemmen, lassen sich verschleißärmere Materialien,
+wie gefräste Aluminiumteile einsetzen. Auch ein Wechsel zu hochwertigeren Motoren, könnte ein Prozessausfall bei einem 
+Dauerbetrieb minimieren. Diese Maßnahmen beruhen jedoch nur auf Erwartungen und sollten erst nach tiefer gehender Prüfung
 des Gesamtsystems umgesetzt werden.
 
 \subsection{Alltagsbetrieb \& Limitationen}\label{sub:Erkenntnisse}
@@ -59,7 +59,7 @@ Die Messreihen umfassen zwischen 10 und 25 Durchläufen, der Dauerlauf drei Durc
 Langzeitverhalten, insbesondere zu Verschleiß und selten auftretenden Fehlerbildern, lassen sich daraus nicht ableiten.
 Der Dauerlauf umfasste zudem keinen vollständigen Zellenzyklus einschließlich des Laserprozesses. Dies stellt
 jedoch nicht Teil dieser Arbeit dar und wird durch eine andere Arbeit verifiziert. Die entsprechenden Anforderungen
-für die Übergabe sind erfüllt und gestestet.
+für die Übergabe sind erfüllt und getestet.
 
 \subsection{Fazit}\label{sec:Fazit}
 Ziel dieser Arbeit war die Entwicklung eines Systems, das Hairpins vereinzelt und einem Roboterarm zur

@@ -39,8 +39,8 @@ gegenüberliegenden Ecke zum Laser, also in der \cref{fig:laser_system_aufbau} u
 %
 %
 \subsubsection{Clean-Laser-Anlage}\label{sec:CleanLaser}
-Das Laserbearbeitungssystem ist eine Sonderanfertigung des Herstellers Clean Laser, welches einen CL 300GR Laser
-mit Optik Stamp 14 und einem Prozessmodul vereint. Dieses Gesamtsystem wird wireLine MIRROR static genannt,
+Das Laserbearbeitungssystem ist eine Sonderanfertigung des Herstellers Clean-Laser, welches einen CL 300GR Laser
+mit Optik Stamp 14 und einem Prozessmodul vereint. Dieses Gesamtsystem wird wireLINE MIRROR static genannt,
 da der Laserstrahl so aufgeteilt werden muss, dass alle vier Seiten des Hairpins bearbeitet werden können.
 
 Die Laseremitierung erfolgt bei diesem System in dem externen gekühlten Serverschrank, in dem auch
@@ -117,7 +117,7 @@ anders aufgebaut sind.
 %
 \subsection{Subsystem-Betrachtung}\label{sec:SubSystem}
 Die oben beschriebenen Anlagen lassen sich jeweils in mehrere Subsysteme unterteilen. Zur Analyse
-der verschiedenen Auslegungsmöglichkeiten wird die VDI 2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese
+der verschiedenen Auslegungsmöglichkeiten wird die VDI~2860\PEMfootcite{VDI2860.1990} - Handhabungsfunktion benutzt. Diese
 Richtlinie wurde 2018 wegen einer teilweise veralteten Betrachtung zurückgezogen, ist aber für diesen
 Abschnitt dennoch relevant mit zu betrachten.
 
@@ -462,7 +462,7 @@ zum Überwinden der Haftreibung\PEMfootcite{Reibung.2001} eingestellt sein:
 \begin{equation}\label{eq:Grenzwinkel}
   \tan \alpha = \mu_\text{H}
 \end{equation}
-Da im Normalfall die Gleitreibung kleiner als die Haftreibung ist, wird mit dieser Formel also der Winkel zwischen dem vertikalen
+Da im Normalfall die Gleitreibung kleiner als die Haftreibung ist, wird mit dieser Formel also der Winkel zwischen dem horizontalen
 Boden und der schiefen Ebene beschrieben. Die Konstante muss individuell für die Werkstoffpaarung, also zwischen Außenschicht des
 Bauteils und Beschaffenheit der schiefen Ebene, bestimmt werden. Der steilste Winkel beschreibt die Aufstellung im rechten Winkel mit einem Winkel von \qty{90}{\degree}.
 Hierbei ist aber zu beachten, dass dieser theoretische Wert in der Praxis selten verwendet wird, weil besonders bei kleineren Bauteilen
@@ -473,7 +473,7 @@ zu Beschädigungen, wie Verformungen oder Abrieb, führen. Auf der anderen Seite
 kostengünstig und eine wartungsarme Methode für das Verbinden von Schnittstellen.
 
 Die folgenden Transportsysteme setzen auf einen externen Antrieb, zählen also zu den aktiven Systemen. Der Vibrationslinear-
-und Bandförderer kommen aber trotzdem ohne eineb elektronischeb Regelkreis aus. Es kann ausschließlich zwischen den zwei Zuständen
+und Bandförderer kommen aber trotzdem ohne einen elektronischen Regelkreis aus. Es kann ausschließlich zwischen den zwei Zuständen
 AN und AUS entschieden werden. Der Vibrationslinearförderer benutzt Vibrationen bei einer festen Frequenz, die die Bauteile in
 Mikroschritten vorbewegen lässt. Physikalisch werden die Bauteile bei jeder Amplitude eine minimale Strecke weiter geworfen. Passiert dies
 mit der zum Bauteil passenden Frequenz und Amplitude, stellt sich eine kontinuierliche gerade Bewegung ein. Dieses System ist sehr
@@ -487,7 +487,7 @@ Dabei gibt es einen Punkt bei dem Teile dazu gegeben werden und einen Endpunkt a
 meistens aus einem runden kontinuierlichen Kunststoffband, welches über zwei Umlenkrollen rotiert. Die Oberseite wird so zu einer
 linear bewegten Ebene, die durch Spannung der Rollen oder weitere Führungsräder eben gehalten wird. Diese bewährte Lösung bietet
 neben ihrer Variantenvielfalt auch die Möglichkeit einer weiteren Regelung, um ebenfalls Parameter wie Geschwindigkeit und Taktzeit
-des benötigten Prozesses anzupassen. Nachteil ist der erhöhte Wartungs bedarf, da in diesem System viele unterschiedliche bewegbare Komponenten
+des benötigten Prozesses anzupassen. Nachteil ist der erhöhte Wartungsbedarf, da in diesem System viele unterschiedliche bewegbare Komponenten
 verbaut werden.
 
 Die in \cref{fig:wirkkette-antrieb} dargestellten Linearachsen sind eine weitere Möglichkeit Bauteile zu bewegen. Der Zahnriemen-Ansatz
@@ -503,10 +503,10 @@ welches individuelle Anfahrten für den Schlitten ermöglicht.
 
 Alle diese beschriebenen Systeme müssen für den jeweiligen Einsatz stark angepasst werden. Es gibt noch einige weitere Transportsysteme,
 die auf anderen Antrieben basieren, wie elektromagnetische Linearantriebe oder selbstfahrende Wägen für Industriehallen. Diese wurden aber
-hier nicht weiter betrachtet, da diese für den Hairpintransport ungeeignet sind und in dieser Arbeit nicht weiter betrachtet werden.
+hier nicht weiter betrachtet, da diese für den Hairpin-Transport ungeeignet sind und in dieser Arbeit nicht weiter betrachtet werden.
 %
 \subsubsection{Fixierung}\label{sec:FixierungSystem}
-Für die Bearbeitung oder Übergabe an neuen Subsystemen, bedarf es einer passenden Fixierung von Bauteilen. Es lässt sich grob in Kraftschluss-
+Für die Bearbeitung oder Übergabe an neuen Subsystemen bedarf es einer passenden Fixierung von Bauteilen. Es lässt sich grob in Kraftschluss-
 und Formschluss-Fixierungssysteme unterscheiden. Für die sehr schonende Art der Formschlussfixierung kommen an das Bauteil angepasste
 Konturen und Halter zum Einsatz. Diese sind so konstruiert, dass die Bauteile ohne eine externe Fixierung in ihrer Position bleiben. Da
 nur Auflagekräfte wirken, ist eine mechanische Beeinflussung des Bauteils ausgeschlossen. Das Dimensionieren und Designen
@@ -515,7 +515,7 @@ Version erstellt werden, was einer Geometrievariation von Bauteilen entgegensteh
 
 Die andere Möglichkeit ist der Kraftschluss, bei dem ein externer Fixiermechanismus zum Einsatz kommt. Das Bauteil wird so an definierten
 Stellen eingespannt und gehalten. Für den genauen Aufbau eines solchen Mechanismus gibt es eine Vielzahl unterschiedlicher Ansätze,
-wobei meistens Backen an das Bauteil unter Druck angesetzt werden. Weil eine detailierte Betrachtung der einzelnen Aufbauten den
+wobei meistens Backen an das Bauteil unter Druck angesetzt werden. Weil eine detaillierte Betrachtung der einzelnen Aufbauten den
 Rahmen sprengen würde, wird später in der Realisierung die konkrete Umsetzung beschrieben. Problem dieses Systems ist aber, dass
 eine Krafteinwirkung auf das Bauteil zu Beschädigungen und Verformungen führen kann. Bleibt dieser Faktor in der Konstruktion
 unberücksichtigt, hebt dies den Vorteil der flexiblen Bauteilaufnahme vollständig auf.
@@ -534,7 +534,7 @@ nicht detaillierter betrachtet werden müssen.
 %
 %
 \subsubsection{Positionierung}\label{sec:PositionierungsSystem}
-Gegenstand dieses Abschnitts ist die Analyse von Systemen, die für die präzise Positionierung von Hairpin sorgen. Dazu kann
+Gegenstand dieses Abschnitts ist die Analyse von Systemen, die für die präzise Positionierung von Hairpins sorgen. Dazu kann
 zwischen kontinuierlichen Wegsensoren und inkrementellen Sensoren mit Referenzpunkten unterschieden werden. Die in \cref{sec:Sensoren}
 beschriebenen Sensoren dienen der Überprüfung, ob ein Hairpin grob an einer bestimmten Position war. Diese Sensortypen
 können jedoch nicht für eine exakte Positionierung verwendet werden und werden im weiteren Verlauf dieser Arbeit aufgegriffen.
@@ -550,7 +550,7 @@ verbunden ist. Ändert sich nun die Position des Abnehmers, verändert sich auch
 \end{equation}
 Die Endpunkte bilden einmal die niedrigste Spannung am Ground mit \qty{0}{\volt} und die höchste Spannung am Ende des Widerstandes mit der Versorgungsspannung.
 Für eine lineare Bewegung wird meist ein länglicher Widerstand verwendet. Es gibt aber auch Potentiometer in Rundausführung, die
-aber mit dem gleichen elektrischen Prinzip arbeiten. Der Vorteil dieses Prinzips, ist die einfache Kopplung an eine elektrische Regelung,
+aber mit dem gleichen elektrischen Prinzip arbeiten. Der Vorteil dieses Prinzips ist die einfache Kopplung an eine elektrische Regelung,
 da die analoge Spannung mittels Umrechnungen die Position widerspiegelt. Dieses schnelle und direkte Signal
 ist mit dem einfachen Aufbau kaum anders zu realisieren. Bei einem dauerhaften Betrieb stellen sich jedoch Probleme beim Verschleiß
 heraus, da der Abnehmer durch den ständigen mechanischen Druck und das Bewegen den elektrischen Kontakt immer weiter abnutzt.
@@ -558,10 +558,10 @@ heraus, da der Abnehmer durch den ständigen mechanischen Druck und das Bewegen 
 Bei den inkrementellen Sensoren unterscheidet man zwischen open-loop und closed-loop. Diese unterscheiden sich im Feedback an die Regelung.
 Grundsätzlich wird hierbei mit End- oder Referenzpunkten gearbeitet. Zur Initialisierung des Systems müssen dafür bestimmte Sensoren,
 meist Endschalter, angefahren werden, damit einmalig eine feste Position vorgegeben wird. Hier gibt es eine weitere Trennung für die
-Steuerung an sich: Für open-loop Systeme reicht die Anfangsposition und die vorgegebenen Bewegungen werden intern verrechnet.
+Steuerung an sich: Für open-loop-Systeme reicht die Anfangsposition und die vorgegebenen Bewegungen werden intern verrechnet.
 
-Dem gegenüber steht das closed-loop System, bei dem die Steuerung auf einen weiteren Kontrollmechanismus zurückgreifen kann. Dieser
-gibt durch elektrische Zähler, meist in Form von Hall-Sonden mit Rotationszählung für Motren,
+Dem gegenüber steht das closed-loop-System, bei dem die Steuerung auf einen weiteren Kontrollmechanismus zurückgreifen kann. Dieser
+gibt durch elektrische Zähler, meist in Form von Hall-Sonden mit Rotationszählung für Motoren,
 die genaue Schrittanzahl wieder. So können Fehler zurückgerechnet werden und die berechnete Position der Steuerung stimmt mit
 der realen Position überein. Als Nachteil ist hier der zusätzliche Aufwand durch weitere Komponenten und Schnittstellen zu nennen.
 %
@@ -569,6 +569,6 @@ der realen Position überein. Als Nachteil ist hier der zusätzliche Aufwand dur
 \subsection{Zusammenfassung und Handlungsbedarf}\label{sec:ResearchGap}
 Nach Vorstellung dieser ganzen Systeme stellt sich heraus, dass es eine Vielzahl an Möglichkeiten gibt, den mechanischen und elektrischen
 Aufbau dieser Arbeit zu gestalten. In der Produktion ist eben dies die Herausforderung, eine passende Anlage für einen genauen Verwendungszweck
-zu entwickeln. Besonders die Prototypenproduktion mit soeziellen Anforderungen, wie dem Verarbeiten verschiedener Hairpin-Geometrien, erfordert
+zu entwickeln. Besonders die Prototypenproduktion mit speziellen Anforderungen, wie dem Verarbeiten verschiedener Hairpin-Geometrien, erfordert
 eine so hohe Individualisierung. Aus diesem Grund ist eine solche Anlage nicht frei auf dem Markt erhältlich.
 Folglich ist zu prüfen, wie die Realisierung eines solchen Systems aussehen kann.

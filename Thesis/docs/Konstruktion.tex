@@ -41,7 +41,7 @@ dreidimensionale Objekte entstehen. Als Material können für diese Verfahren gr
 Für das Auftragen muss das Grundmaterial jedoch zum Schmelzen gebracht werden, damit es durch eine Düse mit definierter Höhe und Breite
 auf das Druckbett aufgetragen werden kann. Genau in diesem Punkt, dem eingesetzten Material, unterscheidet sich auch die Komplexität des 3D-Druckes.
 Ein Polymer kann mit viel weniger Aufwand erhitzt und bewegt werden. In den letzten Jahren gab es einen großen Entwicklungssprung
-für eben diese FFF Drucker, die die Kosten und Geschwindigkeit für einen Druck mit bestimmten Materialien verbessert haben.
+für eben diese FFF-Drucker, die die Kosten und Geschwindigkeit für einen Druck mit bestimmten Materialien verbessert haben.
 Die am häufigsten zum Einsatz kommenden Materialien sind dabei ABS (Acrylnitril-Butadien-Styrol-Copolymer), PLA (Polylactide), PETG (Polyethylenterephthalatglycol),
 Nylon und TPU (Thermoplastisches Polyurethan), wobei es noch weitere Spezialmaterialien gibt. Für diese Arbeit wurde
 PLA als Wahl für das Material von gedruckten Bauteilen getroffen. Besonders die einfache Handhabung, hohe Belastbarkeit und
@@ -142,7 +142,7 @@ Diese Prinzipien wurden in einem System vereint, in dem die Schiene zur Lagerung
 \paragraph{Aufbau und Wirkprinzip}
 Wie in \cref{fig:Vibrationsschiene} zu sehen, wird die Schiene an zwei Enden gehalten, wobei Halterung~1 in vertikaler Richtung als starr
 und Halterung~2 als bewegbar anzunehmen ist. Die Halterungen werden auf den zwei Befestigungen montiert, die wiederum die Verbindung
-zu der in \cref{sec:AktuellesSystem} beschriebenen Treägerstruktur darstellen. Die Vibrationseinheit ist aus einem Schrittmotor mit Zahnrad und der
+zu der in \cref{sec:AktuellesSystem} beschriebenen Trägerstruktur darstellen. Die Vibrationseinheit ist aus einem Schrittmotor mit Zahnrad und der
 gelagerten Halterung~2 mit Zahnstange aufgebaut. Die vertikale Lagerung der Halterung~2 erfolgt durch an der Vibrationseinheit
 montierte Kugellager. Diese bieten die Möglichkeit, dass Halterung~2 mit einem geringen Widerstand und Toleranzen in die vertikale
 Richtung bewegt werden kann.
@@ -169,12 +169,12 @@ Gelenk~1 und Gelenk~2 sind nach demselben in \cref{sec:Randbedingungen} beschrie
 Die Verbindung zwischen Vibrationsschiene und dem Gelenk~2 bedarf jedoch einer weiteren Anforderung. Da der vertikale Hub
 den Angriffspunkt auf der Schiene verschiebt, muss diese Verbindung die Möglichkeit haben, linear auf der Schiene verschiebbar
 zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde aus Gründen
-der Komplexität gegen eine expilzit gelagerte Verbindung entschieden.
+der Komplexität gegen eine explizit gelagerte Verbindung entschieden.
 
 \paragraph{Antrieb und elektrisches System}
 Für das elektrische System wurde wie bereits erwähnt ein Schrittmotor verwendet. Im Vergleich zu anderen Motoren bietet ein
 Schrittmotor die passende Mischung aus Genauigkeit, Geschwindigkeit und Belastbarkeit (vgl. \cref{sec:Aktorik}).
-Ein Servomotor mit Getriebe ist wegen mangelnder Geschwindigkeit keine Option für ein Vibrationssystem.
+Ein Servomotor mit Getriebe ist wegen mangelnder Geschwindigkeit keine Option für die Vibrationseinheit.
 Diese Wahl bedarf jedoch eines weiteren Systems zur Positionserfassung.
 Aus diesem Grund wird für den eingefahrenen Zustand der Halterung~2 ein Endstop benötigt, der eben diesen Punkt als Signal an die
 Steuerung übergeben kann. Wird nun also das System initialisiert und bleibt in den zu testenden Betriebsgrenzen, kann die Steuerung
@@ -205,7 +205,7 @@ wird zudem auf beiden Seiten durch hängende Aluminiumextrusionen gehalten. Der 
 den Abstand der Schlitten zueinander anzupassen. Dafür wurde ein Schraube-Mutter-System so integriert, dass durch Drehen einer
 Sechskantschraube in den Halterungen 3 und 4 der Abstand der Schlitten zueinander angepasst werden kann. Zudem wurden die vier Kontaktpunkte
 eines Schlittens auf den beiden Linearschienen so designt, dass mittels Aussparungen und angepasstem Durchmesser,
-ein optimalen Kompromiss zwischen Halt und Rutschen erzeugt wurde. Da die lineare Bewegungseinheit durch den Anpressdruck der Hairpins
+ein optimaler Kompromiss zwischen Halt und Rutschen erzeugt wurde. Da die lineare Bewegungseinheit durch den Anpressdruck der Hairpins
 hohe Kräfte bei minimalen Toleranzen aufnehmen muss, wurden die Halterungen der Verbindungsstangen als metallische Linearlager ausgeführt.
 Diese ermöglichen trotz wirkender Kräfte eine leichte lineare Bewegung, welche den Servomotoren zugutekommt.
 Die Endeffektoren müssen zudem so designt werden, dass ein Schnitt zwischen den Hairpins ohne Verharkung möglich ist. Dafür müssen
@@ -235,7 +235,7 @@ angepasste Einkerbung eingebracht. Diese hilft mit einer leicht angeschrägten U
 der Schale zu halten. Der obere Teil dieser Segmente ist eine sich konvex öffnende Schale. Dies dient dem besseren Fangen für den
 Übergang der Hairpins vom Vereinzelungs- in das Überführungssystem. Das mittlere Teil ist ein einfaches lineares Segment ohne Besonderheiten.
 Der unterste Teil ist als Trichter konstruiert, der die Hairpins sicher in das Zuführsystem überführen soll. Die Wahl des Trichters
-ergab sich durch erste Tests, bei denen eine einfache Schale zu fehlerhaften Lagen der Hairpins in der Fixiereinheit führte.
+ergab sich durch erste Tests, bei denen eine einfache Schale zu fehlerhaften Lagen der Hairpins im Fixierungssystem führte.
 Der Grenzwinkel dieses Systems setzt sich aus der Haftreibung zwischen dem Isoliermaterial des Hairpins, dem PLA der Rutsche und
 den Kontaktflächen zwischen beiden Materialien zusammen.\todo{Rechnung zum Grenzwinkel}
 
@@ -254,7 +254,7 @@ Steuerung zu achten.
 \subsubsection{Schnittstellen}
 Mechanisch gesehen ist der Eingang dieses Subsystems der vereinzelte Hairpin aus der Überführung. Der Ausgang beschreibt wiederum
 die definierte Übergabeposition an den Roboterarm. Als elektrisches Signal wird die Steuerung eines Schrittmotors für das Transportieren
-benötigt. Auch die Fixiereinheit muss elektronisch eingestellt werden.
+benötigt. Auch das Fixierungssystem muss elektronisch eingestellt werden.
 
 \subsubsection{Übernahme und Fixierung}
 Dieser Teil des Zuführsystems besteht aus einem Behälter und elektronisch angetriebenen Klemmen. Durch die Rutsche des Überführungssystems
@@ -264,7 +264,7 @@ Klemmen. Diese Einheit sitzt auf einem Transportsystem, welches für den Wechsel
 \paragraph{Aufbau und Wirkprinzip}
 Der in \cref{fig:Kraftschlussklemme} aufgezeigte Behälter ist mit den gleichen Dimensionen wie die Segmente der Rutsche konstruiert. Der Übergang
 zwischen beiden Systemen stellt somit eine geringere Verhakungsgefahr dar. Landet nun also ein Hairpin in diesem Behälter, kommen die Klemmen zum
-Einsatz. Nach einer passenden Kalibrierung auf die Hairpingeometrie können die Seitenklemmen auf die definierte Position ausfahren.
+Einsatz. Nach einer passenden Kalibrierung auf die Hairpin-Geometrie können die Seitenklemmen auf die definierte Position ausfahren.
 Dies ermöglicht das Ausrichten des Hairpins genau auf die Mitte und verhindert zudem ein seitliches Verrutschen. Die Bewegung übernimmt
 dabei ein einfacher Servomotor, der mit einem Ausleger verbunden ist. Die Hauptklemme dient zum Aufrichten des Hairpins. Da die
 Rutsche in einem Winkel montiert ist, werden die Hairpins ebenfalls in dieser schrägen Lage übernommen. Schließt die Hauptklemme
@@ -290,7 +290,7 @@ Aufbau möglich.
 \paragraph{Antrieb und Sensorik}
 Wie bereits erwähnt, werden für die Aktuatorik der Klemmen kleine Servomotoren verwendet. Diese Wahl wurde aus Gründen des Platzmangels
 und der präzisen Ansteuerung getroffen. Zudem ist durch die kurzen Bewegungsstrecken der Klemmen die beschränkte Rotation dieser
-Motoren kein Problem für dieses System. Wie in \cref{sec:eletrischeAktorik} aufgezeigt bedarf es für Servomotoren keine exteren Sensorik.
+Motoren kein Problem für dieses System. Wie in \cref{sec:eletrischeAktorik} aufgezeigt bedarf es für Servomotoren keiner externen Sensorik.
 
 \subsubsection{Transport und Positionierung}\label{sec:Transportsystem}
 Der Behälter mit dem fixierten Hairpin muss aus dem Überführungssystem herausbewegt und zur Übergabeposition des Roboterarmes
@@ -299,11 +299,11 @@ gefahren werden.
 \paragraph{Aufbau und Wirkprinzip}
 Die Führung besteht aus dem Spindelantrieb mit Schrittmotor, zwei Führungsschienen und einem Schlitten, der alle drei Teile verbindet.
 Der Schlitten besitzt zwei lineare Lager, die auf den Führungsschienen für eine reibungslose Befestigung sorgen, und die Möglichkeit,
-den Behälter der Fixiereinheit mit vier Schrauben zu montieren. Die Rotation der Spindel sorgt für die Bewegung aus der Tragstruktur
+den Behälter des Fixierungssystems mit vier Schrauben zu montieren. Die Rotation der Spindel sorgt für die Bewegung aus der Tragstruktur
 heraus.
 
 \paragraph{Antrieb und Referenzierung}
-Für die Positionsermittlung wird das bekannte Verfahren mit Endstop und einer open-loop Steuerung eingesetzt.
+Für die Positionsermittlung wird das bekannte Verfahren mit Endstop und einer open-loop-Steuerung eingesetzt.
 
 \subsubsection{Übergabe an den Roboterarm}
 Nachdem die Kraftschlussklemme durch den Spindelantrieb an eine definierte Position gefahren wurde, greift der Roboterarm mit einem
@@ -321,7 +321,7 @@ in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und 
 Zur Bereitstellung der benötigten Energie wird das vorhandene 230V AC Niederspannungsnetz verwendet (vgl. En1). Mit einem
 AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von 12V erzeugt. Außerdem wird für weitere Komponenten eine Spannung von 5V benötigt,
 die von einem dedizierten DC-DC-Konverter bereitgestellt wird. Das Gesamtsystem arbeitet mit
-der am Netzteil anleigenden Masse/Ground. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
+der am Netzteil anliegenden Masse/Ground. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
 Leistungsbedarfsanalyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherungen und
 Konverter trotzdem ausgelegt sein sollten.\todo{Leistungsanalyse?}
 
@@ -339,13 +339,13 @@ bietet neben einer kompakten Größe eine große Anzahl an PWM-Kanälen. Ein ELE
 eine passende Treibereinheit zur Ansteuerung von Schrittmotoren verfügt.
 
 Gegenüber einem SPS-System begründet sich die Wahl dieser
-Komponenten vor allem durch deren hohe Verfügbarkeit und Kostenvorteile (vgl. Anforderung St2)..
+Komponenten vor allem durch deren hohe Verfügbarkeit und Kostenvorteile (vgl. Anforderung St2).
 
 Die Aufgabenstruktur ist streng unterteilt (vgl. \cref{fig:Signalfluss}), wobei der ESP32 die Verarbeitung von Befehlen durch ein HMI und Sensoren
 übernimmt. Dieser erteilt dann bestimmte Aufgaben, wie einen Motor auf eine definierte Position zu fahren, an die Slaves. Außerdem
 wird kontinuierlich abgefragt, in welchem Zustand sich die Slaves bezüglich vorangegangener Befehle befinden. Der ELEGOO Uno
 ist mit seiner Treiberschaltung für die Steuerung der Schrittmotoren verantwortlich. Dabei sind die Endstops als einzige Sensoren
-direkt mit dem Slave verbunden, um die open-loop Regelung ohne den Einfluss von anderen Komponenten zu ermöglichen.
+direkt mit dem Slave verbunden, um die open-loop-Steuerung ohne den Einfluss von anderen Komponenten zu ermöglichen.
 Der Arduino Nano bekommt die Position eines Servomotors durch den Master vorgegeben und gibt diese als PWM-Signal an den geforderten
 Servomotor weiter.
 
@@ -415,14 +415,14 @@ Servomotor weiter.
 kräftigere DM996-Motoren. Für das Fixierungssystem werden drei kleinere SG90-Servomotoren mit einer geringeren Kraft verwendet.
 Die Versorgung erfolgt durch eine GND- und eine 5V-Leitung zu jedem Servomotor.
 
-\paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als Nema 17 Motoren ausgeführt.
+\paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als NEMA-17-Motoren ausgeführt.
 
-\paragraph{Prozessensoren} werden als einfache Reflexlichttaster zum Regestrieren eines passierden Hairpins verwendet.
+\paragraph{Prozesssensoren} werden als einfache Reflexlichttaster zum Registrieren eines passierenden Hairpins verwendet.
 Im aktuellen System ist die Platzierung eines solchen Sensors an der Rutsche der Überführung geplant. Es gibt noch
-weiter mögliche Positionen für diesen Prozesssensor, wie z. B. an der Vibrationseinheit zur Detetkion von
-neu beladenen Hairpins. Auch ist der Einsatz eines kapazitiven Sensors an der Fixiereinheit sinnvoll, um die Überprüfung der
-Rutsche zu gewährleisten. Wegen des Integrationsaufwandes, mangelnder Zeit und der auschließlichen Erfüllung einer Wunschanforderung (Si2),
-werden diese Sensoren zunächst nicht mit realsisiert.
+weiter mögliche Positionen für diesen Prozesssensor, wie z. B. an der Vibrationseinheit zur Detektion von
+neu beladenen Hairpins. Auch ist der Einsatz eines kapazitiven Sensors am Fixierungssystem sinnvoll, um die Überprüfung der
+Rutsche zu gewährleisten. Wegen des Integrationsaufwandes, mangelnder Zeit und der ausschließlichen Erfüllung einer Wunschanforderung (Si2),
+werden diese Sensoren zunächst nicht mit realisiert.
 
 \paragraph{HMI} besteht aus einem Display und fünf Knöpfen für die Navigation. Das Display wird über eine SPI-Schnittstelle
 mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an die GPIO des ESP32 geführt.
@@ -431,7 +431,7 @@ mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an d
 In \cref{fig:Schaltplan} wird die konkrete Pinbelegung der einzelnen elektrischen Komponenten aufgezeigt. Nach dieser Schematic werden alle Bauteile
 miteinander verbunden. Die Mikrocontroller werden jeweils auf einer eigenen Lochrasterplatine mit passend gebogenen
 Leitungen verlötet. Für die Abgänge zu den Motoren werden individuelle Verlängerungskabel mit passendem Stecker verwendet. Für
-die Verbindung der Spannungsversorgung und der I2C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet(vgl. \cref{fig:Lochraster_Nano}).
+die Verbindung der Spannungsversorgung und der I\textsuperscript{2}C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet(vgl. \cref{fig:Lochraster_Nano}).
 
 \begin{figure}[htbp]
 	\centering
@@ -482,8 +482,8 @@ rechts, die fünfte bestätigt die Auswahl.
 \cref{sec:CodeStruktur} beschriebenen Bausteinen zusammenstellen, ohne den Quellcode
 der Mikrocontroller zu verändern. Ergänzend sind die Vorgabewerte der Motorgrenzen
 einstellbar, sodass sich die Anlage ohne Eingriff in die Software an geänderte
-Randbedingungen anpassen lässt. Akutell ist dieses System aber nur vorbereitet und
-eine Steuerung erfolgt über einen exterenen Rechner.
+Randbedingungen anpassen lässt. Aktuell ist dieses System aber nur vorbereitet und
+eine Steuerung erfolgt über einen externen Rechner.
 
 \subsection{Zusammenfassung des Realisierungsstands}\label{sec:Realisierungsstand}
 \Cref{fig:RealisirungGesamt} zeigt die realisierte Anlage. Vereinzelungs- und Zuführsystem
@@ -492,7 +492,7 @@ die Steuerung setzt den in \cref{sec:CodeStruktur} beschriebenen Ablauf um. Die 
 ist damit in der Lage, Hairpins aus dem Vorrat zu vereinzeln, zu überführen und in der
 Übergabeposition zu fixieren.
 
-Drei Aspekte wurden im Rahmen dieser zunächst Arbeit bewusst zurückgestellt. Die Prozesssensorik ist
+Drei Aspekte wurden im Rahmen dieser Arbeit zunächst bewusst zurückgestellt. Die Prozesssensorik ist
 mechanisch montiert, jedoch noch nicht in die Ablaufsteuerung eingebunden. Die
 Zustandsüberwachung erfolgt bislang nicht über Sensorsignale, sondern über feste
 Zeitvorgaben. Das HMI ist hardwareseitig vorbereitet, die
@@ -503,6 +503,6 @@ Laserzelle besteht.
 
 Diese Einschränkungen betreffen die Prozessüberwachung und die Anbindung an die
 übergeordnete Zelle, nicht die mechanische Funktion des Systems. Für die in
-\cref{sec:ValidierungTests} beschriebenen Versuchsreihen ist aber dennoch der  Aufbau in diesem Zustand
-einsetzbar und alle gefordernten Anforderungen wurden erfüllt.
+\cref{sec:ValidierungTests} beschriebenen Versuchsreihen ist aber dennoch der Aufbau in diesem Zustand
+einsetzbar und alle geforderten Anforderungen wurden erfüllt.
 
