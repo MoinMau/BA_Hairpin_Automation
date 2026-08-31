@@ -655,11 +655,6 @@ INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
-INPUT ./figs/Schaltplan.png
-INPUT ./figs/Schaltplan.png
-INPUT ./figs/Schaltplan.png
-INPUT ./figs/Schaltplan.png
-INPUT ./figs/Schaltplan.png
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -706,6 +701,11 @@ INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
 INPUT ./figs/Lochraster_Nano.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
+INPUT ./figs/Schaltplan.png
 INPUT ./figs/Gesamtanlage_Systeme.jpg
 INPUT ./figs/Gesamtanlage_Systeme.jpg
 INPUT ./figs/Gesamtanlage_Systeme.jpg
@@ -729,11 +729,6 @@ INPUT docs/Messwerte.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr8.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ts1-lmr6.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx8.tfm
-INPUT ./docs/Erklaerung.tex
-INPUT ./docs/Erklaerung.tex
-INPUT ./docs/Erklaerung.tex
-INPUT ./docs/Erklaerung.tex
-INPUT docs/Erklaerung.tex
 INPUT Vorlage.aux
 INPUT Vorlage.run.xml
 OUTPUT Vorlage.run.xml

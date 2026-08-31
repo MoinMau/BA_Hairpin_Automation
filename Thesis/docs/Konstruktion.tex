@@ -319,9 +319,9 @@ in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und 
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
 Zur Bereitstellung der benötigten Energie wird das vorhandene \qty{230}{\volt}-AC-Niederspannungsnetz verwendet (vgl. En1). Mit einem
-AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von \qty{12}{\volt} erzeugt. Außerdem wird für weitere Komponenten eine Spannung von \qty{5}{\volt} benötigt,
+AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von \qty{12}{\volt} erzeugt. Außerdem wird für weitere Komponenten eine DC-Spannung von \qty{5}{\volt} benötigt,
 die von einem dedizierten DC-DC-Konverter bereitgestellt wird. Das Gesamtsystem arbeitet mit
-der am Netzteil anliegenden Masse/Ground. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
+der am Netzteil anliegenden Masse. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
 Leistungsbedarfsanalyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherungen und
 Konverter trotzdem ausgelegt sein sollten.\todo{Leistungsanalyse?}
 
@@ -431,14 +431,7 @@ mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an d
 In \cref{fig:Schaltplan} wird die konkrete Pinbelegung der einzelnen elektrischen Komponenten aufgezeigt. Nach dieser Schematic werden alle Bauteile
 miteinander verbunden. Die Mikrocontroller werden jeweils auf einer eigenen Lochrasterplatine mit passend gebogenen
 Leitungen verlötet. Für die Abgänge zu den Motoren werden individuelle Verlängerungskabel mit passendem Stecker verwendet. Für
-die Verbindung der Spannungsversorgung und der I\textsuperscript{2}C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet(vgl. \cref{fig:Lochraster_Nano}).
-
-\begin{figure}[htbp]
-	\centering
-	    \includegraphics[width=0.8\linewidth]{figs/Schaltplan.png}
-	\caption{Schaltplan}
-	\label{fig:Schaltplan}
-\end{figure}\todo{Einfügen des richtigen Schaltplans}
+die Verbindung der Spannungsversorgung und der I\textsuperscript{2}C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet (vgl. \cref{fig:Lochraster_Nano}).
 
 \subsection{Software}\label{sec:Software}
 Die Software bildet die eigentliche Steuerungsebene des Systems, in der Entscheidungen
@@ -474,7 +467,7 @@ eine zeit- beziehungsweise zustandsabhängige Steuerung ermöglichen. Aus der
 Kombination dieser Bausteine entsteht der vollständige Prozessablauf.
 
 \subsubsection{HMI}\label{sec:HMI}
-Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von \qty{2.8}{\inch}
+Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von \qty{2.8}{\zoll}
 und fünf Tasten. Vier davon dienen der Navigation in den Richtungen auf, ab, links und
 rechts, die fünfte bestätigt die Auswahl.
 
@@ -504,5 +497,5 @@ Laserzelle besteht.
 Diese Einschränkungen betreffen die Prozessüberwachung und die Anbindung an die
 übergeordnete Zelle, nicht die mechanische Funktion des Systems. Für die in
 \cref{sec:ValidierungTests} beschriebenen Versuchsreihen ist aber dennoch der Aufbau in diesem Zustand
-einsetzbar und alle geforderten Anforderungen wurden erfüllt.
+einsetzbar und alle durch die Konstruktion bedingten Anforderungen wurden erfüllt.
 
