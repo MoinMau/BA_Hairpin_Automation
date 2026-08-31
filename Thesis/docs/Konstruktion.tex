@@ -13,7 +13,7 @@ Für die Ausarbeitung werden aus den Teilfunktionen der gewählten Variante konk
 grobe Beschreibung für das Realsystem darstellen. Nach diesem Schritt folgt das Erstellen des realen Objektes in einem CAD-Programm.
 In dieser Arbeit wurde die Studenten-Lizenz
 von Autodesk Fusion~360 verwendet. Auch elektromechanische Komponenten werden in diesem Prozess mit eingeplant. Nach der
-Erstellung aller Subsysteme am Computer, konnten die einzelnen Bauteile gefertigt und montiert werden. Für das
+Erstellung aller Subsysteme am Computer konnten die einzelnen Bauteile gefertigt und montiert werden. Für das
 elektrische System wurden parallel externe Komponenten zur Steuerung festgelegt und ein Kabelplan erstellt. Zur Nachvollziehbarkeit
 dieses Schaltplanes wurde eine Schematic in KiCad angefertigt. Die einzelnen Komponenten wurden nach diesem Plan
 mit Kabeln und selbst gelegten Leitungen auf einer Lochrasterplatine verbunden. Zur schrittweisen Initialisierung der Anlage wurde
@@ -39,7 +39,7 @@ sie stehen als Werkmaterial in großer Anzahl zur Verfügung und können bei feh
 basiert auf dem schichtweisen Auftrag von Material. Durch diesen Prozess können aus zweidimensionalen Layern verbundene
 dreidimensionale Objekte entstehen. Als Material können für diese Verfahren grundsätzlich Metall, Nylon und Polymere in Frage kommen.
 Für das Auftragen muss das Grundmaterial jedoch zum Schmelzen gebracht werden, damit es durch eine Düse mit definierter Höhe und Breite
-auf das Druckbett aufgetragen werden kann. Genau in diesem Punkt, dem eingesetzten Material, unterscheidet sich auch die Komplexität des 3D-Druckes.
+auf das Druckbett aufgetragen werden kann. Genau in diesem Punkt, dem eingesetzten Material, unterscheidet sich auch die Komplexität des FFF-Druckes.
 Ein Polymer kann mit viel weniger Aufwand erhitzt und bewegt werden. In den letzten Jahren gab es einen großen Entwicklungssprung
 für eben diese FFF-Drucker, die die Kosten und Geschwindigkeit für einen Druck mit bestimmten Materialien verbessert haben.
 Die am häufigsten zum Einsatz kommenden Materialien sind dabei ABS (Acrylnitril-Butadien-Styrol-Copolymer), PLA (Polylactide), PETG (Polyethylenterephthalatglycol),
@@ -52,7 +52,7 @@ Ein Gelenk verbindet zwei Bauteile so miteinander, dass ihnen genau ein rotatori
 dies üblicherweise über einen zylindrischen Zapfen gelöst, der in einer entsprechenden Bohrung des Gegenstücks geführt wird. In
 der klassischen Umsetzung sind Zapfen und Lagerauge getrennte Bauteile, die über einen Stift oder eine Buchse gefügt werden.
 
-Da die Bauteile dieser Arbeit im 3D-Druck-Verfahren gefertigt werden, wird stattdessen ein einteiliger Ansatz verwendet. Zapfen
+Da die Bauteile dieser Arbeit im FFF-Verfahren gefertigt werden, wird stattdessen ein einteiliger Ansatz verwendet. Zapfen
 und Lagerauge werden als ein einziges Bauteil modelliert und lediglich durch einen schmalen Spalt voneinander getrennt (\cref{fig:PrintInPlace}\,a).
 Dieser Spalt liegt im Bereich weniger Zehntelmillimeter und damit unterhalb dessen, was das Druckverfahren sauber auflösen kann.
 Beim Druck entstehen an diesen Stellen deshalb keine vollständig getrennten Flächen, sondern schmale Materialbrücken,
@@ -83,7 +83,7 @@ dennoch eine geeignete Lösung.
   \draw[bohrung] (0,0) circle (0.85);
   \draw[innen]   (0,0) circle (0.60);
   \node[font=\tiny] at (0,0) {Zapfen};
-  \node[font=\tiny] at (-0.95,-1.08) {Lagerauge};
+  \node[font=\tiny] at (-0.6,-1.08) {Lagerauge};
   \node[bez] (la) at (0,2.05) {geplanter Spalt};
   \draw[thin, figKonturHell] (la.south) -- (0.51,0.51);
   \node[titel] at (0,-1.9) {(a) Konstruktion des Gelenks};
@@ -98,9 +98,9 @@ dennoch eine geeignete Lösung.
     \draw[line width=2.2pt, figAkzent] (\a:0.57) -- (\a:0.88);}
   \node[bez] (lb) at (0,2.05) {Materialbrücken als\\Sollbruchstelle};
   \draw[thin, figKonturHell] (lb.south) -- (30:0.72);
-  \node[titel] at (0,-1.9) {(b) nach dem 3D-Druck};
+  \node[titel] at (0,-1.9) {(b) nach der Fertigung};
 \end{scope}
-% ------------------------------------------------ (c) nach dem Loesen
+% ------------------------------------------------ (c) nach dem Lösen
 \begin{scope}[xshift=7.8cm]
   \draw[aussen]  (-1.35,-1.35) rectangle (1.35,1.35);
   \draw[bohrung] (0,0) circle (0.85);
@@ -168,13 +168,13 @@ Auch auf der sich bewegenden Halterung~2 muss als Verbindungsstück ein Gelenk m
 Gelenk~1 und Gelenk~2 sind nach demselben in \cref{sec:Randbedingungen} beschriebenen Herstellungsverfahren gefertigt worden.
 Die Verbindung zwischen Vibrationsschiene und dem Gelenk~2 bedarf jedoch einer weiteren Anforderung. Da der vertikale Hub
 den Angriffspunkt auf der Schiene verschiebt, muss diese Verbindung die Möglichkeit haben, linear auf der Schiene verschiebbar
-zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde aus Gründen
+zu sein. Wegen des geringen Versatzes ist diese Verbindung nur als eine gelockerte Befestigung konstruiert. Es wurde sich aus Gründen
 der Komplexität gegen eine explizit gelagerte Verbindung entschieden.
 
 \paragraph{Antrieb und elektrisches System}
 Für das elektrische System wurde wie bereits erwähnt ein Schrittmotor verwendet. Im Vergleich zu anderen Motoren bietet ein
 Schrittmotor die passende Mischung aus Genauigkeit, Geschwindigkeit und Belastbarkeit (vgl. \cref{sec:Aktorik}).
-Ein Servomotor mit Getriebe ist wegen mangelnder Geschwindigkeit keine Option für die Vibrationseinheit.
+Ein Servomotor mit Getriebe ist wegen mangelnder Kreisgeschwindigkeit keine Option für die Vibrationseinheit.
 Diese Wahl bedarf jedoch eines weiteren Systems zur Positionserfassung.
 Aus diesem Grund wird für den eingefahrenen Zustand der Halterung~2 ein Endstop benötigt, der eben diesen Punkt als Signal an die
 Steuerung übergeben kann. Wird nun also das System initialisiert und bleibt in den zu testenden Betriebsgrenzen, kann die Steuerung
@@ -189,7 +189,7 @@ montiert. Die Vereinzelung ist dabei in hängender Lage ausgeführt, damit eine 
 Grundsätzlich besteht die Vereinzelung aus zwei linearen Bewegungseinheiten. Zum Erzeugen einer festen und definierten linearen
 Bewegung wurde ein Schlitten mit Servomotor und einer Zahnrad-Zahnstangen-Kombination verwendet. Dieses Prinzip wurde wie in
 \cref{fig:Vereinzelungseinheit} aufgezeigt doppelt ausgeführt. Die rotatorische Bewegung wird hier ebenfalls in eine vertikale
-Auf- und Abbewegung umgesetzt. Am Ende dieser Bewegungshalterung sitzen die Sperrklinken und Endeffektoren, die die eigentliche
+Auf- und Abbewegung umgesetzt. Am Ende dieser Bewegungseinheit sitzen die Sperrklinken/Endeffektoren, die die eigentliche
 Trennung der Hairpins durchführen.
 
 \begin{figure}[htbp]
@@ -204,17 +204,17 @@ Die Befestigung der Schlitten erfolgt auf zwei Linearschienen, die wiederum an d
 wird zudem auf beiden Seiten durch hängende Aluminiumextrusionen gehalten. Der Einsatz der Linearschienen bietet die Möglichkeit
 den Abstand der Schlitten zueinander anzupassen. Dafür wurde ein Schraube-Mutter-System so integriert, dass durch Drehen einer
 Sechskantschraube in den Halterungen 3 und 4 der Abstand der Schlitten zueinander angepasst werden kann. Zudem wurden die vier Kontaktpunkte
-eines Schlittens auf den beiden Linearschienen so designt, dass mittels Aussparungen und angepasstem Durchmesser,
+eines Schlittens auf den beiden Linearschienen so designt, dass mittels Aussparungen und angepasstem Durchmesser
 ein optimaler Kompromiss zwischen Halt und Rutschen erzeugt wurde. Da die lineare Bewegungseinheit durch den Anpressdruck der Hairpins
 hohe Kräfte bei minimalen Toleranzen aufnehmen muss, wurden die Halterungen der Verbindungsstangen als metallische Linearlager ausgeführt.
 Diese ermöglichen trotz wirkender Kräfte eine leichte lineare Bewegung, welche den Servomotoren zugutekommt.
-Die Endeffektoren müssen zudem so designt werden, dass ein Schnitt zwischen den Hairpins ohne Verharkung möglich ist. Dafür müssen
-diese an die Form und Biegung des oberen Teils angepasst werden. Ziel sollte aber sein, ein möglichst variantenstarkes Design für
+Die Endeffektoren müssen zudem so designt werden, dass ein Schnitt zwischen den Hairpins ohne Verhaken möglich ist. Dafür müssen
+diese an die Form und Biegung des Hairpin-Kopfes angepasst werden. Ziel sollte aber sein, ein möglichst variantenstarkes Design für
 einen geringeren Wechsel zwischen Endeffektoren zu finden.
 
 \paragraph{Antrieb und Sensorik}
 Für die Vereinzelung wurden zwei Servomotoren verwendet. Dies hat den Grund, dass in diesem System eine sehr präzise Position angefahren
-werden muss, weil die Hairpins meist nur eine Höhe von 3-4mm aufweisen. Außerdem müssen keine hohen Geschwindigkeiten und lange Strecken
+werden muss, weil die Hairpins meist nur eine Höhe von \qtyrange{3}{4}{\milli\meter} aufweisen. Außerdem müssen keine hohen Geschwindigkeiten und lange Strecken
 umgesetzt werden. Die Wahl des Servomotors entspricht also genau diesen Anforderungen und ist in der passenden kompakten Form vorhanden.
 Durch die interne Lageregelung ist kein externer Sensor zur Bestimmung der Position notwendig.
 
@@ -269,7 +269,7 @@ Dies ermöglicht das Ausrichten des Hairpins genau auf die Mitte und verhindert 
 dabei ein einfacher Servomotor, der mit einem Ausleger verbunden ist. Die Hauptklemme dient zum Aufrichten des Hairpins. Da die
 Rutsche in einem Winkel montiert ist, werden die Hairpins ebenfalls in dieser schrägen Lage übernommen. Schließt die Hauptklemme
 nach der Ausrichtung der Seitenklemmen, lässt sich so der Hairpin punktgenau positionieren. Als Referenzebene für die vertikale
-Richtung dient dabei die längere Außenwand des Behälters.
+Richtung dient die vordere Außenwand des Behälters gegenüber der Hauptklemme.
 
 \begin{figure}[htbp]
 	\centering
@@ -318,8 +318,8 @@ Befehle eines HMI oder von Sensoren zu reagieren und eine Aktion zu starten. Fü
 in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und die Peripherie.
 
 \subsubsection{Spannungsversorgung}\label{sec:SpannungsVersorgung}
-Zur Bereitstellung der benötigten Energie wird das vorhandene 230V AC Niederspannungsnetz verwendet (vgl. En1). Mit einem
-AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von 12V erzeugt. Außerdem wird für weitere Komponenten eine Spannung von 5V benötigt,
+Zur Bereitstellung der benötigten Energie wird das vorhandene \qty{230}{\volt}-AC-Niederspannungsnetz verwendet (vgl. En1). Mit einem
+AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von \qty{12}{\volt} erzeugt. Außerdem wird für weitere Komponenten eine Spannung von \qty{5}{\volt} benötigt,
 die von einem dedizierten DC-DC-Konverter bereitgestellt wird. Das Gesamtsystem arbeitet mit
 der am Netzteil anliegenden Masse/Ground. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
 Leistungsbedarfsanalyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherungen und
@@ -413,7 +413,7 @@ Servomotor weiter.
 \subsubsection{Peripherie}\label{sec:Peripherie}
 \paragraph{Servomotoren} werden in zwei verschiedenen Größen eingesetzt. Die zwei Servomotoren des Vereinzelungssystems verwenden
 kräftigere DM996-Motoren. Für das Fixierungssystem werden drei kleinere SG90-Servomotoren mit einer geringeren Kraft verwendet.
-Die Versorgung erfolgt durch eine GND- und eine 5V-Leitung zu jedem Servomotor.
+Die Versorgung erfolgt durch eine GND- und eine \qty{5}{\volt}-Leitung zu jedem Servomotor.
 
 \paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als NEMA-17-Motoren ausgeführt.
 
@@ -474,7 +474,7 @@ eine zeit- beziehungsweise zustandsabhängige Steuerung ermöglichen. Aus der
 Kombination dieser Bausteine entsteht der vollständige Prozessablauf.
 
 \subsubsection{HMI}\label{sec:HMI}
-Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von 2,8"
+Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von \qty{2.8}{\inch}
 und fünf Tasten. Vier davon dienen der Navigation in den Richtungen auf, ab, links und
 rechts, die fünfte bestätigt die Auswahl.
 

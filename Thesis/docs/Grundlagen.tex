@@ -878,7 +878,7 @@ Gibt es einen Ausfall an diesem Punkt, befindet sich das Gesamtsystem in einem u
 lässt sich ein bestehendes System schlecht erweitern, da alle Abgänge und Signalflüsse im Vorhinein festgelegt werden müssen.
 Auch das Prüfen einzelner Subsysteme ist erst nach der Montage aller Komponenten und Anbauteile möglich.
 
-Der nächste Schritt, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steuerungsebenen aufgebaut. Dabei
+Ein weiteres System, die hierarchische Steuerungsarchitektur, ist aus einer Pyramide mit mehreren Steuerungsebenen aufgebaut. Dabei
 delegiert jede Ebene Aufgaben an die darunterliegende Ebene, die diese selbstständig löst. Die höchste
 Ebene dient der Koordination der globalen Parameter. Dieses Prinzip ermöglicht eine enorme Skalierbarkeit,
 da Subsysteme eigenständig arbeiten können und nur den Befehlen eines Masters folgen müssen. Diese klaren und strukturierten
@@ -892,7 +892,7 @@ extreme Flexibilität und eine hohe Ausfallsicherheit, da das System nicht stati
 Methode zu dem hierarchischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationswege minimiert werden. Zudem lassen
 sich einzelne Ebenen weiterhin überprüfen. Die Herausforderungen sind hierbei aber eine komplexe Programmierung
 und ein schwer vorhersehbares Systemverhalten.
-
+\todo{bessere Überleitung}
 Für einen konkreten Beispiel-Aufbau werden die einzelnen Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
 arbeitet nach dem hierarchischen Prinzip, bei dem der Master eine Abfrage oder einen Befehl initialisiert und ein Slave nur nach Erhalt
 dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selbst, welche Peripheriegeräte
@@ -906,8 +906,6 @@ arbeiten.
   \begin{tikzpicture}[
     font=\small,
     box/.style    = {draw, thin, rounded corners=2pt, align=center},
-    % Hierarchie ueber die Blaustufe: Master kraeftig, Slave mittel,
-    % Peripherie neutral grau.
     master/.style = {box, fill=figAkzentFlaeche, draw=figAkzent, line width=0.8pt,
                      minimum width=32mm, minimum height=11mm},
     slave/.style  = {box, fill=figAkzentZart,    draw=figAkzentMittel,
@@ -960,7 +958,7 @@ wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Span
 GPIO-Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
 die Möglichkeit Bussignale in kurzer Zeit umzuwandeln oder auszugeben.
 
-Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit 3,3V oder 5V. Diese Spannungspegel definieren die Versorgungspannung des
+Als Logikpegel gibt es in der Regel zwei verschiedene Möglichkeiten mit \qty{3.3}{\volt} oder \qty{5}{\volt}. Diese Spannungspegel definieren die Versorgungspannung des
 Mikrocontrollers, die Höhe eines digitalen Signals und die maximal zulässige Spannung an den einzelnen Aus- und Eingängen. In den
 Datenblättern der konkreten Komponente sind zulässige kurzzeitige Spitzenwerte für Spannung und Strom angegeben. Da die Belastbarkeitsgrenzen
 für den Strom deutlich unter der benötigten Leistungsanforderung von Motoren liegen, gibt es nachgeschaltete Treiberstufen.
@@ -968,7 +966,7 @@ Für eine Kompatibilität zwischen zwei Spannungsebenen bedarf es eines Pegelwan
 
 In der Industrie werden vermehrt SPS-Systeme im Gegensatz zu Mikrocontrollern verwendet. Diese sind auf Echtzeitanwendungen
 und industrielle Robustheit optimiert. Außerdem gibt es Standardisierungen, die eine hohe Kompatibilität zwischen
-Peripheriegeräten ermöglichen. Besonders die Beschaffungskosten und eine geringe Individualisierbarkeit auf Layoutebene stellen
+Peripheriegeräten ermöglichen. Besonders die Beschaffungskosten und eine geringe Individualisierbarkeit auf Layoutebene dieser SPS-Systeme stellen
 für den Prototypenbau Probleme dar.
 
 \subsubsection{Signalübertragung}
@@ -1015,7 +1013,7 @@ Ein Bussystem arbeitet nicht starr wie die vorher beschriebenen einfachen Signal
 mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Die Vorteile dieser Systeme sind ein bidirektionaler
 Informationsfluss und ein geringerer Leitungsaufwand gegenüber den einfachen direkten Verbindungen. Die konkreten Systeme
 lassen sich in synchrone Prinzipien mit einer dedizierten Taktleitung und asynchrone Prinzipien mit festgelegter Baudrate unterscheiden.
-In \cref{tab:bussysteme} werden unterschiedliche Prinzipien gegeneinander aufgezeigt und verglichen.
+In \cref{tab:bussysteme} werden unterschiedliche Prinzipien aufgezeigt und gegeneinander verglichen.
 
 \begin{table}[htbp]
   \centering
@@ -1062,7 +1060,7 @@ Danach folgt im Takt der Clock das Senden der Adresse des Ziel-Slaves. Der Ziel-
 indem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung erfolgen, die stückweise in
 8-Bit-Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK abläuft. Der Master beendet die Übertragung, indem er
 die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzips sind durch eine
-maximale Teilnehmeranzahl und Leitungslänge beschränkt.
+maximale Teilnehmeranzahl und Leitungslänge beschränkt.\todo{Warum wird I2C genauer beschrieben?}
 
 \subsubsection{Leistungselektronik und Motortreiber}
 Da die Ausgänge der Mikrocontroller auf einen bestimmten maximalen Strom, der unter dem für den Betrieb von Motoren benötigten Strom liegt,
@@ -1131,13 +1129,3 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
            Durchschalten von $T_2$ und $T_3$ kehrt die Stromrichtung um.}
   \label{fig:h-bruecke}
 \end{figure}
-
-\subsection{Verfahren}\label{sec:Verfahren}
-Diese Arbeit orientiert sich stark an den Verfahren der in der VDI~2221 beschriebenen Methode zur Entwicklung von Produktionssystemen. Diese werden in \cref{sec:Anforderung} genauer
-beschrieben, wobei es aber hilft, jetzt schon einmal kurz darzustellen, nach welchem Prinzip in dieser
-Arbeit verfahren wird. So wird das am Ende zu entwickelnde Gesamtsystem in mehrere Subsysteme unterteilt.
-Diese Subsysteme wiederum haben untereinander Schnittstellen, Übergabepunkte und Anforderungen. Für eine Analyse und Betrachtung wird
-also je nach Tiefe nur der innere Aufbau, der die festgelegten Anforderungen erfüllen muss, betrachtet oder nur die Schnittstellen der einzelnen Subsysteme.
-In dieser Arbeit wird es also immer eine Abstufung zwischen detaillierter und grober Betrachtung geben, damit die Komplexität des Gesamtsystems
-in einzelne Abschnitte unterteilt werden kann. Im Folgenden sollen weitere Sicherheits- und andere Normen beschrieben werden.
-\todo{WEG?}

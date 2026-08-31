@@ -1459,6 +1459,36 @@
       \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
       \endverb
     \endentry
+    \entry{VDI2221.2019}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b72003ef20a8eeaaf8ea3204757fd44e}{%
+           family={{Verein Deutscher Ingenieure}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Düsseldorf}%
+      }
+      \list{publisher}{1}{%
+        {VDI-Verlag}%
+      }
+      \strng{namehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{fullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{bibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorbibnamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authornamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \strng{authorfullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \field{extraname}{1}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Ausgabe 2019-11; ersetzt VDI 2221:1993-05}
+      \field{shorttitle}{VDI 2221: Modell der Produktentwicklung}
+      \field{title}{VDI 2221 Blatt 1: Entwicklung technischer Produkte und Systeme; Modell der Produktentwicklung}
+      \field{year}{2019}
+    \endentry
     \entry{VDI2860.1990}{manual}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=b72003ef20a8eeaaf8ea3204757fd44e}{%
@@ -1479,6 +1509,7 @@
       \strng{authornamehash}{b72003ef20a8eeaaf8ea3204757fd44e}
       \strng{authorfullhash}{b72003ef20a8eeaaf8ea3204757fd44e}
       \strng{authorfullhashraw}{b72003ef20a8eeaaf8ea3204757fd44e}
+      \field{extraname}{2}
       \field{sortinit}{V}
       \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
       \field{labelnamesource}{author}
@@ -1541,7 +1572,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{Hesse.2020}
 \endrefsection
 \endinput
 

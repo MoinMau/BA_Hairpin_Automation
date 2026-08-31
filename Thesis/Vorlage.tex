@@ -117,8 +117,12 @@
 		range-units           = single, % "3 bis 4 eV" statt "3 eV bis 4 eV"
 		per-mode              = symbol,
 	}
-	% Zoll ist keine SI-Einheit und daher in siunitx nicht vordefiniert.
+	% Nicht in siunitx vordefinierte Einheiten.
+	% \bar kollidiert mit dem Mathe-Akzent \bar und muss deshalb selbst deklariert werden.
 	\DeclareSIUnit{\inch}{in}
+	\DeclareSIUnit\bar{bar}
+	\DeclareSIUnit{\stk}{Stk.}
+	\DeclareSIUnit{\zyklus}{Zyklus}
 	
 	% URL:
 	% Clickable URL's can be made with this package: \url{}.
