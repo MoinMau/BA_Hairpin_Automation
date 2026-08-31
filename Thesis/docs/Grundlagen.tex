@@ -436,7 +436,7 @@ einem pn-Übergang. Fällt energiereiches Licht auf diese Schicht werden die Pho
 Elektronen aus dem Valenzband in das Leitungsband gehoben. Dadurch entsteht eine Ladungstrennung, die einen
 Fotostrom erzeugt. Dieser Ladungsträgerfluss erzeugt einen messbaren Strom, der proportional zur Bestrahlungsstärke
 ist. Dieser Strom wird nun zur weiteren Verstärkung an einen Bipolartransistor geleitet, der den
-niedrigen Fotostrom verstärkt ausgeben kann, sodass er als Signal verwendet werden kann.\todo{Überarbeiten}
+niedrigen Fotostrom verstärkt ausgeben kann, sodass er als Signal verwendet werden kann.
 
 \paragraph{Einweglichtschranken} sind eine physische Ausführung der oben beschriebenen Komponenten. Hierbei
 sind Sender und Empfänger aufgetrennt und liegen sich gegenüber. Ein Objekt wird detektiert, indem der
@@ -552,11 +552,11 @@ Kraft erreicht wird.
   bem/.style={{Stealth[length=1.6mm,width=1.3mm]}-{Stealth[length=1.6mm,width=1.3mm]},
               figAkzent,line width=0.5pt},
 ]
-\def\xl{0}   \def\xr{9}      % Rohr aussen
+\def\xl{0}   \def\xr{9}    
 \def\yb{0}   \def\yt{2.6}
-\def\w{0.28}                 % Wandstaerke
-\def\xk{3.65} \def\dk{0.7}    % Kolben
-\def\yrb{1.02} \def\yrt{1.58}% Kolbenstange
+\def\w{0.28}                 
+\def\xk{3.65} \def\dk{0.7}    
+\def\yrb{1.02} \def\yrt{1.58}
 
 % ---- Kammern ----
 \fill[figAkzentFlaeche] (\xl+\w,\yb+\w) rectangle (\xk,\yt-\w);
@@ -646,7 +646,6 @@ Weiter muss ein ausreichend guter Regler verbaut sein, der das genaue Anfahren d
     font=\small,
     box/.style   = {draw, thin, rounded corners=2pt, align=center,
                     minimum width=32mm, minimum height=13mm},
-    % Vorwaertskette blau (Wirkrichtung), Rueckfuehrung grau gestrichelt.
     chain/.style = {box, fill=figAkzentZart, draw=figAkzentMittel},
     fb/.style    = {box, fill=figFlaeche,    draw=figKontur},
     sig/.style   = {-{Latex[length=2mm,width=1.6mm]}, thin, figAkzent},
@@ -686,9 +685,6 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
   \centering
   \begin{tikzpicture}[
     font=\small,
-    % Bestromt = blau und kraeftig, unbestromt = grau und hell.
-    % N- und S-Pol trennen sich zusaetzlich ueber die Flaechenhelligkeit,
-    % damit die Zuordnung auch im Graustufendruck lesbar bleibt.
     stat/.style   = {draw=figKontur,  thin, fill=figFlaeche},
     live/.style   = {draw=figAkzent,  thin, fill=figAkzentFlaeche},
     coil/.style   = {draw=figKonturHell, line width=0.35pt},
@@ -698,8 +694,6 @@ deaktiviert, können bei wirkender Kraft auf die Welle nicht registrierbare Übe
     lbl/.style    = {font=\scriptsize, text=figText},
     mov/.style    = {-{Latex[length=1.8mm,width=1.4mm]}, thin, figAkzent}
   ]
-
-  %% #1 = x-Versatz, #2 = Polwinkel, #3 = Stil
   \newcommand{\statorpol}[3]{%
     \begin{scope}[shift={(#1,0)}, rotate=#2]
       \fill[#3] (1.15,-0.34) rectangle (2.2,0.34);
@@ -892,7 +886,7 @@ extreme Flexibilität und eine hohe Ausfallsicherheit, da das System nicht stati
 Methode zu dem hierarchischen Prinzip verwendet, da Reaktionszeiten durch direkte Kommunikationswege minimiert werden. Zudem lassen
 sich einzelne Ebenen weiterhin überprüfen. Die Herausforderungen sind hierbei aber eine komplexe Programmierung
 und ein schwer vorhersehbares Systemverhalten.
-\todo{bessere Überleitung}
+
 Für einen konkreten Beispiel-Aufbau werden die einzelnen Komponenten in Master, Slaves und Peripherie unterteilt. Die Rollenverteilung
 arbeitet nach dem hierarchischen Prinzip, bei dem der Master eine Abfrage oder einen Befehl initialisiert und ein Slave nur nach Erhalt
 dieser Nachricht auf die Anfrage antwortet oder eine Aktion ausführt. Der Slave entscheidet nun selbst, welche Peripheriegeräte
@@ -1013,7 +1007,9 @@ Ein Bussystem arbeitet nicht starr wie die vorher beschriebenen einfachen Signal
 mit bestimmten Adressierungen und Zugriffsrechten ein Übertragungsmedium. Die Vorteile dieser Systeme sind ein bidirektionaler
 Informationsfluss und ein geringerer Leitungsaufwand gegenüber den einfachen direkten Verbindungen. Die konkreten Systeme
 lassen sich in synchrone Prinzipien mit einer dedizierten Taktleitung und asynchrone Prinzipien mit festgelegter Baudrate unterscheiden.
-In \cref{tab:bussysteme} werden unterschiedliche Prinzipien aufgezeigt und gegeneinander verglichen.
+In \cref{tab:bussysteme} werden unterschiedliche Prinzipien aufgezeigt und gegeneinander verglichen. Im folgenden wird passend zudem
+in \cref{sec:Steuerungsarchitektur} beschriebenen Beispiel-Aufbau die Kommunikation mittels I\textsuperscript{2}C genauer erklärt.
+Die anderen Systeme werden bewusst reduziert betrachtet und nur vorgestellt.
 
 \begin{table}[htbp]
   \centering
@@ -1060,13 +1056,13 @@ Danach folgt im Takt der Clock das Senden der Adresse des Ziel-Slaves. Der Ziel-
 indem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung erfolgen, die stückweise in
 8-Bit-Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK abläuft. Der Master beendet die Übertragung, indem er
 die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzips sind durch eine
-maximale Teilnehmeranzahl und Leitungslänge beschränkt.\todo{Warum wird I2C genauer beschrieben?}
+maximale Teilnehmeranzahl und Leitungslänge beschränkt.
 
 \subsubsection{Leistungselektronik und Motortreiber}
 Da die Ausgänge der Mikrocontroller auf einen bestimmten maximalen Strom, der unter dem für den Betrieb von Motoren benötigten Strom liegt,
 ausgelegt sind, bedarf es einer weiteren Zwischeneinheit für die Steuerung. Außerdem entstehen unter hohen Leistungen Wärme und Induktionsspannungen,
 die einer weiteren Kontrolle unterliegen. Als Motortreiber für Schrittmotoren wird je Wicklung eine H-Brücke
-mit vier Hochleistungs-MOSFETs verwendet. Wie in \cref{fig:h-bruecke} aufgezeigt, lässt sich die Versorgungsspannung des Motors $V_\mathrm{M}$ auf
+mit vier Hochleistungs-MOSFETs verwendet. Wie in \cref{fig:h-brücke} aufgezeigt, lässt sich die Versorgungsspannung des Motors $V_\mathrm{M}$ auf
 die Wicklung geben. Da der Stromanstieg durch die Induktivität $L$ der Wicklung begrenzt ist, kann die Leistung und damit das Drehmoment
 nicht mehr durch schnelleres Schalten erzielt werden. Es ist zu beachten, dass die MOSFETs eines Halbzweiges niemals gleichzeitig,
 sondern nur mit einem Verzögerungsglied geschaltet werden dürfen, da sonst hohe Kurzschlussströme entstehen können. Durch das Umschalten
@@ -1077,8 +1073,6 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
 \begin{figure}[htbp]
   \centering
   \begin{circuitikz}[
-      % Der Strompfad wird blau hinterlegt; die Schaltung selbst bleibt
-      % schwarz, damit die Hinterlegung als eigene Ebene lesbar ist.
       hl/.style={draw=figAkzent, line width=2.4pt, opacity=.30},
       ar/.style={-{Latex[length=3mm,width=2.6mm]}, draw=figAkzent,
                  line width=2.4pt, opacity=.65}
@@ -1127,5 +1121,5 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
            liegt als Diagonale zwischen den Mittelpunkten A und B. Hervorgehoben
            ist der Strompfad bei durchgeschaltetem $T_1$ und $T_4$; das
            Durchschalten von $T_2$ und $T_3$ kehrt die Stromrichtung um.}
-  \label{fig:h-bruecke}
+  \label{fig:h-brücke}
 \end{figure}
