@@ -483,11 +483,12 @@ Die andere Methode bedarf eines geringeren Hardwareaufwandes und wird
 meist in Mikrocontrollern eingesetzt. Hier ist das Prinzip so, dass in mehreren Zyklen die Sensorelektrode mit einer
 festen Spannung aufgeladen wird und die in der Kapazität gespeicherte Ladung gezählt wird.
 \begin{equation}
-    Q = C \cdot U \quad \Leftrightarrow \quad U_{C\text{ref}} = \frac{Q_{\text{gesamt}}}{C_{\text{ref}}}
+    Q = C \cdot U \quad \Leftrightarrow \quad U_{C\mathrm{ref}} = \frac{Q_\mathrm{ges}}{C_\mathrm{ref}}
+    \label{eq:kapazitaet}
 \end{equation}
-Dies geschieht, indem über einen festgelegten Zyklus ein großer Referenzkondensator die gespeicherte Ladung $Q_\text{sens}$ der Sensorelektrode aufnimmt.
-Während jedes Zyklus addieren sich die Ladungen zu $Q_\text{gesamt}$ auf und die Spannung am Referenzkondensator steigt durch seine feste Kapazität $C_\text{ref}$ an.
-Erreicht die Kondensatorspannung $U_{C\text{ref}}$ einen Schwellenwert, wird die Anzahl der benötigten Zyklen als Signal weiterverarbeitet
+Dies geschieht, indem über einen festgelegten Zyklus ein großer Referenzkondensator die gespeicherte Ladung $Q_\mathrm{sens}$ der Sensorelektrode aufnimmt.
+Während jedes Zyklus addieren sich die Ladungen zu $Q_\mathrm{ges}$ auf und die Spannung am Referenzkondensator steigt durch seine feste Kapazität $C_\mathrm{ref}$ an.
+Erreicht die Kondensatorspannung $U_{C\mathrm{ref}}$ einen Schwellenwert, wird die Anzahl der benötigten Zyklen als Signal weiterverarbeitet
 und zu einem Kapazitätswert der Sensorelektrode umgerechnet.
 So lässt sich die Größe der Kapazität der Sensorelektrode sehr genau und mit wenigen Fehlereinflüssen ermitteln.
 Es muss jedoch bedacht werden, dass diese Messung wegen der vielen Zyklen eine gewisse Zeit für ein Ergebnis
@@ -946,7 +947,7 @@ Der Mikrocontroller bietet sich als Ein-Chip-System hervorragend als Steuerbaust
 Recheneinheit, Speicher und einer integrierten Peripherie zur Steuerung der Aus- und Eingänge. Diese Peripherie stellt
 einen Hauptvorteil gegenüber einem handelsüblichen Computer, der über mehr Rechenleistung verfügt, dar.
 
-Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar. Der Timer wird zum
+Die wichtigsten Peripheriebaugruppen stellen dabei der Timer, ADC, GPIO und Kommunikationscontroller dar.\PEMfootcite[S.~258--301]{Wuest.2011} Der Timer wird zum
 Erzeugen von Steuersignalen oder für interne Zeitzählungen verwendet. Ein ADC wird zum Einlesen von Analogspannungen verwendet. Dieser
 wandelt durch Abtastung die kontinuierlichen Spannungen in diskrete binäre Spannungswerte mit einer begrenzten Auflösung um. Ein
 GPIO-Pin kann zum Einlesen und Ausgeben von digitalen Signalen verwendet werden. Ein zusätzlicher Kommunikationscontroller bietet
@@ -1014,7 +1015,7 @@ Die anderen Systeme werden bewusst reduziert betrachtet und nur vorgestellt.
 \begin{table}[htbp]
   \centering
   \caption[Vergleich serieller Kommunikationsschnittstellen]%
-          {Vergleich gebräuchlicher serieller Kommunikationsschnittstellen}
+          {Vergleich gebräuchlicher serieller Kommunikationsschnittstellen\PEMfootcite[S.~272--273]{Wuest.2011}}
   \label{tab:bussysteme}
   \small
   \begin{tabularx}{\textwidth}{@{}
@@ -1055,7 +1056,7 @@ Das Kommunizieren beginnt mit der Start-Bedingung durch den Master, der die SDA-
 Danach folgt im Takt der Clock das Senden der Adresse des Ziel-Slaves. Der Ziel-Slave antwortet mit einem Bestätigungsbit (ACK),
 indem dieser die SDA-Leitung kurz auf LOW zieht. Nach diesem Handshake kann die eigentliche Datenübertragung erfolgen, die stückweise in
 8-Bit-Paketen mit nachfolgender Bestätigung eines Paketes durch ein ACK abläuft. Der Master beendet die Übertragung, indem er
-die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist. Die Grenzen dieses Prinzips sind durch eine
+die SDA-Leitung von LOW auf HIGH steigen lässt, während die SCL-Leitung auf HIGH ist.\PEMfootcite[S.~8--13]{NXP.2021} Die Grenzen dieses Prinzips sind durch eine
 maximale Teilnehmeranzahl und Leitungslänge beschränkt.
 
 \subsubsection{Leistungselektronik und Motortreiber}
@@ -1117,7 +1118,7 @@ Durch häufiges Umschalten kann eine genaue Zwischenposition angefahren werden.
 
   \end{circuitikz}
   \caption[Aufbau einer H-Brücke]%
-          {Aufbau einer H-Brücke aus zwei Halbbrückenzweigen. Die Wicklung
+          {Aufbau einer H-Brücke aus zwei Halbbrückenzweigen.\PEMfootcite[S.~71--80]{Specovius.2011} Die Wicklung
            liegt als Diagonale zwischen den Mittelpunkten A und B. Hervorgehoben
            ist der Strompfad bei durchgeschaltetem $T_1$ und $T_4$; das
            Durchschalten von $T_2$ und $T_3$ kehrt die Stromrichtung um.}

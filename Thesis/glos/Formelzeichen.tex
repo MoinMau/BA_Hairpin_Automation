@@ -1,5 +1,6 @@
 \section{Formelzeichen und Abkürzungen}
 
+{\small
 \begin{xltabular}{15.1cm}{llX}
 	\textbf{Formelzeichen} & \textbf{Einheit} & \textbf{Beschreibung} \\
 	\hline
@@ -7,69 +8,58 @@
 	\textbf{Formelzeichen} & \textbf{Einheit} & \textbf{Beschreibung} \\
 	\hline
 	\endhead
-	$A$ & \unit{\square\milli\metre} & Fläche \bigstrut[t] \\
-	$C$ & \unit{\farad} & Kapazität \\
-	$c$ & \unit{\metre\per\second} & Lichtgeschwindigkeit \\
-	$d$ & \unit{\milli\metre} & Durchmesser \\
-	$E$ & \unit{\electronvolt} & Energie \\
-	$F$ & \unit{\newton} & Kraft \\
-	$h$ & \unit{\joule\second} & Planck-Konstante \\
+	$A_\mathrm{K}$, $A_\mathrm{St}$, $d_\mathrm{K}$, $d_\mathrm{St}$ & \unit{\square\milli\metre}, \unit{\milli\metre} & Querschnitt und Durchmesser von Kolben, Kolbenstange \bigstrut[t] \\
+	$C$, $C_\mathrm{ref}$ & \unit{\farad} & Kapazität, des Referenzkondensators \\
+	$c$, $h$ & \unit{\metre\per\second}, \unit{\joule\second} & Lichtgeschwindigkeit, Planck-Konstante \\
+	$E_\mathrm{Photon}$ & \unit{\electronvolt} & Energie eines Lichtquants \\
+	$F_\mathrm{aus}$, $F_\mathrm{ein}$ & \unit{\newton} & Kolbenkraft beim Ausfahren, beim Einfahren \\
 	$L$ & \unit{\henry} & Induktivität \\
-	$n$ & -- & Anzahl der Messwerte \\
-	$P$ & \unit{\watt} & Leistung \\
-	$p$ & \unit{\bar} & Druck \\
-	$Q$ & \unit{\coulomb} & elektrische Ladung \\
-	$R$ & \unit{\ohm} & elektrischer Widerstand \\
-	$R$ & \unit{\milli\metre} & Spanne einer Messreihe \\
+	$n$ & -- & Stichprobenumfang einer Messreihe \\
+	$P$ & \unit{\watt} & Strahlleistung\\
+	$p$ & \unit{\bar} & Betriebsdruck \\
+	$Q$, $Q_\mathrm{sens}$, $Q_\mathrm{ges}$ & \unit{\coulomb} & elektrische Ladung, der Sensorelektrode, aufsummiert \\
+	$R$, $R_x$, $R_y$, $R_\mathrm{res}$ & \unit{\milli\metre} & Spanne einer Messreihe, in $x$-, in $y$-Richtung, resultierend \\
+	$R$, $R_\mathrm{Abn}$, $R_\mathrm{ges}$ & \unit{\ohm} & elektrischer Widerstand, am Abnehmer, gesamt \\
 	$s$ & \unit{\milli\metre} & empirische Standardabweichung \\
-	$U$ & \unit{\volt} & elektrische Spannung (im Schaltplan als $V_\mathrm{M}$) \\
-	$x_i$, $\bar{x}$ & \unit{\milli\metre} & Einzelmesswert, arithmetischer Mittelwert \\
-	$\alpha$ & \unit{\degree} & Winkel der schiefen Ebene \\
-	$\Delta_i$ & \unit{\milli\metre} & Abweichung eines Messwertes vom Mittelwert \\
+	$U$, $U_\mathrm{Vers}$, $U_\mathrm{Abn}$ & \unit{\volt} & elektrische Spannung, Versorgung, am Abnehmer\\
+	$x_i$, $\bar{x}$, $x_{\min}$, $x_{\max}$ & \unit{\milli\metre} & Einzelmesswert, Mittelwert, kleinster und größter Wert \\
+	$\alpha$ & \unit{\degree} & Neigungswinkel der schiefen Ebene \\
+	$\Delta_i$ & \unit{\milli\metre} & Abweichung des Messwertes $x_i$ vom Mittelwert \\
 	$\eta$ & -- & Wirkungsgrad \\
 	$\lambda$ & \unit{\nano\metre} & Wellenlänge \\
-	$\mu_\text{H}$ & -- & Haftreibungskoeffizient \bigstrut[b] \\
+	$\mu_\mathrm{H}$ & -- & Haftreibungszahl der Werkstoffpaarung \bigstrut[b] \\
 \end{xltabular}
 
 \begin{xltabular}{15.1cm}{llX}
-	\textbf{Abkürzung} &  & \textbf{Beschreibung} \bigstrut[t] \\
+	\textbf{Abkürzung} &  & \textbf{Beschreibung} \\
 	\hline
 	\endfirsthead
-	\textbf{Abkürzung} &  & \textbf{Beschreibung} \bigstrut[t] \\
+	\textbf{Abkürzung} &  & \textbf{Beschreibung} \\
 	\hline
 	\endhead
-
-	\multicolumn{3}{@{}l}{\textit{Elektrotechnik und Steuerung}\bigstrut[t]} \\
-	AC & & alternating current, Wechselstrom \\
+	AC & & alternating current, Wechselstrom \bigstrut[t] \\
+	ACK & & Acknowledge, Bestätigung eines Datenpakets \\
 	ADC & & Analog-Digital-Wandler \\
+	AM & & Additive Manufacturing, additive Fertigung \\
+	CAD & & Computer Aided Design \\
+	CAN & & Controller Area Network \\
+	CNC & & Computerized Numerical Control \\
 	DC & & direct current, Gleichstrom \\
+	FFF & & Fused Filament Fabrication \\
 	GND & & Ground, Erde \\
 	GPIO & & General Purpose Input/Output \\
+	GUI & & Graphical User Interface, grafische Benutzeroberfläche \\
+	HMI & & Human-Machine-Interface, Bedienschnittstelle \\
+	I\textsuperscript{2}C & & Inter-Integrated Circuit \\
 	LED & & Light Emitting Diode, Leuchtdiode \\
 	MOSFET & & Metal-Oxide-Semiconductor Field-Effect-Transistor \\
 	PMSM & & permanentmagneterregte Synchronmaschine \\
 	PWM & & Pulsweitenmodulation \\
-	SPS & & speicherprogrammierbare Steuerung \\
-
-	\multicolumn{3}{@{}l}{\textit{Kommunikation und Bussysteme}\bigstrut[t]} \\
-	ACK & & Acknowledge, Bestätigung eines Datenpakets \\
-	CAN & & Controller Area Network \\
-	I\textsuperscript{2}C & & Inter-Integrated Circuit \\
 	SCL & & Serial Clock Line \\
 	SDA & & Serial Data Line \\
 	SPI & & Serial Peripheral Interface \\
-	UART & & Universal Asynchronous Receiver Transmitter \\
-
-	\multicolumn{3}{@{}l}{\textit{Bedienung und Anzeige}\bigstrut[t]} \\
-	GUI & & Graphical User Interface, grafische Benutzeroberfläche \\
-	HMI & & Human-Machine-Interface, Bedienschnittstelle \\
+	SPS & & speicherprogrammierbare Steuerung \\
 	TFT & & Thin-Film-Transistor \\
-
-	\multicolumn{3}{@{}l}{\textit{Fertigungsverfahren}\bigstrut[t]} \\
-	AM & & Additive Manufacturing, additive Fertigung \\
-	CAD & & Computer Aided Design \\
-	CNC & & Computerized Numerical Control \\
-	FFF & & Fused Filament Fabrication \\
-
+	UART & & Universal Asynchronous Receiver Transmitter \bigstrut[b] \\
 \end{xltabular}
-
+}

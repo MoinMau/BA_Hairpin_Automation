@@ -57,10 +57,11 @@
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
       \field{issn}{1991-8178}
       \field{journaltitle}{Australian Journal of Basic and Applied Sciences}
       \field{number}{2}
+      \field{shorttitle}{Review of Pneumatic Actuators}
       \field{title}{A Review of Pneumatic Actuators (Modeling and Control)}
       \field{urlday}{17}
       \field{urlmonth}{7}
@@ -121,10 +122,11 @@
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
       \field{issn}{0007-8506}
       \field{journaltitle}{CIRP Annals}
       \field{number}{2}
+      \field{shorttitle}{Machine Tool Feed Drives}
       \field{title}{Machine tool feed drives}
       \field{urlday}{11}
       \field{urlmonth}{8}
@@ -292,10 +294,11 @@
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
       \field{month}{2}
       \field{note}{Revision 02-01 vom 22.02.2022}
       \field{number}{Dok-ID: 1340066}
+      \field{shorttitle}{Betriebsanleitung wireLINE MIRROR}
       \field{title}{Betriebsanleitung: wireLINE MIRROR static (L21-1710)}
       \field{year}{2022}
     \endentry
@@ -352,26 +355,6 @@
       \verb https://doi.org/10.1007/978-3-642-41438-1
       \endverb
     \endentry
-    \entry{RNAAutomation.o.J.}{online}{}{}
-      \list{organization}{1}{%
-        {RNA Automation Ltd}%
-      }
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{labeltitlesource}{title}
-      \field{note}{Ohne Datumsangabe}
-      \field{title}{Escapements and Nests}
-      \field{urlday}{9}
-      \field{urlmonth}{8}
-      \field{urlyear}{2026}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
-      \endverb
-      \verb{url}
-      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
-      \endverb
-    \endentry
     \entry{Glaessel2020Skinning}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a9bd8c58c67e64e0566a5a68da33e6a4}{%
@@ -422,6 +405,8 @@
       \field{volume}{9}
       \field{year}{2020}
       \field{urldateera}{ce}
+      \field{pages}{163\bibrangedash 169}
+      \range{pages}{7}
       \verb{doi}
       \verb 10.18178/ijmerr.9.2.163-169
       \endverb
@@ -717,9 +702,10 @@
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
       \field{journaltitle}{Proceedings of the IEEE}
       \field{number}{6}
+      \field{shorttitle}{Electric Drive Technology Trends}
       \field{title}{Electric Drive Technology Trends, Challenges, and Opportunities for Future Electric Vehicles}
       \field{volume}{109}
       \field{year}{2021}
@@ -727,6 +713,43 @@
       \range{pages}{21}
       \verb{doi}
       \verb 10.1109/JPROC.2020.3046112
+      \endverb
+    \endentry
+    \entry{Werkstueckmagazin.2008}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5d1fb2860811a16c01ce913c1b6a2c22}{%
+           family={{industrial-production.de}},
+           familyi={i\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {industrial-production.de}%
+      }
+      \strng{namehash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{fullhash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{fullhashraw}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{bibnamehash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{authorbibnamehash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{authornamehash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{authorfullhash}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \strng{authorfullhashraw}{5d1fb2860811a16c01ce913c1b6a2c22}
+      \field{sortinit}{i}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{month}{11}
+      \field{note}{Veröffentlicht am 01.11.2008}
+      \field{shorttitle}{Werkstückmagazin}
+      \field{title}{Magazine / Werkstückmagazin}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
+      \endverb
+      \verb{url}
+      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
       \endverb
     \endentry
     \entry{IEA.2026}{online}{}{}
@@ -1074,29 +1097,6 @@
       \verb https://link.springer.com/book/10.1007/978-3-642-29061-9
       \endverb
     \endentry
-    \entry{Werkstueckmagazin.2008}{online}{}{}
-      \list{organization}{1}{%
-        {industrial-production.de}%
-      }
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labeltitlesource}{shorttitle}
-      \field{month}{11}
-      \field{note}{Veröffentlicht am 01.11.2008}
-      \field{shorttitle}{Werkstückmagazin}
-      \field{title}{Magazine / Werkstückmagazin}
-      \field{urlday}{9}
-      \field{urlmonth}{8}
-      \field{urlyear}{2026}
-      \field{year}{2008}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
-      \endverb
-      \verb{url}
-      \verb https://www.industrial-production.de/handhabungstechnik/know-how---magazine--werkstueckmagazin.htm
-      \endverb
-    \endentry
     \entry{Reibung.2001}{online}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=de5776ac5c32cd3a7a849f188d87b11b}{%
@@ -1179,6 +1179,40 @@
       \endverb
       \verb{url}
       \verb https://digital-library.theiet.org/doi/10.1049/esej%3A19920050
+      \endverb
+    \endentry
+    \entry{NXP.2021}{manual}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=70a107d58d4aa1203cc8cde04480d72c}{%
+           family={{NXP Semiconductors}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{fullhash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{fullhashraw}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{bibnamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorbibnamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authornamehash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorfullhash}{70a107d58d4aa1203cc8cde04480d72c}
+      \strng{authorfullhashraw}{70a107d58d4aa1203cc8cde04480d72c}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{Rev. 7.0}
+      \field{note}{Anwenderhandbuch}
+      \field{shorttitle}{I\textsuperscript{2}C-bus Specification}
+      \field{title}{UM10204: I\textsuperscript{2}C-bus specification and user manual}
+      \field{urlday}{1}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
       \endverb
     \endentry
     \entry{ICCT.2026}{report}{}{}
@@ -1332,6 +1366,88 @@
       \verb https://www.mdpi.com/1996-1073/16/6/2555
       \endverb
     \endentry
+    \entry{RNAAutomation.o.J.}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1272833184d4ff64282e531aee1c9ec2}{%
+           family={{RNA Automation Ltd}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {RNA Automation Ltd}%
+      }
+      \strng{namehash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{fullhash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{fullhashraw}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{bibnamehash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{authorbibnamehash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{authornamehash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{authorfullhash}{1272833184d4ff64282e531aee1c9ec2}
+      \strng{authorfullhashraw}{1272833184d4ff64282e531aee1c9ec2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{note}{Ohne Jahresangabe der Quelle}
+      \field{shorttitle}{Escapements and Nests}
+      \field{title}{Escapements and Nests}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
+      \verb{url}
+      \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
+      \endverb
+    \endentry
+    \entry{Specovius.2011}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=af606871d2813f04d5f907de08a0fcb6}{%
+           family={Specovius},
+           familyi={S\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wiesbaden}%
+      }
+      \list{publisher}{1}{%
+        {Vieweg+Teubner}%
+      }
+      \strng{namehash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{fullhash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{fullhashraw}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{bibnamehash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{authorbibnamehash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{authornamehash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{authorfullhash}{af606871d2813f04d5f907de08a0fcb6}
+      \strng{authorfullhashraw}{af606871d2813f04d5f907de08a0fcb6}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{edition}{5. Auflage}
+      \field{isbn}{978-3-8348-8270-7}
+      \field{pagetotal}{389}
+      \field{shorttitle}{Grundkurs Leistungselektronik}
+      \field{title}{Grundkurs Leistungselektronik: Bauelemente, Schaltungen und Systeme}
+      \field{urlday}{1}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2011}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-8348-8270-7
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-8348-8270-7
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-8348-8270-7
+      \endverb
+    \endentry
     \entry{Stoelting.2011}{book}{}{}
       \name{editor}{3}{}{%
         {{un=0,uniquepart=base,hash=e52af6fdd2d0194d6bec31c24caef2bd}{%
@@ -1458,10 +1574,15 @@
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
       \field{note}{Copyright © 2009-2025}
+      \field{shorttitle}{Benutzerhandbuch UR5e}
       \field{title}{Benutzerhandbuch UR5e: Übersetzung der Originalanleitung (de), PolyScope 5}
+      \field{urlday}{14}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
+      \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://www.universal-robots.com/manuals/de/PDF/SW5_25/user-manual-UR5e-PDF_online/710-966-00_UR5e_User_Manual_de_Global.pdf
       \endverb
@@ -1527,19 +1648,55 @@
       \field{note}{Ausgabe 1982-10, überprüft und bestätigt 1990-05; zurückgezogen 2018}
       \field{shorttitle}{VDI 2860: Handhabungsfunktionen}
       \field{title}{VDI 2860 Blatt 1: Montage- und Handhabungstechnik; Handhabungsfunktionen, Handhabungseinrichtungen; Begriffe, Definitionen, Symbole}
-      \field{urlday}{23}
-      \field{urlmonth}{7}
-      \field{urlyear}{2026}
       \field{year}{1990}
+    \endentry
+    \entry{Wuest.2011}{inbook}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7c5b071ef2ead354c6885c03599cacb1}{%
+           family={Wüst},
+           familyi={W\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wiesbaden}%
+      }
+      \list{publisher}{1}{%
+        {Vieweg+Teubner}%
+      }
+      \strng{namehash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{fullhash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{fullhashraw}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{bibnamehash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{authorbibnamehash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{authornamehash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{authorfullhash}{7c5b071ef2ead354c6885c03599cacb1}
+      \strng{authorfullhashraw}{7c5b071ef2ead354c6885c03599cacb1}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{booktitle}{Mikroprozessortechnik: Grundlagen, Architekturen, Schaltungstechnik und Betrieb von Mikroprozessoren und Mikrocontrollern}
+      \field{edition}{4. Auflage}
+      \field{isbn}{978-3-8348-0906-3}
+      \field{shorttitle}{Mikrocontroller}
+      \field{title}{Mikrocontroller}
+      \field{urlday}{1}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2011}
       \field{urldateera}{ce}
-      \verb{file}
-      \verb VDI2860_Handhabungsfunktionen:Attachments/VDI2860_Handhabungsfunktionen.pdf:application/pdf
+      \field{pages}{258\bibrangedash 301}
+      \range{pages}{44}
+      \verb{doi}
+      \verb 10.1007/978-3-8348-9881-4_14
       \endverb
       \verb{urlraw}
-      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
+      \verb https://doi.org/10.1007/978-3-8348-9881-4_14
       \endverb
       \verb{url}
-      \verb https://www.vdi.de/richtlinien/details/vdi-2860-handhabungsfunktionen-handhabungseinrichtungen-begriffe-definitionen-symbol
+      \verb https://doi.org/10.1007/978-3-8348-9881-4_14
       \endverb
     \endentry
     \entry{HairpinTechnologyReview.2025}{article}{}{}
