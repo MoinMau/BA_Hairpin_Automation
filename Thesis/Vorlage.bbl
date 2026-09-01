@@ -1401,53 +1401,6 @@
       \verb https://www.rnaautomation.com/products/feeding-and-handling/spares-standard-equipment/escapements-and-nests/
       \endverb
     \endentry
-    \entry{Specovius.2011}{book}{}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=af606871d2813f04d5f907de08a0fcb6}{%
-           family={Specovius},
-           familyi={S\bibinitperiod},
-           given={Joachim},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{location}{1}{%
-        {Wiesbaden}%
-      }
-      \list{publisher}{1}{%
-        {Vieweg+Teubner}%
-      }
-      \strng{namehash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{fullhash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{fullhashraw}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{bibnamehash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{authorbibnamehash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{authornamehash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{authorfullhash}{af606871d2813f04d5f907de08a0fcb6}
-      \strng{authorfullhashraw}{af606871d2813f04d5f907de08a0fcb6}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{edition}{5. Auflage}
-      \field{isbn}{978-3-8348-8270-7}
-      \field{pagetotal}{389}
-      \field{shorttitle}{Grundkurs Leistungselektronik}
-      \field{title}{Grundkurs Leistungselektronik: Bauelemente, Schaltungen und Systeme}
-      \field{urlday}{1}
-      \field{urlmonth}{9}
-      \field{urlyear}{2026}
-      \field{year}{2011}
-      \field{urldateera}{ce}
-      \verb{doi}
-      \verb 10.1007/978-3-8348-8270-7
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1007/978-3-8348-8270-7
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1007/978-3-8348-8270-7
-      \endverb
-    \endentry
     \entry{Stoelting.2011}{book}{}{}
       \name{editor}{3}{}{%
         {{un=0,uniquepart=base,hash=e52af6fdd2d0194d6bec31c24caef2bd}{%

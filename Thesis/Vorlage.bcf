@@ -2402,25 +2402,24 @@
     <bcf:citekey order="28" intorder="1">Wuest.2011</bcf:citekey>
     <bcf:citekey order="29" intorder="1">Wuest.2011</bcf:citekey>
     <bcf:citekey order="30" intorder="1">NXP.2021</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">Specovius.2011</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">CleanLaser2022</bcf:citekey>
     <bcf:citekey order="32" intorder="1">CleanLaser2022</bcf:citekey>
     <bcf:citekey order="33" intorder="1">CleanLaser2022</bcf:citekey>
     <bcf:citekey order="34" intorder="1">CleanLaser2022</bcf:citekey>
-    <bcf:citekey order="35" intorder="1">CleanLaser2022</bcf:citekey>
-    <bcf:citekey order="36" intorder="1">ur5e_handbuch_2025</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">VDI2860.1990</bcf:citekey>
-    <bcf:citekey order="38" intorder="1">MontageIndustriellenProduktion.2012</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">ur5e_handbuch_2025</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">VDI2860.1990</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">MontageIndustriellenProduktion.2012</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
     <bcf:citekey order="39" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">Werkstueckmagazin.2008</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">Werkstueckmagazin.2008</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
     <bcf:citekey order="42" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
     <bcf:citekey order="43" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">GrundlagenHandhabungstechnik.2020</bcf:citekey>
-    <bcf:citekey order="44" intorder="2">RNAAutomation.o.J.</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">Reibung.2001</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">Altintas.2011</bcf:citekey>
-    <bcf:citekey order="47" intorder="1">Strasser.2011</bcf:citekey>
-    <bcf:citekey order="48" intorder="1">VDI2221.2019</bcf:citekey>
+    <bcf:citekey order="43" intorder="2">RNAAutomation.o.J.</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">Reibung.2001</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">Altintas.2011</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">Strasser.2011</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">VDI2221.2019</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

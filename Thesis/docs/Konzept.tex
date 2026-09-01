@@ -146,50 +146,57 @@ Die Übergabe muss ohne Einschränkungen und Veränderungen für den Roboterarm 
 \begin{tikzpicture}[
   font=\footnotesize,
   block/.style={draw=figKontur, line width=0.6pt, rounded corners,
-                minimum width=3.6cm, minimum height=0.8cm,
+                minimum width=3.4cm, minimum height=0.75cm,
                 align=center, fill=white},
   io/.style={align=center, font=\footnotesize\itshape, text=figText},
   flow/.style={-{Stealth[length=2.4mm]}, thick, figAkzent},
   node distance=4mm
 ]
-\node[io] (in) {Hairpin-Vorrat};
-\node[block, below=of in]   (bev)  {Bevorraten};
+% ---- linke Spalte: Vereinzelungssystem ----
+\node[block]                (bev)  {Bevorraten};
 \node[block, below=of bev]  (nach) {Nachführen};
 \node[block, below=of nach] (ver)  {Vereinzeln};
-\node[block, below=of ver]  (ufh)  {Überführen};
-\node[block, below=of ufh]  (fix)  {Übernehmen \& Fixieren};
+\node[block, below=of ver]      (ufh)  {Überführen};
+\node[io, left=7mm of bev]      (in)   {Hairpin-\\Vorrat};
+
+% ---- rechte Spalte: Zuführsystem, oben buendig mit der linken ----
+\node[block] (fix) at ($(bev)+(6.4cm,0)$) {Übernehmen \& Fixieren};
 \node[block, below=of fix]  (tra)  {Transportieren};
 \node[block, below=of tra]  (pos)  {Positionieren};
 \node[block, below=of pos]  (ueb)  {Übergeben};
-\node[io, below=of ueb] (out) {Übergabe an Roboterarm};
+\node[io,    below=of ueb]  (out)  {Übergabe an Roboterarm};
 
 \draw[flow] (in)   -- (bev);
 \draw[flow] (bev)  -- (nach);
 \draw[flow] (nach) -- (ver);
 \draw[flow] (ver)  -- (ufh);
-\draw[flow] (ufh)  -- (fix);
 \draw[flow] (fix)  -- (tra);
 \draw[flow] (tra)  -- (pos);
 \draw[flow] (pos)  -- (ueb);
 \draw[flow] (ueb)  -- (out);
 
-\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=6pt,
+% ---- Schnittstelle: Beschriftung schraeg am senkrechten Pfeilstueck ----
+\coordinate (kn) at ($(ufh.east)+(1.0,0)$);
+\draw[flow] (ufh.east) -- (kn)
+      -- node[sloped, above, font=\footnotesize\itshape, text=figText]
+             {Schnittstelle}
+         (kn |- fix.west) -- (fix.west);
+
+% ---- Subsystemrahmen (gleiche Hoehe, oben und unten buendig) ----
+\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=5pt,
       fit=(bev)(nach)(ver)] (s1) {};
-\node[right=3mm of s1, align=left, font=\footnotesize\bfseries, text=figAkzent]
-      {Vereinzelungs-\\system};
+\node[above=1.5mm of s1, font=\footnotesize\bfseries, text=figAkzent]
+      {Vereinzelungssystem};
 
-\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=6pt,
+\node[draw=figAkzentMittel, dashed, rounded corners, inner sep=5pt,
       fit=(fix)(tra)(pos)(ueb)] (s2) {};
-\node[right=3mm of s2, align=left, font=\footnotesize\bfseries, text=figAkzent]
-      {Zuführ-\\system};
-
-\node[left=3mm of ufh, align=right, font=\footnotesize\itshape, text=figText]
-      {Schnittstelle};
+\node[above=1.5mm of s2, font=\footnotesize\bfseries, text=figAkzent]
+      {Zuführsystem};
 \end{tikzpicture}
 \caption[Funktionsstruktur des Gesamtsystems]%
       {Funktionsstruktur des Gesamtsystems; der Teilefluss (Hairpin) verläuft von
-      oben nach unten. Das Überführen bildet die Schnittstelle zwischen den beiden
-      aktiven Subsystemen.}
+      oben nach unten und setzt sich rechts fort. Das Überführen bildet die
+      Schnittstelle zwischen den beiden aktiven Subsystemen.}
 \label{fig:funktionsstruktur}
 \end{figure}
 %
