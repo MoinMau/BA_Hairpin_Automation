@@ -1175,10 +1175,10 @@
       \verb 10.1049/esej:19920050
       \endverb
       \verb{urlraw}
-      \verb https://doi.org/10.1049/esej:19920050
+      \verb https://digital-library.theiet.org/doi/10.1049/esej%3A19920050
       \endverb
       \verb{url}
-      \verb https://doi.org/10.1049/esej:19920050
+      \verb https://digital-library.theiet.org/doi/10.1049/esej%3A19920050
       \endverb
     \endentry
     \entry{ICCT.2026}{report}{}{}
@@ -1375,7 +1375,17 @@
       \field{isbn}{978-3-446-42392-3}
       \field{shorttitle}{Handbuch Elektrische Kleinantriebe}
       \field{title}{Handbuch Elektrische Kleinantriebe}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
       \field{year}{2011}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://sisis.rz.htw-berlin.de/inh2011/12395478.pdf
+      \endverb
+      \verb{url}
+      \verb https://sisis.rz.htw-berlin.de/inh2011/12395478.pdf
+      \endverb
     \endentry
     \entry{Strasser.2011}{thesis}{}{}
       \name{author}{1}{}{%
