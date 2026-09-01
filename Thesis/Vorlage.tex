@@ -131,6 +131,14 @@
 	
 	%Float Package zur Positionierung von Abbildungen
 	\usepackage{float}
+	% Auf reinen Float-Seiten (Seiten, die nur Abbildungen/Tabellen enthalten)
+	% verteilt LaTeX den freien Platz per Default oben UND unten, der Float
+	% steht dadurch mittig. \@fptop auf 0pt setzt ihn an den Seitenanfang;
+	% der verbleibende Platz geht dann komplett nach unten (\@fpbot).
+	\makeatletter
+	\setlength{\@fptop}{0pt}
+	\setlength{\@fpsep}{12pt plus 1fil}
+	\makeatother
 
 	%für Todos
 	\usepackage[ngerman]{todonotes}
