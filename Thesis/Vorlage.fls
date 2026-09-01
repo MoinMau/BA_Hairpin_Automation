@@ -635,6 +635,12 @@ INPUT ./docs/Konzept.tex
 INPUT docs/Konzept.tex
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri9.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmbx9.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx6.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx7.tfm
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx5.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT ./docs/Konstruktion.tex
 INPUT ./docs/Konstruktion.tex
@@ -661,6 +667,7 @@ INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
 INPUT ./figs/Beschriftung_Klemmeinheit.png
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx9.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -670,9 +677,6 @@ INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT ./docs/Validierung_Tests.tex
 INPUT docs/Validierung_Tests.tex
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx7.tfm
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/rm-lmbx5.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib10.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib7.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/lm/lmmib5.tfm

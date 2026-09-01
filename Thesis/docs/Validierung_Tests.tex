@@ -66,7 +66,7 @@ angefertigt.
 Die Verifikation der Subsysteme dient dem Nachweis, dass die in Kapitel 5 aufgebauten Baugruppen die ihnen zugeordneten
 Anforderungen isoliert erfüllen. Die getrennte Betrachtung erlaubt es, wiederkehrende Fehlerbilder frühzeitig zu identifizieren
 und einem spezifischen System zuordnen zu können. Wird dies nicht getan, kann es bei der späteren Validierung des Gesamtsystems zu Problemen
-beim Herausfinden der exakten Fehlerquelle kommen.
+bei der Ermittlung der exakten Fehlerquelle kommen.
 
 Wie im vorgestellten Prüfplan (vgl. \cref{tab:pruefplan}) dargelegt, werden zunächst die Aktuatoren der einzelnen Subsysteme
 getestet und untersucht. Danach folgt eine Analyse der eigentlichen Funktion und der Schnittstellen dieser Systeme.
@@ -136,7 +136,7 @@ die der Vereinzelung zugutekommt und mit der ein optimaler Vereinzelungsprozess 
 
 \paragraph{Prüfziel}
 Das maßgebliche Ziel dieser Messreihe ist der Nachweis für die Anforderung L3, da die Vibrationseinheit als einzige Begrenzung für die
-Zuladung der Hairpins gilt. Weiter werden die Anforderungen B1 und L5 (vgl. \cref{tab:anforderungen}) geprüft, wobei hierfür keine
+Anzahl der Hairpin-Zuladung gilt. Weiter werden die Anforderungen B1 und L5 (vgl. \cref{tab:anforderungen}) geprüft, wobei hierfür keine
 konkreten Messwerte erhoben werden, sondern eine Bewertung nach Kriterien der ausführenden Testperson erfolgt.
 
 \paragraph{Spezifischer Aufbau}
@@ -144,13 +144,13 @@ Der Aufbau ist ähnlich zu dem in \cref{fig:PosTastkop_T-01} abgebildeten Grunda
 positioniert wurde. Dazu wurde diese durch die Vibrationseinheit auf die maximale Auslenkung ausgefahren und die Messuhr kopfüber auf das Aluminiumprofil
 angesetzt. Für die Überprüfung der Anforderungen fährt die Vibrationseinheit feste Schritte, die eine Initialisierung des Schrittmotors,
 eines Vibrationsabschnittes und eine weitere Ausfahrt beinhalten. Am Ende eines Durchlaufes lässt sich diese Auslenkung ablesen
-und damit die Genauigkeit der Abfahrten verifizieren. Weiter wurden gestaffelte Beladungen der Hairpins getestet, um auch die wahren 
+und damit die Genauigkeit der Abfahrten verifizieren. Weiter wurden gestaffelte Beladungen der Hairpins getestet, um die wahren 
 Betriebsgrenzen dieses Systems zu ermitteln.
 
 \paragraph{Ergebnis}
 Die Messwerte zeigen ein ungewöhnliches Verhalten in der Gleichmäßigkeit auf. So springen die Werte ca. alle zwei Durchläufe um
 einen bestimmten Hub. Dies lässt sich nicht eindeutig erklären, da keine Fehler im Code oder im mechanischen Aufbau gefunden wurden,
-die ein solches Verhalten verursachen würden. Aus diesem Grund sind die Spanne $R$ und die Standardabweichung $s$ etwas höher als angenommen.
+die ein solches Verhalten verursachen würden. Als Aus diesem Grund sind die Spanne $R$ und die Standardabweichung $s$ etwas höher als angenommen.
 Dennoch ist interessant, dass die Standardabweichung bis zu einer Beladung von 40 Hairpins und dem resultierenden Gesamtgewicht von
 \qty{0.916}{\kilo\gram} konstant unter \qty{0.2}{\milli\meter} bleibt. Auch die maximalen und minimalen Auslenkungen bleiben unter
 \qty{0.55}{\milli\meter}. Ab 60 Hairpins steigen diese Werte, und die Genauigkeit des Systems wird inkonsistenter. Bei 80 Hairpins ist
@@ -160,7 +160,7 @@ Druck durch das Gewicht der Beladung erklären. Ab einem Gewicht von \qty{2.29}{
 des Systems zu erkennen. Die Spanne dieser Messreihe liegt bei \qty{7.7}{\milli\meter}, was für einen Betrieb nicht vertretbar
 ist. Weiter ist noch zu nennen, dass es während dieser Messreihen keine Probleme bezüglich des Verhakens von Hairpins gab und
 diese immer kontinuierlich in die richtige Richtung bewegt wurden. Es musste nur einmalig passend beladen werden, und ein weiterer Eingriff
-war zu keinem Zeitpunkt nötig.\todo{bimodal Auswerten}
+war zu keinem Zeitpunkt nötig.
 
 \paragraph{Bewertung}
 Da die beschriebenen Abweichungen für den Betrieb des Vereinzelungssystems für eine Anzahl von bis zu 40 Hairpins im Rahmen bleiben,
@@ -170,22 +170,23 @@ ist die wichtigste Anforderung L3 für das Beladen von mindestens 25 Hairpins er
 \subsubsection{Transportsystem T-03}
 
 \paragraph{Prüfziel}
-Im Transportsystem hat der Schrittmotor großen
+Im Transportsystem hat der Schrittmotor hauptsächlichen
 Einfluss auf die in den Anforderungen L2 und K2 (vgl.\ \cref{tab:anforderungen}) festgelegte genaue Positionierung der Hairpins bei der
 Übergabe an den Roboterarm.
 
 \paragraph{Spezifischer Aufbau}
-Der Tastkopf der Messuhr wurde wie in den bereits durchgeführten Messreihen an der maximalen Auslenkung des Schlittens des Transportsystems
+Der Tastkopf der Messuhr wurde dafür, wie in den bereits durchgeführten Messreihen, an der maximalen Auslenkung des Schlittens des Transportsystems
 platziert. Die Schritte eines Durchlaufes sahen die Initialisierung mittels Endstop vor, dann eine schnelle Fahrt mit Abbremsen und einem
 doppelten Richtungswechsel und schlussendlich eine langsamere Fahrt zum definierten Endpunkt.
 
 \paragraph{Ergebnis}
 Die gemessene Standardabweichung liegt bei \qty{0.015}{\milli\meter} und die Spanne bei \qty{0.06}{\milli\meter}. Diese beiden Werte zeigen
-die enorme Präzision dieses Systems auf. Es gab keine Ausreißer und damit kein fehlerhaftes Verhalten.
+die enorme Präzision dieses Systems auf. Es gab keine Ausreißer und damit kein fehlerhaftes Verhalten. Die
+in den \cref{sec:Aktorik} beschriebenen Vorteile bezüglich der Genauigkeit wurden also bestätigt.
 
 \paragraph{Bewertung}
 Dadurch, dass die gemessenen Werte weit unter der geforderten Abweichung von $<\qty{2}{\milli\meter}$ liegen, kann dieses Subsystem keine
-Fehlerquelle für die endgültige Positionierung der Hairpins sein.
+Fehlerquelle für die endgültige Positionierung der Hairpins darstellen.
 %
 \subsubsection{Fixierungssystem: Hairpin-Aufstellung T-04}
 
@@ -199,15 +200,15 @@ In diesem Test wurden ausschließlich die Kraftklemmen bewegt. Der Transportschl
 an der Oberseite des Hairpins angesetzt. Hierbei ist zu beachten, dass wegen der Länge des Hairpins und der dadurch resultierenden,
 verstärkt wirkenden Hebelkraft diese Messung erhebliche Abweichungen aufweisen kann. Auch ist ein gleicher Antastpunkt beim wiederholten
 Durchführen der Messreihen schwer zu realisieren, da die Hairpins eine zum Tastkopf schräge Oberfläche haben.
-Der allgemeine Durchlauf sah vor, dass der Prüfhairpin dauerhaft im Behälter blieb und nur die Hauptklemme sich öffnete und schloss.
+Der allgemeine Durchlauf sah vor, dass ein Hairpin dauerhaft im Behälter gelassen wurde und sich nur die Hauptklemme öffnet und schließt.
 
 \paragraph{Ergebnis}
 Trotz der zuvor beschriebenen Messprobleme ergab dieser Durchlauf eine Standardabweichung von nur \qty{0.167}{\milli\meter}. Auch die
-maximale Spanne belief sich auf \qty{0.525}{\milli\meter}.
+maximale Spanne belief sich auf nur \qty{0.525}{\milli\meter}.
 
 \paragraph{Bewertung}
-Beide Werte zeigen, dass wie bei T-03 dieses Teilsystem der Anforderung L2 nicht entgegensteht. Dennoch müssen im weiteren Verlauf
-die Messungenauigkeiten durch einen anderen Messaufbau überprüft werden.
+Beide Werte zeigen, dass dieses Teilsystem ähnlich zu T-03 der Anforderung L2 nicht entgegensteht. Dennoch muss im weiteren Verlauf
+die benannten Messungenauigkeiten durch einen andere Messreihe überprüft werden.
 
 \subsubsection{Fixierungssystem: Seitenklemmen T-06}
 
@@ -277,7 +278,7 @@ Spannenwerte anwenden:
   \label{eq:T07_Durchgang1}
 \end{equation}
 %
-Für den zweiten Durchgang lässt sich der eben beschriebene Prozess genauso umsetzen. In y-Richtung wurden eine Standardabweichung
+Für den zweiten Durchgang mit einem langen Hairpin lässt sich der eben beschriebene Prozess genauso umsetzen. In y-Richtung wurden eine Standardabweichung
 von \qty{0.218}{\milli\meter} und eine Spanne von \qty{0.84}{\milli\meter} und in x-Richtung eine Standardabweichung von
 \qty{0.464}{\milli\meter} und eine Spanne von \qty{1.8}{\milli\meter} bestimmt. Auch hier lässt sich die Auslenkung berechnen zu:
 %
@@ -294,7 +295,7 @@ kein Höhenversatz im Zuführsystem auftritt.
 \paragraph{Bewertung}
 Es folgt also, dass die Anforderungen L2 und K2 vollumfänglich erfüllt werden, da beide Durchläufe eine Worst-Case-Abweichung von
 $<\qty{2}{\milli\meter}$ haben. Es ist zu nennen, dass nach den Standardabweichungen, die alle unter \qty{0.5}{\milli\meter} liegen, eine
-deutlich genauere Anfahrt der Übergabeposition zu erwarten ist. Weiter ist aber zu benennen, dass ein längerer Hairpin zu einer erhöhten Abweichung führt.
+deutlich genauere Anfahrt der Übergabeposition zu erwarten ist.
 %
 \subsubsection{Vereinzelungssystem: Vereinzelungstreue T-05}\label{sec:VR_Vereinzelungstreue}
 
@@ -308,8 +309,9 @@ Der Aufbau entspricht dem Anfang eines Dauerlaufes im Betrieb, wobei der vereinz
 entnommen wird. Dieser Ablauf startet mit dem Beladen von 25 Hairpins auf die Vibrationsschiene und der nachfolgenden Vereinzelung
 der Hairpins aus dem Bündel. Diese bewegen sich dann wie im Normalbetrieb über die Überführung und der folgende Prozess wird gestoppt.
 Nach einem Fehlerprotokoll werden während der Messreihe alle Probleme oder Auffälligkeiten notiert. Für die Validierung 
-der Anforderung St1 wurden vier unterschiedliche Hairpin-Geometrien gewählt. Hierbei waren nicht nur die äußeren Maße verschieden,
-sondern auch die Biegung am Kopf des Hairpins. Der Endeffektor der linearen Bewegungseinheit war auf eine feste Geometrie (TestV1)
+der Anforderung St1 wurden vier unterschiedliche Hairpin-Geometrien gewählt. Diese weisen starke Unterschiede in der Beschaffenheit
+der Biegung am Kopf des Hairpins. Auch auf verschiednen äußeren Maße wie Länge und Breite wurden getestet.
+ Der Endeffektor der linearen Bewegungseinheit war auf eine feste Geometrie (TestV1)
 festgelegt und wurde nicht variiert.
 
 \paragraph{Ergebnis}
@@ -319,32 +321,38 @@ C und D den größten Längenunterschied von \qty{39}{\milli\meter} mit den geri
 in welchem System genau die Fehler aufgetreten sind. So zeigt sich, dass keine Fehler in der Vereinzelung auftreten, wenn eine zu den
 Endeffektoren passende Hairpin-Geometrie gewählt wurde. Vergleicht man die Hairpin-Varianten A und C, so treten diese erst im späteren Verlauf durch die
 Rutsche auf. Zur Hairpin-Variante A ist zu nennen, dass die Beine nicht sauber entgratet wurden und sich in der Rutsche verharken konnten.
-An Hairpin-Variante B ist die Geometrieabhängigkeit zu den Sperrklinken klar zu erkennen, da hier eine nicht passende Geometrie gewählt wurde. 
-
+An Hairpin-Variante B ist die Geometrieabhängigkeit zu den Sperrklinken klar zu erkennen, da hier eine nicht zu den Endeffektoren passende Geometrie gewählt wurde. 
 
 \paragraph{Bewertung}
 Dieses Messergebnis zeigt eine klare Verletzung der Anforderung St1, da das System nicht direkt mit jeder Hairpin-Geometrie einwandfrei
 funktioniert. Dennoch ist durch eine gute Kalibrierung und eine der Hairpin-Geometrie angepasste Endeffektorkombination ein
 fehlerarmer Betrieb möglich. Dies setzt zwar die Wunschanforderung B2 aus, weil die Bedienperson zu Beginn eines
-Hairpin-Geometriewechsels die Endeffektoren passend austauschen müsste. Weiter sind beschädigte Hairpins nicht mit
-diesem System kompatibel.\todo{besser Verkaufen!}
+Hairpin-Geometriewechsels die Endeffektoren passend austauschen müsste. Wird dies jedoch gemacht, lässt sich eine geringe
+Fehlerquote feststellen, die eine hohe Prozesssicherheit ermöglicht. Weiter ist zu erwähnen, dass beschädigte Hairpins mit
+diesem System schlecht kompatibel sind und erhöhte Fehlerquoten auftreten können. Da dies nicht explizit in den Anforderungen
+aufgezählt wird und im Regelbetrieb nicht vorkommen sollte, stellt dies keine Einschränkung für das allgemeine System dar.
 
 \subsubsection{Dauerlauf T-08}\label{sec:VR_Durchsatz}
 
 Der Dauerlauf stellt das gesamte System auf die Probe. Alle Subsysteme müssen zusammenarbeiten und in allen Schnittstellen
 funktionieren. Wie in der Realisierung (vgl.\ \cref{sec:Realisierungsstand}) erklärt, werden bis jetzt keine der geplanten
 Prozesssensoren verwendet, und eine Steuerung erfolgt nach festen Zeiten. Aus diesem Grund sind an vielen Stellen in der Prozesskette
-erhöhte Wartezeiten eingebaut, die zur Erhöhung der Prozesssicherheit dienen. Aktuell liegt diese Durchlaufzeit bei \qty{43}{\second}
-und erfüllt damit Anforderung L1. Werden in Zukunft auch die Prozesssensoren mit einbezogen, lässt sich dieses Zeitintervall weiter
-minimieren.
+erhöhte Wartezeiten eingebaut, die zur Erhöhung und Absicherung der Prozesskette dienen. Aktuell liegt diese Durchlaufzeit bei \qty{43}{\second}
+und erfüllt damit Anforderung L1. Werden in Zukunft auch die Prozesssensoren mit einbezogen, lässt sich diese Periodendauer weiter
+reduzieren.
 
 Die Übergabe des Hairpins an den Roboterarm erfolgt in dieser Messreihe zeitgesteuert und bedarf einer genauen Kalibrierung und
 Synchronisation durch den Bedienenden. Der Test spiegelt den Dauerlauf wider, wobei der Roboterarm aber keine vollständige
 Fahrt zum Laser durchführt, sondern nur die Aufnahme, ein kurzes Bewegen und das Abgeben des Hairpins durchführt.
 Die Wahl des Hairpins belief sich auf eine zu den Endeffektoren der Vereinzelung kompatiblen Geometrie.
-Es wurden drei Durchläufe à $n = 25$ durchgeführt. In der ersten Messreihe entstanden drei Timeout-Fehler zwischen Roboterarm und
-Zuführsystem, die aber durch eine optimierte Kalibrierung minimiert werden konnten. In den nächsten beiden Durchläufen
-gab es wiederum jeweils einen Fehler in der Vereinzelung durch Verhakung.
+Es wurden drei Durchläufe $n = 25$ durchgeführt. In der ersten Messreihe entstanden drei Timeout-Fehler zwischen Roboterarm und
+Zuführsystem, die aber durch eine optimierte Kalibrierung entfernt werden konnten. In den nächsten beiden Durchläufen
+gab es wiederum jeweils einen Fehler in der Vereinzelung durch Verhakung. Es wurde sich gegen eine explizite Aufführung 
+dieser Messdaten im Anhang entschieden. Dies hat den Grund, dass in den drei Messreihen keine unterschiedlichen Fehler
+aufgetreten sind. Die repräsentativen letzten Druchläufe hatten eine Fehlerquote von \qty{4}{\percent}. Dieser Wert
+widerspricht grundsätzlich keiner Anforderung, kann aber zu gunsten der Prozessstabilität optimiert werden. Interessant
+ist dabei, dass das Zusammenspiel der Subsysteme keine Probleme darstellte und nur die bereits identifizierten
+Fehlerstellen bei der Vereinzelung behoben werden müssten.
 
 \subsubsection{Beschädigungen T-09}\label{sec:VR_Beschädigung}
 Der letzte Test beschreibt die Überprüfung der Hairpins bei einem Gesamtdurchlauf auf Beschädigungen (vgl. Anforderung L4).
@@ -357,16 +365,19 @@ sich auf n=10 Durchläufen mit zwei Hairpin-Geometrien beschränkt.
 In \cref{tab:mess_T09} sind die Befunde nach Kategorien sortiert. Wichtig zu nennen ist, dass keinerlei sichtbare Beschädigungen
 an der Isolierung der Hairpins gefunden wurden. Die Messreihen lassen jedoch erkennen, dass es Unterschiede in den Abweichungen
 von den verschiedenen Eigenschaften der Hairpin-Geometrien gibt. Besonders die Länge und die Kupferbandbreite haben einen Einfluss. Für längere
-Hairpin-Geometrien sind besonders die Beine betroffen. Es muss sich aber die Stärke dieser Abweichungen angeguckt werden. Diese liegt
-bei ${\leq}\qty{1}{\milli\meter}$ und ist im Normalbetrieb nicht als fehlerhaft zu deklarieren und Anforderung L4 kann als bestätigt angesehen werden. 
-Dennoch sollte im Schritt der Optimierung dieser Teil mit beachtet werden und evtl. verbessert werden.\todo{Toleranz argument auf Laserschweiß anlage beziehen!}
-\todo{Ehrlcih zwischen Isolierschäden < 1\% und Geometrie schäden >1\% }
+Hairpin-Geometrien sind besonders die Beine betroffen. Die Stärke dieser Abweichungen liegt
+bei ${\leq}\qty{1}{\milli\meter}$ und ist im Regelbetrieb für das Zusammenspiel zwischen dem entwickelten System und dem Roboterarm
+kein Problem. Es muss in weiteren Messreihen und Anforderungen hinsichtlich der Gesamtproduktion aber kontrolliert werden,
+ob eine solche Abweichung z.B. die Abisolierung durch den Laser oder das spätere Fügen in den Stator behindert. Bezüglich der 
+Isolierung lässt sich dennoch Anforderung L4 als bestätigt ansehen. Es sollte trotzdem das Ziel sein, jegliche Veränderungen
+bezüglich der Hairpin-Geometrie zu minimieren. Aus diesem Grund werden in \cref{sub:Optimierungspotezial} Optimierungsmöglichkeiten
+für die Überführung und damit den maßgeblichen Träger der Abweichungen dargestellt.
 
 \subsection{Zusammenfassung der Tests}\label{sec:Testbewertung}
 Die durchgeführten Versuche prüfen alle Anforderungen, die sich nicht bereits
 aus dem Konzept oder der Realisierung ergeben. Die Einzelbewertungen sind in den
-jeweiligen Testabschnitten erfolgt; \cref{tab:anforderungsabgleich} fasst sie
-je Anforderung zusammen.
+jeweiligen Testabschnitten erfolgt. In \cref{tab:anforderungsabgleich} werden die durch die Messreihen
+resultierenden Ergebnisse je Anforderung zusammengefasst.
 
 Aus der Gesamtschau ergeben sich drei Befunde. Erstens ist die geforderte
 Wiederholgenauigkeit nach L2 mit einem Wert von maximal
@@ -376,27 +387,13 @@ Transportsystem ($s = \qty{0.015}{\milli\meter}$) ausgeht, sondern vom
 Fixierungssystem ($s = \qty{0.167}{\milli\meter}$). Der in T-04 und T-06
 gewählte Ansatz der Kraftschlussklemmung ist damit die maßgebliche Größe für
 die Positioniergenauigkeit. Zweitens ist die Funktion des Vereinzelungssystems
-unmittelbar an die Hairpin-Geometrie gekoppelt. Mit angepassten Sperrklinken
+unmittelbar an die Hairpin-Geometrie gekoppelt. Mit angepassten Endeffektoren
 arbeitet das System fehlerfrei, ein Geometriewechsel erfordert jedoch einen
 manuellen Eingriff und schränkt die Anforderungen St1 und B2 ein. Drittens
 konnten Beschädigungen der Isolierung in keinem Durchlauf festgestellt werden,
 während geometrische Abweichungen im Bereich unterhalb eines Millimeters
 auftraten, deren Zulässigkeit von den Toleranzen des nachgelagerten
 Schweißprozesses abhängt.
-
-Die übrigen Anforderungen der Liste ergeben sich unmittelbar aus der
-Konzeptauswahl und der Realisierung und bedürfen keiner eigenen Messreihe. Die
-Anforderungen G1 bis G3 sind durch den Aufbau im vorhandenen Aluminiumgestell
-und die Lage der Übergabeposition im Arbeitsraum des Roboterarms UR5e erfüllt, En1 und En2
-durch den Betrieb ohne Druckluft und Vakuum, Sa1 durch den definierten sicheren
-Zustand bei Not-Halt.
-
-Damit sind alle Forderungen der Anforderungsliste nachgewiesen oder in ihrer
-Einschränkung benannt. Die identifizierten Schwachstellen betreffen die
-Geometrieabhängigkeit der Vereinzelung, die Überführung und die
-zeitgesteuerte Prozessführung ohne Sensorik. Aus diesen drei Punkten werden im
-folgenden Kapitel Optimierungsvorschläge abgeleitet, deren Umsetzung nicht mehr
-Bestandteil dieser Arbeit ist.
 
 \begin{table}[htbp]
   \centering
@@ -436,3 +433,20 @@ Bestandteil dieser Arbeit ist.
     \bottomrule
   \end{tabularx}
 \end{table}
+
+Die übrigen Anforderungen der Liste ergeben sich unmittelbar aus der
+Konzeptauswahl und der Realisierung. Die
+Anforderungen G1 bis G3 sind durch den Aufbau im vorhandenen Aluminiumgestell
+und die Lage der Übergabeposition im Arbeitsraum des Roboterarms UR5e erfüllt.
+Die Anforderungen En1 und En2 werden durch den vorrausgesetzten und dementsprechen 
+beachteten Betrieb ohne Druckluft und Vakuum erfüllt. Die Anforderung Sa1 wird durch den definierten stop
+Zustand  der Motoren bei Not-Halt erfüllt.
+
+Damit sind alle Forderungen der Anforderungsliste nachgewiesen oder in ihrer
+Einschränkung benannt. Die identifizierten Schwachstellen betreffen die
+Geometrieabhängigkeit der Vereinzelung, die Überführung und die
+zeitgesteuerte Prozessführung ohne Sensorik. Aus diesen drei Punkten werden im
+folgenden Kapitel Optimierungsvorschläge abgeleitet, deren Umsetzung nicht mehr
+Bestandteil dieser Arbeit ist.
+
+

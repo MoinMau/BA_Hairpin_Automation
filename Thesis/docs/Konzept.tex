@@ -380,44 +380,52 @@ Da beide Varianten sämtliche Forderungen erfüllen, erfolgt der Vergleich anhan
 Kriterien, in denen sie sich unterscheiden. \Cref{tab:variantenvergleich} stellt diese
 gegenüber.
 
+\newcommand{\bPP}{\ensuremath{\mathbf{{+}{+}}}}
+\newcommand{\bP}{\ensuremath{{+}}}
+\newcommand{\bM}{\ensuremath{{-}}}
+\newcommand{\bMM}{\ensuremath{\mathbf{{-}{-}}}}
+
 \begin{table}[htbp]
 \centering
 \caption[Vergleich der Konzeptvarianten]{Vergleich der Konzeptvarianten anhand der
-  unterscheidenden Kriterien}
+  unterscheidenden Kriterien. \bP{} bezeichnet den Vorteil, \bM{} den Nachteil im
+  jeweiligen Kriterium; die verdoppelten Symbole \bPP{} und \bMM{} kennzeichnen die
+  für die Auswahl ausschlaggebenden Kriterien.}
 \label{tab:variantenvergleich}
 \small
-\begin{tabularx}{\textwidth}{@{} p{2.6cm} >{\raggedright\arraybackslash}X
-                              >{\raggedright\arraybackslash}X @{}}
+\begin{tabularx}{\textwidth}{@{} p{2.35cm} c >{\raggedright\arraybackslash}X
+                              c >{\raggedright\arraybackslash}X @{}}
 \toprule
-\textbf{Kriterium} & \textbf{Variante A} & \textbf{Variante B}\\
-\midrule
+\textbf{Kriterium} & \multicolumn{2}{c}{\textbf{Variante A}}
+                   & \multicolumn{2}{c}{\textbf{Variante B}}\\
+\cmidrule(r){1-1}\cmidrule(lr){2-3}\cmidrule(l){4-5}
 Lageerhalt \newline (G3)
-  & Hairpins werden in der Anlieferungslage übernommen
-  & zusätzlicher Arbeitsschritt für Umladen und Lagewechsel erforderlich\\
+  & \bPP & Hairpins werden in der Anlieferungslage übernommen
+  & \bMM & zusätzlicher Arbeitsschritt für Umladen und Lagewechsel erforderlich\\
 \addlinespace
 Geometrie\-bereich \newline (St1)
-  & Vibrationsbeförderung und Lagerung ohne Anpassung über den Geometriebereich wirksam
-  & Magazindesign und Schieberkontur je Geometrie anzupassen\\
+  & \bPP & Vibrationsbeförderung und Lagerung ohne Anpassung über den Geometriebereich wirksam
+  & \bMM & Magazindesign und Schieberkontur je Geometrie anzupassen\\
 \addlinespace
 Bedien\-eingriff \newline (B2)
-  & Nachladen ohne Lageänderung
-  & Befüllen des Magazins in geänderter Lage\\
+  & \bP & Nachladen ohne Lageänderung
+  & \bM & Befüllen des Magazins in geänderter Lage\\
 \addlinespace
 Taktzeit \newline (L1)
-  & Spindelantrieb begrenzt die Verfahrgeschwindigkeit
-  & Zahnriemen ermöglicht kürzere Verfahrzeiten\\
+  & \bM & Spindelantrieb begrenzt die Verfahrgeschwindigkeit
+  & \bP & Zahnriemen ermöglicht kürzere Verfahrzeiten\\
 \addlinespace
-Systemkomplexität \newline (Mo1)
-  & passive Überführung, Positionierung im \emph{open-loop}
-  & angetriebenes Förderband, Positionierung im \emph{closed-loop}\\
+System\-komplexität \newline (Mo1)
+  & \bP & passive Überführung, Positionierung im \emph{open-loop}
+  & \bM & angetriebenes Förderband, Positionierung im \emph{closed-loop}\\
 \addlinespace
 Bauteilbelastung \newline (L4)
-  & Klemmung der Hairpin durch exteren Krafteinwirkung
-  & Einfaches Ablegen des Hairpin ins Formschluss Nest\\
+  & \bM & Klemmung des Hairpins durch externe Krafteinwirkung
+  & \bP & einfaches Ablegen des Hairpins in das Formschluss-Nest\\
 \addlinespace
 Positionier\-genauigkeit \newline (L2)
-  & Lage wird im \emph{open-loop} aus der Referenzfahrt fortgeschrieben
-  & Rückführung über \emph{closed-loop} erkennt Abweichungen unmittelbar\\
+  & \bM & Lage wird im \emph{open-loop} aus der Referenzfahrt fortgeschrieben
+  & \bP & Rückführung über \emph{closed-loop} erkennt Abweichungen unmittelbar\\
 \bottomrule
 \end{tabularx}
 \end{table}
