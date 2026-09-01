@@ -1,6 +1,8 @@
 \section{Realisierung}\label{sec:Realisierung}
 Nach dem Abschluss des theoretischen Teils dieser Arbeit steht die Konzeptvariante fest und die konkrete Umsetzung kann erfolgen.
-In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und dem Bau der Anlage dargestellt werden.
+In diesem Kapitel sollen die Schritte und Entscheidungen zur Konstruktion und dem Bau der Anlage dargestellt werden. Für ein besseres
+Verständnis und Einordnung der folgenden Detailbeschreibungen ist im Anhnag in \cref{fig:RealisirungGesamt} das aufgebaute
+Gesamtsystem einmal aufgezeigt.
 %
 %
 \subsection{Vorgehen und verwendete Werkzeuge}\label{sec:VerwendeteTools}
@@ -17,7 +19,7 @@ Erstellung aller Subsysteme am Computer konnten die einzelnen Bauteile gefertigt
 elektrische System wurden parallel externe Komponenten zur Steuerung festgelegt und ein Kabelplan erstellt. Zur Nachvollziehbarkeit
 dieses Schaltplanes wurde eine Schematic in KiCad angefertigt. Die einzelnen Komponenten wurden nach diesem Plan
 mit Kabeln und selbst gelegten Leitungen auf einer Lochrasterplatine verbunden. Zur schrittweisen Initialisierung der Anlage wurde
-als Entwicklungshilfe des Codes GitHub verwendet. Git ermöglicht es, Code schrittweise aufzubauen und einfach zwischen Versionen
+als Entwicklungshilfe des Codes Git verwendet. Git ermöglicht es, Code schrittweise aufzubauen und einfach zwischen Versionen
 zu wechseln.
 
 Diese Aufzählung beschreibt zwar alle verwendeten Werkzeuge, soll aber nicht als zeitliche Darstellung der Realisierung dienen.
@@ -229,7 +231,7 @@ stellen dabei die Übernahme des vereinzelten Hairpins aus der Vereinzelung und 
 dar.
 
 \paragraph{Aufbau und Auslegung}
-Allgemein besteht die Rutsche aus drei Segmenten. Alle diese Segmente sind als Schalen ausgeführt. Zwei Ränder an den Außenseiten
+Allgemein besteht die Rutsche aus drei Segmenten (vgl. \cref{fig:Überführungseinheit}). Alle diese Segmente sind als Schalen ausgeführt. Zwei Ränder an den Außenseiten
 verhindern ein seitliches Herausfallen der Hairpins. Zudem wurde in der Mitte eine an die Biegung der Oberseite der Hairpins
 angepasste Einkerbung eingebracht. Diese hilft mit einer leicht angeschrägten Unterseite, den Hairpin stabil in der Mitte
 der Schale zu halten. Der obere Teil dieser Segmente ist eine sich konvex öffnende Schale. Dies dient dem besseren Fangen für den
@@ -255,8 +257,8 @@ Steuerung zu achten.
 
 \subsubsection{Schnittstellen}
 Mechanisch gesehen ist der Eingang dieses Subsystems der vereinzelte Hairpin aus der Überführung. Der Ausgang beschreibt wiederum
-die definierte Übergabeposition an den Roboterarm. Als elektrisches Signal wird die Steuerung eines Schrittmotors für das Transportieren
-benötigt. Auch das Fixierungssystem muss elektronisch eingestellt werden.
+die definierte Übergabeposition an den Roboterarm. Als elektrische Signale wird die Steuerung des Schrittmotors für das Transportsystem
+sowie die Servomotoren des Fixierungssystems benötigt.
 
 \subsubsection{Übernahme und Fixierung}
 Dieser Teil des Zuführsystems besteht aus einem Behälter und elektronisch angetriebenen Klemmen. Durch die Rutsche des Überführungssystems
@@ -309,7 +311,7 @@ Für die Positionsermittlung wird das bekannte Verfahren mit Endstop und einer o
 
 \subsubsection{Übergabe an den Roboterarm}
 Nachdem die Kraftschlussklemme durch den Spindelantrieb an eine definierte Position gefahren wurde, greift der Roboterarm mit einem
-angepassten Greifer den oberen Teil des Hairpins. In einem fest definierten Zeitfenster müssen nun die Beine des Hairpins aus den
+zur Hairpin-Geometrie passenden Greifer den Kopf des Hairpins. In einem fest definierten Zeitfenster müssen nun die Beine des Hairpins aus den
 Klemmen gelöst werden. Dafür wird von der Steuerung der Befehl an die Servomotoren gegeben die Klemmen einzuziehen. Der
 Roboterarm kann so den Hairpin nach oben aus dem Behältnis heben und diesen nun in die Laseranlage geben.
 
@@ -323,9 +325,14 @@ in die folgenden drei Bereiche unterschieden: die Versorgung, die Steuerung und 
 Zur Bereitstellung der benötigten Energie wird das vorhandene \qty{230}{\volt}-AC-Niederspannungsnetz verwendet (vgl. En1). Mit einem
 AC-DC-Netzteil wird aus der Wechselspannung eine Gleichspannung von \qty{12}{\volt} erzeugt. Außerdem wird für weitere Komponenten eine DC-Spannung von \qty{5}{\volt} benötigt,
 die von einem dedizierten DC-DC-Konverter bereitgestellt wird. Das Gesamtsystem arbeitet mit
-der am Netzteil anliegenden Masse. Für die Auslegung dieser Komponenten bedarf es einer vorherigen
-Leistungsbedarfsanalyse. Diese geht von Spitzenlasten aus, die im Normalbetrieb nicht auftreten, für die Kabel, Sicherungen und
-Konverter trotzdem ausgelegt sein sollten.\todo{Leistungsanalyse?}
+der am Netzteil anliegenden Masse. 
+
+Die Auswahl von Netzteil und Konverter erfolgte anhand der Datenblattwerte der
+eingesetzten Aktuatoren. Maßgeblich ist dabei nicht der Nennstrom, sondern der
+Blockierstrom der Servomotoren. Da die Ablaufsteuerung sequenziell arbeitet und je
+Slave nur eine Zielposition gleichzeitig vorgibt,
+treten diese Spitzenlasten nicht gemeinsam auf. Die bereitgestellte Leistung ist entsprechend
+für den Regelbetrieb ausreichend dimensioniert worden.
 
 \subsubsection{Steuerungstopologie}\label{sec:Microcontroller}
 Die Wahl der Steuerungstopologie wurde durch die in \cref{sec:Steuerungsarchitektur} beschriebenen Vorteile eines hierarchischen
@@ -414,13 +421,13 @@ Servomotor weiter.
 
 \subsubsection{Peripherie}\label{sec:Peripherie}
 \paragraph{Servomotoren} werden in zwei verschiedenen Größen eingesetzt. Die zwei Servomotoren des Vereinzelungssystems verwenden
-kräftigere DM996-Motoren. Für das Fixierungssystem werden drei kleinere SG90-Servomotoren mit einer geringeren Kraft verwendet.
+kräftigere MG996R-Motoren. Für das Fixierungssystem werden drei kleinere SG90-Servomotoren mit einer geringeren Kraft verwendet.
 Die Versorgung erfolgt durch eine GND- und eine \qty{5}{\volt}-Leitung zu jedem Servomotor.
 
 \paragraph{Schrittmotoren} werden im Transportsystem und der Vibrationseinheit als NEMA-17-Motoren ausgeführt.
 
 \paragraph{Prozesssensoren} werden als einfache Reflexlichttaster zum Registrieren eines passierenden Hairpins verwendet.
-Im aktuellen System ist die Platzierung eines solchen Sensors an der Rutsche der Überführung geplant. Es gibt noch
+Im aktuellen System ist die Platzierung eines solchen Sensors an der Rutsche der Überführung vorgesehen. Es gibt noch
 weiter mögliche Positionen für diesen Prozesssensor, wie z. B. an der Vibrationseinheit zur Detektion von
 neu beladenen Hairpins. Auch ist der Einsatz eines kapazitiven Sensors am Fixierungssystem sinnvoll, um die Überprüfung der
 Rutsche zu gewährleisten. Wegen des Integrationsaufwandes, mangelnder Zeit und der ausschließlichen Erfüllung einer Wunschanforderung (Si2),
@@ -430,7 +437,8 @@ werden diese Sensoren zunächst nicht mit realisiert.
 mit dem ESP32 verbunden. Die Knöpfe werden als einfache digitale Eingänge an die GPIO des ESP32 geführt.
 
 \subsubsection{Schaltplan}\label{sec:Schaltplan}
-In \cref{fig:Schaltplan} wird die konkrete Pinbelegung der einzelnen elektrischen Komponenten aufgezeigt. Nach dieser Schematic werden alle Bauteile
+In \cref{fig:Schaltplan} wird die konkrete Pinbelegung der einzelnen elektrischen Komponenten aufgezeigt, wobei die \cref{fig:Signalfluss} als
+grobe Übersicht der einzelnen Verbindungen weiterhin gültig ist. Nach diesem Schalt werden alle elektrischen Bauteile
 miteinander verbunden. Die Mikrocontroller werden jeweils auf einer eigenen Lochrasterplatine mit passend gebogenen
 Leitungen verlötet. Für die Abgänge zu den Motoren werden individuelle Verlängerungskabel mit passendem Stecker verwendet. Für
 die Verbindung der Spannungsversorgung und der I\textsuperscript{2}C-Kommunikation werden Schraubklemmen für das variable Montieren von Kabeln verwendet (vgl. \cref{fig:Lochraster_Nano}).
@@ -461,7 +469,7 @@ Ein empfangener Befehl wird vor der Ausführung gegen diese Grenzen geprüft und
 Motors ausgegeben.
 
 Ziel dieser Aufteilung ist ein Gesamtablauf, der sich aus einzelnen Bausteinen
-zusammensetzen lässt. Dafür stellt die Software vier Modultypen bereit: Die
+zusammensetzen lässt. Dafür stellt der C++ Code vier Modultypen bereit: Die
 Initialisierung fährt die Servomotoren auf eine definierte Ausgangsstellung und
 referenziert die Schrittmotoren über die Endlagenschalter. Positionsblöcke geben
 anschließend für jeden Motor eine Zielposition vor, während Warte- und Sensorblöcke
@@ -471,10 +479,10 @@ Kombination dieser Bausteine entsteht der vollständige Prozessablauf.
 \subsubsection{HMI}\label{sec:HMI}
 Die Bedienung erfolgt über ein TFT-Display mit einer Diagonale von \qty{2.8}{\zoll}
 und fünf Tasten. Vier davon dienen der Navigation in den Richtungen auf, ab, links und
-rechts, die fünfte bestätigt die Auswahl.
+rechts, die fünfte Taste bestätigt eine Auswahl.
 
 Über diese Oberfläche lässt sich ein Prozessablauf aus den in
-\cref{sec:CodeStruktur} beschriebenen Bausteinen zusammenstellen, ohne den Quellcode
+\cref{sec:CodeStruktur} beschriebenen Bausteinen zusammenstellen, ohne den C++ Code
 der Mikrocontroller zu verändern. Ergänzend sind die Vorgabewerte der Motorgrenzen
 einstellbar, sodass sich die Anlage ohne Eingriff in die Software an geänderte
 Randbedingungen anpassen lässt. Aktuell ist dieses System aber nur vorbereitet und
