@@ -39,8 +39,9 @@
 #define TFT_HEIGHT_PX  160
 
 // Rotation: 0/2 = Hochformat (128x160), 1/3 = Querformat (160x128)
-// Fuer die Menuefuehrung nutzen wir Querformat -> mehr Platz fuer Zeilen.
-#define TFT_ROTATION    1
+// Querformat -> mehr Platz fuer Menuezeilen. 3 = um 180 Grad gedreht
+// gegenueber 1 (Einbaulage 02.09.2026).
+#define TFT_ROTATION    3
 
 // SPI-Takt fuers Zeichnen. Bewusst niedrig gesetzt: bei langen Dupont-Kabeln
 // ist die Flankensteilheit das Problem, nicht die Rechenleistung.
@@ -86,21 +87,25 @@
 // Alle Taster schalten gegen GND, interne Pullups sind aktiv
 // -> gedrueckt = LOW. Kein externer Widerstand noetig.
 //
-//   UP     -> GPIO32
-//   DOWN   -> GPIO33
-//   LEFT   -> GPIO25
+//   UP     -> GPIO27
+//   DOWN   -> GPIO32
+//   LEFT   -> GPIO33
 //   RIGHT  -> GPIO26
-//   ENTER  -> GPIO27
+//   ENTER  -> GPIO25
+//
+// Belegung laut Verdrahtung vom 02.09.2026. Alle Taster schalten gegen GND,
+// die internen Pullups sind aktiv -> gedrueckt = LOW, keine externen
+// Widerstaende noetig.
 //
 // Diese GPIOs sind bewusst gewaehlt: keine Strapping-Pins, interne Pullups
 // vorhanden, kein Konflikt mit SPI (18/23/4/16/5) oder I2C (21/22).
 // ============================================================================
 
-#define BTN_PIN_UP     32
-#define BTN_PIN_DOWN   33
-#define BTN_PIN_LEFT   25
+#define BTN_PIN_UP     27
+#define BTN_PIN_DOWN   32
+#define BTN_PIN_LEFT   33
 #define BTN_PIN_RIGHT  26
-#define BTN_PIN_ENTER  27
+#define BTN_PIN_ENTER  25
 
 // Entprellzeit in ms
 #define BTN_DEBOUNCE_MS      30

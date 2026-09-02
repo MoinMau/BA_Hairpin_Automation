@@ -89,6 +89,7 @@ void print_status();                       // Detailierter Report
 // --- Low-Level (für eigene Erweiterungen) ---
 void sendStepperCommand(StepperCommand cmd);
 void sendServoCommand(uint8_t num, uint16_t val);
+bool servo_readAll(uint16_t out[6]);       // liest Ist-Stellwerte vom Nano
 
 // ============================================================================
 
@@ -98,6 +99,12 @@ void printMasterHelp();
 void updateSequence();
 void startHairpinSequence(int program, int runs);
 void startDefaultSequence(int runs);  // Kurzform fuer Programm 1
+
+// --- Zugriff fuer die Menuefuehrung (siehe machine_api.h) ---
+bool sequence_isRunning();
+int  sequence_program();
+int  sequence_remainingRuns();
+void sequence_abort();
 
 void setup() {
   Serial.begin(115200);
@@ -306,6 +313,22 @@ void sendStepperCommand(StepperCommand cmd) {
   } else {
     Serial.println(F("[I2C SUCCESS] Befehl an Uno übertragen."));
   }
+}
+
+// Liest die aktuellen Stellwerte aller sechs Servos vom Nano.
+// Rueckgabe false, wenn der Nano nicht antwortet.
+bool servo_readAll(uint16_t out[6]) {
+  Wire.beginTransmission(I2C_ADDR_NANO);
+  Wire.write(REQ_NANO_SERVOS);
+  if (Wire.endTransmission() != 0) return false;
+
+  Wire.requestFrom((uint8_t)I2C_ADDR_NANO, (uint8_t)sizeof(ServoStatus));
+  if (Wire.available() < (int)sizeof(ServoStatus)) return false;
+
+  ServoStatus st;
+  Wire.readBytes((uint8_t*)&st, sizeof(ServoStatus));
+  for (uint8_t i = 0; i < 6; i++) out[i] = st.current_val[i];
+  return true;
 }
 
 void sendServoCommand(uint8_t num, uint16_t val) {
@@ -564,6 +587,25 @@ void startHairpinSequence(int program, int runs) {
 
 void startDefaultSequence(int runs) {
   startHairpinSequence(1, runs);
+}
+
+// ----------------------------------------------------------------------------
+// Zugriff fuer die Menuefuehrung
+// ----------------------------------------------------------------------------
+// Das Menue soll den Zustand der Ablaufsteuerung lesen und einen Lauf
+// abbrechen koennen, ohne die internen Variablen direkt anzufassen.
+
+bool sequence_isRunning() { return currentSeqState != SEQ_IDLE; }
+int  sequence_program()   { return currentProgram; }
+int  sequence_remainingRuns() { return seqRemainingRuns; }
+
+void sequence_abort() {
+  currentSeqState  = SEQ_IDLE;
+  seqRemainingRuns = 0;
+  axis_stop(AXIS_X);
+  axis_stop(AXIS_Y);
+  axis_stop(AXIS_Z);
+  Serial.println(F("[HALT] Sequenz abgebrochen, alle Achsen gestoppt."));
 }
 
 void updateSequence() {

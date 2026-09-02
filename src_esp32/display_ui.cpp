@@ -6,11 +6,12 @@
 
 #include "config_display.h"
 #include "buttons.h"
+#include "machine_api.h"
 
 // ----------------------------------------------------------------------------
 // Display-Objekt.
 //   Software-SPI: bitbang ueber MOSI/SCLK, ca. 1-2 MHz, sehr tolerant
-//                 gegenueber langen Kabeln. Zur Fehlersuche die erste Wahl.
+//                 gegenueber langen Kabeln.
 //   Hardware-SPI: VSPI, deutlich schneller, aber empfindlicher.
 // ----------------------------------------------------------------------------
 #if TFT_USE_SOFT_SPI
@@ -20,91 +21,376 @@ static Adafruit_ST7735 tft(TFT_PIN_CS, TFT_PIN_DC, TFT_PIN_MOSI,
 static Adafruit_ST7735 tft(TFT_PIN_CS, TFT_PIN_DC, TFT_PIN_RST);
 #endif
 
-// --- Farbschema (an einer Stelle definiert, damit spaeter leicht anpassbar) ---
+// --- Farbschema ---
 #define COL_BG         ST77XX_BLACK
 #define COL_TEXT       ST77XX_WHITE
-#define COL_DIM        0x8410            // mittleres Grau (RGB565)
+#define COL_DIM        0x8410            // mittleres Grau
 #define COL_HEADER_BG  0x001F            // Blau
 #define COL_SEL_BG     0xFD20            // Orange
 #define COL_SEL_TEXT   ST77XX_BLACK
+#define COL_VALUE      0x07FF            // Cyan
 #define COL_OK         ST77XX_GREEN
-#define COL_WARN       ST77XX_RED
+#define COL_ALARM      ST77XX_RED
 
-// --- Layout (Querformat: 160 x 128) ---
+// --- Layout (Querformat 160x128) ---
 static int16_t scrW = 160;
 static int16_t scrH = 128;
 #define HEADER_H   14
 #define FOOTER_H   12
 #define ROW_H      14
-#define PAD_X       4
+#define PAD_X       5
+#define CHAR_W      6    // Breite eines Zeichens bei Textgroesse 1
 
+// ============================================================================
+// MENUE-MODELL
 // ----------------------------------------------------------------------------
-// Screens der Teststufe
-// ----------------------------------------------------------------------------
+// Das gesamte Menue steckt in Tabellen. Ein Renderer und ein Navigationsstack
+// bedienen alle Seiten. Ein neuer Menuepunkt ist damit eine Tabellenzeile.
+// ============================================================================
+
+enum RowType {
+  ROW_SUBMENU,   // ENTER/RIGHT oeffnet eine Unterseite
+  ROW_ACTION,    // ENTER loest eine Aktion aus
+  ROW_VALUE,     // LEFT/RIGHT aendert einen Zahlenwert
+  ROW_CHOICE,    // LEFT/RIGHT waehlt aus einer festen Liste
+  ROW_JOG,       // LEFT/RIGHT verfaehrt die Achse um die Schrittweite
+  ROW_BACK       // ENTER/LEFT geht eine Ebene zurueck
+};
+
+// Seiten-IDs
+enum PageId {
+  PAGE_MAIN = 0,
+  PAGE_PROGRAMS,
+  PAGE_PROGRUN,
+  PAGE_STEPPERS,
+  PAGE_AXIS,
+  PAGE_SERVOS,
+  PAGE_COUNT
+};
+
+// Aktions-IDs
+enum ActionId {
+  ACT_NONE = 0,
+  ACT_SEL_P1, ACT_SEL_P2, ACT_SEL_P3,
+  ACT_START,
+  ACT_AXIS_X, ACT_AXIS_Y, ACT_AXIS_Z,
+  ACT_HOME_ALL, ACT_DRV_ON, ACT_DRV_OFF,
+  ACT_AXIS_HOME, ACT_AXIS_STOP,
+  ACT_SERVO_APPLY, ACT_SERVO_INIT, ACT_SERVO_ALL_OFF,
+  ACT_HALT
+};
+
+struct MenuRow {
+  const char*     label;
+  RowType         type;
+  uint8_t         action;      // ACT_* bzw. PAGE_* bei ROW_SUBMENU
+  uint8_t         arg;         // z.B. Servo-Nummer
+  int32_t*        value;       // ROW_VALUE / ROW_CHOICE
+  int32_t         vmin, vmax, vstep;
+  const int32_t*  choices;     // ROW_CHOICE
+  uint8_t         choiceCount;
+};
+
+struct MenuPage {
+  const char*    title;        // NULL -> dynamischer Titel
+  const MenuRow* rows;
+  uint8_t        count;
+};
+
+// --- Kuerzel, damit die Tabellen lesbar bleiben ---
+#define R_SUB(lbl, page)                 { lbl, ROW_SUBMENU, page, 0, nullptr, 0,0,0, nullptr, 0 }
+#define R_ACT(lbl, act)                  { lbl, ROW_ACTION,  act,  0, nullptr, 0,0,0, nullptr, 0 }
+#define R_ACTA(lbl, act, a)              { lbl, ROW_ACTION,  act,  a, nullptr, 0,0,0, nullptr, 0 }
+#define R_VAL(lbl, var, lo, hi, st)      { lbl, ROW_VALUE, ACT_NONE, 0, &(var), lo, hi, st, nullptr, 0 }
+#define R_VALA(lbl, var, lo, hi, st, act, a) { lbl, ROW_VALUE, act, a, &(var), lo, hi, st, nullptr, 0 }
+#define R_CHO(lbl, var, arr)             { lbl, ROW_CHOICE, ACT_NONE, 0, &(var), 0, (int32_t)(sizeof(arr)/sizeof(arr[0]))-1, 1, arr, sizeof(arr)/sizeof(arr[0]) }
+#define R_JOG(lbl)                       { lbl, ROW_JOG, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
+#define R_BACK()                         { "Zurueck", ROW_BACK, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
+
+// ============================================================================
+// EINSTELLBARE WERTE
+// ============================================================================
+
+static int32_t progRuns   = 1;      // Durchlaeufe des gewaehlten Programms
+static int32_t jogStepIdx = 2;      // Index in JOG_STEPS -> 100 Steps
+static int32_t jogSpeed   = 800;    // Steps/s fuer Handfahrt
+static int32_t servoVal[6] = { 500, 500, 500, 500, 500, 500 };
+
+static const int32_t JOG_STEPS[] = { 1, 10, 100, 1000 };
+
+static uint8_t selProgram = 1;      // im Programm-Menue gewaehltes Programm
+static uint8_t curAxis    = AXIS_X; // im Achs-Menue gewaehlte Achse
+
+// ============================================================================
+// SEITEN-TABELLEN
+// ============================================================================
+
+// --- Hauptmenue ---
+static const MenuRow ROWS_MAIN[] = {
+  R_SUB("Programme",      PAGE_PROGRAMS),
+  R_SUB("Schrittmotoren", PAGE_STEPPERS),
+  R_SUB("Servomotoren",   PAGE_SERVOS),
+  R_ACT("NOT-HALT",       ACT_HALT)
+};
+
+// --- Programme ---
+static const MenuRow ROWS_PROGRAMS[] = {
+  R_ACT("Programm 1  Hairpin", ACT_SEL_P1),
+  R_ACT("Programm 2",          ACT_SEL_P2),
+  R_ACT("Programm 3",          ACT_SEL_P3),
+  R_BACK()
+};
+
+// --- Start-Seite eines Programms (Titel wird zur Laufzeit gesetzt) ---
+static const MenuRow ROWS_PROGRUN[] = {
+  R_VAL("Durchlaeufe", progRuns, 1, 99, 1),
+  R_ACT("START",       ACT_START),
+  R_BACK()
+};
+
+// --- Schrittmotoren ---
+static const MenuRow ROWS_STEPPERS[] = {
+  R_ACT("Achse X",            ACT_AXIS_X),
+  R_ACT("Achse Y",            ACT_AXIS_Y),
+  R_ACT("Achse Z",            ACT_AXIS_Z),
+  R_ACT("Referenzfahrt alle", ACT_HOME_ALL),
+  R_ACT("Treiber EIN",        ACT_DRV_ON),
+  R_ACT("Treiber AUS",        ACT_DRV_OFF),
+  R_BACK()
+};
+
+// --- Einzelne Achse (Titel wird zur Laufzeit gesetzt) ---
+static const MenuRow ROWS_AXIS[] = {
+  R_ACT("Referenzfahrt",  ACT_AXIS_HOME),
+  R_CHO("Schrittweite",   jogStepIdx, JOG_STEPS),
+  R_VAL("Geschw. St/s",   jogSpeed, 50, 3000, 50),
+  R_JOG("Fahren   - / +"),
+  R_ACT("STOPP",          ACT_AXIS_STOP),
+  R_BACK()
+};
+
+// --- Servomotoren ---
+static const MenuRow ROWS_SERVOS[] = {
+  R_VALA("Servo 0  D7",  servoVal[0], 0, 1000, 10, ACT_SERVO_APPLY, 0),
+  R_VALA("Servo 1  D8",  servoVal[1], 0, 1000, 10, ACT_SERVO_APPLY, 1),
+  R_VALA("Servo 2  D9",  servoVal[2], 0, 1000, 10, ACT_SERVO_APPLY, 2),
+  R_VALA("Servo 3  D10", servoVal[3], 0, 1000, 10, ACT_SERVO_APPLY, 3),
+  R_VALA("Servo 4  D11", servoVal[4], 0, 1000, 10, ACT_SERVO_APPLY, 4),
+  R_VALA("Servo 5  D12", servoVal[5], 0, 1000, 10, ACT_SERVO_APPLY, 5),
+  R_ACT("Grundstellung", ACT_SERVO_INIT),
+  R_BACK()
+};
+
+static const MenuPage PAGES[PAGE_COUNT] = {
+  { "Hauptmenue",     ROWS_MAIN,     sizeof(ROWS_MAIN)     / sizeof(MenuRow) },
+  { "Programme",      ROWS_PROGRAMS, sizeof(ROWS_PROGRAMS) / sizeof(MenuRow) },
+  { nullptr,          ROWS_PROGRUN,  sizeof(ROWS_PROGRUN)  / sizeof(MenuRow) },
+  { "Schrittmotoren", ROWS_STEPPERS, sizeof(ROWS_STEPPERS) / sizeof(MenuRow) },
+  { nullptr,          ROWS_AXIS,     sizeof(ROWS_AXIS)     / sizeof(MenuRow) },
+  { "Servomotoren",   ROWS_SERVOS,   sizeof(ROWS_SERVOS)   / sizeof(MenuRow) }
+};
+
+// ============================================================================
+// ZUSTAND DER OBERFLAECHE
+// ============================================================================
+
 enum UiScreen {
-  SCR_SPLASH,        // Startbild
-  SCR_MENU,          // Hauptliste
-  SCR_LAYOUT_TEST,   // Rahmen/Raster -> prueft Offsets und Bildgrenzen
-  SCR_COLOR_TEST,    // Farbbalken    -> prueft Tab-Typ / Farbreihenfolge
-  SCR_BUTTON_TEST,   // Live-Anzeige aller Tasten
-  SCR_VALUE_DEMO,    // Wert mit LEFT/RIGHT aendern (Vorschau Parameter-Editor)
-  SCR_INFO
+  SCR_SPLASH,    // Startbild
+  SCR_PAGE,      // tabellengetriebene Menueseite
+  SCR_RUNNING,   // laufende Sequenz
+  SCR_HALTED     // Bestaetigung nach NOT-HALT
 };
 
 static UiScreen currentScreen = SCR_SPLASH;
 static unsigned long splashStart = 0;
-#define SPLASH_MS 2500
-static bool     needsRedraw   = true;   // Vollbild neu zeichnen
-static bool     needsPartial  = false;  // nur veraenderliche Bereiche
+#define SPLASH_MS 2000
 
-// --- Hauptmenue ---
-static const char* MENU_ITEMS[] = {
-  "Layout-Test",
-  "Farb-Test",
-  "Tasten-Test",
-  "Wert-Demo",
-  "Info"
-};
-static const uint8_t MENU_COUNT = sizeof(MENU_ITEMS) / sizeof(MENU_ITEMS[0]);
-static uint8_t menuIndex = 0;
+static uint8_t curPage   = PAGE_MAIN;
+static uint8_t curRow    = 0;
+static uint8_t scrollTop = 0;
+static char    dynTitle[26] = "";
 
-// --- Zustand Wert-Demo ---
-static int demoValue = 500;   // 0..1000, Schrittweite 10 (wie Servo-Stellwert)
+// Navigationsstack: merkt sich Seite und Cursorposition der Ebene darueber
+struct NavEntry { uint8_t page; uint8_t row; uint8_t top; };
+static NavEntry navStack[4];
+static uint8_t  navDepth = 0;
 
-// --- Zustand Tasten-Test ---
-static ButtonId lastEvent      = BTN_NONE;
-static uint32_t eventCounter   = 0;
-static uint8_t  lastDrawnMask  = 0xFF;  // erzwingt ersten Redraw
-static unsigned long enterHoldStart = 0; // fuer "ENTER halten = zurueck"
+static bool needsRedraw  = true;   // Vollbild
+static bool needsRows    = false;  // nur die Zeilen
+static bool needsHeader  = false;  // nur die Kopfzeile
 
-// ----------------------------------------------------------------------------
-// Zeichen-Helfer
-// ----------------------------------------------------------------------------
+// Zwischengespeicherter Maschinenstatus. Wird getaktet geholt, damit das
+// Menue den I2C-Bus nicht zusaetzlich belastet.
+static StepperStatus mStatus = { 0, 0, 0, 0, 0 };
+static unsigned long mStatusLast = 0;
+#define STATUS_POLL_MS 300
 
+// NOT-HALT als globale Geste: LEFT gedrueckt halten wirkt auf jedem Bildschirm
+static unsigned long leftHoldStart = 0;
+#define HALT_HOLD_MS 1500
+
+// ============================================================================
+// ZEICHEN-HELFER
+// ============================================================================
+
+static uint8_t visibleRows() {
+  return (scrH - HEADER_H - FOOTER_H) / ROW_H;
+}
+
+static void drawTextRight(const char* s, int16_t rightX, int16_t y, uint16_t col) {
+  int16_t w = (int16_t)strlen(s) * CHAR_W;
+  tft.setTextColor(col);
+  tft.setCursor(rightX - w, y);
+  tft.print(s);
+}
+
+static void pollStatus(bool force = false) {
+  unsigned long now = millis();
+  if (!force && (now - mStatusLast) < STATUS_POLL_MS) return;
+  mStatusLast = now;
+  mStatus = get_stepper_status();
+}
+
+// Rechter Teil der Kopfzeile. Auf der Achsseite ist die Istposition die
+// wichtigste Information, sonst der Gesamtzustand der Maschine.
+static void buildStatusText(char* out, size_t n) {
+  if (currentScreen == SCR_PAGE && curPage == PAGE_AXIS) {
+    int32_t pos = (curAxis == AXIS_X) ? mStatus.current_pos_x
+                : (curAxis == AXIS_Y) ? mStatus.current_pos_y
+                                      : mStatus.current_pos_z;
+    bool busy = (mStatus.axis_busy & (1 << curAxis)) != 0;
+    snprintf(out, n, "%ld%s", (long)pos, busy ? " >" : "");
+    return;
+  }
+  if (sequence_isRunning()) {
+    snprintf(out, n, "P%d RUN", sequence_program());
+  } else if (mStatus.axis_busy & 0x07) {
+    snprintf(out, n, "%c%c%c",
+             (mStatus.axis_busy & BUSY_X) ? 'X' : '.',
+             (mStatus.axis_busy & BUSY_Y) ? 'Y' : '.',
+             (mStatus.axis_busy & BUSY_Z) ? 'Z' : '.');
+  } else {
+    snprintf(out, n, "BEREIT");
+  }
+}
+
+// Zuletzt gezeichneter Status - damit die Kopfzeile nur bei echter
+// Aenderung neu gezeichnet wird und nicht flackert.
+static char lastStatusText[14] = "";
+
+// Kopfzeile: links der Seitentitel, rechts der Live-Zustand
 static void drawHeader(const char* title) {
   tft.fillRect(0, 0, scrW, HEADER_H, COL_HEADER_BG);
-  tft.setTextColor(COL_TEXT);
   tft.setTextSize(1);
+  tft.setTextColor(COL_TEXT);
   tft.setCursor(PAD_X, 4);
   tft.print(title);
+
+  buildStatusText(lastStatusText, sizeof(lastStatusText));
+  drawTextRight(lastStatusText, scrW - PAD_X, 4, COL_TEXT);
 }
 
 static void drawFooter(const char* hint) {
   tft.fillRect(0, scrH - FOOTER_H, scrW, FOOTER_H, COL_BG);
   tft.drawFastHLine(0, scrH - FOOTER_H, scrW, COL_DIM);
-  tft.setTextColor(COL_DIM);
   tft.setTextSize(1);
+  tft.setTextColor(COL_DIM);
   tft.setCursor(PAD_X, scrH - FOOTER_H + 3);
   tft.print(hint);
 }
 
-static void clearBody() {
-  tft.fillRect(0, HEADER_H, scrW, scrH - HEADER_H - FOOTER_H, COL_BG);
+// Position in der Liste, rechts in der Fusszeile. Steht bewusst dort und
+// nicht neben den Zeilen, damit nichts die Werte ueberdeckt.
+static void drawScrollMark() {
+  const MenuPage& p = PAGES[curPage];
+  if (p.count <= visibleRows()) return;
+  char m[10];
+  snprintf(m, sizeof(m), "%u/%u", (unsigned)(curRow + 1), (unsigned)p.count);
+  drawTextRight(m, scrW - PAD_X, scrH - FOOTER_H + 3, COL_DIM);
 }
 
-// ----------------------------------------------------------------------------
-// Screen: Startbild
-// ----------------------------------------------------------------------------
+// Rechts stehender Wert einer Zeile als Text aufbereiten
+static void rowValueText(const MenuRow& r, char* out, size_t n) {
+  switch (r.type) {
+    case ROW_VALUE:
+      snprintf(out, n, "%ld", (long)*r.value);
+      break;
+    case ROW_CHOICE:
+      snprintf(out, n, "%ld", (long)r.choices[*r.value]);
+      break;
+    case ROW_JOG:
+      snprintf(out, n, "%ld", (long)JOG_STEPS[jogStepIdx]);
+      break;
+    case ROW_SUBMENU:
+      snprintf(out, n, ">");
+      break;
+    default:
+      out[0] = '\0';
+      break;
+  }
+}
+
+static void drawRows() {
+  const MenuPage& p = PAGES[curPage];
+  uint8_t vis = visibleRows();
+
+  // Sichtfenster nachfuehren
+  if (curRow < scrollTop)               scrollTop = curRow;
+  if (curRow >= scrollTop + vis)        scrollTop = curRow - vis + 1;
+  if (p.count <= vis)                   scrollTop = 0;
+
+  tft.fillRect(0, HEADER_H, scrW, scrH - HEADER_H - FOOTER_H, COL_BG);
+  tft.setTextSize(1);
+
+  for (uint8_t i = 0; i < vis && (scrollTop + i) < p.count; i++) {
+    uint8_t        idx = scrollTop + i;
+    const MenuRow& r   = p.rows[idx];
+    int16_t        y   = HEADER_H + i * ROW_H;
+    bool           sel = (idx == curRow);
+
+    if (sel) tft.fillRect(0, y, scrW, ROW_H - 1, COL_SEL_BG);
+
+    // NOT-HALT faellt auch unmarkiert auf
+    uint16_t labelCol = sel ? COL_SEL_TEXT
+                            : (r.action == ACT_HALT && r.type == ROW_ACTION
+                               ? COL_ALARM : COL_TEXT);
+    tft.setTextColor(labelCol);
+    tft.setCursor(PAD_X, y + 3);
+    tft.print(r.label);
+
+    char val[12];
+    rowValueText(r, val, sizeof(val));
+    if (val[0]) drawTextRight(val, scrW - PAD_X, y + 3,
+                              sel ? COL_SEL_TEXT : COL_VALUE);
+  }
+
+}
+
+// Fusszeile passend zum markierten Zeilentyp
+static const char* footerHint() {
+  const MenuRow& r = PAGES[curPage].rows[curRow];
+  switch (r.type) {
+    case ROW_VALUE:
+    case ROW_CHOICE: return "L/R aendern  ENTER ok";
+    case ROW_JOG:    return "L/R = Achse verfahren";
+    case ROW_SUBMENU:return "ENTER oeffnen";
+    case ROW_BACK:   return "ENTER zurueck";
+    default:         return "ENTER ausloesen";
+  }
+}
+
+static void drawPage() {
+  const MenuPage& p = PAGES[curPage];
+  drawHeader(p.title ? p.title : dynTitle);
+  drawRows();
+  drawFooter(footerHint());
+  drawScrollMark();
+}
+
+// ============================================================================
+// WEITERE BILDSCHIRME
+// ============================================================================
+
 static void drawSplash() {
   tft.fillScreen(COL_BG);
   tft.setTextColor(COL_TEXT);
@@ -114,290 +400,256 @@ static void drawSplash() {
   tft.setTextSize(1);
   tft.setTextColor(COL_SEL_BG);
   tft.setCursor(10, 58);
-  tft.print("Display-Teststufe v0.1");
+  tft.print("Vereinzelung  v0.2");
   tft.setTextColor(COL_DIM);
   tft.setCursor(10, 78);
   tft.print("Taste druecken...");
 }
 
-// ----------------------------------------------------------------------------
-// Screen: Hauptmenue
-// ----------------------------------------------------------------------------
-static void drawMenu() {
-  drawHeader("BA Hairpin  -  Menue");
-  clearBody();
+static int lastRunsShown = -1;
 
-  for (uint8_t i = 0; i < MENU_COUNT; i++) {
-    int16_t y = HEADER_H + 2 + i * ROW_H;
-    bool sel = (i == menuIndex);
-
-    if (sel) {
-      tft.fillRect(2, y - 1, scrW - 4, ROW_H - 1, COL_SEL_BG);
-      tft.setTextColor(COL_SEL_TEXT);
-    } else {
-      tft.setTextColor(COL_TEXT);
-    }
-    tft.setTextSize(1);
-    tft.setCursor(PAD_X + 4, y + 3);
-    tft.print(sel ? ">" : " ");
-    tft.print(" ");
-    tft.print(MENU_ITEMS[i]);
-  }
-  drawFooter("UP/DOWN  ENTER=oeffnen");
-}
-
-// ----------------------------------------------------------------------------
-// Screen: Layout-Test
-// Zeigt Rahmen, Ecken und Raster. Damit laesst sich pruefen, ob das Panel
-// vollstaendig angesteuert wird oder ob ein Offset (falscher Tab-Typ) vorliegt.
-// ----------------------------------------------------------------------------
-static void drawLayoutTest() {
+static void drawRunningStatic() {
   tft.fillScreen(COL_BG);
-
-  // Aeusserer Rahmen: muss exakt am Bildrand liegen
-  tft.drawRect(0, 0, scrW, scrH, ST77XX_WHITE);
-  tft.drawRect(1, 1, scrW - 2, scrH - 2, ST77XX_WHITE);
-
-  // Eckmarker: alle vier muessen vollstaendig sichtbar sein
-  tft.fillRect(2, 2, 8, 8, ST77XX_RED);
-  tft.fillRect(scrW - 10, 2, 8, 8, ST77XX_GREEN);
-  tft.fillRect(2, scrH - 10, 8, 8, ST77XX_BLUE);
-  tft.fillRect(scrW - 10, scrH - 10, 8, 8, ST77XX_YELLOW);
-
-  // Diagonalen zur Mittenkontrolle
-  tft.drawLine(0, 0, scrW - 1, scrH - 1, COL_DIM);
-  tft.drawLine(scrW - 1, 0, 0, scrH - 1, COL_DIM);
-
+  drawHeader("LAEUFT");
   tft.setTextColor(COL_TEXT);
-  tft.setTextSize(1);
-  tft.setCursor(16, 30);
-  tft.print("Rahmen sichtbar?");
-  tft.setCursor(16, 42);
-  tft.print("4 Ecken sichtbar?");
-
   tft.setTextSize(2);
-  tft.setCursor(16, 60);
-  tft.print("160x128");
-
+  tft.setCursor(PAD_X, HEADER_H + 10);
+  tft.print("Programm ");
+  tft.print(sequence_program());
   tft.setTextSize(1);
   tft.setTextColor(COL_DIM);
-  tft.setCursor(16, 86);
-  tft.print("LEFT = zurueck");
+  tft.setCursor(PAD_X, HEADER_H + 36);
+  tft.print("Verbleibende Laeufe:");
+  drawFooter("ENTER = NOT-HALT");
+  lastRunsShown = -1;
 }
 
-// ----------------------------------------------------------------------------
-// Screen: Farb-Test
-// Farbbalken mit Beschriftung. Wenn Rot und Blau vertauscht erscheinen,
-// muss in config_display.h ein anderer TFT_TAB_TYPE gewaehlt werden.
-// ----------------------------------------------------------------------------
-static void drawColorTest() {
-  drawHeader("Farb-Test");
-  clearBody();
+static void drawRunningDynamic() {
+  int runs = sequence_remainingRuns();
+  if (runs == lastRunsShown) return;
+  lastRunsShown = runs;
 
-  struct { uint16_t col; const char* name; } bars[] = {
-    { ST77XX_RED,     "ROT"    },
-    { ST77XX_GREEN,   "GRUEN"  },
-    { ST77XX_BLUE,    "BLAU"   },
-    { ST77XX_YELLOW,  "GELB"   },
-    { ST77XX_CYAN,    "CYAN"   },
-    { ST77XX_MAGENTA, "MAGENTA"}
-  };
-  const uint8_t n = sizeof(bars) / sizeof(bars[0]);
-  int16_t top = HEADER_H + 2;
-  int16_t h   = (scrH - HEADER_H - FOOTER_H - 4) / n;
-
-  for (uint8_t i = 0; i < n; i++) {
-    int16_t y = top + i * h;
-    tft.fillRect(0, y, 90, h - 1, bars[i].col);
-    tft.setTextColor(COL_TEXT);
-    tft.setTextSize(1);
-    tft.setCursor(96, y + (h - 8) / 2);
-    tft.print(bars[i].name);
-  }
-  drawFooter("Farbe = Text? LEFT=zurueck");
-}
-
-// ----------------------------------------------------------------------------
-// Screen: Tasten-Test
-// Zeigt live, welche Taste gedrueckt ist. Deckt Verdrahtungsfehler auf.
-// ----------------------------------------------------------------------------
-static void drawButtonTestStatic() {
-  drawHeader("Tasten-Test");
-  clearBody();
-  drawFooter("ENTER 1.5s halten = zurueck");
-  lastDrawnMask = 0xFF;  // erzwingt Neuzeichnen der dynamischen Felder
-}
-
-static void drawButtonTestDynamic() {
-  // Aktuelle Tastenmaske bilden
-  uint8_t mask = 0;
-  for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    if (buttons_isDown((ButtonId)i)) mask |= (1 << i);
-  }
-  if (mask == lastDrawnMask) return;   // nichts veraendert -> kein Flackern
-  lastDrawnMask = mask;
-
-  const char* labels[BTN_COUNT] = { "UP", "DOWN", "LEFT", "RIGHT", "ENTER" };
-  int16_t top = HEADER_H + 4;
-
-  for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    int16_t y   = top + i * 15;
-    bool    on  = (mask & (1 << i)) != 0;
-
-    tft.fillRect(PAD_X, y, 60, 13, COL_BG);
-    tft.setTextColor(on ? COL_OK : COL_DIM);
-    tft.setTextSize(1);
-    tft.setCursor(PAD_X, y + 3);
-    tft.print(labels[i]);
-
-    // Statusbalken rechts daneben
-    tft.fillRect(70, y, 50, 12, on ? COL_OK : 0x2104);
-  }
-
-  // Zaehler der erkannten Ereignisse
-  tft.fillRect(124, top, 34, 40, COL_BG);
-  tft.setTextColor(COL_TEXT);
-  tft.setCursor(126, top + 2);
-  tft.print("EVT");
-  tft.setCursor(126, top + 14);
-  tft.print(eventCounter);
-}
-
-// ----------------------------------------------------------------------------
-// Screen: Wert-Demo
-// Vorschau auf den spaeteren Parameter-Editor: LEFT/RIGHT aendert den Wert.
-// ----------------------------------------------------------------------------
-static void drawValueDemoStatic() {
-  drawHeader("Wert-Demo");
-  clearBody();
-  tft.setTextColor(COL_DIM);
-  tft.setTextSize(1);
-  tft.setCursor(PAD_X, HEADER_H + 6);
-  tft.print("Servo-Stellwert (0-1000)");
-  drawFooter("LEFT/RIGHT +-10  ENTER=OK");
-}
-
-static void drawValueDemoDynamic() {
-  // Zahl
-  tft.fillRect(PAD_X, HEADER_H + 22, scrW - 2 * PAD_X, 24, COL_BG);
-  tft.setTextColor(COL_TEXT);
+  tft.fillRect(PAD_X, HEADER_H + 48, 60, 22, COL_BG);
+  tft.setTextColor(COL_OK);
   tft.setTextSize(3);
-  tft.setCursor(PAD_X + 20, HEADER_H + 22);
-  tft.print(demoValue);
-
-  // Balken als visuelle Rueckmeldung
-  int16_t barX = PAD_X, barY = HEADER_H + 56, barW = scrW - 2 * PAD_X, barH = 12;
-  tft.drawRect(barX, barY, barW, barH, COL_DIM);
-  int16_t fill = (int32_t)(barW - 2) * demoValue / 1000;
-  tft.fillRect(barX + 1, barY + 1, fill, barH - 2, COL_SEL_BG);
-  tft.fillRect(barX + 1 + fill, barY + 1, (barW - 2) - fill, barH - 2, COL_BG);
+  tft.setCursor(PAD_X, HEADER_H + 48);
+  tft.print(runs);
 }
 
-// ----------------------------------------------------------------------------
-// Screen: Info
-// ----------------------------------------------------------------------------
-static void drawInfo() {
-  drawHeader("Info");
-  clearBody();
+static void drawHalted() {
+  tft.fillScreen(COL_ALARM);
+  tft.setTextColor(ST77XX_WHITE);
+  tft.setTextSize(2);
+  tft.setCursor(14, 28);
+  tft.print("NOT-HALT");
   tft.setTextSize(1);
-  tft.setTextColor(COL_TEXT);
-
-  int16_t y = HEADER_H + 4;
-  tft.setCursor(PAD_X, y);      tft.print("BA Hairpin Automation");
-  y += 12;
-  tft.setTextColor(COL_DIM);
-  tft.setCursor(PAD_X, y);      tft.print("UI-Teststufe v0.1");
-  y += 14;
-  tft.setTextColor(COL_TEXT);
-  tft.setCursor(PAD_X, y);      tft.print("TFT : ST7735 128x160");
-  y += 11;
-  tft.setCursor(PAD_X, y);      tft.print("SPI : 18/23 CS5 DC4 RS16");
-  y += 11;
-  tft.setCursor(PAD_X, y);      tft.print("BTN : 32/33/25/26/27");
-  y += 11;
-  tft.setCursor(PAD_X, y);      tft.print("I2C : 21/22 (unberuehrt)");
-
-  drawFooter("LEFT = zurueck");
+  tft.setCursor(14, 56);
+  tft.print("Sequenz abgebrochen,");
+  tft.setCursor(14, 68);
+  tft.print("alle Achsen gestoppt.");
+  tft.setTextColor(0xFFE0);
+  tft.setCursor(14, 92);
+  tft.print("ENTER = weiter");
 }
 
-// ----------------------------------------------------------------------------
-// Navigation
-// ----------------------------------------------------------------------------
-static void openScreen(UiScreen s) {
-  currentScreen = s;
+// ============================================================================
+// NAVIGATION UND AKTIONEN
+// ============================================================================
+
+static void setDynTitle(const char* t) {
+  strncpy(dynTitle, t, sizeof(dynTitle) - 1);
+  dynTitle[sizeof(dynTitle) - 1] = '\0';
+}
+
+// Ist-Stellwerte vom Nano holen, damit die Servo-Seite nicht Werte anzeigt,
+// die nie gesendet wurden. Antwortet der Nano nicht, bleiben die bisherigen
+// Werte stehen - besser als eine Null anzuzeigen, die nicht stimmt.
+static void refreshServoValues() {
+  uint16_t v[6];
+  if (!servo_readAll(v)) {
+    Serial.println(F("[UI] Servo-Istwerte: Nano antwortet nicht."));
+    return;
+  }
+  for (uint8_t i = 0; i < 6; i++) servoVal[i] = (int32_t)v[i];
+}
+
+static void openPage(uint8_t page, bool push = true) {
+  if (push && navDepth < (sizeof(navStack) / sizeof(navStack[0]))) {
+    navStack[navDepth++] = { curPage, curRow, scrollTop };
+  }
+  if (page == PAGE_SERVOS) refreshServoValues();
+
+  curPage     = page;
+  curRow      = 0;
+  scrollTop   = 0;
+  currentScreen = SCR_PAGE;
+  needsRedraw = true;
+}
+
+static void goBack() {
+  if (navDepth == 0) return;
+  NavEntry e = navStack[--navDepth];
+  curPage     = e.page;
+  curRow      = e.row;
+  scrollTop   = e.top;
+  currentScreen = SCR_PAGE;
+  needsRedraw = true;
+}
+
+static void doHalt() {
+  sequence_abort();
+  currentScreen = SCR_HALTED;
   needsRedraw   = true;
-  Serial.print(F("[UI] Screen -> ")); Serial.println((int)s);
 }
 
-static void handleMenuInput(ButtonId ev) {
-  switch (ev) {
-    case BTN_UP:
-      menuIndex = (menuIndex == 0) ? (MENU_COUNT - 1) : (menuIndex - 1);
-      needsRedraw = true;
+static void runAction(uint8_t act, uint8_t arg) {
+  char buf[26];
+  switch (act) {
+
+    // --- Programmauswahl ---
+    case ACT_SEL_P1: case ACT_SEL_P2: case ACT_SEL_P3:
+      selProgram = (act == ACT_SEL_P1) ? 1 : (act == ACT_SEL_P2) ? 2 : 3;
+      snprintf(buf, sizeof(buf), "Programm %d", selProgram);
+      setDynTitle(buf);
+      openPage(PAGE_PROGRUN);
       break;
-    case BTN_DOWN:
-      menuIndex = (menuIndex + 1) % MENU_COUNT;
-      needsRedraw = true;
+
+    case ACT_START:
+      startHairpinSequence(selProgram, (int)progRuns);
+      currentScreen = SCR_RUNNING;
+      needsRedraw   = true;
       break;
-    case BTN_RIGHT:
-    case BTN_ENTER:
-      switch (menuIndex) {
-        case 0: openScreen(SCR_LAYOUT_TEST); break;
-        case 1: openScreen(SCR_COLOR_TEST);  break;
-        case 2: openScreen(SCR_BUTTON_TEST); break;
-        case 3: openScreen(SCR_VALUE_DEMO);  break;
-        case 4: openScreen(SCR_INFO);        break;
+
+    // --- Achsauswahl ---
+    case ACT_AXIS_X: case ACT_AXIS_Y: case ACT_AXIS_Z:
+      curAxis = (act == ACT_AXIS_X) ? AXIS_X : (act == ACT_AXIS_Y) ? AXIS_Y : AXIS_Z;
+      snprintf(buf, sizeof(buf), "Achse %c",
+               (curAxis == AXIS_X) ? 'X' : (curAxis == AXIS_Y) ? 'Y' : 'Z');
+      setDynTitle(buf);
+      openPage(PAGE_AXIS);
+      break;
+
+    case ACT_HOME_ALL:
+      axis_home(AXIS_X); axis_home(AXIS_Y); axis_home(AXIS_Z);
+      break;
+
+    case ACT_DRV_ON:  axis_enable();  break;
+    case ACT_DRV_OFF: axis_disable(); break;
+
+    case ACT_AXIS_HOME: axis_home(curAxis); break;
+    case ACT_AXIS_STOP: axis_stop(curAxis); break;
+
+    // --- Servos ---
+    case ACT_SERVO_APPLY:
+      servo_set(arg, (uint16_t)servoVal[arg]);
+      break;
+
+    case ACT_SERVO_INIT: {
+      // Grundstellung wie am Anfang von Programm 1
+      static const int32_t INIT_VALS[6] = { 1000, 100, 0, 800, 500, 500 };
+      for (uint8_t i = 0; i < 6; i++) {
+        servoVal[i] = INIT_VALS[i];
+        servo_set(i, (uint16_t)INIT_VALS[i]);
       }
+      needsRedraw = true;
+      break;
+    }
+
+    case ACT_HALT: doHalt(); break;
+
+    default: break;
+  }
+}
+
+// Wert einer Zeile veraendern. dir ist -1 oder +1.
+static void changeRow(const MenuRow& r, int dir) {
+  switch (r.type) {
+    case ROW_VALUE: {
+      int32_t v = *r.value + dir * r.vstep;
+      if (v < r.vmin) v = r.vmin;
+      if (v > r.vmax) v = r.vmax;
+      if (v == *r.value) return;
+      *r.value = v;
+      if (r.action != ACT_NONE) runAction(r.action, r.arg);
+      needsRows = true;
+      break;
+    }
+    case ROW_CHOICE: {
+      int32_t v = *r.value + dir;
+      if (v < 0) v = 0;
+      if (v > r.vmax) v = r.vmax;
+      if (v == *r.value) return;
+      *r.value = v;
+      needsRows = true;
+      break;
+    }
+    case ROW_JOG:
+      axis_rel(curAxis, dir * JOG_STEPS[jogStepIdx], (int16_t)jogSpeed);
       break;
     default:
       break;
   }
 }
 
-static void handleValueDemoInput(ButtonId ev) {
-  if (ev == BTN_RIGHT) {
-    demoValue = min(1000, demoValue + 10);
-    needsPartial = true;
-  } else if (ev == BTN_LEFT) {
-    demoValue = max(0, demoValue - 10);
-    needsPartial = true;
-  } else if (ev == BTN_UP) {
-    demoValue = min(1000, demoValue + 100);
-    needsPartial = true;
-  } else if (ev == BTN_DOWN) {
-    demoValue = max(0, demoValue - 100);
-    needsPartial = true;
-  } else if (ev == BTN_ENTER) {
-    Serial.print(F("[UI] Wert bestaetigt: ")); Serial.println(demoValue);
-    openScreen(SCR_MENU);
+static bool rowConsumesLeftRight(const MenuRow& r) {
+  return r.type == ROW_VALUE || r.type == ROW_CHOICE || r.type == ROW_JOG;
+}
+
+static void handlePageInput(ButtonId ev) {
+  const MenuPage& p = PAGES[curPage];
+  const MenuRow&  r = p.rows[curRow];
+
+  switch (ev) {
+    case BTN_UP:
+      curRow    = (curRow == 0) ? (p.count - 1) : (curRow - 1);
+      needsRows = true;
+      break;
+
+    case BTN_DOWN:
+      curRow    = (curRow + 1) % p.count;
+      needsRows = true;
+      break;
+
+    case BTN_LEFT:
+      if (rowConsumesLeftRight(r)) changeRow(r, -1);
+      else                        goBack();
+      break;
+
+    case BTN_RIGHT:
+      if (rowConsumesLeftRight(r))       changeRow(r, +1);
+      else if (r.type == ROW_SUBMENU)    openPage(r.action);
+      break;
+
+    case BTN_ENTER:
+      if (r.type == ROW_SUBMENU)     openPage(r.action);
+      else if (r.type == ROW_BACK)   goBack();
+      else if (r.type == ROW_ACTION) runAction(r.action, r.arg);
+      break;
+
+    default:
+      break;
   }
 }
 
-// ----------------------------------------------------------------------------
-// Oeffentliche API
-// ----------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
-// Panel-Initialisierung
-// ----------------------------------------------------------------------------
-// Die Bibliothek fahert ihre Init-Sequenz fest mit 32 MHz (SPI_DEFAULT_FREQ in
+// ============================================================================
+// PANEL-INITIALISIERUNG
+// ============================================================================
+// Die Bibliothek faehrt ihre Init-Sequenz fest mit 32 MHz (SPI_DEFAULT_FREQ in
 // Adafruit_ST77xx.cpp) - das laesst sich von aussen nicht setzen. Bei langen
 // Kabeln kommen diese Befehle verstuemmelt an und das Panel bleibt schwarz.
 // Deshalb wird direkt danach auf TFT_SPI_HZ heruntergeschaltet und die
 // entscheidenden Einschaltbefehle werden noch einmal gesendet.
 //
 // Die delay() hier sind Datenblatt-Wartezeiten des ST7735 und laufen
-// ausschliesslich einmalig in setup(), bevor die Maschine arbeitet. Die
-// Regel "kein delay() in der Ablaufsteuerung" bleibt davon unberuehrt.
+// ausschliesslich einmalig in setup(), bevor die Maschine arbeitet.
 static void tftInitPanel(uint8_t tabType) {
-  tft.initR(tabType);            // 32 MHz, kann bei langen Kabeln scheitern
-  tft.setSPISpeed(TFT_SPI_HZ);   // ab hier sicherer Takt
+  tft.initR(tabType);
+  tft.setSPISpeed(TFT_SPI_HZ);
 
-  // Einschaltbefehle nachreichen - jetzt langsam und damit zuverlaessig
   tft.sendCommand(ST77XX_SWRESET); delay(150);
   tft.sendCommand(ST77XX_SLPOUT);  delay(150);
-  uint8_t colmod = 0x05;           // 16 Bit pro Pixel (RGB565)
-  tft.sendCommand(ST77XX_COLMOD, &colmod, 1); delay(10);
+  uint8_t colmod = 0x05;                        // 16 Bit pro Pixel
+  tft.sendCommand(ST77XX_COLMOD, &colmod, 1);   delay(10);
   tft.sendCommand(ST77XX_NORON);   delay(10);
   tft.sendCommand(ST77XX_DISPON);  delay(100);
 
@@ -409,104 +661,9 @@ static void tftInitPanel(uint8_t tabType) {
   scrH = tft.height();
 }
 
-#if TFT_DIAG_MODE
 // ============================================================================
-// DIAGNOSE-MODUS
-// ----------------------------------------------------------------------------
-// Zeigt nacheinander Vollbildfarben und probiert dabei automatisch alle
-// Panel-Varianten durch. Der Serial-Monitor schreibt mit, was gerade auf dem
-// Schirm stehen muesste - so laesst sich "gar kein Bild" von "falsche
-// Variante" unterscheiden, ohne jedes Mal neu zu flashen.
+// OEFFENTLICHE API
 // ============================================================================
-
-struct DiagStep { uint16_t color; const char* name; };
-static const DiagStep DIAG_STEPS[] = {
-  { ST77XX_RED,   "ROT"     },
-  { ST77XX_GREEN, "GRUEN"   },
-  { ST77XX_BLUE,  "BLAU"    },
-  { ST77XX_WHITE, "WEISS"   },
-  { ST77XX_BLACK, "SCHWARZ + Text" }
-};
-static const uint8_t DIAG_STEP_COUNT = sizeof(DIAG_STEPS) / sizeof(DIAG_STEPS[0]);
-
-struct DiagTab { uint8_t tab; const char* name; };
-static const DiagTab DIAG_TABS[] = {
-  { INITR_BLACKTAB,     "BLACKTAB"     },
-  { INITR_GREENTAB,     "GREENTAB"     },
-  { INITR_REDTAB,       "REDTAB"       },
-  { INITR_144GREENTAB,  "144GREENTAB"  }
-};
-static const uint8_t DIAG_TAB_COUNT = sizeof(DIAG_TABS) / sizeof(DIAG_TABS[0]);
-
-#define DIAG_STEP_MS 1800
-
-static uint8_t       diagStep     = 0;
-static uint8_t       diagTab      = 0;
-static unsigned long diagLast     = 0;
-static bool          diagFirst    = true;
-static unsigned long diagLedLast  = 0;
-static bool          diagLedState = false;
-
-static void diagDrawStep() {
-  const DiagStep& st = DIAG_STEPS[diagStep];
-  tft.fillScreen(st.color);
-
-  if (st.color == ST77XX_BLACK) {
-    // Textbild: prueft zusaetzlich Rahmen und Bildgrenzen
-    tft.drawRect(0, 0, scrW, scrH, ST77XX_WHITE);
-    tft.setTextColor(ST77XX_WHITE);
-    tft.setTextSize(1);
-    tft.setCursor(6, 10);  tft.print("DIAGNOSE");
-    tft.setCursor(6, 26);  tft.print(DIAG_TABS[diagTab].name);
-    tft.setCursor(6, 42);  tft.print(scrW); tft.print("x"); tft.print(scrH);
-    tft.setCursor(6, 58);
-#if TFT_USE_SOFT_SPI
-    tft.print("SOFT-SPI");
-#else
-    tft.print("HW-SPI ");
-    tft.print(TFT_SPI_HZ / 1000000); tft.print("MHz");
-#endif
-  }
-
-  Serial.print(F("[DIAG] Variante "));
-  Serial.print(DIAG_TABS[diagTab].name);
-  Serial.print(F("  ->  Bildschirm sollte jetzt sein: "));
-  Serial.println(st.name);
-}
-
-static void diagUpdate() {
-  unsigned long now = millis();
-
-  // Heartbeat auf der Onboard-LED: zeigt, dass die Firmware wirklich laeuft
-  if (now - diagLedLast >= 500) {
-    diagLedLast  = now;
-    diagLedState = !diagLedState;
-    digitalWrite(2, diagLedState ? HIGH : LOW);
-  }
-
-#if TFT_BL_CONTROLLED
-  // Backlight im Takt der Farbwechsel schalten - damit ist erkennbar, ob das
-  // Panel ueberhaupt versorgt wird, selbst wenn der Controller nicht antwortet.
-  digitalWrite(TFT_PIN_BL, HIGH);
-#endif
-
-  if (!diagFirst && (now - diagLast) < DIAG_STEP_MS) return;
-  diagFirst = false;
-  diagLast  = now;
-
-  diagDrawStep();
-
-  diagStep++;
-  if (diagStep >= DIAG_STEP_COUNT) {
-    diagStep = 0;
-    diagTab  = (diagTab + 1) % DIAG_TAB_COUNT;
-    Serial.print(F("[DIAG] --- wechsle Panel-Variante auf "));
-    Serial.print(DIAG_TABS[diagTab].name);
-    Serial.println(F(" ---"));
-    tftInitPanel(DIAG_TABS[diagTab].tab);
-  }
-}
-#endif // TFT_DIAG_MODE
 
 void ui_begin() {
   buttons_begin();
@@ -517,123 +674,111 @@ void ui_begin() {
 #endif
 
 #if !TFT_USE_SOFT_SPI
-  // VSPI explizit auf die verdrahteten Pins legen (MISO wird nicht benutzt).
   SPI.begin(TFT_PIN_SCLK, -1, TFT_PIN_MOSI, TFT_PIN_CS);
 #endif
 
-  Serial.println(F("\n[UI] Display-Init startet..."));
-#if TFT_USE_SOFT_SPI
-  Serial.println(F("[UI] Modus: SOFTWARE-SPI (bitbang, robust)"));
-#else
-  Serial.print(F("[UI] Modus: HARDWARE-SPI @ "));
-  Serial.print(TFT_SPI_HZ / 1000000); Serial.println(F(" MHz"));
-#endif
-  Serial.print(F("[UI] Pins  : SCLK=")); Serial.print(TFT_PIN_SCLK);
-  Serial.print(F(" MOSI="));  Serial.print(TFT_PIN_MOSI);
-  Serial.print(F(" CS="));    Serial.print(TFT_PIN_CS);
-  Serial.print(F(" DC="));    Serial.print(TFT_PIN_DC);
-  Serial.print(F(" RST="));   Serial.println(TFT_PIN_RST);
-
-#if TFT_DIAG_MODE
-  tftInitPanel(DIAG_TABS[0].tab);
-  Serial.println(F("[UI] DIAGNOSE-MODUS aktiv - Menue ist deaktiviert."));
-#else
   tftInitPanel(TFT_TAB_TYPE);
+
   currentScreen = SCR_SPLASH;
   splashStart   = millis();
   needsRedraw   = true;
-#endif
 
   Serial.print(F("[UI] Display bereit: "));
   Serial.print(scrW); Serial.print('x'); Serial.println(scrH);
 }
 
 void ui_update() {
-#if TFT_DIAG_MODE
-  diagUpdate();
-  // Tasten trotzdem einlesen: die Ereignisse landen im Serial-Monitor und
-  // lassen sich so auch ohne Bild pruefen.
-  ButtonId dev = buttons_update();
-  if (dev != BTN_NONE) {
-    Serial.print(F("[BTN] ")); Serial.println(buttons_name(dev));
-  }
-  return;
-#else
   ButtonId ev = buttons_update();
-
   if (ev != BTN_NONE) {
-    lastEvent = ev;
-    eventCounter++;
     Serial.print(F("[BTN] ")); Serial.println(buttons_name(ev));
   }
 
-  // Startbild: endet nach Ablauf der Zeit oder beim ersten Tastendruck.
+  // --- NOT-HALT als globale Geste: LEFT 1,5 s halten ---
+  // Wirkt auf jedem Bildschirm, auch tief in einem Untermenue. Bewusst als
+  // Halte-Geste, damit ein versehentlicher kurzer Druck nichts abbricht.
+  //
+  // Ausgenommen sind Zeilen, in denen LEFT einen Wert verkleinert: dort haelt
+  // man die Taste absichtlich laenger gedrueckt (Autorepeat), und das darf
+  // keinen Abbruch ausloesen.
+  bool leftEditsValue = (currentScreen == SCR_PAGE)
+                        && rowConsumesLeftRight(PAGES[curPage].rows[curRow]);
+
+  if (buttons_isDown(BTN_LEFT) && !leftEditsValue && currentScreen != SCR_HALTED) {
+    if (leftHoldStart == 0) {
+      leftHoldStart = millis();
+    } else if (millis() - leftHoldStart >= HALT_HOLD_MS) {
+      leftHoldStart = 0;
+      doHalt();
+      return;
+    }
+  } else {
+    leftHoldStart = 0;
+  }
+
+  pollStatus();
+
+  // --- Startbild ---
   if (currentScreen == SCR_SPLASH) {
     if (needsRedraw) { drawSplash(); needsRedraw = false; }
     if (ev != BTN_NONE || (millis() - splashStart) >= SPLASH_MS) {
-      openScreen(SCR_MENU);
+      curPage = PAGE_MAIN; curRow = 0; scrollTop = 0; navDepth = 0;
+      currentScreen = SCR_PAGE;
+      needsRedraw   = true;
     }
     return;
   }
 
-  // Aus den Anzeige-Screens fuehrt LEFT zurueck ins Hauptmenue.
-  // Ausgenommen: Wert-Demo (dort ist LEFT die Minus-Taste) und Tasten-Test
-  // (dort muss LEFT selbst pruefbar bleiben -> Ausstieg per ENTER halten).
-  if (ev == BTN_LEFT && currentScreen != SCR_VALUE_DEMO && currentScreen != SCR_BUTTON_TEST) {
-    openScreen(SCR_MENU);
-    ev = BTN_NONE;
+  // --- Bestaetigung nach NOT-HALT ---
+  if (currentScreen == SCR_HALTED) {
+    if (needsRedraw) { drawHalted(); needsRedraw = false; }
+    if (ev == BTN_ENTER) {
+      currentScreen = SCR_PAGE;
+      needsRedraw   = true;
+    }
+    return;
   }
 
-  switch (currentScreen) {
-    case SCR_SPLASH:
-      break;
-
-    case SCR_MENU:
-      if (ev != BTN_NONE) handleMenuInput(ev);
-      if (needsRedraw) { drawMenu(); needsRedraw = false; }
-      break;
-
-    case SCR_LAYOUT_TEST:
-      if (needsRedraw) { drawLayoutTest(); needsRedraw = false; }
-      break;
-
-    case SCR_COLOR_TEST:
-      if (needsRedraw) { drawColorTest(); needsRedraw = false; }
-      break;
-
-    case SCR_BUTTON_TEST:
-      if (needsRedraw) {
-        drawButtonTestStatic();
-        needsRedraw    = false;
-        enterHoldStart = 0;
-      }
-      drawButtonTestDynamic();   // zeichnet nur bei Aenderung
-
-      // Ausstieg: ENTER 1.5 s halten. So bleiben alle fuenf Tasten pruefbar.
-      if (buttons_isDown(BTN_ENTER)) {
-        if (enterHoldStart == 0) enterHoldStart = millis();
-        else if (millis() - enterHoldStart >= 1500) openScreen(SCR_MENU);
-      } else {
-        enterHoldStart = 0;
-      }
-      break;
-
-    case SCR_VALUE_DEMO:
-      if (ev != BTN_NONE) handleValueDemoInput(ev);
-      if (needsRedraw) {
-        drawValueDemoStatic();
-        drawValueDemoDynamic();
-        needsRedraw  = false;
-        needsPartial = false;
-      } else if (needsPartial) {
-        drawValueDemoDynamic();
-        needsPartial = false;
-      }
-      break;
-
-    case SCR_INFO:
-      if (needsRedraw) { drawInfo(); needsRedraw = false; }
-      break;
+  // --- Laufende Sequenz: Navigation gesperrt, nur ENTER haelt an ---
+  // Greift auch, wenn der Lauf ueber die serielle Konsole gestartet wurde.
+  if (sequence_isRunning()) {
+    if (currentScreen != SCR_RUNNING) {
+      currentScreen = SCR_RUNNING;
+      needsRedraw   = true;
+    }
+    if (needsRedraw) { drawRunningStatic(); needsRedraw = false; }
+    drawRunningDynamic();
+    if (ev == BTN_ENTER) doHalt();
+    return;
   }
-#endif // TFT_DIAG_MODE
+
+  // Sequenz ist gerade fertig geworden -> zurueck ins Menue
+  if (currentScreen == SCR_RUNNING) {
+    currentScreen = SCR_PAGE;
+    needsRedraw   = true;
+  }
+
+  // --- Menueseiten ---
+  if (ev != BTN_NONE) handlePageInput(ev);
+
+  // Kopfzeile nachfuehren, wenn sich Position oder Busy-Zustand geaendert hat
+  if (!needsRedraw && !needsRows) {
+    char now[sizeof(lastStatusText)];
+    buildStatusText(now, sizeof(now));
+    if (strcmp(now, lastStatusText) != 0) needsHeader = true;
+  }
+
+  if (needsRedraw) {
+    drawPage();
+    needsRedraw = false;
+    needsRows   = false;
+    needsHeader = false;
+  } else if (needsRows) {
+    drawRows();
+    drawFooter(footerHint());
+    drawScrollMark();
+    needsRows = false;
+  } else if (needsHeader) {
+    drawHeader(PAGES[curPage].title ? PAGES[curPage].title : dynTitle);
+    needsHeader = false;
+  }
 }

@@ -82,67 +82,89 @@ nur bei Aenderung (`needsRedraw` / `needsPartial`), deshalb flackert nichts.
 
 ---
 
-## 3. Geplante Menuestruktur (Stufe 2)
+## 3. Umgesetzte Menuestruktur (Stufe 2)
 
 ```
-[Statuszeile: Programm | Zustand | X/Y/Z busy | I2C ok]
+[Kopfzeile: Seitentitel | Live-Status (BEREIT / X.Z / P2 RUN / Istposition)]
 │
-├─ 1 Programme
-│   ├─ Programm 1 (Hairpin)      → Durchlaeufe: [ 1 ]  → START
-│   ├─ Programm 2                → Durchlaeufe: [ 1 ]  → START
-│   ├─ Programm 3 (Homing 1x)    → Durchlaeufe: [ 1 ]  → START
-│   └─ STOP (Sequenz abbrechen)
+├─ Programme
+│   ├─ Programm 1  Hairpin ─┐
+│   ├─ Programm 2           ├→  Durchlaeufe [1-99]  →  START
+│   ├─ Programm 3           ┘
+│   └─ Zurueck
 │
-├─ 2 Manuell
+├─ Schrittmotoren
 │   ├─ Achse X ─┐
-│   ├─ Achse Y ─┼→ Homing / Jog ± / Absolut anfahren / Stop
-│   ├─ Achse Z ─┘
-│   ├─ Servos   → S0…S5, Stellwert 0-1000 per LEFT/RIGHT
-│   └─ Treiber  → EIN / AUS (enAll / disAll)
+│   ├─ Achse Y ─┼→  Referenzfahrt
+│   ├─ Achse Z ─┘   Schrittweite   1 / 10 / 100 / 1000
+│   │                Geschw. St/s   50-3000
+│   │                Fahren  - / +  (verfaehrt um die Schrittweite)
+│   │                STOPP
+│   ├─ Referenzfahrt alle
+│   ├─ Treiber EIN / Treiber AUS
+│   └─ Zurueck
 │
-├─ 3 Status
-│   ├─ Positionen  (X/Y/Z in Steps, Busy-Flags, Homing)
-│   ├─ Servos      (sechs Stellwerte)
-│   ├─ Sensoren    (Shunt A0, MH D2/A7, A1-A3 in Volt)
-│   └─ I2C-Scan    (findet 0x32 / 0x33?)
+├─ Servomotoren
+│   ├─ Servo 0 D7 … Servo 5 D12   Stellwert 0-1000, wirkt sofort
+│   ├─ Grundstellung              (Werte aus dem Start von Programm 1)
+│   └─ Zurueck
 │
-├─ 4 Parameter
-│   ├─ Vibration   (Amplitude, Frequenz)
-│   ├─ Geschwind.  (Y-Speed, Z-Speed)
-│   ├─ Wege        (Y-Vorschub, Z-Zustellung)
-│   └─ Zeiten      (Servo-Settling, Vereinzelungsdauer)
-│
-└─ 5 System
-    ├─ Display-Tests (Layout / Farbe / Tasten aus v0.1)
-    ├─ Werte zuruecksetzen
-    └─ Info
+└─ NOT-HALT
 ```
 
-### Bedienlogik (durchgaengig gleich)
+### Bedienlogik
 
-| Taste | Liste | Wert-Editor | Laufende Sequenz |
-| :-- | :-- | :-- | :-- |
-| UP / DOWN | Eintrag wechseln | grosse Schrittweite | — |
-| LEFT | eine Ebene zurueck | Wert − | — |
-| RIGHT | Ebene oeffnen | Wert + | — |
-| ENTER | oeffnen / ausloesen | uebernehmen | — |
-| LEFT 1,5 s halten | — | verwerfen | **NOT-STOP** |
+| Taste | Liste | Wertzeile | Fahrzeile | Laufender Betrieb |
+| :-- | :-- | :-- | :-- | :-- |
+| UP / DOWN | Zeile wechseln | Zeile wechseln | Zeile wechseln | — |
+| LEFT | eine Ebene zurueck | Wert − | Achse − | — |
+| RIGHT | Unterseite oeffnen | Wert + | Achse + | — |
+| ENTER | oeffnen / ausloesen | — | — | **NOT-HALT** |
+| LEFT 1,5 s halten | **NOT-HALT** | (gesperrt) | (gesperrt) | **NOT-HALT** |
 
-Der Not-Stop ueber „LEFT halten" ist bewusst auf eine Halte-Geste gelegt: ein
-versehentlicher kurzer Druck darf eine laufende Vereinzelung nicht abbrechen.
-Er ruft dieselbe Logik wie das serielle `stop` auf (`axis_stop` auf X/Y/Z,
-`currentSeqState = SEQ_IDLE`).
+Der NOT-HALT ist zusaetzlich zum Menuepunkt als globale Halte-Geste erreichbar,
+damit man ihn nicht aus einem Untermenue heraussuchen muss. Auf Wert- und
+Fahrzeilen ist die Geste gesperrt, weil man LEFT dort absichtlich haelt
+(Autorepeat) — sonst wuerde das Verkleinern eines Werts einen Abbruch ausloesen.
+
+Umgekehrt gilt auf dem Laufbildschirm: **ENTER haelt sofort an**. Anhalten muss
+leicht sein, Starten schwer — deshalb braucht der Start den Umweg ueber
+Programmwahl und Durchlaufzahl.
 
 ### Laufbildschirm
 
-Solange `currentSeqState != SEQ_IDLE` schaltet die UI automatisch auf einen
-Laufbildschirm: Programmnummer, aktueller Schritt im Klartext, verbleibende
-Durchlaeufe, Fortschrittsbalken. Navigation ist dort gesperrt — nur der
-Not-Stop bleibt aktiv. Damit kann man waehrend eines Laufs nichts verstellen.
+Sobald `sequence_isRunning()` true wird, schaltet die Oberflaeche automatisch
+um: Programmnummer, verbleibende Durchlaeufe, Navigation gesperrt. Das greift
+auch, wenn der Lauf ueber die serielle Konsole (`run`, `runp2_5`) gestartet
+wurde — Menue und Konsole zeigen damit immer denselben Zustand. Endet die
+Sequenz, kehrt die Anzeige selbsttaetig ins Menue zurueck.
+
+### Technische Umsetzung
+
+Das Menue steckt vollstaendig in Tabellen (`MenuPage` / `MenuRow` in
+`display_ui.cpp`). Ein Renderer und ein Navigationsstack bedienen alle Seiten,
+ein neuer Menuepunkt ist damit eine Tabellenzeile statt einer neuen
+Zeichenfunktion. Zeilentypen: `ROW_SUBMENU`, `ROW_ACTION`, `ROW_VALUE`,
+`ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
+
+Seiten, die laenger sind als die sieben sichtbaren Zeilen, scrollen mit; die
+Position steht als `3/8` rechts in der Fusszeile und nicht neben den Zeilen,
+damit nichts die Werte ueberdeckt.
+
+`src_esp32/machine_api.h` deklariert die in `main.cpp` implementierten
+Maschinenfunktionen. Dadurch nutzen Menue und serielle Konsole dieselbe API,
+ohne dass die erprobte Ablaufsteuerung angefasst werden musste. Ergaenzt wurden
+dort nur `sequence_isRunning()`, `sequence_program()`,
+`sequence_remainingRuns()`, `sequence_abort()` und `servo_readAll()`.
+
+Der Maschinenstatus wird alle 300 ms einmal geholt und zwischengespeichert; das
+Menue erzeugt damit rund 3 I2C-Zugriffe pro Sekunde zusaetzlich. Neu gezeichnet
+wird nur, was sich geaendert hat.
 
 ---
 
-## 4. Umsetzung in Stufe 2 — Schritte
+## 4. Offene Punkte fuer Stufe 3 — Schritte
+
 
 **Schritt 1 — Maschinen-API herausloesen.**
 `main.cpp` hat inzwischen 1188 Zeilen und mischt API, State Machine und
