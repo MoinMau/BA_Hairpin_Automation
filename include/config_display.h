@@ -9,13 +9,18 @@
 //   Modul-Pin 2  SCK        -> GPIO18   (VSPI CLK)
 //   Modul-Pin 3  SDA (MOSI) -> GPIO23   (VSPI MOSI)
 //   Modul-Pin 4  A0  (DC)   -> GPIO4
-//   Modul-Pin 5  RESET      -> GPIO16
+//   Modul-Pin 5  RESET      -> GPIO16   (Achtung bei ESP32-WROVER, s.u.)
 //   Modul-Pin 6  CS         -> GPIO5    (VSPI CS)
 //   Modul-Pin 7  GND        -> GND
 //   Modul-Pin 8  VCC        -> +3V3
 //
 // Hinweis: Die I2C-Leitungen (GPIO21/22) bleiben unberuehrt, das Display haengt
-// komplett am Hardware-SPI (VSPI) und stoert die Slave-Kommunikation nicht.
+// komplett am SPI und stoert die Slave-Kommunikation nicht.
+//
+// ACHTUNG WROVER: Auf ESP32-WROVER-Modulen sind GPIO16 und GPIO17 fest fuer das
+// externe PSRAM verdrahtet und als GPIO unbrauchbar. Nur auf WROOM-32 (ohne
+// PSRAM) sind sie frei. Im Zweifel RESET auf GPIO15 legen und TFT_PIN_RST
+// entsprechend aendern.
 // ============================================================================
 
 // --- Display-Pins ---
@@ -37,9 +42,30 @@
 // Fuer die Menuefuehrung nutzen wir Querformat -> mehr Platz fuer Zeilen.
 #define TFT_ROTATION    1
 
-// SPI-Takt. ST7735 vertraegt in der Regel 26-40 MHz. Bei langen Kabeln
-// oder Bildstoerungen auf 10000000 reduzieren.
-#define TFT_SPI_HZ     26000000
+// SPI-Takt fuers Zeichnen. Bewusst niedrig gesetzt: bei langen Dupont-Kabeln
+// ist die Flankensteilheit das Problem, nicht die Rechenleistung.
+// Wenn das Bild sauber steht, schrittweise erhoehen: 8M -> 16M -> 26M.
+#define TFT_SPI_HZ      4000000
+
+// ----------------------------------------------------------------------------
+// WICHTIG: Die Adafruit-Bibliothek fuehrt ihre Init-Sequenz IMMER mit fest
+// einkompilierten 32 MHz aus (Adafruit_ST77xx.cpp: SPI_DEFAULT_FREQ). Das laesst
+// sich von aussen nicht setzen. Bei langen Kabeln kommen die Init-Befehle
+// dadurch verstuemmelt an und das Panel bleibt schwarz.
+// Gegenmassnahmen (in dieser Reihenfolge probieren):
+//   1) TFT_USE_SOFT_SPI = 1  -> Bitbang-SPI, langsam aber extrem robust.
+//      Damit klaert sich, ob die Verdrahtung stimmt.
+//   2) TFT_USE_SOFT_SPI = 0  -> Hardware-SPI. ui_begin() sendet die
+//      entscheidenden Init-Befehle nach dem Umschalten auf TFT_SPI_HZ
+//      nochmals nach, damit ein misslungener 32-MHz-Init aufgefangen wird.
+// ----------------------------------------------------------------------------
+#define TFT_USE_SOFT_SPI    1
+
+// Diagnose-Modus: statt des Menues laeuft ein Testbild-Durchlauf, der
+// automatisch alle Panel-Varianten durchprobiert und im Serial-Monitor
+// mitschreibt, was gerade auf dem Schirm stehen muesste.
+// Auf 0 setzen, sobald ein Bild da ist.
+#define TFT_DIAG_MODE       1
 
 // --- Panel-Variante ("Tab") ---
 // Das rote 1.8"-Modul V1.2 laeuft fast immer mit INITR_BLACKTAB.

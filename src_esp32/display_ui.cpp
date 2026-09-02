@@ -8,10 +8,17 @@
 #include "buttons.h"
 
 // ----------------------------------------------------------------------------
-// Display-Objekt am Hardware-SPI (VSPI). SCLK/MOSI werden in ui_begin()
-// explizit auf die Pins aus config_display.h gelegt.
+// Display-Objekt.
+//   Software-SPI: bitbang ueber MOSI/SCLK, ca. 1-2 MHz, sehr tolerant
+//                 gegenueber langen Kabeln. Zur Fehlersuche die erste Wahl.
+//   Hardware-SPI: VSPI, deutlich schneller, aber empfindlicher.
 // ----------------------------------------------------------------------------
+#if TFT_USE_SOFT_SPI
+static Adafruit_ST7735 tft(TFT_PIN_CS, TFT_PIN_DC, TFT_PIN_MOSI,
+                           TFT_PIN_SCLK, TFT_PIN_RST);
+#else
 static Adafruit_ST7735 tft(TFT_PIN_CS, TFT_PIN_DC, TFT_PIN_RST);
+#endif
 
 // --- Farbschema (an einer Stelle definiert, damit spaeter leicht anpassbar) ---
 #define COL_BG         ST77XX_BLACK
@@ -370,6 +377,137 @@ static void handleValueDemoInput(ButtonId ev) {
 // Oeffentliche API
 // ----------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------
+// Panel-Initialisierung
+// ----------------------------------------------------------------------------
+// Die Bibliothek fahert ihre Init-Sequenz fest mit 32 MHz (SPI_DEFAULT_FREQ in
+// Adafruit_ST77xx.cpp) - das laesst sich von aussen nicht setzen. Bei langen
+// Kabeln kommen diese Befehle verstuemmelt an und das Panel bleibt schwarz.
+// Deshalb wird direkt danach auf TFT_SPI_HZ heruntergeschaltet und die
+// entscheidenden Einschaltbefehle werden noch einmal gesendet.
+//
+// Die delay() hier sind Datenblatt-Wartezeiten des ST7735 und laufen
+// ausschliesslich einmalig in setup(), bevor die Maschine arbeitet. Die
+// Regel "kein delay() in der Ablaufsteuerung" bleibt davon unberuehrt.
+static void tftInitPanel(uint8_t tabType) {
+  tft.initR(tabType);            // 32 MHz, kann bei langen Kabeln scheitern
+  tft.setSPISpeed(TFT_SPI_HZ);   // ab hier sicherer Takt
+
+  // Einschaltbefehle nachreichen - jetzt langsam und damit zuverlaessig
+  tft.sendCommand(ST77XX_SWRESET); delay(150);
+  tft.sendCommand(ST77XX_SLPOUT);  delay(150);
+  uint8_t colmod = 0x05;           // 16 Bit pro Pixel (RGB565)
+  tft.sendCommand(ST77XX_COLMOD, &colmod, 1); delay(10);
+  tft.sendCommand(ST77XX_NORON);   delay(10);
+  tft.sendCommand(ST77XX_DISPON);  delay(100);
+
+  tft.setRotation(TFT_ROTATION);   // sendet MADCTL erneut
+#if TFT_INVERT_COLORS
+  tft.invertDisplay(true);
+#endif
+  scrW = tft.width();
+  scrH = tft.height();
+}
+
+#if TFT_DIAG_MODE
+// ============================================================================
+// DIAGNOSE-MODUS
+// ----------------------------------------------------------------------------
+// Zeigt nacheinander Vollbildfarben und probiert dabei automatisch alle
+// Panel-Varianten durch. Der Serial-Monitor schreibt mit, was gerade auf dem
+// Schirm stehen muesste - so laesst sich "gar kein Bild" von "falsche
+// Variante" unterscheiden, ohne jedes Mal neu zu flashen.
+// ============================================================================
+
+struct DiagStep { uint16_t color; const char* name; };
+static const DiagStep DIAG_STEPS[] = {
+  { ST77XX_RED,   "ROT"     },
+  { ST77XX_GREEN, "GRUEN"   },
+  { ST77XX_BLUE,  "BLAU"    },
+  { ST77XX_WHITE, "WEISS"   },
+  { ST77XX_BLACK, "SCHWARZ + Text" }
+};
+static const uint8_t DIAG_STEP_COUNT = sizeof(DIAG_STEPS) / sizeof(DIAG_STEPS[0]);
+
+struct DiagTab { uint8_t tab; const char* name; };
+static const DiagTab DIAG_TABS[] = {
+  { INITR_BLACKTAB,     "BLACKTAB"     },
+  { INITR_GREENTAB,     "GREENTAB"     },
+  { INITR_REDTAB,       "REDTAB"       },
+  { INITR_144GREENTAB,  "144GREENTAB"  }
+};
+static const uint8_t DIAG_TAB_COUNT = sizeof(DIAG_TABS) / sizeof(DIAG_TABS[0]);
+
+#define DIAG_STEP_MS 1800
+
+static uint8_t       diagStep     = 0;
+static uint8_t       diagTab      = 0;
+static unsigned long diagLast     = 0;
+static bool          diagFirst    = true;
+static unsigned long diagLedLast  = 0;
+static bool          diagLedState = false;
+
+static void diagDrawStep() {
+  const DiagStep& st = DIAG_STEPS[diagStep];
+  tft.fillScreen(st.color);
+
+  if (st.color == ST77XX_BLACK) {
+    // Textbild: prueft zusaetzlich Rahmen und Bildgrenzen
+    tft.drawRect(0, 0, scrW, scrH, ST77XX_WHITE);
+    tft.setTextColor(ST77XX_WHITE);
+    tft.setTextSize(1);
+    tft.setCursor(6, 10);  tft.print("DIAGNOSE");
+    tft.setCursor(6, 26);  tft.print(DIAG_TABS[diagTab].name);
+    tft.setCursor(6, 42);  tft.print(scrW); tft.print("x"); tft.print(scrH);
+    tft.setCursor(6, 58);
+#if TFT_USE_SOFT_SPI
+    tft.print("SOFT-SPI");
+#else
+    tft.print("HW-SPI ");
+    tft.print(TFT_SPI_HZ / 1000000); tft.print("MHz");
+#endif
+  }
+
+  Serial.print(F("[DIAG] Variante "));
+  Serial.print(DIAG_TABS[diagTab].name);
+  Serial.print(F("  ->  Bildschirm sollte jetzt sein: "));
+  Serial.println(st.name);
+}
+
+static void diagUpdate() {
+  unsigned long now = millis();
+
+  // Heartbeat auf der Onboard-LED: zeigt, dass die Firmware wirklich laeuft
+  if (now - diagLedLast >= 500) {
+    diagLedLast  = now;
+    diagLedState = !diagLedState;
+    digitalWrite(2, diagLedState ? HIGH : LOW);
+  }
+
+#if TFT_BL_CONTROLLED
+  // Backlight im Takt der Farbwechsel schalten - damit ist erkennbar, ob das
+  // Panel ueberhaupt versorgt wird, selbst wenn der Controller nicht antwortet.
+  digitalWrite(TFT_PIN_BL, HIGH);
+#endif
+
+  if (!diagFirst && (now - diagLast) < DIAG_STEP_MS) return;
+  diagFirst = false;
+  diagLast  = now;
+
+  diagDrawStep();
+
+  diagStep++;
+  if (diagStep >= DIAG_STEP_COUNT) {
+    diagStep = 0;
+    diagTab  = (diagTab + 1) % DIAG_TAB_COUNT;
+    Serial.print(F("[DIAG] --- wechsle Panel-Variante auf "));
+    Serial.print(DIAG_TABS[diagTab].name);
+    Serial.println(F(" ---"));
+    tftInitPanel(DIAG_TABS[diagTab].tab);
+  }
+}
+#endif // TFT_DIAG_MODE
+
 void ui_begin() {
   buttons_begin();
 
@@ -378,28 +516,49 @@ void ui_begin() {
   digitalWrite(TFT_PIN_BL, HIGH);
 #endif
 
+#if !TFT_USE_SOFT_SPI
   // VSPI explizit auf die verdrahteten Pins legen (MISO wird nicht benutzt).
   SPI.begin(TFT_PIN_SCLK, -1, TFT_PIN_MOSI, TFT_PIN_CS);
-
-  tft.initR(TFT_TAB_TYPE);
-  tft.setSPISpeed(TFT_SPI_HZ);
-  tft.setRotation(TFT_ROTATION);
-#if TFT_INVERT_COLORS
-  tft.invertDisplay(true);
 #endif
 
-  scrW = tft.width();
-  scrH = tft.height();
+  Serial.println(F("\n[UI] Display-Init startet..."));
+#if TFT_USE_SOFT_SPI
+  Serial.println(F("[UI] Modus: SOFTWARE-SPI (bitbang, robust)"));
+#else
+  Serial.print(F("[UI] Modus: HARDWARE-SPI @ "));
+  Serial.print(TFT_SPI_HZ / 1000000); Serial.println(F(" MHz"));
+#endif
+  Serial.print(F("[UI] Pins  : SCLK=")); Serial.print(TFT_PIN_SCLK);
+  Serial.print(F(" MOSI="));  Serial.print(TFT_PIN_MOSI);
+  Serial.print(F(" CS="));    Serial.print(TFT_PIN_CS);
+  Serial.print(F(" DC="));    Serial.print(TFT_PIN_DC);
+  Serial.print(F(" RST="));   Serial.println(TFT_PIN_RST);
 
+#if TFT_DIAG_MODE
+  tftInitPanel(DIAG_TABS[0].tab);
+  Serial.println(F("[UI] DIAGNOSE-MODUS aktiv - Menue ist deaktiviert."));
+#else
+  tftInitPanel(TFT_TAB_TYPE);
   currentScreen = SCR_SPLASH;
   splashStart   = millis();
   needsRedraw   = true;
+#endif
 
   Serial.print(F("[UI] Display bereit: "));
   Serial.print(scrW); Serial.print('x'); Serial.println(scrH);
 }
 
 void ui_update() {
+#if TFT_DIAG_MODE
+  diagUpdate();
+  // Tasten trotzdem einlesen: die Ereignisse landen im Serial-Monitor und
+  // lassen sich so auch ohne Bild pruefen.
+  ButtonId dev = buttons_update();
+  if (dev != BTN_NONE) {
+    Serial.print(F("[BTN] ")); Serial.println(buttons_name(dev));
+  }
+  return;
+#else
   ButtonId ev = buttons_update();
 
   if (ev != BTN_NONE) {
@@ -476,4 +635,5 @@ void ui_update() {
       if (needsRedraw) { drawInfo(); needsRedraw = false; }
       break;
   }
+#endif // TFT_DIAG_MODE
 }

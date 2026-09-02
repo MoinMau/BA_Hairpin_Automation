@@ -219,6 +219,32 @@ Gib mir zu jedem Punkt kurz Rueckmeldung, dann gehen wir Stufe 2 an.
 
 ---
 
+## 5a. Bekanntes Problem: 32-MHz-Init der Bibliothek
+
+`Adafruit_ST7735::initR()` ruft intern `begin(0)` auf, und dort wird die
+Frequenz auf `SPI_DEFAULT_FREQ = 32000000` gesetzt (`Adafruit_ST77xx.cpp:35`).
+Die **gesamte Init-Sequenz laeuft also mit 32 MHz**, unabhaengig davon, was
+`setSPISpeed()` sagt — das wirkt erst auf die nachfolgenden Zeichenbefehle.
+Bei langen Dupont-Kabeln kommen die Init-Befehle verstuemmelt an, das Panel
+wird nie eingeschaltet und bleibt schwarz.
+
+Da `begin()` nicht virtuell ist, laesst sich das nicht sauber ueberschreiben.
+Gegenmassnahmen in `tftInitPanel()`:
+
+1. `TFT_USE_SOFT_SPI = 1` — Bitbang-SPI ueber den Konstruktor
+   `Adafruit_ST7735(cs, dc, mosi, sclk, rst)`. Langsam, aber unempfindlich
+   gegen lange Leitungen. Damit klaert sich, ob die Verdrahtung stimmt.
+2. Nach `initR()` wird auf `TFT_SPI_HZ` heruntergeschaltet und die
+   entscheidenden Einschaltbefehle (`SWRESET`, `SLPOUT`, `COLMOD`, `NORON`,
+   `DISPON`) werden bei diesem sicheren Takt noch einmal gesendet. Ein
+   misslungener 32-MHz-Init wird dadurch aufgefangen.
+
+Mit `TFT_DIAG_MODE = 1` laeuft statt des Menues ein Testbild-Durchlauf, der
+alle Panel-Varianten automatisch durchprobiert und im Serial-Monitor
+protokolliert, was gerade zu sehen sein muesste.
+
+---
+
 ## 6. Zwei Randnotizen zum bestehenden Code
 
 Beim Einlesen sind mir zwei Stellen aufgefallen, die nichts mit dem Display zu
