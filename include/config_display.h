@@ -65,7 +65,8 @@
 // automatisch alle Panel-Varianten durchprobiert und im Serial-Monitor
 // mitschreibt, was gerade auf dem Schirm stehen muesste.
 // Auf 0 setzen, sobald ein Bild da ist.
-#define TFT_DIAG_MODE       1
+// 02.09.2026: Bild laeuft mit BLACKTAB + Software-SPI -> Diagnose aus.
+#define TFT_DIAG_MODE       0
 
 // --- Panel-Variante ("Tab") ---
 // Das rote 1.8"-Modul V1.2 laeuft fast immer mit INITR_BLACKTAB.
