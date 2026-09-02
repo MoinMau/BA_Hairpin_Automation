@@ -92,43 +92,65 @@ Init-Fix wahrscheinlich problemlos moeglich.
 ## 2. Menuestruktur
 
 ```
-[Kopfzeile: Seitentitel | Live-Status: BEREIT / X.Z / P2 RUN / Istposition / KEIN I2C]
+[Kopfzeile: Seitentitel | BEREIT / X.Z / LAEUFT / * offen / KEIN I2C]
 │
-├─ Programme
-│   ├─ Programm 1  Hairpin ─┐
-│   ├─ Programm 2           ├→  Durchlaeufe [1-99]  →  START
-│   ├─ Programm 3           ┘
+├─ Programme                       (Liste, waechst mit angelegten Programmen)
+│   ├─ Programm 1
+│   │   ├─ Durchlaeufe      25     Vorgabe je Programm, 1-999
+│   │   ├─ START
+│   │   ├─ Ablauf                  → Blockliste, siehe unten
+│   │   ├─ Kopieren                → neues Programm aus dieser Vorlage
+│   │   ├─ Speichern
+│   │   ├─ Loeschen                → mit Rueckfrage
+│   │   └─ Zurueck
+│   ├─ Programm 2 …
+│   ├─ Neues Programm              → Kopie des ersten Programms
 │   └─ Zurueck
 │
 ├─ Schrittmotoren
-│   ├─ Achse X ─┐
-│   ├─ Achse Y ─┼→  Referenzfahrt
-│   ├─ Achse Z ─┘   Schrittweite   1 / 10 / 100 / 1000
-│   │                Geschw. St/s   50-3000
-│   │                Fahren  - / +
-│   │                STOPP
+│   ├─ Achse X / Y / Z             → Referenzfahrt, Schrittweite, Geschw.,
+│   │                                 Fahren -/+, STOPP
 │   ├─ Referenzfahrt alle
-│   ├─ Treiber EIN / Treiber AUS
+│   ├─ Treiber EIN / AUS
 │   └─ Zurueck
 │
 ├─ Servomotoren
-│   ├─ Servo 0 D7 … Servo 5 D12   Stellwert 0-1000, wirkt sofort
-│   ├─ Grundstellung              (Werte aus dem Start von Programm 1)
-│   └─ Zurueck
-│
-├─ Parameter
-│   ├─ Programm 1 ─┐
-│   ├─ Programm 2  ├→  Servo-Grundstellung   S0-S4, Wartezeit
-│   ├─ Programm 3 ─┘   Vereinzelung          Rutschzeit, S1, S0, Dauer
-│   │                   Greifer               zu S2/S3/S4, auf S2/S3/S4, Auf-Zeit
-│   │                   Achse Y               Startpos, Vorschub, Geschw., Roboterzeit
-│   │                   Achse Z / Vibration   Position, Geschw., Amplitude, Frequenz
-│   │                   Speichern
-│   │                   Werkseinstellungen
+│   ├─ Servo 0 D7 … Servo 5 D12    Stellwert, wirkt sofort
+│   ├─ Grundstellung
 │   └─ Zurueck
 │
 └─ NOT-HALT
 ```
+
+### Ablauf und Bloecke
+
+„Ablauf" listet die Bloecke des Programms mit ihren Werten:
+
+```
+Programm 3 Ablauf                     6/24
+  1 Z Referenz *
+  2 Y Referenz *
+  3 Y abs -7500 *
+  4 Servo 0 = 1000
+ ...
+ 19 Y rel 7400
+ 20 Warten 4000ms
+```
+
+Ein `*` kennzeichnet Bloecke, die nur im ersten Durchlauf ausgefuehrt werden
+(die Referenzfahrten in Programm 3). ENTER auf einem Block oeffnet dessen
+Felder — welche das sind, haengt vom Blocktyp ab:
+
+| Blocktyp | Felder |
+| :-- | :-- |
+| Referenzfahrt | Achse |
+| Fahren absolut / relativ | Achse, Weg, Geschwindigkeit |
+| Vibration | Achse, Amplitude, Frequenz |
+| Achse stoppen | Achse |
+| Servo setzen | Servo-Nummer, Stellwert |
+| Warten | Zeit in ms |
+
+Dazu bei jedem Block die Zeile „nur 1. Lauf".
 
 ### Bedienlogik
 
@@ -143,13 +165,15 @@ Init-Fix wahrscheinlich problemlos moeglich.
 Der NOT-HALT ist zusaetzlich zum Menuepunkt als globale Halte-Geste erreichbar,
 damit man ihn nicht aus einem Untermenue heraussuchen muss. Auf Wert- und
 Fahrzeilen ist die Geste gesperrt, weil man LEFT dort absichtlich haelt
-(Autorepeat) — sonst wuerde das Verkleinern eines Werts einen Abbruch ausloesen.
-Bewaffnet wird der Timer nur durch ein echtes Druck-Ereignis, nicht durch den
-blossen Pegel.
+(Autorepeat). Bewaffnet wird der Timer nur durch ein echtes Druck-Ereignis.
 
 Umgekehrt gilt auf dem Laufbildschirm: **ENTER haelt sofort an**. Anhalten muss
-leicht sein, Starten schwer — deshalb braucht der Start den Umweg ueber
-Programmwahl und Durchlaufzahl.
+leicht sein, Starten schwer.
+
+**Beschleunigung beim Halten.** Wer einen Weg von 7400 Schritten in Zehnerschritten
+einstellen muesste, waere lange beschaeftigt. Deshalb waechst die Schrittweite,
+solange die Richtungstaste gehalten wird: erst der eingestellte Schritt, nach
+etwa einer Sekunde das Zehnfache, danach das Hundertfache.
 
 > Der Menuepunkt heisst „NOT-HALT", trennt aber nur softwareseitig ueber den
 > I2C-Bus. Ein echter Nothalt muss die Motorversorgung hardwareseitig trennen
@@ -158,80 +182,47 @@ Programmwahl und Durchlaufzahl.
 
 ### Laufbildschirm
 
-Sobald `sequence_isRunning()` true wird, schaltet die Oberflaeche automatisch
-um: Programmnummer, verbleibende Durchlaeufe, Navigation gesperrt. Das greift
-auch, wenn der Lauf ueber die serielle Konsole (`run`, `runp2_5`) gestartet
-wurde — Menue und Konsole zeigen damit immer denselben Zustand. Endet die
-Sequenz, kehrt die Anzeige selbsttaetig ins Menue zurueck.
+Sobald ein Programm laeuft, schaltet die Oberflaeche automatisch um:
+Programmname, aktueller Block mit Kurzbeschreibung, verbleibende Durchlaeufe.
+Navigation gesperrt. Das greift auch, wenn der Lauf ueber die serielle Konsole
+(`run`, `runp2_5`) gestartet wurde.
 
 ---
 
-## 3. Aufbau des Codes
+## 3. Programme als Daten
 
-| Datei | Inhalt |
-| :-- | :-- |
-| `include/config_display.h` | Pins, Panel-Variante, SPI-Takt, Tastenparameter |
-| `src_esp32/buttons.*` | Entprellung, Autorepeat, Sperre klemmender Tasten |
-| `src_esp32/machine_api.h` | Deklariert die in `main.cpp` liegenden Maschinenfunktionen |
-| `src_esp32/params.*` | Parametersaetze der drei Programme, NVS-Speicherung |
-| `src_esp32/display_ui.*` | Menuemodell, Renderer, Navigation |
-| `src_esp32/main.cpp` | unveraendert bis auf `ui_begin()`/`ui_update()` und fuenf Zugriffsfunktionen |
+Ein Programm ist eine **Liste von Bloecken** (`src_esp32/program.h`), keine
+Zustandsmaschine im Quelltext mehr. Vorher liess sich ein neuer Ablauf nur
+durch Programmieren und Flashen anlegen; jetzt kopiert man eine Vorlage am
+Display und stellt die Werte ein. Genau das braucht man, wenn pro
+Hairpin-Laenge ein eigenes Programm noetig ist.
 
-Das Menue steckt vollstaendig in Tabellen (`MenuPage` / `MenuRow`). Ein Renderer
-und ein Navigationsstack bedienen alle Seiten — ein neuer Menuepunkt ist eine
-Tabellenzeile, keine neue Zeichenfunktion. Zeilentypen: `ROW_SUBMENU`,
-`ROW_ACTION`, `ROW_VALUE`, `ROW_PARAM`, `ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
+**Blocktypen:** Referenzfahrt, Fahren absolut, Fahren relativ, Vibration,
+Achse stoppen, Servo setzen, Warten. Jeder Block traegt zusaetzlich das Flag
+„nur im ersten Durchlauf".
 
-Seiten mit mehr als sieben Zeilen scrollen; die Position steht als `3/8` rechts
-in der Fusszeile, damit nichts die Werte ueberdeckt.
+**Grenzen:** 8 Programme, je 40 Bloecke. Das sind rund 2,8 KB im RAM und
+ebenso viel im NVS.
 
-`machine_api.h` verschiebt keinen Code, sondern deklariert nur die vorhandenen
-Funktionen. Menue und serielle Konsole rufen damit dieselbe API auf, ohne dass
-die erprobte Ablaufsteuerung angefasst werden musste. Ergaenzt wurden in
-`main.cpp` lediglich `sequence_isRunning()`, `sequence_program()`,
-`sequence_remainingRuns()`, `sequence_abort()`, `servo_readAll()` und
-`i2c_devicePresent()`.
+**Speicherung** im NVS des ESP32 (`Preferences`, Namensraum `hairpin`,
+Schluessel `pg0`…`pg7`). Jedes Programm traegt `magic` und `version`; passt
+eines nicht, wird es verworfen. Sind gar keine Programme gespeichert, werden
+die Werkseinstellungen geladen. Beim Erweitern der Struktur muss
+`PROG_VERSION` erhoeht werden.
 
-**Buslast:** Der Maschinenstatus wird alle 300 ms geholt und zwischengespeichert
-(rund 3 zusaetzliche I2C-Zugriffe pro Sekunde). Alle 2 s wird geprueft, ob der
-Uno ueberhaupt antwortet; fehlt er, entfaellt der Statuspoll und die Kopfzeile
-zeigt `KEIN I2C`. Das Menue laesst sich damit auch ohne angeschlossene Slaves
-bedienen. Neu gezeichnet wird nur, was sich geaendert hat.
+**Schreibzeitpunkt:** 8 Sekunden nach der letzten Aenderung automatisch, dazu
+die Zeile „Speichern" fuer sofortiges Sichern. Die Kopfzeile zeigt `* offen`,
+solange etwas noch nicht im NVS steht.
 
----
+**Werkseinstellungen** bilden die frueheren Zustandsmaschinen P1, P2 und P3
+exakt nach. Eine Besonderheit bei Programm 1: dort liefen die beiden
+Wartezeiten der Vereinzelung nicht nacheinander, sondern beide ab dem Start
+der Vibration (1500 ms und 18000 ms ab demselben Zeitpunkt). Als
+aufeinanderfolgende Bloecke sind das 1500 ms und danach 16500 ms — die
+Gesamtdauer von 18000 ms bleibt gleich.
 
-## 3a. Programm-Parameter
-
-Alle Zeiten, Wege, Geschwindigkeiten und Servo-Stellwerte der drei Programme
-liegen in `src_esp32/params.h` in einem `struct Params` — je ein Satz pro
-Programm. Vorher standen diese Werte fest in `updateSequence()`, jede Aenderung
-erforderte neu zu flashen.
-
-**Speicherung.** Die drei Saetze liegen im NVS des ESP32 (`Preferences`,
-Namensraum `hairpin`, Schluessel `p1`/`p2`/`p3`) und ueberstehen Neustart und
-Stromausfall. Jeder Satz traegt `magic` und `version`; passt eines davon nicht,
-werden die Werkseinstellungen geladen statt Felder falsch zuzuordnen. Beim
-Erweitern der Struktur muss `PARAMS_VERSION` erhoeht werden.
-
-**Schreibzeitpunkt.** NVS-Schreibvorgaenge nutzen den Flash ab, deshalb wird
-nicht bei jedem Tastendruck geschrieben. `params_tick()` speichert 8 Sekunden
-nach der letzten Aenderung; zusaetzlich gibt es die Zeile „Speichern" fuer
-sofortiges Sichern. Die Kopfzeile zeigt `* offen`, solange Aenderungen noch
-nicht im NVS stehen, sonst `gesich.`.
-
-**Einheitlicher Typ.** Alle Felder sind `int32_t`. Dadurch kann das Menue jedes
-Feld ueber denselben Zeiger bearbeiten: der Zeilentyp `ROW_PARAM` speichert nur
-den Feld-Offset (`offsetof`), der erst beim Zeichnen auf den Satz des gerade
-bearbeiteten Programms angewendet wird. Eine Tabelle genuegt daher fuer alle
-drei Programme.
-
-**Wertebereich der Servos.** Die Grenzen gehen bis 1100, weil Programm 3 mit
-1050 arbeitet. Dieser Wert lag schon vor der Umstellung ausserhalb des
-dokumentierten Bereichs 0-1000 und wird hier nicht stillschweigend beschnitten.
-
-Besonders relevant sind die Greiferwerte in Programm 3, die von der
-Hairpin-Laenge abhaengen (die alten Quelltext-Kommentare stehen als
-Werkseinstellung in `params.cpp`):
+Die Greiferwerte in Programm 3 haengen von der Hairpin-Laenge ab (die alten
+Quelltext-Kommentare stehen als Werkseinstellung in `program.cpp`):
 
 | Hairpin | S2 | S3 |
 | :-- | :-- | :-- |
@@ -240,26 +231,42 @@ Werkseinstellung in `params.cpp`):
 | 69 mm | 430 | 380 |
 | 70 mm | 430 | 370 |
 
+Fuer jede Laenge ein eigenes Programm anzulegen ist damit: Programm 3 oeffnen,
+„Kopieren", im Ablauf die beiden Servo-Bloecke anpassen.
+
 ---
 
 ## 4. Naechste Ausbaustufe
+
+
+**Bloecke einfuegen, loeschen, verschieben.** Aktuell lassen sich die Werte
+eines Blocks aendern, aber die Struktur eines Ablaufs nicht. Fuer neue
+Programme aus einer Vorlage reicht das; um einen Ablauf voellig neu
+aufzubauen, braeuchte es einen Block-Editor.
+
+**Programmnamen aendern.** Kopien heissen automatisch „Programm N". Eine
+Texteingabe ueber fuenf Tasten ist unhandlich; sinnvoller waere eine Liste
+vorgegebener Namen, etwa nach Hairpin-Laenge.
 
 **Status-Menue.** `print_status()` und `scanI2CBus()` sind vorhanden, haengen
 aber am Serial-Monitor. Positionen, Servostellungen, Sensorwerte und I2C-Scan
 am Display verfuegbar zu machen, waere wenig Aufwand.
 
-**Klartext-Schrittanzeige.** `updateSequence()` koennte den aktuellen Schritt in
-eine Variable schreiben, die der Laufbildschirm anzeigt.
-
 ---
 
 ## 5. Behobene Altlasten
 
-Bei der Umstellung auf Parameter mit korrigiert:
+Beim Umbau auf Bloecke mit korrigiert — alle drei waren fehlende `break;` bzw.
+nicht erreichbare Zweige in der alten Zustandsmaschine:
 
-- `case P2_POSITION_Y_WAIT:` hatte kein `break;` und fiel in `P2_SERVO_INIT`
-  durch. Die Servos wurden dadurch schon gesetzt, waehrend Y noch fuhr.
-- `P1_DONE` sprang beim Wiederholen auf
-  `(currentProgram == 1) ? P1_HOME_Z : P2_HOME_Z`. Der zweite Zweig war nicht
-  erreichbar, da `P1_DONE` nur aus Programm 1 heraus angelaufen wird; Programm 3
-  hat mit `P3_DONE` einen eigenen Zweig. Jetzt direkt `P1_HOME_Z`.
+- `P2_POSITION_Y_WAIT` fiel in `P2_SERVO_INIT` durch: die Servos liefen los,
+  waehrend Y noch fuhr.
+- `P2_Y_FORWARD_WAIT` fiel in `P2_Y_ROBOT_WAIT` durch, und zwar mit einem
+  Zeitstempel aus einem frueheren Schritt. Die Roboter-Wartezeit in Programm 2
+  wurde dadurch faktisch uebersprungen.
+- `P1_DONE` sprang beim Wiederholen auf einen nicht erreichbaren
+  `P2_HOME_Z`-Zweig.
+
+Zusaetzlich prueft die Engine eine Fahrt erst 150 ms nach dem Absetzen des
+Befehls auf „fertig". Vorher konnte ein Block sofort als abgeschlossen gelten,
+wenn der Uno die Achse noch nicht als belegt gemeldet hatte.

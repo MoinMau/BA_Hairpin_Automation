@@ -24,6 +24,7 @@ void axis_home(uint8_t axis);
 void axis_enable();
 void axis_disable();
 StepperStatus get_stepper_status();
+bool is_axis_busy(uint8_t axis);        // pollt den Uno
 
 // --- Servos (Nano 0x32) ---
 void servo_set(uint8_t num, uint16_t value);   // Wert 0-1000
