@@ -100,32 +100,9 @@ void buttons_selfTest() {
   Serial.println();
 }
 
-// Solange ein Eingang klemmt, alle zwei Sekunden die Rohpegel ausgeben.
-// Damit laesst sich beim Messen direkt verfolgen, welcher Draht haengt.
-// Sobald alles frei ist, verstummt die Ausgabe von selbst.
-static void reportRawWhileLocked() {
-  static unsigned long last = 0;
-  bool any = false;
-  for (uint8_t i = 0; i < BTN_COUNT; i++) if (btnLocked[i]) { any = true; break; }
-  if (!any) return;
-  if (millis() - last < 2000) return;
-  last = millis();
-
-  Serial.print(F("[BTN] roh:"));
-  for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    Serial.print(' ');
-    Serial.print(BTN_NAMES[i]);
-    Serial.print('=');
-    Serial.print(BTN_IS_PRESSED(BTN_PINS[i]) ? F("gedrueckt") : F("frei"));
-  }
-  Serial.println();
-}
-
 ButtonId buttons_update() {
   unsigned long now = millis();
   ButtonId event = BTN_NONE;
-
-  reportRawWhileLocked();
 
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
     bool raw = BTN_IS_PRESSED(BTN_PINS[i]);

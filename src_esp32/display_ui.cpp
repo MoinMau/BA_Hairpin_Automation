@@ -7,6 +7,8 @@
 #include "config_display.h"
 #include "buttons.h"
 #include "machine_api.h"
+#include "params.h"
+#include <stddef.h>
 
 // ----------------------------------------------------------------------------
 // Display-Objekt.
@@ -51,7 +53,8 @@ static int16_t scrH = 128;
 enum RowType {
   ROW_SUBMENU,   // ENTER/RIGHT oeffnet eine Unterseite
   ROW_ACTION,    // ENTER loest eine Aktion aus
-  ROW_VALUE,     // LEFT/RIGHT aendert einen Zahlenwert
+  ROW_VALUE,     // LEFT/RIGHT aendert einen Zahlenwert (globale Variable)
+  ROW_PARAM,     // wie ROW_VALUE, aber ein Feld im Parametersatz des Programms
   ROW_CHOICE,    // LEFT/RIGHT waehlt aus einer festen Liste
   ROW_JOG,       // LEFT/RIGHT verfaehrt die Achse um die Schrittweite
   ROW_BACK       // ENTER/LEFT geht eine Ebene zurueck
@@ -65,8 +68,20 @@ enum PageId {
   PAGE_STEPPERS,
   PAGE_AXIS,
   PAGE_SERVOS,
+  PAGE_PARAMS,
+  PAGE_PARGROUP,
+  PAGE_PAR_SERVO,
+  PAGE_PAR_FEED,
+  PAGE_PAR_GRIP,
+  PAGE_PAR_Y,
+  PAGE_PAR_Z,
   PAGE_COUNT
 };
+
+// Auf diesen Seiten wird der Programmname vor den Titel gesetzt
+static inline bool isParamPage(uint8_t pg) {
+  return pg >= PAGE_PARGROUP && pg <= PAGE_PAR_Z;
+}
 
 // Aktions-IDs
 enum ActionId {
@@ -77,6 +92,8 @@ enum ActionId {
   ACT_HOME_ALL, ACT_DRV_ON, ACT_DRV_OFF,
   ACT_AXIS_HOME, ACT_AXIS_STOP,
   ACT_SERVO_APPLY, ACT_SERVO_INIT, ACT_SERVO_ALL_OFF,
+  ACT_PAR_P1, ACT_PAR_P2, ACT_PAR_P3,
+  ACT_PAR_SAVE, ACT_PAR_RESET,
   ACT_HALT
 };
 
@@ -85,7 +102,8 @@ struct MenuRow {
   RowType         type;
   uint8_t         action;      // ACT_* bzw. PAGE_* bei ROW_SUBMENU
   uint8_t         arg;         // z.B. Servo-Nummer
-  int32_t*        value;       // ROW_VALUE / ROW_CHOICE
+  int32_t*        value;       // ROW_VALUE / ROW_CHOICE: feste Variable
+  uint16_t        offset;      // ROW_PARAM: Feld-Offset in struct Params
   int32_t         vmin, vmax, vstep;
   const int32_t*  choices;     // ROW_CHOICE
   uint8_t         choiceCount;
@@ -98,14 +116,19 @@ struct MenuPage {
 };
 
 // --- Kuerzel, damit die Tabellen lesbar bleiben ---
-#define R_SUB(lbl, page)                 { lbl, ROW_SUBMENU, page, 0, nullptr, 0,0,0, nullptr, 0 }
-#define R_ACT(lbl, act)                  { lbl, ROW_ACTION,  act,  0, nullptr, 0,0,0, nullptr, 0 }
-#define R_ACTA(lbl, act, a)              { lbl, ROW_ACTION,  act,  a, nullptr, 0,0,0, nullptr, 0 }
-#define R_VAL(lbl, var, lo, hi, st)      { lbl, ROW_VALUE, ACT_NONE, 0, &(var), lo, hi, st, nullptr, 0 }
-#define R_VALA(lbl, var, lo, hi, st, act, a) { lbl, ROW_VALUE, act, a, &(var), lo, hi, st, nullptr, 0 }
-#define R_CHO(lbl, var, arr)             { lbl, ROW_CHOICE, ACT_NONE, 0, &(var), 0, (int32_t)(sizeof(arr)/sizeof(arr[0]))-1, 1, arr, sizeof(arr)/sizeof(arr[0]) }
-#define R_JOG(lbl)                       { lbl, ROW_JOG, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
-#define R_BACK()                         { "Zurueck", ROW_BACK, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
+#define R_SUB(lbl, page)                 { lbl, ROW_SUBMENU, page, 0, nullptr, 0, 0,0,0, nullptr, 0 }
+#define R_ACT(lbl, act)                  { lbl, ROW_ACTION,  act,  0, nullptr, 0, 0,0,0, nullptr, 0 }
+#define R_VAL(lbl, var, lo, hi, st)      { lbl, ROW_VALUE, ACT_NONE, 0, &(var), 0, lo, hi, st, nullptr, 0 }
+#define R_VALA(lbl, var, lo, hi, st, act, a) { lbl, ROW_VALUE, act, a, &(var), 0, lo, hi, st, nullptr, 0 }
+#define R_CHO(lbl, var, arr)             { lbl, ROW_CHOICE, ACT_NONE, 0, &(var), 0, 0, (int32_t)(sizeof(arr)/sizeof(arr[0]))-1, 1, arr, sizeof(arr)/sizeof(arr[0]) }
+#define R_JOG(lbl)                       { lbl, ROW_JOG, ACT_NONE, 0, nullptr, 0, 0,0,0, nullptr, 0 }
+#define R_BACK()                         { "Zurueck", ROW_BACK, ACT_NONE, 0, nullptr, 0, 0,0,0, nullptr, 0 }
+
+// Zeile, die ein Feld im Parametersatz des gerade bearbeiteten Programms
+// bearbeitet. Der Offset wird erst beim Zeichnen bzw. Aendern aufgeloest,
+// deshalb genuegt eine Tabelle fuer alle drei Programme.
+#define R_PAR(lbl, field, lo, hi, st)    { lbl, ROW_PARAM, ACT_NONE, 0, nullptr, \
+                                           (uint16_t)offsetof(Params, field), lo, hi, st, nullptr, 0 }
 
 // ============================================================================
 // EINSTELLBARE WERTE
@@ -120,6 +143,7 @@ static const int32_t JOG_STEPS[] = { 1, 10, 100, 1000 };
 
 static uint8_t selProgram = 1;      // im Programm-Menue gewaehltes Programm
 static uint8_t curAxis    = AXIS_X; // im Achs-Menue gewaehlte Achse
+static uint8_t editProg   = 0;      // 0..2, welcher Parametersatz bearbeitet wird
 
 // ============================================================================
 // SEITEN-TABELLEN
@@ -130,6 +154,7 @@ static const MenuRow ROWS_MAIN[] = {
   R_SUB("Programme",      PAGE_PROGRAMS),
   R_SUB("Schrittmotoren", PAGE_STEPPERS),
   R_SUB("Servomotoren",   PAGE_SERVOS),
+  R_SUB("Parameter",      PAGE_PARAMS),
   R_ACT("NOT-HALT",       ACT_HALT)
 };
 
@@ -181,13 +206,96 @@ static const MenuRow ROWS_SERVOS[] = {
   R_BACK()
 };
 
+// ============================================================================
+// PARAMETER-SEITEN
+// ----------------------------------------------------------------------------
+// Alle Zeilen zeigen ueber einen Feld-Offset in den Parametersatz des gerade
+// bearbeiteten Programms (editProg). Eine Tabelle genuegt daher fuer alle drei
+// Programme.
+//
+// Servo-Stellwerte gehen bis 1100, weil Programm 3 mit 1050 arbeitet - der
+// Wert lag schon vor der Umstellung ausserhalb des dokumentierten Bereichs
+// 0-1000 und wird hier nicht stillschweigend beschnitten.
+// ============================================================================
+
+static const MenuRow ROWS_PARAMS[] = {
+  R_ACT("Programm 1", ACT_PAR_P1),
+  R_ACT("Programm 2", ACT_PAR_P2),
+  R_ACT("Programm 3", ACT_PAR_P3),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PARGROUP[] = {
+  R_SUB("Servo-Grundstellung", PAGE_PAR_SERVO),
+  R_SUB("Vereinzelung",        PAGE_PAR_FEED),
+  R_SUB("Greifer",             PAGE_PAR_GRIP),
+  R_SUB("Achse Y",             PAGE_PAR_Y),
+  R_SUB("Achse Z / Vibration", PAGE_PAR_Z),
+  R_ACT("Speichern",           ACT_PAR_SAVE),
+  R_ACT("Werkseinstellungen",  ACT_PAR_RESET),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PAR_SERVO[] = {
+  R_PAR("Servo 0",      servoInit0,    0, 1100, 10),
+  R_PAR("Servo 1",      servoInit1,    0, 1100, 10),
+  R_PAR("Servo 2",      servoInit2,    0, 1100, 10),
+  R_PAR("Servo 3",      servoInit3,    0, 1100, 10),
+  R_PAR("Servo 4",      servoInit4,    0, 1100, 10),
+  R_PAR("Wartezeit ms", servoSettleMs, 0, 10000, 50),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PAR_FEED[] = {
+  R_PAR("Rutschzeit ms", slideWaitMs,    0, 60000, 100),
+  R_PAR("Schritt1 S1",   feed1Servo1,    0, 1100,   10),
+  R_PAR("Schritt2 S0",   feed2Servo0,    0, 1100,   10),
+  R_PAR("Dauer ms",      feedDurationMs, 0, 60000, 100),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PAR_GRIP[] = {
+  R_PAR("Zu    S2",     gripServo2, 0, 1100,  10),
+  R_PAR("Zu    S3",     gripServo3, 0, 1100,  10),
+  R_PAR("Zu    S4",     gripServo4, 0, 1100,  10),
+  R_PAR("Auf   S2",     openServo2, 0, 1100,  10),
+  R_PAR("Auf   S3",     openServo3, 0, 1100,  10),
+  R_PAR("Auf   S4",     openServo4, 0, 1100,  10),
+  R_PAR("Auf-Zeit ms",  openWaitMs, 0, 60000, 100),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PAR_Y[] = {
+  R_PAR("Startpos",     yStartPos,   -20000, 20000, 100),
+  R_PAR("Start St/s",   yStartSpeed,     50,  5000,  50),
+  R_PAR("Vorschub",     yFeedSteps,  -20000, 20000, 100),
+  R_PAR("Vor   St/s",   yFeedSpeed,      50,  5000,  50),
+  R_PAR("Roboter ms",   robotWaitMs,      0, 60000, 100),
+  R_BACK()
+};
+
+static const MenuRow ROWS_PAR_Z[] = {
+  R_PAR("Position",     zMovePos,   -5000, 5000, 10),
+  R_PAR("Geschw St/s",  zMoveSpeed,    10, 2000, 10),
+  R_PAR("Vib Amplitude",vibAmplitude,   0,  100,  1),
+  R_PAR("Vib Freq Hz",  vibFreqHz,      1,  200,  1),
+  R_BACK()
+};
+
 static const MenuPage PAGES[PAGE_COUNT] = {
   { "Hauptmenue",     ROWS_MAIN,     sizeof(ROWS_MAIN)     / sizeof(MenuRow) },
   { "Programme",      ROWS_PROGRAMS, sizeof(ROWS_PROGRAMS) / sizeof(MenuRow) },
   { nullptr,          ROWS_PROGRUN,  sizeof(ROWS_PROGRUN)  / sizeof(MenuRow) },
   { "Schrittmotoren", ROWS_STEPPERS, sizeof(ROWS_STEPPERS) / sizeof(MenuRow) },
   { nullptr,          ROWS_AXIS,     sizeof(ROWS_AXIS)     / sizeof(MenuRow) },
-  { "Servomotoren",   ROWS_SERVOS,   sizeof(ROWS_SERVOS)   / sizeof(MenuRow) }
+  { "Servomotoren",   ROWS_SERVOS,   sizeof(ROWS_SERVOS)   / sizeof(MenuRow) },
+  { "Parameter",      ROWS_PARAMS,   sizeof(ROWS_PARAMS)   / sizeof(MenuRow) },
+  { "Parameter",      ROWS_PARGROUP, sizeof(ROWS_PARGROUP) / sizeof(MenuRow) },
+  { "Servos",         ROWS_PAR_SERVO,sizeof(ROWS_PAR_SERVO)/ sizeof(MenuRow) },
+  { "Vereinzelung",   ROWS_PAR_FEED, sizeof(ROWS_PAR_FEED) / sizeof(MenuRow) },
+  { "Greifer",        ROWS_PAR_GRIP, sizeof(ROWS_PAR_GRIP) / sizeof(MenuRow) },
+  { "Achse Y",        ROWS_PAR_Y,    sizeof(ROWS_PAR_Y)    / sizeof(MenuRow) },
+  { "Achse Z",        ROWS_PAR_Z,    sizeof(ROWS_PAR_Z)    / sizeof(MenuRow) }
 };
 
 // ============================================================================
@@ -277,6 +385,11 @@ static void pollStatus(bool force = false) {
 // Rechter Teil der Kopfzeile. Auf der Achsseite ist die Istposition die
 // wichtigste Information, sonst der Gesamtzustand der Maschine.
 static void buildStatusText(char* out, size_t n) {
+  // Auf den Parameterseiten ist wichtiger, ob die Werte schon im NVS stehen
+  if (currentScreen == SCR_PAGE && isParamPage(curPage)) {
+    snprintf(out, n, "%s", params_isDirty() ? "* offen" : "gesich.");
+    return;
+  }
   if (!unoOnline) {
     snprintf(out, n, "KEIN I2C");
     return;
@@ -336,14 +449,23 @@ static void drawScrollMark() {
   drawTextRight(m, scrW - PAD_X, scrH - FOOTER_H + 3, COL_DIM);
 }
 
+// Zeiger auf den Wert einer Zeile. Bei ROW_PARAM wird der Feld-Offset erst
+// hier auf den Satz des gerade bearbeiteten Programms angewendet.
+static int32_t* rowValuePtr(const MenuRow& r) {
+  if (r.type == ROW_PARAM)
+    return (int32_t*)((uint8_t*)&gParams[editProg] + r.offset);
+  return r.value;
+}
+
 // Rechts stehender Wert einer Zeile als Text aufbereiten
 static void rowValueText(const MenuRow& r, char* out, size_t n) {
   switch (r.type) {
     case ROW_VALUE:
-      snprintf(out, n, "%ld", (long)*r.value);
+    case ROW_PARAM:
+      snprintf(out, n, "%ld", (long)*rowValuePtr(r));
       break;
     case ROW_CHOICE:
-      snprintf(out, n, "%ld", (long)r.choices[*r.value]);
+      snprintf(out, n, "%ld", (long)r.choices[*rowValuePtr(r)]);
       break;
     case ROW_JOG:
       snprintf(out, n, "%ld", (long)JOG_STEPS[jogStepIdx]);
@@ -398,6 +520,7 @@ static const char* footerHint() {
   const MenuRow& r = PAGES[curPage].rows[curRow];
   switch (r.type) {
     case ROW_VALUE:
+    case ROW_PARAM:
     case ROW_CHOICE: return "L/R aendern  ENTER ok";
     case ROW_JOG:    return "L/R = Achse verfahren";
     case ROW_SUBMENU:return "ENTER oeffnen";
@@ -406,9 +529,21 @@ static const char* footerHint() {
   }
 }
 
-static void drawPage() {
+// Seitentitel zusammensetzen. Parameterseiten bekommen die Programmnummer
+// vorangestellt, damit immer sichtbar ist, welcher Satz bearbeitet wird.
+static void composeTitle(char* out, size_t n) {
   const MenuPage& p = PAGES[curPage];
-  drawHeader(p.title ? p.title : dynTitle);
+  if (!p.title)                  strncpy(out, dynTitle, n - 1);
+  else if (isParamPage(curPage)) snprintf(out, n, "P%u %s",
+                                          (unsigned)(editProg + 1), p.title);
+  else                           strncpy(out, p.title, n - 1);
+  out[n - 1] = '\0';
+}
+
+static void drawPage() {
+  char title[26];
+  composeTitle(title, sizeof(title));
+  drawHeader(title);
   drawRows();
   drawFooter(footerHint());
   drawScrollMark();
@@ -602,6 +737,22 @@ static void runAction(uint8_t act, uint8_t arg) {
       break;
     }
 
+    // --- Parameter ---
+    case ACT_PAR_P1: case ACT_PAR_P2: case ACT_PAR_P3:
+      editProg = (act == ACT_PAR_P1) ? 0 : (act == ACT_PAR_P2) ? 1 : 2;
+      openPage(PAGE_PARGROUP);
+      break;
+
+    case ACT_PAR_SAVE:
+      params_save();
+      needsRedraw = true;
+      break;
+
+    case ACT_PAR_RESET:
+      params_reset(editProg);
+      needsRedraw = true;
+      break;
+
     case ACT_HALT: doHalt(); break;
 
     default: break;
@@ -610,23 +761,26 @@ static void runAction(uint8_t act, uint8_t arg) {
 
 // Wert einer Zeile veraendern. dir ist -1 oder +1.
 static void changeRow(const MenuRow& r, int dir) {
+  int32_t* vp = rowValuePtr(r);
   switch (r.type) {
-    case ROW_VALUE: {
-      int32_t v = *r.value + dir * r.vstep;
+    case ROW_VALUE:
+    case ROW_PARAM: {
+      int32_t v = *vp + dir * r.vstep;
       if (v < r.vmin) v = r.vmin;
       if (v > r.vmax) v = r.vmax;
-      if (v == *r.value) return;
-      *r.value = v;
+      if (v == *vp) return;
+      *vp = v;
+      if (r.type == ROW_PARAM) params_markDirty();
       if (r.action != ACT_NONE) runAction(r.action, r.arg);
-      needsRows = true;
-      break;
+      needsRows = true;     // der "* offen"-Merker wird ueber den
+      break;                // Statusvergleich in ui_update() erkannt
     }
     case ROW_CHOICE: {
-      int32_t v = *r.value + dir;
+      int32_t v = *vp + dir;
       if (v < 0) v = 0;
       if (v > r.vmax) v = r.vmax;
-      if (v == *r.value) return;
-      *r.value = v;
+      if (v == *vp) return;
+      *vp = v;
       needsRows = true;
       break;
     }
@@ -639,7 +793,8 @@ static void changeRow(const MenuRow& r, int dir) {
 }
 
 static bool rowConsumesLeftRight(const MenuRow& r) {
-  return r.type == ROW_VALUE || r.type == ROW_CHOICE || r.type == ROW_JOG;
+  return r.type == ROW_VALUE || r.type == ROW_PARAM
+      || r.type == ROW_CHOICE || r.type == ROW_JOG;
 }
 
 static void handlePageInput(ButtonId ev) {
@@ -835,7 +990,9 @@ void ui_update() {
     drawScrollMark();
     needsRows = false;
   } else if (needsHeader) {
-    drawHeader(PAGES[curPage].title ? PAGES[curPage].title : dynTitle);
+    char title[26];
+    composeTitle(title, sizeof(title));
+    drawHeader(title);
     needsHeader = false;
   }
 }

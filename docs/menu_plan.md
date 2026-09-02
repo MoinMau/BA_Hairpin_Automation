@@ -116,6 +116,17 @@ Init-Fix wahrscheinlich problemlos moeglich.
 │   ├─ Grundstellung              (Werte aus dem Start von Programm 1)
 │   └─ Zurueck
 │
+├─ Parameter
+│   ├─ Programm 1 ─┐
+│   ├─ Programm 2  ├→  Servo-Grundstellung   S0-S4, Wartezeit
+│   ├─ Programm 3 ─┘   Vereinzelung          Rutschzeit, S1, S0, Dauer
+│   │                   Greifer               zu S2/S3/S4, auf S2/S3/S4, Auf-Zeit
+│   │                   Achse Y               Startpos, Vorschub, Geschw., Roboterzeit
+│   │                   Achse Z / Vibration   Position, Geschw., Amplitude, Frequenz
+│   │                   Speichern
+│   │                   Werkseinstellungen
+│   └─ Zurueck
+│
 └─ NOT-HALT
 ```
 
@@ -162,13 +173,14 @@ Sequenz, kehrt die Anzeige selbsttaetig ins Menue zurueck.
 | `include/config_display.h` | Pins, Panel-Variante, SPI-Takt, Tastenparameter |
 | `src_esp32/buttons.*` | Entprellung, Autorepeat, Sperre klemmender Tasten |
 | `src_esp32/machine_api.h` | Deklariert die in `main.cpp` liegenden Maschinenfunktionen |
+| `src_esp32/params.*` | Parametersaetze der drei Programme, NVS-Speicherung |
 | `src_esp32/display_ui.*` | Menuemodell, Renderer, Navigation |
 | `src_esp32/main.cpp` | unveraendert bis auf `ui_begin()`/`ui_update()` und fuenf Zugriffsfunktionen |
 
 Das Menue steckt vollstaendig in Tabellen (`MenuPage` / `MenuRow`). Ein Renderer
 und ein Navigationsstack bedienen alle Seiten — ein neuer Menuepunkt ist eine
 Tabellenzeile, keine neue Zeichenfunktion. Zeilentypen: `ROW_SUBMENU`,
-`ROW_ACTION`, `ROW_VALUE`, `ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
+`ROW_ACTION`, `ROW_VALUE`, `ROW_PARAM`, `ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
 
 Seiten mit mehr als sieben Zeilen scrollen; die Position steht als `3/8` rechts
 in der Fusszeile, damit nichts die Werte ueberdeckt.
@@ -188,14 +200,49 @@ bedienen. Neu gezeichnet wird nur, was sich geaendert hat.
 
 ---
 
-## 4. Naechste Ausbaustufe
+## 3a. Programm-Parameter
 
-**Parameter-Menue.** In `updateSequence()` stehen die Werte fest im Code:
-`axis_rel(AXIS_Y, 2000, 800)`, `axis_vibrate(AXIS_Z, 1, 50)`, die 18000 ms
-Vereinzelungsdauer, `axis_abs(AXIS_Y, -7500, 2000)`. Jede Aenderung erfordert
-neu zu flashen. Ein Menuepunkt „Parameter" plus Speicherung im NVS des ESP32
-(`Preferences`) wuerde Parameterstudien direkt an der Anlage ermoeglichen — das
-ist der eigentliche Nutzen des Displays.
+Alle Zeiten, Wege, Geschwindigkeiten und Servo-Stellwerte der drei Programme
+liegen in `src_esp32/params.h` in einem `struct Params` — je ein Satz pro
+Programm. Vorher standen diese Werte fest in `updateSequence()`, jede Aenderung
+erforderte neu zu flashen.
+
+**Speicherung.** Die drei Saetze liegen im NVS des ESP32 (`Preferences`,
+Namensraum `hairpin`, Schluessel `p1`/`p2`/`p3`) und ueberstehen Neustart und
+Stromausfall. Jeder Satz traegt `magic` und `version`; passt eines davon nicht,
+werden die Werkseinstellungen geladen statt Felder falsch zuzuordnen. Beim
+Erweitern der Struktur muss `PARAMS_VERSION` erhoeht werden.
+
+**Schreibzeitpunkt.** NVS-Schreibvorgaenge nutzen den Flash ab, deshalb wird
+nicht bei jedem Tastendruck geschrieben. `params_tick()` speichert 8 Sekunden
+nach der letzten Aenderung; zusaetzlich gibt es die Zeile „Speichern" fuer
+sofortiges Sichern. Die Kopfzeile zeigt `* offen`, solange Aenderungen noch
+nicht im NVS stehen, sonst `gesich.`.
+
+**Einheitlicher Typ.** Alle Felder sind `int32_t`. Dadurch kann das Menue jedes
+Feld ueber denselben Zeiger bearbeiten: der Zeilentyp `ROW_PARAM` speichert nur
+den Feld-Offset (`offsetof`), der erst beim Zeichnen auf den Satz des gerade
+bearbeiteten Programms angewendet wird. Eine Tabelle genuegt daher fuer alle
+drei Programme.
+
+**Wertebereich der Servos.** Die Grenzen gehen bis 1100, weil Programm 3 mit
+1050 arbeitet. Dieser Wert lag schon vor der Umstellung ausserhalb des
+dokumentierten Bereichs 0-1000 und wird hier nicht stillschweigend beschnitten.
+
+Besonders relevant sind die Greiferwerte in Programm 3, die von der
+Hairpin-Laenge abhaengen (die alten Quelltext-Kommentare stehen als
+Werkseinstellung in `params.cpp`):
+
+| Hairpin | S2 | S3 |
+| :-- | :-- | :-- |
+| 62 mm | 580 | 350 |
+| 64 mm | 550 | 350 |
+| 69 mm | 430 | 380 |
+| 70 mm | 430 | 370 |
+
+---
+
+## 4. Naechste Ausbaustufe
 
 **Status-Menue.** `print_status()` und `scanI2CBus()` sind vorhanden, haengen
 aber am Serial-Monitor. Positionen, Servostellungen, Sensorwerte und I2C-Scan
@@ -206,16 +253,13 @@ eine Variable schreiben, die der Laufbildschirm anzeigt.
 
 ---
 
-## 5. Randnotizen zum bestehenden Code
+## 5. Behobene Altlasten
 
-Beim Einlesen aufgefallen, bewusst nicht geaendert, weil ausserhalb des
-Display-Themas:
+Bei der Umstellung auf Parameter mit korrigiert:
 
-- `src_esp32/main.cpp` — `case P2_POSITION_Y_WAIT:` hat kein `break;` und faellt
-  in `P2_SERVO_INIT` durch. Die Servos werden dadurch schon gesetzt, waehrend Y
-  noch faehrt.
-- `src_esp32/main.cpp` — beim Wiederholen springt `P1_DONE` auf
-  `(currentProgram == 1) ? P1_HOME_Z : P2_HOME_Z`. Programm 3 hat mit `P3_DONE`
-  aber einen eigenen Zweig, der Fall greift dort also nicht.
-
-Beides sollte vor der Umstellung auf ein Parameter-Menue angefasst werden.
+- `case P2_POSITION_Y_WAIT:` hatte kein `break;` und fiel in `P2_SERVO_INIT`
+  durch. Die Servos wurden dadurch schon gesetzt, waehrend Y noch fuhr.
+- `P1_DONE` sprang beim Wiederholen auf
+  `(currentProgram == 1) ? P1_HOME_Z : P2_HOME_Z`. Der zweite Zweig war nicht
+  erreichbar, da `P1_DONE` nur aus Programm 1 heraus angelaufen wird; Programm 3
+  hat mit `P3_DONE` einen eigenen Zweig. Jetzt direkt `P1_HOME_Z`.
