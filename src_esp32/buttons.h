@@ -18,8 +18,12 @@ enum ButtonId {
   BTN_NONE = 255
 };
 
-// Initialisiert die GPIOs als INPUT_PULLUP.
+// Initialisiert die GPIOs als INPUT_PULLUP und fuehrt den Selbsttest aus.
 void buttons_begin();
+
+// Prueft jeden Eingang gegen internen Pullup und Pulldown und meldet auf
+// Serial, ob er offen ist oder extern auf GND bzw. 3V3 festgehalten wird.
+void buttons_selfTest();
 
 // Muss zyklisch in loop() aufgerufen werden. Liefert genau ein Ereignis
 // pro Aufruf zurueck (BTN_NONE wenn nichts passiert ist).

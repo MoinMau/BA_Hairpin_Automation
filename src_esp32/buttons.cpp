@@ -39,23 +39,96 @@ void buttons_begin() {
     btnLocked[i]     = false;
   }
 
-  // Pullups einschwingen lassen, dann auf klemmende Tasten pruefen.
   delay(20);
+  buttons_selfTest();
+}
+
+// ----------------------------------------------------------------------------
+// Selbsttest der Eingaenge
+// ----------------------------------------------------------------------------
+// Jeder Pin wird einmal mit internem Pullup und einmal mit internem Pulldown
+// gelesen. Aus der Kombination laesst sich der Fehler eindeutig zuordnen:
+//
+//   Pullup HIGH / Pulldown LOW   -> Pin haengt an nichts ausser dem Taster.
+//                                   Genau so muss es im Ruhezustand sein.
+//   Pullup LOW  / Pulldown LOW   -> Pin ist fest mit GND verbunden. Entweder
+//                                   Kurzschluss auf der Platine oder der
+//                                   Taster ist dauerhaft geschlossen (bei
+//                                   4-poligen Mikrotastern: die beiden intern
+//                                   verbundenen Beine erwischt).
+//   Pullup HIGH / Pulldown HIGH  -> Pin ist fest mit 3V3 verbunden.
+//
+// Ein Pin, der dem jeweiligen Pull folgt, ist offen; ein Pin, der auf einem
+// Pegel klebt, ist extern festgehalten. Damit ist geklaert, ob der Fehler in
+// der Firmware oder in der Verdrahtung liegt.
+void buttons_selfTest() {
+  Serial.println(F("\n[BTN] Selbsttest der Eingaenge:"));
+
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    if (digitalRead(BTN_PINS[i]) != LOW) continue;
-    btnLocked[i]  = true;
-    btnLastRaw[i] = true;   // damit die Freigabe eine echte Flanke sieht
-    Serial.print(F("[BTN] "));
+    uint8_t pin = BTN_PINS[i];
+
+    pinMode(pin, INPUT_PULLUP);
+    delay(2);
+    bool up = (digitalRead(pin) == HIGH);
+
+    pinMode(pin, INPUT_PULLDOWN);
+    delay(2);
+    bool dn = (digitalRead(pin) == HIGH);
+
+    pinMode(pin, INPUT_PULLUP);   // Betriebszustand wiederherstellen
+    delay(2);
+
+    Serial.print(F("  "));
     Serial.print(BTN_NAMES[i]);
-    Serial.print(F(" (GPIO"));
-    Serial.print(BTN_PINS[i]);
-    Serial.println(F(") liegt beim Start auf LOW -> gesperrt."));
+    Serial.print(F("\tGPIO"));
+    Serial.print(pin);
+    Serial.print(F("\t"));
+
+    if (up && !dn) {
+      Serial.println(F("offen - ok"));
+    } else if (!up && !dn) {
+      Serial.println(F("FEST AUF GND - Kurzschluss oder Taster dauerhaft zu"));
+    } else if (up && dn) {
+      Serial.println(F("FEST AUF 3V3 - falsch verdrahtet"));
+    } else {
+      Serial.println(F("unplausibel - Verdrahtung pruefen"));
+    }
+
+    // Alles, was jetzt LOW ist, wird gesperrt, bis es einmal HIGH war.
+    if (digitalRead(pin) == LOW) {
+      btnLocked[i]  = true;
+      btnLastRaw[i] = true;
+    }
   }
+  Serial.println();
+}
+
+// Solange ein Eingang klemmt, alle zwei Sekunden die Rohpegel ausgeben.
+// Damit laesst sich beim Messen direkt verfolgen, welcher Draht haengt.
+// Sobald alles frei ist, verstummt die Ausgabe von selbst.
+static void reportRawWhileLocked() {
+  static unsigned long last = 0;
+  bool any = false;
+  for (uint8_t i = 0; i < BTN_COUNT; i++) if (btnLocked[i]) { any = true; break; }
+  if (!any) return;
+  if (millis() - last < 2000) return;
+  last = millis();
+
+  Serial.print(F("[BTN] roh:"));
+  for (uint8_t i = 0; i < BTN_COUNT; i++) {
+    Serial.print(' ');
+    Serial.print(BTN_NAMES[i]);
+    Serial.print('=');
+    Serial.print(digitalRead(BTN_PINS[i]) == LOW ? F("LOW") : F("HIGH"));
+  }
+  Serial.println();
 }
 
 ButtonId buttons_update() {
   unsigned long now = millis();
   ButtonId event = BTN_NONE;
+
+  reportRawWhileLocked();
 
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
     // Pullup: gedrueckt = LOW
