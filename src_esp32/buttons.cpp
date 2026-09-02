@@ -1,6 +1,7 @@
 #include "buttons.h"
 #include "config_display.h"
 
+
 // Zuordnung ButtonId -> GPIO (Reihenfolge muss zum enum passen)
 static const uint8_t BTN_PINS[BTN_COUNT] = {
   BTN_PIN_UP, BTN_PIN_DOWN, BTN_PIN_LEFT, BTN_PIN_RIGHT, BTN_PIN_ENTER
@@ -9,6 +10,16 @@ static const uint8_t BTN_PINS[BTN_COUNT] = {
 static const char* BTN_NAMES[BTN_COUNT] = {
   "UP", "DOWN", "LEFT", "RIGHT", "ENTER"
 };
+
+// Eingangsbeschaltung, siehe config_display.h. Der Rest des Moduls arbeitet
+// nur noch mit "gedrueckt ja/nein" und kennt die Polaritaet nicht.
+#if BTN_ACTIVE_HIGH
+  #define BTN_INPUT_MODE   INPUT_PULLDOWN
+  #define BTN_IS_PRESSED(p) (digitalRead(p) == HIGH)
+#else
+  #define BTN_INPUT_MODE   INPUT_PULLUP
+  #define BTN_IS_PRESSED(p) (digitalRead(p) == LOW)
+#endif
 
 // Zustandsspeicher je Taste
 static bool          btnStable[BTN_COUNT];      // entprellter Zustand (true = gedrueckt)
@@ -31,7 +42,7 @@ static bool btnRepeatAllowed(ButtonId id) {
 
 void buttons_begin() {
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    pinMode(BTN_PINS[i], INPUT_PULLUP);
+    pinMode(BTN_PINS[i], BTN_INPUT_MODE);
     btnStable[i]     = false;
     btnLastRaw[i]    = false;
     btnLastChange[i] = 0;
@@ -46,37 +57,20 @@ void buttons_begin() {
 // ----------------------------------------------------------------------------
 // Selbsttest der Eingaenge
 // ----------------------------------------------------------------------------
-// Jeder Pin wird einmal mit internem Pullup und einmal mit internem Pulldown
-// gelesen. Aus der Kombination laesst sich der Fehler eindeutig zuordnen:
-//
-//   Pullup HIGH / Pulldown LOW   -> Pin haengt an nichts ausser dem Taster.
-//                                   Genau so muss es im Ruhezustand sein.
-//   Pullup LOW  / Pulldown LOW   -> Pin ist fest mit GND verbunden. Entweder
-//                                   Kurzschluss auf der Platine oder der
-//                                   Taster ist dauerhaft geschlossen (bei
-//                                   4-poligen Mikrotastern: die beiden intern
-//                                   verbundenen Beine erwischt).
-//   Pullup HIGH / Pulldown HIGH  -> Pin ist fest mit 3V3 verbunden.
-//
-// Ein Pin, der dem jeweiligen Pull folgt, ist offen; ein Pin, der auf einem
-// Pegel klebt, ist extern festgehalten. Damit ist geklaert, ob der Fehler in
-// der Firmware oder in der Verdrahtung liegt.
+// Prueft, ob ein Eingang schon im Ruhezustand als gedrueckt gelesen wird. Das
+// ist praktisch immer ein Verdrahtungsfehler. Sieht ein Pin falsch aus, wird er
+// zusaetzlich gegen internen Pullup und Pulldown gelesen: ein offener Pin folgt
+// dem jeweiligen Pull, ein extern festgehaltener klebt auf seinem Pegel. Damit
+// ist entschieden, ob der Pin an GND oder an 3V3 haengt.
 void buttons_selfTest() {
   Serial.println(F("\n[BTN] Selbsttest der Eingaenge:"));
 
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
     uint8_t pin = BTN_PINS[i];
 
-    pinMode(pin, INPUT_PULLUP);
+    pinMode(pin, BTN_INPUT_MODE);
     delay(2);
-    bool up = (digitalRead(pin) == HIGH);
-
-    pinMode(pin, INPUT_PULLDOWN);
-    delay(2);
-    bool dn = (digitalRead(pin) == HIGH);
-
-    pinMode(pin, INPUT_PULLUP);   // Betriebszustand wiederherstellen
-    delay(2);
+    bool pressed = BTN_IS_PRESSED(pin);
 
     Serial.print(F("  "));
     Serial.print(BTN_NAMES[i]);
@@ -84,21 +78,24 @@ void buttons_selfTest() {
     Serial.print(pin);
     Serial.print(F("\t"));
 
-    if (up && !dn) {
-      Serial.println(F("offen - ok"));
-    } else if (!up && !dn) {
-      Serial.println(F("FEST AUF GND - Kurzschluss oder Taster dauerhaft zu"));
-    } else if (up && dn) {
-      Serial.println(F("FEST AUF 3V3 - falsch verdrahtet"));
-    } else {
-      Serial.println(F("unplausibel - Verdrahtung pruefen"));
+    if (!pressed) {
+      Serial.println(F("Ruhezustand - ok"));
+      continue;
     }
 
-    // Alles, was jetzt LOW ist, wird gesperrt, bis es einmal HIGH war.
-    if (digitalRead(pin) == LOW) {
-      btnLocked[i]  = true;
-      btnLastRaw[i] = true;
-    }
+    // Sieht falsch aus -> genauer nachsehen, woran der Pin haengt
+    pinMode(pin, INPUT_PULLUP);   delay(2);
+    bool up = (digitalRead(pin) == HIGH);
+    pinMode(pin, INPUT_PULLDOWN); delay(2);
+    bool dn = (digitalRead(pin) == HIGH);
+    pinMode(pin, BTN_INPUT_MODE); delay(2);
+
+    if (up && dn)       Serial.println(F("liegt fest auf 3V3 - Taster dauerhaft zu?"));
+    else if (!up && !dn) Serial.println(F("liegt fest auf GND"));
+    else                 Serial.println(F("wird als GEDRUECKT gelesen - Verdrahtung pruefen"));
+
+    btnLocked[i]  = true;
+    btnLastRaw[i] = true;   // damit die Freigabe eine echte Flanke sieht
   }
   Serial.println();
 }
@@ -119,7 +116,7 @@ static void reportRawWhileLocked() {
     Serial.print(' ');
     Serial.print(BTN_NAMES[i]);
     Serial.print('=');
-    Serial.print(digitalRead(BTN_PINS[i]) == LOW ? F("LOW") : F("HIGH"));
+    Serial.print(BTN_IS_PRESSED(BTN_PINS[i]) ? F("gedrueckt") : F("frei"));
   }
   Serial.println();
 }
@@ -131,8 +128,7 @@ ButtonId buttons_update() {
   reportRawWhileLocked();
 
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    // Pullup: gedrueckt = LOW
-    bool raw = (digitalRead(BTN_PINS[i]) == LOW);
+    bool raw = BTN_IS_PRESSED(BTN_PINS[i]);
 
     if (raw != btnLastRaw[i]) {
       btnLastRaw[i]    = raw;

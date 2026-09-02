@@ -37,10 +37,26 @@ Panel-Variante: `INITR_BLACKTAB`, Querformat um 180° gedreht (`TFT_ROTATION 3`)
 | RIGHT | 26 |
 | ENTER | 25 |
 
-Alle Taster schalten gegen GND, interne Pullups sind aktiv (gedrueckt = LOW),
-externe Widerstaende sind nicht noetig. Bei vierbeinigen Mikrotastern sind
-jeweils zwei Beine intern dauerhaft verbunden — die Kontakte muessen ueber die
-**Diagonale** abgegriffen werden, sonst liegt der Eingang permanent auf LOW.
+Die gemeinsame Schiene der Taster liegt auf **+3V3**, nicht auf GND.
+
+Grund: Die verbauten Taster haben einen festen Widerstand von rund 5 kΩ
+zwischen Signal und GND, parallel zum Kontakt. Gegen den internen Pullup
+(rund 45 kΩ) ergibt das im Ruhezustand nur 0,33 V — der Eingang laege dauerhaft
+auf LOW und ein Tastendruck waere nicht erkennbar. Mit der Schiene auf +3V3
+wirkt derselbe Widerstand als Pulldown:
+
+| Zustand | Pfad | Pegel |
+| :-- | :-- | :-- |
+| Ruhe | Pin ueber 5 kΩ nach GND | LOW |
+| Gedrueckt | Pin direkt auf +3V3 | HIGH |
+
+Zusaetzlich ist der interne Pulldown aktiv: bricht ein Draht, liest der Eingang
+weiterhin LOW statt zu floaten. Keiner der fuenf GPIOs ist ein Strapping-Pin,
+ein HIGH beim Booten ist also unkritisch. Umschaltbar ueber `BTN_ACTIVE_HIGH`
+in `config_display.h`.
+
+Bei vierbeinigen Mikrotastern sind jeweils zwei Beine intern dauerhaft
+verbunden — die Kontakte muessen ueber die **Diagonale** abgegriffen werden.
 
 Entprellung 30 ms, Autorepeat nach 450 ms mit 120 ms Takt. ENTER hat bewusst
 kein Autorepeat, damit ein langer Druck keine Aktion doppelt ausloest.

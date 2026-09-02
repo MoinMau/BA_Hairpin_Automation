@@ -73,8 +73,6 @@
 // ============================================================================
 // Konfiguration: Bedientasten (5-Wege-Navigation)
 // ----------------------------------------------------------------------------
-// Alle Taster schalten gegen GND, interne Pullups sind aktiv
-// -> gedrueckt = LOW. Kein externer Widerstand noetig.
 //
 //   UP     -> GPIO27
 //   DOWN   -> GPIO32
@@ -82,13 +80,30 @@
 //   RIGHT  -> GPIO26
 //   ENTER  -> GPIO25
 //
-// Belegung laut Verdrahtung vom 02.09.2026. Alle Taster schalten gegen GND,
-// die internen Pullups sind aktiv -> gedrueckt = LOW, keine externen
-// Widerstaende noetig.
+// Belegung laut Verdrahtung vom 02.09.2026.
+//
+// SCHALTUNG: Die verbauten Taster haben einen festen Widerstand von rund
+// 5 kOhm zwischen Signal und GND, parallel zum Kontakt. Gegen den internen
+// Pullup (rund 45 kOhm) ergibt das im Ruhezustand nur 0,33 V - der Eingang
+// laege dauerhaft auf LOW und ein Tastendruck waere nicht erkennbar.
+//
+// Deshalb ist die gemeinsame Schiene der Taster auf +3V3 gelegt statt auf GND.
+// Der 5-kOhm-Widerstand wirkt damit als Pulldown:
+//
+//     Ruhe      : Pin ueber 5 kOhm nach GND      -> LOW
+//     Gedrueckt : Pin direkt auf +3V3            -> HIGH
+//
+// Zusaetzlich ist der interne Pulldown aktiv. Bricht ein Draht, liest der
+// Eingang weiterhin LOW (nicht gedrueckt) statt zu floaten.
+// Keiner der fuenf GPIOs ist ein Strapping-Pin, ein HIGH beim Booten ist
+// also unkritisch.
 //
 // Diese GPIOs sind bewusst gewaehlt: keine Strapping-Pins, interne Pullups
 // vorhanden, kein Konflikt mit SPI (18/23/4/16/5) oder I2C (21/22).
 // ============================================================================
+
+// Taster gegen +3V3 (1) oder gegen GND (0). Siehe Erlaeuterung oben.
+#define BTN_ACTIVE_HIGH  1
 
 #define BTN_PIN_UP     27
 #define BTN_PIN_DOWN   32
