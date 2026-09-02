@@ -95,7 +95,7 @@ Init-Fix wahrscheinlich problemlos moeglich.
 [Kopfzeile: Seitentitel | BEREIT / X.Z / LAEUFT / * offen / KEIN I2C]
 │
 ├─ Programme                       (Liste, waechst mit angelegten Programmen)
-│   ├─ Programm 1
+│   ├─ Basisprogramm
 │   │   ├─ Durchlaeufe      25     Vorgabe je Programm, 1-999
 │   │   ├─ START
 │   │   ├─ Ablauf + Werte          → Blockliste mit Einstellungen, siehe unten
@@ -103,8 +103,8 @@ Init-Fix wahrscheinlich problemlos moeglich.
 │   │   ├─ Speichern
 │   │   ├─ Loeschen                → mit Rueckfrage
 │   │   └─ Zurueck
-│   ├─ Programm 2 …
-│   ├─ Neues Programm              → Kopie von Programm 3
+│   ├─ … weitere Kopien
+│   ├─ Neues Programm              → Kopie des Basisprogramms
 │   └─ Zurueck
 │
 ├─ Schrittmotoren
@@ -117,6 +117,12 @@ Init-Fix wahrscheinlich problemlos moeglich.
 ├─ Servomotoren
 │   ├─ Servo 0 D7 … Servo 5 D12    Stellwert, wirkt sofort
 │   ├─ Grundstellung
+│   └─ Zurueck
+│
+├─ Einstellungen
+│   ├─ Erklaerung                  → sechs Hilfeseiten zum System
+│   ├─ Alles speichern
+│   ├─ Werkseinstellungen          → mit Rueckfrage
 │   └─ Zurueck
 │
 └─ NOT-HALT
@@ -202,6 +208,24 @@ etwa einer Sekunde das Zehnfache, danach das Hundertfache.
 > (zwangsoeffnender Pilzkopf) und darf nicht davon abhaengen, dass Firmware,
 > I2C-Bus und Uno noch funktionieren.
 
+### Ruhezustand
+
+**Nach 1 Minute** ohne Tastendruck kehrt die Anzeige zum Hauptbildschirm
+zurueck, damit niemand versehentlich in einem Untermenue stehen bleibt. Der
+Namens-Editor ist ausgenommen, sonst ginge eine angefangene Eingabe verloren.
+
+**Nach 10 Minuten** werden die Schrittmotortreiber stromlos geschaltet
+(`axis_disable()`, entspricht `disAll`); sie werden sonst dauerhaft warm, ohne
+dass etwas passiert. Die Kopfzeile zeigt dann `MOT AUS`. Der naechste
+Tastendruck schaltet sie wieder ein.
+
+> **Nach dem Aufwecken ist die Position nicht mehr gesichert.** Die Motoren
+> waren stromlos und koennen sich mechanisch verstellt haben. Vor dem naechsten
+> absoluten Fahrbefehl gehoert eine Referenzfahrt.
+
+Waehrend ein Programm laeuft, gilt das System nicht als unbenutzt — beide
+Zeiten laufen dann nicht.
+
 ### Laufbildschirm
 
 Sobald ein Programm laeuft, schaltet die Oberflaeche automatisch um:
@@ -245,6 +269,10 @@ gelesen, damit eine Rampe vom tatsaechlichen Wert losfaehrt.
 Das Menue uebernimmt diese Grenzen, damit sich keine Werte einstellen lassen,
 die auf dem Nano wirkungslos verpuffen.
 
+**Ab Werk gibt es genau ein Programm**, das „Basisprogramm". Es bildet den
+frueheren Ablauf von Programm 3 nach — den vollstaendigsten der drei alten
+Zustandsmaschinen. Alle weiteren Programme entstehen als Kopie davon.
+
 **Grenzen:** 8 Programme, je 40 Bloecke. Das sind rund 2,8 KB im RAM und
 ebenso viel im NVS.
 
@@ -258,13 +286,6 @@ die Werkseinstellungen geladen. Beim Erweitern der Struktur muss
 die Zeile „Speichern" fuer sofortiges Sichern. Die Kopfzeile zeigt `* offen`,
 solange etwas noch nicht im NVS steht.
 
-**Werkseinstellungen** bilden die frueheren Zustandsmaschinen P1, P2 und P3
-exakt nach. Eine Besonderheit bei Programm 1: dort liefen die beiden
-Wartezeiten der Vereinzelung nicht nacheinander, sondern beide ab dem Start
-der Vibration (1500 ms und 18000 ms ab demselben Zeitpunkt). Als
-aufeinanderfolgende Bloecke sind das 1500 ms und danach 16500 ms — die
-Gesamtdauer von 18000 ms bleibt gleich.
-
 Die Greiferwerte in Programm 3 haengen von der Hairpin-Laenge ab (die alten
 Quelltext-Kommentare stehen als Werkseinstellung in `program.cpp`):
 
@@ -276,13 +297,13 @@ Quelltext-Kommentare stehen als Werkseinstellung in `program.cpp`):
 | 70 mm | 430 | 370 |
 
 Fuer jede Laenge ein eigenes Programm anzulegen ist damit: in der
-Programmliste „Neues Programm" (kopiert Programm 3), umbenennen, im Ablauf
-unter „Fixiereinheit" die beiden Servo-Bloecke anpassen.
+Programmliste „Neues Programm" (kopiert das Basisprogramm), umbenennen, im
+Ablauf unter „Fixiereinheit" die beiden Servo-Bloecke anpassen.
 
 **Umbenennen.** Der Zeicheneditor arbeitet mit den fuenf Tasten: UP/DOWN
 blaettert das Zeichen an der Cursorstelle durch, LEFT/RIGHT bewegt den Cursor,
 ENTER uebernimmt. Leerzeichen am Ende werden entfernt; ein leerer Name faellt
-auf „Programm N" zurueck.
+auf „Programm N" zurueck. Beliebig oft wiederholbar.
 
 ---
 
@@ -315,6 +336,14 @@ nicht erreichbare Zweige in der alten Zustandsmaschine:
 - Programm 3 setzte Servo 1 auf 1050. Der Nano begrenzt diesen Servo auf 540,
   der Wert hatte also nie eine Wirkung. In den Werkseinstellungen steht jetzt
   540, der Wert, der tatsaechlich anliegt.
+
+**Bildschirmwechsel aus dem Menue heraus** verloren ihr Neuzeichnen-Flag: nach
+`handlePageInput()` lief am Ende von `ui_update()` noch `drawPage()` und
+verbrauchte `needsRedraw`, bevor der neue Bildschirm es auswerten konnte. Der
+Namens-Editor, die Loesch-Rueckfrage und der Laufbildschirm waren dadurch aktiv,
+aber unsichtbar — sichtbar wurden sie erst nach dem naechsten Tastendruck.
+`ui_update()` kehrt jetzt sofort zurueck, wenn eine Eingabe den Bildschirm
+gewechselt hat.
 
 Zusaetzlich prueft die Engine eine Fahrt erst 150 ms nach dem Absetzen des
 Befehls auf „fertig". Vorher konnte ein Block sofort als abgeschlossen gelten,

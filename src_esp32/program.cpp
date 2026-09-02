@@ -3,7 +3,7 @@
 #include <Preferences.h>
 
 #define PROG_MAGIC     0x48505247   // 'HPRG'
-#define PROG_VERSION   2   // 2: Blockgruppen und Servo-Geschwindigkeit
+#define PROG_VERSION   3   // 3: nur noch ein Basisprogramm ab Werk
 
 // NVS-Schreibvorgaenge nutzen den Flash ab, deshalb wird erst gespeichert,
 // wenn eine Weile nichts mehr veraendert wurde.
@@ -68,60 +68,12 @@ static void beginProgram(Program& pr, const char* name) {
 // ----------------------------------------------------------------------------
 // Werkseinstellungen
 // ----------------------------------------------------------------------------
-// Bilden die frueheren Zustandsmaschinen P1, P2 und P3 exakt nach.
-//
-// Eine Besonderheit bei Programm 1: dort liefen die beiden Wartezeiten der
-// Vereinzelung nicht nacheinander, sondern beide ab dem Start der Vibration
-// (1500 ms und 18000 ms ab demselben Zeitpunkt). Als aufeinanderfolgende
-// Bloecke sind das 1500 ms und danach 16500 ms - die Gesamtdauer von 18000 ms
-// bleibt damit gleich.
+// Bildet den frueheren Ablauf von Programm 3 nach - den vollstaendigsten der
+// drei alten Zustandsmaschinen. Er ist ab Werk das einzige Programm; alle
+// weiteren entstehen als Kopie davon.
 
-static void defaultsProgram1(Program& pr) {
-  beginProgram(pr, "Programm 1");
-  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT);
-  addServoInit(pr);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SERVO_POS);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100, GRP_VIBRATION);
-  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50, GRP_VIBRATION);
-  addBlock(pr, BLK_SERVO,     1, 1000, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_SERVO,     0, 100, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_WAIT,      0, 16500, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_SERVO,     2, 800, 0, GRP_FIXATION);
-  addBlock(pr, BLK_SERVO,     3, 0, 0, GRP_FIXATION);
-  addBlock(pr, BLK_SERVO,     4, 0, 0, GRP_FIXATION);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_FIXATION);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y,  2000, 800, GRP_TRANSPORT);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -2000, 800, GRP_TRANSPORT);
-}
-
-static void defaultsProgram2(Program& pr) {
-  beginProgram(pr, "Programm 2");
-  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT);
-  addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0, GRP_INIT);
-  addBlock(pr, BLK_MOVE_ABS,  AXIS_Y, -7500, 2000, GRP_INIT);
-  addServoInit(pr);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SERVO_POS);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100, GRP_VIBRATION);
-  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50, GRP_VIBRATION);
-  addBlock(pr, BLK_WAIT,      0, 5000, 0, GRP_VIBRATION);
-  addBlock(pr, BLK_SERVO,     1, 1000, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_SERVO,     0, 100, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_WAIT,      0, 10000, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0, GRP_SINGULATION);
-  addBlock(pr, BLK_SERVO,     2, 300, 0, GRP_FIXATION);
-  addBlock(pr, BLK_SERVO,     3, 500, 0, GRP_FIXATION);
-  addBlock(pr, BLK_SERVO,     4, 60, 0, GRP_FIXATION);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_FIXATION);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, 7000, 2000, GRP_TRANSPORT);
-  addBlock(pr, BLK_WAIT,      0, 12000, 0, GRP_HANDOVER);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7000, 2000, GRP_TRANSPORT);
-}
-
-static void defaultsProgram3(Program& pr) {
-  beginProgram(pr, "Programm 3");
+static void defaultsBaseProgram(Program& pr) {
+  beginProgram(pr, "Basisprogramm");
   // Referenzfahrten nur im ersten Durchlauf, wie bisher
   addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT, BLK_FLAG_FIRST_ONLY);
   addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0, GRP_INIT, BLK_FLAG_FIRST_ONLY);
@@ -154,11 +106,10 @@ static void defaultsProgram3(Program& pr) {
   addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7400, 2000, GRP_TRANSPORT);
 }
 
+// Ab Werk gibt es genau ein Programm. Weitere entstehen als Kopien davon.
 void program_resetAll() {
   memset(gPrograms, 0, sizeof(gPrograms));
-  defaultsProgram1(gPrograms[0]);
-  defaultsProgram2(gPrograms[1]);
-  defaultsProgram3(gPrograms[2]);
+  defaultsBaseProgram(gPrograms[0]);
   program_markDirty();
 }
 
@@ -457,10 +408,9 @@ const char* block_groupName(uint8_t group) {
   return (group < GRP_COUNT) ? GROUP_NAMES[group] : "?";
 }
 
-// Programm 3 ist der vollstaendigste Ablauf und dient als Vorlage fuer neue
-// Programme. Fehlt es, wird das erste vorhandene Programm genommen.
+// Vorlage fuer neue Programme ist das erste vorhandene - ab Werk das
+// Basisprogramm.
 uint8_t program_templateIndex() {
-  if (gPrograms[2].used) return 2;
   for (uint8_t i = 0; i < PROG_MAX_COUNT; i++) if (gPrograms[i].used) return i;
   return 0;
 }

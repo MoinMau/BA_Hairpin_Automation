@@ -75,6 +75,7 @@ enum PageId {
   PAGE_STEPPERS,
   PAGE_AXIS,
   PAGE_SERVOS,
+  PAGE_SETTINGS,
   PAGE_COUNT
 };
 
@@ -86,6 +87,7 @@ enum ActionId {
   ACT_HOME_ALL, ACT_DRV_ON, ACT_DRV_OFF,
   ACT_AXIS_HOME, ACT_AXIS_STOP,
   ACT_SERVO_APPLY, ACT_SERVO_INIT,
+  ACT_HELP, ACT_FACTORY,
   ACT_HALT
 };
 
@@ -131,6 +133,7 @@ static const MenuRow ROWS_MAIN[] = {
   R_SUB("Programme",      PAGE_PROGRAMS),
   R_SUB("Schrittmotoren", PAGE_STEPPERS),
   R_SUB("Servomotoren",   PAGE_SERVOS),
+  R_SUB("Einstellungen",  PAGE_SETTINGS),
   R_ACT("NOT-HALT",       ACT_HALT)
 };
 
@@ -176,6 +179,13 @@ static const MenuRow ROWS_SERVOS[] = {
   R_BACK()
 };
 
+static const MenuRow ROWS_SETTINGS[] = {
+  R_ACT("Erklaerung",         ACT_HELP),
+  R_ACT("Alles speichern",    ACT_SAVE),
+  R_ACT("Werkseinstellungen", ACT_FACTORY),
+  R_BACK()
+};
+
 static const MenuPage PAGES[PAGE_COUNT] = {
   { "Hauptmenue",     ROWS_MAIN,     sizeof(ROWS_MAIN)     / sizeof(MenuRow) },
   { "Programme",      nullptr,       0 },   // dynamisch
@@ -184,14 +194,15 @@ static const MenuPage PAGES[PAGE_COUNT] = {
   { nullptr,          nullptr,       0 },   // dynamisch
   { "Schrittmotoren", ROWS_STEPPERS, sizeof(ROWS_STEPPERS) / sizeof(MenuRow) },
   { nullptr,          ROWS_AXIS,     sizeof(ROWS_AXIS)     / sizeof(MenuRow) },
-  { "Servomotoren",   ROWS_SERVOS,   sizeof(ROWS_SERVOS)   / sizeof(MenuRow) }
+  { "Servomotoren",   ROWS_SERVOS,   sizeof(ROWS_SERVOS)   / sizeof(MenuRow) },
+  { "Einstellungen",  ROWS_SETTINGS, sizeof(ROWS_SETTINGS) / sizeof(MenuRow) }
 };
 
 // ============================================================================
 // ZUSTAND
 // ============================================================================
 
-enum UiScreen { SCR_SPLASH, SCR_PAGE, SCR_RUNNING, SCR_HALTED, SCR_CONFIRM, SCR_RENAME };
+enum UiScreen { SCR_SPLASH, SCR_PAGE, SCR_RUNNING, SCR_HALTED, SCR_CONFIRM, SCR_RENAME, SCR_HELP };
 
 static UiScreen      currentScreen = SCR_SPLASH;
 static unsigned long splashStart   = 0;
@@ -231,6 +242,18 @@ static unsigned long presenceLast = 0;
 static unsigned long leftHoldStart = 0;
 #define HALT_HOLD_MS 1500
 
+// Leerlauf
+// ----------------------------------------------------------------------------
+// Nach einer Minute ohne Eingabe kehrt das Menue zum Hauptbildschirm zurueck,
+// damit niemand versehentlich in einem Untermenue stehen bleibt. Nach zehn
+// Minuten werden die Schrittmotortreiber stromlos geschaltet: sie werden sonst
+// dauerhaft warm, ohne dass etwas passiert. Der naechste Tastendruck schaltet
+// sie wieder ein.
+static unsigned long lastActivity = 0;
+static bool          driversOff   = false;
+#define IDLE_HOME_MS    60000UL
+#define IDLE_MOTORS_MS 600000UL
+
 // Beschleunigung beim Halten einer Richtungstaste. Ohne sie waere ein Weg
 // von 7400 Schritten bei Schrittweite 10 nicht in vertretbarer Zeit
 // einzustellen.
@@ -240,7 +263,7 @@ static int           editDir    = 0;
 
 // Bestaetigungsdialog
 static const char* confirmText = "";
-static uint8_t     confirmAct  = ACT_NONE;
+static uint8_t     confirmAct  = ACT_NONE;   // ACT_NONE = reiner Hinweis
 
 // Namens-Editor
 // Zeichensatz bewusst kurz gehalten: mit fuenf Tasten ist jedes zusaetzliche
@@ -251,6 +274,75 @@ static const char NAME_CHARS[] =
 
 static char    nameBuf[PROG_NAME_LEN] = "";
 static uint8_t namePos = 0;
+
+// --- Hilfe ---
+// Kurze Erklaerung des Systems, in Seiten zu je hoechstens acht Zeilen.
+// Eine Zeile fasst 26 Zeichen.
+struct HelpPage { const char* title; const char* lines[8]; };
+
+static const HelpPage HELP[] = {
+  { "Aufbau", {
+    "Drei Steuerungen am I2C:",
+    "",
+    "ESP32  Ablauf und Menue",
+    "Uno    Schrittmotoren",
+    "       X, Y und Z",
+    "Nano   Servos und",
+    "       Sensoren",
+    nullptr } },
+
+  { "Programme", {
+    "Ein Programm ist eine",
+    "Liste von Bloecken, die",
+    "nacheinander ablaufen.",
+    "",
+    "Ablauf + Werte zeigt sie",
+    "nach Funktion gruppiert",
+    "und laesst jeden Wert",
+    "einstellen." } },
+
+  { "Neues Programm", {
+    "Programme > Neues",
+    "Programm legt eine Kopie",
+    "des Basisprogramms an.",
+    "",
+    "Danach umbenennen und im",
+    "Ablauf die Werte an die",
+    "Hairpin-Laenge anpassen.",
+    nullptr } },
+
+  { "Bedienung", {
+    "UP/DOWN  Zeile waehlen",
+    "LEFT     zurueck, Wert -",
+    "RIGHT    oeffnen, Wert +",
+    "ENTER    ausloesen",
+    "",
+    "Taste halten aendert",
+    "Werte in groesseren",
+    "Schritten." } },
+
+  { "Ruhezustand", {
+    "Nach 1 Minute ohne",
+    "Eingabe springt das",
+    "Menue zum Hauptbild.",
+    "",
+    "Nach 10 Minuten werden",
+    "die Motoren stromlos.",
+    "Ein Tastendruck weckt",
+    "sie. Danach Referenz!" } },
+
+  { "Sicherheit", {
+    "NOT-HALT: LEFT 1,5 s",
+    "halten, oder ENTER",
+    "waehrend ein Programm",
+    "laeuft.",
+    "",
+    "Er stoppt nur ueber den",
+    "I2C-Bus und ersetzt",
+    "keinen Nothalt-Schalter." } }
+};
+#define HELP_COUNT (sizeof(HELP) / sizeof(HELP[0]))
+static uint8_t helpPage = 0;
 
 // ============================================================================
 // ZUGRIFF AUF ZEILENWERTE
@@ -375,6 +467,7 @@ static void buildStatusText(char* out, size_t n) {
     return;
   }
   if (program_isRunning()) { snprintf(out, n, "LAEUFT");   return; }
+  if (driversOff)          { snprintf(out, n, "MOT AUS");  return; }
   if (program_isDirty())   { snprintf(out, n, "* offen");  return; }
   if (!unoOnline)          { snprintf(out, n, "KEIN I2C"); return; }
   if (mStatus.axis_busy & 0x07) {
@@ -777,6 +870,26 @@ static void drawRename() {
   drawFooter("");
 }
 
+static void drawHelp() {
+  char t[26];
+  snprintf(t, sizeof(t), "%s  %u/%u", HELP[helpPage].title,
+           (unsigned)(helpPage + 1), (unsigned)HELP_COUNT);
+  tft.fillScreen(COL_BG);
+  drawHeader(t);
+
+  tft.setTextSize(1);
+  int16_t y = HEADER_H + 3;
+  for (uint8_t i = 0; i < 8; i++) {
+    const char* ln = HELP[helpPage].lines[i];
+    if (!ln) break;
+    tft.setTextColor(COL_TEXT);
+    tft.setCursor(PAD_X, y);
+    tft.print(ln);
+    y += 12;
+  }
+  drawFooter("L/R blaettern  ENTER ok");
+}
+
 static void drawConfirm() {
   tft.fillScreen(COL_BG);
   drawHeader("Bestaetigen");
@@ -784,12 +897,18 @@ static void drawConfirm() {
   tft.setTextColor(COL_TEXT);
   tft.setCursor(PAD_X, HEADER_H + 16);
   tft.print(confirmText);
-  tft.setTextColor(COL_ALARM);
-  tft.setCursor(PAD_X, HEADER_H + 44);
-  tft.print("ENTER = ja");
-  tft.setTextColor(COL_DIM);
-  tft.setCursor(PAD_X, HEADER_H + 58);
-  tft.print("LEFT  = abbrechen");
+  if (confirmAct == ACT_NONE) {
+    tft.setTextColor(COL_DIM);
+    tft.setCursor(PAD_X, HEADER_H + 44);
+    tft.print("ENTER = weiter");
+  } else {
+    tft.setTextColor(COL_ALARM);
+    tft.setCursor(PAD_X, HEADER_H + 44);
+    tft.print("ENTER = ja");
+    tft.setTextColor(COL_DIM);
+    tft.setCursor(PAD_X, HEADER_H + 58);
+    tft.print("LEFT  = abbrechen");
+  }
   drawFooter("");
 }
 
@@ -837,6 +956,9 @@ static void askConfirm(const char* text, uint8_t action) {
   needsRedraw   = true;
 }
 
+// Reiner Hinweis ohne Rueckfrage - fuer Aktionen, die gerade nicht gehen.
+static void showNote(const char* text) { askConfirm(text, ACT_NONE); }
+
 static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
   switch (act) {
 
@@ -849,7 +971,7 @@ static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
       // Vorlage ist Programm 3, der vollstaendigste Ablauf.
       int n = program_copy(program_templateIndex());
       if (n >= 0) { selProg = (uint8_t)n; openPage(PAGE_PROGRAM); }
-      else        needsRedraw = true;
+      else        showNote("Kein Platz mehr frei.");
       break;
     }
 
@@ -880,7 +1002,7 @@ static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
 
     case ACT_DELETE:
       if (!confirmed) {
-        if (program_count() <= 1) { needsRedraw = true; break; }
+        if (program_count() <= 1) { showNote("Letztes Programm bleibt."); break; }
         askConfirm("Programm loeschen?", ACT_DELETE);
         break;
       }
@@ -925,6 +1047,21 @@ static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
       needsRedraw = true;
       break;
     }
+
+    case ACT_HELP:
+      helpPage      = 0;
+      currentScreen = SCR_HELP;
+      needsRedraw   = true;
+      break;
+
+    case ACT_FACTORY:
+      if (!confirmed) { askConfirm("Alles zuruecksetzen?", ACT_FACTORY); break; }
+      program_resetAll();
+      selProg  = program_templateIndex();
+      selBlock = 0;
+      navDepth = 0;
+      openPage(PAGE_MAIN, false);
+      break;
 
     case ACT_HALT: doHalt(); break;
     default: break;
@@ -1063,6 +1200,7 @@ void ui_begin() {
 
   currentScreen = SCR_SPLASH;
   splashStart   = millis();
+  lastActivity  = millis();
   needsRedraw   = true;
 
   Serial.print(F("[UI] Display bereit: "));
@@ -1071,7 +1209,18 @@ void ui_begin() {
 
 void ui_update() {
   ButtonId ev = buttons_update();
-  if (ev != BTN_NONE) { Serial.print(F("[BTN] ")); Serial.println(buttons_name(ev)); }
+  if (ev != BTN_NONE) {
+    Serial.print(F("[BTN] ")); Serial.println(buttons_name(ev));
+    lastActivity = millis();
+    if (driversOff) {
+      axis_enable();
+      driversOff  = false;
+      needsHeader = true;
+      Serial.println(F("[UI] Motortreiber wieder eingeschaltet."));
+    }
+  }
+  // Waehrend ein Programm laeuft, gilt das System nicht als unbenutzt
+  if (program_isRunning()) lastActivity = millis();
 
   // --- NOT-HALT als globale Geste: LEFT 1,5 s halten ---
   // Auf Zeilen, in denen LEFT einen Wert verkleinert, gesperrt: dort haelt man
@@ -1081,7 +1230,7 @@ void ui_update() {
                    && rowConsumesLeftRight(pageRows()[curRow]);
   if (!buttons_isDown(BTN_LEFT) || leftEdits
       || currentScreen == SCR_HALTED || currentScreen == SCR_CONFIRM
-      || currentScreen == SCR_RENAME) {
+      || currentScreen == SCR_RENAME || currentScreen == SCR_HELP) {
     leftHoldStart = 0;
   } else {
     if (ev == BTN_LEFT && leftHoldStart == 0) leftHoldStart = millis();
@@ -1094,6 +1243,33 @@ void ui_update() {
 
   pollStatus();
 
+  // --- Leerlauf ---
+  unsigned long idleMs = millis() - lastActivity;
+
+  if (!driversOff && idleMs >= IDLE_MOTORS_MS) {
+    // Auch ohne erreichbaren Uno merken, sonst wuerde bei jedem Durchlauf
+    // erneut ein Befehl abgesetzt, der ohnehin fehlschlaegt.
+    driversOff  = true;
+    needsHeader = true;
+    if (unoOnline) axis_disable();
+    Serial.println(F("[UI] 10 min ohne Eingabe - Motortreiber stromlos."));
+  }
+
+  // Zurueck zum Hauptbildschirm. Der Namens-Editor ist ausgenommen, damit
+  // eine angefangene Eingabe nicht verloren geht.
+  if (idleMs >= IDLE_HOME_MS && currentScreen != SCR_SPLASH
+      && currentScreen != SCR_RUNNING && currentScreen != SCR_RENAME) {
+    if (currentScreen != SCR_PAGE || curPage != PAGE_MAIN || navDepth != 0) {
+      navDepth      = 0;
+      curPage       = PAGE_MAIN;
+      curRow        = 0;
+      scrollTop     = 0;
+      currentScreen = SCR_PAGE;
+      buildDynamicPage(PAGE_MAIN);
+      needsRedraw   = true;
+    }
+  }
+
   // --- Startbild ---
   if (currentScreen == SCR_SPLASH) {
     if (needsRedraw) { drawSplash(); needsRedraw = false; }
@@ -1102,6 +1278,22 @@ void ui_update() {
       if (buttons_isLocked((ButtonId)i)) { showMs = 8000; break; }
     if (ev != BTN_NONE || (millis() - splashStart) >= showMs) {
       curPage = PAGE_MAIN; curRow = 0; scrollTop = 0; navDepth = 0;
+      currentScreen = SCR_PAGE;
+      needsRedraw   = true;
+    }
+    return;
+  }
+
+  // --- Hilfe ---
+  if (currentScreen == SCR_HELP) {
+    if (needsRedraw) { drawHelp(); needsRedraw = false; }
+    if (ev == BTN_RIGHT || ev == BTN_DOWN) {
+      helpPage = (helpPage + 1) % HELP_COUNT;
+      needsRedraw = true;
+    } else if (ev == BTN_LEFT || ev == BTN_UP) {
+      helpPage = (helpPage == 0) ? HELP_COUNT - 1 : helpPage - 1;
+      needsRedraw = true;
+    } else if (ev == BTN_ENTER) {
       currentScreen = SCR_PAGE;
       needsRedraw   = true;
     }
@@ -1146,8 +1338,10 @@ void ui_update() {
   // --- Bestaetigungsdialog ---
   if (currentScreen == SCR_CONFIRM) {
     if (needsRedraw) { drawConfirm(); needsRedraw = false; }
-    if (ev == BTN_ENTER)     runAction(confirmAct, 0, true);
-    else if (ev == BTN_LEFT) { currentScreen = SCR_PAGE; needsRedraw = true; }
+    if (ev == BTN_ENTER) {
+      if (confirmAct == ACT_NONE) { currentScreen = SCR_PAGE; needsRedraw = true; }
+      else                        runAction(confirmAct, 0, true);
+    } else if (ev == BTN_LEFT) { currentScreen = SCR_PAGE; needsRedraw = true; }
     return;
   }
 
@@ -1170,6 +1364,11 @@ void ui_update() {
 
   // --- Menueseiten ---
   if (ev != BTN_NONE) handlePageInput(ev);
+
+  // Hat die Eingabe den Bildschirm gewechselt (Editor, Rueckfrage, Start),
+  // darf hier nicht mehr die Menueseite gezeichnet werden - sonst wuerde
+  // deren needsRedraw verbraucht und der neue Bildschirm nie erscheinen.
+  if (currentScreen != SCR_PAGE) return;
 
   if (!needsRedraw && !needsRows) {
     char now[sizeof(lastStatusText)];
