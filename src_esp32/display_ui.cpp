@@ -8,6 +8,7 @@
 #include "buttons.h"
 #include "machine_api.h"
 #include "program.h"
+#include "config_nano.h"   // Servo-Limits: die Grenzen, die der Nano wirklich zulaesst
 
 // ----------------------------------------------------------------------------
 // Display-Objekt (Software- oder Hardware-SPI, siehe config_display.h)
@@ -57,6 +58,7 @@ enum RowType {
   ROW_PROGFIELD,   // Feld im gewaehlten Programm
   ROW_BLOCKFIELD,  // Feld im gewaehlten Block
   ROW_INFO,        // nur Anzeige
+  ROW_GROUP,       // Ueberschrift einer Funktionsgruppe, nicht anwaehlbar
   ROW_BACK
 };
 
@@ -78,7 +80,7 @@ enum PageId {
 
 enum ActionId {
   ACT_NONE = 0,
-  ACT_OPEN_PROG, ACT_NEW_PROG, ACT_START, ACT_COPY, ACT_DELETE, ACT_SAVE,
+  ACT_OPEN_PROG, ACT_NEW_PROG, ACT_START, ACT_RENAME, ACT_DELETE, ACT_SAVE,
   ACT_OPEN_BLOCK,
   ACT_AXIS_X, ACT_AXIS_Y, ACT_AXIS_Z,
   ACT_HOME_ALL, ACT_DRV_ON, ACT_DRV_OFF,
@@ -114,6 +116,7 @@ struct MenuPage {
 #define R_PROG(lbl, lo, hi, st)       { lbl, ROW_PROGFIELD, ACT_NONE, 0, nullptr, lo, hi, st, nullptr, 0 }
 #define R_BLK(lbl, field, lo, hi, st) { lbl, ROW_BLOCKFIELD, ACT_NONE, field, nullptr, lo, hi, st, nullptr, 0 }
 #define R_INFO(lbl)                   { lbl, ROW_INFO, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
+#define R_GROUP(lbl)                  { lbl, ROW_GROUP, ACT_NONE, 0, nullptr, 0,0,0, nullptr, 0 }
 
 // ============================================================================
 // FESTE SEITEN
@@ -132,12 +135,12 @@ static const MenuRow ROWS_MAIN[] = {
 };
 
 static const MenuRow ROWS_PROGRAM[] = {
-  R_PROG("Durchlaeufe", 1, 999, 1),
-  R_ACT ("START",       ACT_START),
-  R_SUB ("Ablauf",      PAGE_FLOW),
-  R_ACT ("Kopieren",    ACT_COPY),
-  R_ACT ("Speichern",   ACT_SAVE),
-  R_ACT ("Loeschen",    ACT_DELETE),
+  R_PROG("Durchlaeufe",     1, 999, 1),
+  R_ACT ("START",           ACT_START),
+  R_SUB ("Ablauf + Werte",  PAGE_FLOW),
+  R_ACT ("Umbenennen",      ACT_RENAME),
+  R_ACT ("Speichern",       ACT_SAVE),
+  R_ACT ("Loeschen",        ACT_DELETE),
   R_BACK()
 };
 
@@ -160,13 +163,15 @@ static const MenuRow ROWS_AXIS[] = {
   R_BACK()
 };
 
+// Die Grenzen kommen aus config_nano.h. Der Nano begrenzt jeden Servo auf
+// seinen eigenen Bereich; ein groesserer Wert im Menue haette keine Wirkung.
 static const MenuRow ROWS_SERVOS[] = {
-  R_VALA("Servo 0  D7",  servoVal[0], 0, 1100, 10, ACT_SERVO_APPLY, 0),
-  R_VALA("Servo 1  D8",  servoVal[1], 0, 1100, 10, ACT_SERVO_APPLY, 1),
-  R_VALA("Servo 2  D9",  servoVal[2], 0, 1100, 10, ACT_SERVO_APPLY, 2),
-  R_VALA("Servo 3  D10", servoVal[3], 0, 1100, 10, ACT_SERVO_APPLY, 3),
-  R_VALA("Servo 4  D11", servoVal[4], 0, 1100, 10, ACT_SERVO_APPLY, 4),
-  R_VALA("Servo 5  D12", servoVal[5], 0, 1100, 10, ACT_SERVO_APPLY, 5),
+  R_VALA("Servo 0  D7",  servoVal[0], S0_MIN, S0_MAX, 10, ACT_SERVO_APPLY, 0),
+  R_VALA("Servo 1  D8",  servoVal[1], S1_MIN, S1_MAX, 10, ACT_SERVO_APPLY, 1),
+  R_VALA("Servo 2  D9",  servoVal[2], S2_MIN, S2_MAX, 10, ACT_SERVO_APPLY, 2),
+  R_VALA("Servo 3  D10", servoVal[3], S3_MIN, S3_MAX, 10, ACT_SERVO_APPLY, 3),
+  R_VALA("Servo 4  D11", servoVal[4], S4_MIN, S4_MAX, 10, ACT_SERVO_APPLY, 4),
+  R_VALA("Servo 5  D12", servoVal[5], S5_MIN, S5_MAX, 10, ACT_SERVO_APPLY, 5),
   R_ACT ("Grundstellung", ACT_SERVO_INIT),
   R_BACK()
 };
@@ -186,7 +191,7 @@ static const MenuPage PAGES[PAGE_COUNT] = {
 // ZUSTAND
 // ============================================================================
 
-enum UiScreen { SCR_SPLASH, SCR_PAGE, SCR_RUNNING, SCR_HALTED, SCR_CONFIRM };
+enum UiScreen { SCR_SPLASH, SCR_PAGE, SCR_RUNNING, SCR_HALTED, SCR_CONFIRM, SCR_RENAME };
 
 static UiScreen      currentScreen = SCR_SPLASH;
 static unsigned long splashStart   = 0;
@@ -202,7 +207,7 @@ static uint8_t selBlock = 0;   // gewaehlter Block
 static uint8_t curAxis  = AXIS_X;
 
 // Puffer fuer dynamisch gebaute Seiten
-#define DYN_MAX   (PROG_MAX_BLOCKS + 4)
+#define DYN_MAX   (PROG_MAX_BLOCKS + GRP_COUNT + 4)
 static MenuRow dynRows[DYN_MAX];
 static uint8_t dynCount = 0;
 static char    dynLabel[DYN_MAX][22];
@@ -236,6 +241,16 @@ static int           editDir    = 0;
 // Bestaetigungsdialog
 static const char* confirmText = "";
 static uint8_t     confirmAct  = ACT_NONE;
+
+// Namens-Editor
+// Zeichensatz bewusst kurz gehalten: mit fuenf Tasten ist jedes zusaetzliche
+// Zeichen ein weiterer Tastendruck beim Durchblaettern.
+static const char NAME_CHARS[] =
+  " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._";
+#define NAME_CHAR_COUNT (sizeof(NAME_CHARS) - 1)
+
+static char    nameBuf[PROG_NAME_LEN] = "";
+static uint8_t namePos = 0;
 
 // ============================================================================
 // ZUGRIFF AUF ZEILENWERTE
@@ -406,13 +421,19 @@ static void rowValueText(const MenuRow& r, char* out, size_t n) {
     case ROW_PROGFIELD:
       snprintf(out, n, "%ld", (long)rowGet(r));
       break;
-    case ROW_BLOCKFIELD:
-      if (r.arg == BF_FLAG) snprintf(out, n, "%s", rowGet(r) ? "ja" : "nein");
-      else if (r.arg == BF_IDX && selBlockPtr()
-               && selBlockPtr()->type != BLK_SERVO)
+    case ROW_BLOCKFIELD: {
+      const Block* b = selBlockPtr();
+      if (r.arg == BF_FLAG) {
+        snprintf(out, n, "%s", rowGet(r) ? "ja" : "nein");
+      } else if (r.arg == BF_IDX && b && b->type != BLK_SERVO) {
         snprintf(out, n, "%c", (char)('X' + rowGet(r)));
-      else snprintf(out, n, "%ld", (long)rowGet(r));
+      } else if (r.arg == BF_V2 && b && b->type == BLK_SERVO && rowGet(r) == 0) {
+        snprintf(out, n, "sofort");
+      } else {
+        snprintf(out, n, "%ld", (long)rowGet(r));
+      }
       break;
+    }
     case ROW_CHOICE:
       snprintf(out, n, "%ld", (long)r.choices[rowGet(r)]);
       break;
@@ -447,7 +468,16 @@ static void drawRows() {
     int16_t        y   = HEADER_H + i * ROW_H;
     bool           sel = (idx == curRow);
 
-    if (sel) tft.fillRect(0, y, scrW, ROW_H - 1, COL_SEL_BG);
+    if (sel && r.type != ROW_GROUP) tft.fillRect(0, y, scrW, ROW_H - 1, COL_SEL_BG);
+
+    if (r.type == ROW_GROUP) {
+      // Abschnittsueberschrift: eigene Farbe und Trennlinie
+      tft.setTextColor(COL_SEL_BG);
+      tft.setCursor(PAD_X, y + 3);
+      tft.print(r.label);
+      tft.drawFastHLine(PAD_X, y + ROW_H - 2, scrW - 2 * PAD_X, COL_SEL_BG);
+      continue;
+    }
 
     uint16_t col = sel ? COL_SEL_TEXT
                  : (r.type == ROW_ACTION && (r.action == ACT_HALT
@@ -523,7 +553,19 @@ static void buildProgramList() {
 static void buildFlowList() {
   Program& pr = gPrograms[selProg];
   dynCount = 0;
+  uint8_t lastGroup = 0xFF;
+
   for (uint8_t i = 0; i < pr.blockCount; i++) {
+    // Ueberschrift, sobald ein neuer Funktionsabschnitt beginnt
+    if (pr.blocks[i].group != lastGroup) {
+      lastGroup = pr.blocks[i].group;
+      snprintf(dynLabel[dynCount], sizeof(dynLabel[0]), "%s",
+               block_groupName(lastGroup));
+      MenuRow g = { dynLabel[dynCount], ROW_GROUP, ACT_NONE, 0,
+                    nullptr, 0,0,0, nullptr, 0 };
+      addDynRow(g);
+    }
+
     char desc[26];
     block_describe(pr.blocks[i], desc, sizeof(desc));
     // Bloecke, die nur im ersten Durchlauf laufen, mit * kennzeichnen
@@ -571,9 +613,13 @@ static void buildBlockPage() {
       break;
     }
     case BLK_SERVO: {
-      MenuRow a = R_BLK("Servo Nr", BF_IDX, 0,    5, 1);
-      MenuRow v = R_BLK("Stellwert",BF_V1,  0, 1100, 10);
-      addDynRow(a); addDynRow(v);
+      // Grenzen des jeweiligen Servos aus der Nano-Konfiguration
+      uint8_t sn = (b->idx < 6) ? b->idx : 0;
+      MenuRow a = R_BLK("Servo Nr",  BF_IDX, 0, 5, 1);
+      MenuRow v = R_BLK("Stellwert", BF_V1,
+                        SERVO_MIN_LIMITS[sn], SERVO_MAX_LIMITS[sn], 10);
+      MenuRow g = R_BLK("Geschw /s", BF_V2, 0, 2000, 10);
+      addDynRow(a); addDynRow(v); addDynRow(g);
       break;
     }
     case BLK_WAIT: {
@@ -700,6 +746,37 @@ static void drawHalted() {
   tft.setCursor(14, 92); tft.print("Taste druecken = weiter");
 }
 
+static void drawRename() {
+  tft.fillScreen(COL_BG);
+  drawHeader("Umbenennen");
+
+  // Bei Textgroesse 2 passen zwoelf Zeichen nebeneinander. Laengere Namen
+  // laufen im Fenster mit, das dem Cursor folgt.
+  const uint8_t VIS = 12;
+  uint8_t first = (namePos < VIS) ? 0 : (uint8_t)(namePos - VIS + 1);
+
+  tft.setTextSize(2);
+  int16_t x0 = PAD_X, y0 = HEADER_H + 20;
+  for (uint8_t k = 0; k < VIS; k++) {
+    uint8_t i = first + k;
+    if (i >= PROG_NAME_LEN - 1) break;
+    char c = nameBuf[i] ? nameBuf[i] : ' ';
+    int16_t x = x0 + k * 12;
+    tft.setTextColor(i == namePos ? COL_SEL_BG : COL_TEXT);
+    tft.setCursor(x, y0);
+    tft.print(c);
+    if (i == namePos) tft.drawFastHLine(x, y0 + 18, 11, COL_SEL_BG);
+  }
+
+  tft.setTextSize(1);
+  tft.setTextColor(COL_DIM);
+  tft.setCursor(PAD_X, HEADER_H + 52);  tft.print("UP/DOWN  Zeichen");
+  tft.setCursor(PAD_X, HEADER_H + 64);  tft.print("L/R      Position");
+  tft.setTextColor(COL_OK);
+  tft.setCursor(PAD_X, HEADER_H + 78);  tft.print("ENTER    uebernehmen");
+  drawFooter("");
+}
+
 static void drawConfirm() {
   tft.fillScreen(COL_BG);
   drawHeader("Bestaetigen");
@@ -720,6 +797,9 @@ static void drawConfirm() {
 // NAVIGATION UND AKTIONEN
 // ============================================================================
 
+static bool rowSelectable(const MenuRow& r);
+static void moveCursor(int dir);
+
 static void openPage(uint8_t page, bool push = true) {
   if (push && navDepth < (sizeof(navStack) / sizeof(navStack[0])))
     navStack[navDepth++] = { curPage, curRow, scrollTop };
@@ -728,6 +808,8 @@ static void openPage(uint8_t page, bool push = true) {
   scrollTop     = 0;
   currentScreen = SCR_PAGE;
   buildDynamicPage(page);
+  // Erste Zeile kann eine Ueberschrift sein
+  if (pageCount() && !rowSelectable(pageRows()[0])) moveCursor(+1);
   needsRedraw   = true;
 }
 
@@ -764,12 +846,8 @@ static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
       break;
 
     case ACT_NEW_PROG: {
-      // Kopiert immer das erste Programm als Vorlage. Wer von einem anderen
-      // ableiten will, nimmt dort die Zeile "Kopieren" - das ist eindeutiger,
-      // als hier still das zuletzt geoeffnete Programm zu verwenden.
-      uint8_t base = 0;
-      while (base < PROG_MAX_COUNT && !gPrograms[base].used) base++;
-      int n = (base < PROG_MAX_COUNT) ? program_copy(base) : -1;
+      // Vorlage ist Programm 3, der vollstaendigste Ablauf.
+      int n = program_copy(program_templateIndex());
       if (n >= 0) { selProg = (uint8_t)n; openPage(PAGE_PROGRAM); }
       else        needsRedraw = true;
       break;
@@ -781,10 +859,17 @@ static void runAction(uint8_t act, uint8_t arg, bool confirmed = false) {
       needsRedraw   = true;
       break;
 
-    case ACT_COPY: {
-      int n = program_copy(selProg);
-      if (n >= 0) { selProg = (uint8_t)n; buildDynamicPage(PAGE_PROGRAM); }
-      needsRedraw = true;
+    case ACT_RENAME: {
+      // Puffer vollstaendig mit Leerzeichen fuellen: sonst entstuende beim
+      // Bearbeiten hinter dem Namensende eine Luecke, an der der Name spaeter
+      // abgeschnitten wuerde.
+      const char* cur = gPrograms[selProg].name;
+      for (uint8_t i = 0; i < PROG_NAME_LEN - 1; i++)
+        nameBuf[i] = (i < strlen(cur)) ? cur[i] : ' ';
+      nameBuf[PROG_NAME_LEN - 1] = '\0';
+      namePos       = 0;
+      currentScreen = SCR_RENAME;
+      needsRedraw   = true;
       break;
     }
 
@@ -870,6 +955,34 @@ static void changeRow(const MenuRow& r, int dir) {
 
   rowSet(r, v);
   if (r.action != ACT_NONE) runAction(r.action, r.arg);
+
+  // Beim Wechsel der Servo-Nummer gelten andere Stellwert-Grenzen,
+  // deshalb die Seite neu aufbauen.
+  if (r.type == ROW_BLOCKFIELD && r.arg == BF_IDX && curPage == PAGE_BLOCK) {
+    uint8_t keep = curRow;
+    buildDynamicPage(PAGE_BLOCK);
+    if (keep < pageCount()) curRow = keep;
+    needsRedraw = true;
+    return;
+  }
+  needsRows = true;
+}
+
+// Ueberschriften und Infozeilen sind nicht anwaehlbar
+static bool rowSelectable(const MenuRow& r) {
+  return r.type != ROW_GROUP && r.type != ROW_INFO;
+}
+
+// Naechste anwaehlbare Zeile in Richtung dir suchen
+static void moveCursor(int dir) {
+  uint8_t cnt = pageCount();
+  if (cnt == 0) return;
+  const MenuRow* rows = pageRows();
+  for (uint8_t n = 0; n < cnt; n++) {
+    curRow = (dir > 0) ? (uint8_t)((curRow + 1) % cnt)
+                       : (uint8_t)((curRow == 0) ? cnt - 1 : curRow - 1);
+    if (rowSelectable(rows[curRow])) break;
+  }
   needsRows = true;
 }
 
@@ -881,12 +994,10 @@ static void handlePageInput(ButtonId ev) {
 
   switch (ev) {
     case BTN_UP:
-      curRow    = (curRow == 0) ? (cnt - 1) : (curRow - 1);
-      needsRows = true;
+      moveCursor(-1);
       break;
     case BTN_DOWN:
-      curRow    = (curRow + 1) % cnt;
-      needsRows = true;
+      moveCursor(+1);
       break;
     case BTN_LEFT:
       if (rowConsumesLeftRight(r)) changeRow(r, -1);
@@ -969,7 +1080,8 @@ void ui_update() {
   bool leftEdits = (currentScreen == SCR_PAGE) && pageCount()
                    && rowConsumesLeftRight(pageRows()[curRow]);
   if (!buttons_isDown(BTN_LEFT) || leftEdits
-      || currentScreen == SCR_HALTED || currentScreen == SCR_CONFIRM) {
+      || currentScreen == SCR_HALTED || currentScreen == SCR_CONFIRM
+      || currentScreen == SCR_RENAME) {
     leftHoldStart = 0;
   } else {
     if (ev == BTN_LEFT && leftHoldStart == 0) leftHoldStart = millis();
@@ -991,6 +1103,41 @@ void ui_update() {
     if (ev != BTN_NONE || (millis() - splashStart) >= showMs) {
       curPage = PAGE_MAIN; curRow = 0; scrollTop = 0; navDepth = 0;
       currentScreen = SCR_PAGE;
+      needsRedraw   = true;
+    }
+    return;
+  }
+
+  // --- Namens-Editor ---
+  if (currentScreen == SCR_RENAME) {
+    if (needsRedraw) { drawRename(); needsRedraw = false; }
+    if (ev == BTN_LEFT || ev == BTN_RIGHT) {
+      uint8_t last = PROG_NAME_LEN - 2;
+      if (ev == BTN_RIGHT) namePos = (namePos >= last) ? 0 : namePos + 1;
+      else                 namePos = (namePos == 0) ? last : namePos - 1;
+      needsRedraw = true;
+    } else if (ev == BTN_UP || ev == BTN_DOWN) {
+      // aktuelles Zeichen im Zeichensatz weiterdrehen
+      char c = nameBuf[namePos] ? nameBuf[namePos] : ' ';
+      const char* pos = strchr(NAME_CHARS, c);
+      int k = pos ? (int)(pos - NAME_CHARS) : 0;
+      k += (ev == BTN_UP) ? 1 : -1;
+      if (k < 0) k = NAME_CHAR_COUNT - 1;
+      if (k >= (int)NAME_CHAR_COUNT) k = 0;
+      nameBuf[namePos] = NAME_CHARS[k];
+      needsRedraw = true;
+    } else if (ev == BTN_ENTER) {
+      // Leerzeichen am Ende entfernen, leeren Namen nicht zulassen
+      nameBuf[PROG_NAME_LEN - 1] = '\0';
+      for (int i = (int)strlen(nameBuf) - 1; i >= 0 && nameBuf[i] == ' '; i--)
+        nameBuf[i] = '\0';
+      if (nameBuf[0] == '\0')
+        snprintf(nameBuf, PROG_NAME_LEN, "Programm %u", (unsigned)(selProg + 1));
+      strncpy(gPrograms[selProg].name, nameBuf, PROG_NAME_LEN - 1);
+      gPrograms[selProg].name[PROG_NAME_LEN - 1] = '\0';
+      program_markDirty();
+      currentScreen = SCR_PAGE;
+      buildDynamicPage(curPage);
       needsRedraw   = true;
     }
     return;

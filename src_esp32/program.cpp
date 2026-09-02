@@ -3,7 +3,7 @@
 #include <Preferences.h>
 
 #define PROG_MAGIC     0x48505247   // 'HPRG'
-#define PROG_VERSION   1
+#define PROG_VERSION   2   // 2: Blockgruppen und Servo-Geschwindigkeit
 
 // NVS-Schreibvorgaenge nutzen den Flash ab, deshalb wird erst gespeichert,
 // wenn eine Weile nichts mehr veraendert wurde.
@@ -13,6 +13,18 @@
 // Achse als "busy" meldet. Ohne diese Sperre koennte ein Block sofort als
 // fertig gelten und die Fahrt uebersprungen werden.
 #define BUSY_GUARD_MS 150
+
+// Servo-Geschwindigkeit
+// ----------------------------------------------------------------------------
+// Modellbauservos haben keinen Drehzahleingang - sie fahren immer mit voller
+// Stellgeschwindigkeit auf den Sollwert. Eine langsamere Bewegung entsteht nur,
+// indem der Sollwert selbst schrittweise nachgefuehrt wird. Genau das macht die
+// Engine: bei v2 > 0 wandert der gesendete Wert mit v2 Einheiten pro Sekunde
+// vom bisherigen zum neuen Wert. v2 = 0 sendet den Wert sofort, wie bisher.
+//
+// Das begrenzt die Verfahrgeschwindigkeit, ist aber keine geregelte Drehzahl:
+// unter Last kann der Servo weiterhin hinterherhinken.
+#define SERVO_RAMP_STEP_MS 25
 
 Program gPrograms[PROG_MAX_COUNT];
 
@@ -26,20 +38,21 @@ static unsigned long dirtySince = 0;
 // ----------------------------------------------------------------------------
 
 static void addBlock(Program& pr, uint8_t type, uint8_t idx,
-                     int32_t v1, int32_t v2, uint8_t flags = 0) {
+                     int32_t v1, int32_t v2, uint8_t group, uint8_t flags = 0) {
   if (pr.blockCount >= PROG_MAX_BLOCKS) return;
   Block& b = pr.blocks[pr.blockCount++];
-  b.type = type; b.idx = idx; b.flags = flags; b.pad = 0;
+  b.type = type; b.idx = idx; b.flags = flags; b.group = group;
   b.v1 = v1; b.v2 = v2;
 }
 
-// Servo-Grundstellung, in allen drei Programmen identisch
+// Servo-Grundstellung, in allen drei Programmen identisch.
+// v2 = 0 bedeutet: Servo faehrt so schnell wie er kann (bisheriges Verhalten).
 static void addServoInit(Program& pr) {
-  addBlock(pr, BLK_SERVO, 0, 1000, 0);
-  addBlock(pr, BLK_SERVO, 1,  100, 0);
-  addBlock(pr, BLK_SERVO, 2,    0, 0);
-  addBlock(pr, BLK_SERVO, 3,  800, 0);
-  addBlock(pr, BLK_SERVO, 4,  500, 0);
+  addBlock(pr, BLK_SERVO, 0, 1000, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_SERVO, 1,  100, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_SERVO, 2,    0, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_SERVO, 3,  800, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_SERVO, 4,  500, 0, GRP_SERVO_POS);
 }
 
 static void beginProgram(Program& pr, const char* name) {
@@ -65,78 +78,80 @@ static void beginProgram(Program& pr, const char* name) {
 
 static void defaultsProgram1(Program& pr) {
   beginProgram(pr, "Programm 1");
-  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0);
+  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT);
   addServoInit(pr);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100);
-  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50);
-  addBlock(pr, BLK_SERVO,     1, 1000, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_SERVO,     0, 100, 0);
-  addBlock(pr, BLK_WAIT,      0, 16500, 0);
-  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0);
-  addBlock(pr, BLK_SERVO,     2, 800, 0);
-  addBlock(pr, BLK_SERVO,     3, 0, 0);
-  addBlock(pr, BLK_SERVO,     4, 0, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y,  2000, 800);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -2000, 800);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100, GRP_VIBRATION);
+  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50, GRP_VIBRATION);
+  addBlock(pr, BLK_SERVO,     1, 1000, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_SERVO,     0, 100, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 16500, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_SERVO,     2, 800, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     3, 0, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     4, 0, 0, GRP_FIXATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_FIXATION);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y,  2000, 800, GRP_TRANSPORT);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -2000, 800, GRP_TRANSPORT);
 }
 
 static void defaultsProgram2(Program& pr) {
   beginProgram(pr, "Programm 2");
-  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0);
-  addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0);
-  addBlock(pr, BLK_MOVE_ABS,  AXIS_Y, -7500, 2000);
+  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT);
+  addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0, GRP_INIT);
+  addBlock(pr, BLK_MOVE_ABS,  AXIS_Y, -7500, 2000, GRP_INIT);
   addServoInit(pr);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100);
-  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50);
-  addBlock(pr, BLK_WAIT,      0, 5000, 0);
-  addBlock(pr, BLK_SERVO,     1, 1000, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_SERVO,     0, 100, 0);
-  addBlock(pr, BLK_WAIT,      0, 10000, 0);
-  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0);
-  addBlock(pr, BLK_SERVO,     2, 300, 0);
-  addBlock(pr, BLK_SERVO,     3, 500, 0);
-  addBlock(pr, BLK_SERVO,     4, 60, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, 7000, 2000);
-  addBlock(pr, BLK_WAIT,      0, 12000, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7000, 2000);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Z, 100, 100, GRP_VIBRATION);
+  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50, GRP_VIBRATION);
+  addBlock(pr, BLK_WAIT,      0, 5000, 0, GRP_VIBRATION);
+  addBlock(pr, BLK_SERVO,     1, 1000, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_SERVO,     0, 100, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 10000, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_SERVO,     2, 300, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     3, 500, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     4, 60, 0, GRP_FIXATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_FIXATION);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, 7000, 2000, GRP_TRANSPORT);
+  addBlock(pr, BLK_WAIT,      0, 12000, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7000, 2000, GRP_TRANSPORT);
 }
 
 static void defaultsProgram3(Program& pr) {
   beginProgram(pr, "Programm 3");
   // Referenzfahrten nur im ersten Durchlauf, wie bisher
-  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, BLK_FLAG_FIRST_ONLY);
-  addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0, BLK_FLAG_FIRST_ONLY);
-  addBlock(pr, BLK_MOVE_ABS,  AXIS_Y, -7500, 2000, BLK_FLAG_FIRST_ONLY);
+  addBlock(pr, BLK_HOME,      AXIS_Z, 0, 0, GRP_INIT, BLK_FLAG_FIRST_ONLY);
+  addBlock(pr, BLK_HOME,      AXIS_Y, 0, 0, GRP_INIT, BLK_FLAG_FIRST_ONLY);
+  addBlock(pr, BLK_MOVE_ABS,  AXIS_Y, -7500, 2000, GRP_INIT, BLK_FLAG_FIRST_ONLY);
   addServoInit(pr);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_ABS,  AXIS_Z, 100, 100);
-  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50);
-  addBlock(pr, BLK_WAIT,      0, 5000, 0);
-  addBlock(pr, BLK_SERVO,     1, 1050, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_SERVO,     0, 100, 0);
-  addBlock(pr, BLK_WAIT,      0, 10000, 0);
-  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SERVO_POS);
+  addBlock(pr, BLK_MOVE_ABS,  AXIS_Z, 100, 100, GRP_VIBRATION);
+  addBlock(pr, BLK_VIBRATE,   AXIS_Z, 1, 50, GRP_VIBRATION);
+  addBlock(pr, BLK_WAIT,      0, 5000, 0, GRP_VIBRATION);
+  // 1050 wurde vom Nano ohnehin auf das Limit von Servo 1 (540) begrenzt;
+  // hier steht jetzt der Wert, der tatsaechlich wirkt.
+  addBlock(pr, BLK_SERVO,     1, 540, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_SERVO,     0, 100, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_WAIT,      0, 10000, 0, GRP_SINGULATION);
+  addBlock(pr, BLK_STOP_AXIS, AXIS_Z, 0, 0, GRP_SINGULATION);
   // Greiferwerte haengen von der Hairpin-Laenge ab:
   // S2: 580 bei 62 mm, 550 bei 64 mm, 430 bei 69/70 mm
   // S3: 350 bei 62/64 mm, 380 bei 69 mm, 370 bei 70 mm
-  addBlock(pr, BLK_SERVO,     2, 430, 0);
-  addBlock(pr, BLK_SERVO,     3, 380, 0);
-  addBlock(pr, BLK_SERVO,     4, 60, 0);
-  addBlock(pr, BLK_WAIT,      0, 1500, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, 7400, 2000);
-  addBlock(pr, BLK_WAIT,      0, 4000, 0);
-  addBlock(pr, BLK_SERVO,     2, 0, 0);
-  addBlock(pr, BLK_SERVO,     3, 800, 0);
-  addBlock(pr, BLK_SERVO,     4, 500, 0);
-  addBlock(pr, BLK_WAIT,      0, 4000, 0);
-  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7400, 2000);
+  addBlock(pr, BLK_SERVO,     2, 430, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     3, 380, 0, GRP_FIXATION);
+  addBlock(pr, BLK_SERVO,     4, 60, 0, GRP_FIXATION);
+  addBlock(pr, BLK_WAIT,      0, 1500, 0, GRP_FIXATION);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, 7400, 2000, GRP_TRANSPORT);
+  addBlock(pr, BLK_WAIT,      0, 4000, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_SERVO,     2, 0, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_SERVO,     3, 800, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_SERVO,     4, 500, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_WAIT,      0, 4000, 0, GRP_HANDOVER);
+  addBlock(pr, BLK_MOVE_REL,  AXIS_Y, -7400, 2000, GRP_TRANSPORT);
 }
 
 void program_resetAll() {
@@ -265,6 +280,11 @@ static bool          firstRun     = true;
 static bool          blockEntered = false;
 static unsigned long blockStart   = 0;
 
+// Zuletzt gesendeter Stellwert je Servo - Startpunkt einer Rampe
+static int32_t       servoCur[6]  = { 500, 500, 500, 500, 500, 500 };
+static int32_t       rampFrom     = 0;
+static unsigned long rampLastSend = 0;
+
 void program_start(uint8_t idx, int runs) {
   if (idx >= PROG_MAX_COUNT || !gPrograms[idx].used) {
     Serial.println(F("[PRG] Programm existiert nicht."));
@@ -274,6 +294,12 @@ void program_start(uint8_t idx, int runs) {
     Serial.println(F("[PRG] Programm hat keine Bloecke."));
     return;
   }
+  // Ist-Stellwerte holen, damit eine Rampe vom tatsaechlichen Wert startet
+  uint16_t sv[6];
+  if (servo_readAll(sv)) {
+    for (uint8_t i = 0; i < 6; i++) servoCur[i] = (int32_t)sv[i];
+  }
+
   runIdx       = idx;
   runRemaining = (runs < 1) ? 1 : runs;
   runBlock     = 0;
@@ -306,7 +332,16 @@ static void executeBlock(const Block& b) {
     case BLK_MOVE_REL:  axis_rel(b.idx, b.v1, (int16_t)b.v2); break;
     case BLK_VIBRATE:   axis_vibrate(b.idx, b.v1, (int16_t)b.v2); break;
     case BLK_STOP_AXIS: axis_stop(b.idx); break;
-    case BLK_SERVO:     servo_set(b.idx, (uint16_t)b.v1); break;
+    case BLK_SERVO:
+      if (b.idx > 5) break;
+      if (b.v2 <= 0) {                       // ohne Rampe: sofort setzen
+        servo_set(b.idx, (uint16_t)b.v1);
+        servoCur[b.idx] = b.v1;
+      } else {                               // mit Rampe: Startwert merken
+        rampFrom     = servoCur[b.idx];
+        rampLastSend = 0;
+      }
+      break;
     case BLK_WAIT:      break;   // wartet nur
     default:            break;
   }
@@ -326,8 +361,28 @@ static bool blockFinished(const Block& b, unsigned long now) {
     case BLK_WAIT:
       return (now - blockStart) >= (unsigned long)b.v1;
 
+    case BLK_SERVO: {
+      if (b.v2 <= 0 || b.idx > 5) return true;   // ohne Rampe sofort fertig
+
+      // Zurueckgelegter Stellweg aus verstrichener Zeit und Geschwindigkeit
+      int32_t dist      = b.v1 - rampFrom;
+      int32_t span      = (dist < 0) ? -dist : dist;
+      int32_t travelled = (int32_t)(((int64_t)(now - blockStart) * b.v2) / 1000);
+
+      int32_t v = (travelled >= span) ? b.v1
+                : rampFrom + ((dist > 0) ? travelled : -travelled);
+
+      if (v != servoCur[b.idx]
+          && (v == b.v1 || (now - rampLastSend) >= SERVO_RAMP_STEP_MS)) {
+        servo_set(b.idx, (uint16_t)v);
+        servoCur[b.idx] = v;
+        rampLastSend    = now;
+      }
+      return (servoCur[b.idx] == b.v1);
+    }
+
     default:
-      return true;   // Vibration, Stopp und Servo wirken sofort
+      return true;   // Vibration und Stopp wirken sofort
   }
 }
 
@@ -388,6 +443,28 @@ void program_update() {
 
 static const char* AXIS_NAME[3] = { "X", "Y", "Z" };
 
+static const char* GROUP_NAMES[GRP_COUNT] = {
+  "Initialisierung",
+  "Servopositionierung",
+  "Vibrationsfoerderer",
+  "Vereinzelung",
+  "Fixiereinheit",
+  "Transportsystem",
+  "Uebergabe Roboter"
+};
+
+const char* block_groupName(uint8_t group) {
+  return (group < GRP_COUNT) ? GROUP_NAMES[group] : "?";
+}
+
+// Programm 3 ist der vollstaendigste Ablauf und dient als Vorlage fuer neue
+// Programme. Fehlt es, wird das erste vorhandene Programm genommen.
+uint8_t program_templateIndex() {
+  if (gPrograms[2].used) return 2;
+  for (uint8_t i = 0; i < PROG_MAX_COUNT; i++) if (gPrograms[i].used) return i;
+  return 0;
+}
+
 const char* block_typeName(uint8_t type) {
   switch (type) {
     case BLK_HOME:      return "Referenzfahrt";
@@ -410,8 +487,12 @@ void block_describe(const Block& b, char* out, size_t n) {
     case BLK_MOVE_REL:  snprintf(out, n, "%s rel %ld", ax, (long)b.v1); break;
     case BLK_VIBRATE:   snprintf(out, n, "%s Vib %ldHz", ax, (long)b.v2); break;
     case BLK_STOP_AXIS: snprintf(out, n, "%s Stopp", ax); break;
-    case BLK_SERVO:     snprintf(out, n, "Servo %u = %ld",
-                                 (unsigned)b.idx, (long)b.v1); break;
+    case BLK_SERVO:
+      if (b.v2 > 0) snprintf(out, n, "Servo %u = %ld @%ld",
+                             (unsigned)b.idx, (long)b.v1, (long)b.v2);
+      else          snprintf(out, n, "Servo %u = %ld",
+                             (unsigned)b.idx, (long)b.v1);
+      break;
     case BLK_WAIT:      snprintf(out, n, "Warten %ldms", (long)b.v1); break;
     default:            snprintf(out, n, "?"); break;
   }

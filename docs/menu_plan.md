@@ -98,13 +98,13 @@ Init-Fix wahrscheinlich problemlos moeglich.
 │   ├─ Programm 1
 │   │   ├─ Durchlaeufe      25     Vorgabe je Programm, 1-999
 │   │   ├─ START
-│   │   ├─ Ablauf                  → Blockliste, siehe unten
-│   │   ├─ Kopieren                → neues Programm aus dieser Vorlage
+│   │   ├─ Ablauf + Werte          → Blockliste mit Einstellungen, siehe unten
+│   │   ├─ Umbenennen              → Zeicheneditor
 │   │   ├─ Speichern
 │   │   ├─ Loeschen                → mit Rueckfrage
 │   │   └─ Zurueck
 │   ├─ Programm 2 …
-│   ├─ Neues Programm              → Kopie des ersten Programms
+│   ├─ Neues Programm              → Kopie von Programm 3
 │   └─ Zurueck
 │
 ├─ Schrittmotoren
@@ -124,18 +124,40 @@ Init-Fix wahrscheinlich problemlos moeglich.
 
 ### Ablauf und Bloecke
 
-„Ablauf" listet die Bloecke des Programms mit ihren Werten:
+„Ablauf + Werte" listet die Bloecke des Programms, gegliedert nach
+Funktionsabschnitten:
 
 ```
-Programm 3 Ablauf                     6/24
+Programm 3 Ablauf                     6/31
+ Initialisierung
   1 Z Referenz *
   2 Y Referenz *
   3 Y abs -7500 *
+ Servopositionierung
   4 Servo 0 = 1000
+  5 Servo 1 = 100
  ...
- 19 Y rel 7400
- 20 Warten 4000ms
+ Vibrationsfoerderer
+ 10 Z abs 100
+ 11 Z Vib 50Hz
+ Vereinzelung
+ ...
+ Fixiereinheit
+ ...
+ Transportsystem
+ 22 Y rel 7400
+ Uebergabe Roboter
+ 23 Warten 4000ms
 ```
+
+Eine Ueberschrift erscheint, sobald sich die Funktionsgruppe von einem Block
+zum naechsten aendert. Sie ist nicht anwaehlbar, die Navigation springt darueber
+hinweg. Die Rueckfahrt der Y-Achse bekommt deshalb am Ende erneut eine
+Transportsystem-Ueberschrift.
+
+Gruppen: Initialisierung, Servopositionierung, Vibrationsfoerderer,
+Vereinzelung, Fixiereinheit, Transportsystem, Uebergabe Roboter. Die
+Wartezeiten liegen jeweils in der Gruppe, zu der sie gehoeren.
 
 Ein `*` kennzeichnet Bloecke, die nur im ersten Durchlauf ausgefuehrt werden
 (die Referenzfahrten in Programm 3). ENTER auf einem Block oeffnet dessen
@@ -147,7 +169,7 @@ Felder — welche das sind, haengt vom Blocktyp ab:
 | Fahren absolut / relativ | Achse, Weg, Geschwindigkeit |
 | Vibration | Achse, Amplitude, Frequenz |
 | Achse stoppen | Achse |
-| Servo setzen | Servo-Nummer, Stellwert |
+| Servo setzen | Servo-Nummer, Stellwert, Geschwindigkeit |
 | Warten | Zeit in ms |
 
 Dazu bei jedem Block die Zeile „nur 1. Lauf".
@@ -199,7 +221,29 @@ Hairpin-Laenge ein eigenes Programm noetig ist.
 
 **Blocktypen:** Referenzfahrt, Fahren absolut, Fahren relativ, Vibration,
 Achse stoppen, Servo setzen, Warten. Jeder Block traegt zusaetzlich das Flag
-„nur im ersten Durchlauf".
+„nur im ersten Durchlauf" und seine Funktionsgruppe.
+
+**Servo-Geschwindigkeit.** Modellbauservos haben keinen Drehzahleingang; sie
+fahren immer mit voller Stellgeschwindigkeit auf den Sollwert. Eine langsamere
+Bewegung entsteht nur, indem der Sollwert selbst nachgefuehrt wird. Genau das
+macht die Engine: bei einer Geschwindigkeit groesser null wandert der gesendete
+Wert mit der eingestellten Rate (Einheiten pro Sekunde) vom bisherigen zum
+neuen Wert, mit einem Stellbefehl alle 25 ms. Die Einstellung `sofort` (0)
+entspricht dem bisherigen Verhalten. Das begrenzt die Verfahrgeschwindigkeit,
+ist aber **keine geregelte Drehzahl** — unter Last kann der Servo weiterhin
+hinterherhinken. Beim Start eines Programms werden die Ist-Stellwerte vom Nano
+gelesen, damit eine Rampe vom tatsaechlichen Wert losfaehrt.
+
+**Servo-Grenzen.** Der Nano begrenzt jeden Servo auf einen eigenen Bereich
+(`include/config_nano.h`):
+
+| Servo | 0 | 1 | 2 | 3 | 4 | 5 |
+| :-- | :-- | :-- | :-- | :-- | :-- | :-- |
+| min | 100 | 100 | 0 | 0 | 0 | 100 |
+| max | 560 | 540 | 800 | 800 | 500 | 900 |
+
+Das Menue uebernimmt diese Grenzen, damit sich keine Werte einstellen lassen,
+die auf dem Nano wirkungslos verpuffen.
 
 **Grenzen:** 8 Programme, je 40 Bloecke. Das sind rund 2,8 KB im RAM und
 ebenso viel im NVS.
@@ -231,8 +275,14 @@ Quelltext-Kommentare stehen als Werkseinstellung in `program.cpp`):
 | 69 mm | 430 | 380 |
 | 70 mm | 430 | 370 |
 
-Fuer jede Laenge ein eigenes Programm anzulegen ist damit: Programm 3 oeffnen,
-„Kopieren", im Ablauf die beiden Servo-Bloecke anpassen.
+Fuer jede Laenge ein eigenes Programm anzulegen ist damit: in der
+Programmliste „Neues Programm" (kopiert Programm 3), umbenennen, im Ablauf
+unter „Fixiereinheit" die beiden Servo-Bloecke anpassen.
+
+**Umbenennen.** Der Zeicheneditor arbeitet mit den fuenf Tasten: UP/DOWN
+blaettert das Zeichen an der Cursorstelle durch, LEFT/RIGHT bewegt den Cursor,
+ENTER uebernimmt. Leerzeichen am Ende werden entfernt; ein leerer Name faellt
+auf „Programm N" zurueck.
 
 ---
 
@@ -243,10 +293,6 @@ Fuer jede Laenge ein eigenes Programm anzulegen ist damit: Programm 3 oeffnen,
 eines Blocks aendern, aber die Struktur eines Ablaufs nicht. Fuer neue
 Programme aus einer Vorlage reicht das; um einen Ablauf voellig neu
 aufzubauen, braeuchte es einen Block-Editor.
-
-**Programmnamen aendern.** Kopien heissen automatisch „Programm N". Eine
-Texteingabe ueber fuenf Tasten ist unhandlich; sinnvoller waere eine Liste
-vorgegebener Namen, etwa nach Hairpin-Laenge.
 
 **Status-Menue.** `print_status()` und `scanI2CBus()` sind vorhanden, haengen
 aber am Serial-Monitor. Positionen, Servostellungen, Sensorwerte und I2C-Scan
@@ -266,6 +312,9 @@ nicht erreichbare Zweige in der alten Zustandsmaschine:
   wurde dadurch faktisch uebersprungen.
 - `P1_DONE` sprang beim Wiederholen auf einen nicht erreichbaren
   `P2_HOME_Z`-Zweig.
+- Programm 3 setzte Servo 1 auf 1050. Der Nano begrenzt diesen Servo auf 540,
+  der Wert hatte also nie eine Wirkung. In den Werkseinstellungen steht jetzt
+  540, der Wert, der tatsaechlich anliegt.
 
 Zusaetzlich prueft die Engine eine Fahrt erst 150 ms nach dem Absetzen des
 Befehls auf „fertig". Vorher konnte ein Block sofort als abgeschlossen gelten,

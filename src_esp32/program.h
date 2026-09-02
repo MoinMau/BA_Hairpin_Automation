@@ -25,9 +25,22 @@ enum BlockType : uint8_t {
   BLK_MOVE_REL,   // idx = Achse,     v1 = Schritte,  v2 = Geschwindigkeit
   BLK_VIBRATE,    // idx = Achse,     v1 = Amplitude, v2 = Frequenz in Hz
   BLK_STOP_AXIS,  // idx = Achse
-  BLK_SERVO,      // idx = Servo 0-5, v1 = Stellwert
+  BLK_SERVO,      // idx = Servo 0-5, v1 = Stellwert, v2 = Geschwindigkeit
   BLK_WAIT,       // v1 = Millisekunden
   BLK_TYPE_COUNT
+};
+
+// Funktionsgruppen. Dienen der Gliederung der Ablaufanzeige: sobald sich die
+// Gruppe von einem Block zum naechsten aendert, erscheint eine Ueberschrift.
+enum BlockGroup : uint8_t {
+  GRP_INIT = 0,      // Referenzfahrten, Grundstellung der Achsen
+  GRP_SERVO_POS,     // Servopositionierung
+  GRP_VIBRATION,     // Vibrationsfoerderer
+  GRP_SINGULATION,   // Vereinzelung
+  GRP_FIXATION,      // Fixiereinheit
+  GRP_TRANSPORT,     // Transportsystem
+  GRP_HANDOVER,      // Uebergabe an den Roboter
+  GRP_COUNT
 };
 
 // Block nur im ersten Durchlauf ausfuehren (z.B. Referenzfahrten)
@@ -37,7 +50,7 @@ struct Block {
   uint8_t type;
   uint8_t idx;      // Achse 0-2 bzw. Servo-Nummer 0-5
   uint8_t flags;
-  uint8_t pad;      // haelt die Struktur auf 4-Byte-Grenzen
+  uint8_t group;    // BlockGroup, nur fuer die Gliederung der Anzeige
   int32_t v1;
   int32_t v2;
 };
@@ -79,6 +92,10 @@ uint8_t program_currentBlock();
 
 // --- Anzeige ---
 const char* block_typeName(uint8_t type);
+const char* block_groupName(uint8_t group);
 void        block_describe(const Block& b, char* out, size_t n);
+
+// Index des Programms, das als Vorlage fuer neue Programme dient.
+uint8_t program_templateIndex();
 
 #endif // PROGRAM_H
