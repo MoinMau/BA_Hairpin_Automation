@@ -95,6 +95,7 @@ bool servo_readAll(uint16_t out[6]);       // liest Ist-Stellwerte vom Nano
 
 void handleSerialMaster();
 void scanI2CBus();
+bool i2c_devicePresent(uint8_t addr);
 void printMasterHelp();
 void updateSequence();
 void startHairpinSequence(int program, int runs);
@@ -347,6 +348,13 @@ void sendServoCommand(uint8_t num, uint16_t val) {
 // ============================================================================
 // HILFS-FUNKTIONEN
 // ============================================================================
+
+// Prueft, ob ein Slave auf dem Bus antwortet. Das Menue nutzt das, um bei
+// fehlenden Slaves nicht bei jedem Durchlauf in den I2C-Timeout zu laufen.
+bool i2c_devicePresent(uint8_t addr) {
+  Wire.beginTransmission(addr);
+  return Wire.endTransmission() == 0;
+}
 
 void scanI2CBus() {
   Serial.println(F("\n--- Starte I2C-Bus-Scan... ---"));

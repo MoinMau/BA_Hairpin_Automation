@@ -30,6 +30,11 @@ ButtonId buttons_update();
 // Wird fuer den Tasten-Testscreen gebraucht.
 bool buttons_isDown(ButtonId id);
 
+// True, wenn die Taste beim Start bereits gedrueckt war und deshalb gesperrt
+// ist (fast immer ein Verdrahtungsfehler). Die Sperre faellt, sobald die Taste
+// einmal losgelassen wurde.
+bool buttons_isLocked(ButtonId id);
+
 // Klartextname fuer Debug-Ausgaben und Anzeige.
 const char* buttons_name(ButtonId id);
 

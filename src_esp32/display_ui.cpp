@@ -225,6 +225,13 @@ static StepperStatus mStatus = { 0, 0, 0, 0, 0 };
 static unsigned long mStatusLast = 0;
 #define STATUS_POLL_MS 300
 
+// Ist der Uno ueberhaupt am Bus? Ohne diese Pruefung liefe das Menue bei
+// abgezogenen Slaves alle 300 ms in einen I2C-Timeout und wuerde ruckeln.
+// So laesst sich die Bedienung auch ohne angeschlossene Slaves testen.
+static bool          unoOnline     = false;
+static unsigned long presenceLast  = 0;
+#define PRESENCE_POLL_MS 2000
+
 // NOT-HALT als globale Geste: LEFT gedrueckt halten wirkt auf jedem Bildschirm
 static unsigned long leftHoldStart = 0;
 #define HALT_HOLD_MS 1500
@@ -246,6 +253,22 @@ static void drawTextRight(const char* s, int16_t rightX, int16_t y, uint16_t col
 
 static void pollStatus(bool force = false) {
   unsigned long now = millis();
+
+  // Praesenz seltener pruefen als den Status
+  if (presenceLast == 0 || (now - presenceLast) >= PRESENCE_POLL_MS) {
+    presenceLast = now;
+    bool was = unoOnline;
+    unoOnline = i2c_devicePresent(I2C_ADDR_UNO);
+    if (was != unoOnline) {
+      Serial.print(F("[UI] Uno (0x33): "));
+      Serial.println(unoOnline ? F("online") : F("nicht erreichbar"));
+    }
+  }
+  if (!unoOnline) {
+    mStatus = { 0, 0, 0, 0, 0 };
+    return;
+  }
+
   if (!force && (now - mStatusLast) < STATUS_POLL_MS) return;
   mStatusLast = now;
   mStatus = get_stepper_status();
@@ -254,6 +277,10 @@ static void pollStatus(bool force = false) {
 // Rechter Teil der Kopfzeile. Auf der Achsseite ist die Istposition die
 // wichtigste Information, sonst der Gesamtzustand der Maschine.
 static void buildStatusText(char* out, size_t n) {
+  if (!unoOnline) {
+    snprintf(out, n, "KEIN I2C");
+    return;
+  }
   if (currentScreen == SCR_PAGE && curPage == PAGE_AXIS) {
     int32_t pos = (curAxis == AXIS_X) ? mStatus.current_pos_x
                 : (curAxis == AXIS_Y) ? mStatus.current_pos_y
@@ -401,9 +428,29 @@ static void drawSplash() {
   tft.setTextColor(COL_SEL_BG);
   tft.setCursor(10, 58);
   tft.print("Vereinzelung  v0.2");
-  tft.setTextColor(COL_DIM);
-  tft.setCursor(10, 78);
-  tft.print("Taste druecken...");
+  // Verdrahtungsfehler sofort sichtbar machen, ohne Serial-Monitor
+  int16_t y = 78;
+  bool anyLocked = false;
+  for (uint8_t i = 0; i < BTN_COUNT; i++) {
+    if (!buttons_isLocked((ButtonId)i)) continue;
+    if (!anyLocked) {
+      tft.setTextColor(COL_ALARM);
+      tft.setCursor(10, y);
+      tft.print("Taste klemmt:");
+      y += 12;
+      anyLocked = true;
+    }
+    tft.setTextColor(COL_ALARM);
+    tft.setCursor(10, y);
+    tft.print(buttons_name((ButtonId)i));
+    tft.print(" dauerhaft LOW");
+    y += 12;
+  }
+  if (!anyLocked) {
+    tft.setTextColor(COL_DIM);
+    tft.setCursor(10, y);
+    tft.print("Taste druecken...");
+  }
 }
 
 static int lastRunsShown = -1;
@@ -449,7 +496,7 @@ static void drawHalted() {
   tft.print("alle Achsen gestoppt.");
   tft.setTextColor(0xFFE0);
   tft.setCursor(14, 92);
-  tft.print("ENTER = weiter");
+  tft.print("Taste druecken = weiter");
 }
 
 // ============================================================================
@@ -703,16 +750,18 @@ void ui_update() {
   bool leftEditsValue = (currentScreen == SCR_PAGE)
                         && rowConsumesLeftRight(PAGES[curPage].rows[curRow]);
 
-  if (buttons_isDown(BTN_LEFT) && !leftEditsValue && currentScreen != SCR_HALTED) {
-    if (leftHoldStart == 0) {
-      leftHoldStart = millis();
-    } else if (millis() - leftHoldStart >= HALT_HOLD_MS) {
+  // Der Timer wird nur durch ein echtes Druck-Ereignis bewaffnet, nicht durch
+  // den blossen Pegel. Eine Taste, die schon beim Start gedrueckt ist, erzeugt
+  // kein Ereignis und kann die Geste damit nicht ausloesen.
+  if (!buttons_isDown(BTN_LEFT) || leftEditsValue || currentScreen == SCR_HALTED) {
+    leftHoldStart = 0;
+  } else {
+    if (ev == BTN_LEFT && leftHoldStart == 0) leftHoldStart = millis();
+    if (leftHoldStart != 0 && (millis() - leftHoldStart) >= HALT_HOLD_MS) {
       leftHoldStart = 0;
       doHalt();
       return;
     }
-  } else {
-    leftHoldStart = 0;
   }
 
   pollStatus();
@@ -720,7 +769,13 @@ void ui_update() {
   // --- Startbild ---
   if (currentScreen == SCR_SPLASH) {
     if (needsRedraw) { drawSplash(); needsRedraw = false; }
-    if (ev != BTN_NONE || (millis() - splashStart) >= SPLASH_MS) {
+    // Bei gemeldetem Verdrahtungsfehler laenger stehen lassen, damit die
+    // Meldung lesbar ist.
+    unsigned long showMs = SPLASH_MS;
+    for (uint8_t i = 0; i < BTN_COUNT; i++)
+      if (buttons_isLocked((ButtonId)i)) { showMs = 8000; break; }
+
+    if (ev != BTN_NONE || (millis() - splashStart) >= showMs) {
       curPage = PAGE_MAIN; curRow = 0; scrollTop = 0; navDepth = 0;
       currentScreen = SCR_PAGE;
       needsRedraw   = true;
@@ -731,7 +786,9 @@ void ui_update() {
   // --- Bestaetigung nach NOT-HALT ---
   if (currentScreen == SCR_HALTED) {
     if (needsRedraw) { drawHalted(); needsRedraw = false; }
-    if (ev == BTN_ENTER) {
+    // Bewusst jede Taste: eine einzelne klemmende Taste darf die Bedienung
+    // nicht dauerhaft blockieren.
+    if (ev != BTN_NONE) {
       currentScreen = SCR_PAGE;
       needsRedraw   = true;
     }

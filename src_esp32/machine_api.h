@@ -29,6 +29,9 @@ StepperStatus get_stepper_status();
 void servo_set(uint8_t num, uint16_t value);   // Wert 0-1000
 bool servo_readAll(uint16_t out[6]);           // Ist-Stellwerte, false = keine Antwort
 
+// --- Bus ---
+bool i2c_devicePresent(uint8_t addr);   // antwortet der Slave?
+
 // --- Ablaufsteuerung ---
 void startHairpinSequence(int program, int runs);
 bool sequence_isRunning();

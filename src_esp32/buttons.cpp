@@ -16,6 +16,13 @@ static bool          btnLastRaw[BTN_COUNT];     // letzter Rohwert
 static unsigned long btnLastChange[BTN_COUNT];  // Zeitpunkt der letzten Flanke
 static unsigned long btnNextRepeat[BTN_COUNT];  // naechster Autorepeat-Zeitpunkt
 
+// Beim Start bereits gedrueckte Tasten werden gesperrt. Das ist fast immer ein
+// Verdrahtungsfehler (Draht gegen GND, kalte Loetstelle, vertauschter Pin) und
+// nicht der Wille des Bedieners. Ohne diese Sperre wuerde eine einzige
+// klemmende Taste die gesamte Bedienung blockieren.
+// Die Sperre faellt, sobald die Taste einmal sauber losgelassen wurde.
+static bool btnLocked[BTN_COUNT];
+
 // ENTER bekommt bewusst KEIN Autorepeat, damit Aktionen nicht mehrfach
 // ausgeloest werden, wenn man die Taste zu lange haelt.
 static bool btnRepeatAllowed(ButtonId id) {
@@ -29,7 +36,28 @@ void buttons_begin() {
     btnLastRaw[i]    = false;
     btnLastChange[i] = 0;
     btnNextRepeat[i] = 0;
+    btnLocked[i]     = false;
   }
+
+  // Pullups kurz einschwingen lassen, dann Startzustand pruefen und melden.
+  delay(20);
+  Serial.println(F("\n[BTN] Startzustand der Tasten (Pullup, gedrueckt = LOW):"));
+  for (uint8_t i = 0; i < BTN_COUNT; i++) {
+    bool pressed = (digitalRead(BTN_PINS[i]) == LOW);
+    Serial.print(F("  "));
+    Serial.print(BTN_NAMES[i]);
+    Serial.print(F("\tGPIO"));
+    Serial.print(BTN_PINS[i]);
+    Serial.print(F("\t"));
+    Serial.println(pressed ? F("LOW  <-- dauerhaft gedrueckt, GESPERRT")
+                           : F("HIGH  ok"));
+    if (pressed) {
+      btnLocked[i]  = true;
+      btnLastRaw[i] = true;   // damit die Freigabe eine echte Flanke sieht
+    }
+  }
+  Serial.println(F("[BTN] Gesperrte Tasten werden freigegeben, sobald sie"));
+  Serial.println(F("      einmal losgelassen wurden.\n"));
 }
 
 ButtonId buttons_update() {
@@ -47,6 +75,17 @@ ButtonId buttons_update() {
     }
 
     if ((now - btnLastChange[i]) < BTN_DEBOUNCE_MS) continue;
+
+    // Beim Start klemmende Taste: erst freigeben, wenn sie losgelassen wurde
+    if (btnLocked[i]) {
+      if (!raw) {
+        btnLocked[i] = false;
+        Serial.print(F("[BTN] "));
+        Serial.print(BTN_NAMES[i]);
+        Serial.println(F(" losgelassen -> freigegeben."));
+      }
+      continue;
+    }
 
     if (raw && !btnStable[i]) {
       // Saubere fallende Flanke -> Tastendruck
@@ -71,7 +110,12 @@ ButtonId buttons_update() {
 
 bool buttons_isDown(ButtonId id) {
   if (id >= BTN_COUNT) return false;
-  return btnStable[id];
+  return btnStable[id] && !btnLocked[id];
+}
+
+bool buttons_isLocked(ButtonId id) {
+  if (id >= BTN_COUNT) return false;
+  return btnLocked[id];
 }
 
 const char* buttons_name(ButtonId id) {
