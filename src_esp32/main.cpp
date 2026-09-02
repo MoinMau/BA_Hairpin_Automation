@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include "i2c_protocol.h"
+#include "display_ui.h"
 
 #define I2C_SDA 21
 #define I2C_SCL 22
@@ -111,11 +112,15 @@ void setup() {
   Serial.println(F(" -> Tippe 'scan' ein, um die Hardware zu pruefen."));
   Serial.println(F("--------------------------------------------------"));
 
+  // TFT-Menue starten (Teststufe, greift noch nicht in die Sequenz ein)
+  ui_begin();
+
 }
 
 void loop() {
   handleSerialMaster();
   updateSequence();
+  ui_update();   // nicht-blockierend, zeichnet nur bei Aenderungen
 }
 
 // ============================================================================
