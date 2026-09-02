@@ -1,91 +1,82 @@
-# Plan: TFT-Menuefuehrung fuer die Hairpin-Vereinzelung
+# TFT-Menuefuehrung fuer die Hairpin-Vereinzelung
 
-Stand: 02.09.2026 · Branch `Otto_Display_Menu` (baut auf `Otto_BA_Hairpin_Automation` auf)
+Stand: 02.09.2026 · Branch `Otto_Display_Menu`
 
 ---
 
-## 1. Hardware-Setup
+## 1. Hardware
 
 ### 1.1 Display — 1.8" TFT SPI, ST7735, 128x160, V1.2
 
-| Modul-Pin | Signal | ESP32-WROOM-32 | Begruendung |
-| :-- | :-- | :-- | :-- |
-| 1 | LED / BL | 3V3 ueber 47 Ω *oder* GPIO17 | GPIO17 nur noetig, wenn gedimmt/abgeschaltet werden soll |
-| 2 | SCK | **GPIO18** | VSPI-Standard-Takt |
-| 3 | SDA (MOSI) | **GPIO23** | VSPI-Standard-Datenleitung |
-| 4 | A0 / DC | **GPIO4** | frei, kein Strapping-Pin |
-| 5 | RESET | **GPIO16** | frei |
-| 6 | CS | **GPIO5** | VSPI-Standard-CS (Strapping-Pin, aber als Ausgang unkritisch) |
-| 7 | GND | GND | |
-| 8 | VCC | +3V3 | |
-
-Das Display haengt am **VSPI**, die Slaves am **I2C (GPIO21/22)**. Zwei getrennte
-Busse, also keine gegenseitige Beeinflussung — das ist die wichtigste Eigenschaft
-dieses Setups: die Menue-Ausgabe kann die Motorsteuerung nicht ausbremsen.
-
-### 1.2 Bedientasten — 5-Wege-Navigation
-
-| Taste | GPIO | Beschaltung |
+| Modul-Pin | Signal | ESP32-WROOM-32 |
 | :-- | :-- | :-- |
-| UP | 32 | Taster gegen GND, interner Pullup |
-| DOWN | 33 | " |
-| LEFT | 25 | " |
-| RIGHT | 26 | " |
-| ENTER | 27 | " |
+| 1 | LED / BL | 3V3 ueber 47 Ω |
+| 2 | SCK | GPIO18 |
+| 3 | SDA (MOSI) | GPIO23 |
+| 4 | A0 / DC | GPIO4 |
+| 5 | RESET | GPIO16 |
+| 6 | CS | GPIO5 |
+| 7 | GND | GND |
+| 8 | VCC | +3V3 |
 
-Bewusst gewaehlt: keine Strapping-Pins (0, 2, 12, 15), keine Input-Only-Pins
-(34-39, die haben keine internen Pullups), kein Konflikt mit SPI oder I2C.
-Externe Widerstaende sind nicht noetig.
+Das Display haengt am SPI, die Slaves am I2C (GPIO21/22) — zwei getrennte Busse,
+die Menue-Ausgabe kann die Motorsteuerung also nicht ausbremsen.
 
-**Entprellung:** 30 ms in Software, zusaetzlich Autorepeat (450 ms Verzoegerung,
-danach alle 120 ms) fuer UP/DOWN/LEFT/RIGHT. ENTER hat bewusst *kein* Autorepeat,
-damit ein zu langer Druck keine Aktion doppelt ausloest.
+Panel-Variante: `INITR_BLACKTAB`, Querformat um 180° gedreht (`TFT_ROTATION 3`).
+
+> **ESP32-WROVER:** Dort sind GPIO16/17 fest fuer das PSRAM verdrahtet und als
+> GPIO unbrauchbar. Nur auf WROOM-32 sind sie frei.
+
+### 1.2 Bedientasten
+
+| Taste | GPIO |
+| :-- | :-- |
+| UP | 27 |
+| DOWN | 32 |
+| LEFT | 33 |
+| RIGHT | 26 |
+| ENTER | 25 |
+
+Alle Taster schalten gegen GND, interne Pullups sind aktiv (gedrueckt = LOW),
+externe Widerstaende sind nicht noetig. Bei vierbeinigen Mikrotastern sind
+jeweils zwei Beine intern dauerhaft verbunden — die Kontakte muessen ueber die
+**Diagonale** abgegriffen werden, sonst liegt der Eingang permanent auf LOW.
+
+Entprellung 30 ms, Autorepeat nach 450 ms mit 120 ms Takt. ENTER hat bewusst
+kein Autorepeat, damit ein langer Druck keine Aktion doppelt ausloest.
+
+Tasten, die beim Start bereits auf LOW liegen, werden gesperrt und auf dem
+Startbild sowie auf Serial gemeldet. Das ist praktisch immer ein
+Verdrahtungsfehler; ohne die Sperre wuerde eine einzige klemmende Taste die
+gesamte Bedienung blockieren. Die Sperre faellt, sobald die Taste einmal
+losgelassen wurde.
 
 ### 1.3 Software-Stack
 
-`Adafruit GFX` + `Adafruit ST7735` statt `TFT_eSPI`. Grund: die gesamte
-Konfiguration liegt in `include/config_display.h` und damit im Repository —
-bei TFT_eSPI muesste man Dateien in der Library selbst patchen oder ein Dutzend
-Build-Flags pflegen, was auf einem anderen Rechner erfahrungsgemaess schiefgeht.
-Fuer ein Listenmenue ist die Adafruit-Bibliothek schnell genug.
+`Adafruit GFX` + `Adafruit ST7735` statt `TFT_eSPI`: die gesamte Konfiguration
+liegt damit in `include/config_display.h` und im Repository, statt in
+gepatchten Library-Dateien.
+
+**Wichtig für die Wartung:** `Adafruit_ST7735::initR()` ruft intern `begin(0)`
+auf und setzt dort `SPI_DEFAULT_FREQ = 32 MHz` (`Adafruit_ST77xx.cpp:35`). Die
+gesamte Init-Sequenz laeuft also mit 32 MHz, unabhaengig von `setSPISpeed()` —
+das wirkt erst auf die nachfolgenden Zeichenbefehle. Bei langen Leitungen kommen
+die Init-Befehle verstuemmelt an und das Panel bleibt schwarz. Da `begin()`
+nicht virtuell ist, laesst sich das nicht ueberschreiben. `tftInitPanel()` in
+`display_ui.cpp` faengt es ab: nach `initR()` wird auf `TFT_SPI_HZ`
+heruntergeschaltet und die Einschaltbefehle (`SWRESET`, `SLPOUT`, `COLMOD`,
+`NORON`, `DISPON`) werden bei diesem sicheren Takt noch einmal gesendet.
+
+Aktuell laeuft das Panel mit Software-SPI (`TFT_USE_SOFT_SPI 1`). Auf
+Hardware-SPI umzustellen macht den Bildaufbau fluessiger und ist mit dem
+Init-Fix wahrscheinlich problemlos moeglich.
 
 ---
 
-## 2. Was in dieser Stufe schon implementiert ist (Teststufe v0.1)
-
-Ziel dieser Stufe ist **ausschliesslich die Hardware-Verifikation**. Es wird noch
-kein einziges I2C-Kommando aus dem Menue heraus gesendet.
-
-| Datei | Inhalt |
-| :-- | :-- |
-| `include/config_display.h` | Alle Pins, Panel-Variante, SPI-Takt, Tastenparameter |
-| `src_esp32/buttons.h/.cpp` | Entprellung + Autorepeat, liefert Tasten-*Ereignisse* |
-| `src_esp32/display_ui.h/.cpp` | Testmenue mit fuenf Screens |
-| `src_esp32/main.cpp` | nur drei Zeilen ergaenzt: Include, `ui_begin()`, `ui_update()` |
-
-**Screens der Teststufe**
-
-1. **Startbild** — 2,5 s oder bis zum ersten Tastendruck.
-2. **Hauptmenue** — fuenf Eintraege, Auswahlbalken, Wrap-around.
-3. **Layout-Test** — Rahmen, vier Eckmarker, Diagonalen. Damit laesst sich pruefen,
-   ob das Panel vollstaendig angesteuert wird oder ob ein Offset vorliegt.
-4. **Farb-Test** — sechs beschriftete Farbbalken. Stimmen Text und Farbe nicht
-   ueberein, ist der Tab-Typ falsch (siehe Abschnitt 5).
-5. **Tasten-Test** — Live-Anzeige aller fuenf Tasten plus Ereigniszaehler.
-   Ausstieg per **ENTER 1,5 s halten**, damit alle fuenf Tasten pruefbar bleiben.
-6. **Wert-Demo** — LEFT/RIGHT ±10, UP/DOWN ±100, mit Balkenanzeige. Das ist der
-   Prototyp des spaeteren Parameter-Editors.
-7. **Info** — Pinbelegung zum Abgleich mit der Verdrahtung.
-
-Alles nicht-blockierend, `delay()` wird nirgends verwendet. Neu gezeichnet wird
-nur bei Aenderung (`needsRedraw` / `needsPartial`), deshalb flackert nichts.
-
----
-
-## 3. Umgesetzte Menuestruktur (Stufe 2)
+## 2. Menuestruktur
 
 ```
-[Kopfzeile: Seitentitel | Live-Status (BEREIT / X.Z / P2 RUN / Istposition)]
+[Kopfzeile: Seitentitel | Live-Status: BEREIT / X.Z / P2 RUN / Istposition / KEIN I2C]
 │
 ├─ Programme
 │   ├─ Programm 1  Hairpin ─┐
@@ -98,7 +89,7 @@ nur bei Aenderung (`needsRedraw` / `needsPartial`), deshalb flackert nichts.
 │   ├─ Achse Y ─┼→  Referenzfahrt
 │   ├─ Achse Z ─┘   Schrittweite   1 / 10 / 100 / 1000
 │   │                Geschw. St/s   50-3000
-│   │                Fahren  - / +  (verfaehrt um die Schrittweite)
+│   │                Fahren  - / +
 │   │                STOPP
 │   ├─ Referenzfahrt alle
 │   ├─ Treiber EIN / Treiber AUS
@@ -126,10 +117,17 @@ Der NOT-HALT ist zusaetzlich zum Menuepunkt als globale Halte-Geste erreichbar,
 damit man ihn nicht aus einem Untermenue heraussuchen muss. Auf Wert- und
 Fahrzeilen ist die Geste gesperrt, weil man LEFT dort absichtlich haelt
 (Autorepeat) — sonst wuerde das Verkleinern eines Werts einen Abbruch ausloesen.
+Bewaffnet wird der Timer nur durch ein echtes Druck-Ereignis, nicht durch den
+blossen Pegel.
 
 Umgekehrt gilt auf dem Laufbildschirm: **ENTER haelt sofort an**. Anhalten muss
 leicht sein, Starten schwer — deshalb braucht der Start den Umweg ueber
 Programmwahl und Durchlaufzahl.
+
+> Der Menuepunkt heisst „NOT-HALT", trennt aber nur softwareseitig ueber den
+> I2C-Bus. Ein echter Nothalt muss die Motorversorgung hardwareseitig trennen
+> (zwangsoeffnender Pilzkopf) und darf nicht davon abhaengen, dass Firmware,
+> I2C-Bus und Uno noch funktionieren.
 
 ### Laufbildschirm
 
@@ -139,147 +137,69 @@ auch, wenn der Lauf ueber die serielle Konsole (`run`, `runp2_5`) gestartet
 wurde — Menue und Konsole zeigen damit immer denselben Zustand. Endet die
 Sequenz, kehrt die Anzeige selbsttaetig ins Menue zurueck.
 
-### Technische Umsetzung
+---
 
-Das Menue steckt vollstaendig in Tabellen (`MenuPage` / `MenuRow` in
-`display_ui.cpp`). Ein Renderer und ein Navigationsstack bedienen alle Seiten,
-ein neuer Menuepunkt ist damit eine Tabellenzeile statt einer neuen
-Zeichenfunktion. Zeilentypen: `ROW_SUBMENU`, `ROW_ACTION`, `ROW_VALUE`,
-`ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
+## 3. Aufbau des Codes
 
-Seiten, die laenger sind als die sieben sichtbaren Zeilen, scrollen mit; die
-Position steht als `3/8` rechts in der Fusszeile und nicht neben den Zeilen,
-damit nichts die Werte ueberdeckt.
+| Datei | Inhalt |
+| :-- | :-- |
+| `include/config_display.h` | Pins, Panel-Variante, SPI-Takt, Tastenparameter |
+| `src_esp32/buttons.*` | Entprellung, Autorepeat, Sperre klemmender Tasten |
+| `src_esp32/machine_api.h` | Deklariert die in `main.cpp` liegenden Maschinenfunktionen |
+| `src_esp32/display_ui.*` | Menuemodell, Renderer, Navigation |
+| `src_esp32/main.cpp` | unveraendert bis auf `ui_begin()`/`ui_update()` und fuenf Zugriffsfunktionen |
 
-`src_esp32/machine_api.h` deklariert die in `main.cpp` implementierten
-Maschinenfunktionen. Dadurch nutzen Menue und serielle Konsole dieselbe API,
-ohne dass die erprobte Ablaufsteuerung angefasst werden musste. Ergaenzt wurden
-dort nur `sequence_isRunning()`, `sequence_program()`,
-`sequence_remainingRuns()`, `sequence_abort()` und `servo_readAll()`.
+Das Menue steckt vollstaendig in Tabellen (`MenuPage` / `MenuRow`). Ein Renderer
+und ein Navigationsstack bedienen alle Seiten — ein neuer Menuepunkt ist eine
+Tabellenzeile, keine neue Zeichenfunktion. Zeilentypen: `ROW_SUBMENU`,
+`ROW_ACTION`, `ROW_VALUE`, `ROW_CHOICE`, `ROW_JOG`, `ROW_BACK`.
 
-Der Maschinenstatus wird alle 300 ms einmal geholt und zwischengespeichert; das
-Menue erzeugt damit rund 3 I2C-Zugriffe pro Sekunde zusaetzlich. Neu gezeichnet
-wird nur, was sich geaendert hat.
+Seiten mit mehr als sieben Zeilen scrollen; die Position steht als `3/8` rechts
+in der Fusszeile, damit nichts die Werte ueberdeckt.
+
+`machine_api.h` verschiebt keinen Code, sondern deklariert nur die vorhandenen
+Funktionen. Menue und serielle Konsole rufen damit dieselbe API auf, ohne dass
+die erprobte Ablaufsteuerung angefasst werden musste. Ergaenzt wurden in
+`main.cpp` lediglich `sequence_isRunning()`, `sequence_program()`,
+`sequence_remainingRuns()`, `sequence_abort()`, `servo_readAll()` und
+`i2c_devicePresent()`.
+
+**Buslast:** Der Maschinenstatus wird alle 300 ms geholt und zwischengespeichert
+(rund 3 zusaetzliche I2C-Zugriffe pro Sekunde). Alle 2 s wird geprueft, ob der
+Uno ueberhaupt antwortet; fehlt er, entfaellt der Statuspoll und die Kopfzeile
+zeigt `KEIN I2C`. Das Menue laesst sich damit auch ohne angeschlossene Slaves
+bedienen. Neu gezeichnet wird nur, was sich geaendert hat.
 
 ---
 
-## 4. Offene Punkte fuer Stufe 3 — Schritte
+## 4. Naechste Ausbaustufe
 
+**Parameter-Menue.** In `updateSequence()` stehen die Werte fest im Code:
+`axis_rel(AXIS_Y, 2000, 800)`, `axis_vibrate(AXIS_Z, 1, 50)`, die 18000 ms
+Vereinzelungsdauer, `axis_abs(AXIS_Y, -7500, 2000)`. Jede Aenderung erfordert
+neu zu flashen. Ein Menuepunkt „Parameter" plus Speicherung im NVS des ESP32
+(`Preferences`) wuerde Parameterstudien direkt an der Anlage ermoeglichen — das
+ist der eigentliche Nutzen des Displays.
 
-**Schritt 1 — Maschinen-API herausloesen.**
-`main.cpp` hat inzwischen 1188 Zeilen und mischt API, State Machine und
-Serial-Parser. Die High-Level-Funktionen (`axis_*`, `servo_set`, `get_stepper_status`,
-…) wandern nach `src_esp32/machine_api.h/.cpp`, die Sequenz nach
-`src_esp32/sequence.h/.cpp`. Danach koennen Menue *und* Serial-Konsole dieselbe
-API aufrufen, ohne dass eine der beiden Bedienarten die andere kennt.
+**Status-Menue.** `print_status()` und `scanI2CBus()` sind vorhanden, haengen
+aber am Serial-Monitor. Positionen, Servostellungen, Sensorwerte und I2C-Scan
+am Display verfuegbar zu machen, waere wenig Aufwand.
 
-**Schritt 2 — Status-Cache einfuehren.**
-`is_axis_busy()` loest bei *jedem* Aufruf eine I2C-Transaktion aus. Wenn das Menue
-zusaetzlich pollt, verdoppelt sich die Buslast. Deshalb: ein
-`machine_pollStatus()`, das hoechstens alle 200 ms liest, und Menue wie
-Sequenzsteuerung lesen anschliessend nur noch den Cache.
-
-**Schritt 3 — Generisches Menue-Modell.**
-Statt pro Screen eine eigene Zeichenfunktion ein Datenmodell:
-
-```cpp
-enum ItemType { IT_SUBMENU, IT_ACTION, IT_INT, IT_BOOL, IT_MONITOR };
-
-struct MenuItem {
-  const char* label;
-  ItemType    type;
-  const MenuList* sub;      // IT_SUBMENU
-  void      (*action)();    // IT_ACTION
-  int32_t*    value;        // IT_INT / IT_BOOL
-  int32_t     min, max, step;
-};
-```
-
-Ein Renderer plus ein Navigationsstack (max. 4 Ebenen) genuegen dann fuer den
-gesamten Baum. Neue Menuepunkte sind danach eine Tabellenzeile, kein neuer Code.
-
-**Schritt 4 — Parameter persistent machen.**
-Werte aus „4 Parameter" in den NVS des ESP32 (`Preferences`-Library) schreiben,
-damit sie einen Neustart ueberstehen. Beim Start laden, bei ENTER speichern.
-
-**Schritt 5 — Sequenz auf Parameter umstellen.**
-Die heute fest kodierten Werte in `updateSequence()` (z. B. `axis_rel(AXIS_Y, 2000, 800)`,
-`18000` ms Vereinzelungsdauer, `axis_vibrate(AXIS_Z, 1, 50)`) durch die
-Parameter-Variablen ersetzen. Erst dann hat das Menue echten Nutzen.
-
-**Schritt 6 — Laufbildschirm.**
-`updateSequence()` schreibt eine Klartext-Schrittbeschreibung in eine Variable,
-die die UI anzeigt. Damit entfaellt der Zwang, am Serial-Monitor zu haengen.
+**Klartext-Schrittanzeige.** `updateSequence()` koennte den aktuellen Schritt in
+eine Variable schreiben, die der Laufbildschirm anzeigt.
 
 ---
 
-## 5. Was du beim ersten Test pruefen solltest
+## 5. Randnotizen zum bestehenden Code
 
-Nach `pio run -e esp32 -t upload`:
+Beim Einlesen aufgefallen, bewusst nicht geaendert, weil ausserhalb des
+Display-Themas:
 
-1. **Kommt ein Bild?** Falls schwarz: Backlight (Modul-Pin 1) und die 3V3-Versorgung
-   pruefen. Viele Module ziehen fuer die LED mehr Strom, als der ESP32-Pin liefert —
-   deshalb ist die Variante „3V3 ueber 47 Ω" die sicherere.
-2. **Layout-Test:** Sind alle vier Eckmarker vollstaendig sichtbar und liegt der
-   Rahmen am Rand? Falls ein weisser Streifen oder eine Verschiebung sichtbar ist,
-   in `config_display.h` `TFT_TAB_TYPE` auf `INITR_REDTAB` bzw. `INITR_GREENTAB`
-   umstellen.
-3. **Farb-Test:** Steht neben dem roten Balken auch „ROT"? Falls Rot und Blau
-   vertauscht sind, ebenfalls der Tab-Typ. Falls alles wie ein Negativ aussieht,
-   `TFT_INVERT_COLORS` auf `1` setzen.
-4. **Tasten-Test:** Reagiert jede Taste einzeln und an der richtigen Stelle?
-   Der Ereigniszaehler zeigt, ob eine Taste prellt (springt beim einmaligen
-   Druecken um mehr als 1 → `BTN_DEBOUNCE_MS` erhoehen).
-5. **Bildstoerungen?** Dann `TFT_SPI_HZ` auf `10000000` reduzieren — typisch bei
-   langen Dupont-Kabeln.
-6. **Ausrichtung:** Aktuell Querformat (`TFT_ROTATION 1`, 160x128). Wenn das
-   Display anders eingebaut wird, auf `3` (um 180° gedreht) oder `0`/`2`
-   (Hochformat) stellen. Das Layout rechnet mit `tft.width()/height()` und passt
-   sich an.
-
-Gib mir zu jedem Punkt kurz Rueckmeldung, dann gehen wir Stufe 2 an.
-
----
-
-## 5a. Bekanntes Problem: 32-MHz-Init der Bibliothek
-
-`Adafruit_ST7735::initR()` ruft intern `begin(0)` auf, und dort wird die
-Frequenz auf `SPI_DEFAULT_FREQ = 32000000` gesetzt (`Adafruit_ST77xx.cpp:35`).
-Die **gesamte Init-Sequenz laeuft also mit 32 MHz**, unabhaengig davon, was
-`setSPISpeed()` sagt — das wirkt erst auf die nachfolgenden Zeichenbefehle.
-Bei langen Dupont-Kabeln kommen die Init-Befehle verstuemmelt an, das Panel
-wird nie eingeschaltet und bleibt schwarz.
-
-Da `begin()` nicht virtuell ist, laesst sich das nicht sauber ueberschreiben.
-Gegenmassnahmen in `tftInitPanel()`:
-
-1. `TFT_USE_SOFT_SPI = 1` — Bitbang-SPI ueber den Konstruktor
-   `Adafruit_ST7735(cs, dc, mosi, sclk, rst)`. Langsam, aber unempfindlich
-   gegen lange Leitungen. Damit klaert sich, ob die Verdrahtung stimmt.
-2. Nach `initR()` wird auf `TFT_SPI_HZ` heruntergeschaltet und die
-   entscheidenden Einschaltbefehle (`SWRESET`, `SLPOUT`, `COLMOD`, `NORON`,
-   `DISPON`) werden bei diesem sicheren Takt noch einmal gesendet. Ein
-   misslungener 32-MHz-Init wird dadurch aufgefangen.
-
-Mit `TFT_DIAG_MODE = 1` laeuft statt des Menues ein Testbild-Durchlauf, der
-alle Panel-Varianten automatisch durchprobiert und im Serial-Monitor
-protokolliert, was gerade zu sehen sein muesste.
-
----
-
-## 6. Zwei Randnotizen zum bestehenden Code
-
-Beim Einlesen sind mir zwei Stellen aufgefallen, die nichts mit dem Display zu
-tun haben, aber vor Stufe 5 (Sequenz auf Parameter umstellen) angefasst werden
-sollten:
-
-- `src_esp32/main.cpp:748` — `case P2_POSITION_Y_WAIT:` hat kein `break;` und
-  faellt in `P2_SERVO_INIT` durch. Die Servos werden dadurch schon gesetzt,
-  waehrend Y noch faehrt.
-- `src_esp32/main.cpp:704` — beim Wiederholen springt `P1_DONE` auf
+- `src_esp32/main.cpp` — `case P2_POSITION_Y_WAIT:` hat kein `break;` und faellt
+  in `P2_SERVO_INIT` durch. Die Servos werden dadurch schon gesetzt, waehrend Y
+  noch faehrt.
+- `src_esp32/main.cpp` — beim Wiederholen springt `P1_DONE` auf
   `(currentProgram == 1) ? P1_HOME_Z : P2_HOME_Z`. Programm 3 hat mit `P3_DONE`
-  aber einen eigenen Zweig, daher ist der `P2_HOME_Z`-Fall hier nur fuer
-  Programm 2 korrekt.
+  aber einen eigenen Zweig, der Fall greift dort also nicht.
 
-Beides habe ich bewusst **nicht** geaendert, weil es ausserhalb des Display-Themas
-liegt. Sag Bescheid, ob ich das in einem separaten Commit mitnehmen soll.
+Beides sollte vor der Umstellung auf ein Parameter-Menue angefasst werden.

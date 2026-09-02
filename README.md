@@ -7,6 +7,7 @@ System zur automatischen Vereinzelung und Zuführung von Hairpins für roboterge
 ## Aktueller Projektstatus
 - [x] Repository-Struktur mit PlatformIO Multi-Environment steht.
 - [x] Erste Hardware Tests mit externen Bauteile etc.
+- [x] Bedienmenue auf 1.8" TFT (ST7735) mit 5-Wege-Navigation, siehe `docs/menu_plan.md`.
 - [ ] Implementierung der analogen Strommessung auf dem Nano (Nächster Schritt).
 - [ ] I2C-Protokoll-Definition in `include/`.
 - [ ] Schrittmotor-Ansteuerung via CNC-Shield auf dem Uno.

@@ -48,34 +48,23 @@
 // Wenn das Bild sauber steht, schrittweise erhoehen: 8M -> 16M -> 26M.
 #define TFT_SPI_HZ      4000000
 
-// ----------------------------------------------------------------------------
-// WICHTIG: Die Adafruit-Bibliothek fuehrt ihre Init-Sequenz IMMER mit fest
-// einkompilierten 32 MHz aus (Adafruit_ST77xx.cpp: SPI_DEFAULT_FREQ). Das laesst
+// Software-SPI (Bitbang) statt Hardware-SPI.
+//
+// Hintergrund: Die Adafruit-Bibliothek faehrt ihre Init-Sequenz immer mit fest
+// einkompilierten 32 MHz (Adafruit_ST77xx.cpp: SPI_DEFAULT_FREQ); das laesst
 // sich von aussen nicht setzen. Bei langen Kabeln kommen die Init-Befehle
-// dadurch verstuemmelt an und das Panel bleibt schwarz.
-// Gegenmassnahmen (in dieser Reihenfolge probieren):
-//   1) TFT_USE_SOFT_SPI = 1  -> Bitbang-SPI, langsam aber extrem robust.
-//      Damit klaert sich, ob die Verdrahtung stimmt.
-//   2) TFT_USE_SOFT_SPI = 0  -> Hardware-SPI. ui_begin() sendet die
-//      entscheidenden Init-Befehle nach dem Umschalten auf TFT_SPI_HZ
-//      nochmals nach, damit ein misslungener 32-MHz-Init aufgefangen wird.
-// ----------------------------------------------------------------------------
+// dadurch verstuemmelt an und das Panel bleibt schwarz. tftInitPanel() faengt
+// das ab, indem es nach initR() auf TFT_SPI_HZ umschaltet und die
+// Einschaltbefehle nochmals sendet.
+//
+// 1 = Bitbang, langsamer aber unempfindlich gegen lange Leitungen (aktuell).
+// 0 = Hardware-SPI (VSPI), fluessigerer Bildaufbau.
 #define TFT_USE_SOFT_SPI    1
 
-// Diagnose-Modus: statt des Menues laeuft ein Testbild-Durchlauf, der
-// automatisch alle Panel-Varianten durchprobiert und im Serial-Monitor
-// mitschreibt, was gerade auf dem Schirm stehen muesste.
-// Auf 0 setzen, sobald ein Bild da ist.
-// 02.09.2026: Bild laeuft mit BLACKTAB + Software-SPI -> Diagnose aus.
-#define TFT_DIAG_MODE       0
-
 // --- Panel-Variante ("Tab") ---
-// Das rote 1.8"-Modul V1.2 laeuft fast immer mit INITR_BLACKTAB.
-// Falls die Farben vertauscht sind (Rot <-> Blau) oder ein Rand sichtbar ist:
-//   INITR_BLACKTAB  -> Standard, keine Offsets
-//   INITR_REDTAB    -> falls ein weisser Rand oben/links sichtbar ist
-//   INITR_GREENTAB  -> falls das Bild um 2/3 Pixel verschoben ist
-// Umschalten ueber diesen Define, dann neu flashen.
+// Fuer das verbaute Modul verifiziert: INITR_BLACKTAB.
+// Alternativen bei verschobenem Bild oder vertauschten Farben:
+// INITR_REDTAB, INITR_GREENTAB.
 #define TFT_TAB_TYPE   INITR_BLACKTAB
 
 // Farben invertiert? Manche V1.2-Chargen brauchen invertDisplay(true).

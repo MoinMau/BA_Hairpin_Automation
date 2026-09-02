@@ -39,25 +39,18 @@ void buttons_begin() {
     btnLocked[i]     = false;
   }
 
-  // Pullups kurz einschwingen lassen, dann Startzustand pruefen und melden.
+  // Pullups einschwingen lassen, dann auf klemmende Tasten pruefen.
   delay(20);
-  Serial.println(F("\n[BTN] Startzustand der Tasten (Pullup, gedrueckt = LOW):"));
   for (uint8_t i = 0; i < BTN_COUNT; i++) {
-    bool pressed = (digitalRead(BTN_PINS[i]) == LOW);
-    Serial.print(F("  "));
+    if (digitalRead(BTN_PINS[i]) != LOW) continue;
+    btnLocked[i]  = true;
+    btnLastRaw[i] = true;   // damit die Freigabe eine echte Flanke sieht
+    Serial.print(F("[BTN] "));
     Serial.print(BTN_NAMES[i]);
-    Serial.print(F("\tGPIO"));
+    Serial.print(F(" (GPIO"));
     Serial.print(BTN_PINS[i]);
-    Serial.print(F("\t"));
-    Serial.println(pressed ? F("LOW  <-- dauerhaft gedrueckt, GESPERRT")
-                           : F("HIGH  ok"));
-    if (pressed) {
-      btnLocked[i]  = true;
-      btnLastRaw[i] = true;   // damit die Freigabe eine echte Flanke sieht
-    }
+    Serial.println(F(") liegt beim Start auf LOW -> gesperrt."));
   }
-  Serial.println(F("[BTN] Gesperrte Tasten werden freigegeben, sobald sie"));
-  Serial.println(F("      einmal losgelassen wurden.\n"));
 }
 
 ButtonId buttons_update() {
