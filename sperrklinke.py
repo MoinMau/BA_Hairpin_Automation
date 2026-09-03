@@ -37,10 +37,10 @@ HIER = Path(__file__).resolve().parent
 # Alle uebrigen Groessen (Kontakthoehe, Spiel, Eingriffstiefe, Schenkelwahl)
 # stehen in der dataclass Parameter weiter unten.
 # ============================================================================
-STEP_DATEI = HIER / "PEM-Referenzstator-Aussen.step"
+STEP_DATEI = HIER / "PEM-Referenzstator-Aussen.STEP"
 
 from build123d import (
-    Align, Axis, Box, Cylinder, Kind, Mode, Plane, Pos, Rot,
+    Align, Box, Cylinder, Kind, Plane, Pos, Rot,
     ExportSVG, export_step, export_stl, import_step, offset, section, extrude,
 )
 

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# Generierte CAD-Artefakte.
+# Reproduzierbar mit:  python3 endeffektor.py  /  python3 sperrklinke.py
+out/
+
+# Frontend-Laufzeitdaten (webapp/server.py).
+# Reproduzierbar durch einen neuen Lauf im Browser.
+webapp/jobs/
+webapp/uploads/
+webapp/cache/
