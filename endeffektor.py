@@ -5,9 +5,11 @@ Die Hairpins haengen als Buendel auf einer Stange, Kopf an Kopf. Zwei getrennt
 auf- und abfahrende Stangen tragen je einen Endeffektor:
 
     HALTER     haelt das Buendel auf, damit die Reihe nicht nachrutscht.
-               Seine Stirnseite bildet die Kopf-Knickbiegung ueber die volle
-               Breite ab -- eine reine Anlageflaeche, keine Tasche, der Kopf
-               liegt buendig an.
+               Seine Stirnseite bildet die Kopf-Knickbiegung ab -- eine reine
+               Anlageflaeche, keine Tasche, der Kopf liegt buendig an. Sie ist
+               bewusst breiter als die Biegung, damit die Koepfe stabil
+               abgestuetzt werden. Unter der Platte laeuft nur eine schmale
+               Stirnleiste weiter nach unten, nicht der ganze Koerper.
 
     SCHNEIDER  faehrt zwischen zwei Koepfe und vereinzelt genau einen.
                Unter der Grundplatte sitzt ein einseitig angeschliffener Keil:
@@ -25,7 +27,7 @@ Koordinaten
             (Bohrung, Schraube) beziehen sich auf diesen Punkt.
     Y = 0   Mittelebene, die Knickbiegung wird darauf zentriert.
     Z       'unterkante_z' ist die Trennebene Platte/Unterbau; darunter
-            haengt Keil bzw. Anlageblock, darueber die Grundplatte.
+            haengt Keil bzw. Stirnleiste, darueber die Grundplatte.
 
 Die Stirnform kommt vollstaendig aus dem Hairpin -- ohne STEP-Datei laeuft
 nichts. Die Kontur entsteht als Draufsicht-Projektion des Kopfbereichs.
@@ -35,7 +37,7 @@ Kein externes CAD-Programm.
 
 Aufruf:
     python3 endeffektor.py --hairpin PEM-Referenzstator-Aussen.STEP
-    python3 endeffektor.py --variante halter --hairpin hairpin_test.step
+    python3 endeffektor.py --variante halter --hairpin PEM-Referenzstator-Aussen.STEP
     python3 endeffektor.py --variante schneider --keilwinkel 25 --eintauchtiefe 4
 """
 
@@ -114,6 +116,10 @@ class ParameterBasis:
     kopf_suchbreite: float = 40.0     # so weit wird nach der Biegung gesucht
     kopf_kern_schwelle: float = 0.15  # Anteil der Maximalkruemmung fuer den Kern
     kopf_auslauf: float = 0.9         # Zuschlag je Seite, in Kernbreiten
+    # Die Biegung gibt die Mindestbreite vor; wer mehr Anlageflaeche will,
+    # streckt sie hiermit. Begrenzt wird trotzdem auf das, was die Kontur
+    # ueberhaupt hergibt -- breiter als der Kopf geht nicht.
+    breite_faktor: float = 1.0
 
     # --- Fertigung / Pruefung ---
     min_wandstaerke: float = 1.6   # 4 x Duesendurchmesser
@@ -151,12 +157,20 @@ class ParameterBasis:
 class ParameterHalter(ParameterBasis):
     """Endeffektor 1 -- haelt das Buendel auf.
 
-    Unter der Platte sitzt ein prismatischer Anlageblock. Seine Stirnflaeche
-    ist dieselbe Knickkontur wie die der Platte und laeuft senkrecht durch:
-    der Hairpin-Kopf liegt ueber die ganze Hoehe buendig an. Kein Keil, kein
-    Ruecksprung, keine Tasche.
+    Unter der Platte laeuft nur eine Stirnleiste weiter nach unten -- alles
+    hinter 'anlage_tiefe' faellt weg. Ihre Stirnflaeche ist dieselbe
+    Knickkontur wie die der Platte und laeuft senkrecht durch: der Kopf liegt
+    ueber die ganze Hoehe buendig an. Kein Keil, kein Ruecksprung, keine
+    Tasche.
     """
-    anlage_hoehe: float = 10.0     # Hoehe des Anlageblocks unter der Platte
+    anlage_hoehe: float = 10.0     # Hoehe der Stirnleiste unter der Platte
+    # Wie weit die Leiste nach hinten reicht, ab X = 0 gemessen. Leer = aus
+    # der Formtiefe abgeleitet, damit hinter dem tiefsten Punkt der Kontur
+    # noch Wand steht.
+    anlage_tiefe: float | None = None
+    # Der Halter soll die Koepfe stabil abstuetzen, nicht nur die Biegung
+    # abbilden -- deshalb deutlich breiter als der Schneider.
+    breite_faktor: float = 2.5
 
     @property
     def unterbau_hoehe(self) -> float:
@@ -183,7 +197,10 @@ class ParameterSchneider(ParameterBasis):
 
     # Die Platte darf den Hairpin nicht beruehren -- nur der Keil arbeitet.
     platte_ruecksprung: float = 0.3   # Stirnflaeche hinter der Keilvorderkante
-    platte_freiwinkel: float = 16.0   # zusaetzliche Ruecknahme nach oben [Grad]
+    # 0 = die Stirnflaeche der Platte laeuft senkrecht hoch. Der Ruecksprung
+    # allein haelt sie schon vom Hairpin weg; eine zusaetzliche Neigung kostet
+    # nur Material und bringt nichts.
+    platte_freiwinkel: float = 0.0    # Ruecknahme der Stirnflaeche nach oben [Grad]
 
     @property
     def unterbau_hoehe(self) -> float:
@@ -499,29 +516,49 @@ def klinge_bauen(region, p: ParameterSchneider):
     }
 
 
-def anlageblock_bauen(region, p: ParameterHalter):
-    """Der prismatische Block unter der Platte beim Halter.
+def anlage_tiefe_bestimmen(p: ParameterHalter, formtiefe: float) -> float:
+    """Wie weit die Stirnleiste nach hinten reicht, wenn nichts vorgegeben ist.
 
-    Dieselbe Knickkontur wie die Platte, senkrecht durchgezogen. Damit liegt
-    der Kopf ueber die volle Hoehe buendig an -- genau das, was der Halter
-    leisten soll.
+    Hinter dem tiefsten Punkt der Knickkontur muss noch Wand stehen, sonst
+    ist die Leiste dort hauchduenn. Drei Wandstaerken sind ein brauchbarer
+    Kompromiss zwischen Steifigkeit und Materialeinsatz.
+    """
+    if p.anlage_tiefe is not None:
+        return p.anlage_tiefe
+    return round(formtiefe + 3 * p.min_wandstaerke, 3)
 
-    Rueckgabe: (block, kennwerte).
+
+def anlageblock_bauen(region, p: ParameterHalter, formtiefe: float):
+    """Die Stirnleiste unter der Platte beim Halter.
+
+    Nur die Stirnseite laeuft nach unten weiter, nicht die ganze Platte: alles
+    hinter 'anlage_tiefe' faellt weg. Der Kopf liegt trotzdem ueber die volle
+    Hoehe buendig an, denn die Knickkontur zieht sich senkrecht durch -- aber
+    das Bauteil bleibt leicht und die Reihe kann darunter durchlaufen.
+
+    Rueckgabe: (leiste, kennwerte).
     """
     z_unten = p.unterkante_bauteil
-    block = Pos(0, 0, z_unten) * Box(
-        p.laenge, p.breite, p.anlage_hoehe,
+    tiefe = anlage_tiefe_bestimmen(p, formtiefe)
+    if tiefe <= formtiefe:
+        raise ValueError(
+            f"anlage_tiefe ({tiefe} mm) reicht nicht hinter die Knickkontur "
+            f"({round(formtiefe, 2)} mm tief) -- die Leiste haette Loecher."
+        )
+    leiste = Pos(0, 0, z_unten) * Box(
+        tiefe, p.breite, p.anlage_hoehe,
         align=(Align.MIN, Align.CENTER, Align.MIN),
     )
-    block = block - stirn_werkzeug(region, z_unten, p.unterkante_z, 0.0, 0.0)
-    if not block.solids():
-        raise ValueError("Der Anlageblock ist leer -- laenge oder kopf_y pruefen.")
-    block, splitter = entschlacken(block, p.duesen_d ** 3, "Anlageblock")
+    leiste = leiste - stirn_werkzeug(region, z_unten, p.unterkante_z, 0.0, 0.0)
+    if not leiste.solids():
+        raise ValueError("Die Stirnleiste ist leer -- anlage_tiefe oder kopf_y pruefen.")
+    leiste, splitter = entschlacken(leiste, p.duesen_d ** 3, "Stirnleiste")
     if splitter:
-        print(f"      ({splitter} Splitter aus dem Anlageblock entfernt)")
-    return block, {
+        print(f"      ({splitter} Splitter aus der Stirnleiste entfernt)")
+    return leiste, {
         "anlage_hoehe_mm": round(p.anlage_hoehe, 3),
-        "anlage_volumen_mm3": round(block.volume, 2),
+        "anlage_tiefe_mm": round(tiefe, 3),
+        "anlage_volumen_mm3": round(leiste.volume, 2),
     }
 
 
@@ -601,7 +638,7 @@ def platte_bauen(p: ParameterBasis, region):
     return platte
 
 
-def bauteil_bauen(p: ParameterBasis, region):
+def bauteil_bauen(p: ParameterBasis, region, formtiefe: float):
     """Platte + Unterbau, danach Bohrungen, Schlitz, Senkung und Mutterntasche.
 
     Rueckgabe: (koerper, kennwerte). In den Kennwerten steht, wieviel Material
@@ -615,7 +652,7 @@ def bauteil_bauen(p: ParameterBasis, region):
     if isinstance(p, ParameterSchneider):
         unterbau, unterbau_kw = klinge_bauen(region, p)
     else:
-        unterbau, unterbau_kw = anlageblock_bauen(region, p)
+        unterbau, unterbau_kw = anlageblock_bauen(region, p, formtiefe)
     kw.update(unterbau_kw)
 
     koerper = platte + unterbau
@@ -776,10 +813,18 @@ def pruefen(koerper, kw: dict, p: ParameterBasis) -> list[dict]:
         mindestens("Platte freigestellt gegen den Hairpin",
                    p.platte_ruecksprung, 0.0, "mm")
     else:
-        # Beim Halter traegt die Stirnflaeche -- sie muss durchgehen.
-        add("Anlageflaeche laeuft senkrecht durch", p.anlage_hoehe,
-            p.anlage_hoehe, 0, "mm")
-        mindestens("Anlageblock vorhanden", kw["anlage_volumen_mm3"], 0.01, "mm3")
+        # Beim Halter traegt die Stirnflaeche -- sie muss ueberhaupt da sein.
+        mindestens("Stirnleiste vorhanden", kw["anlage_volumen_mm3"], 0.01, "mm3")
+        # Hinter dem tiefsten Punkt der Knickkontur muss Wand stehen bleiben,
+        # sonst ist die Leiste dort papierduenn.
+        mindestens("Wand hinter der Knickkontur",
+                   kw["anlage_tiefe_mm"] - kw["stirn_formtiefe_mm"],
+                   p.min_wandstaerke, "mm")
+        # Die Leiste darf nicht bis unter die Wellenbohrung reichen -- dort
+        # soll die Reihe unter der Platte durchlaufen koennen.
+        mindestens("Stirnleiste endet vor der Wellenbohrung",
+                   (p.bohrung_x - p.bohrung_d / 2) - kw["anlage_tiefe_mm"],
+                   0.0, "mm")
 
     return checks
 
@@ -867,7 +912,11 @@ def stirnform_vorbereiten(pin, p: ParameterBasis):
               f"{masse['kopf_biegung_breite_mm']} mm breit")
 
         noetig = kopf_mindestbreite(p)
-        breite = max(biegung_breite, noetig)
+        # Der Halter soll die Koepfe abstuetzen, nicht nur die Biegung zeigen
+        # -- er streckt die Breite ueber breite_faktor. Beim Schneider ist der
+        # Faktor 1, dort zaehlt nur die Biegung selbst.
+        gewuenscht = biegung_breite * p.breite_faktor
+        breite = max(gewuenscht, noetig)
         # Breiter als die Kontur reicht darf das Bauteil nicht werden: dort
         # gaebe es nichts zu schneiden, die Stirnseite bliebe stehen und der
         # Koerper zerfiele in mehrere Stuecke. Nach dem Zentrieren ist die
@@ -886,7 +935,10 @@ def stirnform_vorbereiten(pin, p: ParameterBasis):
                 f"und Mutterntasche muessen kleiner werden."
             )
         kw["kopf_breite_gesetzt_mm"] = round(breite, 3)
-        if breite > biegung_breite + 1e-9:
+        if p.breite_faktor != 1.0:
+            print(f"      Breite      : {round(breite, 3)} mm -- Biegung "
+                  f"{round(biegung_breite, 3)} mm x Faktor {p.breite_faktor}")
+        elif breite > biegung_breite + 1e-9:
             print(f"      Breite      : {round(breite, 3)} mm -- auf das Machbare "
                   f"aufgeweitet (Biegung braeuchte nur {round(biegung_breite, 3)})")
         else:
@@ -951,7 +1003,7 @@ def lauf(p: ParameterBasis, outdir: Path, stem: str = "endeffektor",
     print(f"[2/4] Geometrie   : {round(p.laenge, 2)} x {round(p.breite, 2)} x "
           f"{round(p.dicke + p.unterbau_hoehe, 2)} mm, "
           f"Z = {round(p.unterkante_bauteil, 2)}..{round(p.oberkante_z, 2)}")
-    koerper, kw = bauteil_bauen(p, region)
+    koerper, kw = bauteil_bauen(p, region, kopf_kw["stirn_formtiefe_mm"])
     kw.update(kopf_kw)
     if isinstance(p, ParameterSchneider):
         print(f"      Keil        : {p.klinge_hoehe} mm hoch, {p.keilwinkel} Grad, "
@@ -960,7 +1012,8 @@ def lauf(p: ParameterBasis, outdir: Path, stem: str = "endeffektor",
               f"{kw['keil_dicke_eintauch_mm']} mm dick "
               f"(oben {kw['keil_dicke_oben_mm']} mm)")
     else:
-        print(f"      Anlageblock : {p.anlage_hoehe} mm hoch, Kontur senkrecht durch")
+        print(f"      Stirnleiste : {p.anlage_hoehe} mm hoch, "
+              f"{kw['anlage_tiefe_mm']} mm tief, Kontur senkrecht durch")
     print(f"      Rohteil     : {kw['rohteil_volumen_mm3']} mm3")
     for feature in ["hauptbohrung", "klemmschlitz", "schraube", "senkung", "mutter"]:
         print(f"      - {feature:<13}: {kw[f'abtrag_{feature}_mm3']:>8} mm3 abgetragen")
@@ -997,6 +1050,8 @@ def main():
                     help="Abstand Stirnflaeche <-> Hairpin [mm]")
     ap.add_argument("--kopf-y", type=float, dest="kopf_y",
                     help="Kontur quer verschieben [mm]")
+    ap.add_argument("--breite-faktor", type=float, dest="breite_faktor",
+                    help="Stirnseite so viel breiter als die Biegung")
     # nur Schneider
     ap.add_argument("--klinge-hoehe", type=float, dest="klinge_hoehe",
                     help="gebaute Hoehe des Keils [mm]")
@@ -1006,17 +1061,22 @@ def main():
                     help="Anstellung der Keilrueckflaeche [Grad]")
     ap.add_argument("--schneide-fase", type=float, dest="schneide_fase",
                     help="Dicke der Schneidkante [mm]")
+    ap.add_argument("--platte-freiwinkel", type=float, dest="platte_freiwinkel",
+                    help="Ruecknahme der Plattenstirnflaeche nach oben [Grad]")
     # nur Halter
     ap.add_argument("--anlage-hoehe", type=float, dest="anlage_hoehe",
-                    help="Hoehe des Anlageblocks [mm]")
+                    help="Hoehe der Stirnleiste [mm]")
+    ap.add_argument("--anlage-tiefe", type=float, dest="anlage_tiefe",
+                    help="wie weit die Stirnleiste nach hinten reicht [mm]")
     ap.add_argument("--out", default=None, help="Ausgabeordner")
     a = ap.parse_args()
 
     p = VARIANTEN[a.variante]()
     gueltig = {f.name for f in fields(p)}
     for name in ("dicke", "breite", "eckradius", "kantenradius", "kopf_spiel",
-                 "kopf_y", "klinge_hoehe", "eintauchtiefe", "keilwinkel",
-                 "schneide_fase", "anlage_hoehe"):
+                 "kopf_y", "breite_faktor", "klinge_hoehe", "eintauchtiefe",
+                 "keilwinkel", "schneide_fase", "platte_freiwinkel",
+                 "anlage_hoehe", "anlage_tiefe"):
         wert = getattr(a, name, None)
         if wert is None:
             continue

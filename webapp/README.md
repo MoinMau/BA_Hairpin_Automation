@@ -15,7 +15,7 @@ Mit `--port 8000` laeuft er woanders, mit `--no-browser` bleibt der Browser zu.
 
    | | Aufgabe | Unterbau |
    |---|---|---|
-   | **Endeffektor 1 – Halter** | haelt das Buendel auf | prismatischer Anlageblock, Kontur senkrecht durch |
+   | **Endeffektor 1 – Halter** | haelt das Buendel auf | schmale Stirnleiste, Kontur senkrecht durch, Stirnseite breiter als die Biegung |
    | **Endeffektor 2 – Schneider** | vereinzelt genau einen Hairpin | einseitig angeschliffener Keil |
 
 2. **Hairpin-STEP** waehlen. Angeboten wird alles, was als `.step`/`.stp` im

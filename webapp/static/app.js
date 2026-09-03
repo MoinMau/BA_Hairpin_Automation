@@ -358,8 +358,8 @@ $("parameter-gruppen").addEventListener("keydown", (e) => {
     await bauteileLaden();
     await hairpinsLaden();
     if (!zustand.hairpins.length) {
-      meldung("warn", "Keine STEP-Datei gefunden. Lade eine hoch oder erzeuge mit "
-                    + "'python3 make_testpin.py' einen Testpin.");
+      meldung("warn", "Keine STEP-Datei gefunden. Lege einen Hairpin als "
+                    + ".step/.stp im Projektordner ab oder lade ihn hier hoch.");
     }
   } catch (e) {
     meldung("fehler", `Start fehlgeschlagen: ${e.message}`);

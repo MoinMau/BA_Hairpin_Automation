@@ -74,8 +74,9 @@ BAUTEILE = {
     "halter": {
         "titel": "Endeffektor 1 – Halter",
         "beschreibung": "Haelt das Buendel auf. Die Stirnseite bildet die "
-                        "Kopf-Knickbiegung ueber die volle Breite ab und laeuft "
-                        "senkrecht durch – reine Anlageflaeche, keine Tasche.",
+                        "Kopf-Knickbiegung ab, laeuft senkrecht durch und ist "
+                        "breiter als die Biegung, damit die Koepfe stabil "
+                        "anliegen. Darunter bleibt nur eine schmale Stirnleiste.",
         "parameter": endeffektor.ParameterHalter,
         "hairpin": "pflicht",
         "starten": _start_endeffektor,
@@ -126,6 +127,7 @@ _GEMEINSAME_FELDER = {
     "kopf_suchbreite": ("Suchbreite fuer die Biegung", "mm"),
     "kopf_kern_schwelle": ("Kruemmungsschwelle des Biegungskerns", "-"),
     "kopf_auslauf": ("Auslauf je Seite, in Kernbreiten", "-"),
+    "breite_faktor": ("Stirnseite so viel breiter als die Biegung", "x"),
 }
 
 # Die Gruppen, die beide Varianten gemeinsam haben -- sie folgen dem
@@ -133,7 +135,8 @@ _GEMEINSAME_FELDER = {
 # jeweiligen Endeffektor ausmacht.
 _GEMEINSAME_GRUPPEN = [
     ("Stirnform aus dem Hairpin",
-     ["kopf_spiel", "kopf_y", "kopf_breite_ableiten", "kopf_abtastung"]),
+     ["kopf_spiel", "kopf_y", "breite_faktor", "kopf_breite_ableiten",
+      "kopf_abtastung"]),
     ("Grundplatte", ["laenge", "breite", "dicke", "unterkante_z"]),
     ("Hauptbohrung (Welle)", ["bohrung_d", "bohrung_x"]),
     ("Klemmung", ["schlitz_breite", "schraube_d", "schraube_x",
@@ -147,9 +150,11 @@ _GEMEINSAME_GRUPPEN = [
 FELD_INFO = {
     "halter": {
         **_GEMEINSAME_FELDER,
-        "anlage_hoehe": ("Hoehe des Anlageblocks unter der Platte", "mm"),
+        "anlage_hoehe": ("Hoehe der Stirnleiste unter der Platte", "mm"),
+        "anlage_tiefe": ("Tiefe der Stirnleiste (leer = automatisch)", "mm"),
         "_gruppen": [
-            ("Anlage – haelt das Buendel auf", ["anlage_hoehe"]),
+            ("Stirnleiste – haelt das Buendel auf",
+             ["anlage_hoehe", "anlage_tiefe"]),
         ] + _GEMEINSAME_GRUPPEN,
     },
     "schneider": {
@@ -160,7 +165,7 @@ FELD_INFO = {
         "schneide_fase": ("Dicke der Schneidkante (Druckgrenze!)", "mm"),
         "klinge_breite": ("Keilbreite (leer = so breit wie die Platte)", "mm"),
         "platte_ruecksprung": ("Platte hinter der Keilvorderkante", "mm"),
-        "platte_freiwinkel": ("Zusaetzliche Ruecknahme der Platte nach oben", "Grad"),
+        "platte_freiwinkel": ("Ruecknahme der Platte nach oben (0 = senkrecht)", "Grad"),
         "_gruppen": [
             ("Keil – vereinzelt den Hairpin",
              ["klinge_hoehe", "eintauchtiefe", "keilwinkel", "schneide_fase",

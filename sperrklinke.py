@@ -29,7 +29,7 @@ HIER = Path(__file__).resolve().parent
 # >>> HIER ANPASSEN <<<  Pfad zur STEP-Datei des Hairpins
 #
 # Entweder nur der Dateiname -- dann wird die Datei neben diesem Skript gesucht:
-#     STEP_DATEI = HIER / "hairpin_test.step"
+#     STEP_DATEI = HIER / "PEM-Referenzstator-Aussen.STEP"
 # oder ein vollstaendiger Pfad, z.B.:
 #     STEP_DATEI = Path("/Users/moinmau/Desktop/pin_v3.step")
 #     STEP_DATEI = Path(r"C:\Messungen\pin_v3.step")        # Windows
@@ -305,8 +305,7 @@ def main():
         raise SystemExit(
             f"STEP-Datei nicht gefunden: {quelle}\n"
             f"   -> STEP_DATEI im Kopf von {Path(__file__).name} anpassen,\n"
-            f"      oder den Pfad beim Aufruf mitgeben,\n"
-            f"      oder mit 'python3 make_testpin.py' den Testpin erzeugen."
+            f"      oder den Pfad beim Aufruf mitgeben."
         )
     outdir = Path(a.out).expanduser() if a.out else HIER / "out"
 
