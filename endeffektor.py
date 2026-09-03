@@ -135,10 +135,26 @@ class ParameterBasis:
         """Hoehe der Schraubenachse -- immer auf halber Plattendicke."""
         return self.unterkante_z + self.dicke / 2
 
+    def breite_bei(self, x: float) -> float:
+        """Bauteilbreite an der Laengsstelle x.
+
+        Ohne Taille ist sie ueberall gleich. Der Halter ueberschreibt das:
+        vorne traegt die volle Stirnseite, hinten reicht der schmale Hals.
+        Alles, was auf die Aussenflaeche Bezug nimmt -- Senkung, Mutterntasche,
+        Restwaende -- muss diese Funktion benutzen und nicht 'breite', sonst
+        sticht die Senkung neben dem Bauteil ins Leere.
+        """
+        return self.breite
+
+    @property
+    def klemm_breite(self) -> float:
+        """Bauteilbreite auf Hoehe der Klemmschraube."""
+        return self.breite_bei(self.schraube_x)
+
     @property
     def aussen_y(self) -> float:
-        """Y der -Y-Aussenflaeche, von der aus die Senkung eintaucht."""
-        return -self.breite / 2
+        """Y der -Y-Aussenflaeche am Klemmbereich; dort taucht die Senkung ein."""
+        return -self.klemm_breite / 2
 
     @property
     def mutter_sw_gesamt(self) -> float:
@@ -172,9 +188,23 @@ class ParameterHalter(ParameterBasis):
     # abbilden -- deshalb deutlich breiter als der Schneider.
     breite_faktor: float = 2.5
 
+    # --- Taille: hinten braucht nur die Klemmung Platz ---
+    # Die breite Stirnseite wird nur vorne gebraucht, wo die Koepfe anliegen.
+    # Dahinter darf das Bauteil einschnueren -- das spart Material und laesst
+    # der Nachbarmechanik Luft.
+    hals_breite: float | None = None   # leer = so schmal, wie die Klemmung erlaubt
+    hals_ab_x: float | None = None     # leer = direkt hinter der Stirnleiste
+    hals_radius: float = 3.0           # Verrundung der Schulter; 0 = harte Stufe
+
     @property
     def unterbau_hoehe(self) -> float:
         return self.anlage_hoehe
+
+    def breite_bei(self, x: float) -> float:
+        """Vor der Schulter die volle Stirnseite, dahinter der Hals."""
+        if self.hals_breite is None or self.hals_ab_x is None:
+            return self.breite
+        return self.breite if x < self.hals_ab_x else self.hals_breite
 
 
 @dataclass
@@ -516,6 +546,31 @@ def klinge_bauen(region, p: ParameterSchneider):
     }
 
 
+def automatik_aufloesen(p: ParameterBasis, formtiefe: float):
+    """Alle "leer = automatisch"-Felder auf konkrete Zahlen setzen.
+
+    Muss VOR dem ersten Geometrieschritt laufen: sowohl die Grundplatte als
+    auch die Stirnleiste fragen diese Werte ab, und breite_bei() kann erst
+    antworten, wenn Halsbreite und Schulterlage feststehen.
+    """
+    if not isinstance(p, ParameterHalter):
+        return
+    if p.anlage_tiefe is None:
+        # Hinter dem tiefsten Punkt der Knickkontur muss noch Wand stehen,
+        # sonst ist die Leiste dort hauchduenn. Drei Wandstaerken sind ein
+        # brauchbarer Kompromiss zwischen Steifigkeit und Materialeinsatz.
+        p.anlage_tiefe = round(formtiefe + 3 * p.min_wandstaerke, 3)
+    if p.hals_ab_x is None:
+        # Die volle Breite wird genau dort gebraucht, wo die Koepfe anliegen
+        # -- also ueber die Tiefe der Stirnleiste. Dahinter darf es schmaler
+        # werden, deshalb sitzt die Schulter direkt an deren Hinterkante.
+        p.hals_ab_x = p.anlage_tiefe
+    if p.hals_breite is None:
+        # So schmal, wie Wellenbohrung, Senkung und Mutterntasche es zulassen.
+        p.hals_breite = round(kopf_mindestbreite(p), 3)
+    p.hals_breite = min(p.hals_breite, p.breite)
+
+
 def anlage_tiefe_bestimmen(p: ParameterHalter, formtiefe: float) -> float:
     """Wie weit die Stirnleiste nach hinten reicht, wenn nichts vorgegeben ist.
 
@@ -523,9 +578,9 @@ def anlage_tiefe_bestimmen(p: ParameterHalter, formtiefe: float) -> float:
     ist die Leiste dort hauchduenn. Drei Wandstaerken sind ein brauchbarer
     Kompromiss zwischen Steifigkeit und Materialeinsatz.
     """
-    if p.anlage_tiefe is not None:
-        return p.anlage_tiefe
-    return round(formtiefe + 3 * p.min_wandstaerke, 3)
+    if p.anlage_tiefe is None:                 # falls jemand direkt aufruft
+        automatik_aufloesen(p, formtiefe)
+    return p.anlage_tiefe
 
 
 def anlageblock_bauen(region, p: ParameterHalter, formtiefe: float):
@@ -559,6 +614,8 @@ def anlageblock_bauen(region, p: ParameterHalter, formtiefe: float):
         "anlage_hoehe_mm": round(p.anlage_hoehe, 3),
         "anlage_tiefe_mm": round(tiefe, 3),
         "anlage_volumen_mm3": round(leiste.volume, 2),
+        "hals_breite_mm": round(p.hals_breite, 3),
+        "hals_ab_x_mm": round(p.hals_ab_x, 3),
     }
 
 
@@ -604,6 +661,29 @@ def platte_bauen(p: ParameterBasis, region):
         p.laenge, p.breite, p.dicke,
         align=(Align.MIN, Align.CENTER, Align.MIN),
     )
+
+    # --- Taille: hinter der Schulter auf den Hals einschnueren ---
+    # Muss vor den Verrundungen passieren, damit die hinteren Ecken danach
+    # auf der SCHMALEN Kante sitzen und nicht auf einer, die es nicht mehr gibt.
+    hals = getattr(p, "hals_breite", None)
+    ab_x = getattr(p, "hals_ab_x", None)
+    if hals is not None and ab_x is not None and hals < p.breite - 1e-9:
+        ueber = 1.0
+        for vorzeichen in (+1, -1):
+            platte = platte - Pos(ab_x, vorzeichen * (hals / 2), p.unterkante_z - ueber) * Box(
+                p.laenge - ab_x + ueber, (p.breite - hals) / 2 + ueber,
+                p.dicke + 2 * ueber,
+                align=(Align.MIN, Align.MIN if vorzeichen > 0 else Align.MAX, Align.MIN),
+            )
+        # Schulter verrunden -- die Skizze zeigt einen weichen Uebergang,
+        # und die Kerbe waere sonst die Sollbruchstelle des Bauteils.
+        if p.hals_radius > 0:
+            schulter = platte.edges().filter_by(Axis.Z).filter_by_position(
+                Axis.X, ab_x - 1e-6, ab_x + 1e-6
+            )
+            if schulter:
+                platte = fillet(schulter, p.hals_radius)
+
     # Nur die HINTEREN senkrechten Ecken runden. Vorne sitzt die Knickkontur;
     # ein Radius wuerde sie beschneiden.
     if p.eckradius > 0:
@@ -647,6 +727,7 @@ def bauteil_bauen(p: ParameterBasis, region, formtiefe: float):
     kw: dict = {}
     ueberstand = 1.0
 
+    automatik_aufloesen(p, formtiefe)
     platte = platte_bauen(p, region)
 
     if isinstance(p, ParameterSchneider):
@@ -679,7 +760,7 @@ def bauteil_bauen(p: ParameterBasis, region, formtiefe: float):
 
     # --- Klemmschraube quer durch den Schlitz, Achse Y, durchgehend ---
     abziehen("schraube", _y_zylinder(
-        p.schraube_d, p.breite + 2 * ueberstand,
+        p.schraube_d, p.klemm_breite + 2 * ueberstand,
         p.schraube_x, p.aussen_y - ueberstand, p.mitte_z,
     ))
 
@@ -692,7 +773,7 @@ def bauteil_bauen(p: ParameterBasis, region, formtiefe: float):
     # --- Sechskanttasche fuer die Mutter, von der +Y-Seite herein ---
     mutter = _y_sechskant(
         p.mutter_sw_gesamt, p.mutter_tiefe + ueberstand, p.schraube_x,
-        p.breite / 2 - p.mutter_tiefe, p.mitte_z, p.mutter_drehung,
+        p.klemm_breite / 2 - p.mutter_tiefe, p.mitte_z, p.mutter_drehung,
     )
     # Hoehe der Tasche ueber Z messen statt rechnen -- haengt an mutter_drehung
     kw["mutter_hoehe_z_mm"] = round(mutter.bounding_box().size.Z, 3)
@@ -758,7 +839,8 @@ def pruefen(koerper, kw: dict, p: ParameterBasis) -> list[dict]:
                p.bohrung_x - p.bohrung_d / 2 - kw["stirn_formtiefe_mm"],
                p.min_wandstaerke, "mm")
     mindestens("Wand Hauptbohrung <-> Laengsseite",
-               p.breite / 2 - p.bohrung_d / 2, p.min_wandstaerke, "mm")
+               p.breite_bei(p.bohrung_x) / 2 - p.bohrung_d / 2,
+               p.min_wandstaerke, "mm")
     mindestens("Wand Senkung <-> Hinterkante",
                p.laenge - p.schraube_x - p.senkung_d / 2, p.min_wandstaerke, "mm")
 
@@ -780,7 +862,7 @@ def pruefen(koerper, kw: dict, p: ParameterBasis) -> list[dict]:
     # f) Senkungsgrund muss vor dem Schlitz enden, sonst faellt der
     #    Schraubenkopf durch
     mindestens("Material Senkungsgrund <-> Schlitz",
-               (p.breite / 2 - p.senkung_tiefe) - p.schlitz_breite / 2,
+               (p.klemm_breite / 2 - p.senkung_tiefe) - p.schlitz_breite / 2,
                p.min_wandstaerke, "mm")
 
     # g) die Mutter muss ueber die Schraube passen und darf den Schlitz nicht
@@ -788,7 +870,7 @@ def pruefen(koerper, kw: dict, p: ParameterBasis) -> list[dict]:
     mindestens("Mutter passt ueber die Schraube",
                p.mutter_sw_gesamt - p.schraube_d, 0.0, "mm")
     mindestens("Material Mutterngrund <-> Schlitz",
-               (p.breite / 2 - p.mutter_tiefe) - p.schlitz_breite / 2,
+               (p.klemm_breite / 2 - p.mutter_tiefe) - p.schlitz_breite / 2,
                p.min_wandstaerke, "mm")
 
     # h) die Knickform muss ueber die ganze Breite ankommen, sonst liegt der
@@ -825,6 +907,21 @@ def pruefen(koerper, kw: dict, p: ParameterBasis) -> list[dict]:
         mindestens("Stirnleiste endet vor der Wellenbohrung",
                    (p.bohrung_x - p.bohrung_d / 2) - kw["anlage_tiefe_mm"],
                    0.0, "mm")
+        # Die Taille darf die Klemmung nicht erdruecken.
+        mindestens("Hals breit genug fuer die Klemmung",
+                   p.hals_breite, kopf_mindestbreite(p), "mm")
+        # Die Schulter muss hinter der Anlageflaeche sitzen, sonst wird
+        # ausgerechnet dort eingeschnuert, wo die Koepfe tragen.
+        mindestens("Schulter hinter der Stirnleiste",
+                   p.hals_ab_x - kw["anlage_tiefe_mm"], 0.0, "mm")
+        # Die Schulterverrundung muss in die Stufe passen -- in der Tiefe
+        # wie in der Laenge. Sonst kann OCCT sie nicht anlegen. Wie nah sie
+        # der Wellenbohrung kommt, deckt "Wand Hauptbohrung <-> Laengsseite"
+        # ab: die Schulter sitzt seitlich am Hals, nicht vor der Bohrung.
+        mindestens("Schulterradius passt in die Stufe",
+                   (p.breite - p.hals_breite) / 2, p.hals_radius, "mm")
+        mindestens("Schulterradius passt in die Restlaenge",
+                   p.laenge - p.hals_ab_x, p.hals_radius, "mm")
 
     return checks
 
@@ -1014,6 +1111,9 @@ def lauf(p: ParameterBasis, outdir: Path, stem: str = "endeffektor",
     else:
         print(f"      Stirnleiste : {p.anlage_hoehe} mm hoch, "
               f"{kw['anlage_tiefe_mm']} mm tief, Kontur senkrecht durch")
+        print(f"      Taille      : ab X = {kw['hals_ab_x_mm']} mm auf "
+              f"{kw['hals_breite_mm']} mm Hals (Stirnseite {round(p.breite, 2)} mm), "
+              f"Schulterradius {p.hals_radius} mm")
     print(f"      Rohteil     : {kw['rohteil_volumen_mm3']} mm3")
     for feature in ["hauptbohrung", "klemmschlitz", "schraube", "senkung", "mutter"]:
         print(f"      - {feature:<13}: {kw[f'abtrag_{feature}_mm3']:>8} mm3 abgetragen")

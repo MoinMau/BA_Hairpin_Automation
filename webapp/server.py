@@ -152,9 +152,14 @@ FELD_INFO = {
         **_GEMEINSAME_FELDER,
         "anlage_hoehe": ("Hoehe der Stirnleiste unter der Platte", "mm"),
         "anlage_tiefe": ("Tiefe der Stirnleiste (leer = automatisch)", "mm"),
+        "hals_breite": ("Breite hinten am Hals (leer = so schmal wie moeglich)", "mm"),
+        "hals_ab_x": ("Schulter ab X (leer = hinter der Stirnleiste)", "mm"),
+        "hals_radius": ("Verrundung der Schulter (0 = harte Stufe)", "mm"),
         "_gruppen": [
             ("Stirnleiste – haelt das Buendel auf",
              ["anlage_hoehe", "anlage_tiefe"]),
+            ("Taille – hinten schmaler fuer die Stange",
+             ["hals_breite", "hals_ab_x", "hals_radius"]),
         ] + _GEMEINSAME_GRUPPEN,
     },
     "schneider": {
