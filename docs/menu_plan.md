@@ -1,6 +1,6 @@
 # TFT-Menuefuehrung fuer die Hairpin-Vereinzelung
 
-Stand: 02.09.2026 · Branch `Otto_Display_Menu`
+Stand: 18.09.2026 · Branch `main`
 
 ---
 
